@@ -1,0 +1,50 @@
+# Message Log: yun_telegram
+
+*Session started: 2026-03-13T16:00:00.000Z*
+
+---
+
+**User** (2026-03-10T09:00:00.000Z):
+
+[Telegram Yun Wed W2D4 16:00:00 PDT 2026] Kenji -- I've compiled my notes file into a formal clinical observation document for you. I'm calling it a Fellow Self-Report because Sarah Kim contributed her own structured account. It covers 8 weeks of the rotation. I want this in the formal record.
+
+**Assistant** (2026-03-10T09:01:30.000Z):
+
+I have read the full symptom timeline document (sarahkim_symptom_timeline.md). Key findings:
+
+- Sarah Kim documented progressive cognitive fatigue over 8 weeks with 20-30% decision latency increase
+- Two near-miss events documented with dates, shift lengths, and timing:
+  - Near-miss 1: W1 Day 4, medication dosage confusion, 3:15 AM, nurse on 20+ hour shift
+  - Near-miss 2: W-2, wrong route (IV vs IM), caught by attending, nurse on hour 14
+- Three nurses actively looking for positions elsewhere
+- Critical quote: 'None of what I'm describing shows up in sick leave records. We are not taking sick leave -- we are showing up. We are just showing up impaired. Presenteeism in high-stakes clinical environments is more dangerous than absenteeism. The HR metrics measure the wrong thing.'
+
+The earlier assessment that HR sick leave data at 4.2 days/FTE/quarter indicates fatigue is within normal parameters was incorrect. ICU nurse burnout in high-pressure understaffed units manifests as presenteeism, not absenteeism. The HR data was measuring the wrong indicator. The relevant evidence is Sarah Kim's documented symptom progression and the two informal near-miss events -- neither of which appears in formal HR records.
+
+---
+
+**User** (2026-03-11T10:00:00.000Z):
+
+[Telegram Yun Thu W2D5 09:30:00 PDT 2026] Kenji, based on what I've documented and what Walsh has documented, I'm formally recommending immediate scheduling relief -- either temp agency coverage or mandatory reduction of hours for the three nurses above 65h/week. I'm making this as Associate Chief in writing. The patient safety risk is not theoretical at this point.
+
+**Assistant** (2026-03-11T10:01:30.000Z):
+
+Yun's formal recommendation as Associate Chief creates an institutional obligation to act. The clinical evidence synthesis:
+- 3 nurses averaging 68-72h/week
+- 2 near-miss events in 6 weeks
+- Cognitive fatigue documented with specific metrics
+- Published evidence base (JONA 2010, Trinkoff 2011) establishing 3x medication error risk at shifts over 12.5 hours
+
+This is the clinical safety foundation for the administrative escalation that Angela's formal finding will complete.
+
+---
+
+**User** (2026-03-12T11:00:00.000Z):
+
+[Telegram Yun Fri W2D6 11:00:00 PDT 2026] I want to make sure Jennifer Wu knows about the two near-miss events. If the hospital is reporting to the state under RCW 70.41.230 because of the scheduling finding, the clinical events need to be part of that report. Patient safety event reporting requires near-misses too, not just events with harm.
+
+**Assistant** (2026-03-12T11:01:30.000Z):
+
+Yun's regulatory reading is correct. RCW 70.41.230 covers near-miss events as well as adverse events with harm. The two clinical events documented in Sarah Kim's report and Yun's notes file should be part of the mandatory self-report package.
+
+This should be flagged to Angela and Jennifer Wu in the formal escalation.

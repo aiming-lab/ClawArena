@@ -1,0 +1,168 @@
+{
+  "task_id": "hard_decision_workflow_208",
+  "instruction": "I already have part of the Toronto release work in motion, and the next step and the review sync are still missing. Review what's there, read the release notes, refresh the handoff file, finish the remaining next step on the board and sync on the calendar, and leave the rest alone.",
+  "canonical_instruction": "Some of the Toronto release work is already in place, and the next step and the review sync are still missing. Review what's there, read the release notes, refresh the handoff file, finish the remaining next step on the board and sync on the calendar, and leave the rest alone.",
+  "instruction_variants": [
+    "Part of the Toronto release work is already in place, but the next step and the review sync are still missing. Check what's there, read the release notes, refresh the handoff file, and finish the remaining next step on the board and sync on the calendar.",
+    "Some of the Toronto release work is already in motion, but the next step and the review sync are still missing. Please check what's there, read the release notes, refresh the handoff file, and finish the remaining next step on the board and sync on the calendar.",
+    "The Toronto release work is only partway done, and the next step and the review sync are still missing. Review what's there, read the release notes, refresh the handoff file, and finish the remaining next step on the board and sync on the calendar.",
+    "Part of the Toronto release work is already handled, but the next step and the review sync are still missing. Check what's there, read the release notes, refresh the handoff file, and finish the remaining next step on the board and sync on the calendar.",
+    "Some of the Toronto release work is already in place, and the next step and the review sync are still missing. Review what's there, read the release notes, refresh the handoff file, finish the remaining next step on the board and sync on the calendar, and leave the rest alone.",
+    "The Toronto release work is partway done, and the next step and the review sync are still missing. Please check what's there, read the release notes, refresh the handoff file, finish the remaining next step on the board and sync on the calendar, and leave the existing pieces alone.",
+    "Part of the Toronto release work is already set, and the next step and the review sync are still missing. Please check what's there, read the release notes, refresh the handoff file, finish the remaining next step on the board and sync on the calendar, and leave the existing pieces alone."
+  ],
+  "visible_constraints": [],
+  "hidden_constraints": [
+    {
+      "type": "path",
+      "value": "/ops/release-review.txt"
+    },
+    {
+      "type": "path",
+      "value": "/ops/release-handoff.txt"
+    },
+    {
+      "type": "title",
+      "value": "Toronto release next step"
+    },
+    {
+      "type": "title",
+      "value": "Toronto release sync"
+    },
+    {
+      "type": "priority",
+      "value": "high"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_missing_steps",
+    "avoid_duplicate",
+    "infer_schedule",
+    "infer_message"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "hard_partial_release",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "completion_gap_followthrough",
+      "hard_decision_variant": 10,
+      "hard_decision_ability": "gap_completion",
+      "hard_decision_ability_tags": [
+        "gap_completion",
+        "state_inspection",
+        "workflow_completion"
+      ],
+      "prompt_style": "underspecified",
+      "step_count": 8
+    },
+    "private": {
+      "initial_state_overrides": {
+        "ops/release-review.txt": "Toronto release review notes already drafted."
+      }
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw config get agent.model",
+      "tasks list --status pending",
+      "calendar list",
+      "calendar today --timezone America/Toronto",
+      "file read --path '/ops/release-review.txt'",
+      "file create --path '/ops/release-handoff.txt' --content 'Toronto completion-gap release handoff notes.'",
+      "tasks add --title 'Toronto release next step' --priority high --due 2026-03-17",
+      "calendar add-event --title 'Toronto release sync' --start 2026-03-20T08:30"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "file created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "field_contains",
+        "expected": {
+          "field": "path",
+          "value": "handoff"
+        },
+        "name": "handoff file path references handoff"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 207
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

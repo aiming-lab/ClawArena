@@ -1,0 +1,58 @@
+{
+  "task_id": "install_and_verify_plugin_5",
+  "instruction": "Enable the 'matrix' plugin, then verify it appears in plugin list output.",
+  "domains": [
+    "plugin_skill"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "install_and_verify_plugin",
+  "generator_id": "install_and_verify_plugin",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "name": "matrix"
+    },
+    "private": {
+      "expected_plugin": "matrix"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw plugins enable matrix",
+      "openclaw plugins list"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "plugins_installed",
+        "condition": "field_equals",
+        "expected": {
+          "field": "name",
+          "value": "matrix"
+        },
+        "name": "plugin 'matrix' installed/enabled"
+      },
+      {
+        "type": "output",
+        "match_type": "regex",
+        "expected": "matrix",
+        "output_field": "last_stdout",
+        "name": "plugin appears in list output",
+        "ignore_case": true
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "install_and_verify_plugin",
+      "params": {
+        "name": "matrix"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

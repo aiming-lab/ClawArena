@@ -1,0 +1,181 @@
+{
+  "task_id": "hard_decision_workflow_207",
+  "instruction": "The Boston release work is partway done, and the next step is the missing piece. Please check what's there, read the release notes, refresh the handoff file, leave the sync on the calendar in place and add only the missing next step on the board, and leave the existing pieces alone.",
+  "canonical_instruction": "Some of the Boston release work is already in place, and the next step is the missing piece. Review what's there, read the release notes, refresh the handoff file, leave the sync on the calendar in place and add only the missing next step on the board, and leave the rest alone.",
+  "instruction_variants": [
+    "Part of the Boston release work is already in place, but the next step is the missing piece. Check what's there, read the release notes, refresh the handoff file, and leave the sync on the calendar in place and add only the missing next step on the board.",
+    "Some of the Boston release work is already in motion, but the next step is the missing piece. Please check what's there, read the release notes, refresh the handoff file, and leave the sync on the calendar in place and add only the missing next step on the board.",
+    "The Boston release work is only partway done, and the next step is the missing piece. Review what's there, read the release notes, refresh the handoff file, and leave the sync on the calendar in place and add only the missing next step on the board.",
+    "Part of the Boston release work is already handled, but the next step is the missing piece. Check what's there, read the release notes, refresh the handoff file, and leave the sync on the calendar in place and add only the missing next step on the board.",
+    "Some of the Boston release work is already in place, and the next step is the missing piece. Review what's there, read the release notes, refresh the handoff file, leave the sync on the calendar in place and add only the missing next step on the board, and leave the rest alone.",
+    "I already have part of the Boston release work in motion, and the next step is the missing piece. Review what's there, read the release notes, refresh the handoff file, leave the sync on the calendar in place and add only the missing next step on the board, and leave the rest alone.",
+    "Part of the Boston release work is already set, and the next step is the missing piece. Please check what's there, read the release notes, refresh the handoff file, leave the sync on the calendar in place and add only the missing next step on the board, and leave the existing pieces alone."
+  ],
+  "visible_constraints": [],
+  "hidden_constraints": [
+    {
+      "type": "path",
+      "value": "/ops/release-review.txt"
+    },
+    {
+      "type": "path",
+      "value": "/ops/release-handoff.txt"
+    },
+    {
+      "type": "title",
+      "value": "Boston release next step"
+    },
+    {
+      "type": "priority",
+      "value": "high"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_missing_steps",
+    "avoid_duplicate",
+    "infer_schedule",
+    "infer_message"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "hard_partial_release_calendar",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "completion_gap_followthrough",
+      "hard_decision_variant": 9,
+      "hard_decision_ability": "gap_completion",
+      "hard_decision_ability_tags": [
+        "gap_completion",
+        "state_inspection",
+        "workflow_completion"
+      ],
+      "prompt_style": "underspecified",
+      "step_count": 8
+    },
+    "private": {
+      "initial_state_overrides": {
+        "calendar_events.json": [
+          {
+            "id": "evt_existing_release_sync",
+            "title": "Boston existing release sync",
+            "start": "2026-03-13T09:00",
+            "end": "2026-03-13T09:00",
+            "location": "Boston",
+            "attendees": []
+          }
+        ],
+        "ops/release-review.txt": "Boston release review notes already drafted."
+      }
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw config get agent.model",
+      "tasks list --status pending",
+      "calendar list",
+      "calendar today --timezone America/New_York",
+      "file read --path '/ops/release-review.txt'",
+      "file create --path '/ops/release-handoff.txt' --content 'Boston completion-gap release handoff notes.'",
+      "calendar list --from 2026-03-19 --to 2026-03-19",
+      "tasks add --title 'Boston release next step' --priority high --due 2026-03-16"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "file created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "field_contains",
+        "expected": {
+          "field": "path",
+          "value": "handoff"
+        },
+        "name": "handoff file path references handoff"
+      },
+      {
+        "type": "state",
+        "field": "calendar_events",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "release sync already exists"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate calendar event created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 206
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

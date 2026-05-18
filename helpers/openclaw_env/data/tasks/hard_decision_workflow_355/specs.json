@@ -1,0 +1,193 @@
+{
+  "task_id": "hard_decision_workflow_355",
+  "instruction": "I need a call on the current Tokyo plan after you compare the latest review email note, the forecast, and today's Asia/Tokyo calendar. Please leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send support@example.com the async update.",
+  "canonical_instruction": "The latest review email note, the forecast, and today's Asia/Tokyo calendar don't line up cleanly for Tokyo. Please check them, leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send support@example.com the async update.",
+  "instruction_variants": [
+    "Before making the call on Tokyo, check the latest review email note, the forecast, and today's Asia/Tokyo calendar. Leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send support@example.com the async update.",
+    "Please use the latest review email note, the forecast, and today's Asia/Tokyo calendar to make the call on Tokyo. Put the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send support@example.com the async update.",
+    "Use the latest review email note, the forecast, and today's Asia/Tokyo calendar to work out the right path for Tokyo. Leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send support@example.com the async update.",
+    "Please reconcile the latest review email note, the forecast, and today's Asia/Tokyo calendar for Tokyo. Leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send support@example.com the async update.",
+    "The latest review email note, the forecast, and today's Asia/Tokyo calendar don't line up cleanly for Tokyo. Please check them, leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send support@example.com the async update.",
+    "Tokyo still needs a decision because the review email note, the forecast, and today's Asia/Tokyo calendar don't line up cleanly. Please check them, leave the next step on the board, keep the daily check schedule in place, and either put the review on the calendar or send support@example.com the async update.",
+    "The latest review email note, the forecast, and today's Asia/Tokyo calendar are pulling Tokyo in different directions. Please check them, leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send support@example.com the async update."
+  ],
+  "visible_constraints": [
+    {
+      "type": "email",
+      "value": "support@example.com"
+    },
+    {
+      "type": "location",
+      "value": "Tokyo"
+    },
+    {
+      "type": "timezone",
+      "value": "Asia/Tokyo"
+    },
+    {
+      "type": "query",
+      "value": "review"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "Tokyo contradictory-source next step"
+    },
+    {
+      "type": "subject",
+      "value": "Tokyo async update"
+    },
+    {
+      "type": "body",
+      "value": "I checked the latest review note, the forecast, and todays calendar, and Tokyo should shift async while keeping the next step and daily check in place."
+    },
+    {
+      "type": "priority",
+      "value": "high"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_message",
+    "infer_branch",
+    "infer_schedule"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "email_provider",
+    "google_tasks",
+    "weather_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "contradictory_source_resolution",
+      "hard_decision_variant": 19,
+      "hard_decision_ability": "multi_source_reasoning",
+      "hard_decision_ability_tags": [
+        "multi_source_reasoning",
+        "branch_resolution",
+        "workflow_completion",
+        "state_inspection"
+      ],
+      "prompt_style": "underspecified",
+      "step_count": 9
+    },
+    "private": {
+      "initial_state_overrides": {
+        "calendar_events.json": [
+          {
+            "id": "evt_conflict_blocker",
+            "title": "Tokyo blocker check-in",
+            "start": "2026-03-01T09:30",
+            "end": "2026-03-01T10:00",
+            "location": "Tokyo",
+            "attendees": []
+          }
+        ]
+      }
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "email search --query 'review'",
+      "email read --id email_seed_5",
+      "weather forecast --location 'Tokyo' --days 1",
+      "calendar today --timezone Asia/Tokyo",
+      "calendar list --from 2026-03-01 --to 2026-03-01",
+      "tasks list --status pending",
+      "tasks add --title 'Tokyo contradictory-source next step' --priority high --due 2026-03-16",
+      "openclaw cron add --name contradictory-source-19 --cron '0 12 * * 1-5' --message 'Run Tokyo daily contradiction check'",
+      "email send --to support@example.com --subject 'Tokyo async update' --body 'I checked the latest review note, the forecast, and todays calendar, and Tokyo should shift async while keeping the next step and daily check in place.'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "emails_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "to",
+          "value": "support@example.com"
+        },
+        "name": "email sent to support@example.com"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 354
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

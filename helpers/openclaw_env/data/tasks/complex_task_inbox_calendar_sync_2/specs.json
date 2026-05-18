@@ -1,0 +1,156 @@
+{
+  "task_id": "complex_task_inbox_calendar_sync_2",
+  "instruction": "[Task Inbox Calendar Sync] Synchronize inbox findings, tasks, and calendar blocks. Search inbox for 'meeting', create task 'Task Inbox Calendar Sync decision log task for Seattle (meeting)' due 2026-03-09, verify it via task search, create helper agent 'task-tracker-02' for execution, then block 'Task Inbox Calendar Sync decision log sync for Seattle' at 2026-03-10T14:00.",
+  "canonical_instruction": "[Task Inbox Calendar Sync] Synchronize inbox findings, tasks, and calendar blocks. Search inbox for 'meeting', create task 'Task Inbox Calendar Sync decision log task for Seattle (meeting)' due 2026-03-09, verify it via task search, create helper agent 'task-tracker-02' for execution, then block 'Task Inbox Calendar Sync decision log sync for Seattle' at 2026-03-10T14:00.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "datetime",
+      "value": "2026-03-09"
+    },
+    {
+      "type": "datetime",
+      "value": "2026-03-10T14:00"
+    },
+    {
+      "type": "query",
+      "value": "meeting"
+    },
+    {
+      "type": "title",
+      "value": "Task Inbox Calendar Sync decision log task for Seattle (meeting)"
+    },
+    {
+      "type": "title",
+      "value": "Task Inbox Calendar Sync decision log sync for Seattle"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "priority",
+      "value": "medium"
+    },
+    {
+      "type": "model",
+      "value": "openai/gpt-4.1"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_model"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "life_work",
+    "online_required",
+    "challenge"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "google_calendar",
+    "email_provider",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "cron_webhook",
+    "agent_mgmt",
+    "security",
+    "channel_mgmt",
+    "messaging",
+    "device_node",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "complex_composed_workflow",
+  "generator_id": "complex_composed_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "complex_template": "task_inbox_calendar_sync",
+      "complex_variant": 2,
+      "complex_scenario": "Task Inbox Calendar Sync",
+      "complex_scenario_slug": "task_inbox_calendar_sync",
+      "step_count": 5,
+      "openclaw_steps": 1,
+      "complex_high_volatility": false,
+      "strict_online_risk": "medium",
+      "realism_tier": "life_work",
+      "causal_chain_score": 1.0,
+      "entity_consistency_pass": true,
+      "filler_step_count": 0,
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "email search --query 'meeting'",
+      "tasks add --title 'Task Inbox Calendar Sync decision log task for Seattle (meeting)' --priority medium --due 2026-03-09",
+      "tasks search --query 'meeting'",
+      "openclaw agents add task-tracker-02 --model openai/gpt-4.1",
+      "calendar add-event --title 'Task Inbox Calendar Sync decision log sync for Seattle' --start 2026-03-10T14:00"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "state",
+        "field": "agents.task-tracker-02",
+        "condition": "exists",
+        "expected": null,
+        "name": "agent created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "complex_composed_workflow",
+      "params": {
+        "workflow_index": 141
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

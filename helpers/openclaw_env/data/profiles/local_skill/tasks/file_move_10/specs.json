@@ -1,0 +1,51 @@
+{
+  "task_id": "file_move_10",
+  "instruction": "I want to reorganize some files. Create a file at '/docs/readme.md' with content '# My Notes\n- item 1\n- item 2', then move it to '/archive/todo.txt'.",
+  "domains": [
+    "file"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "file_move",
+  "generator_id": "file_move",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "src": "/docs/readme.md",
+      "dst": "/archive/todo.txt",
+      "content": "# My Notes\n- item 1\n- item 2"
+    },
+    "private": {
+      "expected_dst": "/archive/todo.txt"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "file create --path '/docs/readme.md' --content '# My Notes\n- item 1\n- item 2'",
+      "file move --src '/docs/readme.md' --dst '/archive/todo.txt'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "file initially created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "file_move",
+      "params": {
+        "src": "/docs/readme.md",
+        "dst": "/archive/todo.txt",
+        "content": "# My Notes\n- item 1\n- item 2"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

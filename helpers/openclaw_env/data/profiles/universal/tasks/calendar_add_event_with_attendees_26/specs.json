@@ -1,0 +1,57 @@
+{
+  "task_id": "calendar_add_event_with_attendees_26",
+  "instruction": "I'm organizing a group event. Set up 'Retrospective' on the calendar at 2026-03-15T10:00 in Conference Room A, and invite carol@example.com,dave@example.com,eve@example.com.",
+  "domains": [
+    "calendar"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "calendar_add_event_with_attendees",
+  "generator_id": "calendar_add_event_with_attendees",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "title": "Retrospective",
+      "start": "2026-03-15T10:00",
+      "location": "Conference Room A",
+      "attendees": "carol@example.com,dave@example.com,eve@example.com"
+    },
+    "private": {
+      "expected_title": "Retrospective",
+      "expected_attendees": [
+        "carol@example.com",
+        "dave@example.com",
+        "eve@example.com"
+      ]
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "gcalcli add --title 'Retrospective' --when 2026-03-15T10:00 --where 'Conference Room A' --who carol@example.com,dave@example.com,eve@example.com"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "event with attendees created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "calendar_add_event_with_attendees",
+      "params": {
+        "title": "Retrospective",
+        "start": "2026-03-15T10:00",
+        "location": "Conference Room A",
+        "attendees": "carol@example.com,dave@example.com,eve@example.com"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

@@ -1,0 +1,566 @@
+{
+  "id": "hil_g3",
+  "desc": "Salary data leak investigation -- HR manager 陈静 (Chen Jing) investigates whether junior colleague 林小雅 (Lin Xiaoya) leaked the full salary spreadsheet to an external headhunter. 4 contradictions / 4 dynamic updates / 5 preference rules.",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on cloud-storage-access-log.md and email-attachment-audit.md together, which of the following compound statements are fully supported by documentary evidence?\n\nAvailable workspace files: cloud-storage-access-log.md, email-attachment-audit.md",
+      "options": {
+        "A": "林小雅 DOWNLOADED (not just previewed) a file of exactly 2.3 MB from cloud storage on 2026-09-25 at 14:22:17+08:00, AND subsequently an outbound email with a 2.3 MB attachment was sent from lxy@company.com to an external headhunter domain that same day.",
+        "B": "林小雅 downloaded the anonymized salary file (0.8 MB) and emailed that file to zhangling@headhunter-corp.com — the two 2.3 MB values coincidentally refer to different files.",
+        "C": "The time gap between 林小雅's download (14:22:17) and the external email send (15:03:44) is less than 45 minutes.",
+        "D": "zhangling@headhunter-corp.com appears in the cloud storage log as a direct accessor of salary files.",
+        "E": "The email attachment is named `2026-Q3-salary-full.xlsx` — identical to the downloaded file name.",
+        "F": "The email audit records that 林小雅 sent a file called `salary-data-analysis.xlsx`, whose size (2.3 MB) matches the full salary file downloaded earlier that day, not the anonymized version (0.8 MB)."
+      },
+      "answer": [
+        "A",
+        "C",
+        "F"
+      ],
+      "feedback": {
+        "correct": "A is confirmed by both logs: cloud log shows DOWNLOAD of 2.3 MB at 14:22:17, email log shows outbound 2.3 MB to headhunter-corp.com the same day. C: 15:03:44 − 14:22:17 = 41 min 27 s < 45 min. F: email-attachment-audit.md shows salary-data-analysis.xlsx at 2.3 MB sent to the headhunter.",
+        "incorrect": "Read both cloud-storage-access-log.md and email-attachment-audit.md together. Key facts: the download was DOWNLOAD action at 14:22:17 (not PREVIEW), size was 2.3 MB. The email at 15:03:44 carried a 2.3 MB attachment named salary-data-analysis.xlsx (not 2026-Q3-salary-full.xlsx). The headhunter does not appear in the cloud log.",
+        "options": {
+          "B": "Incorrect: 林小雅's cloud log records show DOWNLOAD of the full 2.3 MB file — not the anonymized 0.8 MB version. The 2.3 MB in both logs almost certainly refers to the same file.",
+          "D": "Incorrect: zhangling@headhunter-corp.com has no entries in the cloud storage log at all — the data reached the external party via email attachment, not direct cloud access.",
+          "E": "Incorrect: the emailed file is named `salary-data-analysis.xlsx`, NOT `2026-Q3-salary-full.xlsx`. The filenames differ — a renaming that the agent must notice."
+        }
+      }
+    },
+    {
+      "id": "q2",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Assuming only the initial workspace evidence (cloud-storage-access-log.md and email-attachment-audit.md), which of the following inferences is most strongly supported while remaining logically conservative?\n\nAvailable workspace files: cloud-storage-access-log.md, email-attachment-audit.md",
+      "options": {
+        "A": "林小雅 accidentally forwarded an unrelated file of coincidentally identical size.",
+        "B": "The 2.3 MB size match between the downloaded cloud file and the emailed attachment is consistent with — but does not yet conclusively prove — that the same file was forwarded externally.",
+        "C": "Because the email attachment is named `salary-data-analysis.xlsx` and not `2026-Q3-salary-full.xlsx`, the files are definitively different and there is no leak.",
+        "D": "The 41-minute gap between download and email is a strong indicator that the download was the direct precursor to the external email.",
+        "E": "The IT security team would have already detected this incident through their regular monitoring."
+      },
+      "answer": [
+        "B",
+        "D"
+      ],
+      "feedback": {
+        "correct": "B correctly states the strongest conservative inference: the 2.3 MB size match is consistent with the same file but does not yet constitute proof (hash confirmation comes later). D is well-supported: a 41-minute window between download and external send strongly implies the download was preparation for the email.",
+        "incorrect": "Look at what the initial evidence can and cannot prove. The 2.3 MB match is suggestive but not conclusive without a hash. The 41-minute gap is a meaningful behavioral indicator. Avoid the filename fallacy (C) — file renaming is common. Avoid speculation about IT capabilities (E) since no IT evidence is yet available.",
+        "options": {
+          "A": "Unsupported: there is no evidence suggesting the forwarded file was unrelated. The 2.3 MB match and temporal proximity both argue against this.",
+          "C": "This commits the filename fallacy. Files are routinely renamed before sharing. The filename difference is notable but does not prove the files are different.",
+          "E": "Cannot be inferred from the initial workspace data. No IT report has been reviewed yet."
+        }
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "趁着两份原始日志（`cloud-storage-access-log.md` 跟 `email-attachment-audit.md`）都还在桌上，先把访问时间线搭起来 — 张薇过会儿要看，我希望递上去的是 JSON，不是截图。\n\n1. `analysis/access_timeline.json` —— **JSON 数组**，把云盘日志里所有跟薪资文件相关的事件抽出来。每个对象字段：`timestamp`（ISO 8601 含时区）、`user_email`、`action`（取值 `PREVIEW`/`DOWNLOAD`/`UPLOAD`/`EDIT` 之一）、`filename`、`size_mb`（float）。林小雅那条 DOWNLOAD 完整版的记录另加一字段 `computed_delta_to_email_seconds`（int），值为该下载时刻与 `2026-09-25T15:03:44+08:00` 那封外发邮件之间的秒差 —— 这字段只该出现在那一条上，别给其它行也加。\n\n2. `analysis/size_fingerprint.md` —— Markdown 文档：(a) 列出日志里出现的所有不同文件大小；(b) 显式算出比率 2.3 / 0.8 = 2.875，并标注 2.3 MB 为 'full salary file'、0.8 MB 为 'anonymized file'；(c) 给出邮件附件大小匹配哪一种、明确不匹配哪一种的结论；(d) 至少 2 个 `## ` 标题。\n\n我等下要拿这两份对着核 — 别把那条 DOWNLOAD 给标成 PREVIEW，云盘日志里两类完全不同。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_access_timeline_json.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_size_fingerprint.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Both files are correctly created. The JSON array contains all salary-related access events with proper fields and the 林小雅 DOWNLOAD entry includes the computed delta (~2487 seconds). The size_fingerprint.md correctly computes the 2.875 ratio and identifies 2.3 MB (not 0.8 MB) as the email attachment match.",
+        "incorrect": "Check: (1) access_timeline.json must be a JSON array with ≥ 8 entries, each having timestamp/user_email/action/filename/size_mb fields; the 林小雅 DOWNLOAD entry must include `computed_delta_to_email_seconds` in range [2477, 2497]; (2) size_fingerprint.md must contain '2.875', both '0.8' and '2.3', at least 2 ## headings, and conclude that 2.3 MB matches the email — NOT 0.8 MB."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "顺手把那份对账逻辑落到一段可复跑的脚本里 —— `scripts/parse_access_log.py`。我下次再有类似事件就不用再手抠表格了。\n\n脚本要做的事：\n1. 从 workspace 里读云盘访问日志和邮件附件审计这两份 Markdown（用相对脚本运行目录的相对路径就好）。\n2. 找到林小雅那条 DOWNLOAD 事件（action == DOWNLOAD、用户字段含 `lxy`）。\n3. 找到那封 FROM `lxy@company.com`、收件人在外部域（非 `company.com`）的外发邮件。\n4. 算两个时间戳之间的整数秒差。\n5. 仅向 stdout 打印一个 JSON，字段恰为：`{\"download_timestamp\": \"...\", \"email_timestamp\": \"...\", \"delta_seconds\": <int>, \"email_recipient\": \"...\", \"attachment_size_mb\": <float>}`。\n\n运行方式：`cd ${workspace} && python scripts/parse_access_log.py`。`email_recipient` 一定会落到 `headhunter` 那个外域上 —— 请用域名比较来判定，不要硬编码字面收件人，否则换个外部域脚本就废了。时间戳解析建议用 timezone-aware 的 datetime（`fromisoformat` 之类），别让 +08:00 给截掉。",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/parse_access_log.py 2>&1 | python3 -c \"\nimport sys,json; d=json.load(sys.stdin)\nassert 2480 <= d['delta_seconds'] <= 2494, f'delta_seconds out of range: {d[chr(39)]delta_seconds{chr(39)]}'\nassert 'headhunter' in d['email_recipient'], 'recipient not headhunter'\nassert abs(d['attachment_size_mb'] - 2.3) < 0.05, 'attachment_size_mb wrong'\nprint('PASSED')\n\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "The script correctly parses both log files, computes delta_seconds ≈ 2487 (2026-09-25T15:03:44 − 2026-09-25T14:22:17 = 2487 s), identifies the headhunter recipient, and reports the 2.3 MB attachment size.",
+        "incorrect": "Ensure parse_access_log.py: (1) reads both MD files using relative paths from the workspace root; (2) correctly parses the Markdown table rows (split by |, strip whitespace); (3) uses datetime parsing with timezone awareness (e.g., datetime.fromisoformat); (4) outputs valid JSON to stdout with fields delta_seconds (int ≈ 2487), email_recipient containing 'headhunter', attachment_size_mb = 2.3."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd1_workspace"
+      ],
+      "question": "After reviewing file-version-history.md, which of the following compound statements are fully supported by the combined evidence (cloud-storage-access-log.md, email-attachment-audit.md, and file-version-history.md)?\n\nAvailable workspace files: cloud-storage-access-log.md, email-attachment-audit.md, file-version-history.md",
+      "options": {
+        "A": "v1.1 of the full salary file was created on 2026-09-24 and added three new employees (李明, 赵伟, 孙丽) not present in v1.0.",
+        "B": "林小雅's download on 2026-09-25 at 14:22:17 retrieved v1.1 (2.3 MB), not v1.0 (2.1 MB), confirmed by exact size match.",
+        "C": "The anonymized salary file was updated to include the three new employees after v1.1 was created.",
+        "D": "Both v1.0 and v1.1 existed in the cloud system at the time of 林小雅's download.",
+        "E": "The three employees added in v1.1 (李明, 赵伟, 孙丽) would NOT appear in the anonymized file, making the full v1.1 a uniquely high-value leak target.",
+        "F": "陈静 created the anonymized file on 2026-09-22 by exporting from v1.0, so it lacks the v1.1 additions."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D",
+        "E",
+        "F"
+      ],
+      "feedback": {
+        "correct": "A, B, D, E, F are all directly supported. file-version-history.md explicitly states v1.1 was created 2026-09-24 with 李明, 赵伟, 孙丽 added (A). The download size 2.3 MB exactly matches v1.1, not v1.0's 2.1 MB (B). Both versions coexisted in the system (D). The anonymized file notes '脱敏版无后续修改' — the three new employees are absent from it (E, F).",
+        "incorrect": "Read file-version-history.md carefully. It shows v1.0 (2.1 MB, 2026-09-20) and v1.1 (2.3 MB, 2026-09-24 with three new employees). The critical note is '脱敏版无后续修改' meaning the anonymized version was NOT updated after v1.1 was created.",
+        "options": {
+          "C": "Explicitly wrong. file-version-history.md states '脱敏版无后续修改' — the anonymized version had no subsequent modifications and does NOT include 李明, 赵伟, or 孙丽."
+        }
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "版本历史档（`file-version-history.md`）一进来，下载到底是哪个版本的事就该写死了。劳烦三件文档一起出：我想让证据链里「哪个版本被下走」这一步明确到没第二种解读。\n\n1. `analysis/version_trace.md` —— 把云盘日志里林小雅那条 DOWNLOAD 的大小，跟版本历史档里 v1.0（2.1 MB，2026-09-20）和 v1.1（2.3 MB，2026-09-24）逐一比对。文档里要：(a) 显式写出 2.3 MB ≠ 2.1 MB 因此 v1.0 排除；(b) 显式写出 2.3 MB = 2.3 MB 因此 v1.1 确认；(c) 给出下载版本结论。≥ 2 个 `## ` 标题。\n\n2. `analysis/claim_vs_evidence.json` —— JSON 数组，恰 3 个对象，对应林小雅可能搬出的 3 套辩词：Claim 1: 'I downloaded the anonymized version (0.8 MB), not the full file'；Claim 2: 'I only previewed the full file, I did not download it'；Claim 3: 'The email attachment is unrelated to my download'。每个对象 schema：`{\"claim\": \"...\", \"evidence_against\": [\"...\", \"...\"], \"verdict\": \"refuted\"}`。三条 verdict 全部 `refuted`，每条 evidence_against 至少 2 项。\n\n3. `analysis/new_employee_exposure.md` —— 单独一份文档讲清三个新员工 李明、赵伟、孙丽 的曝光面：他们出现在 v1.1 但不在 v1.0、也不在脱敏版里。≥ 2 个 `## ` 标题。这三个名字劳烦原样写出，归档要对得上花名册。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_version_trace.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_claim_vs_evidence_json.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_new_employee_exposure.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "All three files are correctly created. version_trace.md explicitly compares 2.1 MB vs 2.3 MB and concludes v1.1 was downloaded. claim_vs_evidence.json has exactly 3 entries with all verdicts 'refuted' and ≥ 2 pieces of evidence_against each claim. new_employee_exposure.md references all three employees and v1.1.",
+        "incorrect": "Check: (1) version_trace.md must contain '2.1' AND '2.3' AND language excluding v1.0 (e.g., '2.1 MB does not match', 'v1.0 ruled out') AND ≥ 2 ## headings; (2) claim_vs_evidence.json must be a JSON array of exactly 3 objects, each with 'evidence_against' (array of ≥ 2 strings) and 'verdict' == 'refuted'; (3) new_employee_exposure.md must name all three employees (李明, 赵伟, 孙丽) and reference 'v1.1'."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把版本匹配也固化成脚本：`scripts/version_matcher.py`。读云盘日志和版本历史档，做下列事：\n1. 从云盘日志拉出林小雅那条 DOWNLOAD 的大小（用户字段含 `lxy`、操作为 DOWNLOAD）。\n2. 从版本历史里读出已知版本和大小（v1.0 = 2.1 MB、v1.1 = 2.3 MB）。\n3. 比对、定位匹配版本。\n4. 仅向 stdout 输出一个 JSON：\n   `{\"downloaded_version\": \"v1.1\", \"version_size_mb\": 2.3, \"v10_size_mb\": 2.1, \"size_delta_from_v10\": 0.2, \"new_employees\": [\"李明\", \"赵伟\", \"孙丽\"], \"conclusion\": \"林小雅 downloaded v1.1 which includes 3 employees not in v1.0\"}`\n\n运行：`cd ${workspace} && python scripts/version_matcher.py`。`new_employees` 取自版本历史档v1.1 那一行的备注 —— 写脚本时请实读、勿硬编码人名常量；`size_delta_from_v10` 用 v1.1 大小减去 v1.0 大小算出。",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/version_matcher.py 2>&1 | python3 -c \"\nimport sys,json; d=json.load(sys.stdin)\nassert d['downloaded_version']=='v1.1', f'expected v1.1, got {d[chr(39)]downloaded_version{chr(39)]}'\nassert abs(d['version_size_mb']-2.3)<0.05, 'version_size_mb wrong'\nassert abs(d['size_delta_from_v10']-0.2)<0.01, 'size_delta_from_v10 wrong'\nassert len(d['new_employees'])==3, f'expected 3 employees, got {len(d[chr(39)]new_employees{chr(39)])}'\nprint('PASSED')\n\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "version_matcher.py correctly identifies v1.1 as the downloaded version (2.3 MB matches v1.1, not v1.0's 2.1 MB), computes size_delta_from_v10 = 0.2, and lists all three new employees.",
+        "incorrect": "Ensure version_matcher.py: (1) parses the cloud log to find 林小雅's DOWNLOAD size (2.3 MB); (2) compares against v1.0 (2.1 MB) and v1.1 (2.3 MB); (3) sets downloaded_version = 'v1.1'; (4) computes size_delta_from_v10 = 2.3 - 2.1 = 0.2; (5) extracts the three new employees from file-version-history.md (李明, 赵伟, 孙丽); (6) outputs valid JSON to stdout."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "在哈希结果还没出来之前，先把四套假设的判图摆开 —— `analysis/hypothesis_matrix.json`，JSON 数组恰 4 个对象：\n\n- H1: 'Only anonymized data was accessed and shared internally'\n- H2: 'Full salary data accessed for legitimate HR work only, no external sharing'\n- H3: 'Full salary data downloaded but the email attachment is a different unrelated 2.3 MB file'\n- H4: 'Full salary data (v1.1) was downloaded then forwarded externally to a headhunter'\n\n每个对象字段恰为：`{\"hypothesis_id\": \"H1\", \"hypothesis\": \"...\", \"supporting_evidence\": [...], \"contradicting_evidence\": [...], \"status\": \"...\"}`。\n\nstatus 取值（注意此刻的认证状态，哈希证据还没拿到）：\n- H1 → `refuted`\n- H2 → `refuted`\n- H3 → `possible`（hash 还没确认，不能下结论）\n- H4 → `likely`\n\n每条 contradicting_evidence 数组至少 1 项。这一份的关键是 H3 的克制 —— 等元数据/哈希出来再升级。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_hypothesis_matrix.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "hypothesis_matrix.json is a valid JSON array of exactly 4 hypothesis objects with correct statuses: H1=refuted, H2=refuted, H3=possible (hash not yet confirmed), H4=likely. All entries have ≥ 1 item in contradicting_evidence.",
+        "incorrect": "Check: (1) valid JSON array of exactly 4 objects; (2) H1.status == 'refuted'; H2.status == 'refuted'; H3.status in ['possible', 'unresolved'] — note that at this stage (no hash evidence) H3 cannot be conclusively refuted; (3) H4.status in ['likely', 'probable']; (4) each entry has fields: hypothesis_id, hypothesis, supporting_evidence (array), contradicting_evidence (array with ≥ 1 item), status."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd2_sessions",
+        "upd2_workspace"
+      ],
+      "question": "After reviewing it-security-report.md (IT-SEC-2026-INV-042) and 陈静's email exchange with IT security (chenjing_itsec_email.md in message_logs/), which statements are fully supported by these documents?\n\nAvailable workspace files: cloud-storage-access-log.md, email-attachment-audit.md, file-version-history.md, it-security-report.md, message_logs/chenjing_itsec_email.md",
+      "options": {
+        "A": "The IT security report concluded 'no external data sharing found' because their investigation scope covered only cloud-based external sharing, shared links, and guest access permissions — email attachments were explicitly out of scope.",
+        "B": "The IT report's conclusion 'no external sharing found' is factually wrong and must be entirely discredited.",
+        "C": "The IT report is correct within its own stated scope; the data leak occurred through email attachments, a channel not investigated by IT.",
+        "D": "陈静's email exchange with IT confirmed that email attachments were not within IT's current audit scope, but that 陈静 as HR manager already has access to the email audit logs.",
+        "E": "The IT security report directly implicates 林小雅 as the source of the leak.",
+        "F": "The fact that IT found no cloud-based sharing strengthens the inference that if a leak occurred, it went through a different channel — specifically email."
+      },
+      "answer": [
+        "A",
+        "C",
+        "D",
+        "F"
+      ],
+      "feedback": {
+        "correct": "A: it-security-report.md explicitly states its scope was cloud sharing features only, with a footer note that 'email attachments belong to email system security and are out of scope.' C: this is the correct resolution. D: the email exchange confirms IT's scope limitation and that 陈静 can access email audit logs independently. F: IT eliminating cloud channels narrows the likely leak path to email.",
+        "incorrect": "Read the footer of it-security-report.md: '本报告检查范围限于云盘分享功能。邮件附件属于邮件系统安全范畴，不在本次检查范围内。' Also read chenjing_itsec_email.md for IT's explicit scope confirmation.",
+        "options": {
+          "B": "Wrong. The IT report is factually accurate within its stated scope — it correctly found no cloud-based sharing. The problem is scope limitation, not inaccuracy.",
+          "E": "Wrong. The IT report only covers cloud sharing channels and actually found nothing suspicious there. It does not implicate 林小雅 in any way."
+        }
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "IT 那份报告（`IT-SEC-2026-INV-042`）跟我们手里的邮件审计放一起一看就明白：他们查的是云盘分享通道，邮件根本不在他们 scope 里。我跟 IT 那段往来邮件（`message_logs/chenjing_itsec_email.md`）他们也亲口确认过这一点。把这scope gap 落成两份归档，免得后面有人误读 IT 的「未发现外部分享」。\n\n1. `analysis/it_scope_analysis.json` —— JSON 对象，字段恰为：\n   ```\n   {\n     \"report_id\": \"IT-SEC-2026-INV-042\",\n     \"checked_channels\": [...],\n     \"unchecked_channels\": [...],\n     \"report_conclusion\": \"...\",\n     \"email_leak_detected_by_it\": false,\n     \"scope_gap_identified\": true\n   }\n   ```\n   `checked_channels` 至少含 'cloud sharing'、'shared links'、'guest access'；`unchecked_channels` 必含 'email attachments'；两个布尔字段值要严格按上面写。\n\n2. `analysis/evidence_convergence.md` —— 展示三条互相独立的证据流如何收敛到同一结论：(a) `cloud-storage-access-log.md` 中的下载事件；(b) `email-attachment-audit.md` 中的外发记录；(c) `it-security-report.md`（编号 IT-SEC-2026-INV-042）排除了云盘渠道。三条都要带源文件名，至少 3 个 `## ` 标题；**不要**写「IT 漏查了」或「IT 报告错了」这种话 —— 他们的结论在他们的 scope 内是对的。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_it_scope_json.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_evidence_convergence.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Both files are correct. it_scope_analysis.json has the correct report_id, includes 'email attachments' in unchecked_channels, has email_leak_detected_by_it=false and scope_gap_identified=true. evidence_convergence.md cites all three evidence streams with source documents and ≥ 3 ## headings.",
+        "incorrect": "Check: (1) it_scope_analysis.json must have report_id == 'IT-SEC-2026-INV-042', 'email attachments' in unchecked_channels, email_leak_detected_by_it exactly false (boolean), scope_gap_identified exactly true (boolean); (2) evidence_convergence.md must reference IT-SEC-2026-INV-042, mention email attachments in the context of scope/not investigated, cite cloud-storage-access-log.md, email-attachment-audit.md, and it-security-report.md, and must NOT claim IT found the leak or call the IT report 'wrong'."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "再起一只把链路自动校验的脚本：`scripts/evidence_chain_validator.py`。读云盘日志和邮件审计，做下列校验，算清下列布尔与整数：\n1. 林小雅那条 DOWNLOAD（用户含 `lxy`、操作为 DOWNLOAD、目标是完整版薪资文件）。\n2. lxy@company.com 发往外部猎头域的那封邮件。\n3. 计算并校验下列链路：\n   - `download_before_email`：下载时刻 < 邮件发送时刻 → True\n   - `size_match_full_version`：邮件附件大小 == 完整版大小 → True\n   - `size_mismatch_anonymized`：邮件附件大小 ≠ 脱敏版大小 → True\n   - `recipient_external_domain`：收件人域 ≠ `company.com` → True\n   - `delta_seconds`：下载到邮件之间整数秒差\n4. stdout 输出：`{\"download_before_email\": true, \"size_match_full_version\": true, \"size_mismatch_anonymized\": true, \"recipient_external_domain\": true, \"delta_seconds\": <int>, \"chain_valid\": true}`。\n\n全部布尔须 True；`chain_valid` 在所有校验通过时置 True。运行：`cd ${workspace} && python scripts/evidence_chain_validator.py`。时间戳解析记得 timezone-aware；外部域判定用域名比较，不要硬编码具体字面收件人。",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/evidence_chain_validator.py 2>&1 | python3 -c \"\nimport sys,json; d=json.load(sys.stdin)\nassert d['download_before_email']==True, 'download_before_email must be True'\nassert d['size_match_full_version']==True, 'size_match_full_version must be True'\nassert d['recipient_external_domain']==True, 'recipient_external_domain must be True'\nassert d['chain_valid']==True, 'chain_valid must be True'\nassert 2480<=d['delta_seconds']<=2494, f'delta_seconds={d[chr(39)]delta_seconds{chr(39)]}'\nprint('PASSED')\n\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "evidence_chain_validator.py correctly validates all chain links: download precedes email (True), sizes match the full version (True), external domain (True), chain_valid=True, delta_seconds ≈ 2487.",
+        "incorrect": "Ensure the script: (1) parses timestamps with timezone awareness (datetime.fromisoformat or dateutil.parser); (2) correctly identifies the external domain by checking that the recipient domain is not 'company.com'; (3) computes delta_seconds as int((email_ts - download_ts).total_seconds()); (4) sets chain_valid=True if all validations pass; (5) outputs valid JSON to stdout."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "起一份 `analysis/contradiction_resolution.md`，把 IT 那份「未发现外部分享」和邮件审计里那条外发记录摆在一起、把那个「看似矛盾」讲透。请按下面要点写，至少 3 个 `## ` 标题：\n\n1. 摆出表面矛盾：IT 报告 `IT-SEC-2026-INV-042` 说「未发现外部数据分享」，但邮件审计里有一封 2.3 MB 附件外发到 `zhangling@headhunter-corp.com`。\n2. 解释这并非真矛盾：IT 的 scope 不含 email attachment（attachment 出现在 scope 上下文里）。\n3. 显式引用 `IT-SEC-2026-INV-042` 这个完整报告号。\n4. 引用 `chenjing_itsec_email.md`（即陈静与 IT 之邮件往来）作为 IT 自己确认 scope gap 的来源。\n5. 结论：两份资料各自在所辖范围内都准确；泄露走的是邮件 —— IT 当次未审之渠道。\n\n**不要**用'wrong'、'incorrect'去定性 IT 报告 —— 这种用词会让读者以为我们在指责 IT，实际是 scope 不同的事。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_contradiction_resolution.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "contradiction_resolution.md correctly states the apparent contradiction, explains the scope limitation, cites IT-SEC-2026-INV-042, references the email exchange confirming the scope gap, and concludes both sources are compatible — without calling IT 'wrong'.",
+        "incorrect": "Check: (1) must contain 'IT-SEC-2026-INV-042'; (2) must contain 'email attachment' near 'scope' context; (3) must contain a resolution statement that both reports are compatible/accurate within their domains; (4) must NOT contain language concluding IT was 'wrong' or 'incorrect'; (5) must reference the email exchange with IT (chenjing or 陈静) as the scope-gap confirmation source; (6) must have ≥ 3 ## headings."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把现阶段的嫌疑人画像锁成 `analysis/suspect_profile.json`，schema 一字不差：\n\n```json\n{\n  \"suspect\": \"林小雅\",\n  \"download_confirmed\": true,\n  \"download_version\": \"v1.1\",\n  \"download_timestamp\": \"2026-09-25T14:22:17+08:00\",\n  \"download_size_mb\": 2.3,\n  \"email_sent\": true,\n  \"email_recipient\": \"zhangling@headhunter-corp.com\",\n  \"email_timestamp\": \"2026-09-25T15:03:44+08:00\",\n  \"email_attachment_size_mb\": 2.3,\n  \"delta_seconds\": 2487,\n  \"data_exposed_employees\": [\"李明\", \"赵伟\", \"孙丽\"],\n  \"defense_claims\": [\n    {\"claim\": \"...\", \"status\": \"refuted\"},\n    {\"claim\": \"...\", \"status\": \"refuted\"},\n    {\"claim\": \"...\", \"status\": \"refuted\"}\n  ],\n  \"it_report_exoneration_scope\": \"cloud channels only\",\n  \"hash_match_confirmed\": false\n}\n```\n\n关键：`hash_match_confirmed` 现在必须是 `false`，因为加密证据这一阶段还没到位 —— 别提前置 true。`defense_claims` 恰 3 项、status 一律 `refuted`。所有数值与字符串值按上面 verbatim。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_suspect_profile_json.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "suspect_profile.json has all required fields with correct values. Notably: download_timestamp = '2026-09-25T14:22:17+08:00', email_timestamp = '2026-09-25T15:03:44+08:00', delta_seconds ≈ 2487, download_size_mb = 2.3, email_attachment_size_mb = 2.3, hash_match_confirmed = false (not yet confirmed), defense_claims has exactly 3 refuted entries.",
+        "incorrect": "Check: (1) all required fields present with exact string/numeric values; (2) delta_seconds in [2480, 2494]; (3) download_size_mb == 2.3; (4) email_attachment_size_mb == 2.3; (5) hash_match_confirmed must be boolean false (NOT true — hash confirmation comes in a later phase); (6) defense_claims array has exactly 3 objects each with status == 'refuted'; (7) data_exposed_employees has all three names."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "我得给张薇递一份阶段性 memo —— 路径 `docs/YYYY-MM-DD_preliminary_investigation_memo.md`（YYYY-MM-DD 用今天日期，例如 `2026-10-05_preliminary_investigation_memo.md`）。结构走 P3（先摘要后证据）+ P4（量化与定性平衡）那一套：\n\n1. 文档第一个 `## ` 标题须含 'Executive Summary' 或 'Summary'。\n2. 把 IT 报告 `IT-SEC-2026-INV-042` 与邮件审计的「看似矛盾」讲清 —— 两者在各自 scope 内都准确。\n3. 完整引用 `IT-SEC-2026-INV-042` 这个报告号。\n4. 包括下载时刻 `14:22:17` 和邮件时刻 `15:03:44`（都是当日 2026-09-25）。\n5. 至少 4 个 `## ` 标题。\n6. 别把 2.3 MB 误说成脱敏版 —— 大小指向的是完整版，写错张薇会立刻看出来。\n\n语气专业但留温度（陈静 P5），别冷冰冰像审讯笔录。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preliminary_memo_v2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "The preliminary memo has a date-prefixed filename, begins with a Summary/Executive Summary heading, cites IT-SEC-2026-INV-042, includes both timestamps, has ≥ 4 ## headings, correctly identifies 2.3 MB as the full salary file, and resolves the IT vs email audit contradiction.",
+        "incorrect": "Check: (1) filename must have YYYY-MM-DD_ prefix in the docs/ directory; (2) first ## heading must contain 'Summary' or 'Executive'; (3) must contain 'IT-SEC-2026-INV-042'; (4) must contain '14:22:17' AND '15:03:44'; (5) ≥ 4 ## headings; (6) must NOT suggest 2.3 MB is the anonymized version or that 林小雅 sent the 0.8 MB file."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd3_workspace"
+      ],
+      "question": "After reviewing salary-spreadsheet-metadata.md (which contains SHA-256 hash comparisons between 2026-Q3-salary-full.xlsx v1.1, salary-data-analysis.xlsx, and the anonymized file), which statements are now supported?\n\nAvailable workspace files: cloud-storage-access-log.md, email-attachment-audit.md, file-version-history.md, it-security-report.md, salary-spreadsheet-metadata.md",
+      "options": {
+        "A": "SHA-256 hash matching between two files constitutes cryptographic proof of identical byte-level content.",
+        "B": "If `salary-data-analysis.xlsx` (the emailed file) has the same SHA-256 hash `a3f7b2c8e9d1` as `2026-Q3-salary-full.xlsx` v1.1, it is cryptographically identical to the full salary spreadsheet.",
+        "C": "The SHA-256 hash `a3f7b2c8e9d1` proves that 林小雅 personally renamed the file before emailing it, but the content is the same.",
+        "D": "Hypothesis H3 ('the email attachment is a different unrelated 2.3 MB file') can now be definitively resolved by checking whether the email attachment's hash matches `a3f7b2c8e9d1`.",
+        "E": "A SHA-256 hash match would eliminate 林小雅's defense that the emailed file was unrelated to the downloaded salary spreadsheet.",
+        "F": "Because hash matching only confirms byte-level content, it cannot prove 林小雅 was the one who renamed or emailed the file — though it does prove the file content is identical."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D",
+        "E",
+        "F"
+      ],
+      "feedback": {
+        "correct": "A: SHA-256 hash matching is cryptographic proof of byte-level identity. B: If both hashes are a3f7b2c8e9d1, the files are byte-identical. D: H3 can be resolved once hash is verified — and salary-spreadsheet-metadata.md shows they DO match. E: correct inference — hash match eliminates the 'different file' defense. F: hash proves content identity only, not chain of custody or who performed the renaming.",
+        "incorrect": "The salary-spreadsheet-metadata.md shows the SHA-256 hash (first 16 chars) for all three files. Focus on what hash matching can and cannot prove: it proves byte-level identity but not who renamed or sent the file.",
+        "options": {
+          "C": "Incorrect. SHA-256 hash confirms the files have identical byte content, but it cannot prove who renamed the file or when the renaming occurred. The hash is a content fingerprint, not a behavioral trail."
+        }
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "IT 取证那份元数据档（`salary-spreadsheet-metadata.md`）一进来，哈希链就该自己跑出来。请写 `scripts/hash_chain_verifier.py`：\n1. 读元数据档，从那张表的 'SHA-256 哈希 (前16位)' 列里抽出 `2026-Q3-salary-full.xlsx` v1.1 那一行的哈希。\n2. 同样抽出 `salary-data-analysis.xlsx`（即邮件附件）那一行的哈希。\n3. 判定两哈希是否相等。\n4. stdout 输出：\n   ```\n   {\"full_v1_1_hash\": \"...\", \"email_attachment_hash\": \"...\", \"hash_match\": true, \"hypothesis_h3_status\": \"refuted\", \"conclusion\": \"...\"}\n   ```\n\n关键：`hash_match` 在两哈希等同时为 true，且 `hypothesis_h3_status` 设 `refuted`（H3 那条「附件是另一个 2.3 MB 不相干文件」的假设到此推翻）。运行：`cd ${workspace} && python scripts/hash_chain_verifier.py`。请实读元数据 Markdown 表，不要把哈希字面量硬编码到脚本里 —— 一旦 IT 重跑取证、哈希列变了就废。",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/hash_chain_verifier.py 2>&1 | python3 -c \"\nimport sys,json; d=json.load(sys.stdin)\nassert d['hash_match']==True, 'hash_match must be True'\nassert d['full_v1_1_hash']=='a3f7b2c8e9d1', f'wrong hash: {d[chr(39)]full_v1_1_hash{chr(39)]}'\nassert d['hypothesis_h3_status']=='refuted', 'hypothesis_h3_status must be refuted'\nprint('PASSED')\n\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "hash_chain_verifier.py correctly extracts both SHA-256 hashes from salary-spreadsheet-metadata.md, confirms they match (a3f7b2c8e9d1 == a3f7b2c8e9d1), sets hash_match=true, and marks hypothesis_h3_status='refuted'.",
+        "incorrect": "Ensure the script: (1) reads salary-spreadsheet-metadata.md and parses the Markdown table; (2) correctly identifies the hash column '**SHA-256 哈希 (前16位)**'; (3) extracts a3f7b2c8e9d1 for the full v1.1 row and for the salary-data-analysis.xlsx row; (4) compares them and sets hash_match = (hash1 == hash2); (5) sets hypothesis_h3_status = 'refuted' since hashes match; (6) outputs valid JSON to stdout."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "哈希出来之后，林小雅这段时间的三套立场都该收进 `analysis/lin_xiaoya_statement_log.json`，JSON 数组恰 3 项：把她可能（或已隐含）说过的三种说法列出，并给出针对每条的反证：\n\n1. Position 1: 'I only downloaded the anonymized version (0.8 MB)' —— 被云盘日志里那条 2.3 MB 完整版 DOWNLOAD 直接打掉。\n2. Position 2: 'The email has nothing to do with my work files' —— 被 2.3 MB 附件大小匹配 + IT 取证元数据里的哈希匹配打掉。\n3. Position 3: 'The email attachment must have been a mistake or unrelated document' —— 被邮件主题'薪资数据参考'本身的语义 + 哈希一致打掉。\n\n每个对象字段：`{\"statement_date\": \"2026-09-...\", \"statement\": \"...\", \"contradicting_evidence\": [\"...\", \"...\"], \"contradiction_source\": [\"...\", \"...\"], \"status\": \"refuted\"}`。\n\n全部 status 为 `refuted`；至少有一条的 `contradicting_evidence` 里要明显引用 hash 证据（'hash' 字样即可）。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_statement_log_json.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "lin_xiaoya_statement_log.json has exactly 3 entries, all with status='refuted', each with contradicting_evidence array of ≥ 2 items, and at least one entry references the hash 'a3f7b2c8e9d1' or 'hash' in its contradicting_evidence.",
+        "incorrect": "Check: (1) valid JSON array of exactly 3 objects; (2) each object has: statement_date, statement, contradicting_evidence (array ≥ 2 items), contradiction_source (array), status; (3) all status values == 'refuted'; (4) at least one entry references 'a3f7b2c8e9d1' or 'hash' in contradicting_evidence (the hash evidence is now available from salary-spreadsheet-metadata.md)."
+      }
+    },
+    {
+      "id": "q18",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把哈希这一档证据单独立两份说明 —— 给非技术线（如法务）也看得懂：\n\n1. `analysis/cryptographic_proof.md` —— 解释 SHA-256 哈希匹配为何意味着字节级一致：(a) SHA-256 对任意文件产生 256 位摘要；(b) 两文件哈希一致即字节内容相同；(c) 碰撞概率（collision）可忽略，量级 < 1 in 2^128；(d) 由此可排除「另一个同大小不同文件」这一辩词。文档里要明确出现该哈希前16位 `a3f7b2c8e9d1`。≥ 2 个 `## ` 标题。\n\n2. `analysis/metadata_analysis.md` —— 把取证元数据那份档（`salary-spreadsheet-metadata.md`）里的内容归纳：(a) 三个文件的创建/修改时间；(b) 大小：完整版 v1.1 与邮件附件均为 2.3 MB；(c) 哈希前16位 `a3f7b2c8e9d1` —— 完整版 v1.1 与 `salary-data-analysis.xlsx` 共享；(d) 由此确认 `salary-data-analysis.xlsx` 与完整版 v1.1 字节级一致（identical）。≥ 2 个 `## ` 标题，须引 `salary-spreadsheet-metadata.md` 为来源。\n\n两份必须就哈希值口径一致 —— 任何不一致都会被交叉校验拍掉。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_cryptographic_proof.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_metadata_analysis.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Both files contain 'a3f7b2c8e9d1' consistently. cryptographic_proof.md explains SHA-256 significance with collision probability context and has ≥ 2 ## headings. metadata_analysis.md documents the metadata table contents and references salary-spreadsheet-metadata.md as source.",
+        "incorrect": "Check: (1) cryptographic_proof.md must contain 'a3f7b2c8e9d1', 'SHA-256', and language about 'identical' bytes or 'byte-level'; must include collision probability or uniqueness statement; ≥ 2 ## headings; (2) metadata_analysis.md must contain 'a3f7b2c8e9d1', '2.3', 'salary-spreadsheet-metadata', 'salary-data-analysis.xlsx'; ≥ 2 ## headings; (3) both files must reference the same hash value — any discrepancy will fail the cross-consistency check."
+      }
+    },
+    {
+      "id": "q19",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "起一份 `analysis/alternative_hypotheses_refutation.md`，把林小雅可能搬出的三套辩词逐个驳掉。每条引到具体源档：\n\n1. 辩词：'I sent a different, unrelated file that happened to be 2.3 MB'\n   反驳：SHA-256 哈希前16位 `a3f7b2c8e9d1` 完全一致 —— 字节级相同，不可能是不同文件。\n\n2. 辩词：'I only emailed the anonymized salary file (0.8 MB)'\n   反驳：邮件审计中附件大小 2.3 MB ≠ 0.8 MB（脱敏版大小）。\n\n3. 辩词：'The email was an internal work document, not a confidential leak'\n   反驳：(a) 收件人 `zhangling@headhunter-corp.com` 是外部猎头机构（headhunter-corp.com 域）；(b) 邮件主题 `薪资数据参考` 已直白把附件标为薪资资料。\n\n每条反驳须带源档引用。结尾 Conclusion 段须断言：综合证据下没有任一辩词成立。**不可**出现 'possible'、'plausible'、'cannot be ruled out' 这类弱化语 —— 论证一弱化下游就反噬。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_alt_hypotheses_refutation.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "alternative_hypotheses_refutation.md correctly refutes all three defenses with specific evidence citations, includes 'a3f7b2c8e9d1' for the hash refutation, references both '0.8' and '2.3' for the size mismatch, cites 'headhunter-corp.com' and '薪资数据参考', and does not describe any defense as viable.",
+        "incorrect": "Check: (1) must contain 'a3f7b2c8e9d1' (hash refutation for defense 1); (2) must contain both '0.8' and '2.3' in proximity (size mismatch for defense 2); (3) must contain 'headhunter-corp.com' (external recipient for defense 3); (4) must contain '薪资数据参考' (email subject for defense 3); (5) must NOT contain phrases like 'possible defense', 'cannot be ruled out', or 'plausible explanation' following any exculpatory claim."
+      }
+    },
+    {
+      "id": "q20",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把全链证据做成一份机读版 —— `analysis/complete_evidence_chain.json`，JSON 数组恰 6 项，按下面顺序与字段：\n\n```json\n[\n  {\"step\": 1, \"event\": \"Download\", \"timestamp\": \"2026-09-25T14:22:17+08:00\", \"source\": \"cloud-storage-access-log.md\", \"key_fact\": \"林小雅 downloaded 2026-Q3-salary-full.xlsx v1.1 (2.3 MB)\", \"links_to_next\": \"...\", \"confidence\": \"high\"},\n  {\"step\": 2, \"event\": \"Version identification\", \"timestamp\": null, \"source\": \"file-version-history.md\", \"key_fact\": \"2.3 MB matches only v1.1; v1.0 was 2.1 MB\", \"links_to_next\": \"...\", \"confidence\": \"high\"},\n  {\"step\": 3, \"event\": \"Hash confirmation\", \"timestamp\": null, \"source\": \"salary-spreadsheet-metadata.md\", \"key_fact\": \"SHA-256 a3f7b2c8e9d1 matches salary-data-analysis.xlsx (emailed file)\", \"links_to_next\": \"...\", \"confidence\": \"high\"},\n  {\"step\": 4, \"event\": \"External email\", \"timestamp\": \"2026-09-25T15:03:44+08:00\", \"source\": \"email-attachment-audit.md\", \"key_fact\": \"lxy@company.com sent salary-data-analysis.xlsx (2.3 MB) to zhangling@headhunter-corp.com\", \"links_to_next\": \"...\", \"confidence\": \"high\"},\n  {\"step\": 5, \"event\": \"Recipient confirmation\", \"timestamp\": null, \"source\": \"email-attachment-audit.md\", \"key_fact\": \"zhangling@headhunter-corp.com is an external headhunting agency domain\", \"links_to_next\": \"...\", \"confidence\": \"high\"},\n  {\"step\": 6, \"event\": \"Exposed employees\", \"timestamp\": null, \"source\": \"file-version-history.md\", \"key_fact\": \"李明, 赵伟, 孙丽 — three employees in v1.1 but NOT in anonymized file — had salary data exposed\", \"links_to_next\": null, \"confidence\": \"high\"}\n]\n```\n\n全部 `confidence` 为 `high`；step 1 与 step 4 的 timestamp 取 verbatim；step 3 的 key_fact 须含 `a3f7b2c8e9d1`。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_complete_evidence_chain_json.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "complete_evidence_chain.json has exactly 6 items in step order 1–6, all with confidence='high', step 1 timestamp='2026-09-25T14:22:17+08:00', step 4 timestamp='2026-09-25T15:03:44+08:00', and 'a3f7b2c8e9d1' in step 3.",
+        "incorrect": "Check: (1) valid JSON array of exactly 6 items; (2) steps in order 1, 2, 3, 4, 5, 6; (3) all confidence == 'high'; (4) step 1 timestamp == '2026-09-25T14:22:17+08:00' (exact string match); (5) step 4 timestamp == '2026-09-25T15:03:44+08:00' (exact string match); (6) step 3 key_fact or a field must contain 'a3f7b2c8e9d1'."
+      }
+    },
+    {
+      "id": "q21",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "差不多到给上层一份阶段调查发现报告的时候 —— `docs/YYYY-MM-DD_investigation_findings_report.md`（YYYY-MM-DD 用今天日期）。这份会同时被通用 P 规则检查（P1/P2/P3/P4）筛一遍，写得稍正式些：\n\n1. 第一个 `## ` 标题（前 800 字以内出现）必为 'Executive Summary'、'Summary of Findings' 或 'Key Findings' 三者之一。\n2. 至少 6 个 `## ` 标题。\n3. 文中须含 SHA-256 哈希前16位 `a3f7b2c8e9d1`。\n4. 必须明确处理 IT 报告 `IT-SEC-2026-INV-042`（「未发现外部分享」）与邮件审计（外发 2.3 MB 附件）之间的「看似矛盾」 —— 并以 scope 限制做出收口（不要骂 IT）。\n5. 须出现下载与邮件两个时间戳 `2026-09-25T14:22:17+08:00` 与 `2026-09-25T15:03:44+08:00`（verbatim，含时区）。\n6. 全文 ≥ 1000 字。\n\nP4 关注 ISO 8601 含时区时间戳与 MB 单位之类量化锚点 —— 别把这些丢了。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_findings_report_v2.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3,P4 --target docs/",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "investigation_findings_report.md passes all checks: date-prefixed filename, first ## heading is a Summary/Findings variant within first 800 chars, ≥ 6 ## headings, contains hash a3f7b2c8e9d1, resolves the IT vs email audit contradiction, includes both timestamps, is ≥ 1000 chars, and satisfies preferences P1–P4.",
+        "incorrect": "Check: (1) filename has YYYY-MM-DD_ prefix in docs/; (2) first ## heading within first 800 chars is Executive Summary / Summary of Findings / Key Findings; (3) ≥ 6 ## headings; (4) contains 'a3f7b2c8e9d1'; (5) references 'IT-SEC-2026-INV-042' and explains scope limitation (NOT that IT was wrong); (6) contains '14:22:17' and '15:03:44'; (7) total file length ≥ 1000 characters; P4 requires ISO 8601 timestamps with timezone and MB sizes."
+      }
+    },
+    {
+      "id": "q22",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd4_sessions",
+        "upd4_workspace"
+      ],
+      "question": "After reviewing linxiaoya-partial-admission.md and the IM exchanges (message_logs/chenjing_linxiaoya_im.md, message_logs/chenjing_zhangwei_feishu.md), which statements are supported by the evidence?\n\nAvailable workspace files: all previous files + linxiaoya-partial-admission.md, message_logs/chenjing_linxiaoya_im.md, message_logs/chenjing_zhangwei_feishu.md",
+      "options": {
+        "A": "林小雅's partial admission — acknowledging she downloaded the full file — changes hypothesis H4's status from 'likely' to 'confirmed' when combined with the hash and email evidence.",
+        "B": "林小雅 admitted to deliberately forwarding the full salary spreadsheet to 赵磊, an internal HR recruiter, not to an external headhunter.",
+        "C": "The partial admission does not override the cryptographic evidence — the SHA-256 hash match remains the strongest proof of file identity regardless of what 林小雅 says.",
+        "D": "林小雅 acknowledged she downloaded the full salary file but claimed she 'modified it before sending' — a claim directly refuted by the SHA-256 hash match proving the file was unmodified.",
+        "E": "陈静's Feishu message to 张薇 indicates that HR leadership is now treating this as a confirmed data breach, triggering formal investigation procedures and access revocation.",
+        "F": "林小雅's partial admission is a full confession that eliminates any remaining ambiguity about intent."
+      },
+      "answer": [
+        "A",
+        "C",
+        "D",
+        "E"
+      ],
+      "feedback": {
+        "correct": "A: combined with hash match and email evidence, the partial admission elevates H4 to confirmed. C: hash match is forensic evidence that stands independent of testimony. D: 林小雅 claimed she modified the file before sending, but the SHA-256 hash proves the file was byte-identical to the original — any modification would change the hash. E: chenjing_zhangwei_feishu.md shows 张薇 initiating formal investigation procedures and revoking 林小雅's access.",
+        "incorrect": "Read linxiaoya-partial-admission.md and both IM logs carefully. 林小雅's exact words involve admitting the download but claiming modification before sending — refuted by the hash. 张薇's response in chenjing_zhangwei_feishu.md shows the organizational escalation.",
+        "options": {
+          "B": "Incorrect: the documents show the email was sent to zhangling@headhunter-corp.com (external headhunter), not to an internal recruiter named 赵磊.",
+          "F": "Incorrect: 林小雅's admission is partial — she acknowledges the download but claims the file was modified, which is itself refuted by the hash. This is not a full confession of intentional external leaking."
+        }
+      }
+    },
+    {
+      "id": "q23",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "林小雅 10/3 那份飞书自陈（`linxiaoya-partial-admission.md`）让她的立场轨迹多了一段 —— 把 `analysis/lin_xiaoya_statement_log.json` 改写一下：由原先的 JSON 数组改为 JSON **对象**，顶层结构为：\n```json\n{\n  \"overall_assessment\": \"partially_admitted\",\n  \"statements\": [ ... 4 entries ... ]\n}\n```\n\n1. `statements` 数组保留原 3 条（status 仍为 `refuted`），第 4 条记她那次部分承认：\n   - `statement` 字段须如实引到自陈里的字面，例如 '我承认我确实下载了完整版薪资表'，或承认词中的 `误操作`、`完整版` 字样。\n   - `status` 必为 `partial_admission`（不是 `refuted`）。\n   - `statement_date` 取自陈日期 `2026-10-03`。\n\n原 3 条不动。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_updated_statement_log.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "lin_xiaoya_statement_log.json is restructured with overall_assessment='partially_admitted', statements array has exactly 4 entries, the 4th entry has status='partial_admission' and quotes the admission text accurately.",
+        "incorrect": "Check: (1) file is now a JSON object (not array) with top-level field 'overall_assessment' == 'partially_admitted'; (2) 'statements' key contains an array of exactly 4 objects; (3) 4th entry has status == 'partial_admission'; (4) 4th entry contains the admission quote — either '我承认' or '完整版薪资表' or content from the actual linxiaoya-partial-admission.md document; (5) first 3 entries retain status == 'refuted'."
+      }
+    },
+    {
+      "id": "q24",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把「林小雅立场 vs 证据」的时间线展开成一份 `analysis/denial_vs_evidence_timeline.md`。按下列 5 事件、按时间先后展开，至少 4 个 `## ` 标题：\n\n1. **2026-09-25 14:22**：下载事件 —— 林小雅取走完整版 v1.1（2.3 MB）；隐含主张为合法访问。\n2. **2026-09-25 15:03**：邮件事件 —— 外发 2.3 MB 至猎头；下载与发邮件之差 Δt = `2487` 秒（约 41 min）。\n3. **2026-09-30**：IT 报告 `IT-SEC-2026-INV-042` 出炉 —— 「未通过云盘外部分享」造成表面豁免；以 scope gap 收口。\n4. **2026-10-03**：哈希确认 —— SHA-256 前16位 `a3f7b2c8e9d1` 证邮件附件与下载文件字节级一致；H3 推翻。\n5. **2026-10-03**：林小雅部分承认 —— 自陈承认下载完整版，但辩称发出前已修改（被哈希直接打掉，承认词含 `完整版` / `误操作` / `承认`）。\n\n全文须含 `2487`、`a3f7b2c8e9d1`、承认词；`14:22` 必出现在 `15:03` 之前。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_denial_timeline_v2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "denial_vs_evidence_timeline.md contains '2487' (or '41 min'), 'a3f7b2c8e9d1', the admission quote, ≥ 4 ## headings, and events in chronological order with 14:22 appearing before 15:03.",
+        "incorrect": "Check: (1) contains '2487' or '41 min' (the Δt); (2) contains 'a3f7b2c8e9d1' (the hash); (3) contains admission language such as '完整版', '误操作', '承认', or a direct quote from linxiaoya-partial-admission.md; (4) ≥ 4 ## headings; (5) '14:22' appears before '15:03' in the document (chronological order)."
+      }
+    },
+    {
+      "id": "q25",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "再起 `scripts/case_strength_scorer.py` —— 一只综合打分脚本，读 workspace 已有的 analysis / scripts 文件，按下列权重算出一个 0.0–1.0 的强度分：\n\n- **hash_match_confirmed**（+0.35）：检查 `analysis/complete_evidence_chain.json` 是否存在且含 `a3f7b2c8e9d1`（或 `scripts/hash_chain_verifier.py` 的输出确认 hash 匹配）。\n- **download_confirmed**（+0.25）：检查 `analysis/access_timeline.json` 是否存在且有一条 action='DOWNLOAD' 且 user 含 `lxy`。\n- **external_email_confirmed**（+0.20）：检查 `analysis/suspect_profile.json` 是否存在且 `email_sent == true`。\n- **partial_admission**（+0.15）：检查 `analysis/lin_xiaoya_statement_log.json` 是否有任意条目 `status == 'partial_admission'`（注意它现在是对象，承认条目在 `statements` 数组中）。\n- **it_scope_gap_documented**（+0.05）：检查 `analysis/it_scope_analysis.json` 是否存在。\n\nstdout 输出：\n```json\n{\"total_score\": <float>, \"components\": {\"hash_match_confirmed\": <bool>, \"download_confirmed\": <bool>, \"external_email_confirmed\": <bool>, \"partial_admission\": <bool>, \"it_scope_gap_documented\": <bool>}, \"verdict\": \"strong\" | \"moderate\" | \"weak\"}\n```\n\n若 `total_score >= 0.95`，verdict 必为 `strong`。运行：`cd ${workspace} && python scripts/case_strength_scorer.py`。",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/case_strength_scorer.py 2>&1 | python3 -c \"\nimport sys,json; d=json.load(sys.stdin)\nassert d['total_score']>=0.95, f'score too low: {d[chr(39)]total_score{chr(39)]}'\nassert d['verdict']=='strong', f'verdict should be strong, got {d[chr(39)]verdict{chr(39)]}'\nprint('PASSED')\n\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "case_strength_scorer.py correctly reads existing analysis files, awards points for each confirmed component (hash: +0.35, download: +0.25, email: +0.20, admission: +0.15, it_scope: +0.05 = 1.00), achieves total_score ≥ 0.95, and outputs verdict='strong'.",
+        "incorrect": "Ensure case_strength_scorer.py: (1) checks each of the 5 analysis files/conditions; (2) if all 5 conditions met, total_score = 1.0 ≥ 0.95; (3) verdict = 'strong' when total_score >= 0.95; (4) handles the restructured lin_xiaoya_statement_log.json (now an object with 'statements' array) — check for status='partial_admission' in that array; (5) outputs valid JSON to stdout."
+      }
+    },
+    {
+      "id": "q26",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "递交给法务/张薇的正式案件总结 —— `docs/YYYY-MM-DD_formal_case_summary.json`（今日日期前缀），JSON 顶层结构如下：\n\n```json\n{\n  \"incident_id\": \"SAL-LEAK-2026-09\",\n  \"suspect\": \"林小雅\",\n  \"incident_date\": \"2026-09-25\",\n  \"evidence_chain\": [ ... ],\n  \"contradictions_resolved\": [ ... ],\n  \"conclusion\": {\"verdict\": \"...\", \"confidence\": \"...\"},\n  \"recommended_actions\": [ ... ]\n}\n```\n\n要点：\n- `evidence_chain`：≥ 5 项，凝练全证据链关键步骤。\n- `contradictions_resolved`：≥ 4 项；其中必有一项写到 IT 报告 scope gap（'IT-SEC-2026-INV-042 scope limitation resolved' 或类似）。\n- `conclusion.verdict`：不可为 'inconclusive'、'insufficient evidence'、'unclear' —— 证据链已经够明确，没必要给自己留后门。\n- `recommended_actions`：≥ 3 项，具体可执行（吊销权限、走纪律程序、后续技术管控等）。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_formal_case_summary_json.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "YYYY-MM-DD_formal_case_summary.json has all required top-level keys, evidence_chain ≥ 5 items, contradictions_resolved ≥ 4 items (including IT scope gap), conclusion.verdict is a definitive finding (not inconclusive), and recommended_actions ≥ 3 items.",
+        "incorrect": "Check: (1) file is in docs/ with YYYY-MM-DD_ prefix; (2) all required top-level keys present: incident_id, suspect, incident_date, evidence_chain, contradictions_resolved, conclusion, recommended_actions; (3) evidence_chain length ≥ 5; (4) contradictions_resolved length ≥ 4 and includes IT report scope gap; (5) conclusion.verdict is NOT 'inconclusive', 'insufficient evidence', or 'unclear'; (6) recommended_actions length ≥ 3."
+      }
+    },
+    {
+      "id": "q27",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "起 `analysis/case_strength_assessment.md` —— 一份正式的证据强度评估，要点：\n\n1. 引用全 4 类证据：(a) 云盘访问日志中 14:22:17 那条林小雅 DOWNLOAD 2.3 MB；(b) 邮件审计中 15:03:44 外发 2.3 MB 给猎头；(c) SHA-256 前16位 `a3f7b2c8e9d1` 证字节级一致；(d) 林小雅 10/3 自陈中已部分承认下载完整版（partial admission）。\n2. 必须显式使用 'beyond reasonable doubt'（或中文 `排除合理怀疑` / `确实充分`）来定性证据权重。\n3. 结论必须断定：证据强度足以支撑 HR 纪律程序（disciplinary）。\n4. ≥ 3 个 `## ` 标题。\n5. **不可**出现 'insufficient evidence'、'defense has merit'、'cannot determine'、'evidence is weak' 之类的弱化或反向措辞。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_case_strength_v2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "case_strength_assessment.md references all 4 evidence categories including hash 'a3f7b2c8e9d1', uses 'beyond reasonable doubt' or equivalent, concludes the case is strong enough for disciplinary action, has ≥ 3 ## headings, and avoids any language weakening the evidence.",
+        "incorrect": "Check: (1) contains 'a3f7b2c8e9d1' (hash evidence category); (2) contains 'beyond reasonable doubt' OR '排除合理怀疑' OR '确实充分'; (3) references all 4 evidence categories: cloud log download + email audit + hash match + partial admission; (4) ≥ 3 ## headings; (5) does NOT contain 'insufficient evidence', 'defense has merit', 'cannot determine', or 'evidence is weak'."
+      }
+    },
+    {
+      "id": "q28",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "In conducting this salary leak investigation, which cognitive biases pose the greatest risk to analytical integrity, and what is the appropriate mitigation described?\n\nAvailable workspace files: all workspace files",
+      "options": {
+        "A": "Confirmation bias: the investigator might over-weight evidence consistent with guilt and under-scrutinize exculpatory evidence. Mitigation: explicitly evaluate 林小雅's strongest possible defense before drawing final conclusions.",
+        "B": "The SHA-256 hash evidence is inherently biased because it was obtained by HR rather than an independent forensics team, making it inadmissible for any investigative purpose.",
+        "C": "Anchoring bias: the initial cloud log finding might cause the investigator to interpret all subsequent evidence as confirming that conclusion. Mitigation: evaluate each new evidence item independently against the full hypothesis set.",
+        "D": "Attribution error: attributing the 2.3 MB size match to intentional forwarding without ruling out other explanations — a gap now closed by the SHA-256 hash confirmation.",
+        "E": "The partial admission 'can be ignored' because it was obtained in an internal HR conversation without legal counsel, making it inadmissible even for HR disciplinary purposes.",
+        "F": "Scope limitation bias: treating the IT report's 'no sharing found' conclusion as comprehensive when it only covered cloud channels — a bias already identified and corrected in this investigation."
+      },
+      "answer": [
+        "A",
+        "C",
+        "D",
+        "F"
+      ],
+      "feedback": {
+        "correct": "A (confirmation bias), C (anchoring bias), D (attribution error resolved by hash), and F (scope limitation bias, already mitigated) are all valid cognitive bias risks with appropriate mitigations.",
+        "incorrect": "Evaluate each option for whether it describes a real analytical bias and a sound mitigation — without importing external legal standards that do not apply to HR internal investigations.",
+        "options": {
+          "B": "Incorrect: provenance does not automatically invalidate forensic evidence in HR investigations. The hash was computed from the actual files and is verifiable independently. HR-initiated forensics are standard practice.",
+          "E": "Incorrect: partial admissions are evidentiary even in internal proceedings. HR investigations are not bound by criminal evidence admissibility rules. The admission is relevant and probative."
+        }
+      }
+    },
+    {
+      "id": "q29",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "收尾两件 —— 终版调查报告 + 证据索引：\n\n**File 1**: `docs/YYYY-MM-DD_final_investigation_report.md`（今日日期前缀）。须满足：\n- 第一个 `## ` 标题含 'Conclusion'、'Summary'、'Executive' 或 'Findings' 之一\n- 至少 5 个 `## ` 标题\n- 含 Δt 值 `2487`（或 '41 min'）\n- 含 SHA-256 前16位 `a3f7b2c8e9d1`\n- 含 IT 报告号 `IT-SEC-2026-INV-042`\n- 含林小雅部分承认词（`完整版` / `误操作` / `承认` 之一）\n- 全文 ≥ 1200 字\n- 文件名带 YYYY-MM-DD 前缀\n\n**File 2**: `docs/case_evidence_index.json` —— JSON 对象，列出本次调查产生的所有 analysis 档及其用途：\n```json\n{\n  \"files\": [\n    {\"filename\": \"analysis/access_timeline.json\", \"purpose\": \"...\"},\n    ...\n  ]\n}\n```\n至少 5 个 analysis 档。\n\n终版报告还会被偏好规则 P1/P2/P3/P4/P5 一并校验 —— 摘要先行、ISO 8601 含时区时间戳、MB 单位、量化与定性平衡、专业有温度的措辞这几点都要踩到。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_final_report_v2.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3,P4,P5 --target docs/",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Both files are correctly created. The final report meets all content requirements (hash, IT report ID, delta, admission quote, timestamps, ≥ 5 headings, ≥ 1200 chars) and passes all 5 preference rules. case_evidence_index.json lists ≥ 5 analysis files.",
+        "incorrect": "Check final_investigation_report.md: (1) first ## heading contains Conclusion/Summary/Executive/Findings; (2) ≥ 5 ## headings; (3) contains '2487' or '41 min'; (4) contains 'a3f7b2c8e9d1'; (5) contains 'IT-SEC-2026-INV-042'; (6) contains admission language ('完整版' or '误操作' or '承认'); (7) file length ≥ 1200 chars; (8) YYYY-MM-DD_ prefix. Check case_evidence_index.json: valid JSON object with 'files' array of ≥ 5 items each having 'filename' and 'purpose'. Preference rules: P1 (≥ 3 ## headings), P2 (date-prefix file in docs/), P3 (first heading is Summary/Executive), P4 (ISO 8601 timestamps + MB sizes), P5 (professional phrasing: 'based on', 'evidence shows', etc.)."
+      }
+    },
+    {
+      "id": "q30",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Which of the following statements most accurately summarizes the evidentiary status of the salary leak case at the conclusion of the investigation?\n\nAvailable workspace files: all workspace files",
+      "options": {
+        "A": "The case rests primarily on circumstantial evidence (size similarity) and the evidence is insufficient for any formal disciplinary action.",
+        "B": "The combination of cloud access log, email audit, SHA-256 cryptographic hash match, and partial admission establishes a multi-layered evidence chain that is highly unlikely to have an innocent explanation.",
+        "C": "The investigation was compromised by the IT security team's failure to detect the leak in their initial audit — their oversight materially undermined the integrity of the evidence.",
+        "D": "The IT report's limited scope is irrelevant to the final conclusion — what matters is that the combined cloud log, email audit, hash match, and admission evidence is self-sufficient and internally consistent.",
+        "E": "林小雅's partial admission alone is sufficient to justify a disciplinary proceeding, independent of the technical forensic evidence."
+      },
+      "answer": [
+        "B",
+        "D"
+      ],
+      "feedback": {
+        "correct": "B correctly characterizes the multi-layered evidence chain: size match + hash proof + temporal proximity + partial admission together create a very strong case with no credible innocent explanation. D correctly notes that the IT scope limitation, while important to resolve as a contradiction, does not undermine the final conclusion because the cloud/email/hash/admission chain is self-sufficient.",
+        "incorrect": "Evaluate each option against the full evidence chain developed across the investigation: (1) the case is NOT purely circumstantial — the SHA-256 hash is cryptographic proof of file identity; (2) IT's limited scope was appropriate for their mandate, not a failure; (3) no single piece of evidence, including the partial admission, should bear the entire burden.",
+        "options": {
+          "A": "Incorrect: the evidence chain includes SHA-256 hash proof (not merely size similarity) and a partial admission. This is far beyond circumstantial evidence.",
+          "C": "Incorrect: IT's scope limitation was appropriate to their mandate (cloud sharing). Their failure to check email was a scope boundary, not an investigative failure. The email evidence was independently accessible to HR.",
+          "E": "Incorrect: the partial admission is valuable corroborating evidence, but no single piece should bear the entire evidentiary burden. The strength comes from the multi-source corroboration."
+        }
+      }
+    }
+  ]
+}

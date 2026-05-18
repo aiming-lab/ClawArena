@@ -1,0 +1,138 @@
+{
+  "task_id": "full_workflow_multi_app_31",
+  "instruction": "There's an email about 'budget' that needs action. Search my inbox, create a follow-up task due 2026-03-12, block time at 2026-03-11T10:00 on my calendar, then let #general know via slack that you're on it.",
+  "canonical_instruction": "There's an email about 'budget' that needs action. Search my inbox, create a follow-up task due 2026-03-12, block time at 2026-03-11T10:00 on my calendar, then let #general know via slack that you're on it.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "datetime",
+      "value": "2026-03-12"
+    },
+    {
+      "type": "datetime",
+      "value": "2026-03-11T10:00"
+    },
+    {
+      "type": "channel",
+      "value": "slack"
+    },
+    {
+      "type": "target",
+      "value": "#general"
+    },
+    {
+      "type": "query",
+      "value": "budget"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "Follow up: Budget report"
+    },
+    {
+      "type": "title",
+      "value": "Budget review session"
+    },
+    {
+      "type": "priority",
+      "value": "high"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "email_provider",
+    "google_tasks",
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "email",
+    "tasks",
+    "calendar",
+    "messaging"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "full_workflow_multi_app",
+  "generator_id": "full_workflow_multi_app",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "email_query": "budget",
+      "channel": "slack",
+      "notify_target": "#general",
+      "task_due": "2026-03-12",
+      "meeting_start": "2026-03-11T10:00",
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "email search --query 'budget'",
+      "tasks add --title 'Follow up: Budget report' --priority high --due 2026-03-12",
+      "calendar add-event --title 'Budget review session' --start 2026-03-11T10:00",
+      "openclaw channels login --channel slack",
+      "openclaw message send --channel slack --target #general --message 'I am working on the budget follow-up.'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar block created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "notification sent"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "full_workflow_multi_app",
+      "params": {
+        "email_query": "budget",
+        "channel": "slack",
+        "notify_target": "#general",
+        "task_due": "2026-03-12",
+        "meeting_start": "2026-03-11T10:00"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "task_id": "openclaw_online_calendar_read_3",
+  "instruction": "I need the current date and time in Europe/London right now. Please fetch it and give a concise summary.",
+  "domains": [
+    "calendar"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "openclaw_online_calendar_read",
+  "generator_id": "openclaw_online_calendar_read",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "timezone": "Europe/London"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "gcalcli now --timezone Europe/London --online"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "calendar today online succeeds"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "Current date-time for Europe/London:",
+        "name": "output contains requested timezone"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "Source:",
+        "name": "output includes data source"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "openclaw_online_calendar_read",
+      "params": {
+        "timezone": "Europe/London"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

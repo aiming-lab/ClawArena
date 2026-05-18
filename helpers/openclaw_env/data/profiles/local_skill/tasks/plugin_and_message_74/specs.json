@@ -1,0 +1,75 @@
+{
+  "task_id": "plugin_and_message_74",
+  "instruction": "Complete the following setup:\n1. Install the 'matrix' plugin\n2. Log into the slack channel\n3. Send a message to @bob saying 'Setup complete, matrix is active'",
+  "domains": [
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "plugin_and_message",
+  "generator_id": "plugin_and_message",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "plugin": "matrix",
+      "channel": "slack",
+      "target": "@bob"
+    },
+    "private": {
+      "expected_plugin": "matrix",
+      "expected_target": "@bob"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw plugins enable matrix",
+      "openclaw channels login --channel slack",
+      "openclaw message send --channel slack --target @bob --message 'Setup complete, matrix is active'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "plugins_installed",
+        "condition": "field_equals",
+        "expected": {
+          "field": "name",
+          "value": "matrix"
+        },
+        "name": "plugin 'matrix' installed"
+      },
+      {
+        "type": "state",
+        "field": "channels.slack",
+        "condition": "exists",
+        "expected": null,
+        "name": "slack configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "@bob"
+        },
+        "name": "message sent to correct target"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "plugin_and_message",
+      "params": {
+        "plugin": "matrix",
+        "channel": "slack",
+        "target": "@bob"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

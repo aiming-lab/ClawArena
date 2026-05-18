@@ -1,0 +1,97 @@
+{
+  "task_id": "msg_send_text_37",
+  "instruction": "Send a text message to @bob on discord saying 'Hello, how are you?'.",
+  "canonical_instruction": "Send a text message to @bob on discord saying 'Hello, how are you?'.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "channel",
+      "value": "discord"
+    },
+    {
+      "type": "target",
+      "value": "@bob"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "single_step",
+    "high_volatility"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "messaging"
+  ],
+  "difficulty": 1,
+  "initial_state": "default",
+  "template_id": "msg_send_text",
+  "generator_id": "msg_send_text",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "discord",
+      "target": "@bob",
+      "content": "Hello, how are you?",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_target": "@bob",
+      "expected_channel": "discord",
+      "expected_content": "Hello, how are you?"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw message send --channel discord --target @bob --message 'Hello, how are you?'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "@bob"
+        },
+        "name": "message sent to correct target"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_contains",
+        "expected": {
+          "field": "message",
+          "value": "Hello, how are you?"
+        },
+        "name": "message content correct"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "msg_send_text",
+      "params": {
+        "channel": "discord",
+        "target": "@bob",
+        "content": "Hello, how are you?"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

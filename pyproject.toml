@@ -1,0 +1,66 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "clawarena"
+version = "0.1.0"
+description = "Multi-framework AI agent benchmark evaluation platform"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0",
+    "scipy>=1.11",
+    "pyyaml>=6.0",
+    "pydantic>=2.0",
+]
+
+[project.scripts]
+clawarena = "clawarena.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/clawarena", "helpers/openclaw_env"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src" = ""
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", ".", "helpers"]
+asyncio_mode = "auto"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23.0",
+]
+claude-code = [
+    "claude-agent-sdk>=0.1.0",
+]
+nanobot = [
+    "nanobot-ai",
+]
+codex = [
+    "codex-app-server-sdk>=0.1.0",
+]
+copaw = [
+    "copaw",
+]
+mm-metaclaw = [
+    "google-api-python-client>=2.130.0",
+    "google-auth>=2.29.0",
+    "google-auth-oauthlib>=1.2.0",
+    "aiohttp",
+]
+all = [
+    "claude-agent-sdk>=0.1.0",
+    "nanobot-ai",
+    "codex-app-server-sdk>=0.1.0",
+    "copaw",
+    "google-api-python-client>=2.130.0",
+    "google-auth>=2.29.0",
+    "google-auth-oauthlib>=1.2.0",
+    "aiohttp",
+]

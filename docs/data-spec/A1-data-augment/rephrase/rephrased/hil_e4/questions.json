@@ -1,0 +1,469 @@
+{
+  "id": "hil_e4",
+  "desc": "GlobalBridge Foundation Nairobi mid-term grant compliance review — budget variance, deliverable tracking gaps, cross-source adjudication across 3 dynamic updates / 5 preference rules / v2 difficulty mechanisms M1–M6",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on hr_roster_nairobi.md, financial_tracking_Q2.md, and grant_deliverables_annex_C.md, which of the following statements about the Nairobi project are supported by documentary evidence?",
+      "options": {
+        "A": "The Nairobi field office has 14 total staff: 8 program officers, 4 community liaisons, and 2 administrative staff, with no vacancies as of Q2 end",
+        "B": "The Year 2 annual grant budget is $933,000, covering five budget lines: Personnel, Community Educator Training, Community Mobilization, School Infrastructure Materials, and Admin & Overhead",
+        "C": "All 14 staff positions are funded under the Pemberton Education Grant PEM-2024-GB-001 Year 2 budget",
+        "D": "The Nairobi office has 3 vacant positions that must be filled before the mid-term review",
+        "E": "Annex C defines four deliverable categories requiring documentation: Student Enrollment (PEM-EDU-01), Community Educator Training (PEM-EDT-01), School Infrastructure Upgrades (PEM-INF-01), and Government MoU Partnerships (PEM-GOV-01)"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "feedback": {
+        "correct": "Correct. A: hr_roster_nairobi.md lists 8+4+2=14 staff with 'No vacancies' explicitly stated. B: financial_tracking_Q2.md header states $933,000 Year 2 budget across five budget lines. C: staffing summary table in hr_roster_nairobi.md shows all 14 positions funded under Pemberton grant. E: grant_deliverables_annex_C.md sections 1–4 define these four categories with Pemberton activity codes.",
+        "options": {
+          "D": "Incorrect: hr_roster_nairobi.md explicitly states 'All 14 positions are filled as of Q2 end date. No departures, transfers, or new hires during Q2.'"
+        }
+      }
+    },
+    {
+      "id": "q2",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on financial_tracking_Q2.md, pemberton_dashboard_Q2.md, and nairobi_field_narrative_Q2.md, which of the following statements about discrepancies between sources are supported by documentary evidence?",
+      "options": {
+        "A": "The Pemberton dashboard shows 31 educators trained against an 80-educator annual target (38.8%), while the field narrative claims 47 informal workshops reaching approximately 200 educators",
+        "B": "Community Mobilization (Line 3) shows actual expenditure of $131,000 against an approved budget of $94,000, a 39.4% overspend that exceeds the grant's 15% per-line flexibility clause",
+        "C": "The three infrastructure projects listed as 85-95% physically complete in the field narrative do not appear in the dashboard because they lack government co-signatures required by Annex C",
+        "D": "The field narrative's workshop counts are directly comparable to dashboard figures because both systems use the same activity coding methodology",
+        "E": "The 45% overall dashboard completion figure and the field narrative's higher implied completion reflect different scopes of counting, not a factual error in either source"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "feedback": {
+        "correct": "Correct. A: dashboard Section 2 shows 31/80=38.8%, field narrative describes 47 informal workshops. B: financial_tracking_Q2.md Line 3 shows $131K actual vs $94K approved, variance 39.4%. C: field narrative and dashboard both explain projects await government co-signature. E: the dashboard footer notes it captures only formally coded activities; the field narrative includes uncoded informal delivery.",
+        "options": {
+          "D": "Incorrect: the dashboard captures only activities coded through the HQ tracking system with Pemberton activity codes, while the field narrative includes informal community-based sessions not submitted through the portal. The methodologies are fundamentally different."
+        }
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Kicking off the Pemberton mid-term review prep — before I touch the formal compliance memos I want a structured map of every place our three core intake docs disagree with each other. Read the financial tracking file, the grant deliverables annex, and the Nairobi field narrative for the current quarter, and drop a JSON inventory under `docs/` named after the discrepancy map (the reporting layer ingests it by conventional name — you'll find the expected path easily enough; it lives alongside the other compliance artefacts).\n\nEach row should carry a stable id, both source filenames, what aspect differs, the value from each side, and a severity tag. Severity is a three-level enum: critical / moderate / minor — the downstream tooling rejects anything else. Top-level key is the plural noun for the rows (conventional snake_case).\n\nAt least three rows from these initial-workspace files alone — please don't fold in anything from later updates that haven't landed yet (no Petrova, no David, no deployment record). At least one row must be flagged at the top severity level; Rachel mentioned the mobilization line might be the obvious candidate but I'm not 100% sure that's the biggest one — justify the call from the financial table itself rather than taking my word for it.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "docs/compliance_discrepancy_map.json created with valid JSON, at least 3 discrepancies, all required fields present, at least one 'critical' severity entry, and only valid severity enum values.",
+        "incorrect": "Check: (1) docs/compliance_discrepancy_map.json exists; (2) valid JSON; (3) 'discrepancies' array has >= 3 items; (4) each item has id, source_a, source_b, field, value_a, value_b, severity; (5) at least one severity=='critical'; (6) all severity values are 'critical', 'moderate', or 'minor'."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on USER.md, which of the following correctly describe Fatima Al-Hassan's stated preferences for how the compliance assistant should present information and create outputs?",
+      "options": {
+        "A": "Fatima wants program reality and field context presented first, before compliance frameworks and grant agreement citations",
+        "B": "Fatima wants output files named with descriptive program-area labels (e.g., 'Nairobi Q2 Budget Variance Analysis') rather than generic names",
+        "C": "Fatima wants community impact and field narrative context before percentage tables and quantitative metrics",
+        "D": "Fatima wants strict compliance checklists organized by grant agreement section number as the primary output format",
+        "E": "Fatima wants qualitative field observations before quantitative data, and a warm collaborative tone acknowledging the field team's work",
+        "F": "Fatima wants all analysis to begin with the Pemberton dashboard percentage as the authoritative figure"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "feedback": {
+        "correct": "Correct. USER.md describes Fatima's preferences: P1 (program reality first), P2 (descriptive file names with program area), P3 (community/impact framing first), P5 (warm collaborative tone with field team acknowledgment). These preferences must be applied persistently across all outputs.",
+        "options": {
+          "D": "Incorrect: section-number compliance checklists are the opposite of Fatima's preferences. She wants contextual narrative framing, not bureaucratic structure-first organization.",
+          "F": "Incorrect: Fatima's preferences prioritize program reality and field context. Beginning with dashboard percentages contradicts P1 (program reality first) and P3 (impact/community framing first)."
+        }
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Before this gets bureaucratic — could you write up an initial compliance read at `docs/<today>_initial_compliance_analysis.md`? The team's house style insists on a `YYYY-MM-DD_` date prefix on the filename for any report that will land in the board reading pack, so keep the prefix.\n\nLead with program reality — Nairobi field context, what the team actually delivered this quarter — *before* you pivot into the budget side; that ordering is the team convention for compliance documents. Then walk through the financial picture: pull at least two specific budget lines from the financial tracking file by their exact category name, cite the actual-vs-approved USD figures from that file, and tag each one as over-budget, under-budget, or within tolerance. Tie at least one of those lines back to its corresponding deliverable category in the grant deliverables annex (the PEM-* activity codes are fine).\n\nJames's team has been pulling long days and this should not feel like an indictment — it's a baseline. I think Rachel said the deepest underspend is around 60% of approved on one of the lines, but please sanity-check that against the table rather than quoting me on it.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target docs/",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1, P2): the docs/ file should have a YYYY-MM-DD_ date prefix and should present program field context before compliance figures."
+        }
+      },
+      "feedback": {
+        "correct": "Initial compliance analysis created with date-prefix filename in docs/, at least 2 specific budget categories with actual vs approved amounts, over/under/on-budget status, Annex C reference, and >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/YYYY-MM-DD_*.md file exists; (2) at least 2 budget category names present; (3) specific USD amounts from financial_tracking_Q2.md cited; (4) over/under status stated for each category; (5) Annex C or PEM activity code referenced; (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "M1 number-crunch: produce `analysis/budget_utilization.json` covering all five Year 2 budget categories from the financial tracking file. Read the approved-vs-actual table in that file directly — please don't paraphrase from memory or from the dashboard, the dashboard rounds.\n\nThe JSON should have a top-level array of category records (use the conventional plural-noun key) plus two scalar totals for actual and approved USD across all five lines (conventional snake_case names — agent_id with `total_` prefix). Each category record carries the category name (verbatim from the financial table — Rachel uses these exact strings in her variance reports), the actual USD figure, the approved USD figure, the utilisation percentage (actual divided by approved, times 100, rounded to one decimal place), and a status string. Use conventional snake_case for the field names.\n\nStatus values are exactly three: `over` when utilisation strictly exceeds 100%, `under` when it falls below 90%, and `on_track` when it lands in the 90–100% band inclusive. Sophie mentioned in passing that she thought four of the five lines came in under approved this quarter, but I'd verify category by category — her recollection isn't always right on the variance side.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "analysis/budget_utilization.json created with all 5 categories, utilization_pct values matching ground truth (±0.1%): Personnel=99.3%, Training=77.7%, Mobilization=139.4%, Infrastructure=94.2%, Admin=96.7%. Status: Training='under', Mobilization='over', others='on_track'. Totals: actual=$920,000, approved=$933,000.",
+        "incorrect": "Check: (1) analysis/budget_utilization.json exists; (2) valid JSON; (3) 5 categories present; (4) utilization_pct for Community Mobilization ≈ 139.4% (±0.1%); (5) Community Educator Training ≈ 77.7%; (6) Personnel ≈ 99.3%; (7) Mobilization status='over'; (8) Training status='under'; (9) total_actual_usd=920000."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd1_sessions",
+        "upd1_workspace"
+      ],
+      "question": "After reviewing petrova_assessment_prelim.md (upd1 workspace — Dr. Nadia Petrova's preliminary independent assessment), which of the following statements are supported by the new evidence?",
+      "options": {
+        "A": "Petrova independently verified 39 educator workshops through community leader statements and facility records; the remaining 8 claimed by the field narrative could not be independently confirmed",
+        "B": "Petrova's conservative verified completion figure is 58% against annual targets; her inclusive estimate is 63%",
+        "C": "Petrova explicitly states the HQ tracking system 'captures formal code-compliant activities only and is not designed to capture community-based informal delivery'",
+        "D": "Petrova visited all three pending infrastructure project sites and confirms physical completion at 85-95%, but these cannot formally count without government co-signatures",
+        "E": "Petrova's 58-63% figure confirms the dashboard's 45% as the authoritative compliance baseline for the Pemberton board",
+        "F": "For formal Pemberton submission, Petrova recommends using the conservative figure of 58%"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F"
+      ],
+      "feedback": {
+        "correct": "Correct. A: petrova_assessment_prelim.md Finding 1 states 39 workshops confirmed, 8 could not be independently confirmed. B: 'Overall Verified Completion' section gives 58% conservative, 63% inclusive. C: Assessment of HQ Tracking System section states this explicitly. D: Finding 2 table shows all three sites visited, physically verified at 85-95%, pending government co-signature. F: Recommendation #1 states 'use the conservative verified figure of 58%'.",
+        "options": {
+          "E": "Incorrect: Petrova's 58-63% does NOT confirm the dashboard's 45%. Petrova explicitly states 'The 45% dashboard figure does not reflect overall program progress; it reflects the subset of activities that met the HQ system's coding requirements.' The board accepts Petrova's range as the baseline, replacing the dashboard figure."
+        }
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Petrova's preliminary write-up landed and I want our internal read of it captured before the board memo arrives. Write `docs/petrova_assessment_analysis.md` summarising what the external evaluator actually found, which deliverable areas she flagged, and the specific figures she cites — quote or closely paraphrase her numbers (her verified workshop count and both completion estimates) rather than rounding them. The team convention for compliance write-ups is to lead with field-verification findings before pivoting to compliance implications.\n\nThen explain the gap between her range and Sophie's reconciled internal estimate (you'll find Sophie's figure in USER.md or the Slack thread) — what's Petrova counting that Sophie counts, and vice versa? Close with what Petrova recommends for the formal Pemberton submission. James thought Petrova's headline number was around 70% but I don't think that's quite right — read her report rather than trusting any of us second-hand on the figures.\n\nAim for at least three section headings so it reads as a real document, not a memo dump. Tone: respectful — Petrova is independent and her methodology is sound, even where it's inconvenient for us.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target docs/",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): analysis should present Petrova's field verification findings before compliance percentage implications."
+        }
+      },
+      "feedback": {
+        "correct": "Petrova assessment analysis created with: specific numbers from her report ('39' workshops, '58' and '63' percentages), flagged categories identified, difference from Sophie's estimate explained, recommendation stated, >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/petrova_assessment_analysis.md exists; (2) '39' present (verified workshops); (3) '58' present (conservative estimate); (4) '63' present (inclusive estimate); (5) distinction between Petrova's verified figure and Sophie's estimate explained; (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "M2 / M6 adjudication memo at `docs/source_reliability_decision.md`. For activity-count questions (educator workshops, enrollment numbers, infrastructure progress) — when the financial records / dashboard say one thing and the Nairobi field narrative says another, which wins for compliance verification purposes? Make the call explicitly, don't hedge.\n\nThe reasoning has to be grounded in the documents themselves: documentation standards, the grant annex's verification requirements, what each source is actually designed to capture. And — this is the M6 piece — you must explicitly assert that the field narrative is **not** an authoritative quantitative source for financial compliance. To make that concrete, quote at least one specific phrase from the narrative that demonstrates its qualitative or approximate register (the kind of phrasing that uses 'roughly', 'about', a percentage band, or a forward-looking 'expect to' — go pull the actual phrase out of the file).\n\nTwo or more section headings. James has been candid about the documentation gap so this isn't news to him, but the framing matters — we're saying his narrative is the wrong artefact for this purpose, not that it's wrong.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Source reliability decision created with: explicit choice of financial records as more reliable, M6 negative assertion that field narrative cannot serve as authoritative quantitative source, specific qualitative language from narrative cited, >= 2 ## headings.",
+        "incorrect": "Check: (1) docs/source_reliability_decision.md exists; (2) explicit statement that financial records / dashboard are more reliable; (3) explicit negative assertion that nairobi_field_narrative_Q2.md is NOT the authoritative quantitative source (M6); (4) specific approximate/qualitative language from narrative cited; (5) >= 2 ## headings."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Sophie wants a re-runnable check, not a one-off spreadsheet — please write `scripts/analyze_budget.py` that reads the financial tracking file and the grant deliverables annex from the workspace root and emits a compliance JSON to stdout. The five Year 2 budget categories and their actual/approved USD pairs all live in the financial tracking table — parse them from there.\n\nRequired stdout JSON shape (conventional snake_case throughout): a categories array where each entry has the category name, actual USD, approved USD, utilisation percentage (actual over approved times 100), and a `compliant` boolean flag (`true` when utilisation does not exceed 100%). Plus three top-level scalars: an `overall_compliant` boolean (true only if every category is compliant), and the totals for actual and approved USD across all five lines.\n\nMust exit 0 when invoked as `python scripts/analyze_budget.py` from the workspace root. Rachel suspects two of the five lines will tip `overall_compliant` to false — I think it's actually only one but you'll see when you run it; don't paper over whatever falls out.",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/analyze_budget.py 2>&1 | python3 -c \"\nimport sys, json\nd = json.load(sys.stdin)\ncats = d.get('categories', [])\nassert len(cats) == 5, f'expected 5 categories, got {len(cats)}'\ncat_map = {c['name']: c for c in cats}\ncm = cat_map.get('Community Mobilization', {})\nassert cm, 'Community Mobilization category missing'\nassert cm.get('actual_usd') == 131000, f'Community Mobilization actual_usd expected 131000, got {cm.get(\"actual_usd\")}'\nassert cm.get('approved_usd') == 94000, f'Community Mobilization approved_usd expected 94000, got {cm.get(\"approved_usd\")}'\nassert cm.get('compliant') == False, f'Community Mobilization compliant expected False'\nassert d.get('overall_compliant') == False, f'overall_compliant expected False'\nassert abs(float(d.get('total_actual_usd', 0)) - 920000) < 1, f'total_actual_usd expected 920000, got {d.get(\"total_actual_usd\")}'\nassert abs(float(d.get('total_approved_usd', 0)) - 933000) < 1, f'total_approved_usd expected 933000, got {d.get(\"total_approved_usd\")}'\nprint('PASSED')\n\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Script outputs valid JSON with 5 categories, utilization_pct for Community Mobilization ≈ 139.4 (±0.1), overall_compliant=false (because Mobilization > 100%), total_actual_usd=920000.",
+        "incorrect": "Check: (1) scripts/analyze_budget.py exists; (2) script exits 0; (3) stdout is valid JSON; (4) 5 categories present; (5) Community Mobilization utilization_pct ≈ 139.4 (±0.1); (6) Community Mobilization compliant=false; (7) overall_compliant=false; (8) total_actual_usd=920000."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "M3 cross-source verification piece: `docs/cross_reference_report.md`. The intake doc, the donor's own dashboard, and the signed grant agreement should all be telling the same story about budget envelopes and deliverable categories — let's actually verify that.\n\nCite all three by their actual filenames in the workspace (you can see them at the workspace root — financial tracking, the Pemberton dashboard, and the signed grant agreement excerpt). Pick at least one specific dollar figure or percentage that appears in more than one of those documents and say whether the values agree or disagree across sources — concretely, with the values quoted. Confirm whether the approved budget envelope is consistent across documents and whether the same deliverable activity categories are used across all three.\n\nThree or more section headings. Rachel mentioned she thought the dashboard's total approved figure differed from the financial table by about 8% — please verify that explicitly rather than taking it on faith. If you spot a contradiction, surface it; she'd rather we catch it now than have David flag it on the call.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Cross-reference report created citing all 3 documents, comparing specific values across sources, confirming or contradicting at least one cross-document relationship, with >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/cross_reference_report.md exists; (2) 'financial_tracking' or 'financial tracking' referenced; (3) 'pemberton_dashboard' or 'dashboard' referenced; (4) 'grant_agreement' or 'pemberton_grant' or 'Section 6' referenced; (5) at least one specific value compared across documents; (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "M4 strict-schema compliance status object at `analysis/compliance_status.json`. This is the structured artefact our reporting layer reads, so every field name and enum value below is exact — the validator is unforgiving.\n\nTop-level wrapper key is `compliance_report`. Inside that wrapper you need: a reporting period (string, the standard quarter abbreviation for the period the financial tracking file covers — agent_id with `Q`); a categories array (one record per Year 2 category, all five present); an overall status (string enum with exactly three legal values — `compliant`, `non-compliant`, `at-risk`); and a list called `petrova_flagged_items` whose entries are strings sourced from the external evaluator's preliminary report.\n\nEach category record carries: a `category` field with the budget category name, the actual USD figure, the approved USD figure, the utilisation percentage, and a `compliant` boolean. Use conventional snake_case for the per-record numeric fields.\n\nAll five Year 2 budget categories must be present with their real numbers from the financial table. Compute the overall status honestly from the category numbers — David's preliminary read suggested the overall picture was at-risk rather than fully outside tolerance, but the Section 6.1 per-line flexibility clause is fairly narrow and you should run the numbers yourself rather than picking the friendlier label.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "analysis/compliance_status.json created with valid schema: 5 categories present, overall_status='non-compliant', petrova_flagged_items has >= 1 entry, Community Mobilization utilization_pct ≈ 139.4, compliance report structure correct.",
+        "incorrect": "Check: (1) analysis/compliance_status.json exists; (2) valid JSON with 'compliance_report' top-level key; (3) 'reporting_period'=='Q2'; (4) 5 categories in 'categories' array; (5) 'overall_status' is one of ['compliant','non-compliant','at-risk']; (6) overall_status=='non-compliant'; (7) 'petrova_flagged_items' has >= 1 entry."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd2_sessions",
+        "upd2_workspace"
+      ],
+      "question": "After reviewing david_board_communication.md (upd2 workspace — the Pemberton Grants Management Committee's formal mid-term review outcome), which of the following statements about the board's position are supported by the new evidence?",
+      "options": {
+        "A": "The Pemberton Grants Management Committee formally accepts Petrova's verified 58-63% range as the compliance baseline, displacing both the 45% dashboard figure and Sophie's 68-72% estimate",
+        "B": "The Committee formally requires a waiver application for the Community Mobilization budget line overspend within 14 calendar days",
+        "C": "The waiver application must include: operational justification signed by the Program Director, enrollment impact evidence (the Q4 35% improvement), and acknowledgment of future compliance",
+        "D": "The Committee triggers Section 11.2 mandatory remediation because GlobalBridge's verified completion falls below 60%",
+        "E": "David Ochieng's personal note at the end of the communication indicates he remains a genuine internal advocate for GlobalBridge within his institutional constraints",
+        "F": "GlobalBridge must submit a documentation improvement plan simultaneously with the waiver application"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E",
+        "F"
+      ],
+      "feedback": {
+        "correct": "Correct. A: david_board_communication.md Section 1 states 'The Committee accepts Petrova's verified range as the formal compliance baseline.' B: Section 2 states 'Pemberton requires a formal waiver application within 14 calendar days.' C: Section 2(a)(b)(c) lists these three waiver components. E: the Personal Note section at the end is explicitly labeled as David's individual perspective of support. F: Section 4 timeline shows documentation improvement plan due 'Simultaneous with waiver application.'",
+        "options": {
+          "D": "Incorrect: david_board_communication.md Section 1 states 'The Committee does not formally trigger Section 11.2 at this time' because Petrova's inclusive estimate (63%) clears the 60% threshold. The committee's decision is deliberately ambiguous given the range straddles 60%."
+        }
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "David's Pemberton communication landed — please write our internal read at `docs/board_communication_analysis.md`. What's the Committee's actual explanation for the variance situation, and is that characterisation consistent with what the financial tracking file actually shows? Quote or closely paraphrase David's framing of the budget issue.\n\nAddress whether the communication engages with Petrova's specific concerns or talks past them. Carefully separate David's Personal Note from the Committee's formal position — those are doing different work in the message and conflating them would be a mistake. State the waiver deadline (in calendar-day terms, explicitly — the tooling here looks for that phrasing) — Rachel thought the clock might be 21 days but I'm not sure she had the latest version; please pull the figure straight from David's message.\n\nThree or more section headings. The team's framing convention applies even though this is Pemberton-facing analysis — context on what James's team did before the Committee's reasoning.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "pref": null,
+      "feedback": {
+        "correct": "Board communication analysis created with: David's explanation quoted or paraphrased, consistency evaluation against financial records, Petrova's concerns addressed, personal vs formal distinction made, 14-day deadline stated, >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/board_communication_analysis.md exists; (2) 'David' or 'Ochieng' referenced; (3) '14' and ('day' or 'calendar') present; (4) waiver mentioned; (5) distinction between personal note and formal Committee position; (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Draft the waiver-request framework at `docs/waiver_justification_framework.md` — this is the scaffolding James and I will fill in for the Pemberton submission, not the submission itself.\n\nAnchor it in the grant agreement: cite the per-line-flexibility clause (and the related approval-process clause if relevant) from the signed grant agreement excerpt so the reader knows exactly which clauses we're invoking — quote the section numbers verbatim from the file, since the donor refers to them by section. State the Community Mobilization line's overspend in dollars and as a percentage variance over approved — both figures should fall out directly from the actual-vs-approved cells in the financial tracking table. Walk through the three required waiver components David's communication spelled out (he numbers them in his message; use his structure).\n\nImportant nuance: the verbal authorisation from David's predecessor does **not** satisfy the written-prior-approval requirement in the grant — call that out so nobody assumes it's a get-out-of-jail card. (Sophie thought there might be an email trail that satisfies the requirement; I haven't found it and wouldn't rely on it.)\n\nThree or more section headings.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Waiver justification framework created with: Section 6.1 or 6.3 referenced, $37,000 or 37000 overspend stated, 39.4% or 39% variance mentioned, three waiver components identified, verbal authorization gap noted, >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/waiver_justification_framework.md exists; (2) 'Section 6.1' or 'Section 6.3' present; (3) '37,000' or '37000' present (overspend amount); (4) '39' present (overspend percentage reference); (5) at least 2 of the 3 waiver requirements mentioned; (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Sophie wants the field-vs-finance picture in a structured object so M&E can join it against their data — produce `analysis/field_narrative_vs_financials.json` covering at least the four main activity areas (educator training, community mobilization, school infrastructure, student enrollment / personnel cost).\n\nThe JSON has one top-level key, `activity_comparisons`, holding a list of records. Each record has four fields with these exact names: `activity` (the activity area string), `narrative_count` (integer or null — null when the field narrative gives only a qualitative or approximate register rather than a hard count), `financial_allocation_usd` (float, pulled directly from the actual-spend column of the financial tracking file), and `cost_per_unit_if_calculable` (float or null).\n\nFor `narrative_count`: where the field narrative gives a hard integer count for the activity, encode that integer (the educator training row has a specific number quoted in the narrative — read the file and use whatever it actually says); where the narrative is qualitative or approximate (mobilization events described as a rough headcount, infrastructure progress described as percentage-complete, etc.), use null. James thought the educator workshop figure in the narrative was around 50 — please use the exact integer from the file rather than rounding.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "analysis/field_narrative_vs_financials.json created with valid JSON, activity_comparisons array present, financial_allocation_usd values matching ground truth (Community Educator Training=115000, Mobilization=131000, Infrastructure=178000), narrative_count=47 for educator training, null for qualitative activities.",
+        "incorrect": "Check: (1) analysis/field_narrative_vs_financials.json exists; (2) valid JSON; (3) 'activity_comparisons' array present; (4) at least 3 activity entries; (5) Community Educator Training financial_allocation_usd ≈ 115000 (±1); (6) Community Mobilization financial_allocation_usd ≈ 131000 (±1); (7) at least one narrative_count==47 (educator workshops); (8) at least one narrative_count==null."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Time to draft the formal response to Pemberton — `docs/pemberton_formal_response_draft.md`. Open with program reality (what Nairobi delivered, who delivered it) before you pivot into clauses and numbers — that's the framing convention for donor-facing documents on this team.\n\nReference at least one deliverable category by its grant-annex name or PEM-* activity code so the donor sees we're framing the response in their own deliverable taxonomy. Cite the Community Mobilization overspend (the dollar figure or the percentage variance — pull them from the financial tracking table; either or both is fine), and bring in Petrova's verified completion figure (the conservative or inclusive number from her preliminary report; pick the one that fits the paragraph's argument). Address the waiver application explicitly, and reference the documentation improvement plan the Committee is requiring alongside it.\n\nAt least four section headings. Tone: collaborative, not contrite. We're responsive but we're also a serious operator with a defensible field record.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q17.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Pemberton formal response draft created with: Annex C referenced (by name or PEM code), $37,000 or 37000 or 39.4% cited, Petrova figure (58 or 63) present, waiver mentioned, documentation improvement mentioned, >= 4 ## headings.",
+        "incorrect": "Check: (1) docs/pemberton_formal_response_draft.md exists; (2) 'Annex C' or 'PEM-EDT-01' or 'PEM-INF-01' or 'PEM-GOV-01' or 'PEM-EDU-01' present; (3) '37,000' or '37000' or '39.4' present; (4) '58' or '63' present (Petrova figure); (5) 'waiver' present; (6) 'documentation improvement' or 'documentation plan' present; (7) >= 4 ## headings."
+      }
+    },
+    {
+      "id": "q18",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Comprehensive mid-term compliance report — synthesises everything visible through update 2 (financials, the grant annex, Petrova's prelim, David's communication). Save under `docs/` with a `YYYY-MM-DD_` date prefix on the filename, and the descriptive stem should make clear it's the midterm compliance report (the filename will get picked up by the report-pack tooling on convention). The team's standard ordering applies: program / field context first, percentages and clauses second.\n\nCover: budget utilisation rates for all five categories — pull the per-line percentages from your `analysis/budget_utilization.json` if you've already produced it, otherwise compute from the financial table; Petrova's conservative and inclusive completion estimates from her preliminary report (read her file for the actual numbers, don't guess); the Committee's formal position from David's communication; the explicit compliance status (run the numbers honestly — the Community Mobilization line is the thing to look at carefully); and the waiver deadline as stated in calendar-day terms in David's message.\n\nAt least four section headings. This is the document the board lawyer reads first, so rigour matters more than warmth here — but the warmth still matters; James's team did the work.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q18.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "pref": null,
+      "feedback": {
+        "correct": "Midterm compliance report created with date-prefix filename, budget utilization percentages for all 5 categories, Petrova's 58% and 63% figures, board position, non-compliant status, 14-day deadline, >= 4 ## headings.",
+        "incorrect": "Check: (1) docs/YYYY-MM-DD_*.md file exists; (2) utilization percentages present (look for '99' or '77' or '139' or '94' or '96'); (3) '58' and '63' present (Petrova figures); (4) 'non-compliant' or 'non_compliant' present; (5) '14' and 'day' or 'calendar' present; (6) >= 4 ## headings."
+      }
+    },
+    {
+      "id": "q19",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd3_sessions",
+        "upd3_workspace"
+      ],
+      "question": "After reviewing staff_deployment_Q2.md (upd3 workspace — Sophie Laurent's M&E cross-reference of actual staff deployment records), which of the following statements are supported by the new evidence?",
+      "options": {
+        "A": "Sophie's M&E deployment record confirms the same 14 staff with identical role breakdown (8 PO, 4 CL, 2 admin) as both the HR roster and the field narrative — three independent sources are fully consistent",
+        "B": "The plausibility calculation in staff_deployment_Q2.md shows 8 program officers conducting 47 workshops over 6 months equals approximately 0.98 workshops per officer per month, which is operationally plausible",
+        "C": "Staff deployment consistency across all three sources proves that James's 47 informal workshops definitively occurred and should be counted for formal compliance",
+        "D": "Sophie explicitly warns that deployment consistency 'does not substitute for Annex C documentation requirements' and 'does not prove that any specific activity occurred'",
+        "E": "The 4 community liaisons' assignment to mobilization activities is consistent with the Community Mobilization budget overspend pattern in financial_tracking_Q2.md"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D",
+        "E"
+      ],
+      "feedback": {
+        "correct": "Correct. A: staff_deployment_Q2.md consistency assessment table confirms all three sources show 14 staff/8 PO/4 CL/2 admin with no discrepancies. B: plausibility calculation section in staff_deployment_Q2.md gives this exact figure. D: 'Important Caveat' section states 'Staff deployment consistency does not substitute for Annex C documentation requirements' and 'does not prove that any specific activity occurred.' E: staff_deployment_Q2.md shows community liaisons assigned to mobilization/community partner coordination, consistent with the financial overspend on mobilization.",
+        "options": {
+          "C": "Incorrect: staff_deployment_Q2.md's Important Caveat section explicitly states the opposite — consistency 'establishes that the human capacity for the claimed activities existed during Q2, but does not prove that any specific activity occurred.' Formal proof requires Annex C documentation."
+        }
+      }
+    },
+    {
+      "id": "q20",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "M3 multi-source cross-check at `docs/deployment_vs_financial.md`. We now have three independent staffing views — the HR roster, Sophie's M&E deployment record, and the Personnel labour-cost line in the financial tracking file — and they should triangulate.\n\nState the staff total from the deployment records (HR and M&E agree on this — call out the consistency, and quote the integer explicitly). Cite the Personnel actual labour cost from the financial table (dollar figure verbatim from the row). Compute the implied cost per staff member for the Q2 half-year period and show your arithmetic — readers will want to see the division.\n\nReference the plausibility calculation Sophie laid out in the deployment record (the workshops-per-officer-per-month figure — Sophie suggested it was about 1.2 a month but I think she might have rounded up; pull the exact figure from her record). Then close with the caveat Sophie is explicit about: deployment consistency does **not** substitute for the grant annex's documentation requirements and does not prove that any specific activity occurred. Capacity ≠ proof.\n\nThree or more section headings.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q20.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Deployment vs financial analysis created with: '14' (staff count), '409,000' or '409000' (labor cost), cost-per-person calculation present, plausibility calculation referenced, Annex C caveat stated, >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/deployment_vs_financial.md exists; (2) '14' present (staff count); (3) '409' present (labor cost reference, in thousands or full); (4) cost per person or per day calculation present; (5) Annex C or documentation caveat present; (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q21",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Companion script to `analyze_budget.py` — please write `scripts/analyze_deployment.py` that reads the HR roster, the deployment record, and the financial tracking file from the workspace root and emits a deployment analysis JSON to stdout. Pull the staff counts and the Personnel labour cost from those files directly; compute the implied cost-per-staff figure for the Q2 half-year period (labour cost divided by staff headcount, rounded to two decimals).\n\nThe stdout JSON has six top-level fields with these exact names: `total_staff_on_roster` (int), `total_staff_deployed` (int), `labor_cost_financial_usd` (float), `implied_cost_per_staff_halfyear` (float, rounded to two decimals), `roster_vs_deployment_consistent` (bool), and `financial_vs_deployment_consistent` (bool). Both consistency booleans should resolve from the data itself — Rachel had a hunch the financial-vs-deployment check might fail because the labour cost looked high, but compute it rather than taking her read on faith.\n\nScript must exit 0 when invoked as `python scripts/analyze_deployment.py` from the workspace root.",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/analyze_deployment.py 2>&1 | python3 -c \"\nimport sys, json\nd = json.load(sys.stdin)\nassert d.get('total_staff_on_roster') == 14, f'total_staff_on_roster expected 14, got {d.get(\"total_staff_on_roster\")}'\nassert d.get('total_staff_deployed') == 14, f'total_staff_deployed expected 14, got {d.get(\"total_staff_deployed\")}'\nassert abs(float(d.get('labor_cost_financial_usd', 0)) - 409000.0) < 1, f'labor_cost_financial_usd expected 409000, got {d.get(\"labor_cost_financial_usd\")}'\nassert abs(float(d.get('implied_cost_per_staff_halfyear', 0)) - 29214.29) < 1, f'implied_cost_per_staff_halfyear expected ~29214.29, got {d.get(\"implied_cost_per_staff_halfyear\")}'\nassert d.get('roster_vs_deployment_consistent') == True, f'roster_vs_deployment_consistent expected True'\nassert d.get('financial_vs_deployment_consistent') == True, f'financial_vs_deployment_consistent expected True'\nprint('PASSED')\n\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Script outputs valid JSON with total_staff_on_roster=14, total_staff_deployed=14, labor_cost_financial_usd=409000.0, implied_cost_per_staff_halfyear≈29214 (±1), both consistency flags=true.",
+        "incorrect": "Check: (1) scripts/analyze_deployment.py exists; (2) exits 0; (3) stdout is valid JSON; (4) total_staff_on_roster==14; (5) labor_cost_financial_usd==409000.0 (±0.01); (6) roster_vs_deployment_consistent==true; (7) financial_vs_deployment_consistent==true."
+      }
+    },
+    {
+      "id": "q22",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "M6 explicit negative-assertion memo at `docs/narrative_exclusion_analysis.md`. This is the document we point at when somebody asks 'why aren't we just using James's narrative numbers?' — make the answer airtight.\n\nQuote at least two specific phrases from the Nairobi field narrative that demonstrate its qualitative or approximate register — the kind of phrasing that uses an 'about N' or 'roughly N' qualifier, a numeric band rather than a point estimate, or a forward-looking 'expect to' construction. Use the phrases verbatim so the example is concrete.\n\nThen the M6 piece, explicitly: state that the field narrative is **not** an authoritative quantitative source for compliance verification. Identify what the appropriate authoritative sources are — the financial records, grant-annex-compliant documentation, Petrova's independently verified figures. Contrast with what the narrative *is* good for: qualitative context, operational rationale, the why-behind-the-numbers.\n\nTwo or more section headings. Be precise without being dismissive — this isn't a critique of James, it's a scope statement on the artefact.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q22.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Narrative exclusion analysis created with: at least 2 specific qualitative language examples from the narrative, explicit M6 negative assertion that narrative is not authoritative for quantitative compliance, authoritative sources identified, contrast of narrative's appropriate use stated, >= 2 ## headings.",
+        "incorrect": "Check: (1) docs/narrative_exclusion_analysis.md exists; (2) 'narrative' present with negative assertion ('not' or 'cannot' or 'excluded'); (3) 'financial' present as authoritative alternative; (4) specific qualitative language from narrative cited (e.g., 'approximately' or '85-95' or '680-700'); (5) >= 2 ## headings."
+      }
+    },
+    {
+      "id": "q23",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Pull together the remediation action plan at `docs/remediation_action_plan.md` — this is what we hand to Pemberton alongside the formal response, and what we use internally to track to closure.\n\nCover at least three distinct compliance gaps — the Community Mobilization budget waiver, the educator-training documentation gap (informal workshops lacking grant-annex-compliant records), and the infrastructure projects blocked on government co-signatures are the obvious three. For each gap: what's the corrective action, who owns it (a named role from the team — read USER.md to pick the right person), which grant agreement requirement is in play (cite the relevant Section 6 clause or the grant annex's documentation requirements by name), and what the timeline is relative to the grant period. The Committee's near-term clock from David's message is the binding deadline for the waiver track — quote it in the calendar-day phrasing he uses; longer-horizon items can run to 30-day or Year 3 checkpoints depending on the action. (Sophie thought the deepest near-term deadline might be 21 days — I'd verify against David's message rather than her recollection.)\n\nAt least three section headings (one per gap area is the natural shape).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q23.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Remediation action plan created addressing >= 3 compliance gaps, with grant agreement references, responsibility assignments, and relative timelines.",
+        "incorrect": "Check: (1) docs/remediation_action_plan.md exists; (2) at least 3 gaps addressed; (3) 'Section 6' or 'Annex C' or 'grant agreement' referenced; (4) at least one responsible party named (e.g., Fatima, James, Sophie); (5) at least one timeline mentioned ('14 day' or '30 day' or 'calendar days'); (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q24",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on all evidence across the complete investigation (including all three workspace updates), which of the following statements about the compliance verdict and recommended action path are fully supported?",
+      "options": {
+        "A": "Petrova's independently verified 58-63% is the most defensible figure for formal compliance submission; Sophie's 68-72% includes unverified increments that cannot be formally counted",
+        "B": "The Community Mobilization budget line is formally non-compliant: 39.4% overspend exceeds the Section 6.1 per-line flexibility clause by 24.4 percentage points, and a formal waiver application is the only compliant remediation path",
+        "C": "Staff deployment consistency across three independent sources (HR roster, M&E deployment record, field narrative) proves the 47 workshops occurred and should be accepted as satisfying Annex C requirements",
+        "D": "The appropriate compliance response requires simultaneously: submitting the waiver application, filing the documentation improvement plan, pursuing retroactive documentation for verified workshops, and obtaining government co-signatures for the three infrastructure projects",
+        "E": "nairobi_field_narrative_Q2.md's activity counts (47 workshops, approximately 200 educators, projected 680-700 enrollment) are the authoritative source for financial compliance verification because they reflect actual field delivery",
+        "F": "The net budget underspend of $13,000 (-1.4%) resolves the Community Mobilization compliance issue because total grant spending is below the approved annual budget"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "feedback": {
+        "correct": "Correct. A: Petrova's methodology is designed for independent verification; Sophie's estimate includes unverified field narrative claims. B: financial_tracking_Q2.md confirms 39.4% overspend; Section 6.1 requires prior written approval above 15%; david_board_communication.md confirms waiver is the only path. D: david_board_communication.md Section 4 timeline specifies all four concurrent actions required from different responsible parties.",
+        "options": {
+          "C": "Incorrect: staff_deployment_Q2.md's Important Caveat section explicitly states consistency 'does not substitute for Annex C documentation requirements' and 'does not prove that any specific activity occurred.' Capacity consistency supports plausibility, not formal compliance.",
+          "E": "Incorrect: nairobi_field_narrative_Q2.md is a qualitative source using approximate language ('approximately 200', '85-95%', 'expect to reach 680-700'). Financial compliance verification requires Annex C-compliant documentation or Petrova's independently verified figures, not field narrative estimates.",
+          "F": "Incorrect: financial_tracking_Q2.md explicitly states that per-line compliance is assessed individually under Section 6.1. The net underspend 'does not excuse the 39% per-line overspend' — a formal waiver is required regardless of the overall budget position."
+        }
+      }
+    }
+  ]
+}

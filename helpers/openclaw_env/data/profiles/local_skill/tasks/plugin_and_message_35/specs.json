@@ -1,0 +1,75 @@
+{
+  "task_id": "plugin_and_message_35",
+  "instruction": "Complete the following setup:\n1. Install the 'telegram' plugin\n2. Log into the telegram channel\n3. Send a message to #general saying 'Setup complete, telegram is active'",
+  "domains": [
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "plugin_and_message",
+  "generator_id": "plugin_and_message",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "plugin": "telegram",
+      "channel": "telegram",
+      "target": "#general"
+    },
+    "private": {
+      "expected_plugin": "telegram",
+      "expected_target": "#general"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw plugins enable telegram",
+      "openclaw channels login --channel telegram",
+      "openclaw message send --channel telegram --target #general --message 'Setup complete, telegram is active'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "plugins_installed",
+        "condition": "field_equals",
+        "expected": {
+          "field": "name",
+          "value": "telegram"
+        },
+        "name": "plugin 'telegram' installed"
+      },
+      {
+        "type": "state",
+        "field": "channels.telegram",
+        "condition": "exists",
+        "expected": null,
+        "name": "telegram configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "#general"
+        },
+        "name": "message sent to correct target"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "plugin_and_message",
+      "params": {
+        "plugin": "telegram",
+        "channel": "telegram",
+        "target": "#general"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

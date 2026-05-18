@@ -1,0 +1,63 @@
+{
+  "task_id": "setup_channel_and_send_12",
+  "instruction": "First, log into the slack channel. Then send a message to #general saying 'Channel setup complete, testing messaging.'.",
+  "domains": [
+    "channel_mgmt",
+    "messaging"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "setup_channel_and_send",
+  "generator_id": "setup_channel_and_send",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "slack",
+      "target": "#general",
+      "content": "Channel setup complete, testing messaging."
+    },
+    "private": {
+      "expected_channel": "slack",
+      "expected_target": "#general"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw channels login --channel slack",
+      "openclaw message send --channel slack --target #general --message 'Channel setup complete, testing messaging.'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "channels.slack",
+        "condition": "exists",
+        "expected": null,
+        "name": "slack configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "#general"
+        },
+        "name": "message sent to correct target"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "setup_channel_and_send",
+      "params": {
+        "channel": "slack",
+        "target": "#general",
+        "content": "Channel setup complete, testing messaging."
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

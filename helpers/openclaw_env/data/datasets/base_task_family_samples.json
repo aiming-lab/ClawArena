@@ -1,0 +1,1021 @@
+{
+  "generated_at": "2026-03-10",
+  "note": "Original task families (excluding complex_composed_workflow), grouped by generator_id.",
+  "total_task_count_excluding_complex": 1094,
+  "total_generators_excluding_complex": 73,
+  "samples": [
+    {
+      "generator_id": "add_webhook",
+      "task_count": 5,
+      "sample_task_id": "add_webhook_1",
+      "sample_question": "Configure the gateway remote URL to 'https://hooks.example.com/notify' for webhook/event routing.",
+      "sample_actions": [
+        "openclaw config set gateway.remote.url https://hooks.example.com/notify"
+      ],
+      "sample_domains": [
+        "cron_webhook"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "agent_create",
+      "task_count": 15,
+      "sample_task_id": "agent_create_1",
+      "sample_question": "Create a new agent named 'researcher' using the model 'anthropic/claude-opus-4-6'.",
+      "sample_actions": [
+        "openclaw agents add researcher --model anthropic/claude-opus-4-6"
+      ],
+      "sample_domains": [
+        "agent_mgmt"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "agent_create_and_configure",
+      "task_count": 24,
+      "sample_task_id": "agent_create_and_configure_1",
+      "sample_question": "Create a new agent named 'helper' with model 'anthropic/claude-sonnet-4-5-20250929', then set its emoji to 🤖.",
+      "sample_actions": [
+        "openclaw agents add helper --model anthropic/claude-sonnet-4-5-20250929",
+        "openclaw agents set-identity --agent helper --emoji 🤖"
+      ],
+      "sample_domains": [
+        "agent_mgmt"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "agent_cron_workflow",
+      "task_count": 64,
+      "sample_task_id": "agent_cron_workflow_1",
+      "sample_question": "Set up an automated notification workflow:\n1. Create an agent named 'reporter'\n2. Log into the telegram channel\n3. Create a cron job with schedule '0 9 * * *' that uses the agent to send a status update via telegram",
+      "sample_actions": [
+        "openclaw agents add reporter",
+        "openclaw channels login --channel telegram",
+        "openclaw cron add --name agent-status-01d8ea78 --cron '0 9 * * *' --message 'Run agent reporter status update'"
+      ],
+      "sample_domains": [
+        "agent_mgmt",
+        "channel_mgmt",
+        "cron_webhook"
+      ],
+      "sample_difficulty": 3
+    },
+    {
+      "generator_id": "agent_list_check",
+      "task_count": 1,
+      "sample_task_id": "agent_list_check_1",
+      "sample_question": "List all configured agents and report how many are currently set up.",
+      "sample_actions": [
+        "openclaw agents list"
+      ],
+      "sample_domains": [
+        "agent_mgmt",
+        "monitoring"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "calendar_add_event",
+      "task_count": 15,
+      "sample_task_id": "calendar_add_event_1",
+      "sample_question": "I'd like to block some time on my calendar. Please add an event titled 'Team standup' starting at 2026-03-10T09:00.",
+      "sample_actions": [
+        "calendar add-event --title 'Team standup' --start 2026-03-10T09:00"
+      ],
+      "sample_domains": [
+        "calendar"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "calendar_add_event_with_attendees",
+      "task_count": 32,
+      "sample_task_id": "calendar_add_event_with_attendees_1",
+      "sample_question": "I'm organizing a group event. Set up 'Quarterly review' on the calendar at 2026-03-15T10:00 in Conference Room A, and invite alice@example.com,bob@example.com.",
+      "sample_actions": [
+        "calendar add-event --title 'Quarterly review' --start 2026-03-15T10:00 --location 'Conference Room A' --attendees alice@example.com,bob@example.com"
+      ],
+      "sample_domains": [
+        "calendar"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "calendar_list_events",
+      "task_count": 6,
+      "sample_task_id": "calendar_list_events_1",
+      "sample_question": "I want to review my schedule. Show me all calendar events between 2026-03-01 and 2026-03-07.",
+      "sample_actions": [
+        "calendar list --from 2026-03-01 --to 2026-03-07"
+      ],
+      "sample_domains": [
+        "calendar"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "calendar_reschedule_event",
+      "task_count": 8,
+      "sample_task_id": "calendar_reschedule_event_1",
+      "sample_question": "Plans changed - I need to move 'Team standup'. First add it at 2026-03-10T09:00, then update it to 2026-03-13T10:00.",
+      "sample_actions": [
+        "calendar add-event --title 'Team standup' --start 2026-03-10T09:00",
+        "calendar list",
+        "calendar update-event --id evt_0001 --start 2026-03-13T10:00"
+      ],
+      "sample_domains": [
+        "calendar"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "calendar_today_online",
+      "task_count": 3,
+      "sample_task_id": "calendar_today_online_1",
+      "sample_question": "I need the current date and time in UTC right now. Please look it up and report it.",
+      "sample_actions": [
+        "calendar today --timezone UTC"
+      ],
+      "sample_domains": [
+        "calendar"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "calendar_weather_check",
+      "task_count": 24,
+      "sample_task_id": "calendar_weather_check_1",
+      "sample_question": "I planned 'Team offsite' for 2026-03-01 in New York. Check the forecast — if it's rainy, reschedule to 2026-03-03T10:00; otherwise book it at 2026-03-01T10:00.",
+      "sample_actions": [
+        "weather get --location 'New York' --date 2026-03-01",
+        "calendar add-event --title 'Team offsite' --start 2026-03-03T10:00 --location 'New York'"
+      ],
+      "sample_domains": [
+        "calendar",
+        "weather"
+      ],
+      "sample_difficulty": 3
+    },
+    {
+      "generator_id": "check_security_status",
+      "task_count": 1,
+      "sample_task_id": "check_security_status_1",
+      "sample_question": "Check the current openclaw security configuration and report the authentication mode.",
+      "sample_actions": [
+        "openclaw security audit"
+      ],
+      "sample_domains": [
+        "security"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "check_system_status",
+      "task_count": 2,
+      "sample_task_id": "check_system_status_1",
+      "sample_question": "Check the current openclaw system status.",
+      "sample_actions": [
+        "openclaw status"
+      ],
+      "sample_domains": [
+        "monitoring"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "configure_channel_setting",
+      "task_count": 20,
+      "sample_task_id": "configure_channel_setting_1",
+      "sample_question": "Log into the telegram channel, then set its 'notification_level' configuration to 'all'.",
+      "sample_actions": [
+        "openclaw channels login --channel telegram",
+        "openclaw config set channels.telegram.config.notification_level all"
+      ],
+      "sample_domains": [
+        "channel_mgmt"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "configure_gateway_port",
+      "task_count": 4,
+      "sample_task_id": "configure_gateway_port_1",
+      "sample_question": "Configure the openclaw gateway to listen on port 8080.",
+      "sample_actions": [
+        "openclaw config set gateway.port 8080"
+      ],
+      "sample_domains": [
+        "setup_config"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "configure_model",
+      "task_count": 4,
+      "sample_task_id": "configure_model_1",
+      "sample_question": "Configure openclaw to use the model 'anthropic/claude-opus-4-6' as the default agent model.",
+      "sample_actions": [
+        "openclaw models set anthropic/claude-opus-4-6"
+      ],
+      "sample_domains": [
+        "setup_config"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "create_cron_job",
+      "task_count": 24,
+      "sample_task_id": "create_cron_job_1",
+      "sample_question": "Create a cron job that runs on schedule '0 9 * * *' and sends a status update message to @alice.",
+      "sample_actions": [
+        "openclaw cron add --name status-update-4dec7348 --cron '0 9 * * *' --message 'Send scheduled status update to @alice'"
+      ],
+      "sample_domains": [
+        "cron_webhook"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "cron_send_message",
+      "task_count": 64,
+      "sample_task_id": "cron_send_message_1",
+      "sample_question": "Log into the telegram channel, then create a cron job with schedule '0 9 * * *' that sends a daily report to @alice via telegram.",
+      "sample_actions": [
+        "openclaw channels login --channel telegram",
+        "openclaw cron add --name daily-report-cb2b4b70 --cron '0 9 * * *' --message 'Send daily report to @alice via telegram'"
+      ],
+      "sample_domains": [
+        "cron_webhook",
+        "messaging"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "cron_with_plugin_workflow",
+      "task_count": 16,
+      "sample_task_id": "cron_with_plugin_workflow_1",
+      "sample_question": "Set up an automated workflow:\n1. Install the 'slack' plugin\n2. Create a cron job with schedule '0 9 * * *' that triggers a plugin action",
+      "sample_actions": [
+        "openclaw plugins enable slack",
+        "openclaw cron add --name plugin-cron-41485c3d --cron '0 9 * * *' --message 'Run periodic plugin check'"
+      ],
+      "sample_domains": [
+        "plugin_skill",
+        "cron_webhook"
+      ],
+      "sample_difficulty": 3
+    },
+    {
+      "generator_id": "diagnose_channel_issue",
+      "task_count": 3,
+      "sample_task_id": "diagnose_channel_issue_1",
+      "sample_question": "The telegram channel is not working. Diagnose the issue by checking the system status and channel configuration, then fix it by logging into the channel.",
+      "sample_actions": [
+        "openclaw status",
+        "openclaw channels status --json",
+        "openclaw channels login --channel telegram",
+        "openclaw status"
+      ],
+      "sample_domains": [
+        "monitoring",
+        "channel_mgmt"
+      ],
+      "sample_difficulty": 3
+    },
+    {
+      "generator_id": "email_mark_read",
+      "task_count": 6,
+      "sample_task_id": "email_mark_read_1",
+      "sample_question": "I've already seen the 'Project proposal' email. Mark it as read.",
+      "sample_actions": [
+        "email mark --id email_seed_1 --flag read"
+      ],
+      "sample_domains": [
+        "email"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "email_move",
+      "task_count": 20,
+      "sample_task_id": "email_move_1",
+      "sample_question": "I've processed the 'Project proposal' email from alice@example.com. Move it to the 'archive' folder.",
+      "sample_actions": [
+        "email move --id email_seed_1 --folder archive"
+      ],
+      "sample_domains": [
+        "email"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "email_reply",
+      "task_count": 27,
+      "sample_task_id": "email_reply_1",
+      "sample_question": "I need to respond to an email about 'Project proposal'. Find it in my inbox and send this reply: 'Thanks for reaching out! I will review and get back to you.'.",
+      "sample_actions": [
+        "email reply --id email_seed_1 --body 'Thanks for reaching out! I will review and get back to you.'"
+      ],
+      "sample_domains": [
+        "email"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "email_search_and_read",
+      "task_count": 5,
+      "sample_task_id": "email_search_and_read_1",
+      "sample_question": "I'm trying to find something in my inbox. Search for emails mentioning 'proposal'.",
+      "sample_actions": [
+        "email search --query 'proposal'"
+      ],
+      "sample_domains": [
+        "email"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "email_send",
+      "task_count": 45,
+      "sample_task_id": "email_send_1",
+      "sample_question": "Draft and send an email to alice@example.com — subject: 'Project update', body: 'Hi, just wanted to give you a quick update on the project.'.",
+      "sample_actions": [
+        "email send --to alice@example.com --subject 'Project update' --body 'Hi, just wanted to give you a quick update on the project.'"
+      ],
+      "sample_domains": [
+        "email"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "email_to_calendar",
+      "task_count": 9,
+      "sample_task_id": "email_to_calendar_1",
+      "sample_question": "There's an email in my inbox about 'meeting' mentioning a meeting. Find it and create a calendar event based on the subject, starting at 2026-03-10T14:00.",
+      "sample_actions": [
+        "email search --query 'meeting'",
+        "calendar add-event --title 'Meeting from email' --start 2026-03-10T14:00"
+      ],
+      "sample_domains": [
+        "email",
+        "calendar"
+      ],
+      "sample_difficulty": 3
+    },
+    {
+      "generator_id": "email_to_task",
+      "task_count": 12,
+      "sample_task_id": "email_to_task_1",
+      "sample_question": "I got an email about 'proposal' that needs follow-up. Search my inbox, then create a high-priority task due 2026-03-07 based on the subject.",
+      "sample_actions": [
+        "email search --query 'proposal'",
+        "tasks add --title 'Follow up: Project proposal' --priority high --due 2026-03-07"
+      ],
+      "sample_domains": [
+        "email",
+        "tasks"
+      ],
+      "sample_difficulty": 3
+    },
+    {
+      "generator_id": "file_append",
+      "task_count": 27,
+      "sample_task_id": "file_append_1",
+      "sample_question": "I'm adding to an existing note. Create '/notes/todo.txt' with 'Line 1\n', then append '\nLine 2' to it.",
+      "sample_actions": [
+        "file create --path '/notes/todo.txt' --content 'Line 1\n'",
+        "file append --path '/notes/todo.txt' --content '\nLine 2'"
+      ],
+      "sample_domains": [
+        "file"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "file_create",
+      "task_count": 25,
+      "sample_task_id": "file_create_1",
+      "sample_question": "I need to save some data. Create a file at '/notes/todo.txt' and write this content: 'Hello, world!'.",
+      "sample_actions": [
+        "file create --path '/notes/todo.txt' --content 'Hello, world!'"
+      ],
+      "sample_domains": [
+        "file"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "file_create_and_read",
+      "task_count": 9,
+      "sample_task_id": "file_create_and_read_1",
+      "sample_question": "Please create a file at '/notes/todo.txt' with content 'Hello, world!', then read it back to confirm it saved correctly.",
+      "sample_actions": [
+        "file create --path '/notes/todo.txt' --content 'Hello, world!'",
+        "file read --path '/notes/todo.txt'"
+      ],
+      "sample_domains": [
+        "file"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "file_move",
+      "task_count": 32,
+      "sample_task_id": "file_move_1",
+      "sample_question": "I want to reorganize some files. Create a file at '/notes/todo.txt' with content 'Hello, world!', then move it to '/archive/todo.txt'.",
+      "sample_actions": [
+        "file create --path '/notes/todo.txt' --content 'Hello, world!'",
+        "file move --src '/notes/todo.txt' --dst '/archive/todo.txt'"
+      ],
+      "sample_domains": [
+        "file"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "full_agent_workflow",
+      "task_count": 8,
+      "sample_task_id": "full_agent_workflow_1",
+      "sample_question": "Set up an automated workflow:\n1. Create a new agent named 'daily-reporter'\n2. Log into the telegram channel\n3. Create a cron job with schedule '0 9 * * *' that triggers the agent to send a status report",
+      "sample_actions": [
+        "openclaw agents add daily-reporter",
+        "openclaw channels login --channel telegram",
+        "openclaw cron add --name agent-report-64a79f36 --cron '0 9 * * *' --message 'Trigger agent daily-reporter status report'"
+      ],
+      "sample_domains": [
+        "agent_mgmt",
+        "channel_mgmt",
+        "cron_webhook"
+      ],
+      "sample_difficulty": 3
+    },
+    {
+      "generator_id": "full_setup_and_monitor",
+      "task_count": 12,
+      "sample_task_id": "full_setup_and_monitor_1",
+      "sample_question": "Perform a complete openclaw setup:\n1. Set the default model to 'anthropic/claude-opus-4-6'\n2. Start the gateway\n3. Log into the telegram channel\n4. Verify the system health",
+      "sample_actions": [
+        "openclaw models set anthropic/claude-opus-4-6",
+        "openclaw gateway start",
+        "openclaw channels login --channel telegram",
+        "openclaw health"
+      ],
+      "sample_domains": [
+        "setup_config",
+        "monitoring",
+        "channel_mgmt"
+      ],
+      "sample_difficulty": 3
+    },
+    {
+      "generator_id": "full_workflow_multi_app",
+      "task_count": 32,
+      "sample_task_id": "full_workflow_multi_app_1",
+      "sample_question": "There's an email about 'proposal' that needs action. Search my inbox, create a follow-up task due 2026-03-10, block time at 2026-03-11T10:00 on my calendar, then let @alice know via telegram that you're on it.",
+      "sample_actions": [
+        "email search --query 'proposal'",
+        "tasks add --title 'Follow up: Project proposal' --priority high --due 2026-03-10",
+        "calendar add-event --title 'Project proposal review' --start 2026-03-11T10:00",
+        "openclaw channels login --channel telegram",
+        "openclaw message send --channel telegram --target @alice --message 'I am working on the proposal follow-up.'"
+      ],
+      "sample_domains": [
+        "email",
+        "tasks",
+        "calendar",
+        "messaging"
+      ],
+      "sample_difficulty": 3
+    },
+    {
+      "generator_id": "install_and_verify_plugin",
+      "task_count": 8,
+      "sample_task_id": "install_and_verify_plugin_1",
+      "sample_question": "Install the 'discord' plugin, then verify it appears in plugin list output.",
+      "sample_actions": [
+        "openclaw plugins install @openclaw/discord",
+        "openclaw plugins list"
+      ],
+      "sample_domains": [
+        "plugin_skill"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "install_plugin",
+      "task_count": 10,
+      "sample_task_id": "install_plugin_1",
+      "sample_question": "Install the 'discord' plugin.",
+      "sample_actions": [
+        "openclaw plugins install @openclaw/discord"
+      ],
+      "sample_domains": [
+        "plugin_skill"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "install_skill",
+      "task_count": 6,
+      "sample_task_id": "install_skill_1",
+      "sample_question": "Show detailed information for the 'healthcheck' skill.",
+      "sample_actions": [
+        "openclaw skills info healthcheck"
+      ],
+      "sample_domains": [
+        "plugin_skill"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "install_then_remove_plugin",
+      "task_count": 4,
+      "sample_task_id": "install_then_remove_plugin_1",
+      "sample_question": "Enable the 'discord' plugin, verify it appears by listing plugins, then disable it.",
+      "sample_actions": [
+        "openclaw plugins enable discord",
+        "openclaw plugins list",
+        "openclaw plugins disable discord"
+      ],
+      "sample_domains": [
+        "plugin_skill"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "list_channels",
+      "task_count": 1,
+      "sample_task_id": "list_channels_1",
+      "sample_question": "List all currently configured messaging channels.",
+      "sample_actions": [
+        "openclaw channels list"
+      ],
+      "sample_domains": [
+        "channel_mgmt"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "list_cron_jobs",
+      "task_count": 1,
+      "sample_task_id": "list_cron_jobs_1",
+      "sample_question": "List all currently configured cron jobs.",
+      "sample_actions": [
+        "openclaw cron list"
+      ],
+      "sample_domains": [
+        "cron_webhook"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "list_devices",
+      "task_count": 1,
+      "sample_task_id": "list_devices_1",
+      "sample_question": "List all devices currently paired with openclaw.",
+      "sample_actions": [
+        "openclaw devices list"
+      ],
+      "sample_domains": [
+        "device_node"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "list_plugins",
+      "task_count": 1,
+      "sample_task_id": "list_plugins_1",
+      "sample_question": "List all currently installed plugins.",
+      "sample_actions": [
+        "openclaw plugins list"
+      ],
+      "sample_domains": [
+        "plugin_skill"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "login_and_check_channel",
+      "task_count": 4,
+      "sample_task_id": "login_and_check_channel_1",
+      "sample_question": "Log into the telegram channel, then check and display its current configuration.",
+      "sample_actions": [
+        "openclaw channels login --channel telegram",
+        "openclaw channels list --json"
+      ],
+      "sample_domains": [
+        "channel_mgmt"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "login_channel",
+      "task_count": 6,
+      "sample_task_id": "login_channel_1",
+      "sample_question": "Log into the telegram channel.",
+      "sample_actions": [
+        "openclaw channels login --channel telegram"
+      ],
+      "sample_domains": [
+        "channel_mgmt"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "msg_broadcast",
+      "task_count": 6,
+      "sample_task_id": "msg_broadcast_1",
+      "sample_question": "Broadcast the message 'Team standup in 10 minutes' to the following targets: @alice,@bob.",
+      "sample_actions": [
+        "openclaw message broadcast --targets @alice @bob --message 'Team standup in 10 minutes'"
+      ],
+      "sample_domains": [
+        "messaging"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "msg_create_poll",
+      "task_count": 27,
+      "sample_task_id": "msg_create_poll_1",
+      "sample_question": "Create a poll in #general asking 'What time works for the meeting?' with options: 10am,2pm,4pm.",
+      "sample_actions": [
+        "openclaw message poll --target #general --poll-question 'What time works for the meeting?' --poll-option '10am' --poll-option '2pm' --poll-option '4pm'"
+      ],
+      "sample_domains": [
+        "messaging"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "msg_react",
+      "task_count": 64,
+      "sample_task_id": "msg_react_1",
+      "sample_question": "React to the latest message from @alice on telegram with the 👍 emoji.",
+      "sample_actions": [
+        "openclaw message react --channel telegram --target @alice --message-id 1 --emoji '👍'"
+      ],
+      "sample_domains": [
+        "messaging"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "msg_search",
+      "task_count": 20,
+      "sample_task_id": "msg_search_1",
+      "sample_question": "Search messages in the discord channel for the keyword 'meeting'.",
+      "sample_actions": [
+        "openclaw message search --channel discord --guild-id 123456789012345678 --channel-id 234567890123456789 --query meeting"
+      ],
+      "sample_domains": [
+        "messaging"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "msg_send_text",
+      "task_count": 64,
+      "sample_task_id": "msg_send_text_1",
+      "sample_question": "Send a text message to @alice on telegram saying 'Hello, how are you?'.",
+      "sample_actions": [
+        "openclaw message send --channel telegram --target @alice --message 'Hello, how are you?'"
+      ],
+      "sample_domains": [
+        "messaging"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "openclaw_online_calendar_read",
+      "task_count": 3,
+      "sample_task_id": "openclaw_online_calendar_read_1",
+      "sample_question": "I need the current date and time in UTC right now. Please fetch it and give a concise summary.",
+      "sample_actions": [
+        "calendar today --timezone UTC"
+      ],
+      "sample_domains": [
+        "calendar"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "openclaw_online_weather_read",
+      "task_count": 3,
+      "sample_task_id": "openclaw_online_weather_read_1",
+      "sample_question": "I'm traveling soon and need a live weather check for New York. Please fetch the latest conditions and summarize them clearly.",
+      "sample_actions": [
+        "weather get --location 'New York'"
+      ],
+      "sample_domains": [
+        "weather"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "pair_and_list_devices",
+      "task_count": 1,
+      "sample_task_id": "pair_and_list_devices_1",
+      "sample_question": "Initiate device pairing to connect a new device, then list all paired devices to verify the pairing process started.",
+      "sample_actions": [
+        "openclaw devices pair",
+        "openclaw devices list"
+      ],
+      "sample_domains": [
+        "device_node"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "pair_device",
+      "task_count": 1,
+      "sample_task_id": "pair_device_1",
+      "sample_question": "Initiate device pairing to connect a new device to openclaw.",
+      "sample_actions": [
+        "openclaw devices pair"
+      ],
+      "sample_domains": [
+        "device_node"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "plugin_and_message",
+      "task_count": 80,
+      "sample_task_id": "plugin_and_message_1",
+      "sample_question": "Complete the following setup:\n1. Install the 'slack' plugin\n2. Log into the telegram channel\n3. Send a message to @alice saying 'Setup complete, slack is active'",
+      "sample_actions": [
+        "openclaw plugins enable slack",
+        "openclaw channels login --channel telegram",
+        "openclaw message send --channel telegram --target @alice --message 'Setup complete, slack is active'"
+      ],
+      "sample_domains": [
+        "plugin_skill",
+        "channel_mgmt",
+        "messaging"
+      ],
+      "sample_difficulty": 3
+    },
+    {
+      "generator_id": "rotate_security_token",
+      "task_count": 1,
+      "sample_task_id": "rotate_security_token_1",
+      "sample_question": "Rotate the gateway security token: set a new token value 'rotated-token-xyz789', then verify the security configuration shows the token is configured.",
+      "sample_actions": [
+        "openclaw config set gateway.auth.token rotated-token-xyz789",
+        "openclaw security audit"
+      ],
+      "sample_domains": [
+        "security"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "run_doctor",
+      "task_count": 1,
+      "sample_task_id": "run_doctor_1",
+      "sample_question": "Run the openclaw diagnostic tool to check the system health.",
+      "sample_actions": [
+        "openclaw doctor"
+      ],
+      "sample_domains": [
+        "monitoring"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "secure_channel_and_send",
+      "task_count": 9,
+      "sample_task_id": "secure_channel_and_send_1",
+      "sample_question": "Perform a secure setup:\n1. Set a security token for the gateway (use 'secure-token-env-test')\n2. Log into the telegram channel\n3. Send a message to @alice confirming the secure setup",
+      "sample_actions": [
+        "openclaw config set gateway.auth.token secure-token-env-test",
+        "openclaw channels login --channel telegram",
+        "openclaw message send --channel telegram --target @alice --message 'Secure setup complete'"
+      ],
+      "sample_domains": [
+        "security",
+        "channel_mgmt",
+        "messaging"
+      ],
+      "sample_difficulty": 3
+    },
+    {
+      "generator_id": "send_and_calendar",
+      "task_count": 16,
+      "sample_task_id": "send_and_calendar_1",
+      "sample_question": "I want to reach out to @alice and lock in a meeting. Send them on telegram: 'Let's sync up. I'm booking a meeting for us.'. Then book a follow-up at 2026-03-10T15:00 titled 'Follow-up with @alice'.",
+      "sample_actions": [
+        "openclaw channels login --channel telegram",
+        "openclaw message send --channel telegram --target @alice --message 'Let's sync up. I'm booking a meeting for us.'",
+        "calendar add-event --title 'Follow-up with @alice' --start 2026-03-10T15:00"
+      ],
+      "sample_domains": [
+        "messaging",
+        "calendar"
+      ],
+      "sample_difficulty": 3
+    },
+    {
+      "generator_id": "set_security_token",
+      "task_count": 1,
+      "sample_task_id": "set_security_token_1",
+      "sample_question": "Set a security token for the openclaw gateway. Use 'my-secret-token-abc123' as the token value.",
+      "sample_actions": [
+        "openclaw config set gateway.auth.token my-secret-token-abc123"
+      ],
+      "sample_domains": [
+        "security"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "setup_channel_and_send",
+      "task_count": 12,
+      "sample_task_id": "setup_channel_and_send_1",
+      "sample_question": "First, log into the telegram channel. Then send a message to @alice saying 'Hello from the newly configured channel!'.",
+      "sample_actions": [
+        "openclaw channels login --channel telegram",
+        "openclaw message send --channel telegram --target @alice --message 'Hello from the newly configured channel!'"
+      ],
+      "sample_domains": [
+        "channel_mgmt",
+        "messaging"
+      ],
+      "sample_difficulty": 3
+    },
+    {
+      "generator_id": "setup_workspace",
+      "task_count": 1,
+      "sample_task_id": "setup_workspace_1",
+      "sample_question": "Initialize the openclaw workspace by running the setup command.",
+      "sample_actions": [
+        "openclaw setup"
+      ],
+      "sample_domains": [
+        "setup_config"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "start_gateway_and_check",
+      "task_count": 1,
+      "sample_task_id": "start_gateway_and_check_1",
+      "sample_question": "Start the openclaw gateway, then verify it is running by checking the system health.",
+      "sample_actions": [
+        "openclaw gateway start",
+        "openclaw health"
+      ],
+      "sample_domains": [
+        "monitoring"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "task_and_calendar_sync",
+      "task_count": 27,
+      "sample_task_id": "task_and_calendar_sync_1",
+      "sample_question": "Keep my task list and calendar in sync: add 'Deep work session' as a task due 2026-03-08, and block that time on the calendar at 2026-03-08T09:00.",
+      "sample_actions": [
+        "tasks add --title 'Deep work session' --due 2026-03-08",
+        "calendar add-event --title 'Deep work session' --start 2026-03-08T09:00"
+      ],
+      "sample_domains": [
+        "tasks",
+        "calendar"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "tasks_add",
+      "task_count": 15,
+      "sample_task_id": "tasks_add_1",
+      "sample_question": "I've been meaning to track this — add 'Write weekly report' to my task list, due 2026-03-05.",
+      "sample_actions": [
+        "tasks add --title 'Write weekly report' --due 2026-03-05"
+      ],
+      "sample_domains": [
+        "tasks"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "tasks_add_with_priority",
+      "task_count": 36,
+      "sample_task_id": "tasks_add_with_priority_1",
+      "sample_question": "I need to stay on top of a high-priority item. Add 'Write weekly report' to my list, due 2026-03-05.",
+      "sample_actions": [
+        "tasks add --title 'Write weekly report' --priority high --due 2026-03-05"
+      ],
+      "sample_domains": [
+        "tasks"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "tasks_complete",
+      "task_count": 9,
+      "sample_task_id": "tasks_complete_1",
+      "sample_question": "I just finished the 'Review project proposal' task. Find it in my task list and mark it as done.",
+      "sample_actions": [
+        "tasks complete --id task_seed_1"
+      ],
+      "sample_domains": [
+        "tasks"
+      ],
+      "sample_difficulty": 2
+    },
+    {
+      "generator_id": "tasks_list_filtered",
+      "task_count": 9,
+      "sample_task_id": "tasks_list_filtered_1",
+      "sample_question": "Let me see what's on my plate. Show me all pending tasks with high priority.",
+      "sample_actions": [
+        "tasks list --status pending --priority high"
+      ],
+      "sample_domains": [
+        "tasks"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "tasks_search",
+      "task_count": 4,
+      "sample_task_id": "tasks_search_1",
+      "sample_question": "I'm looking for a specific task. Search my list for anything related to 'project'.",
+      "sample_actions": [
+        "tasks search --query 'project'"
+      ],
+      "sample_domains": [
+        "tasks"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "weather_check_alerts",
+      "task_count": 5,
+      "sample_task_id": "weather_check_alerts_1",
+      "sample_question": "Before I head to New York, check if there are any active weather alerts there.",
+      "sample_actions": [
+        "weather alerts --location 'New York'"
+      ],
+      "sample_domains": [
+        "weather"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "weather_forecast",
+      "task_count": 15,
+      "sample_task_id": "weather_forecast_1",
+      "sample_question": "I need to plan my week. Pull up a 3-day weather forecast for New York.",
+      "sample_actions": [
+        "weather forecast --location 'New York' --days 3"
+      ],
+      "sample_domains": [
+        "weather"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "weather_get",
+      "task_count": 5,
+      "sample_task_id": "weather_get_1",
+      "sample_question": "I'm heading out soon. What's the weather like right now in New York?",
+      "sample_actions": [
+        "weather get --location 'New York'"
+      ],
+      "sample_domains": [
+        "weather"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "weather_get_on_date",
+      "task_count": 9,
+      "sample_task_id": "weather_get_on_date_1",
+      "sample_question": "I have plans in New York on 2026-03-01. What will the weather be like that day?",
+      "sample_actions": [
+        "weather get --location 'New York' --date 2026-03-01"
+      ],
+      "sample_domains": [
+        "weather"
+      ],
+      "sample_difficulty": 1
+    },
+    {
+      "generator_id": "weather_get_online",
+      "task_count": 3,
+      "sample_task_id": "weather_get_online_1",
+      "sample_question": "I'm heading out soon and need a live weather check for New York. Please look it up online and summarize the current conditions.",
+      "sample_actions": [
+        "weather get --location 'New York'"
+      ],
+      "sample_domains": [
+        "weather"
+      ],
+      "sample_difficulty": 2
+    }
+  ]
+}

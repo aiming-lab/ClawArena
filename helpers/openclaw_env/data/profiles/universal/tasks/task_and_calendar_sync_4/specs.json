@@ -1,0 +1,57 @@
+{
+  "task_id": "task_and_calendar_sync_4",
+  "instruction": "Keep my task list and calendar in sync: add 'Deep work session' as a task due 2026-03-09, and block that time on the calendar at 2026-03-08T09:00.",
+  "domains": [
+    "tasks",
+    "calendar"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "task_and_calendar_sync",
+  "generator_id": "task_and_calendar_sync",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "title": "Deep work session",
+      "due": "2026-03-09",
+      "start": "2026-03-08T09:00"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "tasks add --title 'Deep work session' --due 2026-03-09",
+      "gcalcli add --title 'Deep work session' --when 2026-03-08T09:00"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar block created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "task_and_calendar_sync",
+      "params": {
+        "title": "Deep work session",
+        "due": "2026-03-09",
+        "start": "2026-03-08T09:00"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

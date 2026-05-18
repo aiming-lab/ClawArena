@@ -1,0 +1,90 @@
+{
+  "task_id": "configure_channel_setting_3",
+  "instruction": "Log into the telegram channel, then set its 'auto_reply' configuration to 'true'.",
+  "canonical_instruction": "Log into the telegram channel, then set its 'auto_reply' configuration to 'true'.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "channel",
+      "value": "telegram"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "high_volatility"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "channel_mgmt"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "configure_channel_setting",
+  "generator_id": "configure_channel_setting",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "telegram",
+      "key": "auto_reply",
+      "value": "true",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_channel": "telegram",
+      "expected_key": "auto_reply",
+      "expected_value": "true"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw channels login --channel telegram",
+      "openclaw config set channels.telegram.config.auto_reply true"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "channels.telegram",
+        "condition": "exists",
+        "expected": null,
+        "name": "telegram configured"
+      },
+      {
+        "type": "config",
+        "config_path": "channels.telegram.config.auto_reply",
+        "condition": "equals",
+        "expected": "true",
+        "name": "telegram.auto_reply = true"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "configure_channel_setting",
+      "params": {
+        "channel": "telegram",
+        "setting": [
+          "auto_reply",
+          "true"
+        ]
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

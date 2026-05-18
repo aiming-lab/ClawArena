@@ -1,0 +1,57 @@
+{
+  "task_id": "diagnose_channel_issue_2",
+  "instruction": "The discord channel is not working. Diagnose the issue by checking the system status and channel configuration, then fix it by logging into the channel.",
+  "domains": [
+    "monitoring",
+    "channel_mgmt"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "diagnose_channel_issue",
+  "generator_id": "diagnose_channel_issue",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "discord"
+    },
+    "private": {
+      "root_cause": "channel_not_configured"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw status",
+      "openclaw channels status --json",
+      "openclaw channels login --channel discord",
+      "openclaw status"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "channels.discord",
+        "condition": "exists",
+        "expected": null,
+        "name": "discord channel configured"
+      },
+      {
+        "type": "state",
+        "field": "channels.discord.status",
+        "condition": "equals",
+        "expected": "connected",
+        "name": "discord connected"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "diagnose_channel_issue",
+      "params": {
+        "channel": "discord"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

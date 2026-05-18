@@ -1,0 +1,179 @@
+{
+  "task_id": "hard_decision_workflow_7",
+  "instruction": "Please tighten up the Berlin release review. Check what's already on the board and calendar, use anthropic/claude-opus-4-6, refresh the handoff file, and add only the missing review slot or decision-log task.",
+  "canonical_instruction": "I need the Berlin release review cleaned up. Please check what's already on the board and calendar, move to anthropic/claude-opus-4-6, refresh the handoff file, and add only the missing review slot or decision-log task.",
+  "instruction_variants": [
+    "Can you get the Berlin release review back into shape? Check what's already on the board and calendar, switch over to anthropic/claude-opus-4-6, refresh the handoff file, and add only the missing review slot or decision-log task.",
+    "Can you get the Berlin release review settled? Look over what's already on the board and calendar, move to anthropic/claude-opus-4-6, refresh the handoff file, and fill only the missing review slot or decision-log task.",
+    "Please get the Berlin release review into good shape. Check what's already on the board and calendar, use anthropic/claude-opus-4-6, refresh the handoff file, and add only the missing review slot or decision-log task.",
+    "I need the Berlin release review cleaned up. Please check what's already on the board and calendar, move to anthropic/claude-opus-4-6, refresh the handoff file, and add only the missing review slot or decision-log task.",
+    "Some of the Berlin release review is already in place. Please check the board and calendar, use anthropic/claude-opus-4-6, refresh the handoff file, and fill only the missing review slot or decision-log task.",
+    "The Berlin release review is partly there already. Check what's on the board and calendar, switch over to anthropic/claude-opus-4-6, refresh the handoff file, and add only the missing review slot or decision-log task.",
+    "I need the Berlin release review wrapped up properly. Please check what's already on the board and calendar, move to anthropic/claude-opus-4-6, refresh the handoff file, and add only the missing review slot or decision-log task."
+  ],
+  "visible_constraints": [
+    {
+      "type": "title",
+      "value": "Berlin release review"
+    },
+    {
+      "type": "model",
+      "value": "anthropic/claude-opus-4-6"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "path",
+      "value": "/ops/release-handoff.txt"
+    }
+  ],
+  "decision_requirements": [
+    "infer_schedule",
+    "infer_title",
+    "infer_model"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "release_recovery_runbook",
+      "hard_decision_variant": 1,
+      "hard_decision_ability": "workflow_completion",
+      "hard_decision_ability_tags": [
+        "workflow_completion",
+        "schedule_inference"
+      ],
+      "prompt_style": "brief",
+      "step_count": 7
+    },
+    "private": {
+      "initial_state_overrides": {
+        "tasks.json": [
+          {
+            "id": "task_existing_release_next_step",
+            "title": "Berlin existing release next step",
+            "due": "2026-03-12",
+            "status": "pending",
+            "priority": "high",
+            "duration": 1
+          }
+        ]
+      }
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw config get agent.model",
+      "tasks list --status pending",
+      "calendar list",
+      "calendar today --timezone Europe/Berlin",
+      "openclaw models set anthropic/claude-opus-4-6",
+      "file create --path '/ops/release-handoff.txt' --content 'Berlin release handoff notes.'",
+      "calendar add-event --title 'Berlin release review' --start 2026-03-10T09:00"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "config",
+        "config_path": "agent.model",
+        "condition": "equals",
+        "expected": "anthropic/claude-opus-4-6",
+        "name": "model set to anthropic/claude-opus-4-6"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "file created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "field_contains",
+        "expected": {
+          "field": "path",
+          "value": "handoff"
+        },
+        "name": "handoff file path references handoff"
+      },
+      {
+        "type": "state",
+        "field": "tasks",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "decision-log reminder already exists"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 6
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

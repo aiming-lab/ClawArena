@@ -1,0 +1,57 @@
+{
+  "task_id": "openclaw_online_weather_read_1",
+  "instruction": "I'm traveling soon and need a live weather check for New York. Please fetch the latest conditions and summarize them clearly.",
+  "domains": [
+    "weather"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "openclaw_online_weather_read",
+  "generator_id": "openclaw_online_weather_read",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "location": "New York"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "curl -sG \"https://geocoding-api.open-meteo.com/v1/search\" --data-urlencode \"name=New York\" --data-urlencode \"count=1\" --data-urlencode \"language=en\" --data-urlencode \"format=json\"",
+      "curl -sG \"https://timeapi.io/api/Time/current/zone\" --data-urlencode \"timeZone=America/New_York\"",
+      "curl -sG \"https://api.open-meteo.com/v1/forecast\" --data-urlencode \"latitude=40.7128\" --data-urlencode \"longitude=-74.0060\" --data-urlencode \"current=temperature_2m,relative_humidity_2m,weather_code\" --data-urlencode \"timezone=America/New_York\""
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "weather get online succeeds"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "\"current\"",
+        "name": "output contains current weather object"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "\"temperature_2m\"",
+        "name": "output contains temperature field"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "openclaw_online_weather_read",
+      "params": {
+        "location": "New York"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

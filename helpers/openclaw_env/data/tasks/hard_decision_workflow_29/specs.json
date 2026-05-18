@@ -1,0 +1,191 @@
+{
+  "task_id": "hard_decision_workflow_29",
+  "instruction": "Handle the budget email thread in the inbox first. Then check the Tokyo board and calendar; right now the next step is already on the board, and if it only needs async follow-up, leave the calendar alone, so add only what is missing, note it in a handoff file, and send finance@example.com a quick note.",
+  "canonical_instruction": "The budget email thread in the inbox needs attention today. Then check the Tokyo board and calendar; right now the next step is already on the board, and if it only needs async follow-up, leave the calendar alone, so fill only what is missing, note it in a handoff file, and send finance@example.com a quick update.",
+  "instruction_variants": [
+    "Close out the budget email thread in the inbox first. Then review the Tokyo board and calendar; right now the next step is already on the board, and if it only needs async follow-up, leave the calendar alone, so fill only what is missing, note it in a handoff file, and send finance@example.com a quick update.",
+    "Sort out the budget email thread in the inbox first. Then check the Tokyo board and calendar; right now the next step is already on the board, and if it only needs async follow-up, leave the calendar alone, so fill only what is missing, note it in a handoff file, and send finance@example.com a quick update.",
+    "Wrap the budget email thread in the inbox first. Then review the Tokyo board and calendar; right now the next step is already on the board, and if it only needs async follow-up, leave the calendar alone, so add only what is missing, note it in a handoff file, and send finance@example.com a short update.",
+    "The budget email thread in the inbox needs attention today. Then check the Tokyo board and calendar; right now the next step is already on the board, and if it only needs async follow-up, leave the calendar alone, so fill only what is missing, note it in a handoff file, and send finance@example.com a quick update.",
+    "The budget email thread in the inbox still needs to be closed out. Then review the Tokyo board and calendar; right now the next step is already on the board, and if it only needs async follow-up, leave the calendar alone, so add only what is missing, note it in a handoff file, and send finance@example.com a quick note.",
+    "Please handle the budget email thread in the inbox first. Then check the Tokyo board and calendar; right now the next step is already on the board, and if it only needs async follow-up, leave the calendar alone, so fill only what is missing, note it in a handoff file, and send finance@example.com a quick update.",
+    "I still need the budget email thread in the inbox handled today. Then review the Tokyo board and calendar; right now the next step is already on the board, and if it only needs async follow-up, leave the calendar alone, so add only what is missing, note it in a handoff file, and send finance@example.com a short update."
+  ],
+  "visible_constraints": [
+    {
+      "type": "email",
+      "value": "finance@example.com"
+    },
+    {
+      "type": "query",
+      "value": "budget"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "path",
+      "value": "/handoff/tokyo-budget-followup.txt"
+    },
+    {
+      "type": "subject",
+      "value": "Budget follow-up for Tokyo"
+    },
+    {
+      "type": "body",
+      "value": "Tracking the next step for Tokyo."
+    }
+  ],
+  "decision_requirements": [
+    "infer_message",
+    "infer_missing_steps",
+    "avoid_duplicate"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "email_provider",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "inbox_followthrough",
+      "hard_decision_variant": 11,
+      "hard_decision_ability": "information_transfer",
+      "hard_decision_ability_tags": [
+        "information_transfer",
+        "workflow_completion"
+      ],
+      "prompt_style": "brief",
+      "step_count": 7
+    },
+    "private": {
+      "initial_state_overrides": {
+        "tasks.json": [
+          {
+            "id": "task_existing_follow_up",
+            "title": "Tokyo budget follow-up",
+            "due": "2026-03-14",
+            "status": "pending",
+            "priority": "high",
+            "duration": 1
+          }
+        ]
+      }
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "email search --query 'budget'",
+      "email read --id email_seed_3",
+      "tasks list --status pending",
+      "calendar list",
+      "calendar today --timezone Asia/Tokyo",
+      "file create --path '/handoff/tokyo-budget-followup.txt' --content 'Tokyo budget follow-up handoff note.'",
+      "email send --to finance@example.com --subject 'Budget follow-up for Tokyo' --body 'Tracking the next step for Tokyo.'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "emails_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "to",
+          "value": "finance@example.com"
+        },
+        "name": "email sent to finance@example.com"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "file created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "field_contains",
+        "expected": {
+          "field": "path",
+          "value": "handoff"
+        },
+        "name": "handoff file path references handoff"
+      },
+      {
+        "type": "state",
+        "field": "tasks",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "follow-up task already exists"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 28
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "task_id": "set_security_token_1",
+  "instruction": "Set a security token for the openclaw gateway. Use 'my-secret-token-abc123' as the token value.",
+  "domains": [
+    "security"
+  ],
+  "difficulty": 1,
+  "initial_state": "default",
+  "template_id": "set_security_token",
+  "generator_id": "set_security_token",
+  "weight": 1.0,
+  "data": {
+    "public": {},
+    "private": {
+      "expected_token": "my-secret-token-abc123"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw config set gateway.auth.token my-secret-token-abc123"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "config",
+        "config_path": "gateway.auth.token",
+        "condition": "equals",
+        "expected": "my-secret-token-abc123",
+        "name": "auth token set"
+      },
+      {
+        "type": "output",
+        "match_type": "contains",
+        "expected": "updated",
+        "output_field": "last_stdout",
+        "name": "security token updated",
+        "ignore_case": true
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "set_security_token",
+      "params": {},
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

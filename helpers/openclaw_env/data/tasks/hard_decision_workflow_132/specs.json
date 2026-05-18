@@ -1,0 +1,185 @@
+{
+  "task_id": "hard_decision_workflow_132",
+  "instruction": "The Tokyo ops setup is partly there already. Check the current setup, forecast, and calendar, then add a backup review block on the calendar if the forecast looks risky; otherwise add a primary review block on the calendar, and don't rebuild anything that's already in place.",
+  "canonical_instruction": "Some of the Tokyo ops setup is already in place. Check the board, forecast, and calendar, then add a backup review block on the calendar if the forecast looks risky; otherwise add a primary review block on the calendar, and avoid recreating the existing setup.",
+  "instruction_variants": [
+    "Some of the Tokyo ops setup is already in place. Check the board, forecast, and calendar, then add a backup review block on the calendar if the forecast looks risky; otherwise add a primary review block on the calendar, and avoid recreating the existing setup.",
+    "The Tokyo ops setup already has the basics in place. Check the current setup, forecast, and calendar, then add a backup review block on the calendar if the forecast looks risky; otherwise add a primary review block on the calendar, and don't recreate anything that's already right.",
+    "For Tokyo, part of the ops setup is already covered. Review the current setup, forecast, and calendar, then add a backup review block on the calendar if the forecast looks risky; otherwise add a primary review block on the calendar, and leave the existing pieces alone.",
+    "The Tokyo ops setup is mostly in place. Check the current setup, forecast, and calendar, then add a backup review block on the calendar if the forecast looks risky; otherwise add a primary review block on the calendar, and avoid rebuilding anything that's already set.",
+    "I already have part of the Tokyo ops setup in motion. Review the current setup, forecast, and calendar, then add a backup review block on the calendar if the forecast looks risky; otherwise add a primary review block on the calendar, and leave the existing pieces alone.",
+    "The Tokyo ops setup is mostly right already. Check the current setup, forecast, and calendar, then add a backup review block on the calendar if the forecast looks risky; otherwise add a primary review block on the calendar, and avoid recreating anything that's already set."
+  ],
+  "visible_constraints": [
+    {
+      "type": "location",
+      "value": "Tokyo"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "Tokyo primary ops review block"
+    }
+  ],
+  "decision_requirements": [
+    "infer_title",
+    "infer_missing_steps",
+    "avoid_duplicate",
+    "infer_branch",
+    "infer_schedule"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "google_tasks",
+    "weather_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "duplicate_avoidance_followthrough",
+      "hard_decision_variant": 10,
+      "hard_decision_ability": "duplicate_avoidance",
+      "hard_decision_ability_tags": [
+        "duplicate_avoidance",
+        "completion_recognition"
+      ],
+      "prompt_style": "underspecified",
+      "step_count": 6
+    },
+    "private": {
+      "initial_state_overrides": {
+        "tasks.json": [
+          {
+            "id": "task_existing_ops",
+            "title": "Tokyo existing ops next-step task",
+            "due": "2026-03-12",
+            "status": "pending",
+            "priority": "medium",
+            "duration": 1
+          }
+        ],
+        "cron_jobs.json": [
+          {
+            "id": "cron_existing_ops",
+            "name": "tokyo-existing-daily-ops-check",
+            "schedule": "0 9 * * *",
+            "message": "Run Tokyo daily ops check",
+            "status": "active"
+          }
+        ]
+      }
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw cron list",
+      "tasks list --status pending",
+      "calendar list",
+      "weather forecast --location 'Tokyo' --days 1",
+      "calendar today --timezone Asia/Tokyo",
+      "calendar add-event --title 'Tokyo primary ops review block' --start 2026-03-20T08:30"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "state",
+        "field": "tasks",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "next-step task already exists"
+      },
+      {
+        "type": "state",
+        "field": "cron_jobs",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "daily check already exists"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate cron job created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "field_contains",
+        "expected": {
+          "field": "title",
+          "value": "primary"
+        },
+        "name": "calendar title references primary"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 131
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

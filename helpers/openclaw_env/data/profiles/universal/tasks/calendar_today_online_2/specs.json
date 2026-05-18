@@ -1,0 +1,55 @@
+{
+  "task_id": "calendar_today_online_2",
+  "instruction": "I need the current date and time in America/New_York right now. Please look it up and report it.",
+  "domains": [
+    "calendar"
+  ],
+  "difficulty": 1,
+  "initial_state": "default",
+  "template_id": "calendar_today_online",
+  "generator_id": "calendar_today_online",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "timezone": "America/New_York"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "gcalcli now --timezone America/New_York --online"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "calendar today online succeeds"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "Current date-time for America/New_York:",
+        "name": "output contains requested timezone"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "Source:",
+        "name": "output includes data source"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "calendar_today_online",
+      "params": {
+        "timezone": "America/New_York"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

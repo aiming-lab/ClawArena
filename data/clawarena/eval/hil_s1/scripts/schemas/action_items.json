@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hbench.local/schemas/action_items.json",
+  "title": "Action Items Schema",
+  "description": "Schema for action items tracking in the hil_s1 scenario. Documents follow-up actions, assignments, and status tracking for project deliverables.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the action items document",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "examples": ["1.0", "2.0"]
+    },
+    "generated_at": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when this document was generated",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+      "examples": ["2025-03-14T10:30:00Z"]
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when this document was last updated",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+      "examples": ["2025-03-14T15:45:00Z"]
+    },
+    "update": {
+      "type": "string",
+      "description": "Update identifier or label for this set of action items",
+      "examples": ["Update 1", "Weekly Review 2025-03-14", "Phase 2 Actions"]
+    },
+    "project": {
+      "type": "string",
+      "description": "Name or identifier of the project",
+      "minLength": 1,
+      "examples": ["Data Migration Project", "Schema V2 Implementation"]
+    },
+    "context": {
+      "type": "string",
+      "description": "Context or background for these action items",
+      "examples": [
+        "Following schema migration review meeting on 2025-03-12",
+        "Based on data quality assessment findings"
+      ]
+    },
+    "action_items": {
+      "type": "array",
+      "description": "Array of action item objects",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the action item",
+            "pattern": "^[A-Z]+-[0-9]+$",
+            "examples": ["ACTION-001", "AI-123", "ITEM-042"]
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the action to be taken",
+            "minLength": 1,
+            "examples": [
+              "Review and approve field mapping document",
+              "Update data validation scripts for v2 schema",
+              "Schedule training session for new data structure"
+            ]
+          },
+          "owner": {
+            "type": "string",
+            "description": "Person or team responsible for completing this action",
+            "minLength": 1,
+            "examples": ["Alice Johnson", "Data Engineering Team", "bob@example.com"]
+          },
+          "status": {
+            "type": "string",
+            "description": "Current status of the action item",
+            "enum": ["not_started", "in_progress", "blocked", "completed", "cancelled", "deferred"],
+            "default": "not_started",
+            "examples": ["not_started", "in_progress", "completed"]
+          },
+          "priority": {
+            "type": "string",
+            "description": "Priority level",
+            "enum": ["low", "medium", "high", "critical"],
+            "default": "medium",
+            "examples": ["high", "critical"]
+          },
+          "due": {
+            "type": "string",
+            "description": "Due date in YYYY-MM-DD format",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": ["2025-03-14", "2025-03-20"]
+          },
+          "created_at": {
+            "type": "string",
+            "description": "ISO 8601 timestamp when action item was created",
+            "format": "date-time",
+            "examples": ["2025-03-12T09:00:00Z"]
+          },
+          "completed_at": {
+            "type": ["string", "null"],
+            "description": "ISO 8601 timestamp when action item was completed, null if not completed",
+            "format": "date-time",
+            "examples": ["2025-03-14T16:30:00Z", null]
+          },
+          "category": {
+            "type": "string",
+            "description": "Category or type of action",
+            "enum": ["documentation", "development", "testing", "review", "approval", "communication", "training", "deployment", "monitoring"],
+            "examples": ["documentation", "review", "testing"]
+          },
+          "related_to": {
+            "type": "array",
+            "description": "IDs of related items (tasks, issues, risks, etc.)",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "examples": [["TASK-001"], ["RISK-003", "ISSUE-007"]]
+          },
+          "blockers": {
+            "type": "array",
+            "description": "List of blockers preventing completion",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "examples": [["Waiting for stakeholder approval"], ["Dependent on ACTION-005 completion"]]
+          },
+          "estimated_effort_hours": {
+            "type": ["number", "null"],
+            "description": "Estimated effort in hours",
+            "minimum": 0,
+            "examples": [2, 8, 16, null]
+          },
+          "actual_effort_hours": {
+            "type": ["number", "null"],
+            "description": "Actual effort spent in hours",
+            "minimum": 0,
+            "examples": [3.5, 10, null]
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes or comments",
+            "examples": [
+              "Coordinate with Bob before starting",
+              "May need additional resources if complexity increases"
+            ]
+          },
+          "source": {
+            "type": "string",
+            "description": "Source or origin of this action item",
+            "examples": [
+              "Meeting minutes 2025-03-12",
+              "Risk assessment report",
+              "Stakeholder request via email"
+            ]
+          },
+          "unverified": {
+            "type": "boolean",
+            "description": "Flag indicating if action item details are not yet verified",
+            "default": false
+          }
+        },
+        "required": ["id", "description", "owner", "status", "due"],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "summary": {
+      "type": "object",
+      "description": "Summary statistics about action items",
+      "properties": {
+        "total_items": {
+          "type": "integer",
+          "description": "Total number of action items",
+          "minimum": 0
+        },
+        "completed": {
+          "type": "integer",
+          "description": "Number of completed action items",
+          "minimum": 0
+        },
+        "in_progress": {
+          "type": "integer",
+          "description": "Number of action items in progress",
+          "minimum": 0
+        },
+        "not_started": {
+          "type": "integer",
+          "description": "Number of action items not yet started",
+          "minimum": 0
+        },
+        "blocked": {
+          "type": "integer",
+          "description": "Number of blocked action items",
+          "minimum": 0
+        },
+        "overdue": {
+          "type": "integer",
+          "description": "Number of overdue action items",
+          "minimum": 0
+        },
+        "completion_rate": {
+          "type": "number",
+          "description": "Percentage of completed items (0-100)",
+          "minimum": 0,
+          "maximum": 100,
+          "examples": [75.5, 90.0, 50.0]
+        }
+      },
+      "additionalProperties": false
+    },
+    "next_review_date": {
+      "type": "string",
+      "description": "Date for next action items review in YYYY-MM-DD format",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "examples": ["2025-03-21", "2025-04-01"]
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the action items",
+      "examples": ["Action items reviewed and updated in weekly team meeting"]
+    }
+  },
+  "required": ["action_items"],
+  "additionalProperties": false
+}

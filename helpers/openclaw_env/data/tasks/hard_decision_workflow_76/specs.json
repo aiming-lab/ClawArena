@@ -1,0 +1,190 @@
+{
+  "task_id": "hard_decision_workflow_76",
+  "instruction": "Please push the escalation update to #general on discord. Fix the path if needed, review what's already on the board, the next step may already be on the board, so leave it alone if it is there, if the target is shared, leave a short live block on the calendar, and send leadership@example.com a recap.",
+  "canonical_instruction": "I need the escalation update to reach #general on discord. Fix the delivery path if needed, check what's already on the board, the next step may already be on the board, so leave it alone if it is there, if the target is shared, leave a short live block on the calendar, and email leadership@example.com a recap.",
+  "instruction_variants": [
+    "Can you get the escalation update out to #general on discord? Fix the delivery path if needed, check what's already on the board, the next step may already be on the board, so leave it alone if it is there, if the target is shared, leave a short live block on the calendar, and send leadership@example.com a quick recap.",
+    "Please get the escalation update to #general on discord. Fix the delivery path if needed, review what's already on the board, the next step may already be on the board, so leave it alone if it is there, if the target is shared, leave a short live block on the calendar, and send leadership@example.com a quick recap.",
+    "Can you handle the escalation update for #general on discord? Repair the path if needed, check what's already on the board, the next step may already be on the board, so leave it alone if it is there, if the target is shared, leave a short live block on the calendar, and send leadership@example.com a short recap.",
+    "I need the escalation update to reach #general on discord. Fix the delivery path if needed, check what's already on the board, the next step may already be on the board, so leave it alone if it is there, if the target is shared, leave a short live block on the calendar, and email leadership@example.com a recap.",
+    "The escalation update still needs to get to #general on discord. Please fix the path if needed, review what's already on the board, the next step may already be on the board, so leave it alone if it is there, if the target is shared, leave a short live block on the calendar, and send leadership@example.com a quick recap once it's through.",
+    "Please get the escalation update over to #general on discord. Clean up the path if needed, check what's already on the board, the next step may already be on the board, so leave it alone if it is there, if the target is shared, leave a short live block on the calendar, and send leadership@example.com a recap afterward.",
+    "I need the escalation update delivered to #general on discord. Please repair the path if needed, review what's already on the board, the next step may already be on the board, so leave it alone if it is there, if the target is shared, leave a short live block on the calendar, and send leadership@example.com a short recap when it's done."
+  ],
+  "visible_constraints": [
+    {
+      "type": "email",
+      "value": "leadership@example.com"
+    },
+    {
+      "type": "channel",
+      "value": "discord"
+    },
+    {
+      "type": "target",
+      "value": "#general"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "Escalation delivery follow-up"
+    },
+    {
+      "type": "subject",
+      "value": "Escalation delivery recap"
+    },
+    {
+      "type": "body",
+      "value": "The delivery path is recovered and the update is posted."
+    }
+  ],
+  "decision_requirements": [
+    "infer_title",
+    "infer_message",
+    "infer_missing_steps",
+    "avoid_duplicate",
+    "infer_target"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "google_calendar",
+    "email_provider",
+    "google_tasks",
+    "channel_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "delivery_update_followthrough",
+      "hard_decision_variant": 4,
+      "hard_decision_ability": "information_transfer",
+      "hard_decision_ability_tags": [
+        "information_transfer",
+        "workflow_completion"
+      ],
+      "prompt_style": "brief",
+      "step_count": 6
+    },
+    "private": {
+      "initial_state_overrides": {
+        "tasks.json": [
+          {
+            "id": "task_existing_follow_up",
+            "title": "Escalation delivery next step",
+            "due": "2026-03-11",
+            "status": "pending",
+            "priority": "high",
+            "duration": 1
+          }
+        ]
+      }
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "tasks list --status pending",
+      "openclaw channels list --json",
+      "openclaw channels login --channel discord",
+      "calendar add-event --title 'Escalation delivery follow-up' --start 2026-03-12T14:00",
+      "openclaw message send --channel discord --target #general --message 'Escalation update posted and being tracked.'",
+      "email send --to leadership@example.com --subject 'Escalation delivery recap' --body 'The delivery path is recovered and the update is posted.'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "state",
+        "field": "tasks",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "next-step task already exists"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "#general"
+        },
+        "name": "message sent to #general"
+      },
+      {
+        "type": "effect",
+        "effect_type": "emails_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "to",
+          "value": "leadership@example.com"
+        },
+        "name": "email sent to leadership@example.com"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 75
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

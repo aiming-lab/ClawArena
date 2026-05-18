@@ -1,0 +1,156 @@
+{
+  "task_id": "complex_task_inbox_calendar_sync_3",
+  "instruction": "[Task Inbox Calendar Sync] Synchronize inbox findings, tasks, and calendar blocks. Search inbox for 'budget', create task 'Task Inbox Calendar Sync timeline check task for Berlin (budget)' due 2026-03-10, verify it via task search, create helper agent 'task-notifier-03' for execution, then block 'Task Inbox Calendar Sync timeline check sync for Berlin' at 2026-03-11T09:30.",
+  "canonical_instruction": "[Task Inbox Calendar Sync] Synchronize inbox findings, tasks, and calendar blocks. Search inbox for 'budget', create task 'Task Inbox Calendar Sync timeline check task for Berlin (budget)' due 2026-03-10, verify it via task search, create helper agent 'task-notifier-03' for execution, then block 'Task Inbox Calendar Sync timeline check sync for Berlin' at 2026-03-11T09:30.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "datetime",
+      "value": "2026-03-10"
+    },
+    {
+      "type": "datetime",
+      "value": "2026-03-11T09:30"
+    },
+    {
+      "type": "query",
+      "value": "budget"
+    },
+    {
+      "type": "title",
+      "value": "Task Inbox Calendar Sync timeline check task for Berlin (budget)"
+    },
+    {
+      "type": "title",
+      "value": "Task Inbox Calendar Sync timeline check sync for Berlin"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "priority",
+      "value": "low"
+    },
+    {
+      "type": "model",
+      "value": "anthropic/claude-opus-4-6"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_model"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "life_work",
+    "online_required",
+    "challenge"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "google_calendar",
+    "email_provider",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "cron_webhook",
+    "agent_mgmt",
+    "security",
+    "channel_mgmt",
+    "messaging",
+    "device_node",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "complex_composed_workflow",
+  "generator_id": "complex_composed_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "complex_template": "task_inbox_calendar_sync",
+      "complex_variant": 3,
+      "complex_scenario": "Task Inbox Calendar Sync",
+      "complex_scenario_slug": "task_inbox_calendar_sync",
+      "step_count": 5,
+      "openclaw_steps": 1,
+      "complex_high_volatility": false,
+      "strict_online_risk": "medium",
+      "realism_tier": "life_work",
+      "causal_chain_score": 1.0,
+      "entity_consistency_pass": true,
+      "filler_step_count": 0,
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "email search --query 'budget'",
+      "tasks add --title 'Task Inbox Calendar Sync timeline check task for Berlin (budget)' --priority low --due 2026-03-10",
+      "tasks search --query 'budget'",
+      "openclaw agents add task-notifier-03 --model anthropic/claude-opus-4-6",
+      "calendar add-event --title 'Task Inbox Calendar Sync timeline check sync for Berlin' --start 2026-03-11T09:30"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "state",
+        "field": "agents.task-notifier-03",
+        "condition": "exists",
+        "expected": null,
+        "name": "agent created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "complex_composed_workflow",
+      "params": {
+        "workflow_index": 142
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

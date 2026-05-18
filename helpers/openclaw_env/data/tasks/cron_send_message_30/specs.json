@@ -1,0 +1,92 @@
+{
+  "task_id": "cron_send_message_30",
+  "instruction": "Log into the slack channel, then create a cron job with schedule '0 9 * * 1-5' that sends a daily report to +1234567890 via slack.",
+  "canonical_instruction": "Log into the slack channel, then create a cron job with schedule '0 9 * * 1-5' that sends a daily report to +1234567890 via slack.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "channel",
+      "value": "slack"
+    },
+    {
+      "type": "cron",
+      "value": "0 9 * * 1-5"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "high_volatility"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "cron_webhook",
+    "messaging"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "cron_send_message",
+  "generator_id": "cron_send_message",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "slack",
+      "target": "+1234567890",
+      "schedule": "0 9 * * 1-5",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_channel": "slack"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw channels login --channel slack",
+      "openclaw cron add --name daily-report-ad913961 --cron '0 9 * * 1-5' --message 'Send daily report to +1234567890 via slack'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "channels.slack",
+        "condition": "exists",
+        "expected": null,
+        "name": "slack channel configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "cron_send_message",
+      "params": {
+        "channel": "slack",
+        "target": "+1234567890",
+        "schedule": "0 9 * * 1-5"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,299 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hbench.local/schemas/risk_assessment.json",
+  "title": "Risk Assessment Schema",
+  "description": "Schema for project risk assessment and tracking in the hil_s1 scenario. Documents identified risks, severity levels, mitigation strategies, and risk status.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the risk assessment document",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "examples": ["1.0", "2.0"]
+    },
+    "assessed_at": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when this assessment was performed",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+      "examples": ["2025-03-14T10:30:00Z"]
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when this assessment was last updated",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+      "examples": ["2025-03-14T15:45:00Z"]
+    },
+    "project": {
+      "type": "string",
+      "description": "Name or identifier of the project",
+      "minLength": 1,
+      "examples": ["Data Migration Project", "Schema V2 Implementation"]
+    },
+    "assessment_scope": {
+      "type": "string",
+      "description": "Scope or focus area of this risk assessment",
+      "examples": [
+        "Overall project risks",
+        "Data migration phase risks",
+        "Technical implementation risks"
+      ]
+    },
+    "assessor": {
+      "type": "string",
+      "description": "Person or team who performed the assessment",
+      "examples": ["Risk Management Team", "Alice Johnson", "Project Manager"]
+    },
+    "risks": {
+      "type": "array",
+      "description": "Array of identified risks",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the risk",
+            "pattern": "^[A-Z]+-[0-9]+$",
+            "examples": ["RISK-001", "R-042"]
+          },
+          "title": {
+            "type": "string",
+            "description": "Brief title of the risk",
+            "minLength": 1,
+            "examples": [
+              "Data quality issues in source system",
+              "Resource availability constraints",
+              "Technical compatibility issues"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the risk",
+            "minLength": 1,
+            "examples": [
+              "Source system data contains inconsistencies that may cause migration failures",
+              "Key team members may not be available during critical migration phase"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "description": "Category or type of risk",
+            "enum": [
+              "technical",
+              "resource",
+              "schedule",
+              "quality",
+              "security",
+              "compliance",
+              "business",
+              "external",
+              "organizational"
+            ],
+            "examples": ["technical", "resource", "schedule"]
+          },
+          "severity": {
+            "type": "string",
+            "description": "Severity or impact level of the risk",
+            "enum": ["low", "medium", "high", "critical"],
+            "examples": ["high", "critical", "medium"]
+          },
+          "probability": {
+            "type": "string",
+            "description": "Probability or likelihood of the risk occurring",
+            "enum": ["low", "medium", "high"],
+            "examples": ["medium", "high", "low"]
+          },
+          "impact": {
+            "type": "string",
+            "description": "Detailed description of the potential impact",
+            "examples": [
+              "Could delay project by 1-2 weeks and require additional data cleansing effort",
+              "May result in data loss or corruption during migration"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "description": "Current status of the risk",
+            "enum": ["identified", "analyzing", "mitigating", "monitoring", "closed", "occurred"],
+            "default": "identified",
+            "examples": ["identified", "mitigating", "monitoring"]
+          },
+          "mitigation_strategy": {
+            "type": "string",
+            "description": "Strategy for mitigating or managing the risk",
+            "examples": [
+              "Perform comprehensive data quality assessment before migration",
+              "Identify backup resources and cross-train team members",
+              "Conduct compatibility testing in staging environment"
+            ]
+          },
+          "mitigation_status": {
+            "type": "string",
+            "description": "Status of mitigation efforts",
+            "enum": ["not_started", "in_progress", "completed"],
+            "default": "not_started",
+            "examples": ["in_progress", "completed"]
+          },
+          "owner": {
+            "type": "string",
+            "description": "Person or team responsible for managing this risk",
+            "examples": ["Data Engineering Team", "Alice Johnson", "Project Manager"]
+          },
+          "identified_date": {
+            "type": "string",
+            "description": "Date when risk was identified in YYYY-MM-DD format",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": ["2025-03-01", "2025-02-15"]
+          },
+          "target_resolution_date": {
+            "type": ["string", "null"],
+            "description": "Target date for resolving or mitigating the risk, null if not set",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": ["2025-03-10", "2025-03-20", null]
+          },
+          "actual_resolution_date": {
+            "type": ["string", "null"],
+            "description": "Actual date when risk was resolved, null if not resolved",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": ["2025-03-12", null]
+          },
+          "contingency_plan": {
+            "type": "string",
+            "description": "Backup plan if risk occurs despite mitigation",
+            "examples": [
+              "Roll back migration and fix data issues before retrying",
+              "Extend project timeline and reallocate resources"
+            ]
+          },
+          "related_risks": {
+            "type": "array",
+            "description": "IDs of related or dependent risks",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z]+-[0-9]+$"
+            },
+            "uniqueItems": true,
+            "examples": [["RISK-002"], ["RISK-005", "RISK-007"]]
+          },
+          "related_items": {
+            "type": "array",
+            "description": "IDs of related tasks, issues, or milestones",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "examples": [["TASK-010"], ["ISSUE-003", "MS-005"]]
+          },
+          "source": {
+            "type": "string",
+            "description": "Source or origin of this risk identification",
+            "examples": [
+              "Risk workshop 2025-03-01",
+              "Stakeholder feedback",
+              "Historical data from similar projects"
+            ]
+          },
+          "unverified": {
+            "type": "boolean",
+            "description": "Flag indicating if risk details are not yet verified",
+            "default": false
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes about this risk",
+            "examples": ["Risk assessment updated based on recent data quality findings"]
+          }
+        },
+        "required": ["id", "title", "description", "category", "severity", "probability", "status"],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "summary": {
+      "type": "object",
+      "description": "Summary statistics about the risks",
+      "properties": {
+        "total_risks": {
+          "type": "integer",
+          "description": "Total number of identified risks",
+          "minimum": 0
+        },
+        "critical_risks": {
+          "type": "integer",
+          "description": "Number of critical severity risks",
+          "minimum": 0
+        },
+        "high_risks": {
+          "type": "integer",
+          "description": "Number of high severity risks",
+          "minimum": 0
+        },
+        "medium_risks": {
+          "type": "integer",
+          "description": "Number of medium severity risks",
+          "minimum": 0
+        },
+        "low_risks": {
+          "type": "integer",
+          "description": "Number of low severity risks",
+          "minimum": 0
+        },
+        "open_risks": {
+          "type": "integer",
+          "description": "Number of risks not yet closed or resolved",
+          "minimum": 0
+        },
+        "mitigated_risks": {
+          "type": "integer",
+          "description": "Number of risks with completed mitigation",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "risk_score": {
+      "type": "object",
+      "description": "Overall risk score for the project",
+      "properties": {
+        "score": {
+          "type": "number",
+          "description": "Calculated risk score (0-100, higher is riskier)",
+          "minimum": 0,
+          "maximum": 100,
+          "examples": [35.5, 67.2, 15.0]
+        },
+        "level": {
+          "type": "string",
+          "description": "Overall risk level",
+          "enum": ["low", "medium", "high", "critical"],
+          "examples": ["medium", "high"]
+        },
+        "calculation_method": {
+          "type": "string",
+          "description": "Method used to calculate risk score",
+          "examples": ["Weighted severity and probability", "Standard risk matrix"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "next_review_date": {
+      "type": "string",
+      "description": "Date for next risk assessment review in YYYY-MM-DD format",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "examples": ["2025-03-21", "2025-04-01"]
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the risk assessment",
+      "examples": ["Risk assessment conducted with input from all project stakeholders"]
+    }
+  },
+  "required": ["assessed_at", "risks"],
+  "additionalProperties": false
+}

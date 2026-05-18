@@ -1,0 +1,150 @@
+{
+  "task_id": "hard_decision_workflow_281",
+  "instruction": "The London release setup still has one wrong detail in it. Check whether the model is stale, replace the stale model setting with the correct version, and leave the next step and sync correctly set.",
+  "canonical_instruction": "Something in the London release setup was staged wrong. Check whether the model is stale, replace the stale model setting with the correct version, and leave the next step and sync correctly set.",
+  "instruction_variants": [
+    "One part of the London release setup was staged wrong. Check whether the model is stale, replace the stale model setting with the correct version, and leave the next step and sync correctly set.",
+    "Something in the London release setup was staged wrong. Check whether the model is stale, retire the stale model setting and put the correct version in place, and leave the next step and sync correctly set.",
+    "One part of the London release setup is wrong. Check whether the model is stale, retire the stale model setting and put the correct version in place, and leave the next step and sync correctly set.",
+    "Something in the London release setup was staged wrong. Check whether the model is stale, replace the stale model setting with the correct version, and leave the next step and sync correctly set.",
+    "The London release setup still has one wrong detail in it. Check whether the model is stale, retire the stale model setting and put the correct version in place, and leave the next step and sync correctly set.",
+    "I need the London release setup corrected. Check whether the model is stale, replace the stale model setting with the correct version, and leave the next step and sync correctly set.",
+    "One part of the London release setup was staged wrong. Check whether the model is stale, retire the stale model setting and put the correct version in place, and leave the next step and sync correctly set."
+  ],
+  "visible_constraints": [],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "London release replacement next step"
+    },
+    {
+      "type": "title",
+      "value": "London replacement release sync"
+    },
+    {
+      "type": "priority",
+      "value": "high"
+    },
+    {
+      "type": "model",
+      "value": "openai/gpt-4o"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_model",
+    "infer_replacement",
+    "avoid_duplicate",
+    "infer_schedule"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "hard_wrong_model",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "wrong_state_replacement_followthrough",
+      "hard_decision_variant": 21,
+      "hard_decision_ability": "state_repair",
+      "hard_decision_ability_tags": [
+        "state_repair",
+        "replacement_planning",
+        "workflow_completion"
+      ],
+      "prompt_style": "brief",
+      "step_count": 6
+    },
+    "private": {
+      "initial_state_overrides": {}
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw config get agent.model",
+      "tasks list --status pending",
+      "calendar list",
+      "openclaw models set openai/gpt-4o",
+      "tasks add --title 'London release replacement next step' --priority high --due 2026-03-08",
+      "calendar add-event --title 'London replacement release sync' --start 2026-03-10T09:00"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "config",
+        "config_path": "agent.model",
+        "condition": "equals",
+        "expected": "openai/gpt-4o",
+        "name": "model set to openai/gpt-4o"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 280
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

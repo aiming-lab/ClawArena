@@ -1,0 +1,428 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hbench.local/schemas/deliverables_manifest.json",
+  "title": "Deliverables Manifest Schema",
+  "description": "Schema for comprehensive catalog of project deliverables in the hil_s1 scenario. Documents all outputs, artifacts, documents, and files produced during the project with metadata about compliance and ownership.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the deliverables manifest",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "examples": ["1.0", "2.0"]
+    },
+    "generated_at": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when this manifest was generated",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+      "examples": ["2025-03-14T10:30:00Z"]
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when this manifest was last updated",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+      "examples": ["2025-03-14T15:45:00Z"]
+    },
+    "project": {
+      "type": "string",
+      "description": "Name or identifier of the project",
+      "minLength": 1,
+      "examples": ["Data Migration Project", "Schema V2 Implementation"]
+    },
+    "project_phase": {
+      "type": "string",
+      "description": "Project phase for which deliverables are cataloged",
+      "examples": ["Planning", "Development", "Testing", "Deployment", "All Phases"]
+    },
+    "deliverables": {
+      "type": "array",
+      "description": "Array of deliverable objects",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the deliverable",
+            "pattern": "^[A-Z]+-[0-9]+$",
+            "examples": ["DEL-001", "DELIVERABLE-042", "ARTIFACT-123"]
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the deliverable",
+            "minLength": 1,
+            "examples": [
+              "Schema Design Document",
+              "Data Migration Script",
+              "Test Results Report",
+              "Customer Data V2 Dataset"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "description": "Type or category of deliverable",
+            "enum": [
+              "document",
+              "code",
+              "script",
+              "dataset",
+              "report",
+              "configuration",
+              "specification",
+              "diagram",
+              "presentation",
+              "test_results",
+              "other"
+            ],
+            "examples": ["document", "script", "dataset"]
+          },
+          "format": {
+            "type": "string",
+            "description": "File format of the deliverable",
+            "examples": ["markdown", "pdf", "python", "csv", "json", "sql", "html", "pptx"]
+          },
+          "path": {
+            "type": "string",
+            "description": "Path or location where deliverable is stored",
+            "minLength": 1,
+            "examples": [
+              "/documents/schema_design_v2.md",
+              "/scripts/migrate_data_v1_to_v2.py",
+              "/data/customers_v2.csv",
+              "s3://bucket/deliverables/report.pdf"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "description": "URL where deliverable can be accessed",
+            "format": "uri",
+            "examples": [
+              "https://docs.example.com/schema-design",
+              "https://github.com/org/repo/blob/main/script.py"
+            ]
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of the deliverable",
+            "examples": ["v1", "v2", "1.0", "2025-03-14"]
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the deliverable",
+            "enum": ["draft", "in_review", "approved", "delivered", "archived", "superseded"],
+            "default": "draft",
+            "examples": ["approved", "delivered"]
+          },
+          "owner": {
+            "type": "string",
+            "description": "Person or team responsible for this deliverable",
+            "minLength": 1,
+            "examples": ["Alice Johnson", "Data Engineering Team", "bob@example.com"]
+          },
+          "author": {
+            "type": "string",
+            "description": "Person who created the deliverable",
+            "examples": ["Bob Smith", "Technical Writing Team"]
+          },
+          "created_date": {
+            "type": "string",
+            "description": "Date when deliverable was created",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": ["2025-03-05", "2025-03-10"]
+          },
+          "last_modified_date": {
+            "type": "string",
+            "description": "Date when deliverable was last modified",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": ["2025-03-14", "2025-03-12"]
+          },
+          "approved_date": {
+            "type": ["string", "null"],
+            "description": "Date when deliverable was approved, null if not approved",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": ["2025-03-13", null]
+          },
+          "approved_by": {
+            "type": ["string", "null"],
+            "description": "Person who approved the deliverable, null if not approved",
+            "examples": ["Project Manager", "Alice Johnson", null]
+          },
+          "description": {
+            "type": "string",
+            "description": "Brief description of the deliverable",
+            "examples": [
+              "Comprehensive schema design document for v2 data model",
+              "Python script for migrating customer data from v1 to v2 schema"
+            ]
+          },
+          "purpose": {
+            "type": "string",
+            "description": "Purpose or objective of this deliverable",
+            "examples": [
+              "Documents the v2 schema design for stakeholder approval",
+              "Automates data migration process to reduce errors"
+            ]
+          },
+          "audience": {
+            "type": "string",
+            "description": "Intended audience for the deliverable",
+            "examples": ["Technical Team", "Stakeholders", "End Users", "All Project Members"]
+          },
+          "file_size_bytes": {
+            "type": ["integer", "null"],
+            "description": "File size in bytes, null if not applicable",
+            "minimum": 0,
+            "examples": [52428800, 1024, null]
+          },
+          "file_size_human": {
+            "type": "string",
+            "description": "Human-readable file size",
+            "examples": ["50 MB", "1 KB", "2.5 GB"]
+          },
+          "checksum": {
+            "type": "string",
+            "description": "Checksum or hash for integrity verification",
+            "examples": ["md5:d41d8cd98f00b204e9800998ecf8427e", "sha256:e3b0c44298fc1c14..."]
+          },
+          "related_deliverables": {
+            "type": "array",
+            "description": "IDs of related deliverables",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z]+-[0-9]+$"
+            },
+            "uniqueItems": true,
+            "examples": [["DEL-002"], ["DEL-005", "DEL-010"]]
+          },
+          "dependencies": {
+            "type": "array",
+            "description": "IDs of deliverables that this one depends on",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z]+-[0-9]+$"
+            },
+            "uniqueItems": true,
+            "examples": [["DEL-001"]]
+          },
+          "tags": {
+            "type": "array",
+            "description": "Tags for categorizing the deliverable",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "examples": [["documentation", "schema"], ["migration", "critical"]]
+          },
+          "milestone": {
+            "type": "string",
+            "description": "Associated project milestone",
+            "examples": ["MS-003", "Schema Design Complete", "Phase 1"]
+          },
+          "p2_compliant": {
+            "type": "boolean",
+            "description": "Whether filename follows P2 naming convention (YYYY-MM-DD_topic_vN.ext)",
+            "default": false
+          },
+          "p3_compliant": {
+            "type": "boolean",
+            "description": "Whether document follows P3 report structure (Summary/Details/Action Items)",
+            "default": false
+          },
+          "p4_compliant": {
+            "type": "boolean",
+            "description": "Whether code follows P4 style guidelines (docstrings/type hints/logging)",
+            "default": false
+          },
+          "quality_checks": {
+            "type": "array",
+            "description": "Quality checks performed on this deliverable",
+            "items": {
+              "type": "object",
+              "properties": {
+                "check_name": {
+                  "type": "string",
+                  "description": "Name of the quality check",
+                  "examples": ["Spelling and grammar", "Technical review", "Schema validation"]
+                },
+                "status": {
+                  "type": "string",
+                  "description": "Status of the check",
+                  "enum": ["passed", "failed", "not_performed"],
+                  "examples": ["passed", "failed"]
+                },
+                "performed_by": {
+                  "type": "string",
+                  "description": "Who performed the check",
+                  "examples": ["QA Team", "Alice Johnson"]
+                },
+                "performed_date": {
+                  "type": "string",
+                  "description": "Date when check was performed",
+                  "format": "date",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "notes": {
+                  "type": "string",
+                  "description": "Notes about the check",
+                  "examples": ["Minor typos found and corrected", "All validations passed"]
+                }
+              },
+              "required": ["check_name", "status"],
+              "additionalProperties": false
+            }
+          },
+          "access_control": {
+            "type": "string",
+            "description": "Access control level",
+            "enum": ["public", "internal", "restricted", "confidential"],
+            "examples": ["internal", "restricted"]
+          },
+          "retention_period": {
+            "type": "string",
+            "description": "How long to retain this deliverable",
+            "examples": ["7 years", "Permanent", "Until project closure"]
+          },
+          "source": {
+            "type": "string",
+            "description": "Source or origin of this deliverable",
+            "examples": [
+              "Generated by data pipeline",
+              "Created based on requirement DOC-123",
+              "Exported from production system"
+            ]
+          },
+          "unverified": {
+            "type": "boolean",
+            "description": "Flag indicating if deliverable metadata is not yet verified",
+            "default": false
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes about this deliverable",
+            "examples": ["Final version approved by stakeholders on 2025-03-13"]
+          }
+        },
+        "required": ["id", "name", "type", "path", "owner", "status"],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "summary": {
+      "type": "object",
+      "description": "Summary statistics about deliverables",
+      "properties": {
+        "total_deliverables": {
+          "type": "integer",
+          "description": "Total number of deliverables",
+          "minimum": 0
+        },
+        "by_type": {
+          "type": "object",
+          "description": "Count of deliverables by type",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "examples": [
+            {
+              "document": 15,
+              "code": 8,
+              "dataset": 3,
+              "report": 5
+            }
+          ]
+        },
+        "by_status": {
+          "type": "object",
+          "description": "Count of deliverables by status",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "examples": [
+            {
+              "approved": 20,
+              "delivered": 18,
+              "in_review": 3,
+              "draft": 2
+            }
+          ]
+        },
+        "p2_compliance_rate": {
+          "type": "number",
+          "description": "Percentage of deliverables compliant with P2 naming (0-100)",
+          "minimum": 0,
+          "maximum": 100,
+          "examples": [85.5, 100.0]
+        },
+        "p3_compliance_rate": {
+          "type": "number",
+          "description": "Percentage of documents compliant with P3 structure (0-100)",
+          "minimum": 0,
+          "maximum": 100,
+          "examples": [90.0, 100.0]
+        },
+        "p4_compliance_rate": {
+          "type": "number",
+          "description": "Percentage of code compliant with P4 style (0-100)",
+          "minimum": 0,
+          "maximum": 100,
+          "examples": [95.0, 100.0]
+        },
+        "total_size_bytes": {
+          "type": "integer",
+          "description": "Total size of all deliverables in bytes",
+          "minimum": 0,
+          "examples": [1073741824, 524288000]
+        },
+        "total_size_human": {
+          "type": "string",
+          "description": "Human-readable total size",
+          "examples": ["1 GB", "500 MB", "2.5 GB"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "categories": {
+      "type": "array",
+      "description": "Defined categories for organizing deliverables",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Category name",
+            "examples": ["Documentation", "Code", "Data Outputs", "Reports"]
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the category"
+          },
+          "deliverable_ids": {
+            "type": "array",
+            "description": "IDs of deliverables in this category",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z]+-[0-9]+$"
+            },
+            "uniqueItems": true
+          }
+        },
+        "required": ["name"],
+        "additionalProperties": false
+      }
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the deliverables manifest",
+      "examples": ["Manifest updated weekly to track all project outputs"]
+    }
+  },
+  "required": ["generated_at", "deliverables"],
+  "additionalProperties": false
+}

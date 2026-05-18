@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hbench.local/schemas/schema_changes.json",
+  "title": "Schema Changes Schema",
+  "description": "Schema for documenting database or data structure changes between versions in the hil_s1 scenario. Tracks field additions, removals, renames, and type changes.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the schema changes document",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "examples": ["1.0", "2.0"]
+    },
+    "generated_at": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when this document was generated",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+      "examples": ["2025-03-14T10:30:00Z"]
+    },
+    "from_version": {
+      "type": "string",
+      "description": "Source schema version",
+      "minLength": 1,
+      "examples": ["v1", "1.0", "2024-12-01"]
+    },
+    "to_version": {
+      "type": "string",
+      "description": "Target schema version",
+      "minLength": 1,
+      "examples": ["v2", "2.0", "2025-03-14"]
+    },
+    "dataset": {
+      "type": "string",
+      "description": "Name of the dataset or table whose schema changed",
+      "minLength": 1,
+      "examples": ["customers", "transactions", "user_profiles"]
+    },
+    "v1_to_v2_changes": {
+      "type": "array",
+      "description": "List of changes from version 1 to version 2",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of schema change",
+            "enum": ["added", "removed", "renamed", "type_changed", "constraint_added", "constraint_removed", "default_changed"],
+            "examples": ["added", "renamed", "type_changed"]
+          },
+          "field": {
+            "type": "string",
+            "description": "Name of the field that was changed (or new name for renamed fields)",
+            "minLength": 1,
+            "examples": ["customer_id", "email_address", "created_at"]
+          },
+          "old_field": {
+            "type": "string",
+            "description": "Original field name (for renamed fields)",
+            "minLength": 1,
+            "examples": ["customer_number", "email"]
+          },
+          "old_type": {
+            "type": "string",
+            "description": "Previous data type (for type_changed)",
+            "examples": ["string", "integer", "VARCHAR(50)"]
+          },
+          "new_type": {
+            "type": "string",
+            "description": "New data type (for type_changed)",
+            "examples": ["integer", "timestamp", "VARCHAR(255)"]
+          },
+          "old_constraint": {
+            "type": "string",
+            "description": "Previous constraint definition",
+            "examples": ["NOT NULL", "UNIQUE", "PRIMARY KEY"]
+          },
+          "new_constraint": {
+            "type": "string",
+            "description": "New constraint definition",
+            "examples": ["NOT NULL", "FOREIGN KEY REFERENCES other_table(id)"]
+          },
+          "old_default": {
+            "type": ["string", "number", "boolean", "null"],
+            "description": "Previous default value",
+            "examples": ["", 0, null, true]
+          },
+          "new_default": {
+            "type": ["string", "number", "boolean", "null"],
+            "description": "New default value",
+            "examples": ["N/A", 1, "2025-01-01", false]
+          },
+          "note": {
+            "type": "string",
+            "description": "Additional notes about this change",
+            "examples": [
+              "Added to support new customer segmentation feature",
+              "Renamed for consistency with other tables",
+              "Changed from string to integer to improve query performance"
+            ]
+          },
+          "breaking_change": {
+            "type": "boolean",
+            "description": "Whether this is a breaking change requiring code updates",
+            "default": false
+          },
+          "migration_required": {
+            "type": "boolean",
+            "description": "Whether data migration is required for this change",
+            "default": false
+          },
+          "backward_compatible": {
+            "type": "boolean",
+            "description": "Whether this change is backward compatible",
+            "default": true
+          },
+          "reason": {
+            "type": "string",
+            "description": "Reason or justification for the change",
+            "examples": [
+              "Business requirement for tracking customer segments",
+              "Performance optimization",
+              "Data quality improvement"
+            ]
+          },
+          "source": {
+            "type": "string",
+            "description": "Source or reference for this change",
+            "examples": ["Requirement DOC-123", "JIRA ticket PROJ-456", "Design review 2025-03-01"]
+          },
+          "unverified": {
+            "type": "boolean",
+            "description": "Flag indicating if this change is not yet verified",
+            "default": false
+          }
+        },
+        "required": ["type", "field"],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "summary": {
+      "type": "object",
+      "description": "Summary statistics of the schema changes",
+      "properties": {
+        "total_changes": {
+          "type": "integer",
+          "description": "Total number of schema changes",
+          "minimum": 0
+        },
+        "fields_added": {
+          "type": "integer",
+          "description": "Number of fields added",
+          "minimum": 0
+        },
+        "fields_removed": {
+          "type": "integer",
+          "description": "Number of fields removed",
+          "minimum": 0
+        },
+        "fields_renamed": {
+          "type": "integer",
+          "description": "Number of fields renamed",
+          "minimum": 0
+        },
+        "type_changes": {
+          "type": "integer",
+          "description": "Number of type changes",
+          "minimum": 0
+        },
+        "breaking_changes": {
+          "type": "integer",
+          "description": "Number of breaking changes",
+          "minimum": 0
+        },
+        "migration_required": {
+          "type": "boolean",
+          "description": "Whether any changes require data migration",
+          "default": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "impact_assessment": {
+      "type": "object",
+      "description": "Assessment of the impact of these schema changes",
+      "properties": {
+        "affected_applications": {
+          "type": "array",
+          "description": "Applications or systems affected by these changes",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "examples": [["Customer Portal", "Analytics Dashboard", "Reporting API"]]
+        },
+        "affected_queries": {
+          "type": "integer",
+          "description": "Estimated number of queries that need to be updated",
+          "minimum": 0,
+          "examples": [25, 100, 0]
+        },
+        "migration_complexity": {
+          "type": "string",
+          "description": "Complexity level of data migration",
+          "enum": ["low", "medium", "high"],
+          "examples": ["low", "high"]
+        },
+        "estimated_downtime_minutes": {
+          "type": ["integer", "null"],
+          "description": "Estimated downtime required in minutes, null if no downtime needed",
+          "minimum": 0,
+          "examples": [0, 30, 120, null]
+        },
+        "rollback_plan": {
+          "type": "string",
+          "description": "Description of the rollback plan if migration fails",
+          "examples": ["Restore from backup", "Reverse migration script available"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the schema changes",
+      "examples": ["These changes implement phase 1 of the customer data model redesign"]
+    }
+  },
+  "required": ["v1_to_v2_changes"],
+  "additionalProperties": false
+}

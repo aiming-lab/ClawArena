@@ -1,0 +1,87 @@
+{
+  "task_id": "calendar_reschedule_event_3",
+  "instruction": "Plans changed - I need to move 'Team standup'. First add it at 2026-03-11T14:00, then update it to 2026-03-13T10:00.",
+  "canonical_instruction": "Plans changed - I need to move 'Team standup'. First add it at 2026-03-11T14:00, then update it to 2026-03-13T10:00.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "datetime",
+      "value": "2026-03-11T14:00"
+    },
+    {
+      "type": "datetime",
+      "value": "2026-03-13T10:00"
+    },
+    {
+      "type": "title",
+      "value": "Team standup"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "calendar"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "calendar_reschedule_event",
+  "generator_id": "calendar_reschedule_event",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "title": "Team standup",
+      "original_start": "2026-03-11T14:00",
+      "new_start": "2026-03-13T10:00",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_new_start": "2026-03-13T10:00"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "calendar add-event --title 'Team standup' --start 2026-03-11T14:00",
+      "calendar list",
+      "calendar update-event --id evt_0001 --start 2026-03-13T10:00"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "calendar_reschedule_event",
+      "params": {
+        "original_title": "Team standup",
+        "original_start": "2026-03-11T14:00",
+        "new_start": "2026-03-13T10:00"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

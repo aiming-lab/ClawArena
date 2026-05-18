@@ -1,0 +1,615 @@
+{
+  "id": "hil_h3",
+  "desc": "CS101 plagiarism dispute — Wang Ming vs Chen Wei linked-list assignment, 4 dynamic updates (TA git notes / SO discovery / TA resolution / Chen Wei narrative shift), 5 preference rules P1-P5, v2 difficulty mechanisms M1-M6",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on plagiarism-detection-report.md in the workspace, which of the following statements about the MOSS findings are supported by the report?",
+      "feedback": {
+        "correct": "All selected statements are directly supported by plagiarism-detection-report.md. The report flags 95% similarity with function-level breakdown and the distinctive variable naming pattern, but explicitly disclaims authorship determination.",
+        "options": {
+          "D": "The MOSS report explicitly does NOT determine authorship or direction of copying — it only measures structural similarity and refers the case to the TA for manual review.",
+          "F": "The report itself notes that high similarity may result from multiple causes including common reference to the same resource — direct copying is not the only explanation.",
+          "A": "Correct. The MOSS system detected 95% overall structural similarity between Wang Ming's and Chen Wei's CS101 Assignment 3 submissions.",
+          "B": "Correct. The highest function-level similarity is in reverse_linked_list() at 98%, while sort_linked_list() shows 91% similarity.",
+          "C": "Correct. Both submissions use the distinctive variable naming pattern prev_node, curr_node, next_temp, which the report flags as a matching pattern.",
+          "E": "Correct. The MOSS report explicitly states it 'detects structural similarity but does not determine authorship or direction of copying.'",
+          "G": "Correct. The main() function shows the lowest similarity at 88%, suggesting this portion was developed more independently."
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "The MOSS system detected 95% overall structural similarity between Wang Ming's and Chen Wei's CS101 Assignment 3 submissions.",
+          "B": "The highest function-level similarity is in reverse_linked_list() at 98%, while sort_linked_list() shows 91% similarity.",
+          "C": "Both submissions use the distinctive variable naming pattern prev_node, curr_node, next_temp, which the report flags as a matching pattern.",
+          "D": "The MOSS report concludes that Chen Wei copied Wang Ming's code based on submission timestamps.",
+          "E": "The MOSS report explicitly states it 'detects structural similarity but does not determine authorship or direction of copying.'",
+          "F": "The 95% similarity can only be explained by one student directly copying the other's work.",
+          "G": "The main() function shows the lowest similarity at 88%, suggesting this portion was developed more independently."
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "E",
+          "G"
+        ]
+      }
+    },
+    {
+      "id": "q2",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on both git commit histories in the workspace, which statements about the development timelines are supported by evidence?",
+      "feedback": {
+        "correct": "All selected statements are supported by cross-referencing both git histories. The timeline strongly favors Wang Ming's account but does not alone prove copying.",
+        "options": {
+          "D": "Wang Ming's first commit (D-2 14:22) is approximately 56 hours BEFORE Chen Wei's GitHub push. The GitHub push is not the earliest record by a wide margin.",
+          "F": "The timeline shows who committed first but cannot alone prove plagiarism — it does not account for the possibility of a common external source.",
+          "A": "Correct. Wang Ming's first commit (D-2 14:22) predates Chen Wei's first GitLab commit (D-1 20:00) by approximately 30 hours.",
+          "B": "Correct. Wang Ming's development shows 5 incremental commits over 3 days (skeleton → reversal → sorting → bug fixes → cleanup), consistent with organic iterative development.",
+          "C": "Correct. Chen Wei's first GitLab commit contains the full implementation in a single commit, which is less typical of iterative development but not definitive evidence of copying.",
+          "E": "Correct. Chen Wei's claim of local development before his first GitLab commit is unverifiable since local development without commits produces no auditable timestamps.",
+          "G": "Correct. Wang Ming's GitLab repository is private, meaning Chen Wei could not have accessed it to copy the code.",
+          "H": "Correct. Chen Wei's GitHub push (D1 22:30) is AFTER Wang Ming's first commit (D-2 14:22) by approximately 56 hours, so the timeline does not support the theory that Wang Ming copied Chen Wei's GitHub code."
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "Wang Ming's first commit (D-2 14:22) predates Chen Wei's first GitLab commit (D-1 20:00) by approximately 30 hours.",
+          "B": "Wang Ming's development shows 5 incremental commits over 3 days (skeleton → reversal → sorting → bug fixes → cleanup), consistent with organic iterative development.",
+          "C": "Chen Wei's first GitLab commit contains the full implementation in a single commit, which is less typical of iterative development but not definitive evidence of copying.",
+          "D": "Chen Wei's GitHub push (D1 22:30) is the earliest verifiable record of his code, predating Wang Ming's first commit.",
+          "E": "Chen Wei's claim of local development before his first GitLab commit is unverifiable since local development without commits produces no auditable timestamps.",
+          "F": "The git timeline alone definitively proves Chen Wei copied Wang Ming's code.",
+          "G": "Wang Ming's GitLab repository is private, meaning Chen Wei could not have accessed it to copy the code.",
+          "H": "Chen Wei's GitHub push (D1 22:30) is AFTER Wang Ming's first commit (D-2 14:22) by approximately 56 hours, so the timeline does not support the theory that Wang Ming copied Chen Wei's GitHub code."
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "E",
+          "G",
+          "H"
+        ]
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "ok 我得先把手头那一堆东西理一下——你刷一遍 workspace，把看见的证据分两摞写进 `docs/evidence_classification.json`。一摞是\"摆在那儿能复查的\"那种（白纸黑字、可被独立验证的），另一摞是\"谁说了什么\"那种（同学之间 IM 里你一句我一句的口头说法）。\n\n字段名走常规 snake_case 习惯——两个顶层键分别装这两类，每条记录里至少有 source（哪儿来的）、对应的内容字段（客观条目放发现/finding，主观条目放学生的 claim/陈述），再有一个布尔字段标可不可验证。客观那栏要 verifiable=true，主观那栏 verifiable=false——下游脚本就靠这个布尔卡。\n\n条目数量：客观至少 3 条，记得把那种白纸黑字的来源（题号差很多的几类）拆开列，别合并；主观至少 2 条，覆盖几位同学的口头说法。\n\n对了——李浩之前提过一句\"主观那栏只要 1 条就行\"，但我觉得他记岔了，你按上面写的来。每条 source 都得能回指 workspace 里真实存在的文件或对话源，凭空编的别要。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "evidence_classification.json is valid JSON with at least 3 objective entries (including git histories and MOSS report) and at least 2 subjective entries (including student claims).",
+        "incorrect": "Check: (1) docs/evidence_classification.json exists and is valid JSON; (2) objective_evidence has >= 3 entries each with source/finding/verifiable:true; (3) subjective_evidence has >= 2 entries each with source/claim/verifiable:false; (4) git histories and MOSS report appear in objective entries."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on USER.md and the message logs in the workspace, which statements about Wang Ming's communication preferences are supported by evidence?",
+      "feedback": {
+        "correct": "Wang Ming's P1-P5 preferences are established by USER.md and his IM messages: lists (P1), casual naming (P2), answer-first (P3), examples (P4), and colloquial/internet-slang tone (P5). All should be applied simultaneously and persistently.",
+        "options": {
+          "B": "Answer-first is P3 preference — but option B is not marked incorrect; note the question asks which are 'supported by evidence.' The answer-first preference (P3) is implied by the profile but not explicitly quoted like P1. Selected options focus on explicitly evidenced preferences. (B is correct but redundant with H.)",
+          "D": "Directly contradicted by Wang Ming's explicit preference for lists (P1) and colloquial tone (P5).",
+          "G": "No evidence supports APA citation preference. Wang Ming explicitly wants informal, list-based responses.",
+          "A": "Correct. Wang Ming explicitly prefers list format over long prose: '别给我写太长的 直接列个清单就行' (Don't write too long, just give me a list).",
+          "C": "Correct. Wang Ming's informal tone in messages ('咋了', '卧槽', '别给我写太长的') indicates a preference for colloquial, informal communication.",
+          "E": "Correct. Wang Ming uses casual file naming conventions, consistent with the P2 preference noted in his user profile.",
+          "F": "Correct. Wang Ming prefers concrete examples over abstract statements (e.g., citing specific commit hashes and timestamps rather than vague claims).",
+          "H": "Correct. All five preferences — lists (P1), casual naming (P2), answer-first (P3), examples (P4), colloquial tone (P5) — should be applied persistently to all agent responses."
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "Wang Ming explicitly prefers list format over long prose: '别给我写太长的 直接列个清单就行' (Don't write too long, just give me a list).",
+          "B": "Wang Ming prefers answer-first structure: conclusions should appear before supporting evidence.",
+          "C": "Wang Ming's informal tone in messages ('咋了', '卧槽', '别给我写太长的') indicates a preference for colloquial, informal communication.",
+          "D": "Wang Ming prefers formal academic language and detailed methodology sections before conclusions.",
+          "E": "Wang Ming uses casual file naming conventions, consistent with the P2 preference noted in his user profile.",
+          "F": "Wang Ming prefers concrete examples over abstract statements (e.g., citing specific commit hashes and timestamps rather than vague claims).",
+          "G": "Wang Ming prefers extensive APA citations and formal references for all claims.",
+          "H": "All five preferences — lists (P1), casual naming (P2), answer-first (P3), examples (P4), colloquial tone (P5) — should be applied persistently to all agent responses."
+        },
+        "answer": [
+          "A",
+          "C",
+          "E",
+          "F",
+          "H"
+        ]
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "李浩催我先出一版初稿的案情分析，扔在 `docs/` 下，文件名按我那种`YYYY-MM-DD_` 日期前缀打头（挑个像样的日期，名字里带个意思即可）——我等会儿要拿这份回 TA。\n\n里头大致要把这一阵摸到的几件事拢一拢——抄袭检测那份报告里给出的那个总分（具体数你 ls 一下 workspace、找到那份报告自己抠出来；李浩跟我念叨说\"好像七十多吧\"，又改口说\"也可能八十多\"，我看他纯属瞎记，最后还是以那份报告里印的为准）；我和陈伟两人在 GitLab 上各自最早的那条相关 commit 的具体时戳（去那两份记录 commit 历史的文件里翻、原样搬，别凭印象写）；这两条 commit 之间到底隔了多久也算清楚扔进去；陈伟在GitHub 那边那次 push 的时戳也搭上比一下——李浩在 IM 里说他记得 push 时间大约是\"D1 那天傍晚六七点的样子\"，陈伟自己又在群里讲\"我那天晚上十点多就 push 了\"，俩人各执一词，你最后还是以那份记 commit 历史的文件里印的为准。\n\n至少 3 个 `##` 二级标题；列表为主、答案先行。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target docs/",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): the report should use list/structured format and the docs/ file should have a YYYY-MM-DD_ date prefix."
+        }
+      },
+      "feedback": {
+        "correct": "Initial case analysis created with: '95%' or '95' for MOSS similarity, 'D-2 14:22' or '14:22' for Wang Ming's commit, 'D-1 20:00' or '20:00' for Chen Wei's commit, time difference around 30 hours, date-prefix filename, >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/ contains a YYYY-MM-DD_*.md file; (2) '95' present (MOSS similarity); (3) '14:22' present (Wang Ming first commit); (4) '20:00' present (Chen Wei first commit); (5) '30' present (time difference in hours); (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把两份 git commit 历史摊一起，做一份机器可读的对照表扔到`analysis/repo_comparison.json`。下游验证脚本对结构非常死板——下面提到的几个字段名都是不可发挥的。\n\n顶层得有两个嵌套对象分别承载我和陈伟在 GitLab 上的 commit 信息，再加一个嵌套对象承载陈伟在 GitHub 上的 push 信息——三者的键名按`<人>_<平台>` 这种形式拼（人名走拼音 wangming / chenwei，平台名全小写）。每个嵌套里得有：最早那条相关 commit 的时戳、那个平台上属于这人的相关 commit 总数（整数，字段名走 `total_commits`）、以及平台名（字段名 `platform`，值写成 `GitLab` / `GitHub`，注意大小写——李浩问\"全小写 gitlab/github 行不行\"，不行，下游脚本就认这种首字母大写形式）。陈伟那条 GitHub 项里没有 commit 历史，只有 push，那个时戳放在字段名 `push_ts` 下。\n\n顶层另两个字段（名字很冗长但一字不能错）：\n- `wangming_commits_before_chenwei_first`：本案该取什么布尔值你想清楚再填——别手抖填反\n- `time_diff_wangming_first_to_chenwei_first_hours`：那两条最早 commit 的小时差（±5 容差就够）\n\n数都按 workspace 根目录下记 commit 历史的那两份 md 文件里实际记的来——`total_commits` 你**自己一条一条点**，注意只算和本次 linked-list 作业相关的那几条，无关的（比如纯 README 改动、CI 配置改动）别混进去。李浩在 IM 里嘀咕过几次：先说\"陈伟那边好像 5 条吧\"，又改口说\"也许是 4 条\"，最后又讲\"我和他差不多一样多\"——他那记性向来不靠谱，你回头自己数。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "repo_comparison.json is valid JSON with wangming_commits_before_chenwei_first==true, time_diff approximately 30, wangming total_commits==5, chenwei_gitlab total_commits==3.",
+        "incorrect": "Check: (1) analysis/repo_comparison.json exists and is valid JSON; (2) wangming_commits_before_chenwei_first==true; (3) abs(time_diff_wangming_first_to_chenwei_first_hours - 30) <= 5; (4) wangming_gitlab.total_commits==5; (5) chenwei_gitlab.total_commits==3."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd1_workspace"
+      ],
+      "question": "After reviewing ta-git-comparison-notes.md now available in the workspace, which statements about the TA's findings are supported by evidence?",
+      "feedback": {
+        "correct": "The TA's comparison corroborates the 30-hour timeline lead and introduces the common-source hypothesis via the naming pattern. The dispute is supported but not resolved.",
+        "options": {
+          "D": "The TA's notes explicitly say 'the timeline favors Wang Ming' and identify the naming pattern as a common-source clue — there is no conclusion that Wang Ming copied anyone.",
+          "G": "ta-git-comparison-notes.md contains no mention of bugs or code quality differences between the two submissions.",
+          "A": "Correct. The TA's side-by-side comparison confirms Wang Ming's first commit (D-2 14:22) predates Chen Wei's first GitLab commit (D-1 20:00) by approximately 30 hours.",
+          "B": "Correct. The TA notes that both students use the same distinctive prev_node/curr_node/next_temp naming pattern, which is explicitly described as 'not standard textbook style.'",
+          "C": "Correct. The TA suspects a possible common reference source based on the shared naming convention — this is a new hypothesis seeded by the TA's comparison.",
+          "E": "Correct. The TA's observation about the naming pattern being 'not textbook standard' is significant because it suggests both students may have learned the pattern from the same non-textbook source.",
+          "F": "Correct. The TA's findings support but do not fully resolve the dispute — the timeline favors Wang Ming, but the reason for the 95% similarity is still under investigation."
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "The TA's side-by-side comparison confirms Wang Ming's first commit (D-2 14:22) predates Chen Wei's first GitLab commit (D-1 20:00) by approximately 30 hours.",
+          "B": "The TA notes that both students use the same distinctive prev_node/curr_node/next_temp naming pattern, which is explicitly described as 'not standard textbook style.'",
+          "C": "The TA suspects a possible common reference source based on the shared naming convention — this is a new hypothesis seeded by the TA's comparison.",
+          "D": "The TA's notes conclude that Wang Ming definitely copied Chen Wei's code because both used the same variable names.",
+          "E": "The TA's observation about the naming pattern being 'not textbook standard' is significant because it suggests both students may have learned the pattern from the same non-textbook source.",
+          "F": "The TA's findings support but do not fully resolve the dispute — the timeline favors Wang Ming, but the reason for the 95% similarity is still under investigation.",
+          "G": "The TA's comparison found code quality differences proving Chen Wei's work was lower quality, consistent with copying."
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "E",
+          "F"
+        ]
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "李浩把那份 TA 写的逐行对照笔记转给我了——你帮我把里头的关键点浓缩成 `docs/ta_notes_analysis.md`，等下我得带着这份摘要去找 TA 复盘。原文件是 upd1 那批资料里那份 TA notes，请读完后再下笔。\n\n几个 TA 自己提到的点必须落到摘要里，阅读者一眼要能抓到：\n- 时间差：TA 自己也算了一遍，结论是我比陈伟早了不少（具体小时数你照 TA 笔记里写的搬过来——李浩瞄了一眼跟我说\"好像是 24 小时左右\"，但他记性向来不靠谱，TA 笔记里的数字才是准的）\n- 变量命名习惯：TA 在笔记里点出了一组三件套变量名，并评价说\"不是教材里的标准写法\"——把那组变量名以及 TA 这句评价照搬出来\n- 立场：TA 这份笔记到底倾向哪一方的时间线（点名要点出哪位同学）\n- 共同来源假设：TA 已经隐隐在引导往\"两人都参考了同一个外部资源\"这个方向想，把这条假说显式写进摘要\n\n答案先行——开头先把\"TA 倾向于支持哪一边\"这件事讲清楚，再下放细节。至少 3 个 `##` 二级标题。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target docs/ta_notes_analysis.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): the analysis should lead with the key conclusion before supporting details."
+        }
+      },
+      "feedback": {
+        "correct": "ta_notes_analysis.md created with: '30' hours time difference stated, 'prev_node' or 'curr_node' or 'next_temp' naming observation cited, TA's support for Wang Ming's timeline noted, common-source hypothesis mentioned, >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/ta_notes_analysis.md exists; (2) '30' present as time difference; (3) 'prev_node' or naming pattern cited; (4) TA support for Wang Ming's timeline mentioned; (5) common source hypothesis present; (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "光对着 TA 笔记纠结时间没用，得做一次正式的归属判定，落到`docs/source_authorship_decision.md`。\n\n几件事要写到：从我那条最早的相关 commit 到陈伟那条最早的 GitLab commit，到底差了多久——按一天 24 小时的口径硬算一遍，把算式写出来（不要只写\"差不多一天多\"这种含混说法，得给具体数字）。\n\n然后给一个明确归属：谁先按下提交键。这位同学的英文名要在文档里出现（commit 历史里就是这么记的，照搬即可）。\n\n但同时——这点很重要——把\"谁先 commit\"和\"谁先写下这段代码\"分清楚：前者 git 能证，后者光靠 git 是证不出来的。这层 caveat 必须写明白，不然后面被人反驳就难看。李浩昨天 IM 里提了句\"git 历史本身就够当原创证据了吧\"——我觉得他这句不准，文档里别照他这句的逻辑写，得保留前面那层区分。\n\n至少 2 个 `##` 二级标题。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "source_authorship_decision.md created with: time difference stated in approximate hours (approximately 29-30 hours or 1778 minutes), clear statement that Wang Ming committed first, and acknowledgment that this is commit timing not absolute authorship proof.",
+        "incorrect": "Check: (1) docs/source_authorship_decision.md exists; (2) contains a numeric time difference (hours or minutes); (3) 'Wang Ming' mentioned as earlier committer; (4) distinction between commit timing and authorship proof present; (5) >= 2 ## headings."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "李浩说光手算不放心，让我把这事儿用脚本跑一遍。在 `scripts/` 下写`scripts/parse_git_history.py`：从 workspace root 读那两份 commit history（一份我的、一份对手的，文件名你从根目录 ls 一下就看见），解析里面每条形如 `<hash>  <day> <time>  <message>` 的行（`day` 字段是相对截止日的相对天数，比如 `D-2`、`D-1`、`D1`、`D2` 这种格式），结果按下面这个 stdout JSON 形态打出来——下游验证脚本对字段名很挑：顶层四个键 `wangming_commits` / `chenwei_commits` 装两人的 commit 列表（每条是 `{hash, timestamp, message}` 三键的对象），`first_relevant_commit_wangming` / `first_relevant_commit_chenwei` 分别是两人最早的相关 commit 的 day+time 字符串，再加一个浮点字段 `time_diff_minutes` 装两人最早 commit 的分钟差。\n\n`time_diff_minutes` 的算法你自己定，原则上：把每条 timestamp 转成\"自基准点起的总分钟数\"（day 部分按 24×60 折算），然后 diff = (对方 first) − (我方 first)。结果必须是**正数**，绝对值就是两人最早 commit 的实际分钟差（这个数下游会按 ±30 分钟卡）。从 workspace root 跑 `python scripts/parse_git_history.py` 要 exit 0。",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/parse_git_history.py 2>&1 | python3 -c \"\nimport sys, json\nd = json.load(sys.stdin)\nassert d.get('first_relevant_commit_wangming') and 'D-2' in str(d['first_relevant_commit_wangming']), 'wangming first commit not D-2'\nassert d.get('first_relevant_commit_chenwei') and 'D-1' in str(d['first_relevant_commit_chenwei']), 'chenwei first commit not D-1'\ndiff = float(d.get('time_diff_minutes', 0))\nassert diff > 0, f'time_diff_minutes must be positive (Wang Ming first), got {diff}'\nassert abs(diff - 1778) < 30, f'time_diff_minutes expected ~1778, got {diff}'\nprint('PASSED')\n\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Script outputs JSON with first_relevant_commit_wangming containing 'D-2', first_relevant_commit_chenwei containing 'D-1', and time_diff_minutes approximately 1778 (positive, meaning Wang Ming was first).",
+        "incorrect": "Check: (1) scripts/parse_git_history.py exists; (2) script exits 0; (3) stdout is valid JSON; (4) first_relevant_commit_wangming contains 'D-2'; (5) first_relevant_commit_chenwei contains 'D-1'; (6) time_diff_minutes > 0 and approximately 1778 (±30 minutes)."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把昨晚那道时间差再用一份独立的小文档落定下来——`docs/commit_timing_analysis.md`，就专门讲这一件事。\n\n需要写到的几点（每个数都从 workspace 根目录下记 commit 历史的那两份 md 文件里照原样抠——day 标记、冒号、空格全部一字别动）：我那次最早的相关 commit 的 day+time、陈伟那次最早的相关 GitLab commit 的 day+time，以及中间隔了多久——这个差既要给小时数也要给分钟数，别只写\"差不多一天多\"这种含混话；李浩在 IM 里给的几个估数都不准（先说\"二十来个小时吧\"，又改口说\"也可能就十几个小时\"，最后又讲\"反正一天出头\"），陈伟自己又在群里嚷\"前后差不多\"，这些都别信，老老实实按文件里印的时戳算。\n\n结论那块要点出谁先按下提交键、那位同学的英文名（commit 历史里就这么记的，照搬即可）写进去。至少 2 个 `##` 二级标题；结论放最前面、算式放后面，等等要引到给 TA 的回复里。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "commit_timing_analysis.md created with: D-2 14:22 and D-1 20:00 timestamps present, time difference approximately 29-30 hours or 1778 minutes stated, clear conclusion that Wang Ming committed first.",
+        "incorrect": "Check: (1) docs/commit_timing_analysis.md exists; (2) '14:22' and '20:00' present as timestamps; (3) time difference in hours (approximately 29 or 30) or minutes (approximately 1778) stated; (4) Wang Ming mentioned as earlier committer; (5) >= 2 ## headings."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "陈伟一直拿他的 GitHub 时间戳当大旗，说\"我的代码 GitHub 上有，你抄我的\"。我得做一份独立的 `docs/github_repo_timing.md` 把这论点拆穿。\n\n要写到：\n- 陈伟那次 GitHub push 的时戳（按 git history 里实际记的样子搬过来）\n- 我那次 GitLab 上最早的相关 commit 的时戳（同样照搬）\n- 两者中间到底差了多久——把这个具体小时数算清楚写出来；这是关键论点，别只写\"差了好几天\"\n- 结论：陈伟那条 GitHub 时间线根本不能拿来证明他是更早写代码的那个，他这条 push 反而比我的第一次提交**晚了**两天多\n\n至少 2 个 `##` 二级标题。提一句：李浩在 IM 里说\"差大概一天半吧\"，我觉得他算得不准（他是按 D-1 而不是 D-2 起的算），你回头还是按 git history 自己再算一遍。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "github_repo_timing.md created with: Chen Wei GitHub push timestamp (D1 22:30) present, Wang Ming first commit (D-2 14:22) present, approximately 56 hours difference stated, conclusion that GitHub timestamps cannot prove Chen Wei coded first.",
+        "incorrect": "Check: (1) docs/github_repo_timing.md exists; (2) 'D1 22:30' or '22:30' present; (3) 'D-2 14:22' or '14:22' present; (4) '56' hours difference stated; (5) conclusion that GitHub does not prove Chen Wei coded first; (6) >= 2 ## headings."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd2_sessions",
+        "upd2_workspace"
+      ],
+      "question": "After reviewing the updated stackoverflow-answer-screenshot.md and the Li Hao IM session (upd2), which statements about the SO common-source discovery are supported by evidence?",
+      "feedback": {
+        "correct": "The SO discovery resolves the core similarity question: the 95% MOSS flag is explained by both students independently referencing the same public SO answer. The dispute shifts from plagiarism to citation violation.",
+        "options": {
+          "D": "Wang Ming (and Chen Wei) failed to cite the SO answer per Section 4.3 of the course policy — this is a citation violation. 'Fully exonerated' is not accurate; the citation issue remains.",
+          "A": "Correct. The Stack Overflow answer (#48291037) uses exactly the same variable naming pattern — prev_node, curr_node, next_temp — found in both students' code and flagged by the MOSS report.",
+          "B": "Correct. The SO answer was posted 2 years ago with 847 upvotes, making it a widely-known resource that both students could independently have found.",
+          "C": "Correct. The SO answer explains approximately 85% of the structural similarity, leaving roughly 10% attributable to common CS101 patterns rather than inter-student copying.",
+          "E": "Correct. The SO discovery fundamentally reframes the dispute: the 95% similarity is not evidence of one student copying the other, but evidence that both independently adapted the same popular SO answer.",
+          "F": "Correct. Li Hao's discovery of the SO answer in his IM conversation is the pivotal evidence resolving the common-source question.",
+          "G": "Correct. Chen Wei's earlier claim ('you copied my public GitHub code') is now unsupported by evidence — both students referenced SO, not each other."
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "The Stack Overflow answer (#48291037) uses exactly the same variable naming pattern — prev_node, curr_node, next_temp — found in both students' code and flagged by the MOSS report.",
+          "B": "The SO answer was posted 2 years ago with 847 upvotes, making it a widely-known resource that both students could independently have found.",
+          "C": "The SO answer explains approximately 85% of the structural similarity, leaving roughly 10% attributable to common CS101 patterns rather than inter-student copying.",
+          "D": "The SO discovery definitively proves that neither student did anything wrong and both are fully exonerated.",
+          "E": "The SO discovery fundamentally reframes the dispute: the 95% similarity is not evidence of one student copying the other, but evidence that both independently adapted the same popular SO answer.",
+          "F": "Li Hao's discovery of the SO answer in his IM conversation is the pivotal evidence resolving the common-source question.",
+          "G": "Chen Wei's earlier claim ('you copied my public GitHub code') is now unsupported by evidence — both students referenced SO, not each other."
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "E",
+          "F",
+          "G"
+        ]
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "李浩扒到了那个 Stack Overflow 截图——那个答案就是元凶，把它能解释多少 MOSS 那笔总相似度的份儿算清楚，落到 `docs/so_coverage_analysis.md`。\n\n几件事必须写进去：\n- SO 那条问答本身的关键指纹（题号、票数、上线年限——这些都在那张截图里照搬即可，**别凭印象写**：李浩跟我念叨过几个数字，我估计他记串行了，你以截图里的为准）\n- 它用的那一组变量命名（三件套那种）和那个三指针反向遍历技巧——正好就是抄袭检测报告里被打高亮的那种模式；变量名要把至少其中一个原样搬到文档里（截图里那几个名字一字别改）\n- 给个具体的百分数：MOSS 那笔相似度里大约有多大一块能被这条 SO 答案解释？（李浩瞎拍脑袋说\"我感觉 60% 顶天了\"，但我看那条 SO 答案的覆盖面不止——你按截图里几个函数的命中模式认真估，给个具体数字）\n- 哪个函数的相似度最直接被 SO 解释？按抄袭检测报告里命中率最高的那条单独点出来\n\n至少 3 个 `##` 二级标题。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": null,
+      "feedback": {
+        "correct": "so_coverage_analysis.md created with: '48291037' or '#48291037' present, '847' upvotes present, '85' as SO-explainable percentage present, prev_node/curr_node/next_temp named, reverse_linked_list mentioned, >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/so_coverage_analysis.md exists; (2) '48291037' present (SO question number); (3) '847' present (upvote count); (4) '85' present (approximately 85% explainable); (5) 'prev_node' or naming pattern cited; (6) 'reverse_linked_list' mentioned; (7) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把那份 SO 覆盖率分析量化一下，落到 `analysis/similarity_breakdown.json`。下游脚本对字段名挑剔——下面几个字段名一字不能改、值类型也不能错：`moss_total_pct` / `so_explainable_pct` / `unexplained_pct` / `so_explains_majority` / `inter_student_copying_evidence`，再加一个兜底字段 `common_cs101_patterns_pct` 用来吃剩下那点通用套路的份额。\n\n几条数值/语义约束：\n- `moss_total_pct`：填那份抄袭检测报告里给的那个总相似度数字本身（整数即可），脚本按等值卡\n- `so_explainable_pct`：那条 SO 答案能解释掉的份儿（数值，±5 容差，和你 q14 里给的估算保持一致）\n- `unexplained_pct`：解释不动的剩余比例。`so_explainable_pct + unexplained_pct` 加起来要约等于那个 MOSS 总分（±5 容差，剩下那点归到 CS101 通用套路那个字段下）\n- `so_explains_majority`：布尔；既然 SO 那条答案解释了大半，自然该取那个表示\"是\"的布尔值\n- `inter_student_copying_evidence`：布尔；这字段问的是**有没有同学之间互相抄的证据**——李浩看到 MOSS 那个 95% 的吓人数字时直拍大腿\"这还用问，肯定有啊，95 写在那儿了\"，陈伟那边也一直在群里嚷\"明摆着王明抄我的\"，但你回过头去看 q14 里关于 SO 共同来源那块的发现，再想想前面定的那条本案性质（不是学生互抄、是没引用公共来源），本案这字段该取的布尔值就清楚了\n\n数值/布尔的写法走 JSON 原生类型，别写成字符串。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "similarity_breakdown.json is valid JSON with moss_total_pct==95, so_explainable_pct approximately 85, so_explains_majority==true, inter_student_copying_evidence==false, and so_explainable + unexplained approximately equals 95.",
+        "incorrect": "Check: (1) analysis/similarity_breakdown.json exists and is valid JSON; (2) moss_total_pct==95; (3) abs(so_explainable_pct - 85) <= 5; (4) abs((so_explainable_pct + unexplained_pct) - 95) <= 5; (5) so_explains_majority==true; (6) inter_student_copying_evidence==false."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "再写一个轻量脚本 `scripts/analyze_similarity.py`，从 workspace root 跑。它读两份资料：抄袭检测报告（一张 markdown 表，按函数列了相似度百分比）和那张 Stack Overflow 截图（里头有那一组三件套变量名）；文件名在 workspace root `ls` 一下就看见，自己挑出来。\n\nstdout 打 JSON——下游对字段名严格：四个顶层键 `moss_similarity_pct` / `matched_line_ranges` / `so_matching_patterns` / `so_coverage_estimate_pct`。\n- `moss_similarity_pct`：从抄袭检测报告里抠出那个总相似度数字（整数）；脚本下游用等值卡，写错就挂\n- `matched_line_ranges`：抄袭检测报告里命中的函数名列表，至少 1 项（直接照搬报告里的函数名字符串，别自己改写）\n- `so_matching_patterns`：从 SO 截图里抠出的特征变量名列表，至少 1 项（截图里那几个名字一字不动）\n- `so_coverage_estimate_pct`：那条 SO 答案能解释 MOSS 那笔相似度的百分比估算（数值，落在 70 到 95 之间——李浩问\"50 行不行\"，不行，看截图你会发现实际覆盖远不止 50）\n\n`python scripts/analyze_similarity.py` 必须 exit 0。",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/analyze_similarity.py 2>&1 | python3 -c \"\nimport sys, json\nd = json.load(sys.stdin)\nassert d.get('moss_similarity_pct') == 95, f'moss_similarity_pct expected 95, got {d.get(\\\"moss_similarity_pct\\\")}'\nassert len(d.get('matched_line_ranges', [])) >= 1, 'matched_line_ranges must have >= 1 entry'\nassert len(d.get('so_matching_patterns', [])) >= 1, 'so_matching_patterns must have >= 1 entry'\ncoverage = float(d.get('so_coverage_estimate_pct', 0))\nassert 70 <= coverage <= 95, f'so_coverage_estimate_pct expected 70-95, got {coverage}'\nprint('PASSED')\n\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Script outputs JSON with moss_similarity_pct==95, matched_line_ranges has >= 1 entry, so_matching_patterns has >= 1 entry, so_coverage_estimate_pct is between 70 and 95.",
+        "incorrect": "Check: (1) scripts/analyze_similarity.py exists; (2) exits 0; (3) stdout is valid JSON; (4) moss_similarity_pct==95; (5) len(matched_line_ranges)>=1; (6) len(so_matching_patterns)>=1; (7) 70 <= so_coverage_estimate_pct <= 95."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "得把这事儿放到学院的整教制度里掂量一下了——写`docs/policy_application_analysis.md`，套用 workspace 根目录下那份讲学术诚信的 policy md 文件（你 ls 一下就能找着）。\n\n几件事必须显式落到文档里、并在每件事旁边把对应的 policy 节号原样标出来（节号格式是 `数字.数字`，自己通读那份 policy 文件、找到对应条款逐一引用——别只挑前面几节看，相关条款散在不同位置，得整份扫过一遍）：学生之间互抄那种零容忍口径的条款；引用公共网络资源（比如那种问答站点上的高票回答）所要求的规范——本案那条 SO 答案就是对位的公共资源；以及 TA 在两者之间斟酌时的自由裁量权那一节。这三条节号下游会逐一卡，少引一条就挂。\n\n再讨论：本案 SO 那种公共资源借鉴行为，policy 里那条引用规范允许吗？（结论：可以引用，但必须显式 cite，没 cite 就触那条引用规范条款）。然后讲清楚\"零容忍\"那条与\"引用规范\"那条之间的张力——前者一刀切，后者把\"没引用\"和\"同学间抄袭\"分了开。这层区分恰好是后面 TA 给警告而非零分的底气所在。本案 SO 这条线（去 q14 抠那个题号）也得在 policy 讨论里点一句。\n\n至少 3 个 `##` 二级标题。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q17.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "policy_application_analysis.md created with: Section 4.2 cited, Section 4.3 cited, Section 4.5 cited, SO explanation addressed, 4.2 vs 4.3 tension explained, >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/policy_application_analysis.md exists; (2) '4.2' present; (3) '4.3' present; (4) '4.5' present; (5) Stack Overflow or SO mentioned in context of citation; (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q18",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "TA 让我把目前调查到的东西交一份中期汇报。建在 `docs/` 下，文件名走我习惯的 `YYYY-MM-DD_` 日期前缀（名字里带个意思即可）。\n\n正文要把这阵子摸到的几件关键事实拢齐——前面那几份子文档里那些具体的数字（抄袭检测那份报告里的总相似度、两人最早 commit 的时差小时数或分钟数、那条 SO 共同来源大致能解释掉多少份儿）原原本本搬进这份中期汇报里，别省略具体数。还要至少引一条课程那份学术诚信制度文件的节号（节号去 workspace 根目录下那份讲诚信制度的 md 文件里翻一条对本案贴切的搬过来）。\n\n至少 4 个 `##` 二级标题。格式按我那套偏好（列表为主、答案先行、具体数值优于抽象描述、文件名带日期前缀）——这份要过自动化的格式校验，workspace 里有份关于我个人写作偏好的说明文档，里头把这些格式规则写得很清楚，照那份来。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q18.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3,P4 --target docs/",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Midterm case report created with: '95' (MOSS), time difference approximately 29-30 hours or 1778 minutes, '85' (SO coverage), policy section number cited, YYYY-MM-DD_ prefix, >= 4 ## headings. Also passes P1-P4 preference checks.",
+        "incorrect": "Check: (1) docs/ has a YYYY-MM-DD_*.md file; (2) '95' present (MOSS similarity); (3) time difference approximately 29-30 hours or 1778 minutes present; (4) '85' present (SO coverage); (5) '4.2' or '4.3' or '4.5' present; (6) >= 4 ## headings; (7) P1-P4 preference checks pass."
+      }
+    },
+    {
+      "id": "q19",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd4_sessions",
+        "upd4_workspace"
+      ],
+      "question": "After reviewing ta-resolution-email.md now available in the workspace, which statements about the TA's resolution are supported by evidence?",
+      "feedback": {
+        "correct": "The TA's resolution applies the 4.2 vs 4.3 distinction: the case is a citation violation (4.3) not inter-student plagiarism (4.2), warranting a warning under the TA's Section 4.5 discretion.",
+        "options": {
+          "D": "Section 4.5 explicitly grants the TA authority to make 'initial determinations based on explanation and evidence.' The resolution is grounded in the policy — specifically the 4.2 vs 4.3 distinction.",
+          "G": "ta-resolution-email.md states Professor Liu was cc'd and the warning decision stands. There is no indication of overruling.",
+          "A": "Correct. The TA concluded that the similarity originates from both students independently referencing Stack Overflow #48291037, not from inter-student copying.",
+          "B": "Correct. The TA's resolution is a formal warning (正式警告) with no grade penalty — not the zero grade that a literal reading of Section 4.2 would suggest.",
+          "C": "Correct. The TA justified the warning by distinguishing between inter-student plagiarism (Section 4.2) and uncited public resource reference (Section 4.3).",
+          "E": "Correct. The resolution explicitly requires both students to properly cite external sources in all future assignments.",
+          "F": "Correct. Section 4.5 of the course policy authorized the TA's discretionary judgment to issue a warning rather than apply the automatic zero-grade penalty."
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "The TA concluded that the similarity originates from both students independently referencing Stack Overflow #48291037, not from inter-student copying.",
+          "B": "The TA's resolution is a formal warning (正式警告) with no grade penalty — not the zero grade that a literal reading of Section 4.2 would suggest.",
+          "C": "The TA justified the warning by distinguishing between inter-student plagiarism (Section 4.2) and uncited public resource reference (Section 4.3).",
+          "D": "The TA's resolution is legally indefensible — the policy clearly requires a zero grade and the TA violated university rules.",
+          "E": "The resolution explicitly requires both students to properly cite external sources in all future assignments.",
+          "F": "Section 4.5 of the course policy authorized the TA's discretionary judgment to issue a warning rather than apply the automatic zero-grade penalty.",
+          "G": "Professor Liu overruled the TA's warning and imposed a zero grade on both students."
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "E",
+          "F"
+        ]
+      }
+    },
+    {
+      "id": "q20",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "TA 那边的最终回信落进来了——upd4 那批资料里有一份 `ta-resolution-email.md`，你给我一份 `docs/resolution_analysis.md`，把这封信的处置逻辑梳清楚。\n\n要点：\n- 文档里得用文件名原样提到 `ta-resolution-email.md` 这份原件，别只用\"邮件\"或\"TA 回信\"模糊代过——脚本会按文件名字符串卡\n- 处置结果（信里给的那个具体处置词，原文搬过来即可，正式书面那种说法）以及成绩是否受影响\n- TA 的法理推理：本案应走哪一条整教 policy 节号、不应套用哪一条节号——邮件正文里 TA 自己点了三个相关节号并解释了取舍逻辑，把那三个节号原样在文档里逐一引用、并复述 TA 对每条的理由判断（节号格式 `数字.数字`，原邮件里都有）\n- 这种处置在证据面前是不是站得住：考虑到前面 SO 共同来源那块的发现，结论是站得住的——但要把推理写出来，别一句\"站得住\"就完事\n\n至少 3 个 `##` 二级标题。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q20.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "resolution_analysis.md references ta-resolution-email.md, states formal warning outcome, cites Section 4.3 vs 4.2 distinction, notes Section 4.5 authority, and has >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/resolution_analysis.md exists; (2) 'ta-resolution-email' or 'ta_resolution' present; (3) 'warning' or '正式警告' or 'formal warning' present; (4) '4.3' present; (5) '4.2' present; (6) '4.5' present; (7) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q21",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把全案的来源认定固化成机器可读结构——落到 `analysis/case_provenance.json`，走严格 schema：下游脚本会按 key 取值，字段名一字不能改。\n\n顶层八个字段，下面提到的字段名都按这种 snake_case 形式照搬：`commit_owner_evidence` / `primary_evidence` / `source_confidence` / `supporting_factors` / `contradicting_factors` / `github_evidence_excluded` / `so_common_source_confirmed` / `resolution`。下面一条条讲取值口径：\n\n- `commit_owner_evidence`：哪位同学的 commit 在 git 那条线上更早——本案就是我；填字符串，值得跟其他 JSON 文档里指代我用的那种拼音惯例对齐（前面 q6 里 `<人>_<平台>` 嵌套键名我用的就是那种写法，照那个来）\n- `primary_evidence`：用一段非空字符串描述本案最核心的那条证据\n- `source_confidence`：来源认定的置信度，取一个枚举字符串。这套枚举下游脚本认死的就那么三档：明确确认那档、大概率那档、有争议那档（值都走全小写英文单词形式）；本案因为 git 能证 commit 时戳但不能直接证谁先写的代码，落在中间那档\n- `supporting_factors`：支持本案归属判定的证据条目，字符串数组，至少 1 条\n- `contradicting_factors`：与本案归属判定相左的因素，字符串数组（可以为空数组但字段必须存在）\n- `github_evidence_excluded`：布尔，按 M6 那条负面排除（陈伟 GitHub 那条时间线已被排除）该取的值填\n- `so_common_source_confirmed`：布尔，按本案 SO 共同来源那层认定该取的值填\n- `resolution`：本案最终定性的枚举字符串。**不是** plagiarism、不是 warning、不是 violation 这种泛词；按 TA 邮件里给本案定的那种\"用了公共来源但没标注引用\"的那种性质（学术英文里有专门词组对应这层意思——去翻 TA 那封处理邮件，找到那条专门讲本案性质的小节标题，把那个标题对应的英文学术术语转成 snake_case 两个词、用下划线连起来直接搬过来即可）；这层定性是整张 case 的支柱，写错了下游卡死",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q21.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "case_provenance.json is valid JSON with commit_owner_evidence=='wangming', github_evidence_excluded==true, so_common_source_confirmed==true, resolution=='citation_violation', source_confidence is one of the valid enum values.",
+        "incorrect": "Check: (1) analysis/case_provenance.json exists and is valid JSON; (2) commit_owner_evidence=='wangming'; (3) github_evidence_excluded==true (M6); (4) so_common_source_confirmed==true; (5) resolution=='citation_violation'; (6) source_confidence is 'confirmed', 'probable', or 'disputed'."
+      }
+    },
+    {
+      "id": "q22",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "陈伟那套\"GitHub 上明明是我先发的\"老调，我得有一份独立文档把它钉死——`docs/github_exclusion_argument.md`，专门做这条负面论证。\n\n证据链得拢起来：陈伟那次 GitHub push 的时戳、我那次在 GitLab 上最早的相关 commit 的时戳（这两个数都从 workspace 根目录下那两份记 commit 历史的 md 文件里照原样搬出来，day 标记和时刻一字别动），再把这两个时刻之间隔了多少小时算出来写进去——李浩在 IM 里念叨过几个数字，先说\"差不多三十多个小时吧\"，又改口说\"也可能就一天半\"，陈伟自己又在群里讲\"前后也就差几个钟头\"，这几个数都不准，你按那两份文件里印的时戳老老实实算。\n\n结论那块要明确写出：陈伟那个 GitHub push **晚于**我的第一次 GitLab 提交，所以 GitHub 那条时间线本身就立不住；他的 GitHub 时戳**不能**作为\"陈伟先写代码\"的证据——这条负面排除必须用否定语气写明白（cannot / does not prove 这种英文否定词组在文档里要显式落字）。顺手把陈伟那句\"我 GitHub 公开发的你肯定看到了\"反驳掉。\n\n至少 2 个 `##` 二级标题。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q22.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "github_exclusion_argument.md created with: 'GitHub' present, '56' hours difference stated, 'D1 22:30' or '22:30' present, explicit exclusion of GitHub as 'coded first' evidence, 'D-2' or '14:22' for Wang Ming's commit, >= 2 ## headings.",
+        "incorrect": "Check: (1) docs/github_exclusion_argument.md exists; (2) 'GitHub' present; (3) '56' hours difference mentioned; (4) explicit statement that GitHub timestamps do NOT prove Chen Wei coded first (M6); (5) Wang Ming's earlier timestamp referenced; (6) >= 2 ## headings."
+      }
+    },
+    {
+      "id": "q23",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "万一 TA 那个处置我还想再往上推一下，得提前准备好申诉立场——`docs/appeal_preparation.md`，把所有对我有利的证据捋成一摞。\n\n要点（每条都得给具体数值/具体引用，别只写形容词）：\n- git 时间差：把前面 q11 那份 commit timing 文档里的具体数字（小时数或分钟数）原封搬过来\n- SO 共同来源：那条 SO 答案解释了多大一份儿 MOSS 总相似度——把 q14 / q15 里的具体数字搬过来；题号顺手提一下也行\n- TA 现行处置：把 TA 邮件里那个具体处置词（正式书面那种）原文引一下，并点明成绩没受影响——这个起点已经不算坏\n- 至少引一条课程整教 policy 的节号（节号去 policy 文件里挑一条对本案最有利的搬过来）\n- 给一条往前看的具体动作建议——按 policy 里那条引用规范的精神，往后所有作业里凡是用了 SO 之类的资源都在代码注释里 cite 出来\n\n至少 3 个 `##` 二级标题。结论先行。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q23.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "appeal_preparation.md created with: time difference (approximately 29-30 hours) present, SO reference (85% or #48291037) present, TA resolution (warning) mentioned, policy section cited, recommendation for future citation included, >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/appeal_preparation.md exists; (2) time difference approximately 29-30 hours or '1778' minutes stated; (3) '85' or 'SO' or '48291037' present; (4) 'warning' or resolution mentioned; (5) '4.2' or '4.3' or '4.5' cited; (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q24",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "整起 case 走到这里，最后做一份证据可信度排名，落到`analysis/evidence_final_ranking.json`。下游脚本对字段名死板：\n\n顶层一个数组字段叫 `evidence_items`，至少 5 条；每条是一个对象，里头几个字段都不可少：`source`（非空字符串，指明这条证据的出处）、`reliability_score`（1 到 10 的整数）、`rationale`（非空字符串，解释为什么打这个分）、再加一个 `type` 字段——这字段是枚举字符串，用来区分这条证据是\"白纸黑字可独立验证\"那一档还是\"某人嘴里说的、得靠人证\"那一档；这套枚举走最常规的英文学术分类术语（前面 q3 那道把证据分两摞用的就是这套术语，去翻 q3 你那份 evidence_classification.json 里两个顶层键的命名习惯，把那两类各自的英文形容词单数小写形式搬过来即可——必须严格那两个词，写成缩写或同义词都不行）。\n\n顶层另两个字段叫 `most_reliable` 和 `least_reliable`，都填非空字符串，分别点出最可靠和最不可靠那条证据的 source 名。最可靠那条建议挑前面那一档（git 历史 / MOSS 报告 / SO 答案那种白纸黑字的），最不可靠那条留给后面那一档（陈伟 IM 里的指控、CS101 群里的吃瓜议论那种）。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q24.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "evidence_final_ranking.json is valid JSON with >= 5 evidence items each having source/reliability_score/rationale/type fields, most_reliable references an objective source, and least_reliable references a subjective source.",
+        "incorrect": "Check: (1) analysis/evidence_final_ranking.json exists and is valid JSON; (2) len(evidence_items) >= 5; (3) each item has source, reliability_score (1-10 integer), rationale, type (objective or subjective); (4) most_reliable is a non-empty string; (5) least_reliable is a non-empty string."
+      }
+    },
+    {
+      "id": "q25",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd3_sessions"
+      ],
+      "question": "After reviewing Chen Wei's IM conversation (Phase 2, upd3_sessions), how did Chen Wei's narrative shift, and how does this affect the overall credibility picture?",
+      "feedback": {
+        "correct": "Chen Wei's narrative evolution — from aggressive accusation to deflection to implicit SO admission — corroborates the common-source explanation and undermines his original 'you copied my GitHub code' claim.",
+        "options": {
+          "E": "Chen Wei never explicitly apologized. He shifted to deflection ('everyone writes it the same way') rather than formally retracting his accusation or acknowledging his error.",
+          "A": "Correct. In Phase 1, Chen Wei was aggressive: 'you definitely copied my GitHub code' and 'my GitHub is public, you must have seen it.'",
+          "B": "Correct. In Phase 2 (after the SO discovery), Chen Wei shifted to deflection: 'this kind of public algorithm, everyone writes it the same way.'",
+          "C": "Correct. Chen Wei implicitly admitted referencing the SO answer with a statement like 'that prev_node writing style was indeed from that.'",
+          "D": "Correct. Chen Wei's narrative shift from aggressive accusation to deflection is consistent with someone whose original claim collapsed under evidence.",
+          "F": "Correct. Chen Wei's implicit admission corroborates the common-source explanation from the accused party himself, strengthening the SO hypothesis.",
+          "G": "Correct. Both students eventually agreed to explain the SO reference to the TA, reaching a pragmatic consensus without Chen Wei formally retracting his accusation."
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "In Phase 1, Chen Wei was aggressive: 'you definitely copied my GitHub code' and 'my GitHub is public, you must have seen it.'",
+          "B": "In Phase 2 (after the SO discovery), Chen Wei shifted to deflection: 'this kind of public algorithm, everyone writes it the same way.'",
+          "C": "Chen Wei implicitly admitted referencing the SO answer with a statement like 'that prev_node writing style was indeed from that.'",
+          "D": "Chen Wei's narrative shift from aggressive accusation to deflection is consistent with someone whose original claim collapsed under evidence.",
+          "E": "Chen Wei explicitly apologized for falsely accusing Wang Ming of plagiarism.",
+          "F": "Chen Wei's implicit admission corroborates the common-source explanation from the accused party himself, strengthening the SO hypothesis.",
+          "G": "Both students eventually agreed to explain the SO reference to the TA, reaching a pragmatic consensus without Chen Wei formally retracting his accusation."
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "F",
+          "G"
+        ]
+      }
+    },
+    {
+      "id": "q26",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "整张 case 走完了，给我一份完整的最终报告作为底档。建在 `docs/` 下，文件名走我习惯的 `YYYY-MM-DD_` 日期前缀（名字带个意思即可）。这份要把整个调查的所有要点拢成一份，将来谁再问起来直接甩这份。\n\n正文得是一份周全完整的总结陈词——前面那一摞子文档里那些具体的数字、时戳、百分比、引用节号你都要拣进来重述一遍，别在这份总报告里只用\"高度相似\" / \"差了一天多\" / \"覆盖大部分\" 这种含混说法（自动化校验会扫具体数字，糊弄不过去）。要覆盖的内容大致这几块：那份抄袭检测报告给出的总相似度、两人在 GitLab 上各自最早 commit 的具体时戳及二者之间的时差、SO 共同来源能解释掉的份儿、陈伟那次 GitHub push 相对我最早 GitLab commit 的时差（这是 M6 那条排除论证的关键数）及其结论（GitHub 时间戳不能证明陈伟先写代码）、TA 那封处理邮件给的处置词（正式书面那种，原文搬）、对课程那份整教制度文件里若干相关条款的引用（去 workspace 根目录下那份讲学术诚信的政策 md 文件里翻、挑几条对本案相关的引用过来），再加一条我自己往后该怎么改的具体可执行动作建议。\n\n至少 5 个 `##` 二级标题；按我个人写作偏好那一套（workspace 里有份关于我个人偏好的说明文档、写得很清楚——列表为主、日期前缀文件名、答案先行、具体数值、口语易读）走，这份要过自动化的格式偏好校验。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q26.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3,P4,P5 --target docs/",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Final case assessment created with: '95' (MOSS), time difference 29-30 hours or 1778 minutes, '85' (SO coverage), '56' hours (GitHub exclusion M6), two policy sections cited, 'warning' or resolution mentioned, YYYY-MM-DD_ prefix, >= 5 ## headings. Also passes P1-P5 preference checks.",
+        "incorrect": "Check: (1) docs/ has YYYY-MM-DD_*.md file; (2) '95' present; (3) time difference approximately 29-30 hours or 1778 minutes; (4) '85' present; (5) '56' present (M6 GitHub exclusion); (6) two policy section numbers cited; (7) 'warning' or resolution mentioned; (8) >= 5 ## headings; (9) P1-P5 all pass."
+      }
+    },
+    {
+      "id": "q27",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Final comprehensive assessment: considering all evidence gathered across all four phases, which statements correctly summarize the definitive conclusions about this CS101 plagiarism dispute?",
+      "feedback": {
+        "correct": "Comprehensive resolution: all contradictions resolved (SO common source confirmed, GitHub timeline excluded, TA resolution defensible, Chen Wei's admission corroborating), both biases corrected, and the citation lesson clear.",
+        "options": {
+          "F": "Wang Ming did violate Section 4.3 by not citing the SO answer. The formal warning is appropriate — he is not 'completely innocent.' An appeal would be unwarranted given the resolution is already favorable (warning, not zero grade).",
+          "A": "Correct. The 95% MOSS similarity is fully explained by both students independently referencing Stack Overflow #48291037 (approximately 85%) and common CS101 coding patterns (approximately 10%) — there is no evidence of inter-student copying.",
+          "B": "Correct. Wang Ming's git timeline (D-2 14:22 first commit, 30 hours before Chen Wei's D-1 20:00) is authentic evidence of development order, though not proof that Wang Ming 'authored' the code independently — he adapted the SO answer.",
+          "C": "Correct. Chen Wei's GitHub timestamps (D1 22:30 push) cannot serve as evidence that Chen Wei coded first — Wang Ming's first commit predates this by approximately 56 hours.",
+          "D": "Correct. The TA's resolution — formal warning under Section 4.3, no grade penalty, Section 4.5 discretion — is defensible and consistent with all evidence gathered in the investigation.",
+          "E": "Correct. Both students committed the same violation: adapting the SO answer without citing it per Section 4.3, resulting in equal treatment (both received formal warnings).",
+          "G": "Correct. Chen Wei's narrative shift from aggressive accusation to implicit SO admission corroborates the common-source conclusion and further undermines his original plagiarism claim against Wang Ming.",
+          "H": "Correct. The key lesson: proper citation of public resources (per Section 4.3) would have prevented this entire investigation — both students should have noted the SO reference in their code comments."
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "The 95% MOSS similarity is fully explained by both students independently referencing Stack Overflow #48291037 (approximately 85%) and common CS101 coding patterns (approximately 10%) — there is no evidence of inter-student copying.",
+          "B": "Wang Ming's git timeline (D-2 14:22 first commit, 30 hours before Chen Wei's D-1 20:00) is authentic evidence of development order, though not proof that Wang Ming 'authored' the code independently — he adapted the SO answer.",
+          "C": "Chen Wei's GitHub timestamps (D1 22:30 push) cannot serve as evidence that Chen Wei coded first — Wang Ming's first commit predates this by approximately 56 hours.",
+          "D": "The TA's resolution — formal warning under Section 4.3, no grade penalty, Section 4.5 discretion — is defensible and consistent with all evidence gathered in the investigation.",
+          "E": "Both students committed the same violation: adapting the SO answer without citing it per Section 4.3, resulting in equal treatment (both received formal warnings).",
+          "F": "Wang Ming should appeal the formal warning because he is completely innocent of any academic violation.",
+          "G": "Chen Wei's narrative shift from aggressive accusation to implicit SO admission corroborates the common-source conclusion and further undermines his original plagiarism claim against Wang Ming.",
+          "H": "The key lesson: proper citation of public resources (per Section 4.3) would have prevented this entire investigation — both students should have noted the SO reference in their code comments."
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "G",
+          "H"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+# Message Log: employee_zhangtao_im
+
+---
+
+**User** (2026-03-24T01:00:00.000Z):
+
+[企业微信 张涛 Tue Mar 24 09:00:00 CST 2026] 陈经理，你问到PIP的meetings。2月15号那次，孙伟跟我聊的主要是下个sprint的项目规划。他确实提了一句'你的目标进展怎么样'，但大部分时间在讲项目需求。我不觉得那是一个正式的PIP review。
+
+**Assistant** (2026-03-24T01:01:00.000Z):
+
+Zhang Tao's account of the February 15 meeting:
+- Primary focus: next sprint project planning
+- Brief mention of PIP goals ("你的目标进展怎么样")
+- Most of the time spent on project requirements
+- Zhang Tao's perception: NOT a formal PIP review
+
+**Cross-reference:**
+- Calendar label: "PIP Review -- 张涛" (set by Sun Wei)
+- PIP email (same date): Documents specific progress on 4 goals (72% code review rate, 3/4 sprint tasks)
+- The email evidence shows PIP content WAS discussed, but Zhang Tao's experience suggests it was mixed with project planning and not clearly framed as a formal PIP review
+
+**Assessment:** The meeting included PIP elements (documented in the follow-up email) but may not have been clearly framed to the employee as a formal PIP review meeting.
+
+---
+
+**User** (2026-03-24T01:30:00.000Z):
+
+[企业微信 张涛 Tue Mar 24 09:30:00 CST 2026] 3月4号那次就更离谱了。孙伟直接跟我说'我觉得改进不够，我们可能需要考虑其他安排'。这根本不是review，这是在告诉我要被解雇了。我问他'什么叫其他安排'，他说'公司可能不适合你了'。9天之后我就被辞退了。
+
+**Assistant** (2026-03-24T01:31:00.000Z):
+
+Zhang Tao's account of the March 4 meeting aligns with Sun Wei's own notes:
+
+**Comparison:**
+| Source | Description of March 4 Meeting |
+|--------|-------------------------------|
+| Calendar label | "PIP Review -- 张涛" |
+| Sun Wei's 1:1 notes | "跟张涛谈了终止的事情" (discussed termination) |
+| Zhang Tao's account | "直接跟我说改进不够，考虑其他安排" (told me improvement insufficient, consider other arrangements) |
+
+**All three non-calendar sources agree:** The March 4 meeting was functionally a termination notification, not a PIP review. The calendar label does not match the actual meeting content.
+
+**C2 nuanced resolution:** Zhang Tao DID receive the PIP initiation email (Feb 1) and DID attend meetings labeled "PIP Review." But the meeting content did not match the labels: Feb 15 was mixed with project planning, and March 4 was a termination conversation. The truth is between Zhang Tao's "never told about PIP" and the documentation showing PIP-labeled meetings.
+
+---
+
+**User** (2026-03-24T02:00:00.000Z):
+
+[企业微信 张涛 Tue Mar 24 10:00:00 CST 2026] 我不是说我工作完美——确实有要改进的地方。但如果公司按规矩来，给我完整的PIP时间，也许我能达标。40天就辞退，公司自己的政策都说最少60天。这不公平。
+
+**Assistant** (2026-03-24T02:01:00.000Z):
+
+Zhang Tao raises the timeline issue -- he is aware of the 60-day PIP policy minimum.
+
+**Timeline verification:**
+- PIP initiated: February 1 (Day 0)
+- Termination: March 13 (Day 40)
+- Company policy minimum: 60 days
+- PIP document stated: 30 days (already below policy)
+
+Zhang Tao's complaint is factually supported: the company terminated at Day 40, which is 20 days before the 60-day policy minimum. Even the shortened 30-day PIP plan was not fully completed (final assessment never done, Week 4 check-in not documented).
+
+**Combined with the improvement evidence:** Zhang Tao's code review pass rate improved from 60% to 75% during the 40-day period. While he didn't reach the 85% target, the improvement trend was positive and the abbreviated timeline did not give him the full opportunity policy requires.
+
+---
+
+**User** (2026-03-24T02:30:00.000Z):
+
+[企业微信 张涛 Tue Mar 24 10:30:00 CST 2026] 对了，我还想补充一点。PIP期间我的代码review通过率从60%提到了75%。这说明我在改进。虽然没到85%的目标，但只给了40天啊。如果是60天，我可能就达标了。
+
+**Assistant** (2026-03-24T02:31:00.000Z):
+
+Zhang Tao provides additional improvement evidence:
+
+**Code Review Pass Rate Trajectory:**
+- Pre-PIP: 60% (team average: 85%)
+- At PIP Week 2 (Day 14): 72% (+12 points)
+- At termination (Day 40): 75% (+15 points)
+- Target: 85%
+
+**Improvement rate:** ~0.375 percentage points per day
+**Projected time to reach 85% target:** ~27 more days from Day 40 = Day 67
+**Policy minimum PIP duration:** 60 days
+
+If the PIP had run the full 60-day policy minimum, the improvement trajectory suggests Zhang Tao could have reached approximately 82-83% -- close to but possibly not meeting the 85% target. However, the shortened timeline denied him the opportunity to demonstrate whether he could reach the target within the policy-mandated period.
+
+This evidence is relevant to the arbitration risk assessment: the truncated PIP combined with a positive improvement trend weakens the company's "failed PIP" justification.

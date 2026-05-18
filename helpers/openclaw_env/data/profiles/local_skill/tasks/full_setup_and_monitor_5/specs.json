@@ -1,0 +1,68 @@
+{
+  "task_id": "full_setup_and_monitor_5",
+  "instruction": "Perform a complete openclaw setup:\n1. Set the default model to 'anthropic/claude-sonnet-4-5-20250929'\n2. Start the gateway\n3. Log into the telegram channel\n4. Verify the system health",
+  "domains": [
+    "setup_config",
+    "monitoring",
+    "channel_mgmt"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "full_setup_and_monitor",
+  "generator_id": "full_setup_and_monitor",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "model": "anthropic/claude-sonnet-4-5-20250929",
+      "channel": "telegram"
+    },
+    "private": {
+      "expected_model": "anthropic/claude-sonnet-4-5-20250929",
+      "expected_channel": "telegram"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw models set anthropic/claude-sonnet-4-5-20250929",
+      "openclaw gateway start",
+      "openclaw channels login --channel telegram",
+      "openclaw health"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "config",
+        "config_path": "agent.model",
+        "condition": "equals",
+        "expected": "anthropic/claude-sonnet-4-5-20250929",
+        "name": "model configured"
+      },
+      {
+        "type": "state",
+        "field": "gateway_status.running",
+        "condition": "equals",
+        "expected": true,
+        "name": "gateway running"
+      },
+      {
+        "type": "state",
+        "field": "channels.telegram",
+        "condition": "exists",
+        "expected": null,
+        "name": "telegram connected"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "full_setup_and_monitor",
+      "params": {
+        "model": "anthropic/claude-sonnet-4-5-20250929",
+        "channel": "telegram"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

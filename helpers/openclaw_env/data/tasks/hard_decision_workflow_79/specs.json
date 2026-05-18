@@ -1,0 +1,176 @@
+{
+  "task_id": "hard_decision_workflow_79",
+  "instruction": "I need the rollback update to reach @team on slack. Fix the delivery path if needed, check what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and email team@example.com a recap.",
+  "canonical_instruction": "I need the rollback update to reach @team on slack. Fix the delivery path if needed, check what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and email team@example.com a recap.",
+  "instruction_variants": [
+    "Can you get the rollback update out to @team on slack? Fix the delivery path if needed, check what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and send team@example.com a quick recap.",
+    "Please get the rollback update to @team on slack. Fix the delivery path if needed, review what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and send team@example.com a quick recap.",
+    "Can you handle the rollback update for @team on slack? Repair the path if needed, check what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and send team@example.com a short recap.",
+    "Please push the rollback update to @team on slack. Fix the path if needed, review what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and send team@example.com a recap.",
+    "The rollback update still needs to get to @team on slack. Please fix the path if needed, review what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and send team@example.com a quick recap once it's through.",
+    "Please get the rollback update over to @team on slack. Clean up the path if needed, check what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and send team@example.com a recap afterward.",
+    "I need the rollback update delivered to @team on slack. Please repair the path if needed, review what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and send team@example.com a short recap when it's done."
+  ],
+  "visible_constraints": [
+    {
+      "type": "email",
+      "value": "team@example.com"
+    },
+    {
+      "type": "channel",
+      "value": "slack"
+    },
+    {
+      "type": "target",
+      "value": "@team"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "Rollback delivery next step"
+    },
+    {
+      "type": "subject",
+      "value": "Rollback delivery recap"
+    },
+    {
+      "type": "body",
+      "value": "The delivery path is recovered and the update is posted."
+    },
+    {
+      "type": "priority",
+      "value": "high"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_message",
+    "infer_missing_steps",
+    "avoid_duplicate",
+    "infer_target"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "email_provider",
+    "google_tasks",
+    "channel_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "delivery_update_followthrough",
+      "hard_decision_variant": 7,
+      "hard_decision_ability": "information_transfer",
+      "hard_decision_ability_tags": [
+        "information_transfer",
+        "workflow_completion"
+      ],
+      "prompt_style": "underspecified",
+      "step_count": 6
+    },
+    "private": {
+      "initial_state_overrides": {}
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "tasks list --status pending",
+      "openclaw channels list --json",
+      "openclaw channels login --channel slack",
+      "tasks add --title 'Rollback delivery next step' --priority high --due 2026-03-12",
+      "openclaw message send --channel slack --target @team --message 'Rollback update posted and being tracked.'",
+      "email send --to team@example.com --subject 'Rollback delivery recap' --body 'The delivery path is recovered and the update is posted.'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate calendar event created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "@team"
+        },
+        "name": "message sent to @team"
+      },
+      {
+        "type": "effect",
+        "effect_type": "emails_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "to",
+          "value": "team@example.com"
+        },
+        "name": "email sent to team@example.com"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 78
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

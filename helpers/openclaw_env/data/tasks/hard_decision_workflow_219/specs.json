@@ -1,0 +1,179 @@
+{
+  "task_id": "hard_decision_workflow_219",
+  "instruction": "For Toronto, the next step and recurring daily check are already covered. Use the forecast and today's America/Toronto calendar to work out whether this stays live or moves async, and only send leadership@example.com an update if it moves async.",
+  "canonical_instruction": "Some of the Toronto ops setup is already in place. Review the forecast, today's America/Toronto calendar, the task already on the board, and the recurring daily check schedule before working out whether this should stay live or move async, and send leadership@example.com the update if you move it async.",
+  "instruction_variants": [
+    "The Toronto ops setup already has a next step and a recurring daily check scheduled. Check the forecast and today's America/Toronto calendar, work out whether this stays live or moves async, and send leadership@example.com an update only if it moves async.",
+    "For Toronto, the next step and recurring daily check are already there. Use the forecast and today's America/Toronto calendar to work out whether this stays live or goes async, and only send leadership@example.com an update if it goes async.",
+    "The Toronto ops setup already has the basics in place. Check the forecast and today's America/Toronto calendar, work out whether this stays live or shifts async, and send leadership@example.com an update only if it shifts async.",
+    "Some of the Toronto ops setup is already in place. Review the forecast, today's America/Toronto calendar, the task already on the board, and the recurring daily check schedule before working out whether this should stay live or move async, and send leadership@example.com the update if you move it async.",
+    "The Toronto ops setup already has part of the work in place. Please review the forecast, today's America/Toronto calendar, the task already on the board, and the recurring daily check schedule before working out whether this stays live or moves async, and send leadership@example.com the update if it moves async.",
+    "I already have the basics of the Toronto ops setup in motion. Please use the forecast, today's America/Toronto calendar, the task already on the board, and the recurring daily check schedule before working out whether this stays live or moves async, and send leadership@example.com the update if it moves async.",
+    "Some of the Toronto ops setup is already covered. Please review the forecast, today's America/Toronto calendar, the task already on the board, and the recurring daily check schedule before working out whether this stays live or shifts async, and send leadership@example.com the update if it shifts async."
+  ],
+  "visible_constraints": [
+    {
+      "type": "location",
+      "value": "Toronto"
+    },
+    {
+      "type": "timezone",
+      "value": "America/Toronto"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "Toronto primary ops review"
+    }
+  ],
+  "decision_requirements": [
+    "infer_title",
+    "infer_branch",
+    "avoid_duplicate",
+    "infer_schedule"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "google_tasks",
+    "weather_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "hard_partial_delivery",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "branch_resolution_followthrough",
+      "hard_decision_variant": 9,
+      "hard_decision_ability": "multi_source_reasoning",
+      "hard_decision_ability_tags": [
+        "multi_source_reasoning",
+        "branch_resolution",
+        "duplicate_avoidance"
+      ],
+      "prompt_style": "brief",
+      "step_count": 5
+    },
+    "private": {
+      "initial_state_overrides": {
+        "tasks.json": [
+          {
+            "id": "task_existing_ops",
+            "title": "Toronto existing ops next-step task",
+            "due": "2026-03-12",
+            "status": "pending",
+            "priority": "medium",
+            "duration": 1
+          }
+        ],
+        "cron_jobs.json": [
+          {
+            "id": "cron_existing_ops",
+            "name": "toronto-existing-daily-ops-check",
+            "schedule": "0 9 * * *",
+            "message": "Run Toronto daily ops check",
+            "status": "active"
+          }
+        ]
+      }
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "weather forecast --location 'Toronto' --days 1",
+      "calendar today --timezone America/Toronto",
+      "openclaw cron list",
+      "tasks list --status pending",
+      "calendar add-event --title 'Toronto primary ops review' --start 2026-03-19T15:00"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "state",
+        "field": "tasks",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "next-step task already exists"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate task created"
+      },
+      {
+        "type": "state",
+        "field": "cron_jobs",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "daily check already exists"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate cron job created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 218
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "task_id": "hard_decision_workflow_2",
+  "instruction": "The proposal email thread in the inbox still needs to be closed out. Then review the Seattle board and calendar; right now the board still lacks the next step, and if it clearly needs a live follow-up, add the sync, so add only what is missing, note it in a handoff file, and send team@example.com a quick note.",
+  "canonical_instruction": "The proposal email thread in the inbox needs attention today. Then check the Seattle board and calendar; right now the board still lacks the next step, and if it clearly needs a live follow-up, add the sync, so fill only what is missing, note it in a handoff file, and send team@example.com a quick update.",
+  "instruction_variants": [
+    "Handle the proposal email thread in the inbox first. Then check the Seattle board and calendar; right now the board still lacks the next step, and if it clearly needs a live follow-up, add the sync, so add only what is missing, note it in a handoff file, and send team@example.com a quick note.",
+    "Close out the proposal email thread in the inbox first. Then review the Seattle board and calendar; right now the board still lacks the next step, and if it clearly needs a live follow-up, add the sync, so fill only what is missing, note it in a handoff file, and send team@example.com a quick update.",
+    "Sort out the proposal email thread in the inbox first. Then check the Seattle board and calendar; right now the board still lacks the next step, and if it clearly needs a live follow-up, add the sync, so fill only what is missing, note it in a handoff file, and send team@example.com a quick update.",
+    "Wrap the proposal email thread in the inbox first. Then review the Seattle board and calendar; right now the board still lacks the next step, and if it clearly needs a live follow-up, add the sync, so add only what is missing, note it in a handoff file, and send team@example.com a short update.",
+    "The proposal email thread in the inbox needs attention today. Then check the Seattle board and calendar; right now the board still lacks the next step, and if it clearly needs a live follow-up, add the sync, so fill only what is missing, note it in a handoff file, and send team@example.com a quick update.",
+    "Please handle the proposal email thread in the inbox first. Then check the Seattle board and calendar; right now the board still lacks the next step, and if it clearly needs a live follow-up, add the sync, so fill only what is missing, note it in a handoff file, and send team@example.com a quick update.",
+    "I still need the proposal email thread in the inbox handled today. Then review the Seattle board and calendar; right now the board still lacks the next step, and if it clearly needs a live follow-up, add the sync, so add only what is missing, note it in a handoff file, and send team@example.com a short update."
+  ],
+  "visible_constraints": [
+    {
+      "type": "email",
+      "value": "team@example.com"
+    },
+    {
+      "type": "query",
+      "value": "proposal"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "path",
+      "value": "/handoff/seattle-proposal-followup.txt"
+    },
+    {
+      "type": "title",
+      "value": "Seattle proposal follow-up"
+    },
+    {
+      "type": "title",
+      "value": "Seattle follow-up sync"
+    },
+    {
+      "type": "subject",
+      "value": "Proposal follow-up for Seattle"
+    },
+    {
+      "type": "body",
+      "value": "Tracking the next step for Seattle."
+    },
+    {
+      "type": "priority",
+      "value": "high"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_message",
+    "infer_missing_steps",
+    "avoid_duplicate"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "email_provider",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "inbox_followthrough",
+      "hard_decision_variant": 2,
+      "hard_decision_ability": "information_transfer",
+      "hard_decision_ability_tags": [
+        "information_transfer",
+        "workflow_completion"
+      ],
+      "prompt_style": "underspecified",
+      "step_count": 9
+    },
+    "private": {
+      "initial_state_overrides": {}
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "email search --query 'proposal'",
+      "email read --id email_seed_1",
+      "tasks list --status pending",
+      "calendar list",
+      "calendar today --timezone America/Los_Angeles",
+      "tasks add --title 'Seattle proposal follow-up' --priority high --due 2026-03-09",
+      "calendar add-event --title 'Seattle follow-up sync' --start 2026-03-10T13:00",
+      "file create --path '/handoff/seattle-proposal-followup.txt' --content 'Seattle proposal follow-up handoff note.'",
+      "email send --to team@example.com --subject 'Proposal follow-up for Seattle' --body 'Tracking the next step for Seattle.'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "emails_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "to",
+          "value": "team@example.com"
+        },
+        "name": "email sent to team@example.com"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "file created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "field_contains",
+        "expected": {
+          "field": "path",
+          "value": "handoff"
+        },
+        "name": "handoff file path references handoff"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "field_contains",
+        "expected": {
+          "field": "title",
+          "value": "Seattle"
+        },
+        "name": "task title references Seattle"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 1
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

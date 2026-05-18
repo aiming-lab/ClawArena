@@ -1,0 +1,137 @@
+{
+  "task_id": "complex_customer_followup_pipeline_7",
+  "instruction": "[Customer Followup Pipeline] Convert customer-related inbox signal into a tracked action. Create helper agent 'customer-notifier-07' for customer follow-up, search inbox for 'budget', then create task 'Customer Followup Pipeline timeline check task for Berlin (budget)' due 2026-03-12.",
+  "canonical_instruction": "[Customer Followup Pipeline] Convert customer-related inbox signal into a tracked action. Create helper agent 'customer-notifier-07' for customer follow-up, search inbox for 'budget', then create task 'Customer Followup Pipeline timeline check task for Berlin (budget)' due 2026-03-12.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "datetime",
+      "value": "2026-03-12"
+    },
+    {
+      "type": "query",
+      "value": "budget"
+    },
+    {
+      "type": "title",
+      "value": "Customer Followup Pipeline timeline check task for Berlin (budget)"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "priority",
+      "value": "high"
+    },
+    {
+      "type": "model",
+      "value": "anthropic/claude-opus-4-6"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_model"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "life_work",
+    "online_required"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "email_provider",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "cron_webhook",
+    "agent_mgmt",
+    "security",
+    "channel_mgmt",
+    "messaging",
+    "device_node",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "complex_composed_workflow",
+  "generator_id": "complex_composed_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "complex_template": "customer_followup_pipeline",
+      "complex_variant": 7,
+      "complex_scenario": "Customer Followup Pipeline",
+      "complex_scenario_slug": "customer_followup_pipeline",
+      "step_count": 3,
+      "openclaw_steps": 1,
+      "complex_high_volatility": false,
+      "strict_online_risk": "medium",
+      "realism_tier": "life_work",
+      "causal_chain_score": 1.0,
+      "entity_consistency_pass": true,
+      "filler_step_count": 0,
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw agents add customer-notifier-07 --model anthropic/claude-opus-4-6",
+      "email search --query 'budget'",
+      "tasks add --title 'Customer Followup Pipeline timeline check task for Berlin (budget)' --priority high --due 2026-03-12"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "state",
+        "field": "agents.customer-notifier-07",
+        "condition": "exists",
+        "expected": null,
+        "name": "agent created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "complex_composed_workflow",
+      "params": {
+        "workflow_index": 46
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "task_id": "hard_decision_workflow_96",
+  "instruction": "For Sydney, can you use the forecast and today's Australia/Sydney calendar to check the next step on the board and the recurring daily check, then fill only the missing piece and put the review on the calendar?",
+  "canonical_instruction": "Please use the forecast and today's Australia/Sydney calendar context to sort out the Sydney ops review. Check the next step on the board and the recurring daily check too, then fill only the missing piece before you put the review on the calendar.",
+  "instruction_variants": [
+    "For Sydney, can you check the forecast, today's Australia/Sydney schedule, the next step on the board, and the recurring daily check, then fill only the missing piece before you put the review on the calendar?",
+    "Can you look at the forecast and today's Australia/Sydney calendar for Sydney, review the next step on the board and the recurring daily check, and only add what's missing before you put the review on the calendar?",
+    "Please use the forecast and today's Australia/Sydney schedule for Sydney to review the next step on the board and the recurring daily check, fill only what's missing, and put the review on the calendar.",
+    "Please use the forecast and today's Australia/Sydney calendar context to sort out the Sydney ops review. Check the next step on the board and the recurring daily check too, then fill only the missing piece before you put the review on the calendar.",
+    "The Sydney ops review still needs to be set the right way. Please use the forecast and today's Australia/Sydney calendar context, check the next step on the board and the recurring daily check, then add only what's missing before you put the review on the calendar.",
+    "I need the Sydney ops review lined up properly. Use the forecast and today's Australia/Sydney calendar context, review the next step on the board and the recurring daily check, then fill only the missing piece before you put the review on the calendar.",
+    "Please check the forecast and today's Australia/Sydney calendar for Sydney, review the next step on the board and the recurring daily check, then only add what's missing before you put the review on the calendar."
+  ],
+  "visible_constraints": [
+    {
+      "type": "location",
+      "value": "Sydney"
+    },
+    {
+      "type": "timezone",
+      "value": "Australia/Sydney"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "Sydney backup ops review"
+    }
+  ],
+  "decision_requirements": [
+    "infer_title",
+    "infer_schedule"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "google_tasks",
+    "weather_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "ops_review_followthrough",
+      "hard_decision_variant": 14,
+      "hard_decision_ability": "workflow_completion",
+      "hard_decision_ability_tags": [
+        "workflow_completion",
+        "schedule_inference"
+      ],
+      "prompt_style": "brief",
+      "step_count": 6
+    },
+    "private": {
+      "initial_state_overrides": {
+        "tasks.json": [
+          {
+            "id": "task_existing_ops",
+            "title": "Sydney existing ops next-step task",
+            "due": "2026-03-12",
+            "status": "pending",
+            "priority": "medium",
+            "duration": 1
+          }
+        ]
+      }
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "weather forecast --location 'Sydney' --days 1",
+      "calendar today --timezone Australia/Sydney",
+      "openclaw cron list",
+      "tasks list --status pending",
+      "openclaw cron add --name hard-ops-07-14 --cron '30 16 * * 1-5' --message 'Run Sydney daily ops check'",
+      "calendar add-event --title 'Sydney backup ops review' --start 2026-03-14T11:00"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "state",
+        "field": "tasks",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "next-step task already exists"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 95
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

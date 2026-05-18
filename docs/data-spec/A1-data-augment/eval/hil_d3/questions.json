@@ -1,0 +1,580 @@
+{
+  "id": "hil_d3",
+  "desc": "ICU nursing staffing crisis investigation (systematic overtime under-reporting in Cardiac ICU at Pacific Heights Medical Center) — 4 contradictions / 4 dynamic updates / 5 preference rules — v2",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on the initial workspace documents (nurse_roster_current.md, hr_staffing_metrics.md, caresched_compliance_report.md, shift_schedule_published.md), which of the following compound statements are supported by documentary evidence?\n\nNote: each option combines claims from multiple files — all component claims must be supported to select the option.",
+      "options": {
+        "A": "CareScheduler reports a unit average of 42.3 h/week for all 11 full-time nurses, which is 5.7 h/week below the WAC 246-840-711 legal threshold of 48 h/week — and HR records confirm the overtime budget of $42,000/month was exceeded, consistent with this level of reported hours",
+        "B": "The unit has 11 full-time FTE nurses against a 13 FTE target (a gap of 2 FTE), and HR records show the overtime budget of $42,000/month was NOT exceeded — actual overtime spend was $38,400/month, running 8.6% under budget",
+        "C": "CareScheduler reports 100% compliance with the 48 h/week threshold, with the highest individual weekly average at 47.8 h/week (Donna Park RN-01), and this is consistent with charge nurses entering shift completion hours into the system",
+        "D": "The unit sick leave rate (4.2 d/FTE/quarter) is ABOVE the hospital-wide average of 4.6 d/FTE/quarter, and the voluntary turnover rate of 18.2% annualized is below the hospital benchmark of 14.1% annualized",
+        "E": "ClinAlert incident submissions declined from Q4 2025 to Q1 2026, and no formal grievances were filed through HR in Q1 2026 — both facts consistent with informal suppression of workplace concerns",
+        "F": "Charge nurses Donna Park (RN-01) and David Okafor (RN-06) are responsible for entering CareScheduler shift completion hours for all nursing staff on their shifts"
+      },
+      "answer": [
+        "B",
+        "C",
+        "F"
+      ],
+      "feedback": {
+        "correct": "Correct. B accurately states the FTE gap (2 FTE) and under-budget overtime spend ($38,400 vs $42,000). C correctly identifies CareScheduler compliance figures and the charge nurse data entry mechanism. F is directly stated in nurse_roster_current.md. A is wrong because the overtime budget was NOT exceeded — actual was under budget. D is wrong because the unit sick leave rate is BELOW (not above) the hospital average. E is partially inferential — the documents support the ClinAlert decline and no formal grievances, but 'suppression' is an analytical conclusion not stated as fact in the workspace files.",
+        "options": {
+          "A": "Incorrect: HR metrics show actual overtime spend of $38,400/month against a $42,000/month budget — the budget was NOT exceeded. A is the reverse of the documented fact.",
+          "D": "Incorrect: The unit sick leave rate of 4.2 d/FTE is BELOW (not above) the hospital average of 4.6 d/FTE. The 18.2% annualized voluntary turnover is also ABOVE (not below) the 14.1% benchmark.",
+          "E": "Incorrect: While the ClinAlert decline and absence of HR grievances are documented, 'informal suppression' is an analytical inference not stated as documentary fact in the initial workspace files."
+        }
+      }
+    },
+    {
+      "id": "q2",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on the initial workspace documents, which of the following analytical conclusions about the reliability of CareScheduler data are justified by the available evidence?",
+      "options": {
+        "A": "CareScheduler and badge/biometric records are equivalent in reliability because both are digitally recorded and therefore equally resistant to manipulation",
+        "B": "The combination of below-average sick leave (4.2 d/FTE vs 4.6 hospital avg) and reported CareScheduler compliance creates a superficially positive picture that could mask presenteeism — nurses working while cognitively impaired rather than calling in sick",
+        "C": "The fact that charge nurses enter CareScheduler data for all staff on their shifts creates a structural conflict of interest that undermines CareScheduler's status as an independent verification source for actual hours worked",
+        "D": "The overtime budget being under-spent by 8.6% is consistent with CareScheduler accurately capturing hours — since if hours were higher, overtime spend would be higher",
+        "E": "Resolving whether the discrepancy between published schedules and actual hours exists requires an independent data source that does not rely on charge nurse data entry",
+        "F": "The 2 FTE staffing gap is being actively managed through flexible scheduling, and the CareScheduler's reported 42.3 h/week average is a plausible reflection of that flexibility"
+      },
+      "answer": [
+        "B",
+        "C",
+        "E"
+      ],
+      "feedback": {
+        "correct": "Correct. B correctly identifies the presenteeism risk masked by surface-level HR metrics. C correctly identifies the structural conflict of interest in the data entry mechanism. E correctly states that resolution requires an independent data source. A is wrong because self-reported scheduling data and biometric entry logs are fundamentally different in reliability. D is wrong — under-budget overtime spend is suspicious precisely because it would not be expected if actual hours were higher than reported (nurses were working extra hours without being paid overtime). F conflates flexibility with accuracy — flexible scheduling does not rule out systematic underreporting.",
+        "options": {
+          "A": "Incorrect: CareScheduler entries are made by charge nurses (human data entry subject to practice norms), while badge/biometric data is system-generated from physical access events. These are structurally different in reliability.",
+          "D": "Incorrect: Under-budget overtime spend is actually a warning signal, not confirmation of accuracy. If nurses were working unrecorded hours without overtime compensation, actual spend would be low while actual hours would be high — exactly the paradox the evidence suggests.",
+          "F": "Incorrect: Flexible scheduling and accurate hour recording are separate questions. The structural mechanism (charge nurses entering hours) creates the opportunity for systematic underreporting regardless of whether flexibility is being used."
+        }
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on the initial workspace documents (nurse_roster_current.md, hr_staffing_metrics.md, caresched_compliance_report.md), create TWO output files:\n\n**File 1:** `analysis/initial_staffing_assessment.md`\nRequirements:\n- State the FTE gap: 11 actual full-time nurses vs 13 FTE target\n- State the CareScheduler average of 42.3 h/week and compare to the 48 h/week WAC 246-840-711 threshold\n- Discuss the sick leave rate (4.2 d/FTE/quarter vs hospital average 4.6 d/FTE/quarter)\n- Include ≥ 3 ## section headings\n\n**File 2:** `analysis/hr_metrics_interpretation.json`\nRequirements (exact field names required):\n- `sick_leave_rate_unit`: 4.2 (number)\n- `sick_leave_rate_hospital`: 4.6 (number)\n- `presenteeism_risk_higher`: true (boolean)\n- `caresched_avg_weekly_hours`: 42.3 (number)\n\nBoth files must agree on the 42.3 h/week CareScheduler average.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_initial_staffing.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P3 --target analysis/",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder: check ① whether the Markdown document includes ≥2 h/week metric expressions (P2, e.g., '42.3 h/week', '48 h/week'); ② whether any file in docs/ carries a YYYY-MM-DD_ date prefix for clinical reporting (P3)."
+        },
+        "rules": "P2,P3"
+      },
+      "feedback": {
+        "correct": "Both output files are complete: initial_staffing_assessment.md has correct FTE counts and CareScheduler baseline, and hr_metrics_interpretation.json has all required fields with correct values.",
+        "incorrect": "Output files are incomplete or incorrect. Check: ① does analysis/initial_staffing_assessment.md exist with '11' and '13' as standalone numbers and '42.3' present with ≥3 ## headings; ② does analysis/hr_metrics_interpretation.json exist as valid JSON with sick_leave_rate_unit=4.2, sick_leave_rate_hospital=4.6, presenteeism_risk_higher=true, caresched_avg_weekly_hours=42.3; ③ do both files agree on 42.3."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write a Python script at `scripts/analyze_initial_staffing.py` that reads `nurse_roster_current.md` and `hr_staffing_metrics.md` from the workspace root directory (passed as the first command-line argument, e.g., `python analyze_initial_staffing.py /path/to/workspace`) and outputs the following JSON to stdout:\n\n```json\n{\"fte_actual\": 11, \"fte_target\": 13, \"fte_gap\": 2, \"caresched_avg\": 42.3, \"legal_threshold\": 48, \"headroom_hours\": 5.7}\n```\n\nField requirements:\n- `fte_actual`: integer 11 (full-time nurses on roster)\n- `fte_target`: integer 13 (full-time FTE target)\n- `fte_gap`: integer 2 (target minus actual)\n- `caresched_avg`: float 42.3 (CareScheduler unit average from caresched_compliance_report.md or nurse roster)\n- `legal_threshold`: integer or float 48 (WAC 246-840-711 threshold)\n- `headroom_hours`: float within ±0.1 of 5.7 (48.0 − 42.3)\n\nThe script must read the workspace files, not hardcode values. Output must be valid JSON only (no other text on stdout).",
+      "eval": {
+        "command": "python ${workspace}/scripts/analyze_initial_staffing.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "analyze_initial_staffing.py runs successfully and outputs JSON with all required fields at correct values.",
+        "incorrect": "Script failed or produced incorrect output. Check: ① does scripts/analyze_initial_staffing.py exist and run without errors; ② does it accept workspace path as first argument; ③ does it output valid JSON only; ④ is fte_actual=11, fte_target=13, fte_gap=2, caresched_avg=42.3, legal_threshold=48, headroom_hours within ±0.1 of 5.7."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd1_workspace",
+        "upd1_sessions"
+      ],
+      "question": "After reviewing the Walsh overtime audit report (Update 1: overtime_audit_report.md), which of the following statements about the audit findings are now supported by documentary evidence?\n\nNote: options referencing specific numeric values require that those values appear in overtime_audit_report.md.",
+      "options": {
+        "A": "Walsh's 4-week manual audit found that 9 of 11 full-time nurses have CareScheduler entries that understate actual hours, with the average discrepancy across all 11 nurses being 16.1 h/week",
+        "B": "Amy Chen (RN-02) worked an average of 68.4 h/week according to Walsh's manual audit — a discrepancy of 26.8 h/week relative to CareScheduler's recorded 41.6 h/week",
+        "C": "Tanya Williams (RN-05) at 70.3 h/week and Jessica Martinez (RN-07) at 68.9 h/week both exceed the 60 h/week level at which Trinkoff 2011 documents cognitive impairment equivalent to BAC 0.08%",
+        "D": "Donna Park (RN-01) at 45.1 h/week and David Okafor (RN-06) at 44.5 h/week have Walsh manual audit records within 1 h/week of their CareScheduler entries, confirming the charge nurse accuracy asymmetry",
+        "E": "The Walsh audit's 4-week duration is too short to establish a statistically reliable pattern — regulatory reporting requires a minimum of 12 weeks of documented data",
+        "F": "Walsh explicitly states in her report that the CareScheduler entries reflect scheduled hours rather than actual hours, because charge nurses were not recording voluntary overtime or mandatory-in-practice shift extensions"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F"
+      ],
+      "feedback": {
+        "correct": "Correct. A through D and F are all directly stated or calculable from overtime_audit_report.md. E is incorrect — the report does not state any minimum duration requirement for reporting; that standard is not documented in the workspace.",
+        "options": {
+          "E": "Incorrect: No workspace document specifies a minimum audit duration for mandatory reporting under RCW 70.41.230. The statute's reporting threshold is based on the nature and severity of the patient safety event, not the duration of observation."
+        }
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on overtime_audit_report.md (now available after Update 1), create TWO output files:\n\n**File 1:** `analysis/staffing_discrepancy_table.md`\nRequirements:\n- Markdown table with columns: ID | Name | CareScheduler h/week | Actual h/week | Discrepancy | Exceeds 48h\n- Include all 11 nurses with their individual data from the Walsh audit\n- Amy Chen (RN-02) must show 68.4 h/week actual; Tanya Williams (RN-05) must show 70.3 h/week actual; Jessica Martinez (RN-07) must show 68.9 h/week actual\n- Include an averages row: CareScheduler avg 42.3 h/week, actual avg 58.4 h/week\n- Flag exactly 7 nurses as exceeding the 48 h/week threshold\n\n**File 2:** `analysis/threshold_violation_summary.json`\nRequirements (exact field names, exact values):\n```json\n{\n  \"nurses_above_48h\": 7,\n  \"nurses_above_60h\": 3,\n  \"avg_caresched\": 42.3,\n  \"avg_actual\": 58.4,\n  \"avg_discrepancy\": 16.1,\n  \"highest_actual\": {\"name\": \"Tanya Williams\", \"hours\": 70.3}\n}\n```\n`avg_discrepancy` must be within ±0.3 of 16.1.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_staffing_table.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target analysis/staffing_discrepancy_table.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder: check ① whether 'badge' or 'actual' and 'CareScheduler' or 'reported' are compared in the document (P1); ② whether ≥2 h/week metric expressions appear (P2, e.g., '42.3 h/week', '58.4 h/week')."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Both output files are complete: staffing_discrepancy_table.md has correct per-nurse data and averages; threshold_violation_summary.json has all required fields at correct values.",
+        "incorrect": "Output files are incomplete or incorrect. Check: ① does analysis/staffing_discrepancy_table.md exist with 68.4 (Amy Chen), 70.3 (Tanya Williams), 68.9 (Jessica Martinez) and averages 42.3 and 58.4; ② does analysis/threshold_violation_summary.json exist with nurses_above_48h=7, nurses_above_60h=3, avg_discrepancy within ±0.3 of 16.1, highest_actual.name='Tanya Williams', highest_actual.hours=70.3."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write a Python script at `scripts/compute_staffing_stats.py` that reads `overtime_audit_report.md` from the workspace root directory (passed as the first command-line argument) and computes staffing statistics from its data.\n\n`overtime_audit_report.md` contains a Markdown table with columns: `ID | Name | CareScheduler Avg (h/week) | Walsh Manual Avg (h/week) | Badge Avg (h/week) | Discrepancy (h/week)` — parse the Walsh Manual Avg column for actual hours.\n\nThe script must output the following JSON to stdout (no other text):\n```json\n{\"nurses_above_48h\": 7, \"nurses_above_60h\": 3, \"avg_discrepancy\": <float>, \"max_actual_hours\": <float>}\n```\n\nValidation requirements:\n- `nurses_above_48h` must equal 7\n- `nurses_above_60h` must equal 3\n- `avg_discrepancy` must be within ±0.5 of 16.1\n- `max_actual_hours` must be within ±0.5 of 70.3",
+      "eval": {
+        "command": "python ${workspace}/scripts/compute_staffing_stats.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "compute_staffing_stats.py runs successfully and outputs JSON with nurses_above_48h=7, nurses_above_60h=3, avg_discrepancy≈16.1, and max_actual_hours≈70.3.",
+        "incorrect": "Script failed or produced incorrect output. Check: ① does scripts/compute_staffing_stats.py exist; ② does it accept workspace path as first argument; ③ does it parse the Walsh Manual Avg column from the Markdown table in overtime_audit_report.md; ④ is nurses_above_48h exactly 7; ⑤ is nurses_above_60h exactly 3; ⑥ is avg_discrepancy within ±0.5 of 16.1; ⑦ is max_actual_hours within ±0.5 of 70.3."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on overtime_audit_report.md, create `analysis/evidence_source_hierarchy.md`.\n\nRequirements:\n1. Explicitly classify CareScheduler as a Tier-3 source (self-reported by charge nurses) and Walsh manual audit as a Tier-1 (independent) source\n2. Document the charge nurse asymmetry: Donna Park and David Okafor have accurate CareScheduler records while 9 staff nurses are systematically understated\n3. State that the probability of this asymmetric pattern occurring by chance is less than 1% (use '< 1%' or equivalent)\n4. Include ≥ 3 ## section headings",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_evidence_hierarchy.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Evidence source hierarchy document is complete with Tier-1/Tier-3 classification, charge nurse asymmetry documented, probability stated, and ≥3 ## headings.",
+        "incorrect": "Document is incomplete. Check: ① does analysis/evidence_source_hierarchy.md exist; ② is 'Tier-1' or 'independent' present as a source classification; ③ is 'Tier-3' or 'self-reported' present for CareScheduler; ④ is the charge nurse asymmetry (Donna Park, David Okafor accurate; 9 staff nurses understated) described; ⑤ is '< 1%' or 'statistically' or 'less than 1' present; ⑥ are there ≥3 ## headings."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on hr_staffing_metrics.md and overtime_audit_report.md, create `analysis/financial_impact_assessment.md`.\n\nRequirements:\n1. State the overtime budget figures: $42,000/month budgeted vs $38,400/month actual\n2. Explain the under-budget PARADOX: actual spend is below budget precisely because unrecorded overtime was not compensated — nurses worked the extra hours without receiving overtime pay\n3. Explicitly state that CareScheduler CANNOT be relied upon as the basis for calculating actual financial exposure (M6 negative assertion — do NOT use CareScheduler values as ground truth for what nurses actually worked)\n4. Include ≥ 2 ## section headings",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_financial_impact.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Financial impact assessment is complete with correct budget figures, paradox explanation, CareScheduler reliability caveat, and ≥2 ## headings.",
+        "incorrect": "Document is incomplete. Check: ① does analysis/financial_impact_assessment.md exist; ② is '42,000' or '42000' present; ③ is '38,400' or '38400' present; ④ is the under-budget paradox explained (uncompensated/unrecorded overtime); ⑤ is a negative assertion about CareScheduler reliability for financial calculation present; ⑥ are there ≥2 ## headings."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd2_workspace",
+        "upd2_sessions"
+      ],
+      "question": "After reviewing the IT badge access analysis (Update 2: badge_access_analysis.md from IT Security's Marcus Okafor), which of the following compound statements about cross-source verification are now supported by documentary evidence?",
+      "options": {
+        "A": "Badge data shows Amy Chen (RN-02) averaged 67.1 h/week based on door entry/exit timestamps — a 25.5 h/week discrepancy from her CareScheduler record of 41.6 h/week — while Walsh's manual audit found 68.4 h/week for the same period",
+        "B": "Badge data confirms that exactly 7 of 11 nurses exceeded 48 h/week and exactly 3 exceeded 60 h/week based on physical presence timestamps, which matches Walsh's manual audit counts precisely",
+        "C": "Marcus Okafor's badge analysis reports that on 31 of 33 shift comparisons with Walsh's manual observations, the two records agree within 15 minutes — establishing that Walsh's audit and badge data are independently derived but mutually corroborating",
+        "D": "The badge analysis states the probability that the asymmetric pattern (charge nurses matching, staff nurses understated) occurred by random chance is less than 1%",
+        "E": "Badge data shows that Amy Chen (RN-02) averaged 42.3 h/week, confirming that CareScheduler records are accurate for staff nurses",
+        "F": "Because badge timestamps record entry to the ICU floor and not at workstations, the badge data alone is insufficient for any compliance determination"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "feedback": {
+        "correct": "Correct. A accurately states Amy Chen's badge hours (67.1) vs Walsh audit (68.4) vs CareScheduler (41.6). B correctly states 7/11 and 3/11 counts confirmed by badge data. C accurately quotes the 31-of-33 corroboration statistic from badge_access_analysis.md. D correctly cites the < 1% probability from the statistical pattern analysis. E is wrong — badge data shows 67.1 h/week for Amy Chen, the opposite of CareScheduler's 41.6 h/week. F is a distractor — the report uses door entry/exit timestamps at the ICU primary entry door as a valid proxy for hours on unit.",
+        "options": {
+          "E": "Incorrect: Badge data shows Amy Chen averaged 67.1 h/week, which is nearly identical to Walsh's 68.4 h/week and utterly inconsistent with CareScheduler's 41.6 h/week record.",
+          "F": "Incorrect: The badge analysis explicitly uses ICU primary entry door timestamps as the measurement basis and reaches conclusions consistent with Walsh's direct observation. The methodology is treated as valid in the source document."
+        }
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on badge_access_analysis.md and overtime_audit_report.md, create TWO output files:\n\n**File 1:** `analysis/cross_source_validation.md`\nRequirements:\n- Explicitly state that badge data and Walsh manual audit are TWO INDEPENDENT Tier-1 sources that arrive at CONCORDANT findings through different methodologies\n- State that 7/11 nurses above 48 h/week is confirmed by both sources\n- Include the word 'independent' AND ('concordant' or 'cross-verified' or 'corroborated')\n- Include ≥ 3 ## section headings\n\n**File 2:** `analysis/charge_nurse_asymmetry.json`\nRequirements (exact field names):\n```json\n{\n  \"charge_nurses_accurate\": [\"Donna Park (RN-01)\", \"David Okafor (RN-06)\"],\n  \"staff_nurses_understated_count\": 9,\n  \"probability_by_chance_pct\": \"<1\",\n  \"mechanism\": \"systematic\"\n}\n```\n`staff_nurses_understated_count` must equal 9.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_cross_validation.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Both files complete: cross_source_validation.md has independent + concordant language and ≥3 headings; charge_nurse_asymmetry.json has staff_nurses_understated_count=9.",
+        "incorrect": "Output files incomplete or incorrect. Check: ① does analysis/cross_source_validation.md exist with 'independent' and ('concordant' or 'cross-verified' or 'corroborated') and '7' as standalone number and ≥3 ## headings; ② does analysis/charge_nurse_asymmetry.json exist as valid JSON with staff_nurses_understated_count=9."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write a Python script at `scripts/compute_badge_stats.py` that reads `badge_access_analysis.md` from the workspace root directory (passed as the first command-line argument) and extracts per-nurse badge hours from its Markdown table.\n\n`badge_access_analysis.md` contains a Markdown table with columns: `ID | Name | Badge Avg (h/week) | CareScheduler Avg (h/week) | Discrepancy (h/week) | Category` — parse the Badge Avg column.\n\nThe script must output the following JSON to stdout (no other text):\n```json\n{\"nurses_above_48h_badge\": 7, \"nurses_above_60h_badge\": 3, \"amy_chen_badge_hours\": 67.1, \"avg_badge_hours\": <float>}\n```\n\nValidation requirements:\n- `nurses_above_48h_badge` must equal 7\n- `nurses_above_60h_badge` must equal 3\n- `amy_chen_badge_hours` must be within ±0.3 of 67.1\n- `avg_badge_hours` must be within ±1.0 of 57.2 (average of all 11 nurses' badge hours)",
+      "eval": {
+        "command": "python ${workspace}/scripts/compute_badge_stats.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "compute_badge_stats.py runs successfully and outputs JSON with nurses_above_48h_badge=7, amy_chen_badge_hours≈67.1, and avg_badge_hours≈57.2.",
+        "incorrect": "Script failed or produced incorrect output. Check: ① does scripts/compute_badge_stats.py exist; ② does it accept workspace path as first argument; ③ does it parse the Badge Avg (h/week) column from badge_access_analysis.md; ④ is nurses_above_48h_badge exactly 7; ⑤ is nurses_above_60h_badge exactly 3; ⑥ is amy_chen_badge_hours within ±0.3 of 67.1."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on overtime_audit_report.md, badge_access_analysis.md, and icu_staffing_policy.md, create a date-prefixed staffing audit brief for Compliance Officer Angela Reeves at `docs/YYYY-MM-DD_staffing_audit_brief.md` (replace YYYY-MM-DD with today's actual date).\n\nRequirements:\n1. Cite WAC 246-840-711 explicitly by name\n2. State that 7 of 11 nurses exceed the 48 h/week threshold (use '7' as a standalone number)\n3. Reference the JONA 2010 finding: shifts exceeding 12.5 hours are associated with a 3x increase in medication error risk (cite '12.5' or 'JONA')\n4. Include ≥ 4 ## section headings",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_staffing_brief.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Staffing audit brief is complete with date prefix, WAC citation, 7-nurse threshold count, JONA/12.5h reference, and ≥4 ## headings.",
+        "incorrect": "Brief is incomplete. Check: ① does a file matching YYYY-MM-DD_staffing_audit_brief.md exist in docs/; ② is 'WAC 246-840-711' or 'WAC 246' present; ③ is '7' as a standalone number present; ④ is '12.5' or 'JONA' present; ⑤ are there ≥4 ## headings."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on all available workspace documents including incident_log_icucardiac.md and overtime_audit_report.md, create TWO output files:\n\n**File 1:** `analysis/reporting_culture_analysis.md`\nRequirements:\n- Document the ClinAlert submission decline: 9 submissions in Q4 2025 vs 3 in Q1 2026 (a 67% decline)\n- Explain the fear culture mechanism linking excessive hours to fewer formal incident reports\n- Include '9' and '3' as standalone numbers (use word boundary matching)\n- Include '67%' or '67 percent'\n- Include ≥ 3 ## section headings\n\n**File 2:** `analysis/near_miss_risk_model.md`\nRequirements:\n- Reference Trinkoff 2011: 60+ h/week produces cognitive impairment equivalent to BAC 0.08% (cite 'Trinkoff' or both '60' and 'BAC')\n- Reference JONA 2010: 12.5h shift threshold (cite 'JONA' or '12.5')\n- Connect to the 2 undocumented near-miss events from the unit\n- Include ≥ 3 ## section headings",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_reporting_culture.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Both files complete: reporting_culture_analysis.md has 9/3 counts, 67% decline, and ≥3 headings; near_miss_risk_model.md has Trinkoff/JONA references and near-miss connection.",
+        "incorrect": "Files incomplete or incorrect. Check: ① does analysis/reporting_culture_analysis.md exist with '9' and '3' as standalone numbers, '67%' or '67 percent', and ≥3 ## headings; ② does analysis/near_miss_risk_model.md exist with 'Trinkoff' or ('60' + 'BAC'), 'JONA' or '12.5', and 'near-miss' or 'near miss', and ≥3 ## headings."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on overtime_audit_report.md and incident_log_icucardiac.md, create TWO output files:\n\n**File 1:** `analysis/near_miss_event_log.json`\nRequirements — JSON array of exactly 2 objects, each with exact field names:\n```json\n[\n  {\n    \"event_id\": \"NM-1\",\n    \"date_approx\": \"<string>\",\n    \"type\": \"<string describing dosage confusion>\",\n    \"shift_duration_h\": <float ≥ 18>,\n    \"caught_by\": \"<string>\",\n    \"clinalert_filed\": false,\n    \"evidence_source\": \"<string>\"\n  },\n  {\n    \"event_id\": \"NM-2\",\n    \"date_approx\": \"<string>\",\n    \"type\": \"<string describing wrong-route administration>\",\n    \"shift_duration_h\": <float ≥ 14>,\n    \"caught_by\": \"<string>\",\n    \"clinalert_filed\": false,\n    \"evidence_source\": \"<string>\"\n  }\n]\n```\nNM-1 shift_duration_h must be ≥ 18. NM-2 shift_duration_h must be ≥ 14. Both clinalert_filed must be false.\n\n**File 2:** `analysis/presenteeism_vs_absenteeism.md`\nRequirements:\n- Explain why ICU presenteeism (working while cognitively impaired) is more dangerous than absenteeism\n- Reference 4.2 d/FTE (unit rate) vs 4.6 d/FTE (hospital average)\n- Identify cognitive impairment as the mechanism\n- Include ≥ 3 ## section headings",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_near_miss_log.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Both files complete: near_miss_event_log.json has 2 events with correct shift durations and clinalert_filed=false; presenteeism_vs_absenteeism.md has 4.2/4.6 metrics and ≥3 headings.",
+        "incorrect": "Files incomplete or incorrect. Check: ① does analysis/near_miss_event_log.json exist as a valid JSON array with exactly 2 elements; ② does NM-1 have shift_duration_h ≥ 18 and clinalert_filed=false; ③ does NM-2 have shift_duration_h ≥ 14 and clinalert_filed=false; ④ does analysis/presenteeism_vs_absenteeism.md exist with '4.2' and '4.6' and 'presenteeism' and ≥3 ## headings."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write a Python script at `scripts/analyze_near_miss_patterns.py` that reads BOTH of the following files from the workspace:\n- `analysis/near_miss_event_log.json` (JSON array of near-miss events created in a previous task)\n- The near-miss documentation embedded in `overtime_audit_report.md` (for corroboration)\n\nThe script takes the workspace root path as its first command-line argument and outputs the following JSON to stdout (no other text):\n```json\n{\"total_near_misses\": 2, \"clinalert_filed_count\": 0, \"avg_shift_duration_at_event\": <float>, \"longest_shift_at_event\": <float>}\n```\n\nValidation requirements:\n- `total_near_misses` must equal 2\n- `clinalert_filed_count` must equal 0\n- `avg_shift_duration_at_event` must be ≥ 14\n- `longest_shift_at_event` must be ≥ 18",
+      "eval": {
+        "command": "python ${workspace}/scripts/analyze_near_miss_patterns.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "analyze_near_miss_patterns.py runs successfully and outputs JSON with total_near_misses=2, clinalert_filed_count=0, and correct shift duration statistics.",
+        "incorrect": "Script failed or produced incorrect output. Check: ① does scripts/analyze_near_miss_patterns.py exist; ② does it accept workspace path as first argument; ③ does it read analysis/near_miss_event_log.json; ④ is total_near_misses=2; ⑤ is clinalert_filed_count=0; ⑥ is avg_shift_duration_at_event ≥ 14; ⑦ is longest_shift_at_event ≥ 18."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd3_workspace",
+        "upd3_sessions"
+      ],
+      "question": "After reviewing Sarah Kim's symptom timeline (Update 3: sarahkim_symptom_timeline.md), which of the following statements about clinical impact of excessive nursing hours are now supported by documentary evidence?",
+      "options": {
+        "A": "Sarah Kim documented a measurable 20-30% increase in her decision latency over the 8-week observation period, which she attributed to cumulative fatigue from extended hours",
+        "B": "Near-miss event NM-1 occurred during a shift of approximately 19 hours at around 3:15 AM, involving a medication dosage confusion that was self-corrected before administration",
+        "C": "Near-miss event NM-2 involved a wrong-route administration error that occurred during hour 14 of a scheduled 12-hour shift",
+        "D": "Both NM-1 and NM-2 were filed through ClinAlert, creating an official safety record consistent with hospital reporting policy",
+        "E": "Sarah Kim's personal symptom log constitutes objective physiological measurement equivalent in evidentiary weight to a standardized neuropsychological assessment",
+        "F": "Sarah Kim's timeline documents that the cognitive effects of excessive shift lengths (presenteeism) pose greater patient safety risk than absenteeism, because an absent nurse can be replaced but an impaired nurse may cause undetected errors"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "F"
+      ],
+      "feedback": {
+        "correct": "Correct. A, B, C, and F are all supported by sarahkim_symptom_timeline.md. D is incorrect — the timeline explicitly documents that neither NM-1 nor NM-2 was filed through ClinAlert, which is the core of the underreporting problem. E is incorrect — the document is a self-reported personal journal, not an objective clinical assessment.",
+        "options": {
+          "D": "Incorrect: Sarah Kim's symptom timeline explicitly documents that zero ClinAlert reports were filed for NM-1 or NM-2. This is consistent with the broader pattern of incident underreporting documented across the investigation.",
+          "E": "Incorrect: A self-reported personal symptom journal has significant evidential value as a contemporaneous account but is not the same as a standardized psychometric or physiological assessment. Treating the two as equivalent would overstate its evidentiary weight."
+        }
+      }
+    },
+    {
+      "id": "q18",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on sarahkim_symptom_timeline.md and overtime_audit_report.md, create `analysis/retention_risk_assessment.json`.\n\nRequirements — JSON with exact field names:\n```json\n{\n  \"at_risk_count\": 3,\n  \"at_risk_nurses\": [\n    {\"name\": \"Amy Chen\", \"hours_per_week\": 68.4, \"risk_indicator\": \"<string>\"},\n    {\"name\": \"<second nurse>\", \"hours_per_week\": <float>, \"risk_indicator\": \"<string>\"},\n    {\"name\": \"<third nurse>\", \"hours_per_week\": <float>, \"risk_indicator\": \"<string>\"}\n  ],\n  \"primary_driver\": \"excessive_hours\",\n  \"evidence_basis\": \"<string referencing badge/Walsh audit data>\"\n}\n```\n\nCritical constraints:\n- `at_risk_count` must equal 3\n- `at_risk_nurses` array must contain Amy Chen\n- `primary_driver` must contain 'excessive' or 'hours'\n- M6 NEGATIVE CONSTRAINT: the `evidence_basis` field must NOT cite CareScheduler as evidence that hours are compliant. CareScheduler's values are not ground truth for actual hours worked.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_retention_risk.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "retention_risk_assessment.json is complete with at_risk_count=3, Amy Chen in the at_risk_nurses array, and evidence_basis not relying on CareScheduler as ground truth.",
+        "incorrect": "JSON is incomplete or violates constraints. Check: ① does analysis/retention_risk_assessment.json exist as valid JSON; ② is at_risk_count=3; ③ is 'Amy Chen' in one of the at_risk_nurses names; ④ does primary_driver contain 'excessive' or 'hours'; ⑤ does evidence_basis NOT cite CareScheduler as evidence of compliant hours."
+      }
+    },
+    {
+      "id": "q19",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on all available workspace documents through Update 3, create a date-prefixed clinical safety impact report at `docs/YYYY-MM-DD_clinical_safety_impact_report.md` (replace YYYY-MM-DD with today's actual date).\n\nRequirements (all six must be satisfied):\n1. State the evidence hierarchy: badge/Walsh audit (Tier-1) vs CareScheduler (Tier-3)\n2. State Amy Chen's actual hours: 68.4 h/week\n3. State that 7 nurses exceed the 48 h/week threshold (use '7' as a standalone number)\n4. Cite WAC 246-840-711 or RCW 70.41.230 explicitly\n5. Reference near-miss events (NM-1 or 'near-miss')\n6. Include ≥ 5 ## section headings",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_clinical_impact.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Clinical safety impact report is complete with date prefix, evidence hierarchy, Amy Chen hours, 7-nurse count, regulatory citation, near-miss reference, and ≥5 ## headings.",
+        "incorrect": "Report is incomplete. Check all six requirements: ① YYYY-MM-DD_ prefixed file in docs/; ② 'Tier-1' or 'independent' and 'Tier-3' or 'self-reported' present; ③ '68.4' present; ④ '7' as standalone number present; ⑤ 'WAC 246-840-711' or 'RCW 70.41.230' present; ⑥ 'NM-1' or 'near-miss' present; ⑦ ≥5 ## headings."
+      }
+    },
+    {
+      "id": "q20",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write a Python script at `scripts/generate_retention_report.py` that reads TWO files from the workspace:\n- `analysis/retention_risk_assessment.json` (JSON created in a previous task)\n- `overtime_audit_report.md` (Markdown table with Walsh audit data)\n\nThe script takes the workspace root path as its first command-line argument and outputs the following JSON to stdout (no other text):\n```json\n{\"at_risk_count\": <int>, \"total_nurses\": 11, \"risk_rate_pct\": <float>, \"highest_hours_at_risk\": <float>}\n```\n\nValidation requirements:\n- `at_risk_count` must equal 3\n- `total_nurses` must equal 11\n- `risk_rate_pct` must be within ±1.0 of 27.3 (3/11 × 100 ≈ 27.27)\n- `highest_hours_at_risk` must be within ±1.0 of 70.3 (Tanya Williams, highest among at-risk nurses)",
+      "eval": {
+        "command": "python ${workspace}/scripts/generate_retention_report.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "generate_retention_report.py runs successfully and outputs JSON with at_risk_count=3, total_nurses=11, risk_rate_pct≈27.3, and highest_hours_at_risk≈70.3.",
+        "incorrect": "Script failed or produced incorrect output. Check: ① does scripts/generate_retention_report.py exist; ② does it read both analysis/retention_risk_assessment.json and overtime_audit_report.md; ③ is at_risk_count=3; ④ is total_nurses=11; ⑤ is risk_rate_pct within ±1.0 of 27.3; ⑥ is highest_hours_at_risk within ±1.0 of 70.3."
+      }
+    },
+    {
+      "id": "q21",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on all available workspace documents through Update 3, create TWO output files:\n\n**File 1:** `analysis/four_contradiction_matrix.md`\nDocument all four contradictions in labeled sections or a table:\n- C1: CareScheduler avg 42.3 h/week (100% compliant) vs badge/Walsh avg 58.4 h/week (7/11 above 48h)\n- C2: Low sick leave (4.2 d/FTE below 4.6 hospital avg) vs burnout/presenteeism reality\n- C3: ClinAlert 3 Q1 submissions (67% decline from Q4's 9) vs 2+ unreported near-miss events\n- C4: Angela's preliminary 'overall satisfactory' (CareScheduler-only) vs full cross-source audit showing 4-month systematic falsification\nRequirements: C1–C4 all labeled; 42.3 and 58.4 both present; '67%' or 9/3 decline referenced; Angela preliminary vs full audit contrast present; ≥4 ## headings OR ≥4 table rows.\n\n**File 2:** `analysis/contradiction_resolution.json`\nRequirements (exact field names):\n```json\n{\n  \"c1_official\": \"42.3 h/week CareScheduler avg\",\n  \"c1_actual\": \"58.4 h/week badge avg\",\n  \"c1_resolved_by\": \"badge_and_walsh_audit\",\n  \"c2_official\": \"<string>\",\n  \"c2_actual\": \"<string>\",\n  \"c3_official\": \"<string>\",\n  \"c3_actual\": \"<string>\",\n  \"c4_official\": \"<string>\",\n  \"c4_actual\": \"<string>\",\n  \"reliable_source\": \"badge_data_and_manual_audit\"\n}\n```\nc1_official must contain '42.3'; c1_actual must contain '58.4'; all 9 fields must be present.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_contradiction_matrix.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Both files complete: four_contradiction_matrix.md has all C1–C4, 42.3 and 58.4, 67% decline, and Angela preliminary contrast; contradiction_resolution.json has all required fields with c1_official containing 42.3 and c1_actual containing 58.4.",
+        "incorrect": "Files incomplete or incorrect. Check: ① does analysis/four_contradiction_matrix.md exist with 'C1' through 'C4' labeled, '42.3' and '58.4' present, '67%' or the 9/3 decline, and Angela's preliminary vs full audit contrast; ② does analysis/contradiction_resolution.json exist as valid JSON with all 9 fields, c1_official containing '42.3', c1_actual containing '58.4'."
+      }
+    },
+    {
+      "id": "q22",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on caresched_audit_findings.md (available after Update 4 trigger at q23, but anticipate using all available sources) and overtime_audit_report.md, create `analysis/preliminary_audit_critique.md`.\n\nRequirements (M2 source conflict analysis):\n1. Explicitly state that Angela's preliminary review relied solely on CareScheduler data — identify CareScheduler as the less reliable source and explain why (charge nurses enter their own shift data)\n2. State that CareScheduler is NOT an independent source because the charge nurses who enter the data are the same people whose hours are being recorded\n3. Explain why a CareScheduler-only analysis produces a materially false conclusion (it cannot detect systematic underreporting by the data entry agents)\n4. Reference 'charge nurses' as the data entry source\n5. Include ≥ 2 ## section headings",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_cross_validation.py ${workspace} --mode preliminary_critique",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Preliminary audit critique is complete with CareScheduler identified as unreliable source, preliminary vs full audit contrast, charge nurse data entry role identified, and ≥2 ## headings.",
+        "incorrect": "Document is incomplete. Check: ① does analysis/preliminary_audit_critique.md exist; ② is 'CareScheduler' identified as the unreliable source for the preliminary review; ③ is 'preliminary' or 'preliminary review' contrasted with 'full' or 'comprehensive' audit; ④ is 'charge nurses' identified as data entry source; ⑤ are there ≥2 ## headings."
+      }
+    },
+    {
+      "id": "q23",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd4_workspace",
+        "upd4_sessions"
+      ],
+      "question": "After receiving Angela Reeves's formal compliance audit findings (Update 4: caresched_audit_findings.md), which of the following statements about the formal findings and regulatory obligations are supported by documentary evidence?\n\nNote: each statement must be directly traceable to a specific finding (F1–F4) in caresched_audit_findings.md.",
+      "options": {
+        "A": "Finding F1 documents that charge nurse Linda Yee instructed staff to 'enter the scheduled hours — administration needs clean numbers', establishing directed systematic circumvention of accurate time recording",
+        "B": "Finding F2 establishes that 9 of 11 full-time nurses (all staff nurses; both charge nurses are excluded) participated in the underreporting practice, and the practice has persisted for at least 4 months (since approximately November 2025)",
+        "C": "Finding F3 identifies 2 documented near-miss events where ClinAlert filings were not completed, and connects the underreporting of incidents to the underreporting of hours as products of the same institutional culture",
+        "D": "Finding F4 requires mandatory reporting to the Washington State Department of Health within 72 hours under RCW 70.41.230, because the documented pattern meets the statutory threshold for a reportable patient safety event",
+        "E": "The formal audit supersedes and reverses Angela's earlier preliminary finding, demonstrating conclusively that CareScheduler-only analysis produced a materially false conclusion",
+        "F": "The formal audit finding immediately triggers automatic suspension of the hospital's Joint Commission accreditation pending full investigation"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "feedback": {
+        "correct": "Correct. A through E are all directly supported by caresched_audit_findings.md. A–D map to findings F1–F4. E is explicitly noted in the formal finding, which references the discrepancy with the earlier preliminary review. F is incorrect — the formal finding triggers reporting obligations, not automatic accreditation suspension; accreditation decisions are made by the Joint Commission following its own review process.",
+        "options": {
+          "F": "Incorrect: The formal audit finding under RCW 70.41.230 triggers a mandatory report to the state health department, but does not automatically suspend Joint Commission accreditation. Accreditation decisions are made by the Joint Commission following its own survey and review process."
+        }
+      }
+    },
+    {
+      "id": "q24",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on caresched_audit_findings.md (available after Update 4), create `analysis/formal_finding_summary.json`.\n\nRequirements — JSON array of exactly 4 objects, each with exact field names:\n```json\n[\n  {\n    \"finding_id\": \"F1\",\n    \"title\": \"<string>\",\n    \"details\": \"<string mentioning Linda Yee or systematic circumvention>\",\n    \"regulatory_citation\": \"<string, may be empty>\",\n    \"severity\": \"critical\"\n  },\n  {\n    \"finding_id\": \"F2\",\n    \"title\": \"<string>\",\n    \"details\": \"<string mentioning 9 nurses or 4 months>\",\n    \"regulatory_citation\": \"<string>\",\n    \"severity\": \"critical\"|\"high\"\n  },\n  {\n    \"finding_id\": \"F3\",\n    \"title\": \"<string>\",\n    \"details\": \"<string mentioning near-miss or patient safety>\",\n    \"regulatory_citation\": \"<string>\",\n    \"severity\": \"critical\"|\"high\"\n  },\n  {\n    \"finding_id\": \"F4\",\n    \"title\": \"<string>\",\n    \"details\": \"<string>\",\n    \"regulatory_citation\": \"<string containing RCW 70.41.230 or 70.41.230>\",\n    \"severity\": \"critical\"|\"high\"\n  }\n]\n```\nConstraints:\n- Array length must equal 4\n- F1 details must mention 'Linda Yee' or 'systematic circumvention'\n- F3 details must mention 'near-miss' or 'patient safety'\n- F4 regulatory_citation must contain '70.41.230'\n- severity field for each entry must be one of: 'critical', 'high', 'medium', 'low'",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_formal_findings.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "formal_finding_summary.json is complete with exactly 4 findings, F1 mentioning Linda Yee/systematic circumvention, F3 mentioning near-miss, and F4 citing RCW 70.41.230.",
+        "incorrect": "JSON is incomplete or violates constraints. Check: ① does analysis/formal_finding_summary.json exist as a valid JSON array with exactly 4 elements; ② do all four finding_ids F1–F4 exist; ③ does F1.details mention 'Linda Yee' or 'systematic circumvention'; ④ does F3.details mention 'near-miss' or 'patient safety'; ⑤ does F4.regulatory_citation contain '70.41.230'; ⑥ is each severity value one of the four valid enum values."
+      }
+    },
+    {
+      "id": "q25",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write a Python script at `scripts/compute_compliance_metrics.py` that reads THREE files from the workspace:\n- `overtime_audit_report.md` (Markdown table: ID | Name | CareScheduler Avg (h/week) | Walsh Manual Avg (h/week) | Badge Avg (h/week) | Discrepancy (h/week))\n- `badge_access_analysis.md` (Markdown table: ID | Name | Badge Avg (h/week) | CareScheduler Avg (h/week) | Discrepancy (h/week) | Category)\n- `caresched_audit_findings.md` (formal audit findings F1–F4)\n\nThe script takes the workspace root path as its first command-line argument and outputs the following JSON to stdout (no other text):\n```json\n{\"finding_count\": 4, \"nurses_affected\": 9, \"months_of_falsification\": 4, \"mandatory_reporting_hours\": 72, \"violations_above_48h\": 7, \"violations_above_60h\": 3}\n```\n\nValidation requirements:\n- `finding_count` must equal 4\n- `nurses_affected` must equal 9\n- `mandatory_reporting_hours` must equal 72\n- `violations_above_48h` must equal 7\n- `violations_above_60h` must equal 3",
+      "eval": {
+        "command": "python ${workspace}/scripts/compute_compliance_metrics.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "compute_compliance_metrics.py runs successfully and outputs JSON with finding_count=4, nurses_affected=9, mandatory_reporting_hours=72, violations_above_48h=7, violations_above_60h=3.",
+        "incorrect": "Script failed or produced incorrect output. Check: ① does scripts/compute_compliance_metrics.py exist; ② does it read all three required files; ③ is finding_count=4; ④ is nurses_affected=9; ⑤ is mandatory_reporting_hours=72; ⑥ is violations_above_48h=7; ⑦ is violations_above_60h=3."
+      }
+    },
+    {
+      "id": "q26",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on caresched_audit_findings.md (available after Update 4), create `analysis/linda_yee_instruction_analysis.md`.\n\nRequirements:\n1. Quote or accurately paraphrase the instruction: 'enter the scheduled hours — administration needs clean numbers'\n2. Identify the organizational accountability chain: Linda Yee (charge nurse) gave the instruction; staff nurses followed it\n3. Reference Linda Yee's 'charge nurse' role and the authority that role carries over CareScheduler data entry\n4. Include ≥ 2 ## section headings",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_linda_yee.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Linda Yee instruction analysis is complete with instruction quoted/paraphrased, accountability chain identified, charge nurse role referenced, and ≥2 ## headings.",
+        "incorrect": "Document is incomplete. Check: ① does analysis/linda_yee_instruction_analysis.md exist; ② is 'Linda Yee' or 'Linda' present; ③ is 'scheduled hours' or 'clean numbers' present (instruction paraphrase); ④ is 'charge nurse' present; ⑤ are there ≥2 ## headings."
+      }
+    },
+    {
+      "id": "q27",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on caresched_audit_findings.md and all previous analysis, create TWO output files:\n\n**File 1:** `docs/YYYY-MM-DD_mandatory_reporting_memo.md` (replace YYYY-MM-DD with today's actual date)\nRequirements:\n- Cite RCW 70.41.230 explicitly by name\n- State the 72-hour mandatory reporting deadline\n- Include ≥ 3 ## section headings\n\n**File 2:** `analysis/regulatory_citation_index.json`\nRequirements (exact field names and values):\n```json\n{\n  \"rcw_70_41_230\": {\"topic\": \"mandatory reporting\", \"deadline_hours\": 72, \"triggered\": true},\n  \"wac_246_840_711\": {\"topic\": \"48h weekly maximum\", \"threshold_hours\": 48, \"violated_by_count\": 7},\n  \"rcw_49_28_140\": {\"topic\": \"mandatory overtime prohibition\", \"triggered\": false}\n}\n```\nConstraints:\n- `deadline_hours` must equal 72\n- `threshold_hours` must equal 48\n- `violated_by_count` must equal 7",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_mandatory_reporting.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Both files complete: mandatory_reporting_memo.md has RCW 70.41.230, '72', and ≥3 headings; regulatory_citation_index.json has deadline_hours=72, threshold_hours=48, violated_by_count=7.",
+        "incorrect": "Files incomplete or incorrect. Check: ① does a YYYY-MM-DD_mandatory_reporting_memo.md exist in docs/; ② is 'RCW 70.41.230' or '70.41.230' present in the memo; ③ is '72' present in the memo; ④ are there ≥3 ## headings; ⑤ does analysis/regulatory_citation_index.json exist with deadline_hours=72, threshold_hours=48, violated_by_count=7."
+      }
+    },
+    {
+      "id": "q28",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Which of the following statements about analytical biases in Dr. Tanaka's investigation approach are supported by the full body of evidence gathered across all four investigation phases?",
+      "options": {
+        "A": "Dr. Tanaka's initial reliance on CareScheduler as the primary source represents an anchoring bias that could have prematurely closed the investigation had Walsh's audit not provided a contradicting signal",
+        "B": "Requiring independent badge data to corroborate Walsh's manual audit before drawing regulatory conclusions represents sound epistemic practice — specifically, mitigating confirmation bias by requiring two independent sources",
+        "C": "Dr. Tanaka's acceptance of Walsh's audit as conclusive without cross-verification represents an uncorrected confirmation bias that renders the entire investigation epistemically invalid",
+        "D": "The charge nurse accuracy asymmetry (Donna Park and David Okafor having matching records, while all 9 staff nurses are systematically understated) is a critical deconfounding observation — it rules out the alternative hypothesis that CareScheduler software error caused the discrepancy",
+        "E": "Accepting Angela's preliminary 'overall satisfactory' conclusion would have been the epistemically correct choice, because preliminary reviews by professional compliance officers constitute sufficient due diligence",
+        "F": "The investigation exemplifies sound epistemic practice by requiring multiple independent lines of evidence (Walsh manual audit + badge data + Sarah Kim's symptom timeline) before reaching regulatory conclusions"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D",
+        "F"
+      ],
+      "feedback": {
+        "correct": "Correct. A identifies the initial anchoring bias that was overcome. B correctly describes the epistemic value of requiring two independent sources. D identifies the deconfounding importance of the charge nurse asymmetry in ruling out software error. F accurately characterizes the investigation's overall methodology. C is wrong — Dr. Tanaka did NOT treat Walsh's audit as conclusive; commissioning the badge analysis was specifically the cross-verification step. E is wrong — Angela's preliminary review was CareScheduler-only, which is the source proven to be systematically false; accepting it would have been the epistemic error, not avoiding it.",
+        "options": {
+          "C": "Incorrect: The investigation record shows that Dr. Tanaka commissioned badge data analysis specifically to corroborate Walsh's findings before drawing conclusions. The cross-verification step was the designed remedy against this exact bias.",
+          "E": "Incorrect: Angela's preliminary review was based solely on CareScheduler, which is the source subsequently proven to contain systematic underreporting. A review that relies exclusively on a source with a known structural conflict of interest cannot constitute sufficient due diligence."
+        }
+      }
+    },
+    {
+      "id": "q29",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on all workspace documents and prior analysis, create a comprehensive final compliance report at `docs/YYYY-MM-DD_final_compliance_report.md` (replace YYYY-MM-DD with today's actual date).\n\nThis report must satisfy ALL five preference rules:\n- P1: Explicitly compare badge/Walsh audit ('actual') vs CareScheduler ('reported') using both terms within the document\n- P2: Include ≥ 2 h/week metric expressions (e.g., '58.4 h/week', '42.3 h/week', '68.4 h/week')\n- P3: File must have a YYYY-MM-DD_ date prefix\n- P4: Use explicit cross-verification language: 'cross-verified', 'corroborated', 'independently confirmed', 'both sources', or 'cross-validation'\n- P5: Cite WAC 246-840-711 AND RCW 70.41.230\n\nAdditional content requirements:\n- State Amy Chen's actual hours: 68.4 h/week\n- State that 7 nurses exceeded the 48 h/week threshold\n- Reference the near-miss events (NM-1 or 'near-miss')\n- Include ≥ 5 ## section headings\n- Document length must be ≥ 800 characters",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_final_compliance.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3,P4,P5 --target docs/",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Final compliance report satisfies all five preference rules and all content requirements: date prefix, P1 comparison language, P2 h/week metrics, P4 cross-verification language, P5 regulatory citations, plus Amy Chen 68.4 h/week, 7 nurses above threshold, near-miss reference, ≥5 headings, ≥800 characters.",
+        "incorrect": "Report is incomplete or fails preference checks. Verify all five rules: P1 (badge/CareScheduler with actual/reported language); P2 (≥2 h/week metrics); P3 (YYYY-MM-DD_ prefix in docs/); P4 (cross-verification language); P5 (both WAC 246-840-711 and RCW 70.41.230). Also check: '68.4' for Amy Chen, '7' as standalone number for threshold violations, 'near-miss' or 'NM-1', ≥5 ## headings, ≥800 characters total."
+      }
+    },
+    {
+      "id": "q30",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on all available documentation including caresched_audit_findings.md, which of the following statements represent the most accurate assessment of the regulatory situation at Pacific Heights Medical Center's Cardiac ICU?",
+      "options": {
+        "A": "RCW 70.41.230 mandatory reporting is triggered because the formal compliance finding documents a systemic patient safety practice — over 4 months of underreported hours, 2 near-miss events with no ClinAlert filings, and 9 of 11 nurses affected — that meets the statutory threshold for a reportable event",
+        "B": "A CMS survey conducted on the current date would likely find the facility out of compliance with safe staffing requirements, because badge data confirms 7 of 11 nurses exceeded 48 h/week during the audit period",
+        "C": "The Joint Commission survey conducted approximately 4 months ago (prior to the onset of systematic underreporting in November 2025) remains valid for the period it covered, but the current conditions documented by the formal audit represent non-compliant status",
+        "D": "Because CareScheduler showed 100% compliance at the time of the Joint Commission survey, the formal audit findings cannot be used to retroactively question the accuracy of that survey outcome",
+        "E": "The practice onset in November 2025 means the facility was compliant before that date, and the 4-month duration limits the regulatory exposure to a relatively minor violation",
+        "F": "The mandatory report to the Washington State Department of Health under RCW 70.41.230 must be filed within 72 hours of the date the formal compliance finding was issued"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "F"
+      ],
+      "feedback": {
+        "correct": "Correct. A accurately states why mandatory reporting is triggered and the scope of the systemic finding. B correctly identifies the CMS compliance risk based on badge data. C accurately describes the temporal boundary of the prior Joint Commission survey's validity. F correctly states the 72-hour filing requirement under RCW 70.41.230. D is incorrect — formal audit findings are available to regulators regardless of survey timing and can inform understanding of the facility's compliance history. E mischaracterizes the regulatory significance — a 4-month duration of organization-directed, systematic falsification is an aggravating factor that increases rather than limits regulatory exposure.",
+        "options": {
+          "D": "Incorrect: Formal audit findings issued under state law are available to all regulatory bodies. They do not become inadmissible because a survey predated the discovery. Regulators can and do use subsequent findings to understand the full compliance history of a facility.",
+          "E": "Incorrect: A 4-month duration of systematic, leadership-directed falsification — documented with a specific instruction ('enter the scheduled hours') and 9 of 11 nurses affected — is treated as an aggravating factor under regulatory frameworks, not a limiting one. Extended duration of a pattern violation typically increases, not decreases, regulatory sanctions."
+        }
+      }
+    }
+  ]
+}

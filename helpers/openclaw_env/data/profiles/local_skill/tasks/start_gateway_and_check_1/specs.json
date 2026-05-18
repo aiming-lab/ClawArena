@@ -1,0 +1,49 @@
+{
+  "task_id": "start_gateway_and_check_1",
+  "instruction": "Start the openclaw gateway, then verify it is running by checking the system health.",
+  "domains": [
+    "monitoring"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "start_gateway_and_check",
+  "generator_id": "start_gateway_and_check",
+  "weight": 1.0,
+  "data": {
+    "public": {},
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw gateway start",
+      "openclaw health"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "gateway_status.running",
+        "condition": "equals",
+        "expected": true,
+        "name": "gateway is running"
+      },
+      {
+        "type": "output",
+        "match_type": "contains",
+        "expected": "ok",
+        "output_field": "last_stdout",
+        "name": "health check passed",
+        "ignore_case": true
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "start_gateway_and_check",
+      "params": {},
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

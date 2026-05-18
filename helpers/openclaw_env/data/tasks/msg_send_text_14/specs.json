@@ -1,0 +1,97 @@
+{
+  "task_id": "msg_send_text_14",
+  "instruction": "Send a text message to #general on telegram saying 'Meeting at 3pm tomorrow'.",
+  "canonical_instruction": "Send a text message to #general on telegram saying 'Meeting at 3pm tomorrow'.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "channel",
+      "value": "telegram"
+    },
+    {
+      "type": "target",
+      "value": "#general"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "single_step",
+    "high_volatility"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "messaging"
+  ],
+  "difficulty": 1,
+  "initial_state": "default",
+  "template_id": "msg_send_text",
+  "generator_id": "msg_send_text",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "telegram",
+      "target": "#general",
+      "content": "Meeting at 3pm tomorrow",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_target": "#general",
+      "expected_channel": "telegram",
+      "expected_content": "Meeting at 3pm tomorrow"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw message send --channel telegram --target #general --message 'Meeting at 3pm tomorrow'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "#general"
+        },
+        "name": "message sent to correct target"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_contains",
+        "expected": {
+          "field": "message",
+          "value": "Meeting at 3pm tomorrow"
+        },
+        "name": "message content correct"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "msg_send_text",
+      "params": {
+        "channel": "telegram",
+        "target": "#general",
+        "content": "Meeting at 3pm tomorrow"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "task_id": "full_agent_workflow_6",
+  "instruction": "Set up an automated workflow:\n1. Create a new agent named 'status-monitor'\n2. Log into the telegram channel\n3. Create a cron job with schedule '*/30 * * * *' that triggers the agent to send a status report",
+  "domains": [
+    "agent_mgmt",
+    "channel_mgmt",
+    "cron_webhook"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "full_agent_workflow",
+  "generator_id": "full_agent_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "agent_name": "status-monitor",
+      "channel": "telegram",
+      "schedule": "*/30 * * * *"
+    },
+    "private": {
+      "expected_agent": "status-monitor",
+      "expected_channel": "telegram"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw agents add status-monitor",
+      "openclaw channels login --channel telegram",
+      "openclaw cron add --name agent-report-4df0cc8f --cron '*/30 * * * *' --message 'Trigger agent status-monitor status report'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "agents.status-monitor",
+        "condition": "exists",
+        "expected": null,
+        "name": "agent 'status-monitor' created"
+      },
+      {
+        "type": "state",
+        "field": "channels.telegram",
+        "condition": "exists",
+        "expected": null,
+        "name": "telegram configured"
+      },
+      {
+        "type": "state",
+        "field": "cron_jobs",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "full_agent_workflow",
+      "params": {
+        "agent_name": "status-monitor",
+        "channel": "telegram",
+        "schedule": "*/30 * * * *"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

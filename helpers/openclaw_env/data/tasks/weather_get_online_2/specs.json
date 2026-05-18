@@ -1,0 +1,82 @@
+{
+  "task_id": "weather_get_online_2",
+  "instruction": "I'm heading out soon and need a live weather check for London. Please look it up online and summarize the current conditions.",
+  "canonical_instruction": "I'm heading out soon and need a live weather check for London. Please look it up online and summarize the current conditions.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "location",
+      "value": "London"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "single_step"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "weather_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "weather"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "weather_get_online",
+  "generator_id": "weather_get_online",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "location": "London",
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "weather get --location 'London'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "weather get online succeeds"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "Weather for London",
+        "name": "output contains location weather line"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "Source",
+        "name": "output includes data source"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "weather_get_online",
+      "params": {
+        "location": "London"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

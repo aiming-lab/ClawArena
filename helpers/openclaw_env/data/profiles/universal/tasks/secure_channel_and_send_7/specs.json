@@ -1,0 +1,70 @@
+{
+  "task_id": "secure_channel_and_send_7",
+  "instruction": "Perform a secure setup:\n1. Set a security token for the gateway (use 'secure-token-env-test')\n2. Log into the slack channel\n3. Send a message to @alice confirming the secure setup",
+  "domains": [
+    "security",
+    "channel_mgmt",
+    "messaging"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "secure_channel_and_send",
+  "generator_id": "secure_channel_and_send",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "slack",
+      "target": "@alice"
+    },
+    "private": {
+      "expected_channel": "slack",
+      "expected_target": "@alice"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw config set gateway.auth.token secure-token-env-test",
+      "openclaw channels login --channel slack",
+      "openclaw message send --channel slack --target @alice --message 'Secure setup complete'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "config",
+        "config_path": "gateway.auth.token",
+        "condition": "equals",
+        "expected": "secure-token-env-test",
+        "name": "auth token configured"
+      },
+      {
+        "type": "state",
+        "field": "channels.slack",
+        "condition": "exists",
+        "expected": null,
+        "name": "slack configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "@alice"
+        },
+        "name": "confirmation message sent"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "secure_channel_and_send",
+      "params": {
+        "channel": "slack",
+        "target": "@alice"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "task_id": "hard_decision_workflow_44",
+  "instruction": "Can you get the London release gate ready? Check the current model, what's already on the board, and what's already on the calendar before you update the handoff file, the next step on the board, and the sync.",
+  "canonical_instruction": "I need the London release gate tightened up. Please confirm the current model, check the board and calendar first, then refresh the handoff file, the next step on the board, and the sync on the calendar.",
+  "instruction_variants": [
+    "Please get the London release gate into shape. Confirm the current model, check the board and calendar first, then update the handoff file, the London next step on the board, and the sync on the calendar.",
+    "Can you tighten up the London release gate? Check the current model and the existing board and calendar state first, then refresh the handoff file, the next step on the board, and the sync.",
+    "Please get the London release gate sorted out. Confirm the current model, review the board and calendar first, then update the handoff file, the next step on the board, and the sync on the calendar.",
+    "I need the London release gate tightened up. Please confirm the current model, check the board and calendar first, then refresh the handoff file, the next step on the board, and the sync on the calendar.",
+    "The London release gate still needs to be cleaned up. Please review the current model plus the board and calendar state before you refresh the handoff file, the next step on the board, and the sync.",
+    "Please get the London release gate into good shape. Check the current model and the current board and calendar state first, then refresh the handoff file, the next step on the board, and the sync on the calendar.",
+    "I need the London release gate wrapped up properly. Confirm the current model, review the board and calendar first, then refresh the handoff file, the next step on the board, and the sync on the calendar."
+  ],
+  "visible_constraints": [],
+  "hidden_constraints": [
+    {
+      "type": "path",
+      "value": "/ops/release-handoff.txt"
+    },
+    {
+      "type": "title",
+      "value": "London release gate follow-through"
+    },
+    {
+      "type": "title",
+      "value": "London release gate sync"
+    },
+    {
+      "type": "priority",
+      "value": "high"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_schedule",
+    "infer_model"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "release_gate_followthrough",
+      "hard_decision_variant": 2,
+      "hard_decision_ability": "workflow_completion",
+      "hard_decision_ability_tags": [
+        "workflow_completion",
+        "state_inspection"
+      ],
+      "prompt_style": "brief",
+      "step_count": 8
+    },
+    "private": {
+      "initial_state_overrides": {}
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw config get agent.model",
+      "tasks list --status pending",
+      "calendar list",
+      "calendar today --timezone Europe/London",
+      "file create --path '/ops/release-handoff.txt' --content 'London release gate handoff notes.'",
+      "tasks add --title 'London release gate follow-through' --priority high --due 2026-03-08",
+      "calendar add-event --title 'London release gate sync' --start 2026-03-10T09:00",
+      "calendar today --timezone Europe/London"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "config",
+        "config_path": "agent.model",
+        "condition": "equals",
+        "expected": "anthropic/claude-opus-4-6",
+        "name": "model set to anthropic/claude-opus-4-6"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "file created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "field_contains",
+        "expected": {
+          "field": "path",
+          "value": "handoff"
+        },
+        "name": "handoff file path references handoff"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 43
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "task_id": "file_create_and_read_5",
+  "instruction": "Please create a file at '/docs/readme.md' with content '# My Notes\n- item 1\n- item 2', then read it back to confirm it saved correctly.",
+  "domains": [
+    "file"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "file_create_and_read",
+  "generator_id": "file_create_and_read",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "path": "/docs/readme.md",
+      "content": "# My Notes\n- item 1\n- item 2"
+    },
+    "private": {
+      "expected_content": "# My Notes\n- item 1\n- item 2"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "file create --path '/docs/readme.md' --content '# My Notes\n- item 1\n- item 2'",
+      "file read --path '/docs/readme.md'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "file created"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "# My Notes\n- item 1\n",
+        "name": "file content readable"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "file_create_and_read",
+      "params": {
+        "path": "/docs/readme.md",
+        "content": "# My Notes\n- item 1\n- item 2"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

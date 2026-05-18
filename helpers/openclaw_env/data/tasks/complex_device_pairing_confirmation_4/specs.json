@@ -1,0 +1,127 @@
+{
+  "task_id": "complex_device_pairing_confirmation_4",
+  "instruction": "[Device Pairing Confirmation] Pair a device and capture immediate operational follow-up. Start device pairing and verify paired devices, send pairing update to pm@example.com, then search outstanding tasks for 'proposal' to confirm follow-up coverage.",
+  "canonical_instruction": "[Device Pairing Confirmation] Pair a device and capture immediate operational follow-up. Start device pairing and verify paired devices, send pairing update to pm@example.com, then search outstanding tasks for 'proposal' to confirm follow-up coverage.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "email",
+      "value": "pm@example.com"
+    },
+    {
+      "type": "query",
+      "value": "proposal"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "subject",
+      "value": "Device Pairing Confirmation status digest update for Atlanta"
+    },
+    {
+      "type": "body",
+      "value": "Device Pairing Confirmation status digest: completed triage on proposal and captured next actions for Atlanta."
+    }
+  ],
+  "decision_requirements": [
+    "infer_message",
+    "infer_title"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "life_work",
+    "online_required"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "email_provider",
+    "google_tasks"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "cron_webhook",
+    "agent_mgmt",
+    "security",
+    "channel_mgmt",
+    "messaging",
+    "device_node",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "complex_composed_workflow",
+  "generator_id": "complex_composed_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "complex_template": "device_pairing_confirmation",
+      "complex_variant": 4,
+      "complex_scenario": "Device Pairing Confirmation",
+      "complex_scenario_slug": "device_pairing_confirmation",
+      "step_count": 4,
+      "openclaw_steps": 2,
+      "complex_high_volatility": true,
+      "strict_online_risk": "medium",
+      "realism_tier": "life_work",
+      "causal_chain_score": 1.0,
+      "entity_consistency_pass": true,
+      "filler_step_count": 0,
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw devices pair",
+      "openclaw devices list",
+      "email send --to pm@example.com --subject 'Device Pairing Confirmation status digest update for Atlanta' --body 'Device Pairing Confirmation status digest: completed triage on proposal and captured next actions for Atlanta.'",
+      "tasks search --query 'proposal'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "emails_sent",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "email sent"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "complex_composed_workflow",
+      "params": {
+        "workflow_index": 113
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

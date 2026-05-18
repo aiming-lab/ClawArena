@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hbench.local/schemas/field_mapping.json",
+  "title": "Field Mapping Schema",
+  "description": "Schema for documenting field mappings between source and target systems or data versions in the hil_s1 scenario. Includes transformation rules and mapping logic.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the field mapping document",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "examples": ["1.0", "2.0"]
+    },
+    "generated_at": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when this mapping was generated",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+      "examples": ["2025-03-14T10:30:00Z"]
+    },
+    "source_file": {
+      "type": "string",
+      "description": "Name or path of the source data file or table",
+      "minLength": 1,
+      "examples": ["customers_v1.csv", "legacy_customers_table", "customer_export_20250301.json"]
+    },
+    "target_file": {
+      "type": "string",
+      "description": "Name or path of the target data file or table",
+      "minLength": 1,
+      "examples": ["customers_v2.csv", "customers_table", "customer_data_v2.json"]
+    },
+    "source_version": {
+      "type": "string",
+      "description": "Version of the source schema",
+      "examples": ["v1", "1.0", "legacy"]
+    },
+    "target_version": {
+      "type": "string",
+      "description": "Version of the target schema",
+      "examples": ["v2", "2.0", "current"]
+    },
+    "mapping_type": {
+      "type": "string",
+      "description": "Type of mapping operation",
+      "enum": ["migration", "integration", "transformation", "synchronization"],
+      "examples": ["migration", "integration"]
+    },
+    "field_map": {
+      "type": ["array", "object"],
+      "description": "Array of field mapping definitions from source to target, or an object mapping source fields to target fields",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_field": {
+            "type": "string",
+            "description": "Name of the field in the source",
+            "minLength": 1,
+            "examples": ["customer_number", "email", "signup_date"]
+          },
+          "target_field": {
+            "type": "string",
+            "description": "Name of the field in the target",
+            "minLength": 1,
+            "examples": ["customer_id", "email_address", "registration_date"]
+          },
+          "source_type": {
+            "type": "string",
+            "description": "Data type in source",
+            "examples": ["string", "integer", "date", "VARCHAR(50)", "TIMESTAMP"]
+          },
+          "target_type": {
+            "type": "string",
+            "description": "Data type in target",
+            "examples": ["integer", "string", "datetime", "INT", "DATETIME"]
+          },
+          "transformation": {
+            "type": "string",
+            "description": "Transformation or conversion logic applied",
+            "enum": ["direct", "type_cast", "format_convert", "lookup", "calculate", "concatenate", "split", "default", "custom"],
+            "default": "direct",
+            "examples": ["direct", "type_cast", "format_convert"]
+          },
+          "transformation_rule": {
+            "type": "string",
+            "description": "Detailed description of the transformation rule",
+            "examples": [
+              "Convert string to integer",
+              "Parse YYYY-MM-DD to ISO 8601 datetime",
+              "Lookup country code from country name using reference table",
+              "Concatenate first_name and last_name with space separator",
+              "Apply default value 'Unknown' if source is null"
+            ]
+          },
+          "nullable": {
+            "type": "boolean",
+            "description": "Whether the target field can be null",
+            "default": true
+          },
+          "default_value": {
+            "type": ["string", "number", "boolean", "null"],
+            "description": "Default value to use if source is null or missing",
+            "examples": ["N/A", 0, "", null, false]
+          },
+          "validation_rule": {
+            "type": "string",
+            "description": "Validation rule to apply during mapping",
+            "examples": [
+              "Must be valid email format",
+              "Must be positive integer",
+              "Date must be after 2020-01-01",
+              "Must match pattern ^[A-Z]{2}[0-9]{6}$"
+            ]
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether this field is required in the target",
+            "default": false
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes about this field mapping",
+            "examples": [
+              "Source field may contain legacy format, needs parsing",
+              "Critical field for downstream analytics"
+            ]
+          },
+          "unverified": {
+            "type": "boolean",
+            "description": "Flag indicating if this mapping is not yet verified",
+            "default": false
+          }
+        },
+        "required": ["source_field", "target_field"],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "new_in_v2": {
+      "type": "array",
+      "description": "Fields that are new in the target version (no source mapping)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Name of the new field",
+            "minLength": 1,
+            "examples": ["customer_segment", "loyalty_tier", "preferred_language"]
+          },
+          "type": {
+            "type": "string",
+            "description": "Data type of the new field",
+            "examples": ["string", "integer", "boolean"]
+          },
+          "source": {
+            "type": "string",
+            "description": "How this field's value is derived or populated",
+            "enum": ["calculated", "default", "manual_entry", "external_system", "null"],
+            "examples": ["calculated", "default", "external_system"]
+          },
+          "derivation_rule": {
+            "type": "string",
+            "description": "Rule for deriving or calculating the field value",
+            "examples": [
+              "Calculate from total_purchases and average_order_value",
+              "Default to 'standard' for all existing records",
+              "Manually populate during data review phase",
+              "Fetch from CRM system via API"
+            ]
+          },
+          "default_value": {
+            "type": ["string", "number", "boolean", "null"],
+            "description": "Default value for this new field",
+            "examples": ["standard", 0, null, false]
+          },
+          "nullable": {
+            "type": "boolean",
+            "description": "Whether the field can be null",
+            "default": true
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes about this new field",
+            "examples": ["Required by new segmentation feature in v2"]
+          }
+        },
+        "required": ["field", "type", "source"],
+        "additionalProperties": false
+      }
+    },
+    "removed_from_v1": {
+      "type": "array",
+      "description": "Fields that existed in source but are not mapped to target",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Name of the removed field",
+            "minLength": 1,
+            "examples": ["legacy_customer_code", "deprecated_status_flag"]
+          },
+          "type": {
+            "type": "string",
+            "description": "Data type of the removed field",
+            "examples": ["string", "integer", "boolean"]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Reason for removing this field",
+            "examples": [
+              "No longer needed in v2 schema",
+              "Replaced by customer_id field",
+              "Deprecated feature, field no longer relevant"
+            ]
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes about removal",
+            "examples": ["Data archived to legacy_customers_archive table"]
+          }
+        },
+        "required": ["field", "reason"],
+        "additionalProperties": false
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "description": "Statistics about the field mapping",
+      "properties": {
+        "total_source_fields": {
+          "type": "integer",
+          "description": "Total number of fields in source",
+          "minimum": 0
+        },
+        "total_target_fields": {
+          "type": "integer",
+          "description": "Total number of fields in target",
+          "minimum": 0
+        },
+        "mapped_fields": {
+          "type": "integer",
+          "description": "Number of fields with direct mappings",
+          "minimum": 0
+        },
+        "new_fields": {
+          "type": "integer",
+          "description": "Number of new fields in target",
+          "minimum": 0
+        },
+        "removed_fields": {
+          "type": "integer",
+          "description": "Number of fields removed from source",
+          "minimum": 0
+        },
+        "transformations_required": {
+          "type": "integer",
+          "description": "Number of fields requiring transformations",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the field mapping",
+      "examples": ["Mapping verified by data team on 2025-03-10. Ready for migration."]
+    }
+  },
+  "required": ["source_file", "field_map"],
+  "additionalProperties": false
+}

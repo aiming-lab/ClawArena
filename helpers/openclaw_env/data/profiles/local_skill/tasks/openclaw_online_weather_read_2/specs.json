@@ -1,0 +1,55 @@
+{
+  "task_id": "openclaw_online_weather_read_2",
+  "instruction": "I'm traveling soon and need a live weather check for London. Please fetch the latest conditions and summarize them clearly.",
+  "domains": [
+    "weather"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "openclaw_online_weather_read",
+  "generator_id": "openclaw_online_weather_read",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "location": "London"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "weather get --location 'London'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "weather get online succeeds"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "Weather for London",
+        "name": "output includes location"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "Source",
+        "name": "output includes data source"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "openclaw_online_weather_read",
+      "params": {
+        "location": "London"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "task_id": "weather_forecast_13",
+  "instruction": "I need to plan my week. Pull up a 3-day weather forecast for Sydney.",
+  "domains": [
+    "weather"
+  ],
+  "difficulty": 1,
+  "initial_state": "default",
+  "template_id": "weather_forecast",
+  "generator_id": "weather_forecast",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "location": "Sydney",
+      "days": 3
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "curl -sG \"https://geocoding-api.open-meteo.com/v1/search\" --data-urlencode \"name=Sydney\" --data-urlencode \"count=1\" --data-urlencode \"language=en\" --data-urlencode \"format=json\"",
+      "curl -sG \"https://timeapi.io/api/Time/current/zone\" --data-urlencode \"timeZone=Australia/Sydney\"",
+      "curl -sG \"https://api.open-meteo.com/v1/forecast\" --data-urlencode \"latitude=-33.8688\" --data-urlencode \"longitude=151.2093\" --data-urlencode \"daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum\" --data-urlencode \"forecast_days=3\" --data-urlencode \"timezone=Australia/Sydney\""
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "forecast succeeds"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "\"daily\"",
+        "name": "output contains daily forecast object"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "\"temperature_2m_max\"",
+        "name": "output contains max temperature field"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "weather_forecast",
+      "params": {
+        "location": "Sydney",
+        "days": 3
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "task_id": "rotate_security_token_1",
+  "instruction": "Rotate the gateway security token: set a new token value 'rotated-token-xyz789', then verify the security configuration shows the token is configured.",
+  "canonical_instruction": "Rotate the gateway security token: set a new token value 'rotated-token-xyz789', then verify the security configuration shows the token is configured.",
+  "instruction_variants": [],
+  "visible_constraints": [],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step"
+  ],
+  "online_requirement": "none",
+  "provider_dependencies": [],
+  "availability_tier": "stable",
+  "domains": [
+    "security"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "rotate_security_token",
+  "generator_id": "rotate_security_token",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_token": "rotated-token-xyz789"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw config set gateway.auth.token rotated-token-xyz789",
+      "openclaw security audit"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "config",
+        "config_path": "gateway.auth.token",
+        "condition": "equals",
+        "expected": "rotated-token-xyz789",
+        "name": "auth token rotated"
+      },
+      {
+        "type": "output",
+        "match_type": "regex",
+        "expected": "(Summary|critical|warn|audit|security)",
+        "output_field": "last_stdout",
+        "name": "token configured verified",
+        "ignore_case": true
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "rotate_security_token",
+      "params": {},
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

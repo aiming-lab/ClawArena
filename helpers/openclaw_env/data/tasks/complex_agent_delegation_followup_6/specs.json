@@ -1,0 +1,137 @@
+{
+  "task_id": "complex_agent_delegation_followup_6",
+  "instruction": "[Agent Delegation Followup] Delegate inbox-driven follow-up work to a dedicated helper agent. Create helper agent 'agent-coordinator-06', verify agents list, search inbox for 'meeting', then add delegated follow-up task 'Agent Delegation Followup risk review task for London (meeting)' due 2026-03-11.",
+  "canonical_instruction": "[Agent Delegation Followup] Delegate inbox-driven follow-up work to a dedicated helper agent. Create helper agent 'agent-coordinator-06', verify agents list, search inbox for 'meeting', then add delegated follow-up task 'Agent Delegation Followup risk review task for London (meeting)' due 2026-03-11.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "datetime",
+      "value": "2026-03-11"
+    },
+    {
+      "type": "query",
+      "value": "meeting"
+    },
+    {
+      "type": "title",
+      "value": "Agent Delegation Followup risk review task for London (meeting)"
+    },
+    {
+      "type": "priority",
+      "value": "low"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "model",
+      "value": "openai/gpt-4.1"
+    }
+  ],
+  "decision_requirements": [
+    "infer_model"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "life_work",
+    "online_required"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "email_provider",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "cron_webhook",
+    "agent_mgmt",
+    "security",
+    "channel_mgmt",
+    "messaging",
+    "device_node",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "complex_composed_workflow",
+  "generator_id": "complex_composed_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "complex_template": "agent_delegation_followup",
+      "complex_variant": 6,
+      "complex_scenario": "Agent Delegation Followup",
+      "complex_scenario_slug": "agent_delegation_followup",
+      "step_count": 4,
+      "openclaw_steps": 2,
+      "complex_high_volatility": false,
+      "strict_online_risk": "medium",
+      "realism_tier": "life_work",
+      "causal_chain_score": 1.0,
+      "entity_consistency_pass": true,
+      "filler_step_count": 0,
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw agents add agent-coordinator-06 --model openai/gpt-4.1",
+      "openclaw agents list",
+      "email search --query 'meeting'",
+      "tasks add --title 'Agent Delegation Followup risk review task for London (meeting)' --priority low --due 2026-03-11"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "state",
+        "field": "agents.agent-coordinator-06",
+        "condition": "exists",
+        "expected": null,
+        "name": "agent created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "complex_composed_workflow",
+      "params": {
+        "workflow_index": 75
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

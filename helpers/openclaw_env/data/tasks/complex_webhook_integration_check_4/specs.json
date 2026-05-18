@@ -1,0 +1,152 @@
+{
+  "task_id": "complex_webhook_integration_check_4",
+  "instruction": "[Webhook Integration Check] Configure webhook routing and verify downstream scheduling. Configure webhook URL https://notify.service.io/events, capture integration note in /workspace/status-note.txt, create and verify cron schedule '15 8 * * 1-5', then email integration status to eng@example.com.",
+  "canonical_instruction": "[Webhook Integration Check] Configure webhook routing and verify downstream scheduling. Configure webhook URL https://notify.service.io/events, capture integration note in /workspace/status-note.txt, create and verify cron schedule '15 8 * * 1-5', then email integration status to eng@example.com.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "email",
+      "value": "eng@example.com"
+    },
+    {
+      "type": "cron",
+      "value": "15 8 * * 1-5"
+    },
+    {
+      "type": "path",
+      "value": "/workspace/status-note.txt"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "subject",
+      "value": "Webhook Integration Check decision log update for Seattle"
+    },
+    {
+      "type": "body",
+      "value": "Webhook Integration Check decision log: completed triage on meeting and captured next actions for Seattle."
+    }
+  ],
+  "decision_requirements": [
+    "infer_message"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "life_work",
+    "online_required",
+    "challenge"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "email_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "cron_webhook",
+    "agent_mgmt",
+    "security",
+    "channel_mgmt",
+    "messaging",
+    "device_node",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "complex_composed_workflow",
+  "generator_id": "complex_composed_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "complex_template": "webhook_integration_check",
+      "complex_variant": 4,
+      "complex_scenario": "Webhook Integration Check",
+      "complex_scenario_slug": "webhook_integration_check",
+      "step_count": 5,
+      "openclaw_steps": 3,
+      "complex_high_volatility": false,
+      "strict_online_risk": "medium",
+      "realism_tier": "life_work",
+      "causal_chain_score": 1.0,
+      "entity_consistency_pass": true,
+      "filler_step_count": 0,
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw config set gateway.remote.url https://notify.service.io/events",
+      "file create --path '/workspace/status-note.txt' --content 'Webhook Integration Check decision log notes for Seattle with query meeting.'",
+      "openclaw cron add --name cwf-webhook-integration-check-04 --cron '15 8 * * 1-5' --message 'Send webhook integration check decision log digest for Seattle'",
+      "openclaw cron list",
+      "email send --to eng@example.com --subject 'Webhook Integration Check decision log update for Seattle' --body 'Webhook Integration Check decision log: completed triage on meeting and captured next actions for Seattle.'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "config",
+        "config_path": "gateway.remote.url",
+        "condition": "equals",
+        "expected": "https://notify.service.io/events",
+        "name": "gateway remote url configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "file created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "emails_sent",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "email sent"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "complex_composed_workflow",
+      "params": {
+        "workflow_index": 123
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "task_id": "plugin_and_message_10",
+  "instruction": "Complete the following setup:\n1. Install the 'slack' plugin\n2. Log into the slack channel\n3. Send a message to @bob saying 'Setup complete, slack is active'",
+  "canonical_instruction": "Complete the following setup:\n1. Install the 'slack' plugin\n2. Log into the slack channel\n3. Send a message to @bob saying 'Setup complete, slack is active'",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "channel",
+      "value": "slack"
+    },
+    {
+      "type": "target",
+      "value": "@bob"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "high_volatility"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "plugin_and_message",
+  "generator_id": "plugin_and_message",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "plugin": "slack",
+      "channel": "slack",
+      "target": "@bob",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_plugin": "slack",
+      "expected_target": "@bob"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw plugins enable slack",
+      "openclaw channels login --channel slack",
+      "openclaw message send --channel slack --target @bob --message 'Setup complete, slack is active'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "plugins_installed",
+        "condition": "field_equals",
+        "expected": {
+          "field": "name",
+          "value": "slack"
+        },
+        "name": "plugin 'slack' installed"
+      },
+      {
+        "type": "state",
+        "field": "channels.slack",
+        "condition": "exists",
+        "expected": null,
+        "name": "slack configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "@bob"
+        },
+        "name": "message sent to correct target"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "plugin_and_message",
+      "params": {
+        "plugin": "slack",
+        "channel": "slack",
+        "target": "@bob"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

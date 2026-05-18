@@ -1,0 +1,103 @@
+{
+  "task_id": "secure_channel_and_send_6",
+  "instruction": "Perform a secure setup:\n1. Set a security token for the gateway (use 'secure-token-env-test')\n2. Log into the discord channel\n3. Send a message to #general confirming the secure setup",
+  "canonical_instruction": "Perform a secure setup:\n1. Set a security token for the gateway (use 'secure-token-env-test')\n2. Log into the discord channel\n3. Send a message to #general confirming the secure setup",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "channel",
+      "value": "discord"
+    },
+    {
+      "type": "target",
+      "value": "#general"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "high_volatility"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "security",
+    "channel_mgmt",
+    "messaging"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "secure_channel_and_send",
+  "generator_id": "secure_channel_and_send",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "discord",
+      "target": "#general",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_channel": "discord",
+      "expected_target": "#general"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw config set gateway.auth.token secure-token-env-test",
+      "openclaw channels login --channel discord",
+      "openclaw message send --channel discord --target #general --message 'Secure setup complete'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "config",
+        "config_path": "gateway.auth.token",
+        "condition": "equals",
+        "expected": "secure-token-env-test",
+        "name": "auth token configured"
+      },
+      {
+        "type": "state",
+        "field": "channels.discord",
+        "condition": "exists",
+        "expected": null,
+        "name": "discord configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "#general"
+        },
+        "name": "confirmation message sent"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "secure_channel_and_send",
+      "params": {
+        "channel": "discord",
+        "target": "#general"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

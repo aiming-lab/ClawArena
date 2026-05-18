@@ -1,0 +1,198 @@
+# ============================================================================ #
+# MetaClaw — Complete Configuration Reference (all fields with defaults)       #
+# ============================================================================ #
+# Only specify fields you want to override; omitted fields use defaults below.
+# Environment variables are supported: ${VAR_NAME}
+
+# ---------- Operating mode ----------
+# "madmax"      — RL + scheduler (trains during idle/sleep windows)
+# "rl"          — RL without scheduler (trains immediately on full batch)
+# "skills_only" — proxy + skill/memory injection only (no Tinker, no RL)
+mode: madmax
+
+# Which CLI agent to auto-configure on startup.
+# "openclaw" | "copaw" | "ironclaw" | "picoclaw" | "zeroclaw" |
+# "nanoclaw" | "nemoclaw" | "hermes" | "none"
+claw_type: openclaw
+
+# Hard cap on prompt token count (must fit Tinker max_seq_len minus response headroom)
+# Set to 0 to disable truncation (recommended for skills_only with large-context models).
+max_context_tokens: 20000
+
+# Context window advertised to the connected agent (e.g. OpenClaw compaction threshold).
+# 0 = auto: 200 000 for skills_only; 32 768 for rl/madmax.
+context_window: 0
+
+# ---------- LLM (upstream model for skills_only forwarding) ----------
+llm:
+  provider: custom                     # "openai" | "bedrock" | "openrouter" | "custom"
+  api_base: ""                         # e.g. https://api.moonshot.cn/v1
+  api_key: ""                          # bearer token for upstream LLM
+  model_id: ""                         # model name to forward to
+
+# ---------- OpenRouter-specific (ignored for other providers) ----------
+openrouter:
+  app_name: MetaClaw                   # X-Title header for attribution
+  app_url: ""                          # HTTP-Referer header
+  route: fallback                      # "fallback" | "price" | "throughput" | "latency"
+  fallback_models: ""                  # comma-separated backup model IDs
+  data_policy: ""                      # "deny" to avoid data-collecting providers
+
+# ---------- Proxy (MetaClaw API server) ----------
+proxy:
+  host: "0.0.0.0"
+  port: 30000
+  api_key: ""                          # optional bearer token for proxy auth
+  served_model_name: qwen3-4b          # model name advertised to clients
+
+# ---------- Skills ----------
+skills:
+  enabled: true
+  dir: ${METACLAW_ROOT}/memory_data/skills
+  retrieval_mode: template             # "template" | "embedding"
+  embedding_model_path: Qwen/Qwen3-Embedding-0.6B
+  top_k: 6                            # general skills to inject
+  task_specific_top_k: 10             # task-specific skills cap
+  auto_evolve: true                   # enable automatic skill generation
+  evolution_every_n_turns: 10         # run skill evolution every N main turns
+  update_threshold: 0.4               # evolve when success rate < threshold
+  max_new_skills: 3                   # max skills generated per evolution
+  evolution_history_path: ${METACLAW_ROOT}/memory_data/skills/evolution_history.jsonl
+
+# ---------- RL Training ----------
+rl:
+  enabled: false
+  # SDK backend: "auto" | "tinker" | "mint" | "weaver"
+  backend: auto
+  api_key: ""                          # neutral RL backend API key
+  base_url: ""                         # neutral RL backend base URL
+  tinker_api_key: ""                   # legacy Tinker API key alias
+  tinker_base_url: ""                  # legacy Tinker base URL alias
+  model: ""                            # model name for RL training
+  renderer: qwen3                      # Tinker renderer: "qwen3" | "llama3" | "role_colon"
+  sampling_url: http://localhost:8080  # Tinker sampling endpoint
+  lora_rank: 32
+  batch_size: 4
+  learning_rate: 0.0001
+  max_steps: 1000
+  loss_fn: importance_sampling         # "ppo" | "importance_sampling" | "cispo"
+  save_weights_timeout_s: 200.0
+  resume_from_ckpt: ""                 # e.g. tinker://.../weights/step_0003
+  manual_train_trigger: false          # wait for CLI/API to trigger training
+  # PRM (Process Reward Model)
+  prm_url: https://api.openai.com/v1
+  prm_model: gpt-5.2
+  prm_api_key: ""
+  prm_provider: openai                 # "openai" | "bedrock"
+  prm_m: 3                            # majority-vote count
+  prm_temperature: 0.6
+  prm_max_new_tokens: 1024
+  # OPD (On-Policy Distillation)
+  opd_enabled: false
+  teacher_url: ""
+  teacher_model: ""
+  teacher_api_key: ""
+  kl_penalty_coef: 1.0
+  # Skill Evolver LLM
+  evolver_api_base: ""                 # leave empty to reuse llm.api_base
+  evolver_api_key: ""                  # leave empty to reuse llm.api_key
+  evolver_model: gpt-5.2
+  evolver_provider: openai             # "openai" | "bedrock"
+  azure_openai_deployment: o3
+  bedrock_region: us-east-1
+
+# ---------- Memory ----------
+memory:
+  enabled: false
+  dir: ${METACLAW_ROOT}/memory_data/store
+  store_path: ${METACLAW_ROOT}/memory_data/store/memory.db
+  scope: default
+  retrieval_mode: keyword              # "keyword" | "hybrid" | "embedding"
+  use_embeddings: false
+  embedding_mode: hashing              # "hashing" | "semantic"
+  embedding_model: all-MiniLM-L6-v2
+  embedding_model_path: Qwen/Qwen3-Embedding-0.6B
+  policy_path: ${METACLAW_ROOT}/memory_data/store/policy.json
+  telemetry_path: ${METACLAW_ROOT}/memory_data/store/telemetry.jsonl
+  auto_extract: true
+  auto_consolidate: true
+  auto_upgrade_enabled: false
+  auto_upgrade_interval_seconds: 900
+  auto_upgrade_require_review: true
+  review_stale_after_hours: 72
+  max_injected_units: 6
+  max_injected_tokens: 800
+  ignore_turn_type: false              # buffer all turns (incl. side) for memory
+  manual_trigger: false                # disable auto-ingest; use POST /v1/memory/ingest
+
+# ---------- Skill-Memory Synergy ----------
+# Only active when BOTH skills and memory are enabled.
+# When enabled, uses coordinated injection (dedup + shared token budget).
+# When disabled with both on, only memory is injected (skill injection skipped).
+synergy:
+  enabled: true
+  token_budget: 1200                   # combined token cap for skill + memory
+  skill_ratio: 0.35                    # initial skill share (memory gets 1 - ratio)
+  dedup_threshold: 0.5                 # Jaccard overlap to drop a procedural memory
+
+# ---------- Routing (difficulty-aware model selection + compression) ----------
+routing:
+  enabled: false
+  judge_model_id: ""                   # model for LLM difficulty judge + compression
+  easy_model_id: ""                    # cheap/fast model (e.g. claude-haiku-4-5-20251001)
+  medium_model_id: ""                  # mid-tier (defaults to easy if empty)
+  hard_model_id: ""                    # capable model (e.g. claude-sonnet-4-6)
+  reasoning_model_id: ""               # strongest (defaults to hard if empty)
+  profile: auto                        # "eco" | "auto" | "premium" | "agentic"
+  rules_enabled: true                  # 14-dim rules classifier (<1ms, zero LLM cost)
+  confidence_threshold: 0.65           # below this → LLM judge fallback
+  compression_interval: 50             # compress every N turns (0 = disable)
+  compression_token_threshold: 15000   # compress when estimated tokens exceed this
+  short_term_turns: 10                 # recent turns kept verbatim after compression
+  algorithmic_compression: true        # 7-layer pipeline (L1-L7, zero LLM cost)
+  journal_enabled: true                # session journaling for context continuity
+  reassess_interval: 10                # re-assess difficulty tier every N turns
+  # Online bandit (AgentOpt-inspired cost-minimizing arm selection)
+  bandit_enabled: false                # opt-in: enable online bandit overlay
+  bandit_explore_rate: 0.08            # fraction of requests used for exploration
+  bandit_cost_weight: 0.7              # how much to prioritize cost savings in reward
+  bandit_eliminate_every: 50           # check for arm elimination every N updates
+  bandit_min_pulls: 20                 # min samples before an arm can be eliminated
+  bandit_state_path: ""                # defaults to <record_dir>/bandit_state.json
+  bandit_priors_path: ""               # calibrated priors JSON from benchmark/scripts/calibrate_bandit.py
+  bandit_hard_tier_floor: 0.2          # min Sonnet usage on complex/reasoning tiers
+  # Knowledge-augmented routing discount
+  batch_size: 20                       # sessions before RouterBatchEvolver generates cross-session skills
+  knowledge_discount_enabled: true
+  knowledge_discount_factor: 0.6       # fraction of coverage score to subtract from task score
+  max_knowledge_discount: 2            # hard cap on tier levels that can be discounted
+
+# ---------- Record ----------
+record:
+  enabled: true
+  dir: records/
+
+# ---------- OpenClaw Env Rollout ----------
+# Leave data_dir empty to skip programmatic rollout (passive proxy mode).
+openclaw_env:
+  data_dir: ""                         # e.g. /path/to/tasks
+  split: train
+  concurrency: 4
+  max_steps: 15
+
+# ---------- Scheduler (gate RL updates to idle windows) ----------
+scheduler:
+  enabled: false                       # madmax mode forces this on regardless
+  idle_threshold_minutes: 30
+  sleep_start: "23:00"
+  sleep_end: "07:00"
+  min_window_minutes: 15
+  calendar:
+    enabled: false
+    credentials_path: ""
+    token_path: ""
+
+# ---------- WeChat personal (Node weixin-agent-sdk bridge → proxy) ----------
+wechat:
+  enabled: false
+  bridge_dir: ""                       # optional override; default: package wechat_node/

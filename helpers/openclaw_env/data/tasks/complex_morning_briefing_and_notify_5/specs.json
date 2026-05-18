@@ -1,0 +1,136 @@
+{
+  "task_id": "complex_morning_briefing_and_notify_5",
+  "instruction": "[Morning Briefing And Notify] Run a morning check and notify the team with conditions. Check current weather for Atlanta, send a briefing email to pm@example.com using the same location context, then schedule digest automation on '0 9 * * *'.",
+  "canonical_instruction": "[Morning Briefing And Notify] Run a morning check and notify the team with conditions. Check current weather for Atlanta, send a briefing email to pm@example.com using the same location context, then schedule digest automation on '0 9 * * *'.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "email",
+      "value": "pm@example.com"
+    },
+    {
+      "type": "location",
+      "value": "Atlanta"
+    },
+    {
+      "type": "cron",
+      "value": "0 9 * * *"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "subject",
+      "value": "Morning Briefing And Notify status digest update for Atlanta"
+    },
+    {
+      "type": "body",
+      "value": "Morning Briefing And Notify status digest: completed triage on proposal and captured next actions for Atlanta."
+    }
+  ],
+  "decision_requirements": [
+    "infer_message"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "life_work",
+    "online_required"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "email_provider",
+    "weather_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "cron_webhook",
+    "agent_mgmt",
+    "security",
+    "channel_mgmt",
+    "messaging",
+    "device_node",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "complex_composed_workflow",
+  "generator_id": "complex_composed_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "complex_template": "morning_briefing_and_notify",
+      "complex_variant": 5,
+      "complex_scenario": "Morning Briefing And Notify",
+      "complex_scenario_slug": "morning_briefing_and_notify",
+      "step_count": 3,
+      "openclaw_steps": 1,
+      "complex_high_volatility": false,
+      "strict_online_risk": "medium",
+      "realism_tier": "life_work",
+      "causal_chain_score": 1.0,
+      "entity_consistency_pass": true,
+      "filler_step_count": 0,
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "weather get --location 'Atlanta'",
+      "email send --to pm@example.com --subject 'Morning Briefing And Notify status digest update for Atlanta' --body 'Morning Briefing And Notify status digest: completed triage on proposal and captured next actions for Atlanta.'",
+      "openclaw cron add --name cwf-morning-briefing-and-notify-05 --cron '0 9 * * *' --message 'Send morning briefing and notify status digest digest for Atlanta'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "emails_sent",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "email sent"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "complex_composed_workflow",
+      "params": {
+        "workflow_index": 4
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

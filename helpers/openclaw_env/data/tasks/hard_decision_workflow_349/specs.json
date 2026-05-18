@@ -1,0 +1,164 @@
+{
+  "task_id": "hard_decision_workflow_349",
+  "instruction": "Please reconcile the latest meeting email note, the forecast, and today's America/Chicago calendar for Austin. Leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send bob@example.com the async update.",
+  "canonical_instruction": "The latest meeting email note, the forecast, and today's America/Chicago calendar don't line up cleanly for Austin. Please check them, leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send bob@example.com the async update.",
+  "instruction_variants": [
+    "Before making the call on Austin, check the latest meeting email note, the forecast, and today's America/Chicago calendar. Leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send bob@example.com the async update.",
+    "Please use the latest meeting email note, the forecast, and today's America/Chicago calendar to make the call on Austin. Put the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send bob@example.com the async update.",
+    "Use the latest meeting email note, the forecast, and today's America/Chicago calendar to work out the right path for Austin. Leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send bob@example.com the async update.",
+    "The latest meeting email note, the forecast, and today's America/Chicago calendar don't line up cleanly for Austin. Please check them, leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send bob@example.com the async update.",
+    "Austin still needs a decision because the meeting email note, the forecast, and today's America/Chicago calendar don't line up cleanly. Please check them, leave the next step on the board, keep the daily check schedule in place, and either put the review on the calendar or send bob@example.com the async update.",
+    "The latest meeting email note, the forecast, and today's America/Chicago calendar are pulling Austin in different directions. Please check them, leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send bob@example.com the async update.",
+    "I need a call on the current Austin plan after you compare the latest meeting email note, the forecast, and today's America/Chicago calendar. Please leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send bob@example.com the async update."
+  ],
+  "visible_constraints": [
+    {
+      "type": "location",
+      "value": "Austin"
+    },
+    {
+      "type": "timezone",
+      "value": "America/Chicago"
+    },
+    {
+      "type": "query",
+      "value": "meeting"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "Austin contradictory-source next step"
+    },
+    {
+      "type": "title",
+      "value": "Austin live review"
+    },
+    {
+      "type": "priority",
+      "value": "high"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_branch",
+    "infer_schedule",
+    "infer_message"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "email_provider",
+    "google_tasks",
+    "weather_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "contradictory_source_resolution",
+      "hard_decision_variant": 13,
+      "hard_decision_ability": "multi_source_reasoning",
+      "hard_decision_ability_tags": [
+        "multi_source_reasoning",
+        "branch_resolution",
+        "workflow_completion",
+        "state_inspection"
+      ],
+      "prompt_style": "brief",
+      "step_count": 9
+    },
+    "private": {
+      "initial_state_overrides": {}
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "email search --query 'meeting'",
+      "email read --id email_seed_2",
+      "weather forecast --location 'Austin' --days 1",
+      "calendar today --timezone America/Chicago",
+      "calendar list --from 2026-03-01 --to 2026-03-01",
+      "tasks list --status pending",
+      "tasks add --title 'Austin contradictory-source next step' --priority high --due 2026-03-09",
+      "openclaw cron add --name contradictory-source-13 --cron '15 8 * * 1-5' --message 'Run Austin daily contradiction check'",
+      "calendar add-event --title 'Austin live review' --start 2026-03-10T13:00"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 348
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

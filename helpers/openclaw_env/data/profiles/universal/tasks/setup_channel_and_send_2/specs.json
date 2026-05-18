@@ -1,0 +1,63 @@
+{
+  "task_id": "setup_channel_and_send_2",
+  "instruction": "First, log into the telegram channel. Then send a message to @alice saying 'Channel setup complete, testing messaging.'.",
+  "domains": [
+    "channel_mgmt",
+    "messaging"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "setup_channel_and_send",
+  "generator_id": "setup_channel_and_send",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "telegram",
+      "target": "@alice",
+      "content": "Channel setup complete, testing messaging."
+    },
+    "private": {
+      "expected_channel": "telegram",
+      "expected_target": "@alice"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw channels login --channel telegram",
+      "openclaw message send --channel telegram --target @alice --message 'Channel setup complete, testing messaging.'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "channels.telegram",
+        "condition": "exists",
+        "expected": null,
+        "name": "telegram configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "@alice"
+        },
+        "name": "message sent to correct target"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "setup_channel_and_send",
+      "params": {
+        "channel": "telegram",
+        "target": "@alice",
+        "content": "Channel setup complete, testing messaging."
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

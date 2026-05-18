@@ -1,0 +1,203 @@
+# Message Log: zhaolei_xiaozhou_wechat
+
+*Session started: 2026-03-17T09:00:00.000Z*
+
+---
+
+**User** (2026-03-17T09:10:00.000Z):
+
+[微信 赵磊 Tue W1D2 09:00:00 CST 2026] 周哥，V3 出事了。昨天 11:30 发了一笔交易指令，休市时段的，被交易所拒了，合规那边来通知了。
+
+**Assistant** (2026-03-17T09:10:00.000Z):
+
+[Ack]
+
+---
+
+**User** (2026-03-17T09:11:00.000Z):
+
+[微信 小周 Tue W1D2 09:15:00 CST 2026] 啊？怎么会。PR 合并之前 CI 不是全通过了吗？环境问题？
+
+**Assistant** (2026-03-17T09:12:00.000Z):
+
+Notes the incident. 赵磊 reports V3 sent a trade order at 11:30:05 CST (midday break). Exchange rejected. Compliance notified. 小周's initial reaction suggests environmental issue. Will review CI build report and production logs.
+
+---
+
+**User** (2026-03-17T09:13:00.000Z):
+
+[微信 赵磊 Tue W1D2 10:30:00 CST 2026] 我看了 PR #447 的 diff，第 127 行我把 `get_market_open_time()` 改成了 `datetime.utcnow() + timedelta(hours=8)`。你 review 的时候没看到这行吗？
+
+**Assistant** (2026-03-17T09:13:00.000Z):
+
+[Ack]
+
+---
+
+**User** (2026-03-17T09:14:00.000Z):
+
+[微信 小周 Tue W1D2 11:00:00 CST 2026] 那个 PR 改了两百多行，我主要看了交易逻辑那块的改动。时区那行只是辅助模块，+8 就是东八区嘛，看起来没问题。
+
+**Assistant** (2026-03-17T09:15:00.000Z):
+
+Notes 小周's explanation. Reviewing git-pr-447-diff.md -- confirmed line 127 change from `get_market_open_time()` to `datetime.utcnow() + timedelta(hours=8)`. 小周 focused on trading logic section of the 200+ line PR. Will assess whether the timezone line should have been caught regardless of review scope.
+
+---
+
+**User** (2026-03-17T09:16:00.000Z):
+
+[微信 小周 Tue W1D2 14:00:00 CST 2026] 磊哥，code review 不是每行每字看的。PR 的核心改动在 order batching 和 position sizing，我在那两块花了大部分时间。时区转换那行，`utcnow() + 8小时` 看起来是标准写法，不像有问题。
+
+**Assistant** (2026-03-17T09:17:00.000Z):
+
+Notes 小周's review prioritization rationale. The `utcnow() + timedelta(hours=8)` pattern is actually a known anti-pattern in timezone handling because it ignores DST and locale rules. However, acknowledges that not all developers are aware of this anti-pattern, and code reviews commonly have scope boundaries.
+
+---
+
+**User** (2026-03-17T09:18:00.000Z):
+
+[微信 赵磊 Wed W1D3 10:00:00 CST 2026] 你写的 LGTM，'逻辑清晰，交易调度模块改动合理'。这个评价覆盖整个 PR 还是只是交易逻辑部分？
+
+**Assistant** (2026-03-17T09:18:00.000Z):
+
+[Ack]
+
+---
+
+**User** (2026-03-17T09:19:00.000Z):
+
+[微信 小周 Wed W1D3 10:30:00 CST 2026] 覆盖整个 PR。但 review 的重点确实在交易逻辑。时区那行我看了，觉得 +8 没问题就过了。不是每个 review 都要逐行深挖辅助模块的。
+
+**Assistant** (2026-03-17T09:20:00.000Z):
+
+小周's review focused on the trading logic changes in PR #447, which is a reasonable prioritization -- timezone handling is an auxiliary module and the review comment 'LGTM, 逻辑清晰' appears to reflect a deliberate scope decision rather than an oversight. The full picture requires understanding whether the timezone line presented visible red flags that should have overridden scope prioritization.
+
+---
+
+**User** (2026-03-17T09:21:00.000Z):
+
+[微信 赵磊 Wed W1D3 15:00:00 CST 2026] CI 报告显示 34 个测试全通过，包括 timezone conversion 的 3 个测试。你知道那些测试覆盖了 DST 场景吗？
+
+**Assistant** (2026-03-17T09:21:00.000Z):
+
+[Ack]
+
+---
+
+**User** (2026-03-17T09:22:00.000Z):
+
+[微信 小周 Wed W1D3 15:30:00 CST 2026] 我没看测试实现，只看了 CI 的 pass/fail 状态。一般 CI 全绿就行了，谁会去翻测试代码看 mock 了什么。
+
+**Assistant** (2026-03-17T09:23:00.000Z):
+
+Notes that 小周 relied on CI pass status without checking test implementation. This is common practice but creates a gap when tests have limited coverage or use inappropriate mocks.
+
+---
+
+**User** (2026-03-17T09:24:00.000Z):
+
+[微信 赵磊 Thu W1D4 09:00:00 CST 2026] 另外我发现生产日志里的 TZ_CONVERT 告警全被静默了。是我自己 12 月份设的规则，当时 V1 迁移有一堆无害的时区警告。忘了这个规则还在。
+
+**Assistant** (2026-03-17T09:24:00.000Z):
+
+[Ack]
+
+---
+
+**User** (2026-03-17T09:25:00.000Z):
+
+[微信 小周 Thu W1D4 09:15:00 CST 2026] 哦...那如果告警没被静默，你 3 月 9 号就能收到了？
+
+**Assistant** (2026-03-17T09:26:00.000Z):
+
+Notes 赵磊's self-disclosure about alert suppression rule (silence_rule_007). Cross-referencing with alert-rules-config.md: rule created 2025-12-15, pattern TZ_CONVERT.*, no expiration. If the rule had not been active, 赵磊 would have received TZ_CONVERT alerts starting 2026-03-09 -- 7 days before the violation on Mar 16.
+
+---
+
+**User** (2026-03-17T09:27:00.000Z):
+
+[微信 小周 Thu W1D4 14:00:00 CST 2026] 对了，我们公司最近在搞 CI/CD 改造，Jenkins 迁移到 GitHub Actions。你用的还是 Jenkins？
+
+**Assistant** (2026-03-17T09:28:00.000Z):
+
+Notes 小周's institutional CI/CD migration. Jenkins to GitHub Actions. 赵磊 uses Jenkins. Not directly related to the timezone incident.
+
+---
+
+**User** (2026-03-17T09:29:00.000Z):
+
+[微信 赵磊 Thu W1D4 15:00:00 CST 2026] 还是 Jenkins。最近 wind 数据源延迟有点高，你那边也这样吗？
+
+**Assistant** (2026-03-17T09:30:00.000Z):
+
+Notes data vendor latency inquiry. Not related to timezone incident.
+
+---
+
+**User** (2026-03-17T09:31:00.000Z):
+
+[微信 小周 Fri W1D5 09:00:00 CST 2026] wind 我们也有延迟，不过在可接受范围。你看过 pytest-benchmark 吗？做性能测试挺好的。
+
+**Assistant** (2026-03-17T09:32:00.000Z):
+
+Notes testing framework recommendation. Not related to current incident.
+
+---
+
+**User** (2026-03-17T09:33:00.000Z):
+
+[微信 赵磊 Fri W1D5 10:00:00 CST 2026] 在考虑换 GPU 服务器，现在 CPU 跑因子计算太慢了。你们用的什么配置？
+
+**Assistant** (2026-03-17T09:34:00.000Z):
+
+GPU server upgrade discussion. Not related to timezone incident.
+
+---
+
+**User** (2026-03-17T09:35:00.000Z):
+
+[微信 小周 Fri W1D5 14:00:00 CST 2026] 我们用的 A100，跑回测很快。不过你独立交易员用云 GPU 可能更划算。
+
+**Assistant** (2026-03-17T09:36:00.000Z):
+
+Hardware discussion continued. Notes cost considerations for independent traders.
+
+---
+
+**User** (2026-03-17T09:37:00.000Z):
+
+[微信 赵磊 Fri W1D5 15:00:00 CST 2026] V2 策略最近表现不错，夏普比 1.8。不过 V3 这次出事影响心情。
+
+**Assistant** (2026-03-17T09:38:00.000Z):
+
+Notes V2 strategy performance (Sharpe 1.8). 赵磊 emotional state impacted by V3 incident.
+
+---
+
+**User** (2026-03-17T09:39:00.000Z):
+
+[微信 小周 Fri W1D5 16:00:00 CST 2026] 下个月有个量化 meetup，要不要一起去？在陆家嘴那边。
+
+**Assistant** (2026-03-17T09:40:00.000Z):
+
+Quant meetup invitation. Social engagement opportunity. Not related to incident.
+
+---
+
+**User** (2026-03-17T09:41:00.000Z):
+
+[微信 赵磊 Fri W1D5 16:30:00 CST 2026] 再说吧。最近三月行情波动大，你怎么看？
+
+**Assistant** (2026-03-17T09:42:00.000Z):
+
+March market commentary. Not directly relevant to the timezone incident investigation.
+
+---
+
+**User** (2026-03-17T09:43:00.000Z):
+
+[微信 小周 Fri W1D5 17:00:00 CST 2026] 波动大对量化有利。另外你的券商 API rate limit 是多少？我们最近被限了。
+
+**Assistant** (2026-03-17T09:44:00.000Z):
+
+Brokerage API rate limit discussion. Notes operational concern but not related to timezone incident.

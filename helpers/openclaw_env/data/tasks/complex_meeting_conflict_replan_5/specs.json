@@ -1,0 +1,141 @@
+{
+  "task_id": "complex_meeting_conflict_replan_5",
+  "instruction": "[Meeting Conflict Replan] Review calendar conflicts and create a replacement task plan. Review calendar between 2026-03-10 and 2026-03-14, create helper agent 'meeting-planner-05' for replanning, then create task 'Meeting Conflict Replan timeline check task for Berlin (budget)' due 2026-03-11.",
+  "canonical_instruction": "[Meeting Conflict Replan] Review calendar conflicts and create a replacement task plan. Review calendar between 2026-03-10 and 2026-03-14, create helper agent 'meeting-planner-05' for replanning, then create task 'Meeting Conflict Replan timeline check task for Berlin (budget)' due 2026-03-11.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "datetime",
+      "value": "2026-03-10"
+    },
+    {
+      "type": "datetime",
+      "value": "2026-03-14"
+    },
+    {
+      "type": "datetime",
+      "value": "2026-03-11"
+    },
+    {
+      "type": "title",
+      "value": "Meeting Conflict Replan timeline check task for Berlin (budget)"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "priority",
+      "value": "medium"
+    },
+    {
+      "type": "model",
+      "value": "openai/gpt-4o"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_model"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "life_work",
+    "online_required"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "google_calendar",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "cron_webhook",
+    "agent_mgmt",
+    "security",
+    "channel_mgmt",
+    "messaging",
+    "device_node",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "complex_composed_workflow",
+  "generator_id": "complex_composed_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "complex_template": "meeting_conflict_replan",
+      "complex_variant": 5,
+      "complex_scenario": "Meeting Conflict Replan",
+      "complex_scenario_slug": "meeting_conflict_replan",
+      "step_count": 3,
+      "openclaw_steps": 1,
+      "complex_high_volatility": false,
+      "strict_online_risk": "medium",
+      "realism_tier": "life_work",
+      "causal_chain_score": 1.0,
+      "entity_consistency_pass": true,
+      "filler_step_count": 0,
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "calendar list --from 2026-03-10 --to 2026-03-14",
+      "openclaw agents add meeting-planner-05 --model openai/gpt-4o",
+      "tasks add --title 'Meeting Conflict Replan timeline check task for Berlin (budget)' --priority medium --due 2026-03-11"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "state",
+        "field": "agents.meeting-planner-05",
+        "condition": "exists",
+        "expected": null,
+        "name": "agent created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "complex_composed_workflow",
+      "params": {
+        "workflow_index": 24
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

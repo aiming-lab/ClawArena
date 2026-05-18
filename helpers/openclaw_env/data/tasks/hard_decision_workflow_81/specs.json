@@ -1,0 +1,176 @@
+{
+  "task_id": "hard_decision_workflow_81",
+  "instruction": "Please get the deploy update over to @manager on slack. Clean up the path if needed, check what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and send ops@example.com a recap afterward.",
+  "canonical_instruction": "I need the deploy update to reach @manager on slack. Fix the delivery path if needed, check what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and email ops@example.com a recap.",
+  "instruction_variants": [
+    "Can you get the deploy update out to @manager on slack? Fix the delivery path if needed, check what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and send ops@example.com a quick recap.",
+    "Please get the deploy update to @manager on slack. Fix the delivery path if needed, review what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and send ops@example.com a quick recap.",
+    "Can you handle the deploy update for @manager on slack? Repair the path if needed, check what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and send ops@example.com a short recap.",
+    "Please push the deploy update to @manager on slack. Fix the path if needed, review what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and send ops@example.com a recap.",
+    "I need the deploy update to reach @manager on slack. Fix the delivery path if needed, check what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and email ops@example.com a recap.",
+    "The deploy update still needs to get to @manager on slack. Please fix the path if needed, review what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and send ops@example.com a quick recap once it's through.",
+    "I need the deploy update delivered to @manager on slack. Please repair the path if needed, review what's already on the board, the board still needs the next step before you close it out, if the target is direct, close it out without a calendar block, and send ops@example.com a short recap when it's done."
+  ],
+  "visible_constraints": [
+    {
+      "type": "email",
+      "value": "ops@example.com"
+    },
+    {
+      "type": "channel",
+      "value": "slack"
+    },
+    {
+      "type": "target",
+      "value": "@manager"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "Deploy delivery next step"
+    },
+    {
+      "type": "subject",
+      "value": "Deploy delivery recap"
+    },
+    {
+      "type": "body",
+      "value": "The delivery path is recovered and the update is posted."
+    },
+    {
+      "type": "priority",
+      "value": "high"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_message",
+    "infer_missing_steps",
+    "avoid_duplicate",
+    "infer_target"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "email_provider",
+    "google_tasks",
+    "channel_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "delivery_update_followthrough",
+      "hard_decision_variant": 9,
+      "hard_decision_ability": "information_transfer",
+      "hard_decision_ability_tags": [
+        "information_transfer",
+        "workflow_completion"
+      ],
+      "prompt_style": "underspecified",
+      "step_count": 6
+    },
+    "private": {
+      "initial_state_overrides": {}
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "tasks list --status pending",
+      "openclaw channels list --json",
+      "openclaw channels login --channel slack",
+      "tasks add --title 'Deploy delivery next step' --priority high --due 2026-03-17",
+      "openclaw message send --channel slack --target @manager --message 'Deploy update posted and being tracked.'",
+      "email send --to ops@example.com --subject 'Deploy delivery recap' --body 'The delivery path is recovered and the update is posted.'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate calendar event created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "@manager"
+        },
+        "name": "message sent to @manager"
+      },
+      {
+        "type": "effect",
+        "effect_type": "emails_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "to",
+          "value": "ops@example.com"
+        },
+        "name": "email sent to ops@example.com"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 80
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

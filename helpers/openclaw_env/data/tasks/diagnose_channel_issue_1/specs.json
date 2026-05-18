@@ -1,0 +1,86 @@
+{
+  "task_id": "diagnose_channel_issue_1",
+  "instruction": "The telegram channel is not working. Diagnose the issue by checking the system status and channel configuration, then fix it by logging into the channel.",
+  "canonical_instruction": "The telegram channel is not working. Diagnose the issue by checking the system status and channel configuration, then fix it by logging into the channel.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "channel",
+      "value": "telegram"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "high_volatility"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "monitoring",
+    "channel_mgmt"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "diagnose_channel_issue",
+  "generator_id": "diagnose_channel_issue",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "telegram",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "root_cause": "channel_not_configured"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw status",
+      "openclaw channels status --json",
+      "openclaw channels login --channel telegram",
+      "openclaw status"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "channels.telegram",
+        "condition": "exists",
+        "expected": null,
+        "name": "telegram channel configured"
+      },
+      {
+        "type": "state",
+        "field": "channels.telegram.status",
+        "condition": "equals",
+        "expected": "connected",
+        "name": "telegram connected"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "diagnose_channel_issue",
+      "params": {
+        "channel": "telegram"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

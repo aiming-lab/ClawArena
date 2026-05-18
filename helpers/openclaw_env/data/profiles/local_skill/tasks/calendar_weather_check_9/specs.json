@@ -1,0 +1,54 @@
+{
+  "task_id": "calendar_weather_check_9",
+  "instruction": "I planned 'Company picnic' for 2026-03-01 in New York. Check the forecast — if it's rainy, reschedule to 2026-03-03T10:00; otherwise book it at 2026-03-01T10:00.",
+  "domains": [
+    "calendar",
+    "weather"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "calendar_weather_check",
+  "generator_id": "calendar_weather_check",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "event_title": "Company picnic",
+      "original_date": "2026-03-01",
+      "fallback_datetime": "2026-03-03T10:00",
+      "location": "New York"
+    },
+    "private": {
+      "expected_reschedule_datetime": "2026-03-03T10:00"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "weather get --location 'New York' --date 2026-03-01",
+      "calendar add-event --title 'Company picnic' --start 2026-03-03T10:00 --location 'New York'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "event added to calendar"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "calendar_weather_check",
+      "params": {
+        "event_title": "Company picnic",
+        "rainy_date": "2026-03-01",
+        "fallback_date": "2026-03-03T10:00",
+        "location": "New York"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

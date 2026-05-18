@@ -1,0 +1,292 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hbench.local/schemas/timeline.json",
+  "title": "Timeline Schema",
+  "description": "Schema for project timeline and milestone tracking in the hil_s1 scenario. Documents key dates, milestones, phases, and schedule information.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the timeline document",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "examples": ["1.0", "2.0"]
+    },
+    "generated_at": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when this timeline was generated",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+      "examples": ["2025-03-14T10:30:00Z"]
+    },
+    "project": {
+      "type": "string",
+      "description": "Name or identifier of the project",
+      "minLength": 1,
+      "examples": ["Data Migration Project", "Schema V2 Implementation"]
+    },
+    "kickoff_date": {
+      "type": "string",
+      "description": "Project kickoff date in YYYY-MM-DD format",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "examples": ["2025-03-03", "2025-01-15"]
+    },
+    "interim_review": {
+      "type": "string",
+      "description": "Interim review or checkpoint date in YYYY-MM-DD format",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "examples": ["2025-03-12", "2025-02-15"]
+    },
+    "final_deadline": {
+      "type": "string",
+      "description": "Final project deadline in YYYY-MM-DD format",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "examples": ["2025-03-14", "2025-03-31"]
+    },
+    "current_date": {
+      "type": "string",
+      "description": "Current date reference in YYYY-MM-DD format",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "examples": ["2025-03-14"]
+    },
+    "milestones": {
+      "type": "array",
+      "description": "Array of project milestones",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the milestone",
+            "pattern": "^[A-Z]+-[0-9]+$",
+            "examples": ["MS-001", "MILESTONE-042"]
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the milestone",
+            "minLength": 1,
+            "examples": [
+              "Project Kickoff",
+              "Requirements Finalized",
+              "Schema Design Complete",
+              "Data Migration Complete",
+              "Go-Live"
+            ]
+          },
+          "date": {
+            "type": "string",
+            "description": "Target date for the milestone in YYYY-MM-DD format",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": ["2025-03-03", "2025-03-14"]
+          },
+          "actual_date": {
+            "type": ["string", "null"],
+            "description": "Actual completion date if different from target, null if not completed",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": ["2025-03-15", null]
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the milestone",
+            "enum": ["not_started", "in_progress", "at_risk", "completed", "delayed", "cancelled"],
+            "default": "not_started",
+            "examples": ["completed", "in_progress", "at_risk"]
+          },
+          "event": {
+            "type": "string",
+            "description": "Description of what happens at this milestone",
+            "examples": [
+              "Team kickoff meeting and project charter approval",
+              "All requirements documented and approved by stakeholders",
+              "Schema v2 design reviewed and finalized"
+            ]
+          },
+          "deliverables": {
+            "type": "array",
+            "description": "Deliverables expected at this milestone",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "examples": [
+              ["Project charter", "Team roster"],
+              ["Requirements document", "Acceptance criteria"],
+              ["Schema design document", "Migration plan"]
+            ]
+          },
+          "dependencies": {
+            "type": "array",
+            "description": "IDs of milestones that must be completed before this one",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z]+-[0-9]+$"
+            },
+            "uniqueItems": true,
+            "examples": [["MS-001"], ["MS-002", "MS-003"]]
+          },
+          "owner": {
+            "type": "string",
+            "description": "Person or team responsible for this milestone",
+            "examples": ["Project Manager", "Alice Johnson", "Engineering Team"]
+          },
+          "completion_criteria": {
+            "type": "string",
+            "description": "Criteria for considering this milestone complete",
+            "examples": [
+              "All requirements reviewed and approved by stakeholders",
+              "Schema design passes review and is documented"
+            ]
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes about this milestone",
+            "examples": ["May need to adjust date based on stakeholder availability"]
+          }
+        },
+        "required": ["id", "name", "date", "status"],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "phases": {
+      "type": "array",
+      "description": "Project phases grouping related milestones",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the phase",
+            "pattern": "^PHASE-[0-9]+$",
+            "examples": ["PHASE-1", "PHASE-2"]
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the phase",
+            "minLength": 1,
+            "examples": ["Planning", "Design", "Development", "Testing", "Deployment"]
+          },
+          "start_date": {
+            "type": "string",
+            "description": "Phase start date in YYYY-MM-DD format",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": ["2025-03-01", "2025-03-08"]
+          },
+          "end_date": {
+            "type": "string",
+            "description": "Phase end date in YYYY-MM-DD format",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": ["2025-03-07", "2025-03-14"]
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the phase",
+            "enum": ["not_started", "in_progress", "completed", "delayed"],
+            "default": "not_started"
+          },
+          "milestones": {
+            "type": "array",
+            "description": "IDs of milestones in this phase",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z]+-[0-9]+$"
+            },
+            "uniqueItems": true,
+            "examples": [["MS-001", "MS-002"]]
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of what happens in this phase",
+            "examples": ["Requirements gathering and project planning activities"]
+          }
+        },
+        "required": ["id", "name", "start_date", "end_date", "status"],
+        "additionalProperties": false
+      }
+    },
+    "current_update": {
+      "type": "string",
+      "description": "Brief update on current timeline status",
+      "examples": [
+        "On track for final deadline",
+        "Milestone MS-003 delayed by 2 days",
+        "Ahead of schedule, considering earlier go-live"
+      ]
+    },
+    "risks": {
+      "type": "array",
+      "description": "Timeline-related risks",
+      "items": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Description of the risk",
+            "minLength": 1
+          },
+          "impact": {
+            "type": "string",
+            "description": "Impact on timeline",
+            "enum": ["low", "medium", "high"],
+            "examples": ["high", "medium"]
+          },
+          "mitigation": {
+            "type": "string",
+            "description": "Mitigation strategy",
+            "examples": ["Add buffer time to critical path activities"]
+          }
+        },
+        "required": ["description", "impact"],
+        "additionalProperties": false
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "description": "Timeline statistics",
+      "properties": {
+        "total_milestones": {
+          "type": "integer",
+          "description": "Total number of milestones",
+          "minimum": 0
+        },
+        "completed_milestones": {
+          "type": "integer",
+          "description": "Number of completed milestones",
+          "minimum": 0
+        },
+        "delayed_milestones": {
+          "type": "integer",
+          "description": "Number of delayed milestones",
+          "minimum": 0
+        },
+        "days_until_deadline": {
+          "type": "integer",
+          "description": "Number of days until final deadline",
+          "examples": [0, 7, 30, -5]
+        },
+        "completion_percentage": {
+          "type": "number",
+          "description": "Overall project completion percentage (0-100)",
+          "minimum": 0,
+          "maximum": 100,
+          "examples": [75.0, 90.0, 100.0]
+        }
+      },
+      "additionalProperties": false
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the timeline",
+      "examples": ["Timeline reviewed and updated weekly during team meetings"]
+    }
+  },
+  "required": ["milestones"],
+  "additionalProperties": false
+}

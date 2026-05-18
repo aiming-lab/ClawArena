@@ -1,0 +1,95 @@
+{
+  "task_id": "calendar_weather_check_20",
+  "instruction": "I planned 'Outdoor workshop' for 2026-03-01 in London. Check the forecast — if it's rainy, reschedule to 2026-03-05T10:00; otherwise book it at 2026-03-01T10:00.",
+  "canonical_instruction": "I planned 'Outdoor workshop' for 2026-03-01 in London. Check the forecast — if it's rainy, reschedule to 2026-03-05T10:00; otherwise book it at 2026-03-01T10:00.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "datetime",
+      "value": "2026-03-01"
+    },
+    {
+      "type": "datetime",
+      "value": "2026-03-05T10:00"
+    },
+    {
+      "type": "location",
+      "value": "London"
+    },
+    {
+      "type": "title",
+      "value": "Outdoor workshop"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "weather_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "calendar",
+    "weather"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "calendar_weather_check",
+  "generator_id": "calendar_weather_check",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "event_title": "Outdoor workshop",
+      "original_date": "2026-03-01",
+      "fallback_datetime": "2026-03-05T10:00",
+      "location": "London",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_reschedule_datetime": "2026-03-05T10:00"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "weather get --location 'London' --date 2026-03-01",
+      "calendar add-event --title 'Outdoor workshop' --start 2026-03-05T10:00 --location 'London'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "event added to calendar"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "calendar_weather_check",
+      "params": {
+        "event_title": "Outdoor workshop",
+        "rainy_date": "2026-03-01",
+        "fallback_date": "2026-03-05T10:00",
+        "location": "London"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

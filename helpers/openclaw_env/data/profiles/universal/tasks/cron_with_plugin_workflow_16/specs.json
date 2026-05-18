@@ -1,0 +1,58 @@
+{
+  "task_id": "cron_with_plugin_workflow_16",
+  "instruction": "Set up an automated workflow:\n1. Install the 'whatsapp' plugin\n2. Create a cron job with schedule '0 0 * * *' that triggers a plugin action",
+  "domains": [
+    "plugin_skill",
+    "cron_webhook"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "cron_with_plugin_workflow",
+  "generator_id": "cron_with_plugin_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "plugin": "whatsapp",
+      "schedule": "0 0 * * *"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw plugins enable whatsapp",
+      "openclaw cron add --name plugin-cron-f25c5343 --cron '0 0 * * *' --message 'Run periodic plugin check'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "plugins_installed",
+        "condition": "field_equals",
+        "expected": {
+          "field": "name",
+          "value": "whatsapp"
+        },
+        "name": "plugin 'whatsapp' installed"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "cron_with_plugin_workflow",
+      "params": {
+        "plugin": "whatsapp",
+        "schedule": "0 0 * * *"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

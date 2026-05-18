@@ -1,0 +1,169 @@
+{
+  "task_id": "hard_decision_workflow_103",
+  "instruction": "Please check the forecast and today's Europe/London calendar for London, review the next step on the board and the recurring daily check, then only add what's missing before you put the review on the calendar.",
+  "canonical_instruction": "Please use the forecast and today's Europe/London calendar context to sort out the London ops review. Check the next step on the board and the recurring daily check too, then fill only the missing piece before you put the review on the calendar.",
+  "instruction_variants": [
+    "For London, can you check the forecast, today's Europe/London schedule, the next step on the board, and the recurring daily check, then fill only the missing piece before you put the review on the calendar?",
+    "Can you look at the forecast and today's Europe/London calendar for London, review the next step on the board and the recurring daily check, and only add what's missing before you put the review on the calendar?",
+    "For London, can you use the forecast and today's Europe/London calendar to check the next step on the board and the recurring daily check, then fill only the missing piece and put the review on the calendar?",
+    "Please use the forecast and today's Europe/London schedule for London to review the next step on the board and the recurring daily check, fill only what's missing, and put the review on the calendar.",
+    "Please use the forecast and today's Europe/London calendar context to sort out the London ops review. Check the next step on the board and the recurring daily check too, then fill only the missing piece before you put the review on the calendar.",
+    "The London ops review still needs to be set the right way. Please use the forecast and today's Europe/London calendar context, check the next step on the board and the recurring daily check, then add only what's missing before you put the review on the calendar.",
+    "I need the London ops review lined up properly. Use the forecast and today's Europe/London calendar context, review the next step on the board and the recurring daily check, then fill only the missing piece before you put the review on the calendar."
+  ],
+  "visible_constraints": [
+    {
+      "type": "location",
+      "value": "London"
+    },
+    {
+      "type": "timezone",
+      "value": "Europe/London"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "London ops next step"
+    },
+    {
+      "type": "title",
+      "value": "London backup ops review"
+    },
+    {
+      "type": "priority",
+      "value": "medium"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_schedule"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "google_tasks",
+    "weather_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "ops_review_followthrough",
+      "hard_decision_variant": 21,
+      "hard_decision_ability": "workflow_completion",
+      "hard_decision_ability_tags": [
+        "workflow_completion",
+        "schedule_inference"
+      ],
+      "prompt_style": "underspecified",
+      "step_count": 6
+    },
+    "private": {
+      "initial_state_overrides": {
+        "cron_jobs.json": [
+          {
+            "id": "cron_existing_ops",
+            "name": "london-existing-daily-ops-check",
+            "schedule": "0 9 * * *",
+            "message": "Run London daily ops check",
+            "status": "active"
+          }
+        ]
+      }
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "weather forecast --location 'London' --days 1",
+      "calendar today --timezone Europe/London",
+      "openclaw cron list",
+      "tasks list --status pending",
+      "tasks add --title 'London ops next step' --priority medium --due 2026-03-11",
+      "calendar add-event --title 'London backup ops review' --start 2026-03-12T14:00"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "state",
+        "field": "cron_jobs",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "daily check already exists"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate cron job created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 102
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

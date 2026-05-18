@@ -1,0 +1,62 @@
+{
+  "task_id": "configure_channel_setting_8",
+  "instruction": "Log into the discord channel, then set its 'auto_reply' configuration to 'true'.",
+  "domains": [
+    "channel_mgmt"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "configure_channel_setting",
+  "generator_id": "configure_channel_setting",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "discord",
+      "key": "auto_reply",
+      "value": "true"
+    },
+    "private": {
+      "expected_channel": "discord",
+      "expected_key": "auto_reply",
+      "expected_value": "true"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw channels login --channel discord",
+      "openclaw config set channels.discord.config.auto_reply true"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "channels.discord",
+        "condition": "exists",
+        "expected": null,
+        "name": "discord configured"
+      },
+      {
+        "type": "config",
+        "config_path": "channels.discord.config.auto_reply",
+        "condition": "equals",
+        "expected": "true",
+        "name": "discord.auto_reply = true"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "configure_channel_setting",
+      "params": {
+        "channel": "discord",
+        "setting": [
+          "auto_reply",
+          "true"
+        ]
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

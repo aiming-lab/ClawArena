@@ -1,0 +1,102 @@
+{
+  "task_id": "agent_cron_workflow_24",
+  "instruction": "Set up an automated notification workflow:\n1. Create an agent named 'monitor'\n2. Log into the discord channel\n3. Create a cron job with schedule '0 0 * * *' that uses the agent to send a status update via discord",
+  "canonical_instruction": "Set up an automated notification workflow:\n1. Create an agent named 'monitor'\n2. Log into the discord channel\n3. Create a cron job with schedule '0 0 * * *' that uses the agent to send a status update via discord",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "channel",
+      "value": "discord"
+    },
+    {
+      "type": "cron",
+      "value": "0 0 * * *"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "high_volatility"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "agent_mgmt",
+    "channel_mgmt",
+    "cron_webhook"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "agent_cron_workflow",
+  "generator_id": "agent_cron_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "agent_name": "monitor",
+      "channel": "discord",
+      "schedule": "0 0 * * *",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_agent": "monitor",
+      "expected_channel": "discord"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw agents add monitor",
+      "openclaw channels login --channel discord",
+      "openclaw cron add --name agent-status-9cc3e0e0 --cron '0 0 * * *' --message 'Run agent monitor status update'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "agents.monitor",
+        "condition": "exists",
+        "expected": null,
+        "name": "agent 'monitor' created"
+      },
+      {
+        "type": "state",
+        "field": "channels.discord",
+        "condition": "exists",
+        "expected": null,
+        "name": "discord channel configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "agent_cron_workflow",
+      "params": {
+        "agent_name": "monitor",
+        "channel": "discord",
+        "schedule": "0 0 * * *"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

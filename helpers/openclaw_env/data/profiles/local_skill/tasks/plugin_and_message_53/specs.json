@@ -1,0 +1,75 @@
+{
+  "task_id": "plugin_and_message_53",
+  "instruction": "Complete the following setup:\n1. Install the 'whatsapp' plugin\n2. Log into the discord channel\n3. Send a message to @alice saying 'Setup complete, whatsapp is active'",
+  "domains": [
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "plugin_and_message",
+  "generator_id": "plugin_and_message",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "plugin": "whatsapp",
+      "channel": "discord",
+      "target": "@alice"
+    },
+    "private": {
+      "expected_plugin": "whatsapp",
+      "expected_target": "@alice"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw plugins enable whatsapp",
+      "openclaw channels login --channel discord",
+      "openclaw message send --channel discord --target @alice --message 'Setup complete, whatsapp is active'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "plugins_installed",
+        "condition": "field_equals",
+        "expected": {
+          "field": "name",
+          "value": "whatsapp"
+        },
+        "name": "plugin 'whatsapp' installed"
+      },
+      {
+        "type": "state",
+        "field": "channels.discord",
+        "condition": "exists",
+        "expected": null,
+        "name": "discord configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "@alice"
+        },
+        "name": "message sent to correct target"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "plugin_and_message",
+      "params": {
+        "plugin": "whatsapp",
+        "channel": "discord",
+        "target": "@alice"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "task_id": "msg_send_text_57",
+  "instruction": "Send a text message to +1234567890 on slack saying 'Hello, how are you?'.",
+  "domains": [
+    "messaging"
+  ],
+  "difficulty": 1,
+  "initial_state": "default",
+  "template_id": "msg_send_text",
+  "generator_id": "msg_send_text",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "slack",
+      "target": "+1234567890",
+      "content": "Hello, how are you?"
+    },
+    "private": {
+      "expected_target": "+1234567890",
+      "expected_channel": "slack",
+      "expected_content": "Hello, how are you?"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw message send --channel slack --target +1234567890 --message 'Hello, how are you?'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "+1234567890"
+        },
+        "name": "message sent to correct target"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_contains",
+        "expected": {
+          "field": "message",
+          "value": "Hello, how are you?"
+        },
+        "name": "message content correct"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "msg_send_text",
+      "params": {
+        "channel": "slack",
+        "target": "+1234567890",
+        "content": "Hello, how are you?"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

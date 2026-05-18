@@ -1,0 +1,55 @@
+{
+  "task_id": "file_create_and_read_1",
+  "instruction": "Please create a file at '/notes/todo.txt' with content 'Hello, world!', then read it back to confirm it saved correctly.",
+  "domains": [
+    "file"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "file_create_and_read",
+  "generator_id": "file_create_and_read",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "path": "/notes/todo.txt",
+      "content": "Hello, world!"
+    },
+    "private": {
+      "expected_content": "Hello, world!"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "file create --path '/notes/todo.txt' --content 'Hello, world!'",
+      "file read --path '/notes/todo.txt'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "file created"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "Hello, world!",
+        "name": "file content readable"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "file_create_and_read",
+      "params": {
+        "path": "/notes/todo.txt",
+        "content": "Hello, world!"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

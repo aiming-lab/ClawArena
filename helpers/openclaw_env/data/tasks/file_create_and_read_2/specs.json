@@ -1,0 +1,80 @@
+{
+  "task_id": "file_create_and_read_2",
+  "instruction": "Please create a file at '/notes/todo.txt' with content '# My Notes\n- item 1\n- item 2', then read it back to confirm it saved correctly.",
+  "canonical_instruction": "Please create a file at '/notes/todo.txt' with content '# My Notes\n- item 1\n- item 2', then read it back to confirm it saved correctly.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "path",
+      "value": "/notes/todo.txt"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step"
+  ],
+  "online_requirement": "none",
+  "provider_dependencies": [],
+  "availability_tier": "stable",
+  "domains": [
+    "file"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "file_create_and_read",
+  "generator_id": "file_create_and_read",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "path": "/notes/todo.txt",
+      "content": "# My Notes\n- item 1\n- item 2",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_content": "# My Notes\n- item 1\n- item 2"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "file create --path '/notes/todo.txt' --content '# My Notes\n- item 1\n- item 2'",
+      "file read --path '/notes/todo.txt'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "file created"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "# My Notes\n- item 1\n",
+        "name": "file content readable"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "file_create_and_read",
+      "params": {
+        "path": "/notes/todo.txt",
+        "content": "# My Notes\n- item 1\n- item 2"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

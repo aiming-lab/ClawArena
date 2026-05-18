@@ -1,0 +1,76 @@
+{
+  "task_id": "msg_broadcast_3",
+  "instruction": "Broadcast the message 'Team standup in 10 minutes' to the following targets: @alice,@bob,@charlie.",
+  "canonical_instruction": "Broadcast the message 'Team standup in 10 minutes' to the following targets: @alice,@bob,@charlie.",
+  "instruction_variants": [],
+  "visible_constraints": [],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "single_step",
+    "high_volatility"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "messaging"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "msg_broadcast",
+  "generator_id": "msg_broadcast",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "targets": "@alice,@bob,@charlie",
+      "content": "Team standup in 10 minutes",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_targets": [
+        "@alice",
+        "@bob",
+        "@charlie"
+      ],
+      "expected_count": 3
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw message broadcast --targets @alice @bob @charlie --message 'Team standup in 10 minutes'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "count_gte",
+        "expected": 3,
+        "name": "broadcast sent to 3 targets"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "msg_broadcast",
+      "params": {
+        "targets": "@alice,@bob,@charlie",
+        "content": "Team standup in 10 minutes"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,343 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hbench.local/schemas/data_lineage.json",
+  "title": "Data Lineage Schema",
+  "description": "Schema for documenting data lineage and provenance in the hil_s1 scenario. Tracks the origin, transformations, and flow of datasets through the system.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the data lineage document",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "examples": ["1.0", "2.0"]
+    },
+    "generated_at": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when this lineage document was generated",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+      "examples": ["2025-03-14T10:30:00Z"]
+    },
+    "project": {
+      "type": "string",
+      "description": "Name or identifier of the project",
+      "minLength": 1,
+      "examples": ["Data Migration Project", "Schema V2 Implementation"]
+    },
+    "scope": {
+      "type": "string",
+      "description": "Scope of this lineage documentation",
+      "examples": ["Customer data pipeline", "Full data warehouse lineage"]
+    },
+    "datasets": {
+      "type": "array",
+      "description": "Array of dataset objects with lineage information",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the dataset",
+            "pattern": "^[A-Z]+-[0-9]+$",
+            "examples": ["DS-001", "DATASET-042"]
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the dataset",
+            "minLength": 1,
+            "examples": ["customers_v1", "transactions", "customer_profiles_v2"]
+          },
+          "filename": {
+            "type": "string",
+            "description": "Filename or table name",
+            "examples": ["customers_v1.csv", "transactions_table", "profiles.json"]
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of dataset",
+            "enum": ["source", "intermediate", "derived", "final", "archived"],
+            "examples": ["source", "derived", "final"]
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of the dataset",
+            "examples": ["v1", "v2", "2025-03-14", "1.0"]
+          },
+          "format": {
+            "type": "string",
+            "description": "Data format",
+            "enum": ["csv", "json", "parquet", "avro", "xml", "database_table", "api_endpoint"],
+            "examples": ["csv", "database_table", "json"]
+          },
+          "location": {
+            "type": "string",
+            "description": "Location or path where dataset is stored",
+            "examples": [
+              "/data/raw/customers_v1.csv",
+              "s3://bucket/data/customers.parquet",
+              "database.schema.customers_table"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "description": "ISO 8601 timestamp when dataset was created",
+            "format": "date-time",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+            "examples": ["2025-03-10T08:00:00Z"]
+          },
+          "record_count": {
+            "type": "integer",
+            "description": "Number of records in the dataset",
+            "minimum": 0,
+            "examples": [1234567, 98765]
+          },
+          "size_bytes": {
+            "type": "integer",
+            "description": "Size of the dataset in bytes",
+            "minimum": 0,
+            "examples": [52428800, 1073741824]
+          },
+          "schema_version": {
+            "type": "string",
+            "description": "Version of the schema used by this dataset",
+            "examples": ["v1", "v2", "2.0"]
+          },
+          "derived_from": {
+            "type": "array",
+            "description": "IDs of parent datasets this dataset was derived from",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z]+-[0-9]+$"
+            },
+            "uniqueItems": true,
+            "examples": [["DS-001"], ["DS-002", "DS-005"]]
+          },
+          "transformation": {
+            "type": "string",
+            "description": "Description of transformations applied to create this dataset",
+            "examples": [
+              "Filtered records with status='active', joined with address data",
+              "Aggregated daily transactions by customer_id",
+              "Applied schema v2 field mappings and type conversions"
+            ]
+          },
+          "transformation_script": {
+            "type": "string",
+            "description": "Name or path of the transformation script used",
+            "examples": [
+              "transform_customers_v1_to_v2.py",
+              "aggregate_transactions.sql",
+              "pipeline/etl_stage2.sh"
+            ]
+          },
+          "transformation_timestamp": {
+            "type": ["string", "null"],
+            "description": "ISO 8601 timestamp when transformation was performed",
+            "format": "date-time",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+            "examples": ["2025-03-12T14:30:00Z", null]
+          },
+          "quality_checks": {
+            "type": "array",
+            "description": "Quality checks performed on this dataset",
+            "items": {
+              "type": "object",
+              "properties": {
+                "check_name": {
+                  "type": "string",
+                  "description": "Name of the quality check",
+                  "examples": ["Null value check", "Schema validation", "Duplicate detection"]
+                },
+                "status": {
+                  "type": "string",
+                  "description": "Status of the check",
+                  "enum": ["passed", "failed", "warning"],
+                  "examples": ["passed", "warning"]
+                },
+                "details": {
+                  "type": "string",
+                  "description": "Details about the check result",
+                  "examples": ["No null values found in required fields", "3 duplicate records found"]
+                }
+              },
+              "required": ["check_name", "status"],
+              "additionalProperties": false
+            }
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the dataset",
+            "enum": ["active", "deprecated", "archived", "in_progress", "failed"],
+            "default": "active",
+            "examples": ["active", "deprecated"]
+          },
+          "owner": {
+            "type": "string",
+            "description": "Person or team responsible for this dataset",
+            "examples": ["Data Engineering Team", "Alice Johnson"]
+          },
+          "access_control": {
+            "type": "string",
+            "description": "Access control level or permissions",
+            "enum": ["public", "internal", "restricted", "confidential"],
+            "examples": ["restricted", "internal"]
+          },
+          "retention_policy": {
+            "type": "string",
+            "description": "Data retention policy",
+            "examples": [
+              "Keep for 7 years per compliance requirements",
+              "Archive after 90 days",
+              "Delete after v2 migration complete"
+            ]
+          },
+          "downstream_datasets": {
+            "type": "array",
+            "description": "IDs of datasets derived from this dataset",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z]+-[0-9]+$"
+            },
+            "uniqueItems": true,
+            "examples": [["DS-010", "DS-011"]]
+          },
+          "downstream_applications": {
+            "type": "array",
+            "description": "Applications or systems that consume this dataset",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "examples": [["Customer Portal", "Analytics Dashboard", "Reporting API"]]
+          },
+          "data_classification": {
+            "type": "string",
+            "description": "Data classification or sensitivity level",
+            "enum": ["public", "internal", "confidential", "pii", "phi"],
+            "examples": ["pii", "confidential"]
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Additional metadata about the dataset",
+            "additionalProperties": {
+              "type": ["string", "number", "boolean", "null"]
+            },
+            "examples": [
+              {
+                "business_unit": "Customer Operations",
+                "criticality": "high",
+                "update_frequency": "daily"
+              }
+            ]
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes about this dataset",
+            "examples": ["Source data for customer analytics pipeline"]
+          }
+        },
+        "required": ["id", "name", "type", "version", "format", "location"],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "lineage_graph": {
+      "type": "object",
+      "description": "Graph representation of data lineage relationships",
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "description": "Dataset nodes in the lineage graph",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Dataset ID",
+                "pattern": "^[A-Z]+-[0-9]+$"
+              },
+              "label": {
+                "type": "string",
+                "description": "Display label for the node"
+              }
+            },
+            "required": ["id", "label"],
+            "additionalProperties": false
+          }
+        },
+        "edges": {
+          "type": "array",
+          "description": "Edges representing data flow between datasets",
+          "items": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "string",
+                "description": "Source dataset ID",
+                "pattern": "^[A-Z]+-[0-9]+$"
+              },
+              "to": {
+                "type": "string",
+                "description": "Target dataset ID",
+                "pattern": "^[A-Z]+-[0-9]+$"
+              },
+              "transformation": {
+                "type": "string",
+                "description": "Brief description of transformation"
+              }
+            },
+            "required": ["from", "to"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "statistics": {
+      "type": "object",
+      "description": "Statistics about the data lineage",
+      "properties": {
+        "total_datasets": {
+          "type": "integer",
+          "description": "Total number of datasets",
+          "minimum": 0
+        },
+        "source_datasets": {
+          "type": "integer",
+          "description": "Number of source datasets",
+          "minimum": 0
+        },
+        "derived_datasets": {
+          "type": "integer",
+          "description": "Number of derived datasets",
+          "minimum": 0
+        },
+        "final_datasets": {
+          "type": "integer",
+          "description": "Number of final output datasets",
+          "minimum": 0
+        },
+        "max_lineage_depth": {
+          "type": "integer",
+          "description": "Maximum depth of lineage chain",
+          "minimum": 0,
+          "examples": [3, 5, 10]
+        },
+        "total_transformations": {
+          "type": "integer",
+          "description": "Total number of transformations",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the data lineage",
+      "examples": ["Lineage documented as part of data governance initiative"]
+    }
+  },
+  "required": ["datasets"],
+  "additionalProperties": false
+}

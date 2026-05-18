@@ -1,0 +1,118 @@
+{
+  "task_id": "complex_cron_digest_automation_8",
+  "instruction": "[Cron Digest Automation] Automate recurring digests and verify daily context. Create digest cron on '0 9 * * *', verify cron list, pull 5-day forecast for Berlin, then check today's calendar in Europe/Berlin.",
+  "canonical_instruction": "[Cron Digest Automation] Automate recurring digests and verify daily context. Create digest cron on '0 9 * * *', verify cron list, pull 5-day forecast for Berlin, then check today's calendar in Europe/Berlin.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "location",
+      "value": "Berlin"
+    },
+    {
+      "type": "timezone",
+      "value": "Europe/Berlin"
+    },
+    {
+      "type": "cron",
+      "value": "0 9 * * *"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "high_volatility",
+    "life_work",
+    "online_required"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "google_calendar",
+    "weather_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "cron_webhook",
+    "agent_mgmt",
+    "security",
+    "channel_mgmt",
+    "messaging",
+    "device_node",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "complex_composed_workflow",
+  "generator_id": "complex_composed_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "complex_template": "cron_digest_automation",
+      "complex_variant": 8,
+      "complex_scenario": "Cron Digest Automation",
+      "complex_scenario_slug": "cron_digest_automation",
+      "step_count": 4,
+      "openclaw_steps": 2,
+      "complex_high_volatility": false,
+      "strict_online_risk": "medium",
+      "realism_tier": "life_work",
+      "causal_chain_score": 1.0,
+      "entity_consistency_pass": true,
+      "filler_step_count": 0,
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw cron add --name cwf-cron-digest-automation-08 --cron '0 9 * * *' --message 'Send cron digest automation timeline check digest for Berlin'",
+      "openclaw cron list",
+      "weather forecast --location 'Berlin' --days 5",
+      "calendar today --timezone Europe/Berlin"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "complex_composed_workflow",
+      "params": {
+        "workflow_index": 107
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

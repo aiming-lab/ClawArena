@@ -1,0 +1,65 @@
+{
+  "task_id": "msg_send_text_12",
+  "instruction": "Send a text message to +1234567890 on telegram saying 'Happy birthday!'.",
+  "domains": [
+    "messaging"
+  ],
+  "difficulty": 1,
+  "initial_state": "default",
+  "template_id": "msg_send_text",
+  "generator_id": "msg_send_text",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "telegram",
+      "target": "+1234567890",
+      "content": "Happy birthday!"
+    },
+    "private": {
+      "expected_target": "+1234567890",
+      "expected_channel": "telegram",
+      "expected_content": "Happy birthday!"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw message send --channel telegram --target +1234567890 --message 'Happy birthday!'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "+1234567890"
+        },
+        "name": "message sent to correct target"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_contains",
+        "expected": {
+          "field": "message",
+          "value": "Happy birthday!"
+        },
+        "name": "message content correct"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "msg_send_text",
+      "params": {
+        "channel": "telegram",
+        "target": "+1234567890",
+        "content": "Happy birthday!"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

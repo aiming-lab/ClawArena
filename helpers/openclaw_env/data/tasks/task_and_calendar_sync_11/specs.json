@@ -1,0 +1,94 @@
+{
+  "task_id": "task_and_calendar_sync_11",
+  "instruction": "Keep my task list and calendar in sync: add 'Code review block' as a task due 2026-03-08, and block that time on the calendar at 2026-03-09T10:00.",
+  "canonical_instruction": "Keep my task list and calendar in sync: add 'Code review block' as a task due 2026-03-08, and block that time on the calendar at 2026-03-09T10:00.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "datetime",
+      "value": "2026-03-08"
+    },
+    {
+      "type": "datetime",
+      "value": "2026-03-09T10:00"
+    },
+    {
+      "type": "title",
+      "value": "Code review block"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "tasks",
+    "calendar"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "task_and_calendar_sync",
+  "generator_id": "task_and_calendar_sync",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "title": "Code review block",
+      "due": "2026-03-08",
+      "start": "2026-03-09T10:00",
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "tasks add --title 'Code review block' --due 2026-03-08",
+      "calendar add-event --title 'Code review block' --start 2026-03-09T10:00"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar block created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "task_and_calendar_sync",
+      "params": {
+        "title": "Code review block",
+        "due": "2026-03-08",
+        "start": "2026-03-09T10:00"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

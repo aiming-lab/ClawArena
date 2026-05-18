@@ -1,0 +1,85 @@
+{
+  "task_id": "cron_with_plugin_workflow_14",
+  "instruction": "Set up an automated workflow:\n1. Install the 'whatsapp' plugin\n2. Create a cron job with schedule '0 9 * * 1-5' that triggers a plugin action",
+  "canonical_instruction": "Set up an automated workflow:\n1. Install the 'whatsapp' plugin\n2. Create a cron job with schedule '0 9 * * 1-5' that triggers a plugin action",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "cron",
+      "value": "0 9 * * 1-5"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "high_volatility"
+  ],
+  "online_requirement": "none",
+  "provider_dependencies": [],
+  "availability_tier": "stable",
+  "domains": [
+    "plugin_skill",
+    "cron_webhook"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "cron_with_plugin_workflow",
+  "generator_id": "cron_with_plugin_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "plugin": "whatsapp",
+      "schedule": "0 9 * * 1-5",
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw plugins enable whatsapp",
+      "openclaw cron add --name plugin-cron-b45ef4cd --cron '0 9 * * 1-5' --message 'Run periodic plugin check'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "plugins_installed",
+        "condition": "field_equals",
+        "expected": {
+          "field": "name",
+          "value": "whatsapp"
+        },
+        "name": "plugin 'whatsapp' installed"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "cron_with_plugin_workflow",
+      "params": {
+        "plugin": "whatsapp",
+        "schedule": "0 9 * * 1-5"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

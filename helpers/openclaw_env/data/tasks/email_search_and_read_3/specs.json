@@ -1,0 +1,91 @@
+{
+  "task_id": "email_search_and_read_3",
+  "instruction": "I'm trying to find something in my inbox. Search for emails mentioning 'budget' and read the matching email.",
+  "canonical_instruction": "I'm trying to find something in my inbox. Search for emails mentioning 'budget' and read the matching email.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "query",
+      "value": "budget"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "email_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "email"
+  ],
+  "difficulty": 1,
+  "initial_state": "default",
+  "template_id": "email_search_and_read",
+  "generator_id": "email_search_and_read",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "query": "budget",
+      "seed_id": "email_seed_3",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_query": "budget",
+      "expected_seed_id": "email_seed_3",
+      "expected_subject": "Budget report",
+      "expected_body_snippet": "budget report for this quarter"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "email search --query 'budget'",
+      "email read --id email_seed_3"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "read command succeeds"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "Budget report",
+        "output_field": "last_stdout",
+        "name": "read output includes expected subject"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "budget report for this quarter",
+        "output_field": "last_stdout",
+        "name": "read output includes expected body"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "email_search_and_read",
+      "params": {
+        "query": "budget"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

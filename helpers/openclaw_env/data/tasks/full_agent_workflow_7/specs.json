@@ -1,0 +1,102 @@
+{
+  "task_id": "full_agent_workflow_7",
+  "instruction": "Set up an automated workflow:\n1. Create a new agent named 'status-monitor'\n2. Log into the slack channel\n3. Create a cron job with schedule '0 9 * * *' that triggers the agent to send a status report",
+  "canonical_instruction": "Set up an automated workflow:\n1. Create a new agent named 'status-monitor'\n2. Log into the slack channel\n3. Create a cron job with schedule '0 9 * * *' that triggers the agent to send a status report",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "channel",
+      "value": "slack"
+    },
+    {
+      "type": "cron",
+      "value": "0 9 * * *"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "high_volatility"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "agent_mgmt",
+    "channel_mgmt",
+    "cron_webhook"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "full_agent_workflow",
+  "generator_id": "full_agent_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "agent_name": "status-monitor",
+      "channel": "slack",
+      "schedule": "0 9 * * *",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_agent": "status-monitor",
+      "expected_channel": "slack"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw agents add status-monitor",
+      "openclaw channels login --channel slack",
+      "openclaw cron add --name agent-report-686b9323 --cron '0 9 * * *' --message 'Trigger agent status-monitor status report'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "agents.status-monitor",
+        "condition": "exists",
+        "expected": null,
+        "name": "agent 'status-monitor' created"
+      },
+      {
+        "type": "state",
+        "field": "channels.slack",
+        "condition": "exists",
+        "expected": null,
+        "name": "slack configured"
+      },
+      {
+        "type": "state",
+        "field": "cron_jobs",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "full_agent_workflow",
+      "params": {
+        "agent_name": "status-monitor",
+        "channel": "slack",
+        "schedule": "0 9 * * *"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

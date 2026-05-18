@@ -1,0 +1,193 @@
+{
+  "task_id": "hard_decision_workflow_353",
+  "instruction": "London still needs a decision because the meeting email note, the forecast, and today's Europe/London calendar don't line up cleanly. Please check them, leave the next step on the board, keep the daily check schedule in place, and either put the review on the calendar or send team@example.com the async update.",
+  "canonical_instruction": "The latest meeting email note, the forecast, and today's Europe/London calendar don't line up cleanly for London. Please check them, leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send team@example.com the async update.",
+  "instruction_variants": [
+    "Before making the call on London, check the latest meeting email note, the forecast, and today's Europe/London calendar. Leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send team@example.com the async update.",
+    "Please use the latest meeting email note, the forecast, and today's Europe/London calendar to make the call on London. Put the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send team@example.com the async update.",
+    "Use the latest meeting email note, the forecast, and today's Europe/London calendar to work out the right path for London. Leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send team@example.com the async update.",
+    "Please reconcile the latest meeting email note, the forecast, and today's Europe/London calendar for London. Leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send team@example.com the async update.",
+    "The latest meeting email note, the forecast, and today's Europe/London calendar don't line up cleanly for London. Please check them, leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send team@example.com the async update.",
+    "The latest meeting email note, the forecast, and today's Europe/London calendar are pulling London in different directions. Please check them, leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send team@example.com the async update.",
+    "I need a call on the current London plan after you compare the latest meeting email note, the forecast, and today's Europe/London calendar. Please leave the next step on the board, keep the recurring daily check scheduled, and either put the review on the calendar or send team@example.com the async update."
+  ],
+  "visible_constraints": [
+    {
+      "type": "email",
+      "value": "team@example.com"
+    },
+    {
+      "type": "location",
+      "value": "London"
+    },
+    {
+      "type": "timezone",
+      "value": "Europe/London"
+    },
+    {
+      "type": "query",
+      "value": "meeting"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "London contradictory-source next step"
+    },
+    {
+      "type": "subject",
+      "value": "London async update"
+    },
+    {
+      "type": "body",
+      "value": "I checked the latest meeting note, the forecast, and todays calendar, and London should shift async while keeping the next step and daily check in place."
+    },
+    {
+      "type": "priority",
+      "value": "high"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_message",
+    "infer_branch",
+    "infer_schedule"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "email_provider",
+    "google_tasks",
+    "weather_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "contradictory_source_resolution",
+      "hard_decision_variant": 17,
+      "hard_decision_ability": "multi_source_reasoning",
+      "hard_decision_ability_tags": [
+        "multi_source_reasoning",
+        "branch_resolution",
+        "workflow_completion",
+        "state_inspection"
+      ],
+      "prompt_style": "underspecified",
+      "step_count": 9
+    },
+    "private": {
+      "initial_state_overrides": {
+        "calendar_events.json": [
+          {
+            "id": "evt_conflict_blocker",
+            "title": "London blocker check-in",
+            "start": "2026-03-01T09:30",
+            "end": "2026-03-01T10:00",
+            "location": "London",
+            "attendees": []
+          }
+        ]
+      }
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "email search --query 'meeting'",
+      "email read --id email_seed_2",
+      "weather forecast --location 'London' --days 1",
+      "calendar today --timezone Europe/London",
+      "calendar list --from 2026-03-01 --to 2026-03-01",
+      "tasks list --status pending",
+      "tasks add --title 'London contradictory-source next step' --priority high --due 2026-03-13",
+      "openclaw cron add --name contradictory-source-17 --cron '30 16 * * 1-5' --message 'Run London daily contradiction check'",
+      "email send --to team@example.com --subject 'London async update' --body 'I checked the latest meeting note, the forecast, and todays calendar, and London should shift async while keeping the next step and daily check in place.'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "emails_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "to",
+          "value": "team@example.com"
+        },
+        "name": "email sent to team@example.com"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 352
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

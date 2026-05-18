@@ -1,0 +1,213 @@
+{
+  "task_id": "hard_decision_workflow_308",
+  "instruction": "Part of the London ops work is already in motion. Please check the board, the calendar, and the recurring daily check, finish the missing pieces, close out the open work, send alice@example.com a recap, and don't recreate anything that's already in place.",
+  "canonical_instruction": "Some of the London ops work is already in motion. Please check what's on the board, what's on the calendar, and the recurring daily check, finish the missing pieces, close out the open work, send alice@example.com a recap, and don't recreate anything that's already in place.",
+  "instruction_variants": [
+    "Some of the London ops work is already in motion. Check what's on the board, what's on the calendar, and the recurring daily check, finish the missing pieces, close out the open work, send alice@example.com a recap, and don't recreate anything that's already in place.",
+    "The London ops work already has some pieces in place. Check the board, the calendar, and the recurring daily check, finish what's still missing, close out the open work, send alice@example.com a recap, and avoid recreating what's already there.",
+    "Some of the London ops work is already underway. Check the board, the calendar, and the recurring daily check, finish the missing pieces, close out the open work, send alice@example.com a recap, and leave the existing setup alone.",
+    "The London ops work is already partly underway. Check the board, the calendar, and the recurring daily check, finish what's still missing, close out the open work, send alice@example.com a recap, and don't rebuild anything that's already there.",
+    "Some of the London ops work is already in motion. Please check what's on the board, what's on the calendar, and the recurring daily check, finish the missing pieces, close out the open work, send alice@example.com a recap, and don't recreate anything that's already in place.",
+    "The London ops work already has a few pieces moving. Please check the board, the calendar, and the recurring daily check, finish what's still missing, close out the open work, send alice@example.com a recap, and leave the existing setup alone.",
+    "The London ops work is already partly underway. Please check the board, the calendar, and the recurring daily check, finish what's missing, close out the open work, send alice@example.com a recap, and leave the existing pieces alone."
+  ],
+  "visible_constraints": [
+    {
+      "type": "email",
+      "value": "alice@example.com"
+    },
+    {
+      "type": "location",
+      "value": "London"
+    },
+    {
+      "type": "query",
+      "value": "London ops"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "London resumed ops next step"
+    },
+    {
+      "type": "subject",
+      "value": "London ops resume recap"
+    },
+    {
+      "type": "body",
+      "value": "I checked the existing London ops setup, added the missing next step, and left the review block and daily check in place."
+    },
+    {
+      "type": "priority",
+      "value": "medium"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_message",
+    "infer_missing_steps",
+    "avoid_duplicate",
+    "infer_completion"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "email_provider",
+    "google_tasks",
+    "weather_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "interrupted_workflow_resume",
+      "hard_decision_variant": 2,
+      "hard_decision_ability": "gap_completion",
+      "hard_decision_ability_tags": [
+        "gap_completion",
+        "state_inspection",
+        "duplicate_avoidance",
+        "workflow_completion"
+      ],
+      "prompt_style": "underspecified",
+      "step_count": 8
+    },
+    "private": {
+      "initial_state_overrides": {
+        "calendar_events.json": [
+          {
+            "id": "evt_existing_ops",
+            "title": "London existing ops review block",
+            "start": "2026-03-13T09:00",
+            "end": "2026-03-13T09:00",
+            "location": "London",
+            "attendees": []
+          }
+        ],
+        "cron_jobs.json": [
+          {
+            "id": "cron_existing_ops",
+            "name": "london-existing-daily-ops-check",
+            "schedule": "0 9 * * *",
+            "message": "Run London daily ops check",
+            "status": "active"
+          }
+        ],
+        "ops/ops-resume-notes.txt": "London partial ops notes already captured."
+      }
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "weather forecast --location 'London' --days 1",
+      "calendar list",
+      "calendar today --timezone Europe/London",
+      "openclaw cron list",
+      "tasks list --status pending",
+      "tasks search --query 'London ops'",
+      "tasks add --title 'London resumed ops next step' --priority medium --due 2026-03-16",
+      "email send --to alice@example.com --subject 'London ops resume recap' --body 'I checked the existing London ops setup, added the missing next step, and left the review block and daily check in place.'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "state",
+        "field": "calendar_events",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "review block already exists"
+      },
+      {
+        "type": "state",
+        "field": "cron_jobs",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "daily check already exists"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate calendar event created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate cron job created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "emails_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "to",
+          "value": "alice@example.com"
+        },
+        "name": "email sent to alice@example.com"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 307
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

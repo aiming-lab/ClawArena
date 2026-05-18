@@ -1,0 +1,90 @@
+{
+  "task_id": "configure_channel_setting_7",
+  "instruction": "Log into the discord channel, then set its 'notification_level' configuration to 'mentions'.",
+  "canonical_instruction": "Log into the discord channel, then set its 'notification_level' configuration to 'mentions'.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "channel",
+      "value": "discord"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "high_volatility"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "channel_mgmt"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "configure_channel_setting",
+  "generator_id": "configure_channel_setting",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "discord",
+      "key": "notification_level",
+      "value": "mentions",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_channel": "discord",
+      "expected_key": "notification_level",
+      "expected_value": "mentions"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw channels login --channel discord",
+      "openclaw config set channels.discord.config.notification_level mentions"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "channels.discord",
+        "condition": "exists",
+        "expected": null,
+        "name": "discord configured"
+      },
+      {
+        "type": "config",
+        "config_path": "channels.discord.config.notification_level",
+        "condition": "equals",
+        "expected": "mentions",
+        "name": "discord.notification_level = mentions"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "configure_channel_setting",
+      "params": {
+        "channel": "discord",
+        "setting": [
+          "notification_level",
+          "mentions"
+        ]
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

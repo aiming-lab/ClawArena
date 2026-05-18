@@ -1,0 +1,59 @@
+{
+  "task_id": "cron_send_message_42",
+  "instruction": "Log into the discord channel, then create a cron job with schedule '0 9 * * 1-5' that sends a daily report to @team via discord.",
+  "domains": [
+    "cron_webhook",
+    "messaging"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "cron_send_message",
+  "generator_id": "cron_send_message",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "discord",
+      "target": "@team",
+      "schedule": "0 9 * * 1-5"
+    },
+    "private": {
+      "expected_channel": "discord"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw channels login --channel discord",
+      "openclaw cron add --name daily-report-8dc94a3b --cron '0 9 * * 1-5' --message 'Send daily report to @team via discord'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "channels.discord",
+        "condition": "exists",
+        "expected": null,
+        "name": "discord channel configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "cron_send_message",
+      "params": {
+        "channel": "discord",
+        "target": "@team",
+        "schedule": "0 9 * * 1-5"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

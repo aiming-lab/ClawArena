@@ -1,0 +1,61 @@
+{
+  "task_id": "email_send_8",
+  "instruction": "Draft and send an email to alice@example.com — subject: 'Action items', body: 'Can we schedule a meeting for next week?'.",
+  "domains": [
+    "email"
+  ],
+  "difficulty": 1,
+  "initial_state": "default",
+  "template_id": "email_send",
+  "generator_id": "email_send",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "recipient": "alice@example.com",
+      "subject": "Action items",
+      "body": "Can we schedule a meeting for next week?"
+    },
+    "private": {
+      "expected_to": "alice@example.com",
+      "expected_subject": "Action items"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "email send --to alice@example.com --subject 'Action items' --body 'Can we schedule a meeting for next week?'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "emails_sent",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "email sent"
+      },
+      {
+        "type": "effect",
+        "effect_type": "emails_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "to",
+          "value": "alice@example.com"
+        },
+        "name": "email sent to alice@example.com"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "email_send",
+      "params": {
+        "recipient": "alice@example.com",
+        "subject": "Action items",
+        "body": "Can we schedule a meeting for next week?"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

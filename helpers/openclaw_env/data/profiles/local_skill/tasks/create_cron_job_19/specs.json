@@ -1,0 +1,58 @@
+{
+  "task_id": "create_cron_job_19",
+  "instruction": "Create a cron job that runs on schedule '30 17 * * 5' and sends a status update message to @team.",
+  "domains": [
+    "cron_webhook"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "create_cron_job",
+  "generator_id": "create_cron_job",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "schedule": "30 17 * * 5",
+      "target": "@team"
+    },
+    "private": {
+      "expected_schedule": "30 17 * * 5"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw cron add --name status-update-96b239bf --cron '30 17 * * 5' --message 'Send scheduled status update to @team'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "field_contains",
+        "expected": {
+          "field": "schedule",
+          "value": "30 17 * * 5"
+        },
+        "name": "cron schedule is '30 17 * * 5'"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "create_cron_job",
+      "params": {
+        "schedule": "30 17 * * 5",
+        "target": "@team"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

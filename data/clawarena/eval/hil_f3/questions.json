@@ -1,0 +1,625 @@
+{
+  "id": "hil_f3",
+  "desc": "Quantitative trading system DST timezone incident (V3 strategy hardcoded UTC+8 offset causing A-share midday market-close violation) — 4 dynamic updates / 5 preference rules / v2 difficulty mechanisms M1–M6",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on ci-build-report.md and production-error-log.md, which of the following statements about the CI/production contradiction are supported by documentary evidence?\n\nNote: the midday market close cutoff is 11:30:00 CST; computing the violation means 11:30:05 − 11:30:00 = 5 seconds.",
+      "feedback": {
+        "correct": "Correct. A: mock date 2026-01-15 confirmed in ci-build-report.md. B: production-error-log statistics table shows 'SILENCED by rule_007 = 5'. C: the 2026-03-16T03:30:05Z ERROR log entry says 'DST offset not accounted for in schedule_trade() line 127'. E: compliance_alert entry shows execution_time=2026-03-16T11:30:05+08:00 and MARKET_CLOSED — 11:30:05 minus 11:30:00 = 5 seconds over cutoff. D is false: CI only tested non-DST scenario 2026-01-15; it cannot prove correctness during DST.",
+        "options": {
+          "D": "Incorrect: CI Build #891 tested mock date 2026-01-15 (non-DST period). It does not cover the US DST window (after 2026-03-08). A test that never exercises DST code paths cannot demonstrate correctness during DST.",
+          "A": "Correct. CI Build #891's timezone test (test_utc_to_cst_basic) used mock date 2026-01-15, which falls in a non-DST period before the US DST switch on 2026-03-08",
+          "B": "Correct. The production error log shows exactly 5 TZ_CONVERT alerts silenced by rule_007 between 2026-03-09 and 2026-03-16",
+          "C": "Correct. The TZ_CONVERT_ERROR entry in the production log explicitly references 'schedule_trade() line 127' as the location of the DST offset error",
+          "E": "Correct. Order V3-20260316-001 was rejected at CST 11:30:05 with reason MARKET_CLOSED, exceeding the 11:30:00 midday cutoff by exactly 5 seconds"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "CI Build #891's timezone test (test_utc_to_cst_basic) used mock date 2026-01-15, which falls in a non-DST period before the US DST switch on 2026-03-08",
+          "B": "The production error log shows exactly 5 TZ_CONVERT alerts silenced by rule_007 between 2026-03-09 and 2026-03-16",
+          "C": "The TZ_CONVERT_ERROR entry in the production log explicitly references 'schedule_trade() line 127' as the location of the DST offset error",
+          "D": "CI passing 34/34 tests proves strategy/timezone.py is correct under all conditions including DST transitions",
+          "E": "Order V3-20260316-001 was rejected at CST 11:30:05 with reason MARKET_CLOSED, exceeding the 11:30:00 midday cutoff by exactly 5 seconds"
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "E"
+        ]
+      }
+    },
+    {
+      "id": "q2",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on alert-rules-config.md and git-pr-447-diff.md, which of the following statements about the alert silence rule and code review are supported by documentary evidence?",
+      "feedback": {
+        "correct": "Correct. A–E are all directly supported by the documents. F is false: Xiao Zhou later admitted 'I thought +8 was CST, didn't think about DST' — a knowledge gap, not deliberate acceptance of DST risk.",
+        "options": {
+          "F": "Incorrect: Xiao Zhou's upd1 admission ('I thought +8 was CST, didn't think about DST') confirms he was unaware of the DST risk entirely. The characterization 'explicitly knew but accepted' contradicts the evidence.",
+          "A": "Correct. rule_007 was created by Zhao Lei on 2025-12-15T14:22:00+08:00 specifically to silence TZ_CONVERT.* warnings during the V1 migration period",
+          "B": "Correct. rule_007 has expires=null, meaning it was never set to auto-expire and remained active indefinitely after the V1 migration",
+          "C": "Correct. Xiao Zhou's review comment for PR #447 was 'LGTM, logic is clear… Approved' with no specific flag on the timezone handling at line 127",
+          "D": "Correct. PR #447 changed 3 files with 187 lines added and 92 lines deleted, and its corresponding CI build is #891",
+          "E": "Correct. The branch coverage for strategy/timezone.py (55%) is lower than for strategy/scheduler.py (68%) per the CI report"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "rule_007 was created by Zhao Lei on 2025-12-15T14:22:00+08:00 specifically to silence TZ_CONVERT.* warnings during the V1 migration period",
+          "B": "rule_007 has expires=null, meaning it was never set to auto-expire and remained active indefinitely after the V1 migration",
+          "C": "Xiao Zhou's review comment for PR #447 was 'LGTM, logic is clear… Approved' with no specific flag on the timezone handling at line 127",
+          "D": "PR #447 changed 3 files with 187 lines added and 92 lines deleted, and its corresponding CI build is #891",
+          "E": "The branch coverage for strategy/timezone.py (55%) is lower than for strategy/scheduler.py (68%) per the CI report",
+          "F": "Xiao Zhou explicitly knew that utcnow() + timedelta(hours=8) does not handle DST but judged it acceptable for A-share trading"
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ]
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "盘后我先把 CI 那边的 timezone 单测盲区写两份产物 — 一份叙事一份机器可读。\n\n**File 1**: `docs/ci_test_gap_analysis.md`\n- 把 `test_utc_to_cst_basic` 的 mock 日期与 DST 段位置讲清楚（具体哪天、是否落在 DST 起效前，自己读 ci-build-report.md 拿）\n- 用 `##` 二级节列出 gap 类目（DST 边界、午盘收盘边界、多日累积偏移……至少三类，名字自拟）\n- 把两条关键 strategy 模块的分支覆盖率写进来；具体百分比直接读 CI 报告表格（小周私下说 timezone 那条大概 60% 上下，不一定准）\n- 总共 `##` 标题不少于 3 个\n\n**File 2**: `analysis/ci_coverage_data.json`\n- 字段名按下列 schema 模板严格落盘 —— 模板里值是占位，真实值自己从 `ci-build-report.md` 读取并核算：\n  `{\"mock_date\": \"<from-report>\", \"is_dst_period\": <bool>, \"timezone_branch_coverage_pct\": <int>, \"scheduler_branch_coverage_pct\": <int>, \"gap_categories\": [\"<at least three slugs>\"], \"dst_switch_date\": \"<US 2026 DST 起效日>\"}`\n- `is_dst_period` 须反映 mock 日期相对 US DST 起效日的真假\n\n归档版报告日后再单开一份，这次的 gap 分析按团队 docs 命名习惯即可（具体规则我自己再翻 style 笔记）。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target docs/",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P2): at least one file in docs/ should have a YYYY-MM-DD_ date prefix."
+        }
+      },
+      "feedback": {
+        "correct": "Both files created correctly. MD contains mock date 2026-01-15, 55% branch coverage, both DST boundary and market close boundary gap categories, and >= 3 ## headings. JSON has exact schema with correct values.",
+        "incorrect": "Check: (1) docs/ci_test_gap_analysis.md exists with '2026-01-15', '55%' or '55', DST boundary and market close boundary mentioned, >= 3 ## headings; (2) analysis/ci_coverage_data.json exists with mock_date=='2026-01-15', timezone_branch_coverage_pct==55, len(gap_categories)>=3."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把上一题的人肉读法写成可复跑脚本 — `scripts/analyze_ci_coverage.py`，从 workspace 根读 `ci-build-report.md`，stdout 吐 JSON。\n\n报告里同时包含：一段 `@mock.patch` 的 Python 代码块（标了 mock 用的具体 datetime）和一张分支覆盖率表。脚本须自己 parse 出这两处的真实值；不要把数字硬编。\n\nstdout JSON 字段名严格遵循（值为占位，须替换为脚本读到的真实值）：\n```json\n{\"test_mock_date\": \"<YYYY-MM-DD>\", \"timezone_file_coverage_pct\": <int>, \"scheduler_file_coverage_pct\": <int>, \"covers_dst_period\": <bool>, \"dst_boundary_2026\": \"<YYYY-MM-DD>\"}\n```\n\n`covers_dst_period` 必须根据 mock_date 是否落在 2026 年 US DST 起效日之后来计算。运行：`python scripts/analyze_ci_coverage.py`，必须 exit 0。脚本内部若引用文件位置，按团队代码注释惯例（文件名与行号一并标注）。",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/analyze_ci_coverage.py",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4 --target docs/",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P4): when citing code locations, use filename:line_number format (e.g. strategy/scheduler.py:127)."
+        }
+      },
+      "feedback": {
+        "correct": "Script runs successfully and outputs JSON with test_mock_date=='2026-01-15', timezone_file_coverage_pct==55, covers_dst_period==false.",
+        "incorrect": "Check: (1) scripts/analyze_ci_coverage.py exists; (2) script exits 0; (3) stdout is valid JSON; (4) test_mock_date=='2026-01-15'; (5) timezone_file_coverage_pct==55; (6) covers_dst_period==false."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd1_sessions",
+        "upd1_workspace"
+      ],
+      "question": "After reviewing server-diagnostic-report.md (upd1 workspace) and the upd1 session files (Xiao Zhou WeChat and kefu ticket), which of the following statements are now supported by the new evidence?",
+      "feedback": {
+        "correct": "Correct. A–D are all directly supported by server-diagnostic-report.md and the Xiao Zhou WeChat session. E is false: diagnostic shows NTP drift < 50ms and hardware clock synced normally. F is false: Xiao Zhou admitted a knowledge gap ('didn't think about DST'), not deliberate suppression.",
+        "options": {
+          "E": "Incorrect: server-diagnostic-report.md shows NTP drift < 50ms and hardware clock synced with system clock — no drift anomaly.",
+          "F": "Incorrect: In the WeChat session, Xiao Zhou said 'I thought +8 was CST, didn't think about DST' — a candid admission of ignorance, not concealment.",
+          "A": "Correct. The server diagnostic confirms NTP drift < 50ms and OS timezone Asia/Shanghai correctly configured — the 60-minute offset is NOT a server clock issue",
+          "B": "Correct. The OS-layer timezone and kernel timezone are both correctly set to Asia/Shanghai / CST-8",
+          "C": "Correct. The diagnostic report explicitly recommends checking application-layer code for datetime.utcnow() + fixed offset patterns as the likely source of the deviation",
+          "D": "Correct. Xiao Zhou admitted: 'I thought +8 was CST, didn't think about DST' — confirming his review was a knowledge gap rather than deliberate omission"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "The server diagnostic confirms NTP drift < 50ms and OS timezone Asia/Shanghai correctly configured — the 60-minute offset is NOT a server clock issue",
+          "B": "The OS-layer timezone and kernel timezone are both correctly set to Asia/Shanghai / CST-8",
+          "C": "The diagnostic report explicitly recommends checking application-layer code for datetime.utcnow() + fixed offset patterns as the likely source of the deviation",
+          "D": "Xiao Zhou admitted: 'I thought +8 was CST, didn't think about DST' — confirming his review was a knowledge gap rather than deliberate omission",
+          "E": "The server diagnostic report found hardware clock drift > 1 second, which caused the timezone offset",
+          "F": "Xiao Zhou explicitly knew about DST risk during the PR review but suppressed the concern to keep the PR moving forward"
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "现在把根因写实在 — `analysis/root_cause_analysis.md`，把 PR 改动、生产端报错记录、构建侧报告、还有客服小刘那份基础设施诊断这几路证据合到一起。\n\n要点：\n1. 钉死那一行有问题的代码 —— 须把出错函数调用名（那个返回朴素 datetime、不挂时区的 stdlib 函数；具体名字翻 PR 改动报告里红色那行抄）连同文件路径与行号都明文落进来；（小周私底下说函数好像是 `datetime.now()` 之类，他记不清了，准确写法以 PR diff 红行原文为准）\n2. 双源对比：自动化测试侧与线上侧两路结果走势相反，请说明哪一路对 DST 覆盖更可信、为什么；两路语境名都按团队 status 报告里惯用的英文缩写写法写出来（一个是构建/测试通道的两字母缩写，另一个是「线上/上线后」语境的英文术语 — 小周写日志时偏用的那两个词）；（小周记得测试通道大概跑了 30 多条用例全过，具体多少自己翻报告）\n3. 把线上记录里那条警告的偏移量也以「带正负号 + 单位」的明文落进来（记录里有 `delta=` 字样）\n4. 段落口气客观，至少 3 个 `##` 标题\n\n（小周那条 LGTM 不在本篇展开，留到 PR review 专档。）",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Root cause analysis created with: 'scheduler.py:127' or 'scheduler.py line 127', '+60' or '60 minutes' or '60-minute', 'utcnow' present, M2 contradiction between CI and production explained, >= 3 ## headings.",
+        "incorrect": "Check: (1) analysis/root_cause_analysis.md exists; (2) 'scheduler.py:127' or 'scheduler.py line 127' present; (3) '60' and 'minute' or '+60' present; (4) 'utcnow' present; (5) CI vs production contradiction analyzed (M2); (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把违规那一刻的算术写脚本 — `scripts/compute_timezone_offset.py`，从 workspace 根读生产 error log，stdout 吐 JSON。\n\nlog 是 ISO 8601 格式，记录字段含 order_id / execution_time / market_status；违规那单在 03-16 当天，订单号像 `V3-202603xx-yyy`（具体号码与时间戳自己 grep `production-error-log.md`，我印象里 cutoff 越了大概 4 秒上下，但报告里有精确读数）。\n\nstdout JSON 字段名严格（值为占位）：\n```json\n{\"order_timestamp_cst\": \"<ISO8601 with +08:00>\", \"cutoff_time\": \"<HH:MM:SS>\", \"seconds_over_cutoff\": <int>, \"offset_from_expected_minutes\": <int>, \"dst_start_date\": \"<YYYY-MM-DD>\", \"days_affected\": <int>}\n```\n\n数值都要从 log + DST 起效日推算，不可硬编。运行 `python scripts/compute_timezone_offset.py`，必须 exit 0。",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/compute_timezone_offset.py",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Script runs and outputs JSON with seconds_over_cutoff==5 and offset_from_expected_minutes==60.",
+        "incorrect": "Check: (1) scripts/compute_timezone_offset.py exists; (2) script exits 0; (3) stdout is valid JSON; (4) seconds_over_cutoff==5; (5) offset_from_expected_minutes==60."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "客服小刘那份基础设施诊断基本把「服务器时钟」这条线断了 — 写一篇 `analysis/clock_vs_code_analysis.md`，把这事钉死，免得合规那边再绕回来。\n\n要点（每条都会被自动校验，措辞请精准）：\n1. 引用诊断里关于服务器授时与漂移的具体读数 —— 报告里给的是「带数值 + 毫秒单位」形式的小漂移读数（数字与单位写法都照报告原文抄；小刘私下说大约 100 毫秒以内，也有人传是 200ms 上下，但准数以诊断报告原文为准）；同时点名授时协议的英文三字缩写\n2. 否定式结论：用一句明确的否定句钉死 —— 这次问题与服务器时钟漂移无关。句式按团队事故复盘惯例写否定（小周写否定时偏用全大写 NOT 起头），目的是让张审核在通读时一眼看到「不是基础设施锅」这一句白纸黑字\n3. 责任归到 application layer 那条具体代码行 —— 文件路径与行号请按团队 review 惯例（带文件名与行号一并）标全；该层名词请用英文写法\n4. 至少 2 个 `##` 标题",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Analysis correctly cites NTP drift < 50ms, contains negative assertion about clock drift (M6), and attributes issue to application-layer code at scheduler.py.",
+        "incorrect": "Check: (1) analysis/clock_vs_code_analysis.md exists; (2) 'NTP' or 'clock' and '50ms' or '< 50' present; (3) negative assertion 'NOT clock drift' or 'not clock' present (M6); (4) 'application' or 'scheduler.py' as root cause; (5) >= 2 ## headings."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "告警那条线得有专文 — `analysis/alert_silence_analysis.md`，把那条 noisy-alert 静默规则（具体规则 id 自己翻 alerts 配置文件那份；id 形如 `rule_0xx`）的整个静默生命周期讲清楚。\n\n要点（每条均自动校验，请精准）：\n1. 规则 id 须以原文形式（小写 `rule_` + 三位编号）出现在文中\n2. 创建日期与挂规则的人：自己翻 alerts 配置文件查出准确日期 —— 须以 ISO 日期形式 （YYYY-MM-DD）原文写入；（我印象里好像是 2025 年 11 月初前后，也可能拖到 12 月中甚至 2026 年初，记混了，准数翻配置）\n3. 这条规则的过期字段实际取值是什么 —— 直接照配置文件里那个表示「永不过期」的字面值原文抄进来（不要意译，配置里就那个英文 4 字母小写关键字，照原样落字）\n4. 静默窗口：从线上首条 TZ 错误日到违规日之间的整数天数 —— 把得到的整数以「数字 + day(s)」明文形式写入文中（自己读线上记录算）\n5. 该窗口内被该规则静默掉的 TZ_CONVERT 告警条数 —— 也去线上记录里数；得到的整数请以「数字 + alert(s)」明文写入；（小周印象里有四五条上下吧，也可能更多，准数自己数）\n\n（自己挖坑自己填的那段照实写就好，别绕弯子。）",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Alert silence analysis created with: rule_007, 7-day silence period, expires=null or never expired, 5 silenced alerts.",
+        "incorrect": "Check: (1) analysis/alert_silence_analysis.md exists; (2) 'rule_007' present; (3) '7 days' or '7-day' present with word boundary; (4) 'null' or 'never expired' present; (5) '5' as standalone number for silenced alerts present."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd2_sessions"
+      ],
+      "question": "After reading the upd2 session (zhaolei_zhangshenhe_email.md — the Zhang compliance email exchange), which of the following statements about the compliance investigation are supported by the new evidence?",
+      "feedback": {
+        "correct": "Correct. C is false: Zhang maintained the 'first offense' classification and did not reclassify the informal email as a formal violation. F is false: the formal notice required 48 hours (not 24 hours).",
+        "options": {
+          "C": "Incorrect: Zhang's exact response was to note the connection 'as reference for remediation evaluation' while maintaining the 'first offense' classification. She explicitly distinguished informal reminders from formal records.",
+          "F": "Incorrect: compliance-notice.md notice #3 states '48 hours' to submit a statement — not 24 hours.",
+          "A": "Correct. Zhang (compliance officer) characterized the 2026-03-16 violation as a 'first offense' based on the formal compliance record system having no prior entries",
+          "B": "Correct. Zhao Lei challenged the 'first offense' characterization by pointing to the 2025-12-20 informal timezone warning email from Zhang",
+          "D": "Correct. Zhang maintained the 'first offense' characterization but agreed to note the 2025-12-20 connection on file for remediation evaluation reference",
+          "E": "Correct. Zhao Lei's remediation plan submitted in the upd2 session includes: code fix, 12 new DST test cases, rule_007 deletion, and a root cause report"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "Zhang (compliance officer) characterized the 2026-03-16 violation as a 'first offense' based on the formal compliance record system having no prior entries",
+          "B": "Zhao Lei challenged the 'first offense' characterization by pointing to the 2025-12-20 informal timezone warning email from Zhang",
+          "C": "Zhang agreed to reclassify the 2025-12-20 email as a formal compliance violation, changing the characterization to 'second offense'",
+          "D": "Zhang maintained the 'first offense' characterization but agreed to note the 2025-12-20 connection on file for remediation evaluation reference",
+          "E": "Zhao Lei's remediation plan submitted in the upd2 session includes: code fix, 12 new DST test cases, rule_007 deletion, and a root cause report",
+          "F": "The formal compliance notice required Zhao Lei to submit a statement within 24 hours"
+        },
+        "answer": [
+          "A",
+          "B",
+          "D",
+          "E"
+        ]
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把所有事件按时间轴串一遍 — 出两份产物，叙事和结构化各一份，方便回头交叉对（M3）。\n\n**File 1**: `analysis/incident_timeline.md`\n- 时间线起点是 US DST 切换日，中间穿过第一条 TZ 错误日、若干 near-miss 日、收尾在违规日；具体日期请自己读生产 log\n- 必须把三个量写成「数字 + 单位」的明文：静默窗口的天数、偏移分钟数、越过 cutoff 的秒数\n- 至少 3 个 `##` 标题\n\n**File 2**: `analysis/timeline_data.json`\n字段名严格：\n`{\"dst_switch\": \"<YYYY-MM-DD>\", \"first_tz_error\": \"<YYYY-MM-DD>\", \"violation_date\": \"<YYYY-MM-DD>\", \"silence_days\": <int>, \"offset_minutes\": <int>, \"seconds_over_cutoff\": <int>}`\n\n下游会校验 MD 叙事里的三量与 JSON 对得上。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Both files created and cross-validated: JSON has silence_days==7, offset_minutes==60, seconds_over_cutoff==5; MD contains the matching narrative values.",
+        "incorrect": "Check: (1) analysis/incident_timeline.md exists with '7 days', '60 minutes', '5 seconds' and >= 3 ## headings; (2) analysis/timeline_data.json exists with silence_days==7, offset_minutes==60, seconds_over_cutoff==5."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把上一题的时间线计算脚本化 — `scripts/compute_incident_timeline.py`，从 workspace 根读生产 error log，吐 JSON。\n\nlog 里有 TZ_CONVERT warning 条目（含 `offset delta=` 字样）和违规订单条目（execution_time 是+08:00 的 ISO 8601）；脚本须自行 parse 出 DST 切换日、第一条 TZ 错误日、违规日、静默天数、偏移分钟数、越限秒数 —— 不可把数字硬编。\n\nstdout JSON 字段名严格：\n```json\n{\"dst_switch_date\": \"<YYYY-MM-DD>\", \"first_tz_error_date\": \"<YYYY-MM-DD>\", \"violation_date\": \"<YYYY-MM-DD>\", \"silence_days\": <int>, \"offset_minutes\": <int>, \"seconds_over_cutoff\": <int>}\n```\n\n运行：`python scripts/compute_incident_timeline.py`，必须 exit 0。",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/compute_incident_timeline.py",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Script outputs JSON with offset_minutes==60 and seconds_over_cutoff==5.",
+        "incorrect": "Check: (1) scripts/compute_incident_timeline.py exists; (2) exits 0; (3) stdout is valid JSON; (4) offset_minutes==60; (5) seconds_over_cutoff==5."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "出一份机器可读的 incident 卡片 — `analysis/incident_report.json`，让任何下游脚本 jq 一下就能拿全关键数据（M1 数值校验 + M4 严格 schema）。\n\nschema 字段名一字不差，所有数值字段为整数；具体数值与字符串值请从 workspace 文件中读取并核算：\n```json\n{\n  \"incident_id\": \"<任意非空字符串>\",\n  \"affected_order\": \"<任意非空字符串，建议照 log 中订单号原样填>\",\n  \"timestamp\": \"<违规订单 ISO 8601 含 +08:00>\",\n  \"offset_minutes\": <int>,\n  \"seconds_over_cutoff\": <int>,\n  \"root_cause\": \"<short_slug，如 dst_xxx_xxx>\",\n  \"bug_file\": \"<repo 相对路径>\",\n  \"bug_line\": <int>,\n  \"silence_rule\": \"<rule_id>\",\n  \"silence_days\": <int>\n}\n```\n\n（数值精确，全部从 production-error-log + git-pr-447-diff + alert-rules-config 反推。）",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "incident_report.json has all required fields with exact values: offset_minutes==60, bug_line==127, silence_days==7, seconds_over_cutoff==5, timestamp=='2026-03-16T11:30:05+08:00'.",
+        "incorrect": "Check: (1) analysis/incident_report.json exists; (2) offset_minutes==60; (3) bug_line==127 (integer); (4) silence_days==7; (5) seconds_over_cutoff==5; (6) timestamp=='2026-03-16T11:30:05+08:00'; (7) all required fields present."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把 PR #447 的 review 立专档 — `analysis/pr_review_analysis.md`。这事下面合规会问，自己也得搞清楚到底是流程瘫了还是个人盲点。\n\n要点：\n1. PR 的改动统计（修改文件数、新增行数、删除行数）请直接读 `git-pr-447-diff.md` 顶部的 summary 抄进来（小周印象中是 4 个文件、大约 200 行新增；准数请以 diff 报告为准）\n2. 引用小周那条 review 通过的 comment 原文（diff 报告里有，自己 grep `Approved` 附近）；并指出他对时区那块没留任何 DST 相关意见\n3. 否定校验：明文写出该 review 未识别 DST 风险 —— 是知识盲点，非「评估过觉得 OK 才放过」\n4. 把漏掉的具体一行钉死（文件路径与行号一并标）\n5. 至少 2 个 `##` 标题\n\n口气客观点 — 不要写成对小周的指控信。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "PR review analysis has: '187' and '92', 'LGTM', '127', and negative assertion that DST risk was NOT identified (M6).",
+        "incorrect": "Check: (1) analysis/pr_review_analysis.md exists; (2) '187' and '92' present; (3) 'LGTM' present; (4) '127' present; (5) negative assertion that DST was NOT flagged or identified (M6); (6) >= 2 ## headings."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "合规风险点也脚本化一份 — `scripts/compute_compliance_risk.py`，从 workspace 根读`compliance-notice.md`，吐 JSON。\n\n通知里有：发文日期、初步说明响应窗口、正式调查阶段的整改方案窗口（以业务日为单位）、违规类型 slug、受影响订单数、越限秒数、偏移分钟数。所有这些值都从 notice 原文 parse，不可硬编。\n（张审核那边邮件里说初步窗口貌似是 24 小时，但 notice 才是准的，请以 notice 为准。）\n\nstdout JSON 字段名严格：\n```json\n{\"response_deadline_days\": <int>, \"violation_type\": \"<slug>\", \"seconds_over_cutoff\": <int>, \"offset_minutes\": <int>, \"affected_orders\": <int>, \"regulatory_body\": \"<非空字符串>\", \"severity\": \"<level>\"}\n```\n\n运行：`python scripts/compute_compliance_risk.py`，必须 exit 0。",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/compute_compliance_risk.py",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Script outputs JSON with response_deadline_days==5, seconds_over_cutoff==5, offset_minutes==60.",
+        "incorrect": "Check: (1) scripts/compute_compliance_risk.py exists; (2) exits 0; (3) stdout is valid JSON; (4) response_deadline_days==5; (5) seconds_over_cutoff==5; (6) offset_minutes==60."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "给张审核回那份正式的合规回函 — 落到 `docs/` 目录下，文件名遵团队归档惯例（带日期前缀；前缀写法见团队既往归档；文件名主体须能被识别为「合规回函」语境的英文关键词组合，归档脚本会按惯例 glob，请自行翻既往范本对齐命名）。\n\n要点（每条均自动校验）：\n1. 引用违规那一刻的精确时间到秒 —— 须以「ISO 8601 含偏移」形式原文落字（自己翻线上记录，把那条违规订单的 execution_time 原样抄；时分秒精度不可降）\n2. 越过收盘 cutoff 的整数秒数与根因偏移的整数分钟数 —— 都按「数字 + 英文单位短写」形式明文落入；单位短写须用 style 笔记里关于量化陈述偏好的那两个英文词（一个是秒的英文短写，一个是分钟的英文短写，复数 / 单数与连字符处理请按团队 style 笔记对齐）\n3. 双源对比：自动化测试通道与上线后两路结果走势相反，请明文对比，并解释测试通道为何对 DST 覆盖不充分；两路语境名都用团队 status 报告里惯用的英文写法（一个是测试/构建通道的两字母大写缩写，另一个是「上线后」语境英文术语）\n4. 把出错那一行的位置按团队 review 惯例（带文件名与行号一并）标全 —— 行号从 PR 改动报告里红行那段抄；文件路径同样\n5. 文件名带日期前缀（前缀模板形如 `YYYY-MM-DD_`，年月日各两/四位 + 下划线）\n6. `##` 标题不少于 4 个\n\n口气放平 — 张审核那边看「事实 + 整改」，不要废话。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Compliance response created with: timestamp '11:30:05' or full ISO string, '5 seconds' or '5-second', '60' and 'minutes', 'scheduler.py:127' or 'line 127', CI vs production contrast (M2), date-prefix filename, >= 4 ## headings.",
+        "incorrect": "Check: (1) file exists in docs/ with YYYY-MM-DD_ prefix; (2) '11:30:05' or '2026-03-16T11:30:05+08:00' present; (3) '5 seconds' or '5-second' present; (4) '60' and 'minute' present; (5) 'scheduler.py:127' or 'line 127' present; (6) CI vs production contradiction analyzed; (7) >= 4 ## headings."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd3_workspace"
+      ],
+      "question": "After reading trade-execution-log-enhanced.md (upd3 workspace), which of the following statements about the post-DST trading pattern are supported by evidence in the enhanced log?",
+      "feedback": {
+        "correct": "Correct. A, B, D, E, F are all supported by trade-execution-log-enhanced.md. C is false: the enhanced log explicitly notes that Mar 9 is an exception — the trade signal triggered early that day, and actual execution time was 10:30:02 (within normal range, not DST-affected).",
+        "options": {
+          "C": "Incorrect: trade-execution-log-enhanced.md notes 'Mar 9 exception: trade signal triggered early that day, actual_cst=10:30:02, unaffected by DST +60min offset.' The enhanced log specifically calls this out as an anomaly within the anomaly.",
+          "A": "Correct. The 2026-03-10 trade (V3-20260310-001) executed at CST 11:29:47, leaving only 13 seconds before the 11:30:00 market close boundary",
+          "B": "Correct. The 2026-03-11 trade (V3-20260311-001) executed at CST 11:29:53, leaving only 7 seconds before the 11:30:00 market close boundary",
+          "D": "Correct. The safety margins of near-miss and violation events show a narrowing trend: 13 seconds → 7 seconds → 5 seconds past boundary",
+          "E": "Correct. The pre-DST baseline (March 1–8) shows a maximum time deviation of 3 seconds, contrasting sharply with the post-DST ~60-minute offset",
+          "F": "Correct. If rule_007 had not silenced TZ_CONVERT_WARN alerts, an alert could have been received as early as 2026-03-10"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "The 2026-03-10 trade (V3-20260310-001) executed at CST 11:29:47, leaving only 13 seconds before the 11:30:00 market close boundary",
+          "B": "The 2026-03-11 trade (V3-20260311-001) executed at CST 11:29:53, leaving only 7 seconds before the 11:30:00 market close boundary",
+          "C": "The 2026-03-09 trade (V3-20260309-001) was also affected by DST with execution at 11:29:58 CST",
+          "D": "The safety margins of near-miss and violation events show a narrowing trend: 13 seconds → 7 seconds → 5 seconds past boundary",
+          "E": "The pre-DST baseline (March 1–8) shows a maximum time deviation of 3 seconds, contrasting sharply with the post-DST ~60-minute offset",
+          "F": "If rule_007 had not silenced TZ_CONVERT_WARN alerts, an alert could have been received as early as 2026-03-10"
+        },
+        "answer": [
+          "A",
+          "B",
+          "D",
+          "E",
+          "F"
+        ]
+      }
+    },
+    {
+      "id": "q18",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把这次事件里所有「官方说法 vs 实际证据」的对子都摆出来 — 出两份（M3 交叉校验）。\n\n**File 1**: `analysis/four_contradiction_matrix.md`\n- `##` 标题至少 4 个，每个对应一组矛盾（编号自定义如 C1/C2/C3/C4）；至少覆盖：\n  - CI 全过 vs 生产违规\n  - 那条静默规则当初定位为临时 vs 实际过期字段为空（永久）\n  - 小周通过 review vs 小周事后承认没考虑 DST\n  - 代码看着语法没毛病 vs DST 期间语义错\n\n**File 2**: `analysis/contradiction_data.json`\n- 4 对象的数组，每个：`{\"id\": \"<C1/C2/C3/C4>\", \"contradiction\": \"<string>\", \"official_view\": \"<string>\", \"actual_finding\": \"<string>\", \"resolved\": true}`\n\n下游会交叉校验四组矛盾在两份里都出现，且 JSON 全部 `resolved: true`。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q18.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Both files created: MD has C1-C4 with rule_007, expires, LGTM, DST keywords and >= 4 ## headings; JSON has 4 objects all with resolved==true.",
+        "incorrect": "Check: (1) analysis/four_contradiction_matrix.md exists with C1-C4, 'rule_007', 'expires', >= 4 ## headings; (2) analysis/contradiction_data.json exists with exactly 4 objects; (3) all 4 objects have resolved==true."
+      }
+    },
+    {
+      "id": "q19",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把 post-mortem 关键数据点抽成脚本 — `scripts/build_postmortem.py`，从 workspace 读已有分析文件（`analysis/root_cause_analysis.md`、`analysis/alert_silence_analysis.md`、`analysis/incident_timeline.md` 任选可见者），或基于事件事实推算，吐 JSON。\n\n需算出的关键量：DST 切换日到违规日的天数（从生产 log 推 — 小周印象里大概一周吧，准数请自己算）；contributing factors 至少三项 slug（涵盖 CI 覆盖盲区、告警静默、review 漏 DST）。\n\nstdout JSON 字段名严格：\n```json\n{\"root_cause\": \"<slug>\", \"contributing_factors\": [\"<slug1>\", \"<slug2>\", \"<slug3>\"], \"timeline_days_from_dst_switch_to_violation\": <int>, \"offset_minutes\": <int>, \"prevention_measures\": [\"<string>\", \"<string>\"]}\n```\n\n`contributing_factors` 至少 3 项；脚本必须 exit 0。",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/build_postmortem.py",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Script outputs JSON with offset_minutes==60, len(contributing_factors)>=3, timeline_days_from_dst_switch_to_violation==8.",
+        "incorrect": "Check: (1) scripts/build_postmortem.py exists; (2) exits 0; (3) stdout is valid JSON; (4) offset_minutes==60; (5) len(contributing_factors)>=3; (6) timeline_days_from_dst_switch_to_violation==8."
+      }
+    },
+    {
+      "id": "q20",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把修复方案和补丁清单固化下来 — `analysis/fix_specification.md`。\n\n要点：\n1. 引用确切 bug 的代码位置（文件路径配行号）与那行调用的写法\n2. 修法：换成时区感知的 datetime 写法（具体库/类按小周 upd4 的 timezone 笔记选；他比较推 ZoneInfo 那条路，但用 pytz 也行）\n3. 新增 DST 边界单测：mock 日期取 DST 起效当日及其后 1-2 日\n4. 那条静默规则必须删除或显式给一个 expiry\n5. 至少 3 个 `##` 标题",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q20.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Fix specification created with: 'scheduler.py:127' or 'line 127', 'pytz' or 'Asia/Shanghai' or 'ZoneInfo', rule_007 addressed, >= 3 ## headings.",
+        "incorrect": "Check: (1) analysis/fix_specification.md exists; (2) 'scheduler.py:127' or 'line 127' present; (3) 'pytz' or 'Asia/Shanghai' or 'ZoneInfo' or 'timezone-aware' present as fix; (4) 'rule_007' addressed (delete or expiry); (5) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q21",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "CI 整改 spec 出两份（M3 交叉 + M4 严格 schema）。\n\n**File 1**: `analysis/ci_remediation_spec.json`\nschema：\n```json\n{\n  \"test_to_add\": [\n    {\"name\": \"<descriptive_test_name>\", \"mock_date\": \"<YYYY-MM-DD in DST>\", \"expected_offset_hours\": <int>, \"description\": \"<sentence>\"},\n    {\"name\": \"<descriptive_test_name>\", \"mock_date\": \"<YYYY-MM-DD>\", \"expected_behavior\": \"<slug>\"}\n  ],\n  \"rule_to_delete\": \"<rule_id>\",\n  \"min_coverage_target_pct\": <int>\n}\n```\n`test_to_add` 至少 2 项；`rule_to_delete` 必须等于实际那条静默规则的 id；`min_coverage_target_pct` 须达到团队对核心模块的覆盖率红线（不低于 80）。\n\n**File 2**: `analysis/remediation_timeline.md`\n- 整改时间线：immediate（删那条规则、对应代码行 hot-fix）、short-term（DST 单测、提覆盖率）、long-term（DST review checklist）\n- 文中须明示那条规则的 id 与一个具体的覆盖率目标百分数\n- 至少 3 个 `##` 标题",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q21.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Both files correct: JSON has rule_to_delete=='rule_007', len(test_to_add)>=2, min_coverage_target_pct>=80; MD has 'rule_007', '85%' or coverage target, >= 3 ## headings.",
+        "incorrect": "Check: (1) analysis/ci_remediation_spec.json exists; (2) rule_to_delete=='rule_007'; (3) len(test_to_add)>=2; (4) min_coverage_target_pct>=80; (5) analysis/remediation_timeline.md exists with 'rule_007', '85%', >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q22",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "review 这条线再来一篇专门复盘 — `analysis/code_review_lessons.md`，写流程层面的反思，别针对个人。\n\n要点（每条均自动校验，请精准）：\n1. 分析小周为何漏掉 DST：知识盲点（DST 的存在感不足），非 malicious\n2. 强调一句：他在「时区相关那个 strategy 子模块」分支覆盖率明显偏低的情况下仍然通过 review —— 这本身就是结构性问题，单看代码读不出 DST 隐患。请把构建侧报告里对该子模块那一行的覆盖率数值原样抄进文中，并按「<数字>% 分支覆盖」形式落字（具体百分数翻 ci-build-report.md 表格对 timezone 模块那行；小周印象里那行大概在 40% 到 70% 之间徘徊，不要硬编，准数以表格为准）\n3. 区分「小周个人的知识盲点（无可指责）」与「review 流程未强制 DST 验证」（系统性问题）\n4. 引用小周那条 review approval 的 comment 原文 —— 他在 PR 改动报告底部留下的那条短评论（业内惯用的 4 字母大写缩写，意为「在我看来 OK」），原文照抄，不要意译\n5. 给出建议：为时区相关代码引入 DST 专用 review checklist\n6. 至少 2 个 `##` 标题",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q22.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Code review lessons created with: '55%' or '55 percent', 'LGTM', DST checklist or 'checklist' mentioned, >= 2 ## headings.",
+        "incorrect": "Check: (1) analysis/code_review_lessons.md exists; (2) '55%' or '55' and 'percent' or '55 percent' present; (3) 'LGTM' present; (4) 'checklist' or 'DST checklist' present; (5) >= 2 ## headings."
+      }
+    },
+    {
+      "id": "q23",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd4_sessions",
+        "upd4_workspace"
+      ],
+      "question": "After reading xiaozhou-timezone-fix.md (upd4 workspace) and the strategy group chat session (upd4 sessions), which of the following statements about the fix approach and industry context are supported by the new evidence?",
+      "feedback": {
+        "correct": "Correct. D is false: xiaozhou-timezone-fix.md provides parameterized test recommendations specifically to validate the fix before deployment — it explicitly requires test coverage, not direct deployment.",
+        "options": {
+          "D": "Incorrect: xiaozhou-timezone-fix.md includes a full section of recommended test cases (parametrized tests covering non-DST, DST-active, and post-DST-end periods) — this implicitly requires testing before deployment, not deploying directly.",
+          "A": "Correct. xiaozhou-timezone-fix.md recommends using ZoneInfo('Asia/Shanghai') or pytz as the standard DST-safe approach for CST timezone handling",
+          "B": "Correct. The document explicitly marks `datetime.utcnow() + timedelta(hours=8)` as an anti-pattern (❌)",
+          "C": "Correct. Xiao Zhou's institution encountered the same DST bug (hardcoded utcnow() + offset) in their backtesting engine and fixed it uniformly with zoneinfo",
+          "E": "Correct. In the strategy group session, 群友B independently confirmed that utcnow() + fixed offset is a known anti-pattern in production trading systems",
+          "F": "Correct. The parameterized test recommendations in xiaozhou-timezone-fix.md include a mock scenario for 2026-03-10 (first trading day after DST)"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "xiaozhou-timezone-fix.md recommends using ZoneInfo('Asia/Shanghai') or pytz as the standard DST-safe approach for CST timezone handling",
+          "B": "The document explicitly marks `datetime.utcnow() + timedelta(hours=8)` as an anti-pattern (❌)",
+          "C": "Xiao Zhou's institution encountered the same DST bug (hardcoded utcnow() + offset) in their backtesting engine and fixed it uniformly with zoneinfo",
+          "D": "xiaozhou-timezone-fix.md states the fix to line 127 can be deployed directly to production without any regression tests",
+          "E": "In the strategy group session, 群友B independently confirmed that utcnow() + fixed offset is a known anti-pattern in production trading systems",
+          "F": "The parameterized test recommendations in xiaozhou-timezone-fix.md include a mock scenario for 2026-03-10 (first trading day after DST)"
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "E",
+          "F"
+        ]
+      }
+    },
+    {
+      "id": "q24",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "post-mortem 的结构化版本 — `analysis/incident_postmortem.json`（M4 严格 schema）。\n\n字段名一字不差，所有数值字段为整数；值从事件事实反推（不可硬编）：\n```json\n{\n  \"incident_id\": \"<任意非空字符串>\",\n  \"severity\": \"<P-level slug>\",\n  \"duration_days\": <int>,\n  \"offset_minutes\": <int>,\n  \"seconds_over_cutoff\": <int>,\n  \"root_cause_file\": \"<repo 相对路径>\",\n  \"root_cause_line\": <int>,\n  \"contributing_factors\": [\"<string>\", \"<string>\", \"<string>\"],\n  \"immediate_actions\": [\"<string>\"],\n  \"long_term_actions\": [\"<string>\"]\n}\n```\n\n`contributing_factors` 至少 3 项；`duration_days` 取 DST 切换到违规之间的天数；其余数值精确。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q24.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "incident_postmortem.json has: offset_minutes==60, root_cause_line==127, seconds_over_cutoff==5, duration_days==8, len(contributing_factors)>=3.",
+        "incorrect": "Check: (1) analysis/incident_postmortem.json exists; (2) offset_minutes==60; (3) root_cause_line==127 (integer); (4) seconds_over_cutoff==5; (5) duration_days==8; (6) len(contributing_factors)>=3; (7) all required fields present."
+      }
+    },
+    {
+      "id": "q25",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "再做个 fix 就绪度自动检查 — `scripts/validate_fix_readiness.py`，跑一遍输出现状判断 JSON。\n\n检查逻辑：\n1. 那条静默规则是否已从 `alert-rules-config.md` 删除\n2. 关键调度模块那一行 bug 是否已修（注意：workspace 里没有源码文件，所以这一项必然得不到正面验证）\n3. `tests/` 目录下是否有新增 DST 测试\n4. 覆盖率是否提升\n\n由于实际修复尚未落到 workspace，所有项都应该是 false。\n\nstdout JSON 字段名严格：\n```json\n{\"rule_007_deleted\": <bool>, \"line_127_fixed\": <bool>, \"dst_test_added\": <bool>, \"coverage_improved\": <bool>, \"fix_ready\": <bool>}\n```\n\n（字段名 `rule_007_deleted` / `line_127_fixed` 是历史遗留命名，照抄即可，与你最终算出的true/false 无关。）`fix_ready` 必须 false；脚本必须 exit 0。",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/validate_fix_readiness.py",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Script runs and correctly reports fix_ready==false (no fixes applied to workspace yet).",
+        "incorrect": "Check: (1) scripts/validate_fix_readiness.py exists; (2) exits 0; (3) stdout is valid JSON; (4) fix_ready==false — the script must correctly identify that fixes have not yet been applied to the workspace."
+      }
+    },
+    {
+      "id": "q26",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把整起事件的「四层失败」一次性铺开 — `analysis/systematic_failure_analysis.md`。\n\n要点：\n1. 须覆盖四个失败层（每层一个 `##` 节）：\n   - 代码 bug 层（具体函数调用与行号）\n   - CI 覆盖盲区层（mock 日期落点、关键模块分支覆盖率）\n   - 告警静默层（那条规则、静默窗口天数）\n   - review 盲点层（小周 Approved 但未提 DST）\n2. 区分技术失败 vs 流程失败 (process failure) —— review + CI + alerting 三层流程同时失守\n3. 至少 4 个 `##` 标题（每层一个）\n4. 关键定量证据都得在文中以明文数字出现（行号、覆盖率百分比、静默天数、规则 id 等），具体数值自己从 workspace 反查",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q26.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Systematic failure analysis has all 4 failure points with '127', '55%' or '55', '7 days' or '7-day', 'rule_007', and >= 4 ## headings.",
+        "incorrect": "Check: (1) analysis/systematic_failure_analysis.md exists; (2) '127' present; (3) '55%' or '55' present (coverage reference); (4) '7 days' or '7-day' present; (5) 'rule_007' present; (6) >= 4 ## headings; (7) technical vs process distinction present."
+      }
+    },
+    {
+      "id": "q27",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "终版报告也来两份产物（M3 交叉 + 团队 docs 归档命名规则）。\n\n**File 1**: 落到 `docs/` 下，文件名遵团队归档命名约定（带日期前缀、主体含「事故终版报告」语境英文关键词组合 — 具体词由团队既往范本约定，归档脚本会按惯例 glob，请自行翻范本）\n- 报告第一或第二节须为 TL;DR 节（按团队 docs 风格里关于摘要节标题的偏好原样书写 —— 用半角分号短写、二级标题）\n- TL;DR 节内必须以明文形式含「事故关键事实」三组：根因偏移、违规越限、静默窗口长度；每组都按团队对量化陈述的偏好规则写成「数字 + 英文单位」（具体单位英文写法 —— 分钟、秒、天数 —— 请翻 style 笔记里关于量化陈述偏好那段；写法不一致下游交叉校验会判 fail）\n- 全文至少 5 个 `##` 标题（含上面那条 TL;DR 节）\n- 须出现违规那一刻的精确时间到秒（按 ISO 形式抄出至少时分秒部分；自己翻线上记录）\n\n**File 2**: `analysis/report_key_facts.json`\n字段名严格（值为占位 —— 真实值自己核算）：\n`{\"offset_minutes\": <int>, \"seconds_over_cutoff\": <int>, \"silence_days\": <int>, \"bug_line\": <int>, \"dst_switch_date\": \"<YYYY-MM-DD>\", \"violation_date\": \"<YYYY-MM-DD>\", \"compliance_response_days\": <int>}`\n\n下游会交叉校验 TL;DR 段落里的数字与 JSON 一致。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q27.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Both files created: MD has TL;DR heading with '60' and 'minute', '5 seconds' or '5-second', date-prefix filename, >= 5 headings; JSON has offset_minutes==60, silence_days==7, bug_line==127, seconds_over_cutoff==5.",
+        "incorrect": "Check: (1) docs/ has a YYYY-MM-DD_*incident_report*.md or similar; (2) file has >= 5 ## headings including TL;DR; (3) TL;DR section has '60' and 'minute'; (4) '5 seconds' or '5-second' present; (5) analysis/report_key_facts.json exists with exact values."
+      }
+    },
+    {
+      "id": "q28",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Reflecting on the investigation process as a whole, which of the following statements about analytical reasoning and cognitive bias in this incident are accurate?",
+      "feedback": {
+        "correct": "Correct. C is false: 55% branch coverage for a timezone module in a production trading system is insufficient — the DST boundary is precisely the untested branch. E is false: Xiao Zhou explicitly admitted a knowledge gap ('didn't think about DST'), not concealment — this is a training issue, not misconduct.",
+        "options": {
+          "C": "Incorrect: 55% branch coverage means nearly half of code paths in strategy/timezone.py were untested. For a financial trading system where timezone errors cause regulatory violations, this is insufficient. The DST branch was precisely the untested path.",
+          "E": "Incorrect: Xiao Zhou's 'I thought +8 was CST, didn't think about DST' is a textbook knowledge gap. Treating a knowledge gap as misconduct ignores the systemic failure (no DST review checklist, no required DST test coverage).",
+          "A": "Correct. CI Build #891 passing all 34 tests created an availability bias — the 'green build' heuristic initially anchored the investigation away from the code as the root cause",
+          "B": "Correct. Cross-checking CI results against actual production logs was the key step that mitigated the CI-pass anchoring bias and enabled correct diagnosis",
+          "D": "Correct. The permanent silencing of rule_007 (expires=null) is a systemic failure of alert lifecycle management, not an individual error by Zhao Lei",
+          "F": "Correct. The investigation correctly followed multiple independent evidence sources (production log, server diagnostic, Xiao Zhou admission, CI report) to overcome initial anchoring and reach the true root cause"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "CI Build #891 passing all 34 tests created an availability bias — the 'green build' heuristic initially anchored the investigation away from the code as the root cause",
+          "B": "Cross-checking CI results against actual production logs was the key step that mitigated the CI-pass anchoring bias and enabled correct diagnosis",
+          "C": "CI test coverage (55% branch for timezone.py) is sufficient for a trading system deployed in production — the gap was acceptable given the time constraints",
+          "D": "The permanent silencing of rule_007 (expires=null) is a systemic failure of alert lifecycle management, not an individual error by Zhao Lei",
+          "E": "Xiao Zhou's knowledge gap about DST constitutes deliberate concealment that should be treated as misconduct rather than a training gap",
+          "F": "The investigation correctly followed multiple independent evidence sources (production log, server diagnostic, Xiao Zhou admission, CI report) to overcome initial anchoring and reach the true root cause"
+        },
+        "answer": [
+          "A",
+          "B",
+          "D",
+          "F"
+        ]
+      }
+    },
+    {
+      "id": "q29",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "最后给张审核交一份满足团队文档与汇报偏好的合规回函终版 — 落 `docs/`，文件名遵团队归档命名约定。措辞稳重些 —— 这份是过张审核那边正式归档的最后一道。\n\n要求（每条都会被自动校验，未必每条提示完整 — 团队的偏好/风格规范请自行翻团队 style 笔记或既往范本）：\n1. 时间戳须按 ISO 8601 含 +08:00 时区写明，违规那一刻精确到秒\n2. 文件名须按归档规约带日期前缀（前缀模板形如 `YYYY-MM-DD_`），落在 `docs/`\n3. 报告结构化要求 —— 须包含若干特定 `##` 节（包括但不限于 `## TL;DR`），具体节名清单按团队 P 偏好规范，自己翻\n4. bug 位置须按 review 惯例（文件路径与行号一并）标全\n5. TL;DR 节内须含至少两个独立数字事实（按团队对量化陈述的偏好规则）\n6. 三项关键事实都明文出现：偏移分钟数、越限秒数、那条静默规则及其静默天数\n7. 全文 ≥ 800 字符\n\n（具体每条偏好规约的细则，请翻团队的偏好笔记或既往合规回函范本。）",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q29.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3,P4,P5 --target docs/",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Final compliance response satisfies P1–P5: ISO 8601 timestamp, date-prefix file, >= 5 headings (including TL;DR), scheduler.py:127 citation, TL;DR has >= 2 of {60,5,7}, content >= 800 chars.",
+        "incorrect": "Check P1–P5: (P1) does the file contain '2026-03-16T11:30:05+08:00'? (P2) does docs/ have a YYYY-MM-DD_ prefixed file? (P3) does the report have TL;DR, timeline, root cause, remediation sections? (P4) is 'scheduler.py:127' cited? (P5) does TL;DR contain at least two of {60, 5, 7}?"
+      }
+    },
+    {
+      "id": "q30",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on the complete investigation, which of the following statements about the root cause, contributing factors, and required remediation are accurate and fully supported by all evidence gathered?",
+      "feedback": {
+        "correct": "Correct. D is false: the server diagnostic confirmed NTP drift < 50ms; the 5-second overshoot was caused by the exact timing of that day's order (the accumulated offset happened to reach past 11:30:00 by 5 seconds). E is false: the code bug at line 127 still exists; deleting rule_007 only removes alert suppression — it does not fix the application code.",
+        "options": {
+          "D": "Incorrect: NTP drift < 50ms is negligible and not a contributing factor. The 5-second violation was caused by the exact DST offset applied to the specific trade signal timing on 2026-03-16.",
+          "E": "Incorrect: The DST bug at line 127 remains in the code regardless of what happens to rule_007. Deleting rule_007 only restores alert visibility — the code fix (using timezone-aware datetime) is independently required.",
+          "A": "Correct. The root cause is an application-layer DST bug at strategy/scheduler.py line 127 — `utcnow() + timedelta(hours=8)` ignores DST — not server clock drift (which was confirmed < 50ms)",
+          "B": "Correct. rule_007's expires=null caused it to remain active permanently, directly preventing 5 TZ_CONVERT_WARN alerts from reaching Zhao Lei during the 7-day window before the violation",
+          "C": "Correct. The CI coverage gap (mock date 2026-01-15 in non-DST period, 55% branch coverage for timezone.py) is a systemic failure that would not have been caught by any individual reviewer",
+          "F": "Correct. The complete fix requires four actions: delete rule_007, fix line 127 to use timezone-aware datetime, add DST boundary tests, and implement a DST-specific code review checklist"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "The root cause is an application-layer DST bug at strategy/scheduler.py line 127 — `utcnow() + timedelta(hours=8)` ignores DST — not server clock drift (which was confirmed < 50ms)",
+          "B": "rule_007's expires=null caused it to remain active permanently, directly preventing 5 TZ_CONVERT_WARN alerts from reaching Zhao Lei during the 7-day window before the violation",
+          "C": "The CI coverage gap (mock date 2026-01-15 in non-DST period, 55% branch coverage for timezone.py) is a systemic failure that would not have been caught by any individual reviewer",
+          "D": "Server-level NTP drift was a contributing factor that amplified the DST-induced offset from +60 minutes to the observed +60 minutes 5 seconds",
+          "E": "The complete fix requires only deleting rule_007 — the code bug at line 127 self-corrected after US DST ended",
+          "F": "The complete fix requires four actions: delete rule_007, fix line 127 to use timezone-aware datetime, add DST boundary tests, and implement a DST-specific code review checklist"
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "F"
+        ]
+      }
+    }
+  ]
+}

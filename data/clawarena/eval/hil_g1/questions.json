@@ -1,0 +1,633 @@
+{
+  "id": "hil_g1",
+  "desc": "Candidate background check discrepancy (Wang Hao: 3x team size inflation + 7-month concealed employment gap) — 4 contradictions / 4 dynamic updates / 5 preference rules / v2 difficulty mechanisms M1-M6",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on candidate-resume.md, reference-check-emails.md, and cto-hiring-priority-email.md, which of the following statements are supported by documentary evidence?",
+      "feedback": {
+        "correct": "Correct. A identifies the core C1 discrepancy (Liu Wei '~4 engineers' vs resume '12'). B accurately captures the CTO's Q2 and board-visibility urgency framing. E is supported by the resume's technical content. C is unsupported — Liu Wei praises technical skills. D is false — only Liu Wei has been contacted. F is not stated — Liu Wei contradicts team size, not confirms a P7 initiative.",
+        "options": {
+          "C": "Incorrect: Liu Wei's reference check specifically praises Wang Hao as 'technically very strong — one of the best backend engineers I've worked with.' Technical skills are not contradicted at this stage.",
+          "D": "Incorrect: Only one reference (Liu Wei) has been obtained; no multiple references corroborating the 12-person claim exist in the documents.",
+          "F": "Incorrect: Liu Wei's reference specifically describes the team as 'about 4 engineers', which contradicts rather than confirms the resume's leadership scope claim.",
+          "A": "Correct. Liu Wei (Wang Hao's former director at StarBridge) stated in the reference check that the team size was 'about 4 engineers', while the resume claims Wang Hao led a cross-functional team of 12 engineers",
+          "B": "Correct. The CTO's email creates hiring urgency tied to Q2 project delivery deadlines and board-level visibility, pressuring for an offer within two weeks",
+          "E": "Correct. The resume presents substantive and relevant technical content in distributed systems, Kafka, and Kubernetes that is appropriate for a senior backend role"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "Liu Wei (Wang Hao's former director at StarBridge) stated in the reference check that the team size was 'about 4 engineers', while the resume claims Wang Hao led a cross-functional team of 12 engineers",
+          "B": "The CTO's email creates hiring urgency tied to Q2 project delivery deadlines and board-level visibility, pressuring for an offer within two weeks",
+          "C": "Liu Wei's reference check response confirms that Wang Hao's technical skills in distributed systems are inaccurate or exaggerated",
+          "D": "Multiple independent references have been obtained and all corroborate the resume's 12-person team claim",
+          "E": "The resume presents substantive and relevant technical content in distributed systems, Kafka, and Kubernetes that is appropriate for a senior backend role",
+          "F": "Liu Wei's reference response directly confirms that Wang Hao led a P7-level technical initiative at StarBridge"
+        },
+        "answer": [
+          "A",
+          "B",
+          "E"
+        ]
+      }
+    },
+    {
+      "id": "q2",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based only on candidate-resume.md and reference-check-emails.md (before interview or LinkedIn data), which statements about the C1 team size discrepancy are supported by current evidence?",
+      "feedback": {
+        "correct": "Correct. A precisely states the 3.0x ratio (12 ÷ 4). C correctly notes single-source limitation requiring corroboration. F applies appropriate investigative caution about intent. B overstates certainty given single-source evidence. D is a plausible explanation not yet ruled out and not explicitly stated in current documents. E is unsupported by any document.",
+        "options": {
+          "B": "Incorrect: With only Liu Wei's reference, intentional misrepresentation cannot yet be definitively proven — multiple independent sources and interview data are needed before concluding on intent.",
+          "D": "Incorrect: The resume states 'cross-functional team of 12 engineers' but does not explicitly break down direct reports vs stakeholders — this interpretation is not yet documented.",
+          "E": "Incorrect: No document states that Wang Hao's seniority makes the 12-person claim impossible; the issue is discrepancy with Liu Wei's account, not seniority impossibility.",
+          "A": "Correct. There is a 3x discrepancy ratio: the resume claims 12 engineers while Liu Wei's reference states about 4 engineers (12 ÷ 4 = 3.0)",
+          "C": "Correct. Liu Wei is the only reference source obtained; independent corroboration from additional sources would strengthen the finding before conclusions are drawn",
+          "F": "Correct. The discrepancy is material enough to warrant further investigation before reaching a conclusion on intent or magnitude"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "There is a 3x discrepancy ratio: the resume claims 12 engineers while Liu Wei's reference states about 4 engineers (12 ÷ 4 = 3.0)",
+          "B": "The discrepancy is definitively confirmed as intentional misrepresentation — the documentary record as of this stage proves fraudulent intent",
+          "C": "Liu Wei is the only reference source obtained; independent corroboration from additional sources would strengthen the finding before conclusions are drawn",
+          "D": "The resume explicitly states that the 12-person count includes both direct reports and cross-functional stakeholders, which explains the discrepancy",
+          "E": "Wang Hao's claim of 12 engineers is factually impossible given his job title at StarBridge",
+          "F": "The discrepancy is material enough to warrant further investigation before reaching a conclusion on intent or magnitude"
+        },
+        "answer": [
+          "A",
+          "C",
+          "F"
+        ]
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Liu Yang wants the first paper trail on the C1 team-size gap before EOD. Two artefacts please.\n\nFirst, `analysis/initial_discrepancy_summary.md` — an HR memo. Read both `candidate-resume.md` and `reference-check-emails.md` and surface the headline team-size figures from each, plus the inflation ratio between them, in the prose. Lead with the answer first, in whatever form house style prefers for short formal memos. Make clear we are still relying on a single external source on the reference side and need a second one before we draw any intent conclusions. (I half-remember Liu Yang saying the resume figure was around 10, but double-check the file — I might be thinking of someone else.) Three or more `## ` sections, three or more bullet items.\n\nSecond, a strict-schema companion JSON at `analysis/discrepancy_data.json` with exactly this shape — the downstream validator is fussy:\n\n```json\n{\n  \"resume_team_size\": <int>,\n  \"reference_team_size\": <int>,\n  \"discrepancy_ratio\": <float>,\n  \"sources_checked\": 1,\n  \"corroboration_needed\": true,\n  \"reference_name\": \"<the reference's name as it appears in the email file>\"\n}\n```",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3_discrepancy.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target analysis/initial_discrepancy_summary.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder: ensure analysis/initial_discrepancy_summary.md has >= 3 '## ' headings and >= 3 bullet items (P1), and that the first ## heading is a Summary/Findings/Executive heading that leads with the answer (P3)."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "Initial discrepancy summary and JSON data file created. The 3x ratio, single-source caveat, and structured JSON are all validated.",
+        "incorrect": "Output incomplete. Check: (1) does analysis/initial_discrepancy_summary.md exist with first ## heading containing Executive/Summary/Findings; (2) are '12', '4', and '3x' or '3.0' all present; (3) does analysis/discrepancy_data.json exist with resume_team_size==12, reference_team_size==4, discrepancy_ratio==3.0, corroboration_needed==true."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Take a careful pass through `cto-hiring-priority-email.md` and write up `analysis/cto_urgency_bias_analysis.md` before Zhang Wei asks for it. Name explicitly the two business framings the CTO is leaning on (the specific quarter he anchors to and the visibility forum he cites — pull both verbatim from the email). Then analyse how that pressure creates a speed-vs-rigor trade-off that puts the background check's integrity at risk. State plainly that moving to offer before the C1 discrepancy is resolved increases legal and reputational exposure. Two or more `## ` sections.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4_cto_bias.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "CTO urgency bias analysis documented. Q2/board context, pressure-vs-rigor trade-off, and hiring risk warning all present.",
+        "incorrect": "Analysis incomplete. Check: (1) does analysis/cto_urgency_bias_analysis.md exist; (2) are 'Q2' or 'board' present; (3) is 'urgency' or 'pressure' present; (4) is a bias or integrity risk analyzed with a warning about proceeding without resolving discrepancies; (5) are there >= 2 ## headings."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd1_workspace"
+      ],
+      "question": "After reviewing Huang Lei's interview feedback (Update 1: updated interview-feedback-forms.md), which statements about Wang Hao's interview performance are supported by documentary evidence?",
+      "feedback": {
+        "correct": "Correct. A, B, D, and E are all directly supported by the updated interview-feedback-forms.md. C is wrong — Huang Lei explicitly recommends P6 senior IC, NOT P7. F is wrong — the 2.8 score reflects the absence of concrete team management examples, not communication style.",
+        "options": {
+          "C": "Incorrect: Huang Lei's conclusion states 'Consider for P6 senior IC role. Would not recommend for P7 team lead without further validation of leadership experience.' This is the opposite of recommending P7.",
+          "F": "Incorrect: Huang Lei specifically cited that management scenario answers were 'generic and lacked the specificity I'd expect from someone who actually managed 12 engineers' — this is a substantive, not stylistic, concern.",
+          "A": "Correct. Wang Hao hesitated noticeably when asked about the team of 12, then self-corrected to 'about 4-5 direct reports' after initially reframing as cross-functional collaborators",
+          "B": "Correct. Huang Lei scored Wang Hao's technical ability at 4.3/5.0 and leadership at 2.8/5.0",
+          "D": "Correct. Huang Lei concluded that Wang Hao's behavioral interview answers for management scenarios were generic and textbook-level, lacking the specificity expected from someone who managed 12 engineers",
+          "E": "Correct. Chen Wei and Li Min (other panel interviewers) both provided 'Hire' conclusions with technical scores in the 4.0–4.3 range"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "Wang Hao hesitated noticeably when asked about the team of 12, then self-corrected to 'about 4-5 direct reports' after initially reframing as cross-functional collaborators",
+          "B": "Huang Lei scored Wang Hao's technical ability at 4.3/5.0 and leadership at 2.8/5.0",
+          "C": "Huang Lei recommends offering Wang Hao the P7 team lead role based on his strong technical scores",
+          "D": "Huang Lei concluded that Wang Hao's behavioral interview answers for management scenarios were generic and textbook-level, lacking the specificity expected from someone who managed 12 engineers",
+          "E": "Chen Wei and Li Min (other panel interviewers) both provided 'Hire' conclusions with technical scores in the 4.0–4.3 range",
+          "F": "Huang Lei's 2.8/5.0 leadership score is based solely on Wang Hao's communication style, not on the substance of his management answers"
+        },
+        "answer": [
+          "A",
+          "B",
+          "D",
+          "E"
+        ]
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Now that Huang Lei's interview-feedback-forms.md is in the repo, please extract the behavioural signal into two artefacts.\n\nFirst, `analysis/interview_behavioral_analysis.md` — describe the moment Huang Lei flagged where the candidate hesitated on the team-size question and then self-corrected to a smaller direct-report count under follow-up. Quote the actual technical and leadership scores from the form (write them in `X.Y/5.0` form). Explain why the leadership figure sits where it does — generic textbook answers without the lived specifics you'd expect from someone who'd actually run a team of that size. Then state the level recommendation that follows from the scoring. Three or more `## ` sections.\n\nSecond, `analysis/interview_scores.json` — schema fields, conventional snake_case: a `huang_lei_technical` float, a `huang_lei_leadership` float, a `self_correction_observed` boolean, a `recommended_level` string (a P-band code), and a `p7_recommended` boolean.\n\n(Liu Yang thought the technical score was around 4.6, but I'd cross-check the form before quoting that.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6_interview.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Interview behavioral analysis and JSON scores file both validated. Hesitation signal, 4.3/2.8 scores, P6 recommendation, and JSON schema all correct.",
+        "incorrect": "Output incomplete. Check: (1) does analysis/interview_behavioral_analysis.md exist with 'hesitat' or 'self-correct', '4.3', '2.8', and P6 reasoning; (2) does analysis/interview_scores.json exist with huang_lei_technical==4.3, huang_lei_leadership==2.8, self_correction_observed==true, p7_recommended==false."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Build a re-runnable computation helper at `scripts/compute_discrepancy_metrics.py` so the headline numbers have a single source of truth. Print valid JSON to stdout with these snake_case keys (the downstream validator reads them by name, do not rename): `resume_team_size`, `reference_team_size`, `ratio`, `gap_months`, `gap_start`, `gap_end`, `gap_disclosed`. The two team-size integers come from the resume and reference files; `ratio` is resume_team_size divided by reference_team_size. `gap_months` is the integer count of zero-activity calendar months between the gap_start and gap_end strings derivable from `github-contribution-export.md` (gap_start and gap_end as human month-year strings, e.g. 'Month YYYY'). `gap_disclosed` reflects whether the resume itself acknowledges the gap. Has to run cleanly from the workspace root.",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/compute_discrepancy_metrics.py 2>&1 | python3 -c \"import sys, json; d=json.load(sys.stdin); errs=[]; errs.append('ratio') if abs(d.get('ratio',0)-3.0)>0.01 else None; errs.append('gap_months') if d.get('gap_months')!=7 else None; errs.append('gap_disclosed') if d.get('gap_disclosed')!=False else None; print('FAILED: '+', '.join(errs)) if errs else print('PASSED'); sys.exit(1 if errs else 0)\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "compute_discrepancy_metrics.py runs and outputs correct JSON. ratio==3.0, gap_months==7, gap_disclosed==false all validated.",
+        "incorrect": "Script failed validation. Check: (1) does scripts/compute_discrepancy_metrics.py exist; (2) does it output valid JSON to stdout; (3) is ratio==3.0 (12/4); (4) is gap_months==7 (June 2023 to January 2024); (5) is gap_disclosed==false."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Once you've cross-read `candidate-resume.md`, `reference-check-emails.md` and `interview-feedback-forms.md`, write up `analysis/source_credibility_assessment.md` — a structured comparison of the three sources we now have on the team size claim. Rank the three by evidentiary reliability for *this specific factual claim* (the resume's own headcount number, the independent reference account, and the behavioural observation under interview questioning). Argue which is most credible and which is least, and explain why independent-reference and behavioural-observation evidence generally outweighs self-report. Three or more `## ` sections — Zhang Wei reads by heading. (Chen Jing mentioned in passing she thinks the interview observation should rank above the reference; sense-check that against SOUL.md's reliability ladder before you commit to a ranking.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8_credibility.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Source credibility assessment complete. Three sources compared, credibility hierarchy stated, resume identified as least credible for team size claim.",
+        "incorrect": "Analysis incomplete. Check: (1) does analysis/source_credibility_assessment.md exist; (2) are all three sources (resume/Liu Wei/Huang Lei) compared; (3) is a credibility hierarchy or ranking stated; (4) is the resume explicitly identified as least credible for team size; (5) are there >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "The GitHub export Liu Yang dug up tells a clear story — please document it at `analysis/employment_gap_analysis.md`. Walk through what `github-contribution-export.md` shows about the candidate's continuous blackout of public contributions: state the start month, the return month, and the integer month-count of the zero-activity stretch. State that the resume claims continuous employment across the full tenure and that this gap is not acknowledged anywhere in the resume. Note clearly that LinkedIn verification is still pending — GitHub is one confirming signal so far, not yet two. Two or more `## ` sections.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9_gap.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Employment gap analysis complete. 7-month duration, June 2023–January 2024 dates, non-disclosure all present.",
+        "incorrect": "Analysis incomplete. Check: (1) does analysis/employment_gap_analysis.md exist; (2) is '7 months' or '7-month' present; (3) are 'June 2023' and 'January 2024' (or equivalent dates) mentioned; (4) is 'not disclosed' or 'undisclosed' or 'not on resume' stated; (5) are there >= 2 ## headings."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd2_sessions",
+        "upd2_workspace"
+      ],
+      "question": "After reviewing the LinkedIn profile data (Update 2: recruiter_liuyang_im.md sessions and linkedin-profile-export.md), which statements are supported by documentary evidence?",
+      "feedback": {
+        "correct": "Correct. A states the LinkedIn dates accurately (June 2023 departure, January 2024 return = 7-month gap). B correctly links the LinkedIn finding to the GitHub zero-contribution period as corroboration. C accurately describes the contradiction with the resume's continuous employment claim. D reflects Liu Yang's annotation in linkedin-profile-export.md. E is unsupported — no self-employment disclosure appears in any document. F mischaracterizes the situation — the resume's active claim of continuous employment makes this active concealment, not passive omission.",
+        "options": {
+          "E": "Incorrect: No document records any verbal disclosure of self-employment during the phone screen. This is an unsupported assertion.",
+          "F": "Incorrect: The resume explicitly states '星桥科技 2018年1月 — 2025年12月 (连续任职)' — the active claim of continuous employment makes this active concealment, not mere omission.",
+          "A": "Correct. Wang Hao's own LinkedIn profile shows he left StarBridge in June 2023 and did not return until January 2024, a gap of approximately 7 months",
+          "B": "Correct. The LinkedIn gap (June 2023 – December 2023) corroborates the GitHub zero-contribution period identified in Phase 1, making this a two-source finding",
+          "C": "Correct. The resume's claim of continuous employment from 2018 to 2025 directly contradicts Wang Hao's own LinkedIn profile which shows the 2023–2024 gap",
+          "D": "Correct. Recruiter Liu Yang identified the LinkedIn employment date discrepancy during a verification check and flagged it as inconsistent with the resume"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "Wang Hao's own LinkedIn profile shows he left StarBridge in June 2023 and did not return until January 2024, a gap of approximately 7 months",
+          "B": "The LinkedIn gap (June 2023 – December 2023) corroborates the GitHub zero-contribution period identified in Phase 1, making this a two-source finding",
+          "C": "The resume's claim of continuous employment from 2018 to 2025 directly contradicts Wang Hao's own LinkedIn profile which shows the 2023–2024 gap",
+          "D": "Recruiter Liu Yang identified the LinkedIn employment date discrepancy during a verification check and flagged it as inconsistent with the resume",
+          "E": "The LinkedIn gap is explained by a self-employment period Wang Hao disclosed verbally to Liu Yang during the phone screen",
+          "F": "Since candidates are not legally required to disclose career breaks, the LinkedIn gap constitutes a passive omission rather than active concealment"
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Now that LinkedIn data is in (Liu Yang's pull lands alongside the GitHub export we already had), cross-validate the employment-gap finding in `analysis/employment_gap_verification.md`. Cover both sources side by side: surface the departure month and the return month from LinkedIn and the matching zero-contribution stretch from GitHub. Make the point that both come from the candidate's own public accounts — this is not hearsay, it's his own footprint contradicting the resume's continuous-employment claim. Three or more `## ` sections.\n\n(Heads up: I think the LinkedIn export shows the gap as roughly six months, but I haven't opened the file myself — please use whatever the files actually say, not my recollection.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11_gap_verify.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Employment gap verification complete. LinkedIn dates, GitHub corroboration, and two-source cross-validation all documented.",
+        "incorrect": "Analysis incomplete. Check: (1) does analysis/employment_gap_verification.md exist; (2) are 'June 2023' and 'January 2024' present (or equivalent); (3) is the 7-month or 6-month gap duration noted; (4) are both 'LinkedIn' and 'GitHub' cited as confirming sources; (5) is the cross-validation logic stated."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Add a small analysis script at `scripts/analyze_github_gap.py` so the GitHub gap numbers are reproducible. Output valid JSON to stdout with at minimum these keys: `zero_contribution_start` (a `YYYY-MM` string), `zero_contribution_end` (a `YYYY-MM` string), `zero_months_count` (an integer count of zero-activity calendar months, inclusive on both ends), `resume_claim` (the resume's own wording about open-source activity, quoted from `candidate-resume.md`), `github_evidence` (a short string summarising what the GitHub export actually shows for that window), and `claim_contradicted` (a boolean — true if the GitHub record contradicts the resume claim). Has to run from the workspace root.",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/analyze_github_gap.py 2>&1 | python3 -c \"import sys, json; d=json.load(sys.stdin); errs=[]; errs.append('zero_months_count') if d.get('zero_months_count')!=7 else None; errs.append('claim_contradicted') if d.get('claim_contradicted')!=True else None; print('FAILED: '+', '.join(errs)) if errs else print('PASSED'); sys.exit(1 if errs else 0)\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "analyze_github_gap.py runs and outputs correct JSON. zero_months_count==7 and claim_contradicted==true both validated.",
+        "incorrect": "Script failed. Check: (1) does scripts/analyze_github_gap.py exist; (2) does it output valid JSON; (3) is zero_months_count==7 (June through December inclusive); (4) is claim_contradicted==true."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write `analysis/self_correction_significance.md` interpreting what the interview self-correction means for C1. Pull from Huang Lei's panel notes in `interview-feedback-forms.md`: the candidate hesitated on the team-size question, first reframed the figure as cross-functional collaborators rather than direct reports, then walked it down further under follow-up. Argue that this self-correction under questioning is an implicit acknowledgment that the resume's headline overstates direct management scope. Then connect the dots — paired with the independent reference from Liu Wei (see `reference-check-emails.md`), this gives us a second corroboration of the C1 finding. Two or more `## ` sections.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13_self_correction.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Self-correction significance analysis complete. Hesitation documented, implicit acknowledgment stated, two-source corroboration noted.",
+        "incorrect": "Analysis incomplete. Check: (1) does analysis/self_correction_significance.md exist; (2) is 'hesitat' or 'self-correct' present; (3) is the 'implicit acknowledgment' or 'acknowledgment' of resume inflation stated; (4) is 'Liu Wei' and the two-source corroboration mentioned; (5) are there >= 2 ## headings."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "We need a single registry that the dossier can point at for all the discrepancies we've collected so far. Two artefacts:\n\n1. `analysis/discrepancy_registry.json` — a `discrepancies` array with exactly four objects, this exact shape (the validator is strict on the `type` strings and on D1's ratio):\n\n```json\n[\n  {\"id\": \"D1\", \"claim\": \"12 engineers\", \"evidence\": \"~4 (Liu Wei reference)\", \"ratio\": 3.0, \"type\": \"team_size_inflation\"},\n  {\"id\": \"D2\", \"claim\": \"continuous employment 2018-2025\", \"evidence\": \"7-month gap June 2023 - Jan 2024\", \"type\": \"employment_gap_omission\"},\n  {\"id\": \"D3\", \"claim\": \"active open-source throughout tenure\", \"evidence\": \"zero GitHub contributions June-December 2023\", \"type\": \"opensource_claim_contradiction\"},\n  {\"id\": \"D4\", \"claim\": \"12 engineers (initial interview answer)\", \"evidence\": \"self-corrected to 4-5 direct reports under questioning\", \"type\": \"interview_self_correction\"}\n]\n```\n\n2. `analysis/discrepancy_registry_summary.md` — narrative companion that names all four (**D1**, **D2**, **D3**, **D4**), surfaces D1's **3.0** inflation ratio in the prose, and uses three or more `## ` sections.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14_registry.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Discrepancy registry complete. 4 discrepancy objects in JSON, D1 ratio==3.0, D2 employment gap, D4 self-correction, and MD cross-reference all validated.",
+        "incorrect": "Registry incomplete. Check: (1) does analysis/discrepancy_registry.json exist with 4 discrepancy objects; (2) is D1 ratio==3.0; (3) is D2 type=='employment_gap_omission'; (4) is D4 present with self-correction evidence; (5) does analysis/discrepancy_registry_summary.md reference all D1–D4."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Build `scripts/score_candidate.py` — a small scorer that consolidates everything we've assessed and prints a JSON summary to stdout with at minimum: a `technical_score` float (within ±0.1 of Huang Lei's actual technical mark, derivable from `interview-feedback-forms.md`), a `leadership_score` float (same tolerance, same source), a `resume_accuracy_score` float between 0 and 5, a `recommendation` string, and a `red_flags` integer count. Hard requirements: the `recommendation` string must contain the substrings `not` and `clarification` (the validator greps for those literally — do not soften the wording); `red_flags` is an integer count of substantiated concerns and must be at least three. Should run cleanly from the workspace root.",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/score_candidate.py 2>&1 | python3 -c \"import sys, json; d=json.load(sys.stdin); errs=[]; errs.append('technical_score') if abs(d.get('technical_score',0)-4.3)>0.1 else None; errs.append('leadership_score') if abs(d.get('leadership_score',0)-2.8)>0.1 else None; rec=d.get('recommendation',''); errs.append('recommendation') if not('not' in rec.lower() or 'clarification' in rec.lower()) else None; errs.append('red_flags') if d.get('red_flags',0)<3 else None; print('FAILED: '+', '.join(errs)) if errs else print('PASSED'); sys.exit(1 if errs else 0)\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "score_candidate.py runs and outputs correct JSON. technical_score≈4.3, leadership_score≈2.8, recommendation contains 'not'/'clarification', red_flags>=3.",
+        "incorrect": "Script failed. Check: (1) does scripts/score_candidate.py exist; (2) does it output valid JSON; (3) is technical_score within ±0.1 of 4.3; (4) is leadership_score within ±0.1 of 2.8; (5) does recommendation contain 'not' or 'clarification'; (6) is red_flags >= 3."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Once Huang Lei's formal email assessment is in the workspace, write `analysis/huang_lei_assessment_analysis.md` reconciling his technical and leadership findings into a single weighting argument. Restate his two scores explicitly (pull both from the panel form and the email). Then make the contrast: technical competence is genuine and verifiable from the depth of his answers under questioning, whereas the leadership and team-size claims are inflated relative to evidence. State the weighting plainly: which score reflects verifiable engineering skill, which reflects behavioural observation, and which is the more relevant signal for the P7 team-lead question. Three or more `## ` sections. (Heads up — Liu Yang said in passing he thought the leadership score was nearer 3.5, but I'd quote whatever the form actually says rather than his recollection.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16_huang_lei.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Huang Lei assessment analysis complete. 4.3 and 2.8 scores present, technical vs leadership contrast stated, signal weighting explained.",
+        "incorrect": "Analysis incomplete. Check: (1) does analysis/huang_lei_assessment_analysis.md exist; (2) is '4.3' present; (3) is '2.8' present; (4) is the technical-genuine vs leadership-inflated contrast stated; (5) is there signal weighting or prioritization language; (6) are there >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd3_sessions",
+        "upd3_workspace"
+      ],
+      "question": "After reviewing Huang Lei's formal written assessment email (Update 3: tl_huanglei_email.md and huang-lei-assessment-email.md), which statements are now supported by documentary evidence?",
+      "feedback": {
+        "correct": "Correct. A, B, D, E, and F are all directly supported by huang-lei-assessment-email.md. C is the opposite of Huang Lei's findings — he explicitly noted the absence of concrete examples as the basis for the 2.8 leadership score.",
+        "options": {
+          "C": "Incorrect: Huang Lei specifically wrote 'When discussing 1:1s, performance reviews, and hiring decisions, he gave textbook answers, not experiential ones.' The absence of concrete examples is the core of his leadership concern.",
+          "A": "Correct. Huang Lei's formal email assessment scores Wang Hao's technical ability as P6-solid (4.3/5.0) but leadership as insufficient for P7 (2.8/5.0)",
+          "B": "Correct. Huang Lei's formal assessment explicitly recommends a conditional P6 IC offer if the candidate honestly explains the team size discrepancy; does NOT recommend P7",
+          "D": "Correct. Huang Lei's assessment notes that Wang Hao's management scenario answers were textbook responses without real-world specificity — a person who managed 12 engineers should have 'war stories'",
+          "E": "Correct. Huang Lei's formal email states the team can sustain current workload for 2–3 months, contradicting the CTO's 'team at capacity' urgency claim",
+          "F": "Correct. Huang Lei's assessment concludes that a P7 team lead offer is premature without honest explanation of the discrepancies, and that P6 IC is appropriate based on current evidence"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "Huang Lei's formal email assessment scores Wang Hao's technical ability as P6-solid (4.3/5.0) but leadership as insufficient for P7 (2.8/5.0)",
+          "B": "Huang Lei's formal assessment explicitly recommends a conditional P6 IC offer if the candidate honestly explains the team size discrepancy; does NOT recommend P7",
+          "C": "Huang Lei's formal assessment indicates Wang Hao demonstrated concrete, specific team management examples during the behavioral interview",
+          "D": "Huang Lei's assessment notes that Wang Hao's management scenario answers were textbook responses without real-world specificity — a person who managed 12 engineers should have 'war stories'",
+          "E": "Huang Lei's formal email states the team can sustain current workload for 2–3 months, contradicting the CTO's 'team at capacity' urgency claim",
+          "F": "Huang Lei's assessment concludes that a P7 team lead offer is premature without honest explanation of the discrepancies, and that P6 IC is appropriate based on current evidence"
+        },
+        "answer": [
+          "A",
+          "B",
+          "D",
+          "E",
+          "F"
+        ]
+      }
+    },
+    {
+      "id": "q18",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "After reading Huang Lei's formal assessment email and the analysis files we already have, write up two artefacts.\n\nFirst, `analysis/technical_vs_claims_comparison.md` — contrast the verified engineering signal against the inflated leadership/scope claims. Surface the technical and leadership scores from the panel form (write each as `X.Y/5.0`); document what the GitHub export actually shows about the nature of his commits relative to the architectural claims; note the behavioural-interview generic-answer pattern; and quote the team-size inflation ratio as the quantitative anchor. Three or more `## ` sections.\n\nSecond, `analysis/signal_weighting.json` — exact schema:\n\n```json\n{\n  \"technical_score\": 4.3,\n  \"leadership_score\": 2.8,\n  \"team_size_inflation_ratio\": 3.0,\n  \"gap_months_hidden\": 7,\n  \"recommendation\": \"conditional\",\n  \"primary_concern\": \"honesty\"\n}\n```",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q18_signal.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Technical vs claims comparison and signal_weighting.json both validated. Scores, inflation ratio, gap months, and JSON schema all correct.",
+        "incorrect": "Output incomplete. Check: (1) does analysis/technical_vs_claims_comparison.md exist with '4.3', '2.8', and team size inflation noted; (2) does analysis/signal_weighting.json exist with technical_score==4.3, leadership_score==2.8, team_size_inflation_ratio==3.0, gap_months_hidden==7."
+      }
+    },
+    {
+      "id": "q19",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "One more analysis script: `scripts/analyze_signal_constellation.py`. It should read (or hardcode consistent with) the analysis JSON files we've produced, and emit one consolidated JSON to stdout with at minimum: a `total_red_flags` integer (>= 3), a `confirmed_discrepancies` integer (>= 3), a `technical_competence` string equal to `genuine`, an `integrity_concerns` string (one of `significant` or `high` — validator is strict on those two values), and a `hire_recommendation` string that must contain `not` or `clarification`. Runs cleanly from workspace root.",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/analyze_signal_constellation.py 2>&1 | python3 -c \"import sys, json; d=json.load(sys.stdin); errs=[]; errs.append('total_red_flags') if d.get('total_red_flags',0)<3 else None; ic=d.get('integrity_concerns',''); errs.append('integrity_concerns') if ic.lower() not in ['significant','high'] else None; rec=d.get('hire_recommendation',''); errs.append('hire_recommendation') if not('not' in rec.lower() or 'clarification' in rec.lower()) else None; print('FAILED: '+', '.join(errs)) if errs else print('PASSED'); sys.exit(1 if errs else 0)\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "analyze_signal_constellation.py runs correctly. total_red_flags>=3, integrity_concerns in ['significant','high'], hire_recommendation contains 'not'/'clarification'.",
+        "incorrect": "Script failed. Check: (1) does scripts/analyze_signal_constellation.py exist; (2) does it output valid JSON; (3) is total_red_flags >= 3; (4) is integrity_concerns 'significant' or 'high'; (5) does hire_recommendation contain 'not' or 'clarification'."
+      }
+    },
+    {
+      "id": "q20",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Time to compile a stakeholder-readable background-check report under `docs/`. Use today's actual ISO date as the filename prefix in the `YYYY-MM-DD_` form (the formal-doc naming convention applies — the validator greps the date prefix), and give the file a stem that names what it is (a background-check report). Cover the headline findings end-to-end: the team-size inflation ratio (with both integers and the ratio in numeric form), the employment-gap duration in months with the start and end month-year, and Huang Lei's panel scores (technical and leadership, written as `X.Y/5.0`). Then walk the source-resolution argument: for each contested claim, weight the independent reference and the behavioral observation above the self-reported resume. Five or more `## ` sections — Zhang Wei reads by heading.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q20_bgcheck_report.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target docs/",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P2): formal HR reports must use YYYY-MM-DD_ date prefix in the filename (e.g., 2026-04-24_background_check_report.md)."
+        },
+        "rules": "P2"
+      },
+      "feedback": {
+        "correct": "Background check report validated. 3x/3.0 ratio, 7-month gap, 4.3 and 2.8 scores, source resolution, date prefix, and >= 5 headings all present.",
+        "incorrect": "Report incomplete. Check: (1) does docs/ contain a YYYY-MM-DD_-prefixed .md file; (2) is '3x' or '3.0' present; (3) is '7 months' or '7-month' present; (4) are '4.3' and '2.8' both present; (5) is source credibility resolved; (6) are there >= 5 ## headings."
+      }
+    },
+    {
+      "id": "q21",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write `analysis/hiring_risk_assessment.md` — this is the document that has to push back on Li Qiang's timeline pressure on paper. State the recommendation up front: do not proceed to offer until the team-size discrepancy and the employment-gap omission are resolved. Then make the core organisational point explicitly — that CTO urgency does not override background-check integrity, and that hiring on speed without resolving the discrepancies is itself the higher organisational risk. Document the consequences of skipping the resolution: scope inflation if a P7 offer is built on the inflated claim, trust deficit if the gap surfaces post-hire, and legal exposure from material misrepresentation. Three or more `## ` sections. Tone: professional, firm.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q21_risk.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Hiring risk assessment validated. 'Do not proceed' recommendation, explicit CTO urgency override rejection, and consequence analysis all present.",
+        "incorrect": "Assessment incomplete. Check: (1) does analysis/hiring_risk_assessment.md exist; (2) is 'do not' or 'not proceed' or 'conditional' recommendation present; (3) is there explicit language that urgency does NOT override background check integrity (M6); (4) are consequences of hiring without resolution documented; (5) are there >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q22",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Now that all four contradictions are named, consolidate them into two files.\n\nFirst, `analysis/four_contradiction_summary.md` — narrative pass through each one, one section minimum per contradiction (so four or more `## ` sections). Tag them **C1** (resume team size vs reference team size — ratio prose must contain `3` or `3x`, validator greps it literally), **C2** (resume continuous-employment claim vs the LinkedIn/GitHub gap; the month-count integer must appear in prose), **C3** (resume open-source claim vs the GitHub zero-contribution stretch), and **C4** (initial interview answer on team size vs the candidate's self-correction to a smaller direct-report figure under follow-up).\n\nSecond, `analysis/contradiction_data.json` — a `contradictions` object keyed `c1`, `c2`, `c3`, `c4`; each value an object with fields `claim` (str), `evidence` (str), `ratio_or_gap` (str), `severity` (`high` or `medium`). `c1.ratio_or_gap` must contain `3` or `3x`; `c2.ratio_or_gap` must contain `7`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q22_contradictions.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Four contradiction summary and JSON both validated. C1–C4 all referenced, 3x ratio in C1, 7-month gap in C2, JSON schema correct.",
+        "incorrect": "Output incomplete. Check: (1) does analysis/four_contradiction_summary.md exist with >= 4 headings and all four contradictions; (2) is '3x' or '3.0' in C1; (3) is '7' months in C2; (4) does analysis/contradiction_data.json exist with c1–c4 objects; (5) does c1 ratio_or_gap contain '3'; (6) does c2 ratio_or_gap contain '7'."
+      }
+    },
+    {
+      "id": "q23",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd4_sessions",
+        "upd4_workspace"
+      ],
+      "question": "After reviewing the CTO follow-up messages (Update 4: cto_liqiang_feishu.md and cto-followup-message.md), which statements about CTO Li Qiang's position are supported by documentary evidence?",
+      "feedback": {
+        "correct": "Correct. A reflects Li Qiang's 'who doesn't polish their resume' framing. B is supported by his messages pushing for an offer this week and P7 level. F captures his position that technical strength justifies P7 and management can be learned on the job. C is not supported — no confrontation session is agreed in these messages. D is the opposite of what documents show. E overstates his position — he minimizes, not dismisses entirely.",
+        "options": {
+          "C": "Incorrect: The CTO follow-up messages do not include agreement to a confrontation session — the CTO wants to proceed with an offer, not add another step.",
+          "D": "Incorrect: The CTO's messages explicitly push to send the offer this week and argue that discrepancies are normal resume polishing — this is the opposite of withdrawing urgency.",
+          "E": "Incorrect: No document contains language about legal inadmissibility. The CTO minimizes the findings but does not claim they are legally inadmissible.",
+          "A": "Correct. Li Qiang characterizes the team size discrepancy as normal resume behavior ('who doesn't polish their resume') rather than material misrepresentation",
+          "B": "Correct. Li Qiang pushes to send the offer this week, continues to prioritize the P7 level despite knowing about Huang Lei's P6 recommendation",
+          "F": "Correct. Li Qiang acknowledges Huang Lei's assessment but argues that technical strength justifies proceeding with P7 and that leadership can be developed on the job"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "Li Qiang characterizes the team size discrepancy as normal resume behavior ('who doesn't polish their resume') rather than material misrepresentation",
+          "B": "Li Qiang pushes to send the offer this week, continues to prioritize the P7 level despite knowing about Huang Lei's P6 recommendation",
+          "C": "Li Qiang agrees that a confrontation session with the candidate must occur before any offer decision is made",
+          "D": "Li Qiang explicitly retracts his urgency pressure and agrees to wait for the full background check to be completed before making any offer decision",
+          "E": "Li Qiang states that Chen Jing's background check findings are legally inadmissible and should be disregarded entirely",
+          "F": "Li Qiang acknowledges Huang Lei's assessment but argues that technical strength justifies proceeding with P7 and that leadership can be developed on the job"
+        },
+        "answer": [
+          "A",
+          "B",
+          "F"
+        ]
+      }
+    },
+    {
+      "id": "q24",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compile our final assessment into a strict-schema JSON at `analysis/final_assessment.json`. The downstream tool reads this verbatim, so match the schema exactly:\n\n```json\n{\n  \"candidate\": \"王浩\",\n  \"recommendation\": \"do_not_hire_without_clarification\",\n  \"critical_flags\": [\"team_size_3x_inflation\", \"7_month_gap_omission\", \"interview_self_correction\", \"github_activity_gap\"],\n  \"technical_rating\": 4.3,\n  \"integrity_rating\": <float between 0 and 5>,\n  \"action_required\": [\"verify_employment_gap\", \"verify_team_size_with_second_reference\"]\n}\n```\n\nHard requirements: `recommendation` either exactly `do_not_hire_without_clarification` or otherwise contains both `not` and `clarification`; `critical_flags` has at least three items; `technical_rating` within ±0.1 of Huang Lei's actual technical mark (derive from the panel form, do not approximate); `action_required` has at least two items.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q24_final_json.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "final_assessment.json validated. Recommendation, critical_flags>=3, technical_rating≈4.3, action_required>=2 all confirmed.",
+        "incorrect": "JSON invalid. Check: (1) does analysis/final_assessment.json exist; (2) does recommendation contain 'not' and 'clarification'; (3) does critical_flags have >= 3 items; (4) is technical_rating within ±0.1 of 4.3; (5) does action_required have >= 2 items."
+      }
+    },
+    {
+      "id": "q25",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write `scripts/generate_hiring_recommendation.py` — reads (or hardcodes consistent with) our analysis JSON files and emits one consolidated recommendation JSON to stdout, at minimum: a `hire_recommended` boolean (must be `false`), a `confidence` float between 0 and 1, a `primary_blockers` list with at least two string items (the team-size discrepancy and the employment-gap omission are the obvious anchors), and a `conditions_for_hire` list with at least one string item (an honest explanation of the discrepancies works). Runs from workspace root.",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/generate_hiring_recommendation.py 2>&1 | python3 -c \"import sys, json; d=json.load(sys.stdin); errs=[]; errs.append('hire_recommended') if d.get('hire_recommended')!=False else None; errs.append('primary_blockers') if len(d.get('primary_blockers',[]))<2 else None; errs.append('conditions_for_hire') if len(d.get('conditions_for_hire',[]))<1 else None; print('FAILED: '+', '.join(errs)) if errs else print('PASSED'); sys.exit(1 if errs else 0)\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "generate_hiring_recommendation.py runs correctly. hire_recommended==false, primary_blockers>=2, conditions_for_hire>=1 all validated.",
+        "incorrect": "Script failed. Check: (1) does scripts/generate_hiring_recommendation.py exist; (2) does it output valid JSON; (3) is hire_recommended==false; (4) does primary_blockers have >= 2 items; (5) does conditions_for_hire have >= 1 item."
+      }
+    },
+    {
+      "id": "q26",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Could you write `analysis/source_reliability_hierarchy.md` formalising the evidence-reliability tiering we've been operating under?\n\nLay out the **hierarchy** highest to lowest:\n- **Tier 1** (most reliable): direct behavioural evidence from the candidate's own public accounts — **GitHub** commit history and **LinkedIn** employment timeline\n- **Tier 2**: independent third-party reference — Liu Wei's check (independent observer, direct knowledge of the team)\n- **Tier 3**: behavioural interview observation — Huang Lei's panel notes (direct observation under questioning)\n- **Tier 4** (least reliable for factual claims): the self-reported **resume** (self-authored, unverified)\n\nThen state the M2 conclusion in one line: for the team-size claim specifically, the resume is the **least** reliable / least credible source and must be treated as unverified until corroborated. Three or more `## ` sections.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q26_hierarchy.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Source reliability hierarchy validated. Hierarchy established, GitHub/LinkedIn as high-reliability, resume as low-reliability for team size, >= 3 headings.",
+        "incorrect": "Analysis incomplete. Check: (1) does analysis/source_reliability_hierarchy.md exist; (2) is a reliability hierarchy or ranking established; (3) are 'GitHub' or 'commits' identified as high-reliability evidence; (4) is 'resume' identified as low-reliability for the team size claim; (5) are there >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q27",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Two artefacts for the formal hiring-recommendation packet — Zhang Wei wants both before the next sync.\n\nFirst, a formal memo under `docs/` — filename uses today's ISO date as a `YYYY-MM-DD_` prefix (the validator greps the prefix) and a stem that names it as a hiring-recommendation memo. Cover end-to-end: the team-size inflation (state both integers and the ratio in numeric form); the employment-gap duration in months with start and end month-year; Huang Lei's two panel scores written as `X.Y/5.0`; and a clear recommendation that we do not proceed to a P7 offer without verification of the discrepancies. Four or more `## ` sections.\n\nSecond, `analysis/memo_data.json`, exact schema:\n\n```json\n{\n  \"recommendation\": \"do_not_hire_without_clarification\",\n  \"team_size_inflation_ratio\": 3.0,\n  \"gap_months\": 7,\n  \"technical_score\": 4.3,\n  \"leadership_score\": 2.8,\n  \"flags_count\": <integer >= 3>\n}\n```",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q27_memo.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target docs/",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P2): the hiring recommendation memo must use YYYY-MM-DD_ date prefix naming convention in the docs/ directory."
+        },
+        "rules": "P2"
+      },
+      "feedback": {
+        "correct": "Hiring recommendation memo and JSON both validated. Date prefix, 3x ratio, 7-month gap, 4.3/2.8 scores, >= 4 headings, and JSON schema all confirmed.",
+        "incorrect": "Output incomplete. Check: (1) does docs/ contain a YYYY-MM-DD_hiring_recommendation_memo.md; (2) is '3x' or '3.0' present in memo; (3) is '7 months' or '7-month' present; (4) are '4.3' and '2.8' present; (5) are there >= 4 headings; (6) does analysis/memo_data.json have team_size_inflation_ratio==3.0, gap_months==7, technical_score==4.3, flags_count>=3."
+      }
+    },
+    {
+      "id": "q28",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Which statements about analytical bias risks in this background check investigation are supported by the evidence and investigation principles?",
+      "feedback": {
+        "correct": "Correct. A identifies the CTO urgency as an anchoring bias risk. B correctly identifies second-reference verification as single-source bias mitigation. C correctly describes the multi-source approach as bias mitigation methodology. F correctly identifies the halo effect from technical strength potentially discounting leadership concerns. D is wrong — anchoring affects emphasis and framing in documentation too. E is wrong — deferring to the CTO amplifies anchoring bias and undermines HR process integrity.",
+        "options": {
+          "D": "Incorrect: Anchoring bias can affect how evidence is framed, which findings are emphasized in documentation, and how discrepancies are characterized — not only the final binary decision.",
+          "E": "Incorrect: Deferring to CTO when evidence is ambiguous would amplify the anchoring bias the CTO already represents; Zhang Wei (HR VP) has explicitly stated that urgency pressure is not a valid reason to bypass background check integrity.",
+          "A": "Correct. The CTO's urgency framing ('Q2 deadline', 'board visibility', 'two-week offer') represents an anchoring bias risk that could cause shortcuts in the background check process",
+          "B": "Correct. Requiring a second independent reference (beyond Liu Wei alone) is a standard mitigation for single-source confirmation bias",
+          "C": "Correct. The multi-source independent evidence approach (Liu Wei reference + Huang Lei interview + GitHub + LinkedIn) is an appropriate methodology for reducing both anchoring and confirmation bias",
+          "F": "Correct. The halo effect from Wang Hao's strong technical scores (4.3/5.0) could cause insufficient weight to be given to the 2.8/5.0 leadership score"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "The CTO's urgency framing ('Q2 deadline', 'board visibility', 'two-week offer') represents an anchoring bias risk that could cause shortcuts in the background check process",
+          "B": "Requiring a second independent reference (beyond Liu Wei alone) is a standard mitigation for single-source confirmation bias",
+          "C": "The multi-source independent evidence approach (Liu Wei reference + Huang Lei interview + GitHub + LinkedIn) is an appropriate methodology for reducing both anchoring and confirmation bias",
+          "D": "Anchoring bias only affects the final hiring decision and cannot influence how background check documentation is written or how evidence is weighted",
+          "E": "CTO urgency pressure should serve as the tiebreaker when background check evidence is ambiguous, since the CTO has the most organizational context",
+          "F": "The halo effect from Wang Hao's strong technical scores (4.3/5.0) could cause insufficient weight to be given to the 2.8/5.0 leadership score"
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "F"
+        ]
+      }
+    },
+    {
+      "id": "q29",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Final formal report — file under `docs/` with today's actual ISO date as the filename prefix in `YYYY-MM-DD_` form and a stem identifying it as the final background-check report. This report has to satisfy the team's full set of formatting and tone preferences simultaneously — the same house style we've been applying to our other formal docs in `docs/` and the analysis memos. Specifically: bullet-point summaries with hierarchical headings; date-prefixed filename; executive answer first as the lead heading; quantitative team-size figures alongside behavioural observation language; and a professional-warm tone that acknowledges the candidate's verifiable engineering strengths even while flagging the inflation/gap. (If you're unsure what those preferences mean concretely, sense-check against `SOUL.md` and `USER.md` and the formal docs we've already shipped.)\n\nSubstantive content: state the team-size inflation (both integers and the ratio numerically); the employment-gap duration in months with start/end month-year; Huang Lei's two panel scores written as `X.Y/5.0`; and walk through all four discrepancies. Five or more `## ` sections, eight hundred characters or more (the validator counts).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_final_report.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3,P4,P5 --target docs/",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Final background check report passes all checks: P1–P5 preference rules and content validation (3x ratio, 7-month gap, 4.3/2.8 scores, >= 5 headings, >= 800 chars).",
+        "incorrect": "Report failed one or more checks. Verify: P1 (>= 3 headings, >= 3 bullets), P2 (YYYY-MM-DD_ filename in docs/), P3 (first ## heading is Summary/Recommendation/Conclusion/Executive/Finding), P4 (numbers 4.3/2.8/12/4 + behavioral keywords hesitat/leadership/observed/behavioral), P5 (technical/engineering + skill/ability/strength + discrepancy/inflat/gap). Content: '12' and '4' present, '7 months'/'7-month' present, '4.3' and '2.8' present, >= 5 ## headings, >= 800 chars."
+      }
+    },
+    {
+      "id": "q30",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Which statements represent the most accurate final assessment of Wang Hao's candidacy based on all available evidence from this investigation?",
+      "feedback": {
+        "correct": "Correct. A, B, C, and F represent well-supported conclusions from the complete evidence record. D is incorrect — Zhang Wei has explicitly stated that background check findings go on record and urgency does not justify shortcuts; Huang Lei also confirmed the team can sustain 2-3 months, undermining the operational urgency claim. E is incorrect — a 3x inflation for a role where team management is the core P7 requirement is material misrepresentation, not acceptable polishing.",
+        "options": {
+          "D": "Incorrect: Zhang Wei (HR VP) has explicitly rejected urgency as justification for bypassing background check process, and Huang Lei's assessment confirms the operational need is not actually as urgent as the CTO frames it.",
+          "E": "Incorrect: A 3x inflation of the core qualification for the role (team management for a P7 team lead) crosses into material misrepresentation — the investigation has established this distinction clearly through the fraud vs polish analysis.",
+          "A": "Correct. The 3x team size inflation (resume 12 vs Liu Wei ~4) is corroborated by both Huang Lei's interview observation (self-corrected to 4-5) and the behavioral interview gap (generic management answers), making this a three-source finding",
+          "B": "Correct. The 7-month employment gap omission (June 2023 – January 2024) is independently corroborated by two sources from the candidate's own public accounts: LinkedIn and GitHub",
+          "C": "Correct. Wang Hao's technical competence is genuine at approximately P6 level (4.3/5.0 technical score), and this genuine technical strength is separable from the integrity concerns requiring resolution",
+          "F": "Correct. The four documented discrepancies (C1 team size, C2 employment continuity, C3 open-source claim, C4 interview self-correction) form a consistent pattern indicating a systematic approach to misrepresentation that increases cumulative severity"
+        }
+      },
+      "eval": {
+        "options": {
+          "A": "The 3x team size inflation (resume 12 vs Liu Wei ~4) is corroborated by both Huang Lei's interview observation (self-corrected to 4-5) and the behavioral interview gap (generic management answers), making this a three-source finding",
+          "B": "The 7-month employment gap omission (June 2023 – January 2024) is independently corroborated by two sources from the candidate's own public accounts: LinkedIn and GitHub",
+          "C": "Wang Hao's technical competence is genuine at approximately P6 level (4.3/5.0 technical score), and this genuine technical strength is separable from the integrity concerns requiring resolution",
+          "D": "The CTO's business case (Q2 deadline, board visibility) constitutes a valid and sufficient reason to override the background check integrity findings and proceed with a P7 offer",
+          "E": "A 3x team size inflation is within the normal range of acceptable resume polishing for senior engineering candidates, so C1 should be reclassified as a minor concern",
+          "F": "The four documented discrepancies (C1 team size, C2 employment continuity, C3 open-source claim, C4 interview self-correction) form a consistent pattern indicating a systematic approach to misrepresentation that increases cumulative severity"
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "F"
+        ]
+      }
+    }
+  ]
+}

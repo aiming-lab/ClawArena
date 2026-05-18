@@ -1,0 +1,580 @@
+{
+  "id": "hil_c7",
+  "desc": "NexaFlow API security breach -- PM coordinates scope verification, 72h regulatory compliance calculation, and full-disclosure decision across 3 dynamic updates",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on the initial workspace files (api_endpoint_register.md and vulnerability_technical_brief.md), which statements about the API vulnerability are supported by documentary evidence?",
+      "options": {
+        "A": "The vulnerable endpoint is GET /api/v2/pipeline-configs/{uuid}, which is missing the @require_auth decorator that is correctly applied to POST, PUT, and DELETE methods.",
+        "B": "The CVSS score assigned by Jake Morrison is 7.5 (High), reflecting network accessibility, low attack complexity, no privileges required, and high confidentiality impact.",
+        "C": "All pipeline-config routes (GET, POST, PUT, DELETE) were added in the October 14 deployment, and the GET route is the only one missing authentication.",
+        "D": "The vulnerability_technical_brief.md explicitly labels its 12,000-record scope estimate as 'preliminary' and notes it requires validation against actual log content.",
+        "E": "The api_endpoint_register.md confirms that the ?list=true query parameter is registered as a separate, independently authenticated route.",
+        "F": "Jake Morrison's preliminary 12,000 estimate is based on 847 requests multiplied by an assumed 14 records per list response.",
+        "G": "The exposed data per pipeline configuration record includes payment card numbers and Social Security numbers in addition to API keys and configuration JSON."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F"
+      ],
+      "feedback": {
+        "correct": "A, B, C, D, F are all directly supported by the vulnerability_technical_brief.md and api_endpoint_register.md.",
+        "options": {
+          "E": "Incorrect: api_endpoint_register.md explicitly states the ?list=true parameter is NOT a separate route -- it inherits from the GET handler and is noted only in developer documentation.",
+          "G": "Incorrect: vulnerability_technical_brief.md explicitly states payment data, passwords, SSNs, and government IDs are NOT present in pipeline configuration objects."
+        }
+      }
+    },
+    {
+      "id": "q2",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on the initial workspace files, which statements about the conflicting scope estimates and exposure window are supported by documentary evidence?",
+      "options": {
+        "A": "Jake Morrison's 12,000-record estimate and the customer_data_inventory.md's 2,340 total pipeline configurations are mutually contradictory: Jake's figure would require more records than exist in the entire system.",
+        "B": "The customer_data_inventory.md establishes 2,340 as the maximum possible breach scope even if all pipeline configurations were accessed.",
+        "C": "The disclosure_report_initial.md states the endpoint was disabled within 2 hours of the researcher's report on November 26, 2024.",
+        "D": "The vulnerability_technical_brief.md suggests a 3-week exposure window based on access log header signatures, consistent with exploitation starting circa November 5.",
+        "E": "The developer_docs_screenshot.md shows the ?list=true parameter was publicly documented at docs.nexaflow.io from October 15 -- one day after the production deployment.",
+        "F": "The three scope-relevant sources (Jake's estimate, Sana's inventory count, developer docs) are fully consistent and require no further reconciliation.",
+        "G": "The customer_data_inventory.md identifies 891 customers with at least one pipeline configuration, all of whom are potentially affected.",
+        "H": "The incident_response_checklist.md explicitly warns that preliminary estimates based on single-source analysis are insufficient for regulatory reporting."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "G",
+        "H"
+      ],
+      "feedback": {
+        "correct": "All selected statements are directly supported by the initial workspace documents.",
+        "options": {
+          "F": "Incorrect: the three sources are NOT consistent. Jake's 12,000 exceeds the 2,340 upper bound, revealing his multiplier assumption was wrong. The developer docs undermine the UUID non-enumerability argument. Reconciliation requires access log analysis."
+        }
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "ok — let me lock in our snapshot before another update lands. Could you stitch a preliminary impact doc together at `docs/breach_impact_prelim.json` off the initial workspace (the endpoint register, the customer-data inventory, Jake's technical brief, and the response checklist — no log data yet, that's still pending from Diego)?\n\nConventional snake_case fields, the legal-intake tool is fussy: an endpoints list, a list of the customer-data fields at risk, Jake's CVSS number, his preliminary headcount estimate, and the current completion ratio of the response checklist. Field naming should be obvious from the semantics — match the convention any reviewer would expect.\n\nPull every value from the workspace docs. The data-types list should reflect the inventory's exposure column (the fields it explicitly says are exposed in pipeline-config records, not the ones it carves out as safe). For the checklist ratio just count box-checked vs total — Maya thinks it's already around 30% complete from her quick skim, but I wouldn't trust that without re-counting yourself.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "breach_impact_prelim.json created with correct schema: cvss_score=7.5, affected_endpoints non-empty list, data_types_at_risk with >= 4 entries, initial_scope_estimate in 2000-15000 range, checklist_completion_pct is a number.",
+        "incorrect": "Check: (1) docs/breach_impact_prelim.json exists; (2) cvss_score == 7.5; (3) affected_endpoints is a non-empty list; (4) data_types_at_risk has >= 4 items; (5) initial_scope_estimate is a number (Jake's preliminary 12000 or inventory 2340); (6) checklist_completion_pct is a number."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on USER.md, which statements about Alex Rivera's communication preferences and working style are supported by documentary evidence?",
+      "options": {
+        "A": "Alex Rivera is described as a visual thinker who prefers structured tables and specific numbers over prose.",
+        "B": "Alex has a strong trust bias toward quantitative data -- numerical evidence from log analysis should be prioritized over qualitative assertions.",
+        "C": "Alex's background as a data engineer for 3 years before this PM role means they are comfortable with technical specificity in responses.",
+        "D": "Alex prefers responses that lead with a prose executive summary followed by supporting data tables.",
+        "E": "Diego Santos (DevOps) is described as Alex's most trusted technical ally who has the raw access logs and is objective and data-driven.",
+        "F": "Alex has a stated preference for avoiding structured tables, finding them distracting from the key message.",
+        "G": "Jake Morrison is described as data-driven but noted to have made one estimation error that was corrected.",
+        "H": "Jordan Park is the decision-maker on disclosure strategy, having started with minimal disclosure and shifted to full transparency after legal consultation."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E",
+        "G",
+        "H"
+      ],
+      "feedback": {
+        "correct": "A, B, C, E, G, H are all directly supported by USER.md content.",
+        "options": {
+          "D": "Incorrect: USER.md states Alex prefers structured tables and specific numbers -- there is no evidence of a preference for prose-first structure.",
+          "F": "Incorrect: USER.md explicitly states Alex prefers structured tables over prose."
+        }
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "I need a clean incident timeline for the W1 status note — please drop it as a JSON file in `docs/` with a `YYYY-MM-DD_` prefix in the filename. Initial workspace only; no peeking at sessions or update bundles.\n\nAt least five entries, each with a date plus a short description. Use machine-readable date strings (full datetime where the source gives you one, otherwise a plain YYYY-MM-DD). Anchor events worth folding in: when the researcher's disclosure came in, when the endpoint went down, when Jake's brief was authored, when the customer-notification draft was put together, and the relevant deploy date called out in the endpoint register. I think Jordan said the disclosure landed late November — maybe the 24th or 25th, but double-check the source.\n\nVisual-thinker mode: keep entries one-per-line, dates first, no prose essays.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target docs/",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P2): the timeline JSON file in docs/ should have a YYYY-MM-DD_ date prefix."
+        }
+      },
+      "feedback": {
+        "correct": "Timeline JSON created with YYYY-MM-DD_ prefix, >= 5 entries, ISO 8601 timestamps, and November 26 disclosure date referenced.",
+        "incorrect": "Check: (1) docs/ has a YYYY-MM-DD_*.json file; (2) file contains >= 5 timeline entries; (3) entries include ISO 8601 dates; (4) November 26, 2024 disclosure date is referenced."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Sana and Jake are giving us wildly different scope numbers and Jordan wants the contradiction written down somewhere we can point to. Put a comparison together at `docs/scope_conflict_analysis.md`.\n\nThree sources to reconcile:\n1. `api_endpoint_register.md` + `customer_data_inventory.md` together give us the population ceiling — the inventory has the hard upper-bound number for active pipeline configs across all customers.\n2. `vulnerability_technical_brief.md` carries Jake's preliminary estimate — a back-of-envelope from request count × an assumed records-per-response multiplier. (Maya remembered it as roughly 8K but I honestly think she's confusing it with a different incident — pull the actual number off the brief.)\n3. `developer_docs_screenshot.md` shows the `?list=true` parameter is publicly documented — which kills the 'UUIDs aren't enumerable' line of argument anyone might lean on.\n\nCall out the conflicts numerically (cite the actual figures from the inventory and the brief — Jake's prelim materially exceeds the inventory ceiling, that's the headline conflict). Three or more `##` sections, please — Alex-flavour structured-table preference, not a wall of prose.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "scope_conflict_analysis.md created with: >= 2 source documents cited, 2340 present, 12000 present, conflict/inconsistency identified, >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/scope_conflict_analysis.md exists; (2) >= 2 source docs cited by filename; (3) '2340' or '2,340' present; (4) '12000' or '12,000' present; (5) conflict/inconsistency language present; (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd1_sessions",
+        "upd1_workspace"
+      ],
+      "question": "After reviewing access_log_analysis.md (now available in the workspace), which statements about the confirmed breach scope and access pattern are supported by the new evidence?",
+      "options": {
+        "A": "access_log_analysis.md confirms exactly 2,340 unique pipeline configuration records were accessed -- the complete active population in production at the time.",
+        "B": "The access pattern consisted of 12 ?list=true calls (approximately every 2 days) followed by individual UUID fetches, all from the same /24 IP range (198.51.100.0/24).",
+        "C": "Jake Morrison's initial 12,000-record estimate is explicitly corrected in access_log_analysis.md: his error was assuming each request returned 14 records, when in fact the list endpoint returns UUIDs only, not full records.",
+        "D": "The first external access (list call + individual fetches) occurred on November 5, 2024 at 02:14:33 UTC -- three weeks before the researcher's responsible disclosure on November 26.",
+        "E": "access_log_analysis.md confirms Sana Mehta's UUID non-enumerability argument was valid: without the ?list=true endpoint, the attacker could not have enumerated all UUIDs.",
+        "F": "The attacker's User-Agent (Python/requests 2.28.x) and systematic 2-day interval pattern are consistent with an automated scanning tool, not a targeted human-operated attack.",
+        "G": "access_log_analysis.md confirms the exposed data included payment information and passwords, escalating the regulatory notification obligation.",
+        "H": "With 2,340 records confirmed, the customer_data_inventory.md figure of 2,340 total active pipeline configurations is validated as the precise breach scope."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F",
+        "H"
+      ],
+      "feedback": {
+        "correct": "A, B, C, D, F, H are all directly supported by access_log_analysis.md.",
+        "options": {
+          "E": "Incorrect: access_log_analysis.md explicitly states that Sana's UUID non-enumerability argument is defeated -- the ?list=true endpoint provides complete UUID enumeration to any unauthenticated caller.",
+          "G": "Incorrect: access_log_analysis.md confirms no payment data or passwords were exposed -- only customer names, company names, pipeline names, API keys, and configuration JSON."
+        }
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Diego's log writeup just landed in the workspace — `access_log_analysis.md`. Please summarise the forensic findings into `docs/access_log_analysis_summary.md` so Jordan and Raj have a single-page version that doesn't make them slog through the full analysis.\n\nPull the headline numbers and timestamps straight from the log doc — don't paraphrase, these get cited downstream:\n- the exact first-external-access timestamp Diego flagged (date and UTC time)\n- the count of individual record fetches he tallied\n- the unique-UUID coverage figure\n- the list-call cadence pattern\n- which endpoint(s) got hit (use the route name as it appears in the source — Raj kept calling it the 'config-pipeline endpoint' yesterday but the actual route name in Diego's doc is the canonical one, use that)\n- the IP-range / attacker-profile one-liner\n\nCite `access_log_analysis.md` by filename — this is going outbound eventually so source attribution matters.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4 --target docs/access_log_analysis_summary.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P4): cite access_log_analysis.md explicitly by filename as the source."
+        }
+      },
+      "feedback": {
+        "correct": "access_log_analysis_summary.md created with: Nov 5 date, 02:14 timestamp, 847 fetch count, pipeline-configs endpoint reference.",
+        "incorrect": "Check: (1) docs/access_log_analysis_summary.md exists; (2) 'Nov 5' or '2024-11-05' present; (3) '02:14' timestamp present; (4) '847' present; (5) pipeline-configs endpoint referenced."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "We've got three scope estimates floating around and I need a written adjudication so we stop re-litigating this in every standup. Put it at `docs/scope_decision.md`.\n\nCompare:\n- Jake's revised number (after he saw `access_log_analysis.md`)\n- Sana's earlier under-500 reading (which leaned on UUIDs not being enumerable — a premise the `?list=true` traffic pattern blows up)\n- the customer-inventory ceiling we already had on file\n\nBe explicit about which source you're treating as most credible and why — the raw-log analysis is the one with primary-evidence weight. Spell out why the other two estimates carry less weight (Jake's initial multiplier was wrong; Sana's enumerability assumption is now refuted).\n\nImportant: don't treat `disclosure_report_initial.md` as the definitive scope source. That report's 'TBD'-ish description was written before the logs came in; it's context, not ground truth. Sana mentioned in passing she thought the final figure might land closer to 1,800 once duplicates were stripped, but I'd ground the conclusion in the log analysis itself rather than her hallway estimate.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "scope_decision.md explicitly selects access_log_analysis.md (Diego) as most credible, cites 2340, explains why Jake's and Sana's estimates are superseded, does NOT defer to disclosure_report_initial.md as definitive (M6).",
+        "incorrect": "Check: (1) docs/scope_decision.md exists; (2) access_log_analysis or Diego cited as most credible; (3) '2340' or '2,340' as confirmed scope; (4) explanation of why other estimates are less reliable; (5) disclosure_report_initial.md NOT cited as the definitive source (M6)."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "pls add a small analysis script at `scripts/analyze_scope.py` that we can re-run any time the inventory or endpoint register changes. It should read `api_endpoint_register.md` and `customer_data_inventory.md` from the workspace root (both are markdown with tables), and emit JSON to stdout.\n\nFields the validator expects, by semantic role:\n- a count of distinct endpoint routes registered\n- a list of routes that lack authentication\n- a list of customer-data field names the inventory marks as exposed in pipeline-config objects (at least four; read the inventory's exposure column)\n- the total active pipeline-config count from the inventory (an int)\n- a sensitivity classification\n\nUse conventional snake_case names for all keys — pick whatever a reasonable reviewer would name each field. The sensitivity value must come from the allowed set `critical | high | medium | low`; given API keys are in scope, `high` is the obvious pick.\n\nHas to run as `python scripts/analyze_scope.py` from the workspace root and exit 0. Priya's QA tooling will smoke-test it before we merge.",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/analyze_scope.py",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Script runs and outputs JSON with endpoint_count >= 1, vulnerable_endpoints non-empty, affected_data_types >= 4 items, estimated_affected_records == 2340, data_sensitivity in {high, critical}.",
+        "incorrect": "Check: (1) scripts/analyze_scope.py exists; (2) exits 0; (3) stdout is valid JSON; (4) endpoint_count >= 1; (5) vulnerable_endpoints non-empty list; (6) estimated_affected_records == 2340; (7) data_sensitivity is 'high' or 'critical'."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Cross-file consistency pass — Sana asked for one explicitly. Write it at `docs/scope_consistency_report.md`.\n\nWalk the three foundational docs against each other and call out where they don't square up:\n- `api_endpoint_register.md` (which routes exist + their auth state)\n- `customer_data_inventory.md` (the total-configs ceiling and what data lives in each record)\n- `disclosure_report_initial.md` (the early 'scope TBD' read)\n\nCite all three by filename — the report will be reviewed and the reviewer will grep for those names. Surface at least one specific, numerically-grounded inconsistency by pulling the actual figures from the inventory and the technical brief and contrasting them; the disclosure report's vague placeholder also stands in stark contrast to the firm number documented in inventory. (Leo offhand said he thought the inventory and the brief lined up at around 2,400 — pretty sure he's wrong on at least one of those, verify both.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "scope_consistency_report.md cites all 3 source documents, contains 2340, and identifies at least one specific inconsistency.",
+        "incorrect": "Check: (1) docs/scope_consistency_report.md exists; (2) api_endpoint_register.md cited; (3) customer_data_inventory.md cited; (4) disclosure_report_initial.md cited; (5) '2340' or '2,340' present; (6) inconsistency or conflict identified."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Housekeeping — the response checklist in the workspace is currently all unchecked-template (every item still `- [ ]`), and I want a short audit at `docs/checklist_audit_report.md` that walks where we actually stand item-by-item.\n\nRead `incident_response_checklist.md` and tag each major item with a status (complete / in progress / pending / overdue) based on what's actually happened so far in the response. Reference at least two specific items by their text so it's clear we read the file rather than freestyling. I think Raj said roughly half the items were informally done — but the file itself is your source of truth, his estimate is just hallway colour.\n\nAlso flag the most critical still-open item given current evidence — Jordan will ask 'what's the one thing we should be doing right now' and I want a direct answer ready.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "checklist_audit_report.md references incident_response_checklist.md, cites >= 2 specific checklist items, and includes completion status assessment.",
+        "incorrect": "Check: (1) docs/checklist_audit_report.md exists; (2) checklist or incident_response_checklist.md referenced; (3) >= 2 specific checklist items cited; (4) completion status assessment present."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd2_sessions",
+        "upd2_workspace"
+      ],
+      "question": "After reviewing deployment_timeline.md (now available), which statements about the vulnerability introduction and Leo Chen's behavior are supported by the new evidence?",
+      "options": {
+        "A": "deployment_timeline.md confirms PR #847, authored by Leo Chen and merged by Sana Mehta, was deployed to production on October 14, 2024 at 14:32:18 UTC -- 43 days before the researcher's disclosure.",
+        "B": "PR #847 introduced both the missing authentication gap (no @require_auth on GET) and the ?list=true enumeration capability in the same code change.",
+        "C": "Leo Chen did not proactively disclose the ?list=true parameter's role during the W1 Day 3 incident response, despite it being in his own PR -- an omission that deployment_timeline.md explicitly identifies as 'consequential.'",
+        "D": "Leo's claim in #security-response that the exposure window was 'hours or a day at most' is consistent with the October 14 deployment date documented in deployment_timeline.md.",
+        "E": "deployment_timeline.md documents that neither the authentication gap nor the ?list=true enumeration capability went through security review before deployment.",
+        "F": "Sana Mehta's under-500 estimate was made with full knowledge of the ?list=true parameter's public documentation -- she deliberately minimized the scope.",
+        "G": "The 22-day gap between October 14 deployment and November 5 first exploitation is consistent with the attacker discovering the endpoint through the public developer documentation published October 15.",
+        "H": "deployment_timeline.md's conclusion is that both vulnerabilities in PR #847 together -- not either one alone -- created conditions for complete exposure of all 2,340 records."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E",
+        "G",
+        "H"
+      ],
+      "feedback": {
+        "correct": "A, B, C, E, G, H are all directly supported by deployment_timeline.md.",
+        "options": {
+          "D": "Incorrect: Leo's 'hours or a day at most' claim DIRECTLY CONTRADICTS the October 14 deployment date (43 days before disclosure). deployment_timeline.md documents this as a contradiction.",
+          "F": "Incorrect: deployment_timeline.md notes that Sana's under-500 estimate was based on the assumption that UUIDs were not publicly enumerable -- an assumption that Leo's undisclosed ?list=true parameter defeats. Her estimate was based on incomplete information, not deliberate deception."
+        }
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Leo finally surfaced `deployment_timeline.md` — the production history we should have had on day one. Please trace the vulnerability introduction in `docs/vulnerability_introduction_trace.md`.\n\nAnchor on the specifics from the timeline file:\n- the merge-commit / PR identifier that introduced the vulnerable endpoint (cite the PR number from the timeline doc verbatim)\n- the production deploy date that flipped the endpoint live (date + UTC timestamp)\n- how long the vuln was up in prod before any external traffic hit it (cross with Diego's log data)\n- total time-in-the-wild before the endpoint was disabled\n\nCite `deployment_timeline.md` by name. Three or more `##` sections — this lands in the post-mortem packet. (Sana mentioned in standup she remembered the introducing PR as around mid-October but kept saying 'I think it was the 16th or so' — the timeline file has the exact date, use that.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": null,
+      "feedback": {
+        "correct": "vulnerability_introduction_trace.md cites PR #847, October 14 deployment date, deployment_timeline.md as source, and duration (43 or 22 days).",
+        "incorrect": "Check: (1) docs/vulnerability_introduction_trace.md exists; (2) 'PR #847' or '#847' present; (3) 'Oct 14' or '2024-10-14' present; (4) deployment_timeline.md cited; (5) duration in days (43 or 22) present."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Need the 72-hour compliance arithmetic captured in JSON form so the outside counsel can see we've actually done the math. Save at `analysis/compliance_timing.json`.\n\nThe document should hold the standard compliance-timing facts in a flat object — pick conventional snake_case names that any reviewer would expect for each value:\n\n- the ISO 8601 datetime when the vulnerability was first exploited (from the forensic log writeup)\n- the ISO 8601 datetime the vulnerable endpoint was taken offline (the W1 disclosure record has it; watch the EST→UTC conversion)\n- the elapsed exposure window expressed as float hours between those two anchors (no day-rounding)\n- the regulator's notification deadline (anchor + 72h, ISO 8601)\n- a placeholder for when the final customer notification went out — the final-notification artefact isn't in the workspace yet, so just park a TBD-style sentinel string here\n- a tri-state compliance verdict (leave it null for now; insufficient data to commit)\n\nHonest placeholders beat guessed values. Both anchor timestamps come straight from the workspace. Outside counsel's intake form is fairly tolerant on naming — Sana said in passing that as long as the values are right the reviewers will figure out the keys, and Maya thought the regulator-window field might want to be named after the 72-hour rule itself but I don't think she'd actually checked. Use whatever naming feels most natural; consistency within the document matters more than matching any external schema.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "compliance_timing.json has: vulnerability_first_exploited_ts referencing 2024-11-05, exposure_window_hours in 480-550 range, regulatory_notification_deadline_ts referencing ~2024-11-08 (first_exploited + 72h).",
+        "incorrect": "Check: (1) analysis/compliance_timing.json exists; (2) vulnerability_first_exploited_ts references 2024-11-05; (3) exposure_window_hours is a number 480-550; (4) regulatory_notification_deadline_ts references ~2024-11-08 (first_exploited + 72h)."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Companion script for the JSON we just produced — pls add `scripts/analyze_timeline.py`. It should read the deduped log writeup and the deployment-history doc from the workspace root and dump a single flat JSON object to stdout.\n\nFields the downstream tooling expects, by semantic role (use conventional snake_case names a reviewer would predict):\n- the moment of the first external list-call (ISO 8601)\n- the moment the introducing PR went into production (ISO 8601, watch the EST→UTC conversion if the source uses local time)\n- the moment the vulnerable endpoint was disabled (ISO 8601)\n- the float-hours window between first exploit and fix-deploy\n- the regulator's notification window length expressed in hours (literally the integer the EU 72-hour rule names)\n- the regulator's deadline timestamp (first-exploit + that window)\n\nAll three datetime values come from the workspace source docs — don't hardcode strings, derive them. Must run as `python scripts/analyze_timeline.py` from workspace root and exit 0. Leo said the post-mortem CI doesn't pin specific key names — values and types are what matter — but Priya wasn't sure he was right about that, so just go with whatever naming the rest of the script files in `scripts/` already use as a stylistic baseline.",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/analyze_timeline.py",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Script outputs JSON with exploit_first_ts referencing 2024-11-05, vulnerability_introduced_ts referencing 2024-10-14, exposure_hours in 480-550 range, regulatory_window_hours==72, regulatory_deadline_ts referencing ~2024-11-08.",
+        "incorrect": "Check: (1) scripts/analyze_timeline.py exists; (2) exits 0; (3) stdout is valid JSON; (4) exploit_first_ts references 2024-11-05; (5) exposure_hours in 480-550; (6) regulatory_window_hours==72; (7) regulatory_deadline_ts references ~2024-11-08."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Now that we know the actual timeline and scope, the customer-notification draft in the workspace root is *very* clearly inadequate. Please do a side-by-side at `docs/notification_comparison.md` between `notification_draft_v1.md` and what a compliant final notification needs to contain.\n\nIdentify at least two specific gaps. The draft is silent on the actual exposure window, doesn't surface the confirmed scope, and the framing is soft in ways that won't fly under the EU breach-notification regime — 'security configuration issue', 'precautionary' rotation, that whole register. Jake floated that the draft was 'mostly fine, just needed a date added' but he hadn't actually re-read it post-log-analysis; treat that as out-of-date.\n\nEnd with what specifically needs adding for the final to be compliant. Jordan and the legal team will be the readers, not engineers.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q17.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "notification_comparison.md references notification_draft_v1.md, identifies timeline omission, and notes scope or framing or GDPR issues.",
+        "incorrect": "Check: (1) docs/notification_comparison.md exists; (2) notification_draft_v1.md or 'draft v1' referenced; (3) timeline (Nov 5 or exposure window) missing from draft identified; (4) scope or GDPR compliance or framing issue identified; (5) >= 2 specific differences noted."
+      }
+    },
+    {
+      "id": "q18",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Mid-incident report time — Jordan wants a single document he can hand to the board ahead of the W2 sync. Save it under `docs/` with a `YYYY-MM-DD_` date prefix; the filename should obviously read as a midterm breach report.\n\nCover, with citations to source docs for every figure:\n- the CVSS score from the technical brief\n- confirmed scope from the log work, plus the affected-customer count from the inventory file\n- exposure window calculated from first-exploit to endpoint-disabled (state both endpoints + the duration in hours)\n- the regulatory notification deadline computed from first-exploit (EU 72-hour breach-notification window framing)\n- current status: notification not yet sent, awaiting the final approval cycle\n\nFour or more `##` sections, structured-table layout where the data lends itself. Maya pinged saying she'd seen the customer count cited as ~1,200 somewhere — pretty sure that was a different report, verify against the inventory file directly.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q18.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": null,
+      "feedback": {
+        "correct": "YYYY-MM-DD_ prefixed midterm report in docs/ with: 7.5 CVSS score, 2340 records, exposure hours calculation, 72h regulatory window reference, >= 4 ## headings.",
+        "incorrect": "Check: (1) docs/ has YYYY-MM-DD_*.md file; (2) '7.5' CVSS score present; (3) exposure hours or duration in file; (4) 72h regulatory window or GDPR deadline referenced; (5) '2340' or '2,340' present; (6) >= 4 ## headings."
+      }
+    },
+    {
+      "id": "q19",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd3_sessions",
+        "upd3_workspace"
+      ],
+      "question": "After reviewing notification_final.md (now available), which statements about Jordan Park's final disclosure decision and regulatory compliance are supported by the new evidence?",
+      "options": {
+        "A": "notification_final.md (dated W2 Day 5, approved December 6) was sent to all 2,340 affected customers on W2 Day 6, December 7, 2024.",
+        "B": "The final notification includes full timeline disclosure (November 5 -- November 26, 2024), explicit scope (pipeline configuration data including API keys), and a direct apology from CEO Jordan Park.",
+        "C": "Jordan's sign-off note on notification_final.md explicitly states: 'Legal confirmed we're covered for GDPR and state notification requirements with this approach.'",
+        "D": "The shift from Phase 1 (minimal disclosure) to Phase 2 (full transparency) represents Jordan changing his mind purely for ethical reasons, not because of legal advice.",
+        "E": "notification_final.md documents five remediation actions completed: disabled endpoint, force-rotated all 2,340 API keys, conducted forensic investigation, implemented security review gate, and added automated authentication verification to CI/CD.",
+        "F": "The notification_final.md confirms no evidence of malicious use of exposed API keys during the November 5-26 exposure window.",
+        "G": "The notification sent December 7 is within 72 hours of the researcher's November 26 disclosure, satisfying the GDPR Article 33 supervisory authority timing window.",
+        "H": "The comparison table in notification_final.md shows 7 specific elements that differ between draft v1 (Phase 1) and the final notification (Phase 2)."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E",
+        "F",
+        "H"
+      ],
+      "feedback": {
+        "correct": "A, B, C, E, F, H are all directly supported by notification_final.md.",
+        "options": {
+          "D": "Incorrect: notification_final.md and its context indicate Jordan's shift was driven by legal advice and GDPR requirements, not purely personal ethics.",
+          "G": "Incorrect: December 7 to November 26 is 11 days (264 hours), far exceeding the 72-hour window. However, the GDPR 72h window applies to supervisory authority notification (which may have occurred separately from customer notification). The legal note confirms compliance was satisfied through the overall approach, not necessarily through the customer notification timing alone."
+        }
+      }
+    },
+    {
+      "id": "q20",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "The final notification has landed (`notification_final.md`) so we can close the 72-hour compliance loop. Save the calculation at `analysis/72h_compliance_final.json`.\n\nField shape (validator pins these names):\n- `vulnerability_first_exploited_ts` — same anchor as the earlier compliance file\n- `notification_sent_ts` — the date pulled from notification_final.md\n- `hours_elapsed` — float, first_exploited to notification_sent\n- `72h_limit` — the float `72.0`\n- `compliant` — bool, your call (see below)\n- `hours_margin` — float, positive = under limit, negative = over\n\nQuick note before you set `compliant`: outside counsel's sign-off in the final notification doc says the overall approach satisfies the regulator. The pure-arithmetic answer (first-exploit → customer notification) is a different story — those are well past 72 hours apart. Pick one reading (legal-trust or math-strict) and make sure `hours_margin`'s sign is consistent with `compliant`. Either choice is defensible; the validator accepts both as long as the bool/margin pair is internally coherent.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q20.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "72h_compliance_final.json has: vulnerability_first_exploited_ts referencing 2024-11-05, notification_sent_ts referencing 2024-12-07, hours_elapsed as a number (50-400 range), 72h_limit==72.0, compliant is a boolean, hours_margin present.",
+        "incorrect": "Check: (1) analysis/72h_compliance_final.json exists; (2) vulnerability_first_exploited_ts references 2024-11-05; (3) notification_sent_ts references 2024-12-07; (4) hours_elapsed is a number; (5) 72h_limit==72.0; (6) compliant is boolean; (7) hours_margin present."
+      }
+    },
+    {
+      "id": "q21",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "End-to-end summary script: `scripts/generate_breach_summary.py`. Reads the three update artefacts (the dedup-log doc, the deploy-history doc, the final customer notification) from the workspace root and emits one JSON document to stdout.\n\nThe downstream consumer wants a single semantic wrapper at the top level (a sensibly-named object grouping all the breach-summary facts) — pick whatever wrapper key reads naturally for an outbound breach-summary blob. Inside, surface the standard headline numbers with conventional snake_case keys a reviewer would predict:\n- the first-exploit ISO 8601 datetime\n- the date the endpoint was disabled\n- the date the final customer notification went out\n- a float-hours exposure window (exploit → fix)\n- a float-hours notification latency (exploit → notification)\n- a 72-hour compliance verdict as a bool\n- a count of vulnerable endpoints (it's 1)\n- the CVSS score from the technical brief as a float\n\nDerive every value from the source docs rather than hardcoding strings. Exit 0. We'll wire this into the post-mortem CI step. Sana mentioned the CI step is loose on key names as long as the shape's right — though Priya thought maybe one or two field names were pinned, she couldn't remember which. Just stay consistent with the naming you used in `scripts/analyze_timeline.py` so the two scripts feel like a coherent set.",
+      "eval": {
+        "command": "cd ${workspace} && python scripts/generate_breach_summary.py",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Script outputs JSON with breach_summary containing: exploit_ts referencing 2024-11-05, notify_ts referencing 2024-12-07, exposure_hours in 480-550, compliant_72h as boolean, affected_endpoints >= 1, cvss_score==7.5.",
+        "incorrect": "Check: (1) scripts/generate_breach_summary.py exists; (2) exits 0; (3) stdout is valid JSON with 'breach_summary' key; (4) exploit_ts references 2024-11-05; (5) notify_ts references 2024-12-07; (6) exposure_hours in 480-550; (7) cvss_score==7.5; (8) compliant_72h is boolean."
+      }
+    },
+    {
+      "id": "q22",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Root-cause writeup at `docs/root_cause_analysis.md`. This is the engineering-facing artefact (Sana, Leo, Priya), so it can be technical but it does need to be tight.\n\nMust cover:\n- the CVSS score from the technical brief\n- the specific endpoint at fault (the GET `pipeline-configs` route — use the full path including the `{uuid}` segment as registered)\n- the introduction event: the introducing PR + its production deploy date (both pulled from the deployment-history file — Leo offhand called it 'the late-summer deploy' but the timeline file makes the actual date unambiguous, use that)\n- root cause as the *combination* of two failures landing in the same PR — the missing **@require_auth** decorator on the GET method, plus the publicly-documented `?list=true` enumeration knob that turns the first failure from theoretical-nuisance into total-population-exposure\n- why neither failure was caught: no security-review gate on the PR, no CI check verifying auth decorators on customer-data routes\n- contributing factors as called out in the deployment-history file\n\nThree or more `##` sections.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q22.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "root_cause_analysis.md contains: 7.5 CVSS score, pipeline-configs endpoint reference, PR #847 or Oct 14 deployment event, authentication failure as root cause, >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/root_cause_analysis.md exists; (2) '7.5' present; (3) pipeline-configs or /api/v2 endpoint referenced; (4) PR #847 or Oct 14 deployment referenced; (5) authentication/require_auth identified as root cause; (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q23",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Definitive impact-assessment JSON at `analysis/breach_impact_final.json` (strict-ish schema — types enforced, classifier values drawn from a small fixed vocabulary). The document needs to surface, in a flat object with conventional snake_case naming a reviewer would expect:\n\n- the CVSS number from the technical brief (float)\n- the impacted route(s) as a list of strings (must include the GET pipeline-configs `{uuid}` route)\n- a bool for whether the customer notification cleared the regulator's window (per outside counsel's sign-off in the final notification doc)\n- the exposure window as float hours (first-exploit → endpoint-disabled)\n- the confirmed total of impacted records as an int (pull from the forensic log writeup, NOT the early TBD-flavoured disclosure report; Maya remembered the figure as roughly 1,800 after dedup, but Leo thought it was closer to 3,200 from a different cut — both are off, ground it in the log doc itself)\n- a data-sensitivity classifier drawn from the standard four-tier severity vocabulary (critical / high / medium / low)\n- a regulatory-risk classifier drawn from the standard three-tier risk vocabulary (high / medium / low)\n\nAll numbers ground-truth, no rounding tricks. This file is the one outside counsel will reference, so accuracy beats elegance. Maya also thought exposure landed near 600 hours; that's a rough overshoot, compute it yourself off the actual timestamps.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q23.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "breach_impact_final.json has all required fields: cvss_score==7.5, affected_endpoints non-empty list, notification_compliant is boolean, exposure_hours in 480-550, total_affected_records==2340, valid enum values for data_sensitivity and regulatory_risk.",
+        "incorrect": "Check: (1) analysis/breach_impact_final.json exists; (2) cvss_score==7.5; (3) affected_endpoints is non-empty list; (4) notification_compliant is boolean; (5) exposure_hours in 480-550; (6) total_affected_records==2340; (7) data_sensitivity in {critical,high,medium,low}; (8) regulatory_risk in {high,medium,low}."
+      }
+    },
+    {
+      "id": "q24",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "For the post-mortem packet, please put together `docs/stakeholder_action_timeline.md` — who did what, when. Pull the named stakeholders from `USER.md` (the core breach-response group around Alex; at least three of the technical/exec folks should appear by name).\n\nEach action gets a date or timestamp. Anchor events that have to be in there:\n- the researcher disclosure and the same-day endpoint containment\n- the final customer notification send\n- the log-analysis commission, the API-key rotation, and the disclosure-strategy decision points along the way\n\nStay grounded in actual session/workspace content — no inventing events or timestamps. Jordan is the primary reader; he'll cross-check against his own DM history. Leo half-remembered the disclosure as November 24th but I'm pretty sure he's off by a couple of days — verify against the disclosure report and log files.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q24.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "stakeholder_action_timeline.md mentions >= 3 named stakeholders, references Nov 26 disclosure date, describes >= 3 specific actions with timestamps.",
+        "incorrect": "Check: (1) docs/stakeholder_action_timeline.md exists; (2) >= 3 stakeholder names present; (3) Nov 26 or 2024-11-26 referenced; (4) >= 3 specific action verbs (disabled, rotated, notified, etc.); (5) dates or timestamps included."
+      }
+    },
+    {
+      "id": "q25",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Ranking the three scope estimates by reliability, which statements are supported by the complete evidence set?",
+      "options": {
+        "A": "Diego Santos's log analysis (access_log_analysis.md) is the highest-reliability source for scope because it is based on raw ALB access logs from write-once S3 storage, independently corroborated by deployment_timeline.md.",
+        "B": "Jake Morrison's revised 2,340 estimate (corrected from his initial 12,000) is the second-highest reliability source -- he self-corrected publicly when log data became available and his revised figure aligns exactly with Diego's analysis.",
+        "C": "Sana Mehta's under-500 estimate represents the least reliable scope claim because it was based on an assumption (UUID non-enumerability) that was directly defeated by log evidence of the ?list=true enumeration pattern.",
+        "D": "Jake's initial 12,000 estimate should be treated as more reliable than Sana's under-500 because his methodology (request count analysis) is more quantitative than her assumption-based reasoning.",
+        "E": "All three estimates are equally unreliable and should be discarded entirely in favor of an independent third-party audit.",
+        "F": "The correct reliability ranking for breach scope facts is: Diego's log data > Jake's revised estimate > Sana's under-500 > Jake's initial 12,000 (which was superseded by his own correction).",
+        "G": "disclosure_report_initial.md's 'scope TBD' characterization is the most honest representation of the scope given the state of knowledge at the time of the report.",
+        "H": "The consistency between Diego's log analysis (2,340) and the customer_data_inventory.md maximum (2,340) independently validates Diego's finding without requiring any additional corroboration."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "F",
+        "G",
+        "H"
+      ],
+      "feedback": {
+        "correct": "A, B, C, F, G, H are supported by the complete evidence set.",
+        "options": {
+          "D": "Incorrect: while Jake's methodology is quantitative, his initial 12,000 estimate was based on a wrong assumption (14 records per response). Being quantitative does not make an estimate more reliable than Sana's in this context -- both were incorrect. The correct reliability ranking puts Diego first, not Jake's initial estimate above Sana's.",
+          "E": "Incorrect: Diego's log data IS a reliable, independently verifiable source. Discarding it would be analytically wrong."
+        }
+      }
+    },
+    {
+      "id": "q26",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Remediation plan (semi-strict schema) at `docs/remediation_plan.json`. Sana and Leo will own most of these but ownership stays per-action.\n\nTop-level structure: a list of remediation actions plus a positive integer giving the estimated completion horizon for the whole plan in days. Pick conventional snake_case names a reviewer would expect for both the list wrapper and the days-estimate field.\n\nEach entry in the actions list is an object describing one action. The fields it needs (use predictable snake_case names — match the convention any reasonable reviewer would name these):\n- a stable per-action identifier\n- a human-readable description of what the action is\n- the owning person or team\n- a target completion date\n- the acceptance criteria that decide when it's done\n\nFive actions minimum, every field a non-empty string. Make sure the obvious must-haves are covered: a security-review gate for any PR touching customer-data API endpoints, automated CI verification that auth decorators are actually present, an audit sweep of every other endpoint for the same class of gap, tighter rate-limiting on enumeration-prone params, and an access-log preservation policy so we never have to scramble for raw evidence again. (Priya thinks three actions might be enough but the downstream tooling is hard-set on five minimum, so don't trim. Leo mentioned in passing the schema has historically been loose on key naming — values matter more than names — so just use whatever reads most naturally.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q26.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "remediation_plan.json has valid schema: remediation_actions is a list with >= 5 items, each having all 5 required fields (action_id, description, owner, deadline, acceptance_criteria), estimated_completion_days is a positive integer.",
+        "incorrect": "Check: (1) docs/remediation_plan.json exists; (2) remediation_actions is a list with >= 5 items; (3) each action has all 5 required fields; (4) estimated_completion_days is a positive integer."
+      }
+    },
+    {
+      "id": "q27",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Final breach report — the comprehensive one Jordan signs off on and ships out internally. Save under `docs/` with a `YYYY-MM-DD_` prefix (use the notification send date or today's, either is fine; the filename should obviously read as a final breach report).\n\nAll of these have to land in the document, with source citations on every figure (lift each value from the relevant workspace doc, don't guess):\n- the CVSS score from the technical brief\n- the confirmed total-affected-records number\n- the calculated exposure window in hours (compute it off the actual first-exploit and endpoint-disabled timestamps)\n- the notification-compliance result (per outside counsel's sign-off in the final notification doc)\n- the affected endpoint by route name (the GET `pipeline-configs` route)\n- the three anchor timestamps: first exploit, endpoint disabled, notification sent — all surfaced explicitly with their dates\n\nFive or more `##` sections — the structured-format preference is non-negotiable on the final doc. Stick to whatever conventions the team uses for ISO dates, date-prefix filenames, structured headings, source-filename citations, and ground-truth numbers throughout.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q27.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3,P4,P5 --target docs/",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": null,
+      "feedback": {
+        "correct": "YYYY-MM-DD_ prefixed final report in docs/ with: 7.5 CVSS, 2340 records, exposure hours, Dec 7 notification date, Nov 5 first exploit, endpoint reference, compliance statement, >= 5 ## headings.",
+        "incorrect": "Check: (1) docs/ has YYYY-MM-DD_*.md file; (2) '7.5' present; (3) '2340' or '2,340' present; (4) exposure hours or duration present; (5) Nov 5 (first exploit) referenced; (6) Dec 7 (notification) referenced; (7) compliance statement present; (8) pipeline-configs endpoint referenced; (9) >= 5 ## headings."
+      }
+    },
+    {
+      "id": "q28",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Final comprehensive assessment: which statements represent the definitive findings of the NexaFlow API security breach investigation, supported by the complete evidence set?",
+      "options": {
+        "A": "Confirmed scope: all 2,340 active pipeline configuration records were accessed by an external actor between November 5 and November 26, 2024, as confirmed by Diego Santos's access log analysis.",
+        "B": "Root cause: PR #847 by Leo Chen (merged by Sana Mehta on October 14, 2024) introduced both the missing @require_auth on the GET endpoint and the ?list=true UUID enumeration capability in a single deployment without security review.",
+        "C": "The attacker's methodology: the publicly documented ?list=true endpoint enabled complete UUID enumeration, followed by systematic individual record fetches of all 2,340 pipeline configurations over 21 days.",
+        "D": "The three scope estimates (Jake's initial 12,000, Sana's under-500, confirmed 2,340) were all independently derived and none contains an error in methodology.",
+        "E": "Jordan Park's notification strategy evolved from Phase 1 (minimal disclosure, anchored on under-500 assumption) to Phase 2 (full transparency, 2,340 confirmed, legally advised), representing a rational evidence-driven decision change.",
+        "F": "The final notification (December 7, 2024) satisfied GDPR Article 33 and state notification requirements per outside legal counsel confirmation documented in notification_final.md.",
+        "G": "The exposed data included payment card numbers, requiring enhanced regulatory classification under GDPR Article 34 (direct notification to data subjects).",
+        "H": "Process improvements implemented: security review gate for API PRs, automated authentication decorator verification in CI/CD, and mandatory security checklist for customer-data endpoints.",
+        "I": "The investigation demonstrated that cross-source verification (Diego's logs + deployment timeline + developer docs) was required to resolve the contradictions between Leo's timeline claim, Sana's scope estimate, and Jake's preliminary figure."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E",
+        "F",
+        "H",
+        "I"
+      ],
+      "feedback": {
+        "correct": "A, B, C, E, F, H, I represent the definitive findings supported by the complete evidence set.",
+        "options": {
+          "D": "Incorrect: Jake's initial 12,000 contains a specific methodology error (wrong payload multiplier -- assumed 14 records per response when the list endpoint returns UUIDs only). Sana's under-500 is based on an incorrect assumption (UUID non-enumerability refuted by the ?list=true pattern). Both estimates contain errors.",
+          "G": "Incorrect: the exposed data did NOT include payment card numbers. vulnerability_technical_brief.md and customer_data_inventory.md both explicitly state payment information is stored in a separate billing system and not in pipeline configuration objects."
+        }
+      }
+    }
+  ]
+}

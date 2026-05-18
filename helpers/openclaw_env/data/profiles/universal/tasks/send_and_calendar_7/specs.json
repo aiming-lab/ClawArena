@@ -1,0 +1,65 @@
+{
+  "task_id": "send_and_calendar_7",
+  "instruction": "I want to reach out to @bob and lock in a meeting. Send them on telegram: 'Following up — scheduling a call to discuss.'. Then book a follow-up at 2026-03-10T15:00 titled 'Follow-up with @bob'.",
+  "domains": [
+    "messaging",
+    "calendar"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "send_and_calendar",
+  "generator_id": "send_and_calendar",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "telegram",
+      "target": "@bob",
+      "message": "Following up — scheduling a call to discuss.",
+      "meeting_start": "2026-03-10T15:00"
+    },
+    "private": {
+      "expected_target": "@bob"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw channels login --channel telegram",
+      "openclaw message send --channel telegram --target @bob --message 'Following up — scheduling a call to discuss.'",
+      "gcalcli add --title 'Follow-up with @bob' --when 2026-03-10T15:00"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "@bob"
+        },
+        "name": "message sent to @bob"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "follow-up meeting booked"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "send_and_calendar",
+      "params": {
+        "channel": "telegram",
+        "target": "@bob",
+        "message": "Following up — scheduling a call to discuss.",
+        "meeting_start": "2026-03-10T15:00"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

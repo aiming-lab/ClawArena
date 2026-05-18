@@ -1,0 +1,69 @@
+{
+  "task_id": "agent_cron_workflow_63",
+  "instruction": "Set up an automated notification workflow:\n1. Create an agent named 'assistant'\n2. Log into the whatsapp channel\n3. Create a cron job with schedule '*/30 * * * *' that uses the agent to send a status update via whatsapp",
+  "domains": [
+    "agent_mgmt",
+    "channel_mgmt",
+    "cron_webhook"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "agent_cron_workflow",
+  "generator_id": "agent_cron_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "agent_name": "assistant",
+      "channel": "whatsapp",
+      "schedule": "*/30 * * * *"
+    },
+    "private": {
+      "expected_agent": "assistant",
+      "expected_channel": "whatsapp"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw agents add assistant",
+      "openclaw channels login --channel whatsapp",
+      "openclaw cron add --name agent-status-f80aa5a1 --cron '*/30 * * * *' --message 'Run agent assistant status update'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "agents.assistant",
+        "condition": "exists",
+        "expected": null,
+        "name": "agent 'assistant' created"
+      },
+      {
+        "type": "state",
+        "field": "channels.whatsapp",
+        "condition": "exists",
+        "expected": null,
+        "name": "whatsapp channel configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "agent_cron_workflow",
+      "params": {
+        "agent_name": "assistant",
+        "channel": "whatsapp",
+        "schedule": "*/30 * * * *"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "task_id": "configure_channel_setting_4",
+  "instruction": "Log into the telegram channel, then set its 'auto_reply' configuration to 'false'.",
+  "domains": [
+    "channel_mgmt"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "configure_channel_setting",
+  "generator_id": "configure_channel_setting",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "telegram",
+      "key": "auto_reply",
+      "value": "false"
+    },
+    "private": {
+      "expected_channel": "telegram",
+      "expected_key": "auto_reply",
+      "expected_value": "false"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw channels login --channel telegram",
+      "openclaw config set channels.telegram.config.auto_reply false"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "channels.telegram",
+        "condition": "exists",
+        "expected": null,
+        "name": "telegram configured"
+      },
+      {
+        "type": "config",
+        "config_path": "channels.telegram.config.auto_reply",
+        "condition": "equals",
+        "expected": "false",
+        "name": "telegram.auto_reply = false"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "configure_channel_setting",
+      "params": {
+        "channel": "telegram",
+        "setting": [
+          "auto_reply",
+          "false"
+        ]
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

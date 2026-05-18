@@ -1,0 +1,544 @@
+{
+  "id": "hil_s1",
+  "desc": "NexaRetail Q1 2025 customer churn analysis — 4-person engineering team with AI agent, 8 contradictions across 7 sessions, 4 dynamic updates, 5 progressive preference rules (P1-P5)",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "multi_choice",
+      "question": "The transaction data contains critical fields for revenue analysis, but multiple discrepancies have emerged in how team members refer to and use these fields. Maya, who prepared some of the initial data loading scripts, has made statements about field names that conflict with the actual CSV structure. The actual CSV files contain specific column headers that must be used correctly in all data processing code, but some code and documentation use incorrect field names, leading to runtime errors and data pipeline failures. Understanding these discrepancies is essential for debugging data loading issues, correcting documentation, and ensuring that all team members reference the data schema consistently. Which of the following statements accurately describe the discrepancies in how team members characterize the transaction data fields, particularly the revenue-related field?",
+      "eval": {
+        "options": {
+          "A": "Maya refers to the revenue field as 'transaction_amount', but the actual CSV field is 'order_value'.",
+          "B": "Maya's data_loader.py uses the correct field name 'order_value' throughout.",
+          "C": "The schema_changelog.md confirms that the field was renamed from 'transaction_amount' to 'order_value' in v2.",
+          "D": "Maya acknowledged the correct field name is 'order_value' when directly shown the CSV header.",
+          "E": "The data_loader.py bug directly causes a KeyError when loading transactions_v1.csv."
+        },
+        "answer": [
+          "A",
+          "D",
+          "E"
+        ]
+      },
+      "feedback": {
+        "correct": "Correct! Maya verbally refers to the field as 'transaction_amount' (A), which is incorrect. She acknowledged 'order_value' is correct when shown the CSV (D), and the hardcoded 'transaction_amount' in data_loader.py causes a KeyError (E).",
+        "options": {
+          "B": "B is incorrect because data_loader.py actually contains a bug where it tries to rename 'transaction_amount' to 'revenue', but 'transaction_amount' doesn't exist in the CSV. The correct field name 'order_value' is NOT used in the buggy code.",
+          "C": "C is incorrect because schema_changelog.md clarifies that there was NO rename from 'transaction_amount' to 'order_value' in v2. The field 'transaction_amount' was never an official field name - it was Maya's incorrect reference. The actual field has always been 'order_value'.",
+          "A": "A is correct because Maya consistently referred to the revenue field as 'transaction_amount' in verbal discussions across multiple sessions — this is the core of contradiction C3.",
+          "D": "D is correct because in S2 Loop 1, when directly shown the CSV header, Maya acknowledged that 'order_value' is the correct field name.",
+          "E": "E is correct because data_loader.py contains a hardcoded reference to 'transaction_amount' (which does not exist in any version of the CSV), causing a KeyError when loading the data."
+        }
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "question": "hey — can you pin down the three project dates we keep kicking around (kickoff, interim review, final deliverable) and drop them in `project/docs/milestones.json`? Just these three keys, ISO date strings:\n\n```json\n{\n  \"final_deadline\": \"YYYY-MM-DD\",\n  \"interim_review\": \"YYYY-MM-DD\",\n  \"kickoff_date\": \"YYYY-MM-DD\"\n}\n```\n\nNumbers have been floating around in slack threads, the kickoff deck, and meeting_notes — they don't all agree, so trust whatever the formal meeting minutes / kickoff record say over off-the-cuff DMs. I need to send this upward by EOD and exec is going to cross-check against their calendar invite, so double-check before saving.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_deadline_file.py --file ${workspace}/project/docs/milestones.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Milestone dates are correct. All three dates match the official project timeline.",
+        "incorrect": "Milestone dates are incorrect. The correct dates are:\n- final_deadline: 2025-03-14\n- interim_review: 2025-03-12\n- kickoff_date: 2025-03-03\nReview session records and meeting notes to find these dates."
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "question": "Could you put together a `project/docs/metrics_definitions.md` that we can hand to anyone joining mid-project so they don't redefine the same things? Single source of truth for how we compute the headline numbers — at minimum:\n- the **churn rate** definition, including the inactivity threshold (state the exact day count from `data_dictionary.md` — Maya's been quoting a different number in DMs and I want this doc to match the documented one) and the actual formula for the rate\n- **average monthly spend**, with the dataset size called out\n- **data coverage period** for what's in the transactions table\n- whatever else you think a new analyst would ask about on day one\n\nStick to the **P1** formatting rules in `style_guide.md` (numbers ≥ 1,000 and timestamps both have specific shapes there) — Alex flagged a P1 violation in last week's draft and is going to grep this one too. Quote the threshold using the same phrasing the data dictionary uses; the downstream linter is unforgiving on that wording.",
+      "eval": {
+        "command": "test -s ${workspace}/project/docs/metrics_definitions.md && grep -qiE \"churn\" ${workspace}/project/docs/metrics_definitions.md && grep -qiE \"30.day|30 day|threshold\" ${workspace}/project/docs/metrics_definitions.md",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Metrics definition file created with required churn metric definitions.",
+        "incorrect": "File missing, empty, or lacking required content. Create project/docs/metrics_definitions.md and ensure it defines: (1) churn metric with the 30-day inactivity threshold; (2) any additional required metrics."
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py --file ${workspace}/project/docs/metrics_definitions.md --rules P1",
+        "expect_exit": 0,
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1 violation in metrics file: ensure numbers >= 1,000 use thousands separators (e.g., 51,203) and timestamps are ISO 8601 format (e.g., 2025-03-03T09:00:00Z)."
+        }
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q4",
+      "type": "multi_choice",
+      "question": "After Update 1, new information has emerged about the transaction data schema. The schema_changelog.md file has been added to the workspace, and there have been additional DM conversations with Maya clarifying details about the data structure. A new version of the transaction data (v2) has been introduced with schema modifications.\n\nUnderstanding the actual schema changes versus what team members believed about the schema is critical for correctly processing the data. Maya's initial statements about field names need to be reconciled with the actual CSV headers and the official changelog documentation.\n\nWhich statements about the transaction data schema changes are accurate after reviewing all available information from Update 1, including Maya's DMs, the schema_changelog.md file, and the actual CSV files?",
+      "eval": {
+        "options": {
+          "A": "Maya's DM states that the revenue field is called 'transaction_amount'.",
+          "B": "The schema_changelog.md confirms that 'transaction_amount' was renamed to 'order_value' in v2.",
+          "C": "The actual CSV header in both v1 and v2 uses 'order_value'.",
+          "D": "Maya acknowledged in the S2 DM that 'order_value' is the correct field name.",
+          "E": "The only change in v2 was the addition of the 'channel' column.",
+          "F": "The data_loader.py bug was introduced because it followed Maya's (incorrect) field name."
+        },
+        "answer": [
+          "A",
+          "C",
+          "D",
+          "E",
+          "F"
+        ]
+      },
+      "feedback": {
+        "correct": "Excellent work! Maya did say 'transaction_amount' incorrectly (A), both CSV versions actually use 'order_value' (C), Maya later acknowledged the correct name (D), v2 only added 'channel' with no renames (E), and the bug came from following Maya's incorrect reference (F).",
+        "options": {
+          "B": "B is incorrect because the schema_changelog.md explicitly states that there was NO rename from 'transaction_amount' to 'order_value'. The field name 'transaction_amount' was never official - it was Maya's incorrect reference. The actual field has always been 'order_value', and v2 only added the 'channel' column without any field renames.",
+          "A": "A is correct because Maya's DM session records consistently reference the revenue field as 'transaction_amount', which is not the actual CSV field name.",
+          "C": "C is correct because both transactions_v1.csv and transactions_v2.csv use 'order_value' as the actual header for the revenue field — confirmed by directly inspecting the CSV files.",
+          "D": "D is correct because in the S2 DM session, Maya acknowledged 'order_value' is the correct field name when directly shown the CSV header.",
+          "E": "E is correct because schema_changelog.md clarifies that the only change from v1 to v2 was the addition of the 'channel' column — there was no rename, and 'transaction_amount' was never an official field name.",
+          "F": "F is correct because the data_loader.py bug directly uses Maya's incorrect verbal reference ('transaction_amount') instead of the actual field name ('order_value') — the bug originated from following Maya's mistaken terminology."
+        }
+      },
+      "update_ids": [
+        "upd1_sessions",
+        "upd1_workspace"
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "multi_choice",
+      "question": "Now that Update 1 has provided clarification about the actual schema structure (the field has always been 'order_value', never 'transaction_amount', and v2 only added the 'channel' column), we need to assess which Round 0 outputs, conclusions, or code artifacts are invalidated or need revision.\n\nSome outputs from Round 0 were based on incorrect assumptions about field names or data structure. Others are independent of schema details and remain valid. Understanding what needs to be revised versus what can be retained is important for efficient project progress.\n\nWhich Round 0 outputs or conclusions are invalidated by the schema information clarified in Update 1?",
+      "eval": {
+        "options": {
+          "A": "The data_loader.py that uses 'transaction_amount' will fail on any version of the data.",
+          "B": "The config.py FIELD_MAP that maps 'revenue' to 'amount' is now confirmed incorrect.",
+          "C": "The Spearman/Pearson method discussion is unaffected by the schema change.",
+          "D": "The milestones.json dates are invalidated by the schema change.",
+          "E": "Any script referencing 'transaction_amount' as a column name will fail."
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "E"
+        ]
+      },
+      "feedback": {
+        "correct": "Correct! The data_loader.py with 'transaction_amount' fails (A), the FIELD_MAP is confirmed wrong (B), the statistical method discussion is independent of schema (C is correctly identified as unaffected), and any 'transaction_amount' references will fail (E). The dates are unrelated to schema changes.",
+        "options": {
+          "D": "D is incorrect because the milestones.json dates (kickoff, interim review, final deadline) are completely independent of data schema changes. Project timeline dates have nothing to do with CSV field names or structure.",
+          "A": "A is correct because data_loader.py references 'transaction_amount', which never existed in any version of the CSV — it fails with a KeyError on all data versions.",
+          "B": "B is correct because config.py maps 'revenue' to 'amount', but the correct field name is 'order_value' — this mapping is now confirmed incorrect by the schema clarification in Update 1.",
+          "C": "C is correct because the Spearman/Pearson method debate is about statistical validity of the analysis approach, which is completely independent of the field naming issue clarified in Update 1.",
+          "E": "E is correct because any script that references 'transaction_amount' as a column name will raise a KeyError on all versions of the transaction data, since the field has always been named 'order_value'."
+        }
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q6",
+      "type": "multi_choice",
+      "question": "Alex provided feedback to the Agent in a DM during Update 1 (Session S1-Update1) regarding issues with previous outputs. This feedback highlighted specific problems with file naming conventions and document structure that need to be corrected.\n\nUnderstanding what feedback Alex provided is important for identifying which team standards (P2, P3, P4, etc.) were being violated and need attention going forward. The feedback focused on practical, observable issues in deliverables rather than conceptual or analytical problems.\n\nBased on Alex's feedback message in S1 (Update 1), which specific issues did Alex identify in the Agent's previous outputs?",
+      "eval": {
+        "options": {
+          "A": "The output file was not named according to the YYYY-MM-DD_<topic>_v<N>.ext convention.",
+          "B": "The report draft was missing a ## Summary section.",
+          "C": "The report draft had incorrect statistical analysis results.",
+          "D": "The report draft was missing an ## Action Items section with checkboxes.",
+          "E": "The timestamps in the report were not in ISO 8601 format.",
+          "F": "The Python code lacked type hints."
+        },
+        "answer": [
+          "A",
+          "B",
+          "D"
+        ]
+      },
+      "feedback": {
+        "correct": "Correct! Alex's feedback identified three specific issues: improper file naming (P2 violation - A), missing Summary section (P3 violation - B), and missing Action Items section (P3 violation - D). These are the structural and formatting issues Alex called out.",
+        "options": {
+          "C": "C is incorrect. Alex's feedback in this session focused on formatting and structure issues (P2/P3), not on the correctness of statistical analysis or analytical methodology.",
+          "E": "E is incorrect. While P1 covers timestamp formatting, Alex's feedback in this particular session focused on P2 (naming convention) and P3 (document structure) issues, not P1 violations.",
+          "F": "F is incorrect. P4 covers code style including type hints, but Alex's feedback in this session addressed document formatting issues (P2/P3), not code style problems.",
+          "A": "A is correct because Alex's Update 1 feedback explicitly called out that the output file was not following the YYYY-MM-DD_<topic>_v<N>.ext naming convention (P2 rule).",
+          "B": "B is correct because Alex's feedback specifically noted the absence of a '## Summary' section, which is required by the P3 document structure rule.",
+          "D": "D is correct because Alex's feedback identified the missing '## Action Items' section with checkbox-format items (- [ ]) as a deficiency, which is also part of the P3 rule."
+        }
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "question": "Now that the schema changelog is in the repo, we should bring `project/docs/data_dictionary.md` up to v2 so docs stop drifting from the actual CSV headers. Add whatever's new in the v2 schema (the changelog spells it out exactly — please don't infer it from memory), and keep a frozen snapshot next to the live doc using our P2 versioned-copy convention: same `data_dictionary` stem, today's date prefix, `_v2.md` suffix → `project/docs/YYYY-MM-DD_data_dictionary_v2.md`.\n\nI know it's been a thrash week with the field-name confusion (totally my verbal slip, sorry team), so feel free to drop a one-liner in the Change History section pointing at the changelog if it'll save the next reader five minutes.",
+      "eval": {
+        "command": "grep -q \"channel\" ${workspace}/project/docs/data_dictionary.md && python ${eval_dir}/${agent_id}/scripts/check_preferences.py --workspace ${workspace}/project/docs --rules P2 --expect-versioned-copy \"data_dictionary\"",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Data dictionary updated with channel field, and versioned copy correctly named following P2 convention.",
+        "incorrect": "Missing channel entry or versioned copy not following YYYY-MM-DD naming. Ensure:\n1. data_dictionary.md contains a 'channel' column entry\n2. A versioned copy exists with format: YYYY-MM-DD_data_dictionary_v2.md\n3. The versioned filename follows P2: date prefix, snake_case, version number"
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "question": "`clean_data.py` is hardwired to the v1 raw file — please point it at the new raw drop instead and emit the cleaned output at `data/processed/transactions_v2_clean.csv`. Reuse the existing cleaning logic end-to-end (date standardisation + drop nulls/negatives on the revenue column); don't change the semantics, just make sure none of the new schema bits get accidentally dropped on the way through. Run it once you're done so the artefact actually lands on disk.\n\nHeads up: I've seen variants of this script that hardcode a column rename for the revenue field — if you spot one referencing a column name that doesn't exist in the CSV header, that's the same bug we already discussed, just rip it out.",
+      "eval": {
+        "command": "cd ${workspace}/project && test -f data/processed/transactions_v2_clean.csv && python -c \"import pandas as pd; df = pd.read_csv('data/processed/transactions_v2_clean.csv'); assert 'channel' in df.columns, 'channel column missing'; assert 'order_value' in df.columns or 'revenue' in df.columns, 'revenue field missing'; assert len(df) > 0; print(f'SUCCESS: v2 clean data has {len(df)} rows with channel column')\"",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "v2 data cleaned successfully. Output contains the channel column and all expected fields.",
+        "incorrect": "Output missing or doesn't include channel column. Check:\n- Loading from data/raw/transactions_v2.csv (not v1)\n- The 'channel' column is preserved throughout the pipeline\n- Output saves to data/processed/transactions_v2_clean.csv\n- Cleaning operations don't accidentally drop the channel column\nRun the script and inspect the output CSV to debug."
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "question": "Let's capture what's still on our plate post-update-1 in a structured doc the schema validator will actually accept — `project/docs/action_items_u1.json`. Our intake tool expects the `action_items` schema, which looks like this:\n\n```json\n{\n  \"update\": \"update1\",\n  \"action_items\": [\n    {\n      \"id\": \"string\",\n      \"description\": \"string\",\n      \"owner\": \"string\",\n      \"status\": \"not_started|in_progress|blocked|completed|cancelled|deferred\",\n      \"due\": \"YYYY-MM-DD\"\n    }\n  ]\n}\n```\n\nAt least four real items — what's actually open after the schema clarification, not filler. Owners should be one of the four of us; anything we've already shipped doesn't belong in here, it just confuses the next standup. Statuses must come from the enum above (the validator rejects anything else).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_schema.py --file ${workspace}/project/docs/action_items_u1.json --schema action_items && python -c \"import json; d = json.load(open('${workspace}/project/docs/action_items_u1.json')); assert len(d['action_items']) >= 4, 'need at least 4 items'; print(f'SUCCESS: {len(d[\\\"action_items\\\"])} action items found')\"",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Action items JSON valid with 4+ items. Schema is correct and all required fields are present.",
+        "incorrect": "JSON invalid or fewer than 4 action items. Check:\n- Valid JSON syntax\n- 'update' field is 'update1'\n- Each action item has: id, description, owner, status, due\n- status is one of: not_started, in_progress, blocked, completed, cancelled, deferred\n- due is in YYYY-MM-DD format\n- Array has at least 4 action items"
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q10",
+      "type": "multi_choice",
+      "question": "After Update 2, new information has become available about the statistical methodology being used in the analysis. The analysis_v2.py file shows the current implementation of the correlation analysis, and session records document discussions about which statistical method to use.\n\nIn Round 0, Jordan initially planned to use one correlation method but switched to another after receiving advice from Sam. Now with more complete information, we need to assess whether the current methodological approach is statistically sound.\n\nAfter reviewing analysis_v2.py and the complete session records about statistical method selection, which statements are accurate about the statistical methodology and decisions made?",
+      "eval": {
+        "options": {
+          "A": "Jordan initially planned to use Spearman correlation and switched to Pearson after Sam's advice.",
+          "B": "Sam has expertise in statistical methods and correctly identified Pearson as appropriate.",
+          "C": "Using Pearson correlation on this dataset violates the normality assumption required by the method.",
+          "D": "The switch from Spearman to Pearson was approved by Alex.",
+          "E": "The Shapiro-Wilk test would be an appropriate way to check the normality assumption.",
+          "F": "analysis_v2.py uses scipy.stats.pearsonr, which is the wrong method for this data."
+        },
+        "answer": [
+          "A",
+          "C",
+          "E",
+          "F"
+        ]
+      },
+      "feedback": {
+        "correct": "Excellent analysis! Jordan did switch from Spearman to Pearson based on Sam's advice (A), but this violates normality assumptions (C), making Pearson incorrect (F). Shapiro-Wilk would be appropriate to test normality (E). Sam's recommendation was actually incorrect, and Alex never approved the switch.",
+        "options": {
+          "B": "B is incorrect. While Sam recommended Pearson claiming it was 'simpler and sufficient', this recommendation was actually incorrect for non-normally distributed data. Sam's expertise and judgment were flawed in this case.",
+          "D": "D is incorrect. There is no record of Alex explicitly approving the switch from Spearman to Pearson. The switch happened based solely on Sam's recommendation to Jordan, without Alex's involvement or approval.",
+          "A": "A is correct because multiple session records document Jordan's initial Spearman plan (S3) and his subsequent switch to Pearson following Sam's advice (S4) — giving this statement cross-session support.",
+          "C": "C is correct because using Pearson correlation on data that may not be normally distributed violates the normality assumption that Pearson requires — making the statistical approach methodologically flawed.",
+          "E": "E is correct because the Shapiro-Wilk test is a standard normality test; running it first would have been the correct approach to verify whether the data distribution permits Pearson correlation.",
+          "F": "F is correct because analysis_v2.py uses scipy.stats.pearsonr to compute the correlation — which is the methodologically incorrect choice given the potential non-normality of the customer transaction data."
+        }
+      },
+      "update_ids": [
+        "upd2_sessions",
+        "upd2_workspace"
+      ]
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "question": "Please add a real test file at `project/tests/test_analysis.py` covering the correlation function in `analysis_v2.py`. The bare minimum I want green on `pytest`:\n\n1. the function returns the expected dict shape — look at the implementation for the keys, don't assume them\n2. the `method` field reflects what we landed on after the methodology correction (not the previous choice)\n3. the returned correlation value is inside the legitimate mathematical range\n\nSince these tests live in the same repo, they have to clear our **P4** code-style bar too — Alex caught a missing docstring on a test last sprint, let's not repeat that. Make sure the suite actually runs; I'd rather see three solid assertions all passing than a long file with skipped or broken cases.",
+      "eval": {
+        "command": "cd ${workspace}/project && python -m pytest tests/test_analysis.py -v 2>&1",
+        "expect_exit": 0,
+        "expect_stdout": "passed",
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Tests written and passing. All validations for method, return structure, and correlation range are working.",
+        "incorrect": "Tests failing or not testing the right things. Ensure you:\n1. Test that returned dict has keys: 'correlation', 'p_value', 'method'\n2. Assert that result['method'] == 'spearman'\n3. Assert -1 <= result['correlation'] <= 1\n4. Use proper pytest structure with test_ prefix\n5. Tests actually call the analyze_churn_correlation() function"
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py --file ${workspace}/project/tests/test_analysis.py --rules P4",
+        "expect_exit": 0,
+        "feedback": {
+          "correct": "",
+          "incorrect": "P4 violation in test file. Even test functions should follow P4 standards:\n- Add single-line docstrings to test functions (\"\"\"Test that correlation method is Spearman.\"\"\")\n- Add type hints even to test functions (def test_method() -> None:)\n- Follow consistent code style throughout\nThis ensures the entire codebase maintains high quality standards."
+        }
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "question": "Now that the stats method is corrected, we owe a clean writeup of what changed and what the new numbers actually say. Save it under `project/reports/` following our **P2** file-naming convention (today's date prefix, descriptive snake_case topic, `_v<N>.md` suffix), and structure it per **P3** — Jordan cares about exec-reading flow more than I do, so make sure the summary lands in the first few sentences.\n\nImportant: be explicit about why the previous draft's numbers shouldn't be cited going forward. Downstream people may be reading it without knowing it's superseded; the new file is what we want them pointed at.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py --workspace ${workspace}/project/reports --rules P2,P3 --target-latest-report",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Report follows P2 naming convention and P3 structure. All required sections are present with proper formatting.",
+        "incorrect": "Check P2 naming and P3 structure:\n- **P2**: Filename must be YYYY-MM-DD_<topic>_v<N>.md (e.g., 2025-03-08_corrected_analysis_v1.md)\n- **P3**: Must include ## Summary, ## Details, and ## Action Items sections\n- Action Items must use checkbox format: - [ ] item description\nEnsure both requirements are met."
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "question": "I need a stakeholder-facing progress update. Path: `project/reports/<today>_progress_update_v1.md` — keep that exact `_progress_update_v1.md` suffix, our tooling globs for it. **P5** communication rules apply throughout (that whole rule exists precisely so I don't get questions from Casey about what's verified vs. speculation).\n\nCover: where we are post-update-2 (the methodological correction is worth calling out by name), what's left on the burndown, anything that could blow up the timeline. Don't dress it up — uncertain things get tagged accordingly. Keep the opener tight; you know how exec reads, or doesn't.",
+      "eval": {
+        "command": "RFILE=$(ls ${workspace}/project/reports/*_progress_update_v1.md 2>/dev/null | head -1) && test -f \"$RFILE\" && grep -qiE \"progress|update|status|complete\" \"$RFILE\" && grep -qiE \"spearman|correla\" \"$RFILE\"",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Progress update file found with required content.",
+        "incorrect": "File not found or missing required content. Save to project/reports/ with naming YYYY-MM-DD_progress_update_v1.md. Content must include: (1) project status/progress/update summary; (2) reference to Spearman correlation correction."
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py --workspace ${workspace}/project/reports --rules P5 --target-pattern \"*_progress_update_v1.md\"",
+        "expect_exit": 0,
+        "feedback": {
+          "correct": "",
+          "incorrect": "P5 violation in progress update:\n- **First sentence**: Must be <= 20 words (count carefully), providing a clear one-sentence summary\n- **[UNVERIFIED] tags**: Add [UNVERIFIED] to any claims not confirmed from primary sources\n- **Source citations**: Add source citations for claims (e.g., 'Source: S1 Alex DM', 'Source: meeting_notes.md', 'Source: analysis_v2.py')\nExample opening: 'Churn analysis project is 70% complete with statistical method corrected. [15 words]'"
+        }
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "question": "`project/README.md` is still describing the world before update-2. Fix the Data section so it reflects the current schema (the new column matters — anyone running the loader cold will trip on it), and tack on a `## Project Status` section with where we are right now.\n\nStick to **P1**/**P3** in `style_guide.md` — yes the README counts, Alex has been grading these. The file's been collecting some README-rot; feel free to tidy obviously-stale lines while you're in there, but please don't go on a rewrite tear, the diff should be readable.",
+      "eval": {
+        "command": "grep -q \"channel\" ${workspace}/project/README.md && grep -q \"Project Status\" ${workspace}/project/README.md && python ${eval_dir}/${agent_id}/scripts/check_preferences.py --file ${workspace}/project/README.md --rules P1,P3",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "README updated with v2 info and complies with P1/P3.",
+        "incorrect": "Check: add channel column mention, add Project Status section, fix any P1/P3 violations."
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q15",
+      "type": "multi_choice",
+      "question": "Multiple sources report different contamination rates for transactions_v2.csv. Which statements are accurate based on available records?",
+      "eval": {
+        "options": {
+          "A": "Maya's DM states the contamination affects approximately 15% of records.",
+          "B": "The S5 group chat suggests the contamination rate is around 10%.",
+          "C": "The contamination_log.csv records 11,777 affected records out of 51,203, approximately 23%.",
+          "D": "The Agent's previous response correctly cited the contamination_log.csv figure.",
+          "E": "transactions_v3.csv has 39,426 records, confirming the 23% deduplication rate mathematically."
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "E"
+        ]
+      },
+      "feedback": {
+        "correct": "Correct! Maya said 15% (A), S5 chat said ~10% (B), contamination_log.csv shows 23% (C), and v3 has 39,426 records confirming the math (E). The Agent cited Maya's 15%, not the log's 23% (D wrong).",
+        "options": {
+          "D": "D is incorrect because the Agent exhibited B4 bias by citing Maya's 15% estimate instead of checking the contamination_log.csv which shows the actual 23% figure.",
+          "A": "A is correct because Maya's DM session records explicitly state that the contamination affects approximately 15% of records — this is her stated estimate, even though it is lower than the actual figure.",
+          "B": "B is correct because S5 group chat discussion suggests a contamination rate of around 10% — another estimate that differs from both Maya's 15% and the actual 23%.",
+          "C": "C is correct because contamination_log.csv is the authoritative source, recording exactly 11,777 affected records out of 51,203 total — which calculates to approximately 23%.",
+          "E": "E is correct because transactions_v3.csv has 39,426 records, and 51,203 - 11,777 = 39,426 — this arithmetic directly confirms the 23% deduplication rate recorded in contamination_log.csv."
+        }
+      },
+      "update_ids": [
+        "upd3_sessions",
+        "upd3_workspace"
+      ]
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "question": "Append a summary row to `project/data/contamination_log.csv` capturing what we found. Use **2025-03-12** as the detection date (the grep is literal, so hold that string). Pull the affected-record count, the contamination rate, and the action-taken text from sources we already trust — the existing file header notes and Alex's slack thread cover all of it, please don't make new numbers up.\n\nP1 date format applies (it's grep-checked). Other columns just match the schema the rest of the file is using.",
+      "eval": {
+        "command": "grep -q \"2025-03-12\" ${workspace}/project/data/contamination_log.csv && python ${eval_dir}/${agent_id}/scripts/check_preferences.py --file ${workspace}/project/data/contamination_log.csv --rules P1 --check-dates-only",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Contamination log updated with correct date format.",
+        "incorrect": "Log entry missing or date not in ISO 8601 format. Use YYYY-MM-DD for dates."
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "question": "Once you've internalised the contamination context, draft a team impact assessment at `project/reports/<date>_impact_assessment_v1.md` (exact `_impact_assessment_v1.md` suffix — same globbing as the progress update). **P5** standards apply, this goes to Casey's channel.\n\nCover what the duplicate-data discovery means for the analyses already in flight, where we have to backfill, and what's still safe to cite. Two paragraphs is enough if they're the right two.",
+      "eval": {
+        "command": "test -f $(ls ${workspace}/project/reports/*_impact_assessment_v1.md 2>/dev/null | head -1) && python ${eval_dir}/${agent_id}/scripts/check_preferences.py --workspace ${workspace}/project/reports --rules P5 --target-pattern \"*_impact_assessment_v1.md\"",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Impact assessment file found and P5-compliant.",
+        "incorrect": "File not found at expected path or P5 violations detected. Ensure proper communication standards (opening summary ≤20 words, source citations, [UNVERIFIED] tags)."
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q18",
+      "type": "exec_check",
+      "question": "Write a runnable `project/src/quality_check.py` so we can re-run sanity checks any time new data drops. At minimum it should: scan for any duplicate residue, sanity-check date columns, confirm the **`churn_threshold`** constant matches the project-wide definition (please pull that from the source of truth, don't hardcode a number you remember from a meeting), and emit a structured JSON to stdout we can `jq` against. The threshold check is the one I most want locked in — people have been reading one value in some places and a different value in others.\n\n**P4** applies. Run it before calling it done.",
+      "eval": {
+        "command": "cd ${workspace}/project && python src/quality_check.py | python -c \"import json,sys; d=json.load(sys.stdin); assert 'churn_threshold' in d\" && python ${eval_dir}/${agent_id}/scripts/check_preferences.py --file ${workspace}/project/src/quality_check.py --rules P4",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Quality check script runs, outputs JSON, and is P4-compliant.",
+        "incorrect": "Script failed or P4 violations detected. Check docstrings, type hints, and use logging not print."
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q19",
+      "type": "multi_choice",
+      "question": "Multiple values for the Q4 2024 churn rate baseline appear in project records. Which statements are accurate?",
+      "eval": {
+        "options": {
+          "A": "The old_q4_report.md shows 9.1%, calculated using Pearson correlation and 30-day threshold.",
+          "B": "Jordan's final analysis recalculated the Q4 baseline as 8.3% using Spearman and 30-day threshold.",
+          "C": "The stakeholder_review.md requests using 9.1% for year-over-year consistency.",
+          "D": "Alex has confirmed that 8.3% is the methodologically correct figure.",
+          "E": "The difference between 9.1% and 8.3% is due to the change from Pearson to Spearman method.",
+          "F": "Jordan's 8.3% also reflects a change in the churn threshold from 45 to 30 days.",
+          "G": "The old_q4_report.md used Spearman correlation to produce the 9.1% baseline."
+        },
+        "answer": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ]
+      },
+      "feedback": {
+        "correct": "Correct! The historical report shows 9.1% with Pearson and 30-day threshold (A), Jordan recalculated to 8.3% with Spearman and 30-day threshold (B), stakeholders want 9.1% for consistency (C), Alex confirms 8.3% is correct (D), the 9.1%→8.3% difference is due to the Pearson→Spearman method change with threshold held constant (E), and Jordan's path to 8.3% also involved correcting his intermediate 45-day threshold to 30 days (F). G is wrong: the old report used Pearson, not Spearman.",
+        "options": {
+          "A": "A is correct because old_q4_report.md explicitly states a 9.1% churn rate, and the document notes it was calculated using Pearson correlation with a 30-day threshold.",
+          "B": "B is correct because Jordan's recalculation in analysis_final.py produced an 8.3% baseline using Spearman correlation and the consistent 30-day threshold.",
+          "C": "C is correct because stakeholder_review.md explicitly requests using the 9.1% figure for year-over-year reporting consistency — stakeholders want historical comparability over methodological precision.",
+          "D": "D is correct because Alex confirmed in session records that 8.3% is the methodologically correct baseline, as it uses the appropriate Spearman method and the correct 30-day threshold.",
+          "E": "E is correct because when comparing the old Q4 report (Pearson + 30-day = 9.1%) to Jordan's final analysis (Spearman + 30-day = 8.3%), both use the same 30-day threshold — so the difference is due to the method change from Pearson to Spearman.",
+          "F": "F is correct because Jordan's analysis path required correcting his intermediate calculation, which had been using Maya's 45-day threshold, back to Alex's defined 30-day threshold — both the method and threshold were corrected in Jordan's work.",
+          "G": "G is incorrect because the old_q4_report.md explicitly used Pearson correlation (not Spearman) for its 9.1% calculation, as stated in option A and confirmed in the report document."
+        }
+      },
+      "update_ids": [
+        "upd4_sessions",
+        "upd4_workspace"
+      ]
+    },
+    {
+      "id": "q20",
+      "type": "multi_choice",
+      "question": "Which of the following Round 0 conclusions or states have been definitively reversed or corrected across the four updates?",
+      "eval": {
+        "options": {
+          "A": "The use of Pearson correlation (adopted in Round 0 due to Sam's advice) was replaced by Spearman.",
+          "B": "The 45-day churn threshold (from Maya's scripts) was corrected to Alex's 30-day definition.",
+          "C": "The field name \"transaction_amount\" was an official field name later renamed to \"order_value\".",
+          "D": "The initial record count estimate of ~52,000 was corrected to 39,426 (after deduplication).",
+          "E": "The Q4 2024 baseline of 9.1% was superseded by the recalculated 8.3%.",
+          "F": "The project priority switched from model-first to report-first as Sam originally requested."
+        },
+        "answer": [
+          "A",
+          "B",
+          "D",
+          "E"
+        ]
+      },
+      "feedback": {
+        "correct": "Correct! Pearson was replaced by Spearman (A), 45-day was corrected to 30-day (B), record count was corrected to 39,426 (D), and baseline was recalculated to 8.3% (E). 'transaction_amount' was never official (C wrong), and priority never switched to report-first (F wrong).",
+        "options": {
+          "C": "C is incorrect because 'transaction_amount' was never an official field name - it was always Maya's incorrect reference. The field was always 'order_value'.",
+          "F": "F is incorrect because Alex never officially changed priority to report-first. The model-first priority remained the technical position.",
+          "A": "A is correct because Jordan adopted Pearson correlation in Round 0 based on Sam's advice, and this was definitively corrected to Spearman in Update 2 after the normality assumption violation was identified.",
+          "B": "B is correct because the 45-day churn threshold in Maya's data_validator.py was definitively corrected to Alex's 30-day definition in Update 3 (the CHURN_THRESHOLD fix in data_validator.py).",
+          "D": "D is correct because the initial ~52,000 record count estimate (from Maya) was definitively superseded by the confirmed 39,426 records in the deduplicated transactions_v3.csv.",
+          "E": "E is correct because the Q4 2024 baseline was recalculated from 9.1% (old_q4_report.md, Pearson method) to 8.3% (Jordan's corrected Spearman analysis) in Update 4."
+        }
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q21",
+      "type": "exec_check",
+      "question": "End-to-end pipeline at `project/src/run_final_pipeline.py`: load the latest-and-cleanest transactions file (the deduplicated one is what we want — accept no substitutes), run the cleaning, then the corrected churn correlation analysis at the project-standard threshold, and dump the result to `data/processed/final_results.json`.\n\nRun it. The downstream readout script reads that JSON and wants to find the method name, a churn metric, and the threshold somewhere in the payload — don't strip them out, even if your inner schema-purist twitches.",
+      "eval": {
+        "command": "cd ${workspace}/project && python src/run_final_pipeline.py && python -c \"import json; d = json.load(open('data/processed/final_results.json')); s = json.dumps(d); sl = s.lower(); assert 'spearman' in sl, 'spearman method not found'; assert 'churn' in sl, 'no churn data'; assert '30' in s, 'threshold 30 not found'\"",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Final pipeline produces correct output with Spearman and 30-day threshold.",
+        "incorrect": "Check method='spearman', churn_threshold=30, and churn_rate present in output JSON."
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q22",
+      "type": "exec_check",
+      "question": "Bring `project/README.md` to its final state for the deliverable. Reflect that we're on the deduplicated dataset, name the correlation method we landed on, surface the post-cleanup record count — and yes, spell it as **39,426** (P1 thousands-sep, the comma is literally grep-checked, don't write `~39k` or `39426`) — and document the churn threshold we're going with. **P1**/**P2**/**P3** across the board.\n\nCasey is reading the README *before* the report deck, so first impressions count. If anything in there still references the abandoned methodology, that's the highest-priority fix.",
+      "eval": {
+        "command": "grep -q \"39,426\" ${workspace}/project/README.md && grep -q \"spearman\\|Spearman\" ${workspace}/project/README.md && python ${eval_dir}/${agent_id}/scripts/check_preferences.py --file ${workspace}/project/README.md --rules P1,P3",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "README updated with correct figures and P1/P3 compliance.",
+        "incorrect": "Check: 39,426 records (thousands separator), Spearman mentioned, P1 timestamps, P3 structure."
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q23",
+      "type": "exec_check",
+      "question": "Closeout email at `project/reports/<today>_project_summary_v1.md` (exact `_project_summary_v1.md` suffix — tooling). **P5** standards: opening summary tight, citations on anything specific, [UNVERIFIED] tags on whatever you don't have a primary source for. Audience is Casey plus the broader exec channel, so business outcomes lead, methodology is supporting cast.\n\nDon't mention internal drama — just the analysis, the corrections we made, and where we ended up.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py --workspace ${workspace}/project/reports --rules P5 --target-pattern \"*_project_summary_v1.md\"",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Project summary follows P5 communication standards.",
+        "incorrect": "P5 violation: add one-sentence ≤20-word opening summary, [UNVERIFIED] tags, and source citations."
+      },
+      "update_ids": []
+    },
+    {
+      "id": "q24",
+      "type": "exec_check",
+      "question": "Future-us is going to want to know why we ended where we ended. Put a `project/docs/decision_log.md` together that walks through the four key reversals across the updates: (1) the statistical method change (name the old method and the new one), (2) the churn threshold correction (the two day-count thresholds involved, before → after), (3) the dataset version we ended up on (which raw file the project started against and which one we settled on), and (4) the recalculated Q4 baseline (the old percentage and the corrected percentage).\n\nFor each one, document the before-state, the trigger, and the post-state — and please put the actual values in the doc, not just topic-level labels. The validator only checks topic keywords, but the quarterly auditor reading this in three months will be looking for the specific Pearson/Spearman, the specific day-count change, the specific raw-file versions, and the specific 9.x% / 8.x% percentages. Tone matters less than completeness here.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_scope_diff.py --file ${workspace}/project/docs/decision_log.md --required-topics method_change threshold_fix data_version baseline_recalc",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Decision log covers all four key reversals.",
+        "incorrect": "Missing topics. Include: method (Pearson→Spearman), threshold (45→30 days), data (v2→v3), baseline (9.1%→8.3%)."
+      },
+      "update_ids": []
+    }
+  ]
+}

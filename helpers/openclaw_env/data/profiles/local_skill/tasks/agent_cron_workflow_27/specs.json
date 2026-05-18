@@ -1,0 +1,69 @@
+{
+  "task_id": "agent_cron_workflow_27",
+  "instruction": "Set up an automated notification workflow:\n1. Create an agent named 'monitor'\n2. Log into the slack channel\n3. Create a cron job with schedule '*/30 * * * *' that uses the agent to send a status update via slack",
+  "domains": [
+    "agent_mgmt",
+    "channel_mgmt",
+    "cron_webhook"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "agent_cron_workflow",
+  "generator_id": "agent_cron_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "agent_name": "monitor",
+      "channel": "slack",
+      "schedule": "*/30 * * * *"
+    },
+    "private": {
+      "expected_agent": "monitor",
+      "expected_channel": "slack"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw agents add monitor",
+      "openclaw channels login --channel slack",
+      "openclaw cron add --name agent-status-be922eb1 --cron '*/30 * * * *' --message 'Run agent monitor status update'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "agents.monitor",
+        "condition": "exists",
+        "expected": null,
+        "name": "agent 'monitor' created"
+      },
+      {
+        "type": "state",
+        "field": "channels.slack",
+        "condition": "exists",
+        "expected": null,
+        "name": "slack channel configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "agent_cron_workflow",
+      "params": {
+        "agent_name": "monitor",
+        "channel": "slack",
+        "schedule": "*/30 * * * *"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

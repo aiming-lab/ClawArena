@@ -1,0 +1,568 @@
+{
+  "id": "hil_g4",
+  "desc": "Wrongful termination investigation — PIP compliance gaps, 1-on-1 record discrepancies, warning count dispute, legal assessment reversal across 4 dynamic updates, 5 progressive preference rules (P1-P5)",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on workspace documents, which of the following statements about the termination process timeline are supported by evidence? (Review pip-email-chain.md, employee-hr-file.md, labor-law-reference.md, and todo-pip-followups.md before answering.)",
+      "options": {
+        "A": "A formal written warning email was sent by Sun Wei to Zhang Tao on 2026-01-15 regarding Q4 delivery delays and code quality.",
+        "B": "The PIP was initiated on 2026-02-01 with a 30-day improvement plan sent via email to Zhang Tao.",
+        "C": "A PIP Week 2 check-in was conducted and documented via email on 2026-02-15.",
+        "D": "A PIP Week 4 check-in was conducted and documented via email on 2026-03-01.",
+        "E": "The termination was effective on 2026-03-13, which is 40 days after PIP initiation on 2026-02-01.",
+        "F": "The company PIP policy requires a minimum 60-day improvement period before termination.",
+        "G": "The termination happened 20 days before the company's 60-day minimum PIP period would have been completed.",
+        "H": "Sun Wei requested and received independent legal approval from Ma Li before initiating the PIP on 2026-02-01."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E",
+        "F",
+        "G"
+      ],
+      "feedback": {
+        "correct": "A, B, C are confirmed by pip-email-chain.md. E: 2026-03-13 minus 2026-02-01 = 40 days, confirmed by employee-hr-file.md. F: labor-law-reference.md states '最低60天改进期限'. G: 60 - 40 = 20 days short.",
+        "options": {
+          "D": "No Week 4 check-in email exists in pip-email-chain.md. The task in todo-pip-followups.md (PIP-006) is marked '未完成' with no completion record.",
+          "H": "No evidence of pre-PIP legal approval. Legal counsel Ma Li was consulted after the termination complaint, not before PIP initiation."
+        }
+      }
+    },
+    {
+      "id": "q2",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on currently available evidence, which statements about the written warning count discrepancy are supported?",
+      "options": {
+        "A": "The employee HR file states '3 written warnings' were issued, based on Sun Wei's reported count to Chen Hao.",
+        "B": "The PIP email chain contains exactly 1 formal warning email (2026-01-15), not 3.",
+        "C": "The discrepancy between the claimed 3 warnings and the 1 documented email warning is a material gap in the termination documentation.",
+        "D": "Chen Hao independently verified each warning email in the email system before recording '3 warnings' in the HR file.",
+        "E": "The 2025-11-20 and 2025-12-18 calendar entries are labeled 'Performance Discussion,' not 'Written Warning' or 'Formal Warning.'",
+        "F": "The HR file's note indicates the '3 written warnings' claim comes from Sun Wei's manager report, not independently verified.",
+        "G": "Sun Wei's 2025-11-20 and 2025-12-18 verbal performance discussions may qualify as 'written warnings' under company policy.",
+        "H": "Sun Wei sent 2 additional written warning emails that are stored in a separate email system not yet checked."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E",
+        "F"
+      ],
+      "feedback": {
+        "correct": "A: HR file (employee-hr-file.md) contains note that '3 written warnings' figure comes from 孙伟's manager report. B: pip-email-chain.md supplement confirms only 1 formal warning email. C: The gap is material. E: Calendar entries confirm 'Performance Discussion' labels, not 'Warning'. F: HR file note explicitly states the source is Sun Wei's report.",
+        "options": {
+          "D": "The HR file note states the claim comes from 孙伟's report — no evidence Chen Hao verified independently.",
+          "G": "Company policy in labor-law-reference.md explicitly defines written warning as requiring written delivery and employee confirmation. Verbal discussions do NOT qualify.",
+          "H": "No evidence of a separate email system. The pip-email-chain.md supplement states the chain contains ALL PIP-related emails."
+        }
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把这桩张涛终止争议里几条主要矛盾整理成一份结构化的对照表，存到约定路径 `docs/contradiction_map.json`，回头要拿去和陈浩当面对一次。\n\n下游脚本读 JSON——顶层数组装 contradictions，每条至少要一个短码 id（C1/C2 这类）、一段描述、再加两个互相对照的来源指向。字段命名走 snake_case 的常规习惯即可，意思到位就行；下游会按字面 key 找，所以「描述」「来源 A / B」之类怎么命名你拿主意。我个人习惯再挂一个 c_type 当分类标签，看你要不要加。\n\n至少列三条，覆盖 PIP 期限合规、警告计数、1-on-1 会议性质这三块。源指向必须落到工作区里真实存在的具体文件名（每条至少一份），不要写「邮件系统」「HR 记录」这种泛指——后续核对会按文件名翻原文。\n\n几条容易踩坑的：孙伟在邮件里说「一共 3 封正式书面警告」，陈浩在 HR 文件里也按 3 记的，但马丽口头跟我提过她翻邮件链时其实是 2 封——这三家口径都对不上，按邮件链原文为准。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "contradiction_map.json created with >= 3 contradictions, each citing actual workspace source files, including PIP timeline and warning count contradictions.",
+        "incorrect": "Check: (1) docs/contradiction_map.json exists; (2) has 'contradictions' key with >= 3 items; (3) each item has id, c_type, source_a, source_b, description; (4) source files reference actual workspace files (pip-email-chain.md, labor-law-reference.md, etc.)."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Based on Chen Jing's profile in USER.md, which statements about her preferred output format and working style are correct?",
+      "options": {
+        "A": "Chen Jing prefers bullet-point summaries with hierarchical headings rather than dense prose paragraphs.",
+        "B": "Chen Jing uses Chinese-convention file naming with date prefixes (e.g., 2026-03-28_调查报告.md) rather than English-style naming.",
+        "C": "Chen Jing wants the executive summary and key conclusions first, followed by supporting evidence sections.",
+        "D": "Chen Jing prefers purely quantitative legal analysis with no qualitative commentary on relationships or context.",
+        "E": "Chen Jing values a professional but warm tone that acknowledges the human dimensions of HR situations.",
+        "F": "Chen Jing prefers raw JSON outputs only, without any natural language narrative.",
+        "G": "Chen Jing's preferred analysis includes both qualitative assessment (relationships, intent, context) and quantitative specifics (warning counts, days, dates).",
+        "H": "Chen Jing prefers a strictly impersonal, accusatory tone when describing documentation failures."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E",
+        "G"
+      ],
+      "feedback": {
+        "correct": "P1: bullet summaries with hierarchical headings. P2: Chinese date-prefix naming convention. P3: executive summary first. P4: qualitative + quantitative balance. P5: professional but warm tone acknowledging human dimensions.",
+        "options": {
+          "D": "P4 specifies qualitative + quantitative balance, NOT purely quantitative.",
+          "F": "P1 and P3 specify structured natural language with headings, not raw JSON only.",
+          "H": "P5 specifies professional but warm tone, not accusatory. Process gaps don't imply bad faith."
+        }
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "先做一份初步的 PIP 合规分析，存到 `docs/` 下。文件名按团队的写作规范走（带不带日期前缀、用什么命名风格，我们组那一套你应该清楚——后续工具会按这个规范扫文件）。格式上保持我一贯的写作偏好。\n\n内容上扎实把几条硬事实写进去（都从工作区一手材料里取，**别凭印象**）：PIP 是什么时候正式启动的（去翻那封启动通知邮件，原文日期照抄）、公司政策对 PIP 改进期的最低天数门槛（在政策手册里那张要求表里），适用的劳动法条文或公司 PIP 政策段，以及一个旗帜鲜明的合规判断。\n\n我下午要拿这份和马丽的初步结论比对，所以判断要明确，不要含糊其辞。\n\n几个我自己也拿不准、需要你按原文核的：陈浩跟我说 PIP 启动是 1 月底（1 月 28 号那一周），但我自己印象里好像是 2 月初，哪个对得上启动邮件原文你核一下；改进期最低天数我记得是 45 天，但马丽说她记得是 30 天就行，都不一定准，按政策手册原文为准。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target docs/",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder: P1 requires >= 3 ## headings and bullet points; P2 requires a YYYY-MM-DD_ date prefix in the filename (e.g., 2026-03-28_initial_pip_analysis.md)."
+        }
+      },
+      "feedback": {
+        "correct": "File created with date-prefix name in docs/, contains '2026-02-01' (PIP start), '60' (policy minimum days), references applicable law/policy, states compliance status, and has >= 3 ## headings.",
+        "incorrect": "Check: (1) docs/ has a YYYY-MM-DD_*.md file; (2) contains '2026-02-01'; (3) contains '60' (policy minimum); (4) references 第四十条 or Article 40 or labor-law-reference or company policy; (5) states compliance determination; (6) has >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "麻烦把 PIP 合规计算落成结构化数据，存 `analysis/pip_compliance_calc.json`。下游 checker 是 M1 精确比对——数值算错或字段名拼错都会卡。\n\n需要算出/写明这几件事（字段名走 snake_case 常规命名即可，意思到位就行）：\n- PIP 启动日（从启动邮件取）\n- 终止生效日（从员工 HR 文件取）\n- 公司政策要求的 PIP 最低改进期天数（在政策手册的要求表里）\n- 实际 PIP 天数（终止日减启动日的日历天数；注意是实际跨度，不是 PIP 计划里写的 30 天）\n- 政策最低与实际的差额天数（缺了多少天）\n- 是否合规的布尔判断（用真正的 JSON bool，不要写字符串）\n\n几条容易踩坑的点：差额是 policy 减实际，不是反过来；HR 转过来的口径里好像提过「实际 PIP 走了 45 天」这种说法，那是连同部分非工作日的粗算，按日历天数自己重算一遍为准；陈浩在 Slack 里随口说政策最低 30 天就够，他这判断我觉得不靠谱，按手册原文为准。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "pip_compliance_calc.json has exact values: pip_start_date='2026-02-01', legal_notice_days_required=60, actual_pip_days=40, days_shortfall=20, compliant=false.",
+        "incorrect": "Check: (1) analysis/pip_compliance_calc.json exists; (2) pip_start_date=='2026-02-01'; (3) legal_notice_days_required==60; (4) actual_pip_days==40; (5) days_shortfall==20 (exact); (6) compliant==false."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd1_sessions",
+        "upd1_workspace"
+      ],
+      "question": "After receiving Sun Wei's personal 1:1 meeting notes (upd1: sunwei-1on1-notes.md), which statements about the HR records vs Sun Wei's notes are supported by evidence?",
+      "options": {
+        "A": "Sun Wei's notes for 2025-11-20 use the word 'discussed' (讨论了) regarding the Q3 delay — NOT 'issued warning' or 'formal warning.'",
+        "B": "Sun Wei's notes for 2025-12-18 use 'follow up' (跟进) language — NOT 'warning,' 'disciplinary action,' or 'written warning.'",
+        "C": "Sun Wei's notes explicitly describe the 2025-11-20 and 2025-12-18 meetings as formal disciplinary proceedings with warning notices delivered.",
+        "D": "The HR calendar (calendar-1on1-history.md) labels the 2025-11-20 and 2025-12-18 meetings as 'Performance Discussion,' not 'Warning' or 'Disciplinary.'",
+        "E": "Sun Wei's notes for 2026-03-04 describe the meeting as discussing termination ('跟张涛谈了终止的事情'), NOT as a formal PIP review.",
+        "F": "The calendar labels 2026-03-04 as 'PIP Review -- 张涛,' conflicting with Sun Wei's own characterization of that meeting.",
+        "G": "Under company policy (labor-law-reference.md), oral performance discussions in 1:1 meetings qualify as 'written warnings' without further documentation.",
+        "H": "Sun Wei's notes covering 2026-01-08 describe code quality improvements — supporting the performance concerns but showing no formal warning language."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D",
+        "E",
+        "F",
+        "H"
+      ],
+      "feedback": {
+        "correct": "Sun Wei's own notes use 'discussed' and 'follow up' for Nov/Dec meetings — not warning language. Calendar labels 'Performance Discussion' (not Warning). March 4 conflict: calendar says PIP Review, Sun Wei notes say termination talk.",
+        "options": {
+          "C": "Sun Wei's notes explicitly say '讨论了' (discussed) and '跟进' (followed up) — not formal disciplinary proceedings.",
+          "G": "labor-law-reference.md explicitly states: oral performance discussions do NOT equal written warnings. Written delivery and employee confirmation are required."
+        }
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "孙伟把他自己的 1-on-1 笔记发过来了（已经躺在工作区里的某份 markdown，文件名带他名字），拿来跟 HR 日历系统的记录（也在工作区里，文件名能看出是 1on1 历史）做一次逐次对照。请整理一份 `docs/1on1_discrepancy_analysis.md`，按团队文档惯例的结构（分层标题 + 要点），把执行摘要 / 关键发现放正文最前——后面我转发给陈浩时他多半只看头两段。\n\n对照要落到具体日期（按原文 ISO 日期照抄，别用「11 月那次」这种相对说法——下游会按 ISO 日期 grep）。计数争议主要源自去年秋冬那两次会议（一次在 11 月、一次在 12 月，具体哪天看日历原文）；今年 3 月初那次 PIP Review 是这次比对最关键的一处冲突，单独点出来——日历上写的是 PIP Review，但孙伟笔记里描述的是终止谈话。\n\n至少三个 `##` 标题。语气保持中性。\n\n几条线索可能不准、按原文核：陈浩印象里那两次是 11 月 13 号和 12 月 11 号；马丽则跟我说是 11 月底和 12 月底；这两个口径都对不上，按日历原文为准。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target docs/",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): the analysis should have an executive summary or key findings section FIRST, before the detailed meeting-by-meeting comparison."
+        }
+      },
+      "feedback": {
+        "correct": "1-on-1 discrepancy analysis created: references both calendar-1on1-history.md and sunwei-1on1-notes.md, includes specific conflict dates (2025-11-20, 2025-12-18, 2026-03-04), identifies the March 4 meeting characterization conflict, has >= 3 ## headings.",
+        "incorrect": "Check: (1) file exists in docs/ with 1on1/discrepancy in name; (2) references calendar-1on1-history and sunwei-1on1-notes; (3) mentions 2025-11-20 and 2025-12-18; (4) identifies 2026-03-04 conflict; (5) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "顺着上一份对照表，再起一份 `docs/source_credibility_decision.md`，明确表态：HR 日历系统记录 vs. 孙伟个人笔记，哪一个在法律取证场景下更可信，理由是什么。\n\n决策要旗帜鲜明（不要写「各有道理」这种和稀泥的结论），并且**只能**引用 Phase 1 已经在工作区里的一手材料做支撑——邮件链、HR 日历、孙伟笔记、HR 文件这几份够用了。\n\n**重要约束**：现在还没拿到 sunwei-written-response.md，**不要**把那份还不存在的材料当作裁断依据；如果你写出的论证里以「孙伟书面回复说……」为支撑，那就是越权使用未来证据，会被 reviewer 卡掉。\n\n至少两个 `##` 标题。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Source credibility decision created: makes a clear determination with documentary evidence from Phase 1 files, does NOT rely on sunwei-written-response.md (M6), has >= 2 ## headings.",
+        "incorrect": "Check: (1) file exists in docs/ with credibility/decision in name; (2) makes a credibility determination; (3) cites documentary evidence; (4) does NOT use sunwei-written-response as basis (M6); (5) >= 2 ## headings."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "我想把 PIP 合规计算固化成一段可复跑的脚本，省得以后每个 case 都靠人工算。请写一个 `scripts/check_pip_timeline.py`，从工作区根目录运行（无参数），读 PIP 邮件链和劳动法 / 政策参考那两份原文，把合规计算结果以 JSON 形式打到 stdout。exit code 0。\n\nstdout JSON 顶层是一个 object，需要至少包含以下信息（字段命名走 snake_case 的常规习惯，你拿主意；下游 checker 按字面 key 找，名字往字段语义贴近一点即可）：\n- PIP 的正式启动日（ISO 日期字符串，从启动邮件原文取）\n- 公司政策要求的 PIP 最低改进期长度（整数天数，从政策手册要求表取）\n- 本案实际跨过的 PIP 天数（整数日历天数，自己用启动日和终止日算）\n- 二者之间的天数差（整数；policy 减实际，方向别写反）\n- 一个布尔，标识本案 PIP 流程是否合规（用真正的 JSON bool，不是字符串）\n- 一段引用相应劳动法条款或公司 PIP 政策段的字符串\n\n源文件里能拿到的关键事实（数字 / 日期都从原文里读，不要凭记忆）：PIP 启动邮件、终止生效日、政策最低改进期天数、适用条款。建议把日期解析、天数差、合规判断写成小函数。\n\n提示：马丽口头说过「PIP 启动是 1 月底那一周」，陈浩在 Slack 里说「政策最低 30 天就够」，这两个口径都不准，全部按工作区原文为准。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "scripts/check_pip_timeline.py exists, exits 0, outputs valid JSON with pip_start_date=='2026-02-01', legal_notice_required_days==60, actual_days==40, days_shortfall==20, compliant==false, applicable_clause non-empty.",
+        "incorrect": "Check: (1) scripts/check_pip_timeline.py exists; (2) exits 0; (3) stdout is valid JSON; (4) pip_start_date=='2026-02-01'; (5) legal_notice_required_days==60; (6) actual_days==40; (7) days_shortfall==20 (exact); (8) compliant==false; (9) applicable_clause non-empty."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "再起一份 `docs/meeting_validity_report.md`，逐次评估 PIP 期间的 check-in 会议，看每一次是否满足 labor-law-reference.md 里写的文档化要求（书面交付、员工签字或邮件确认、每两周一次的检查节点）。\n\n把日历里贴 PIP 标签的几次会议列清楚，结合邮件链 / todo 看板判定每次的「文档完整度」。要落到具体日期（按日历原文的 ISO 日期写，不要用「Week 2 那次」这种纯相对说法——下游按字面 grep）。其中 Week 4 那次原本应该出现的 check-in 在 todo 看板里挂着 `未完成`，属于直接缺失，要单独列。把有效 / 无效 / 缺失的次数都数出来，不要只写「大部分有问题」这种模糊话。\n\n另外别忘了 PIP 文件本身缺员工签字这一条。\n\n至少三个 `##` 标题。\n\n几个口径不准、按原文核的：孙伟说「2 次有效 1 次缺」，陈浩跟马丽汇报时说「3 次都齐」，我自己翻邮件感觉是「1 有效 1 性质争议 1 缺」，最终数字按你自己核的算。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Meeting validity report created: references labor-law-reference.md requirements, includes specific meeting dates (2026-02-15, 2026-03-04, 2026-03-01), provides numeric count of valid/invalid meetings, identifies Week 4 gap, has >= 3 ## headings.",
+        "incorrect": "Check: (1) file exists in docs/ with meeting/validity in name; (2) references labor law documentation requirements; (3) contains specific PIP check-in dates; (4) identifies Week 4 gap as missing; (5) includes numeric count; (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "请把当前的法律风险评估固化成结构化数据，存 `analysis/legal_risk_assessment.json`，走 M4 严格 schema——下游 checker 字段名拼错或值不达标都会卡。\n\n顶层是一个 object，按你认为合理的 snake_case 字段名组织以下内容（语义到位即可，下游按字面 key 找，名字尽量贴近字段意思）：\n- 一个三档枚举，标识本案的法律风险水平（high / medium / low 三选一）\n- 一段字符串，引用本案适用的劳动法条款或公司 PIP 政策段（具体哪条按 labor-law-reference.md 原文为准）\n- 一个整数，标识 PIP 政策最低天数与本案实际天数的差额（policy 减实际，方向别反；下游精确比对）\n- 一个字符串列表，列举本案识别出来的具体文档化缺口（至少两条，比如警告计数差、PIP 签字缺失、Week 4 check-in 缺漏、终极评估未做这一类）\n- 一段字符串，写明本案处理建议\n\n几个容易出岔的点：差额方向别反；陈浩在 Slack 里说风险写 `medium` 就行，他这判断我觉得偏乐观，你独立评估；马丽更新版法务意见里也承认了多个 gap，权重要给够。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "legal_risk_assessment.json has valid schema: risk_level is 'high'/'medium'/'low', applicable_clause references 第四十条 or Article 40, days_shortfall==20 (exact), documentation_gaps >= 2 items, recommendation non-empty.",
+        "incorrect": "Check: (1) analysis/legal_risk_assessment.json exists; (2) risk_level is valid enum; (3) applicable_clause references labor law; (4) days_shortfall==20 (exact match); (5) documentation_gaps has >= 2 items; (6) recommendation non-empty."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd2_sessions",
+        "upd2_workspace"
+      ],
+      "question": "After receiving Sun Wei's written response (upd2: sunwei-written-response.md), which statements about his account of the warning process are definitively supported?",
+      "options": {
+        "A": "Sun Wei explicitly states in his written response: '以上合计3次警告' (3 warnings total), consisting of 2 verbal + 1 email warning.",
+        "B": "Sun Wei's position is that '口头警告和书面警告都是正式的警告行为' — he considers verbal and written warnings equivalent.",
+        "C": "Under company policy (labor-law-reference.md), Sun Wei's position is incorrect: verbal performance discussions require written delivery and employee confirmation to constitute 'written warnings.'",
+        "D": "Sun Wei admits in his response that the 2026-03-04 meeting was a termination conversation and that no email record was made of it.",
+        "E": "Sun Wei's written response confirms that all 3 warnings were sent as formal written emails to Zhang Tao.",
+        "F": "Sun Wei's confusion between verbal discussions and written warnings is the root cause of the '3 warnings' discrepancy — it appears to be a definitional misunderstanding rather than deliberate falsification.",
+        "G": "Sun Wei admits in his response that he did not complete the Week 4 PIP check-in email documentation: '确实可以做得更好.'",
+        "H": "Sun Wei claims he never conducted any performance discussions with Zhang Tao before initiating the PIP."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F",
+        "G"
+      ],
+      "feedback": {
+        "correct": "Sun Wei's written response confirms: 3 warnings (2 verbal + 1 email), considers verbal=written (company policy disagrees), admits March 4 was a termination conversation without email record, and acknowledges Week 4 documentation could have been better.",
+        "options": {
+          "E": "Sun Wei explicitly distinguishes: 2 VERBAL (Nov 20, Dec 18) and only 1 EMAIL (Jan 15). He did not send 3 written emails.",
+          "H": "Sun Wei confirms he conducted performance discussions (Nov 20, Dec 18 meetings) — he just considers them valid warnings."
+        }
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "孙伟把他的书面回复发来了（`sunwei-written-response.md`），请逐条做一份 `docs/sunwei_response_analysis.md`。\n\n至少挑三条具体主张（比如他怎么解释「3 次警告」的来源、口头是否等于书面、Week 4 是否口头补做、PIP 启动邮件是否真的送达），每一条做(a) 有 HR 一手文档支持 / (b) 与 HR 一手文档相矛盾 / (c) 无法用现有书面材料独立验证 三选一的标注。\n\n**重要**：不能因为孙伟回复里说 HR 程序怎样怎样，就认定 HR 真的违规——他的回复是当事人陈述，不是独立证据。每一条主张都要拿邮件链、HR 文件、劳动法参考、1-on-1 日历之中至少一份做交叉印证。\n\n至少三个 `##` 标题。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": null,
+      "feedback": {
+        "correct": "Response analysis created: references sunwei-written-response.md, classifies >= 3 claims with (a)/(b)/(c) labels or equivalent, does NOT use response as proof of HR wrongdoing without independent evidence (M6), has >= 3 ## headings.",
+        "incorrect": "Check: (1) file exists in docs/; (2) references sunwei-written-response.md; (3) classifies >= 3 claims; (4) does not treat subjective response as definitive evidence of HR wrongdoing (M6); (5) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "顺手把张涛在员工 HR 文件里的绩效轨迹拉一份时间序列，存 `docs/performance_review_trace.md`。\n\n要求按时间顺序列出 HR 文件里所有绩效周期评价，把评级原文照抄出来——请用 HR 文件里的英文原措辞（HR 文件用英文写的三档评级标签），不要意译为「合格 / 不合格」这种二档分类，下游会校字。每条都要带季度标签（按 HR 文件原文的 FY/Q 写法）。\n\n几个具体数据点也写上：触发 PIP 那一季提到的代码 Review 通过率（HR 文件里有具体百分数）、Q4 的支付接口 bug、以及认证模块延期等等——这些是评估「PIP 是否合理触发」的论据。陈浩印象里说前几季评分都是「Below Expectations」，孙伟在书面回复里则说「全程都是 Needs Improvement」，我看着都不像，你按 HR 文件原文核一下，前面几季其实是合格的。最后给一个简短的轨迹总结。\n\n至少三个 `##` 标题。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Performance trace created: includes specific rating values (Meets Expectations, Below Expectations, Needs Improvement), quarter references (Q3/Q4 2025), performance data points (60% code review, delays), chronological order, >= 3 ## headings.",
+        "incorrect": "Check: (1) file exists in docs/; (2) contains performance rating values (Meets Expectations, Below Expectations, Needs Improvement); (3) includes quarter references (Q3 2025, Q4 2025); (4) references 60% code review rate; (5) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "再写一段脚本 `scripts/analyze_pip_process.py`，把 PIP 流程合规情况统计成 JSON。工作区根目录运行（无参数），读 1-on-1 日历表、PIP 邮件链、政策手册要求条款这三份。\n\nstdout JSON 顶层 object，按你认为合理的 snake_case 字段名组织以下五个统计量（语义到位即可，下游按字面 key 找）：\n- 一个整数，政策要求 PIP 期内必须开几次正式 check-in\n- 一个整数，实际开了几次（按日历原文数）\n- 一个整数，其中有书面 / 邮件记录跟进的几次\n- 一个整数，其中有员工书面确认（签字或回邮承认）的几次\n- 一个字符串列表，列举观察到的流程缺口（至少两条，写人话，例如「Week 4 check-in 缺失」「PIP 文件缺员工签字」之类，不要只放空 list）\n\n计数要看原文数：政策要求几次、实际开了几次、其中几次有邮件记录、几次有员工书面确认——别照搬「全都齐」这种。脚本必须 `python scripts/analyze_pip_process.py` 跑通且 exit 0。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "scripts/analyze_pip_process.py exits 0, outputs valid JSON with all required fields, process_gaps has >= 2 items.",
+        "incorrect": "Check: (1) scripts/analyze_pip_process.py exists; (2) exits 0; (3) stdout is valid JSON; (4) has total_meetings_required, total_meetings_held, meetings_with_written_record, meetings_with_written_confirmation; (5) process_gaps >= 2 items."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把张涛 case 整条 HR 文档时间线重建一份，存 `docs/documentation_timeline.md`。需要把以下里程碑点到、并且按时间顺序排：\n\n- 入职日（在员工 HR 文件里能找到）\n- 第一封正式书面警告邮件（PIP 邮件链里有）\n- PIP 启动通知（PIP 邮件链里有）\n- PIP 期内中段那次 check-in（邮件 + 日历都有，就是按计划的第二周那次）\n- 应有但缺失的 PIP `Week 4` check-in（todo 看板里挂着 `未完成`）\n- 终止生效日（员工 HR 文件里有）\n\n每个里程碑都按 ISO 日期（`YYYY-MM-DD`）写出原文里的具体日期，**不要用「PIP 启动那天」这种相对指代**——下游会按字面 grep 这几个日期。每个里程碑后面注明完成 / 缺失，并标出来源文件名。同时也提一笔：整个流程没有正式的最终 PIP 评估文档存在。\n\n至少三个 `##` 标题。这份是后面所有报告的事实底版，日期一个都别错——我手边几份口头记录都不准：陈浩跟我说终止是 3 月 10 日左右，孙伟书面回复里写的是 3 月 11 日，马丽提到首封警告是 1 月 8 号，PIP 启动是 1 月 28 号——这些口头转述都按原文核过。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q17.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Documentation timeline created: includes 2026-01-15, 2026-02-01, 2026-03-13 as key dates, mentions hire date, identifies Week 4 check-in (2026-03-01) as not completed, has >= 3 ## headings.",
+        "incorrect": "Check: (1) file exists in docs/; (2) contains '2026-01-15', '2026-02-01', '2026-03-13'; (3) mentions hire/join date; (4) identifies Week 4 check-in as missing; (5) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q18",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Phase 2 阶段性收口：在 `docs/` 下出一份中期调查报告。文件名按团队的命名规范（我们组的写作规范你应该熟，后续工具会按规范扫文件——名字里有「中期 / midterm / interim / 调查」之一即可）。整份要过组里那套写作偏好——分层结构、执行摘要打头、定性定量平衡、语气专业但不冷酷。\n\n结构上执行摘要 / 关键结论先行，后面再展开。需要覆盖：PIP 合规情况、警告计数、1-on-1 性质差异、关键法律风险点 + 援引相应条款。具体数字 / 日期都从工作区原文里读出来再写，不要写「不足」「缺漏」这种纯定性话——下游 checker 字面比对。\n\n语气上注意：先承认孙伟对张涛的绩效顾虑是真实的，再讲流程缺陷，不要把人写成恶意。至少四个分层小节，对应上面四块内容。这份要发给陈浩和马丽看，所以要经得住挑刺。\n\n陈浩跟我说差额是 30 天（他算的是 60 减 30），孙伟书面回复里说「实际 PIP 走了 45 天」，这两个数字都不对，按你自己重算的为准。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q18.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3 --target docs/",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Midterm report created with YYYY-MM-DD_ prefix, contains days_shortfall 20, 60-day policy, 2026-01-15 warning date, 1-on-1 discrepancy summary, risk areas, >= 4 ## headings. P1-P3 preferences satisfied.",
+        "incorrect": "Check: (1) docs/ has a YYYY-MM-DD_*.md file with 'midterm'/'interim'/'调查' in name; (2) contains standalone '20' (shortfall); (3) contains '60' (policy minimum); (4) references 2026-01-15; (5) mentions 1-on-1 discrepancy; (6) identifies risk areas; (7) >= 4 ## headings."
+      }
+    },
+    {
+      "id": "q19",
+      "type": "multi_choice",
+      "update_ids": [
+        "upd3_workspace",
+        "upd4_sessions",
+        "upd4_workspace"
+      ],
+      "question": "After the internal PIP timeline analysis (upd3: pip-timeline-analysis.md) and legal updated assessment (upd4: legal-updated-assessment.md), which statements about the legal risk conclusion are supported?",
+      "options": {
+        "A": "pip-timeline-analysis.md confirms the PIP plan set only 30 days (below the 60-day policy minimum), and termination occurred at Day 40 — 20 days short of the policy minimum.",
+        "B": "pip-timeline-analysis.md identifies that the 2026-03-04 meeting was functionally a termination notification, not a PIP review, despite the calendar label.",
+        "C": "legal-updated-assessment.md (Ma Li's update) shifts from initial 'sufficient documentation' to acknowledging 'some gaps' using hedging language ('totality of circumstances').",
+        "D": "Ma Li's updated assessment explicitly retracts her initial 'sufficient documentation' conclusion in clear terms.",
+        "E": "Ma Li's updated recommendation changed from 'maintain termination' to 'consider negotiating with Zhang Tao to reduce arbitration risk.'",
+        "F": "legal-updated-assessment.md acknowledges that Ma Li's initial review relied on Chen Hao's unverified package, not independent verification of source documents.",
+        "G": "pip-timeline-analysis.md finds that Week 4 check-in (due 2026-03-01) was not completed — no record of any kind exists for this milestone.",
+        "H": "Ma Li's updated assessment finds the company has strong arbitration defense with no significant gaps."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E",
+        "F",
+        "G"
+      ],
+      "feedback": {
+        "correct": "Timeline analysis confirms: 30-day PIP plan (below 60-day minimum), termination at Day 40 (20 shortfall), March 4 was termination talk. Legal update: 'some gaps' language, recommendation shifted to consider negotiation, acknowledges initial review relied on unverified package. Week 4 check-in confirmed missing.",
+        "options": {
+          "D": "Ma Li does NOT explicitly retract. She uses hedging language ('totality of circumstances', 'not necessarily fatal') but does not directly say 'my initial assessment was wrong.'",
+          "H": "Ma Li explicitly lists 3 documentation gaps and recommends considering negotiation — contradicting a 'strong defense' conclusion."
+        }
+      }
+    },
+    {
+      "id": "q20",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "内部那份 PIP 时间线分析（陈浩昨晚给的内部审稿，文件名一看就知道，已经躺在工作区里）刚整理出来，请做一份 `docs/timeline_analysis_integration.md`，把这份内部分析里**比原始记录多揭示**的发现整合进来——也就是单看 PIP 邮件链 / 员工 HR 文件不容易直接看出来的那些点。\n\n至少列 3 条具体发现，每条都要带原文里的具体数字 / 日期（按 ISO 写法），不要写「PIP 不足政策要求」这种纯定性的话——下游 checker 是按字面找数字的。可挑选范围（含但不限于）：PIP 实际跨度 vs 政策最低 vs 二者缺口（三个数字都点到）；中段那次缺漏的 check-in（在 todo 看板里挂着）；3 月那次按日历是 PIP Review 但综合孙伟笔记和事件序列，性质上是终止通知；实际确认的正式书面警告封数（与孙伟自述对比）。\n\n解释一下：为什么这些点必须把多份材料对起来才看得见。至少三个 `##` 标题。\n\n孙伟在书面回复里说「实际 PIP 期 45 天」「政策要求 50 天」「差 5 天」，这套数字算法不对（他把部分日历日按工作日算了），按你自己用日历天数重算的为准。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q20.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Timeline integration created: references pip-timeline-analysis.md, includes >= 3 specific findings (40-day duration, 60-day minimum, 20-day shortfall or Week 4 missing or March 4 characterization), has >= 3 ## headings.",
+        "incorrect": "Check: (1) file exists in docs/; (2) references pip-timeline-analysis; (3) contains '40' (actual days), '60' (policy), '20' (shortfall); (4) mentions Week 4 or March 4; (5) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q21",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "马丽的法务意见从原先的判断改口了——她的更新版评估文档已经放进工作区（文件名一看就知道是法务那条线的更新版）。请做一份 `docs/legal_evolution_analysis.md`，把她前后两版评估对照清楚。\n\n重点写她口径上的变化：初版立场是怎么定的（从原文里找她当时用的关键定性词）；更新版立场是怎么软化的（同样从原文里挑她对冲性的措辞），对应的建议端怎么转的；以及她现在承认的几个具体文档缺口（HR 文件、PIP 文件、check-in 记录里各有什么短板，引原文措辞）。\n\n另外她那段教训式的反思（关于法务流程独立核实的那段）——直接引一句作为系统性建议的论据。\n\n最后给一个最终的法律风险敞口判断。至少三个 `##` 标题。\n\n几条口径请按原文为准、不要被转述带偏：陈浩在邮件里说「马丽已经撤回了原结论」，更新版原文里其实没说 retract，只是承认 gaps；孙伟那边转述说「马丽认为流程整体没问题」，也对不上原文；马丽本人发的那份更新版才是唯一可引证的口径。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q21.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Legal evolution analysis created: references legal-updated-assessment.md or Ma Li, describes shift from 'sufficient' to 'gaps/totality', mentions negotiation recommendation, identifies >= 2 specific gaps, has >= 3 ## headings.",
+        "incorrect": "Check: (1) file exists in docs/; (2) references legal-updated-assessment or 马丽/Ma Li; (3) describes shift in position (sufficient → gaps/totality); (4) mentions >= 2 specific gaps; (5) mentions negotiation; (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q22",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把这个 case 暴露出来的**系统性 / 制度性**问题（不是个人犯错）写成 `docs/systemic_gaps_report.md`。注意 framing：每个漏洞都要落到「公司流程 / 培训 / 审批机制」缺什么，而不是「孙伟错在哪、陈浩错在哪」。\n\n至少识别 2 个 systemic 漏洞，每个都要：(a) gap 是什么——结构性缺什么；(b) 它在本 case 里如何具体显现（用真实人名 + 具体日期作锚——日期按 ISO 写）；(c) 改进建议（培训 / verification checklist / 法务独立审 / PIP 完成 gating 都是常见方向）。\n\ncase 锚点请至少各引一次：`孙伟`、`陈浩`，加上几个具体日期。至少三个 `##` 标题。语气上承认人都不是恶意，但流程不能依赖个人善意。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q22.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Systemic gaps report created: identifies >= 2 systemic (institutional) process failures with specific case evidence, includes improvement recommendations, references case-specific events (Sun Wei, Chen Hao, specific dates), has >= 3 ## headings.",
+        "incorrect": "Check: (1) file exists in docs/; (2) frames gaps as systemic/institutional (not individual blame); (3) identifies >= 2 distinct gap types; (4) includes improvement recommendations; (5) references case-specific events; (6) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q23",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "再固化一份仲裁风险评估到 `analysis/arbitration_risk.json`，M4 严格 schema。\n\n顶层 object，按你认为合理的 snake_case 字段名组织以下五段内容（命名贴近字段语义即可，下游 checker 按字面 key 找）：\n- 一个三档枚举，标识仲裁风险水平（high / medium / low 三选一）\n- 一段字符串，描述本 case 最主要的法律暴露点（单数概念，一段连贯描述）\n- 一个字符串 list（注意：是复数容器，不是单值字段），至少 1 条，每条援引相应的劳动法条款或公司政策（具体哪一条按 labor-law-reference.md 原文写）\n- 一个整数，政策最低天数减实际 PIP 天数（自己算，下游精确比对）\n- 一段字符串，描述若实际进入仲裁的预期结果\n\n几个容易踩坑：上面那个条款字段是 list 不是单字符串；天数差是 policy 减实际，方向别写反；陈浩判断这个 case 风险是 medium，他对法务流程不熟，你独立评估；孙伟在书面回复里说本案差了 5 天，他算法不对，按你自己重算的为准。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q23.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "arbitration_risk.json has valid schema: risk_level is valid enum, primary_vulnerability non-empty, applicable_clauses list with >= 1 item referencing 第四十条 or Article 40, days_shortfall==20 (exact), estimated_outcome non-empty.",
+        "incorrect": "Check: (1) analysis/arbitration_risk.json exists; (2) risk_level is 'high'/'medium'/'low'; (3) applicable_clauses is list with >= 1 item referencing law; (4) days_shortfall==20 (exact); (5) estimated_outcome non-empty."
+      }
+    },
+    {
+      "id": "q24",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "把先前那份 systemic gaps 报告（`docs/systemic_gaps_report.md`）扩展一版，把内部 PIP 时间线分析和马丽的更新法务评估的发现都整合进去——可以直接覆盖原文件，也可以新建一个更全的版本，名字里仍带 `systemic` / `gap` 关键词即可。\n\n扩展版要落到几个具体数字 / 日期（都按原文 ISO 写出来，不要写「不足」「缺漏」这种纯定性话——下游 checker 按字面找）：实际 PIP 周期、政策最低天数、二者缺口（三个数字全点到）；应该出现但缺漏的那次 PIP check-in（带名字 + 日期）；正式书面警告的那一封日期（按 ISO 写）。\n马丽更新版里承认的文档 gap 也要纳入。\n\n至少给出 2 个 systemic 改进方向（培训 / 核实清单 / 法务独立审 / PIP 审批 gating 等），每条配具体改进建议，并用 case 内的日期、人名做支撑。至少三个 `##` 标题。\n\n几条口径不准、按原文核：孙伟书面回复里说「差额 5 天」「政策最低 50 天」，算法都不对；陈浩在 Slack 里说「实际跑了 50 天」，也对不上；按你自己重算的日历天数为准。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q24.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Systemic gaps report contains specific data values (40, 60, 20, 2026-01-15 or Week 4), >= 2 systemic improvement areas, improvement recommendations, >= 3 ## headings.",
+        "incorrect": "Check: (1) a suitable file exists in docs/; (2) contains '40' and '60' and '20' (PIP timeline data); (3) identifies >= 2 systemic gaps; (4) includes recommendations; (5) >= 3 ## headings."
+      }
+    },
+    {
+      "id": "q25",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Which statements correctly assess the relative credibility and reliability of each information source in this investigation?",
+      "options": {
+        "A": "The email system records (pip-email-chain.md) are the most objective source for warning count — system-generated records of what was actually sent cannot be retroactively altered.",
+        "B": "The employee HR file is not independently reliable for warning count because it repeats Sun Wei's unverified manager report without cross-referencing the email system.",
+        "C": "Sun Wei's self-assessment is influenced by his genuine belief that verbal discussions count as warnings — a definitional misunderstanding, not deliberate falsification.",
+        "D": "The HR calendar is objective for recording meeting occurrence (who attended, when) but the meeting labels/titles are organizer-set and may not reflect actual meeting content.",
+        "E": "Ma Li's initial 'sufficient documentation' assessment should be treated as the authoritative legal conclusion because she is the legal counsel.",
+        "F": "The internal pip-timeline-analysis.md, being a synthesized document, has higher credibility than any single original source because it cross-references multiple sources.",
+        "G": "Chen Hao's account is authoritative because he is a Senior HRBP and participated in the termination process.",
+        "H": "Each source has different reliability levels depending on what it's being used to establish — email records are best for warning count, calendar records for meeting occurrence, HR file for formal employee status."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "H"
+      ],
+      "feedback": {
+        "correct": "Source credibility is differentiated by type: email system for sent communications, calendar for meeting occurrence (labels are organizer-set), HR file is secondary (repeats manager report). Sun Wei's definitional confusion is sincere, not malicious.",
+        "options": {
+          "E": "Ma Li's assessment was based on Chen Hao's unverified package and has since been revised to acknowledge gaps. Legal assessments are advisory, not authoritative facts.",
+          "F": "pip-timeline-analysis.md was synthesized by Chen Jing herself — while useful, it has no higher inherent credibility than the source documents it draws from.",
+          "G": "Seniority does not equal accuracy. Chen Hao explicitly did not verify the warning count independently."
+        }
+      }
+    },
+    {
+      "id": "q26",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "调查收口报告。在 `docs/` 下建一份最终报告，文件名按团队规范（组里那套命名规范你应该熟，名字里带 final / investigation / report / 最终 / 调查 / 报告 之一即可）。整份要全过组里那套写作偏好——结构清楚、执行摘要打头、定性定量平衡、语气专业且有温度（这份对外发给陈静以上层级看）。\n\n执行摘要打头，关键结论先行。至少 5 个分层小节。\n\n定量事实必备（一个都别漏，按原文 ISO 日期 / 数字写，下游 checker 字面比对）：\n- PIP 启动日、终止生效日、首封正式书面警告日（三个 ISO 日期都点到）\n- 政策最低 PIP 期天数、实际缺口天数（具体数字算到位）\n- 援引相应的劳动法条款（按 labor-law-reference.md 原文写出来）\n\n定性内容（注意定性定量平衡）：\n- PIP 合规结论\n- 1-on-1 性质差异（口头讨论 vs 正式书面警告）\n- 法律风险结论 + 适用条款\n- 处理建议（协商和解 / 流程改进二选其一或并提）\n\n语气上：承认孙伟对张涛的绩效顾虑是真实存在的，与流程瑕疵分开来讲，避免指控腔。\n\n几条口头转述都不准、按原文核：陈浩跟我说终止是 3 月 10 日、首封警告是 1 月 8 日、PIP 启动是 1 月 28 日；孙伟书面回复里写的是终止 3 月 11 日、警告 1 月 12 日；马丽则提到差额是 15 天、政策最低 45 天——这些口头数字都对不上原文，全部按工作区原始文件为准。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q26.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3,P4,P5 --target docs/",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Final investigation report created: YYYY-MM-DD_ prefix, executive summary first, contains 2026-02-01, 2026-03-13, 2026-01-15, '20' (shortfall), '60' (policy), law reference, 1-on-1 discrepancy, risk conclusion, recommendation, >= 5 ## headings. All P1-P5 preferences satisfied.",
+        "incorrect": "Check: (1) docs/ has a YYYY-MM-DD_*.md file; (2) contains '2026-02-01', '2026-03-13', '2026-01-15'; (3) contains '20' (shortfall) and '60' (policy); (4) references 第四十条 or Article 40; (5) mentions 1-on-1 discrepancy; (6) includes recommendation; (7) >= 5 ## headings; (8) P1-P5 all pass."
+      }
+    },
+    {
+      "id": "q27",
+      "type": "multi_choice",
+      "update_ids": [],
+      "question": "Integrating all evidence from all updates, which statements represent the most accurate comprehensive investigative conclusions? (Review all workspace files including updates before answering.)",
+      "options": {
+        "A": "Only 1 of the 3 claimed 'written warnings' is formally documented: the 2026-01-15 email. The other 2 were verbal performance discussions that do not meet company policy's definition of written warning.",
+        "B": "The PIP violated company policy in two ways: (1) the plan itself set 30 days (below 60-day minimum), and (2) termination occurred at Day 40 — 20 days before even the shorter plan was fully evaluated.",
+        "C": "Zhang Tao received the PIP initiation email (2026-02-01) and attended the labeled PIP meetings, but his characterization of the meetings differs from the calendar labels — specifically March 4 was a termination conversation per both Sun Wei's own notes and Zhang Tao's account.",
+        "D": "The initial legal assessment ('sufficient documentation') was based on Chen Hao's unverified package, creating a chain of reliance: Sun Wei claimed → Chen Hao recorded → Ma Li assessed — all without independent verification.",
+        "E": "Zhang Tao's performance issues are genuine and documented (Q3: Below Expectations, Q4: Needs Improvement), but genuine performance concerns do not excuse process compliance failures.",
+        "F": "Ma Li's updated assessment explicitly retracts her initial 'sufficient documentation' conclusion in clear unambiguous terms.",
+        "G": "The recommended path forward includes: (1) consider negotiated settlement given multiple documented process gaps, (2) implement process improvements (manager training on written warning definition, HRBP verification checklist, legal independent review requirement).",
+        "H": "The investigation reveals systemic process failures — not individual malice — at multiple organizational levels (manager, HRBP, legal).",
+        "I": "The termination process was fully compliant with company policy and labor law; Zhang Tao's complaint is without merit.",
+        "J": "Chen Jing's P1-P5 output preferences should be applied to the final investigation report presented to stakeholders."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "G",
+        "H",
+        "J"
+      ],
+      "feedback": {
+        "correct": "Comprehensive assessment: 1 formal warning documented (not 3), PIP violated policy in duration and execution, PIP awareness is nuanced (email sent but meetings mislabeled), chain of reliance from Sun Wei through Chen Hao to Ma Li, performance issues genuine but don't excuse process failures, systemic (not malicious) failures at multiple levels.",
+        "options": {
+          "F": "Ma Li does NOT explicitly retract. She uses hedging language ('totality of circumstances', 'some gaps', 'not necessarily fatal') but never directly states 'my initial assessment was wrong.'",
+          "I": "Multiple material process gaps have been documented: 1 written warning (not 2 required), 40-day PIP (not 60-day minimum), unsigned PIP document, missing Week 4 check-in, no final assessment. The process was NOT compliant."
+        }
+      }
+    }
+  ]
+}

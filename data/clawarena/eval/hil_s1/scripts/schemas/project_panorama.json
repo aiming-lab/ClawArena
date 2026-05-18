@@ -1,0 +1,402 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hbench.local/schemas/project_panorama.json",
+  "title": "Project Panorama Schema",
+  "description": "Schema for high-level project overview and status in the hil_s1 scenario. Provides a comprehensive snapshot of project health, progress, team, deliverables, and key decisions.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the project panorama document",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "examples": ["1.0", "2.0"]
+    },
+    "generated_at": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when this panorama was generated",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+      "examples": ["2025-03-14T10:30:00Z"]
+    },
+    "project": {
+      "type": "string",
+      "description": "Name or identifier of the project",
+      "minLength": 1,
+      "examples": ["Data Migration Project", "Schema V2 Implementation"]
+    },
+    "project_code": {
+      "type": "string",
+      "description": "Short code or identifier for the project",
+      "examples": ["DMP-2025", "SCHEMA-V2", "PROJ-042"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the project",
+      "minLength": 1,
+      "examples": [
+        "Migration of customer data from v1 schema to v2 schema with enhanced data quality controls"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "Overall project status",
+      "enum": ["not_started", "planning", "in_progress", "at_risk", "delayed", "completed", "cancelled"],
+      "examples": ["in_progress", "at_risk", "completed"]
+    },
+    "health": {
+      "type": "string",
+      "description": "Overall project health indicator",
+      "enum": ["green", "yellow", "red"],
+      "examples": ["green", "yellow", "red"]
+    },
+    "team": {
+      "type": ["object", "array"],
+      "description": "Project team information",
+      "properties": {
+        "project_manager": {
+          "type": "string",
+          "description": "Name of the project manager",
+          "examples": ["Alice Johnson", "PM Team Lead"]
+        },
+        "technical_lead": {
+          "type": "string",
+          "description": "Name of the technical lead",
+          "examples": ["Bob Smith", "Engineering Lead"]
+        },
+        "team_members": {
+          "type": "array",
+          "description": "List of team members",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of team member",
+                "minLength": 1
+              },
+              "role": {
+                "type": "string",
+                "description": "Role or title",
+                "examples": ["Data Engineer", "QA Analyst", "Business Analyst"]
+              },
+              "email": {
+                "type": "string",
+                "description": "Email address",
+                "format": "email",
+                "examples": ["alice@example.com"]
+              },
+              "responsibilities": {
+                "type": "string",
+                "description": "Key responsibilities",
+                "examples": ["Schema design and migration scripts"]
+              }
+            },
+            "required": ["name", "role"],
+            "additionalProperties": false
+          }
+        },
+        "stakeholders": {
+          "type": "array",
+          "description": "List of key stakeholders",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of stakeholder",
+                "minLength": 1
+              },
+              "organization": {
+                "type": "string",
+                "description": "Organization or department",
+                "examples": ["Customer Operations", "IT Leadership"]
+              },
+              "role": {
+                "type": "string",
+                "description": "Stakeholder role",
+                "examples": ["Sponsor", "Business Owner", "Approver"]
+              },
+              "interest_level": {
+                "type": "string",
+                "description": "Level of interest in project",
+                "enum": ["low", "medium", "high"],
+                "examples": ["high", "medium"]
+              }
+            },
+            "required": ["name", "role"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "timeline": {
+      "type": "object",
+      "description": "Project timeline summary",
+      "properties": {
+        "kickoff_date": {
+          "type": "string",
+          "description": "Project kickoff date",
+          "format": "date",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "examples": ["2025-03-03"]
+        },
+        "interim_review": {
+          "type": "string",
+          "description": "Interim review date",
+          "format": "date",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "examples": ["2025-03-12"]
+        },
+        "final_deadline": {
+          "type": "string",
+          "description": "Final deadline",
+          "format": "date",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "examples": ["2025-03-14"]
+        },
+        "current_phase": {
+          "type": "string",
+          "description": "Current project phase",
+          "examples": ["Development", "Testing", "Deployment"]
+        },
+        "days_remaining": {
+          "type": "integer",
+          "description": "Days remaining until deadline",
+          "examples": [0, 7, 30, -5]
+        },
+        "percent_complete": {
+          "type": "number",
+          "description": "Overall completion percentage (0-100)",
+          "minimum": 0,
+          "maximum": 100,
+          "examples": [75.0, 90.0, 100.0]
+        }
+      },
+      "required": ["kickoff_date", "final_deadline"],
+      "additionalProperties": false
+    },
+    "objectives": {
+      "type": "array",
+      "description": "Project objectives and goals",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Objective identifier",
+            "examples": ["OBJ-001", "GOAL-1"]
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the objective",
+            "minLength": 1
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the objective",
+            "enum": ["not_started", "in_progress", "achieved", "at_risk"],
+            "examples": ["achieved", "in_progress"]
+          },
+          "success_criteria": {
+            "type": "string",
+            "description": "Criteria for success",
+            "examples": ["All customer data migrated with 100% data integrity"]
+          }
+        },
+        "required": ["id", "description", "status"],
+        "additionalProperties": false
+      }
+    },
+    "key_metrics": {
+      "type": "object",
+      "description": "Key performance metrics for the project",
+      "properties": {
+        "total_tasks": {
+          "type": "integer",
+          "description": "Total number of tasks",
+          "minimum": 0
+        },
+        "completed_tasks": {
+          "type": "integer",
+          "description": "Number of completed tasks",
+          "minimum": 0
+        },
+        "open_issues": {
+          "type": "integer",
+          "description": "Number of open issues",
+          "minimum": 0
+        },
+        "critical_risks": {
+          "type": "integer",
+          "description": "Number of critical risks",
+          "minimum": 0
+        },
+        "budget_utilized_percent": {
+          "type": "number",
+          "description": "Percentage of budget utilized (0-100)",
+          "minimum": 0,
+          "maximum": 100,
+          "examples": [65.5, 90.0]
+        },
+        "resource_utilization_percent": {
+          "type": "number",
+          "description": "Percentage of resource capacity utilized (0-100)",
+          "minimum": 0,
+          "maximum": 100,
+          "examples": [85.0, 95.5]
+        }
+      },
+      "additionalProperties": false
+    },
+    "final_outputs": {
+      "type": "array",
+      "description": "Final outputs and deliverables of the project",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the output/deliverable",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of output",
+            "enum": ["dataset", "document", "software", "report", "system", "process"],
+            "examples": ["dataset", "document"]
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the output",
+            "enum": ["planned", "in_progress", "delivered", "approved"],
+            "examples": ["delivered", "approved"]
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the output"
+          }
+        },
+        "required": ["name", "type", "status"],
+        "additionalProperties": false
+      }
+    },
+    "key_decisions": {
+      "type": "array",
+      "description": "Key decisions made during the project",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Decision identifier",
+            "examples": ["DEC-001", "DECISION-042"]
+          },
+          "date": {
+            "type": "string",
+            "description": "Date decision was made",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "decision": {
+            "type": "string",
+            "description": "Description of the decision",
+            "minLength": 1
+          },
+          "rationale": {
+            "type": "string",
+            "description": "Rationale or reason for the decision"
+          },
+          "made_by": {
+            "type": "string",
+            "description": "Who made the decision",
+            "examples": ["Project Steering Committee", "Technical Lead"]
+          },
+          "impact": {
+            "type": "string",
+            "description": "Impact of the decision",
+            "examples": ["High - affects migration timeline", "Medium - affects data model"]
+          }
+        },
+        "required": ["id", "date", "decision"],
+        "additionalProperties": false
+      }
+    },
+    "current_status_summary": {
+      "type": "string",
+      "description": "Brief narrative summary of current project status",
+      "examples": [
+        "Project is on track. Schema migration 90% complete. Final testing in progress."
+      ]
+    },
+    "next_steps": {
+      "type": "array",
+      "description": "Next steps and upcoming activities",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "examples": [
+        ["Complete final data validation", "Conduct go-live readiness review", "Deploy to production"]
+      ]
+    },
+    "risks_summary": {
+      "type": "string",
+      "description": "Summary of key risks",
+      "examples": ["2 high-severity risks identified, mitigation plans in place"]
+    },
+    "issues_summary": {
+      "type": "string",
+      "description": "Summary of key issues",
+      "examples": ["3 open issues, 1 blocking deployment, resolution expected by 2025-03-15"]
+    },
+    "data_version_used": {
+      "type": "string",
+      "description": "Version of data or schema being used",
+      "examples": ["v2", "2.0", "2025-03-14"]
+    },
+    "compliance_status": {
+      "type": "object",
+      "description": "Compliance and governance status",
+      "properties": {
+        "data_privacy": {
+          "type": "string",
+          "description": "Data privacy compliance status",
+          "enum": ["compliant", "in_review", "issues_found", "not_applicable"],
+          "examples": ["compliant", "in_review"]
+        },
+        "security": {
+          "type": "string",
+          "description": "Security compliance status",
+          "enum": ["compliant", "in_review", "issues_found", "not_applicable"],
+          "examples": ["compliant"]
+        },
+        "audit_trail": {
+          "type": "string",
+          "description": "Audit trail status",
+          "enum": ["complete", "incomplete", "not_required"],
+          "examples": ["complete"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "lessons_learned": {
+      "type": "array",
+      "description": "Lessons learned during the project",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "examples": [
+        ["Early stakeholder engagement is critical", "Automated testing saved significant time"]
+      ]
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the project",
+      "examples": ["Project panorama updated weekly for executive reporting"]
+    }
+  },
+  "required": ["project", "team", "timeline"],
+  "additionalProperties": false
+}

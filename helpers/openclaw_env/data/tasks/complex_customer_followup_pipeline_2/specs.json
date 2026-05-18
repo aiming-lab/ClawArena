@@ -1,0 +1,137 @@
+{
+  "task_id": "complex_customer_followup_pipeline_2",
+  "instruction": "[Customer Followup Pipeline] Convert customer-related inbox signal into a tracked action. Create helper agent 'customer-coordinator-02' for customer follow-up, search inbox for 'meeting', then create task 'Customer Followup Pipeline risk review task for London (meeting)' due 2026-03-09.",
+  "canonical_instruction": "[Customer Followup Pipeline] Convert customer-related inbox signal into a tracked action. Create helper agent 'customer-coordinator-02' for customer follow-up, search inbox for 'meeting', then create task 'Customer Followup Pipeline risk review task for London (meeting)' due 2026-03-09.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "datetime",
+      "value": "2026-03-09"
+    },
+    {
+      "type": "query",
+      "value": "meeting"
+    },
+    {
+      "type": "title",
+      "value": "Customer Followup Pipeline risk review task for London (meeting)"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "priority",
+      "value": "medium"
+    },
+    {
+      "type": "model",
+      "value": "openai/gpt-4.1"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_model"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "life_work",
+    "online_required"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "email_provider",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "cron_webhook",
+    "agent_mgmt",
+    "security",
+    "channel_mgmt",
+    "messaging",
+    "device_node",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "complex_composed_workflow",
+  "generator_id": "complex_composed_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "complex_template": "customer_followup_pipeline",
+      "complex_variant": 2,
+      "complex_scenario": "Customer Followup Pipeline",
+      "complex_scenario_slug": "customer_followup_pipeline",
+      "step_count": 3,
+      "openclaw_steps": 1,
+      "complex_high_volatility": false,
+      "strict_online_risk": "medium",
+      "realism_tier": "life_work",
+      "causal_chain_score": 1.0,
+      "entity_consistency_pass": true,
+      "filler_step_count": 0,
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw agents add customer-coordinator-02 --model openai/gpt-4.1",
+      "email search --query 'meeting'",
+      "tasks add --title 'Customer Followup Pipeline risk review task for London (meeting)' --priority medium --due 2026-03-09"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "state",
+        "field": "agents.customer-coordinator-02",
+        "condition": "exists",
+        "expected": null,
+        "name": "agent created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "complex_composed_workflow",
+      "params": {
+        "workflow_index": 41
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "task_id": "msg_send_text_39",
+  "instruction": "Send a text message to @bob on discord saying 'Please review the document'.",
+  "domains": [
+    "messaging"
+  ],
+  "difficulty": 1,
+  "initial_state": "default",
+  "template_id": "msg_send_text",
+  "generator_id": "msg_send_text",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "discord",
+      "target": "@bob",
+      "content": "Please review the document"
+    },
+    "private": {
+      "expected_target": "@bob",
+      "expected_channel": "discord",
+      "expected_content": "Please review the document"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw message send --channel discord --target @bob --message 'Please review the document'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "@bob"
+        },
+        "name": "message sent to correct target"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_contains",
+        "expected": {
+          "field": "message",
+          "value": "Please review the document"
+        },
+        "name": "message content correct"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "msg_send_text",
+      "params": {
+        "channel": "discord",
+        "target": "@bob",
+        "content": "Please review the document"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

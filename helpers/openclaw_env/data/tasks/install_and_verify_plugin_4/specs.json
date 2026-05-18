@@ -1,0 +1,87 @@
+{
+  "task_id": "install_and_verify_plugin_4",
+  "instruction": "Install the 'whatsapp' plugin, then verify it appears in plugin list output.",
+  "canonical_instruction": "Install the 'whatsapp' plugin, then verify it appears in plugin list output.",
+  "instruction_variants": [],
+  "visible_constraints": [],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "high_volatility"
+  ],
+  "online_requirement": "none",
+  "provider_dependencies": [],
+  "availability_tier": "stable",
+  "domains": [
+    "plugin_skill"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "install_and_verify_plugin",
+  "generator_id": "install_and_verify_plugin",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "name": "whatsapp",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_plugin": "whatsapp"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw plugins install @openclaw/whatsapp",
+      "openclaw plugins list"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "match_type": "regex",
+        "expected": "openclaw\\ plugins\\ install\\ @openclaw/whatsapp.*?'exit_code':\\s*0",
+        "output_field": "command_history",
+        "name": "install step executed successfully",
+        "ignore_case": false
+      },
+      {
+        "type": "effect",
+        "effect_type": "plugins_installed",
+        "condition": "field_equals",
+        "expected": {
+          "field": "name",
+          "value": "@openclaw/whatsapp"
+        },
+        "name": "plugin 'whatsapp' installed/enabled"
+      },
+      {
+        "type": "output",
+        "match_type": "regex",
+        "expected": "(whatsapp|@openclaw/whatsapp)",
+        "output_field": "last_stdout",
+        "name": "plugin appears in list output",
+        "ignore_case": true
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "install_and_verify_plugin",
+      "params": {
+        "name": "whatsapp"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

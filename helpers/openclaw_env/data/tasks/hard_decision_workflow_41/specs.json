@@ -1,0 +1,157 @@
+{
+  "task_id": "hard_decision_workflow_41",
+  "instruction": "I need the London daily ops setup cleaned up without rebuilding it. Check today's Europe/London calendar context, the next step on the board, and the recurring daily check schedule, then fill only the missing piece.",
+  "canonical_instruction": "Part of the London daily ops setup may already be there. Please check today's Europe/London calendar context, the next step on the board, and the recurring daily check schedule, then finish only the missing piece.",
+  "instruction_variants": [
+    "Can you check today's Europe/London schedule for London, look at the next step on the board and the recurring daily check, and only fill the missing piece?",
+    "Please check today's Europe/London calendar for London, look over the next step on the board and the recurring daily check schedule, and only add what's still missing.",
+    "Can you use today's Europe/London schedule for London, review the next step on the board and the recurring daily check, and fill only the missing piece?",
+    "Please check today's Europe/London schedule for London, review the next step on the board and the recurring daily check, and only fill what's missing.",
+    "Part of the London daily ops setup may already be there. Please check today's Europe/London calendar context, the next step on the board, and the recurring daily check schedule, then finish only the missing piece.",
+    "The London daily ops setup should only need one missing piece filled. Please use today's Europe/London calendar context, check the next step on the board and the recurring daily check schedule, and add only what's missing.",
+    "Please sort out the remaining London daily ops gap. Use today's Europe/London calendar context, check the next step on the board and the recurring daily check schedule, and only add what's still missing."
+  ],
+  "visible_constraints": [
+    {
+      "type": "location",
+      "value": "London"
+    },
+    {
+      "type": "timezone",
+      "value": "Europe/London"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "London ops review"
+    },
+    {
+      "type": "priority",
+      "value": "medium"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_schedule"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "google_tasks",
+    "weather_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "daily_ops_commitment_loop",
+      "hard_decision_variant": 9,
+      "hard_decision_ability": "workflow_completion",
+      "hard_decision_ability_tags": [
+        "workflow_completion",
+        "schedule_inference"
+      ],
+      "prompt_style": "underspecified",
+      "step_count": 5
+    },
+    "private": {
+      "initial_state_overrides": {
+        "cron_jobs.json": [
+          {
+            "id": "cron_existing_ops",
+            "name": "london-existing-daily-ops-check",
+            "schedule": "0 9 * * *",
+            "message": "Run London daily ops check",
+            "status": "active"
+          }
+        ]
+      }
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "weather forecast --location 'London' --days 3",
+      "calendar today --timezone Europe/London",
+      "tasks list --status pending",
+      "openclaw cron list",
+      "tasks add --title 'London ops review' --priority medium --due 2026-03-13"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "state",
+        "field": "cron_jobs",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "daily check already exists"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "not_exists",
+        "expected": null,
+        "name": "no duplicate cron job created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 40
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

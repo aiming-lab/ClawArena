@@ -1,0 +1,51 @@
+{
+  "task_id": "rotate_security_token_1",
+  "instruction": "Rotate the gateway security token: set a new token value 'rotated-token-xyz789', then verify the security configuration shows the token is configured.",
+  "domains": [
+    "security"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "rotate_security_token",
+  "generator_id": "rotate_security_token",
+  "weight": 1.0,
+  "data": {
+    "public": {},
+    "private": {
+      "expected_token": "rotated-token-xyz789"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw config set gateway.auth.token rotated-token-xyz789",
+      "openclaw security audit"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "config",
+        "config_path": "gateway.auth.token",
+        "condition": "equals",
+        "expected": "rotated-token-xyz789",
+        "name": "auth token rotated"
+      },
+      {
+        "type": "output",
+        "match_type": "regex",
+        "expected": "(Summary|critical|warn|audit|security)",
+        "output_field": "last_stdout",
+        "name": "token configured verified",
+        "ignore_case": true
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "rotate_security_token",
+      "params": {},
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

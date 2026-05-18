@@ -1,0 +1,55 @@
+{
+  "task_id": "file_create_and_read_3",
+  "instruction": "Please create a file at '/notes/todo.txt' with content '{\"key\": \"value\", \"enabled\": true}', then read it back to confirm it saved correctly.",
+  "domains": [
+    "file"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "file_create_and_read",
+  "generator_id": "file_create_and_read",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "path": "/notes/todo.txt",
+      "content": "{\"key\": \"value\", \"enabled\": true}"
+    },
+    "private": {
+      "expected_content": "{\"key\": \"value\", \"enabled\": true}"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "file create --path '/notes/todo.txt' --content '{\"key\": \"value\", \"enabled\": true}'",
+      "file read --path '/notes/todo.txt'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "file created"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "{\"key\": \"value\", \"en",
+        "name": "file content readable"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "file_create_and_read",
+      "params": {
+        "path": "/notes/todo.txt",
+        "content": "{\"key\": \"value\", \"enabled\": true}"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

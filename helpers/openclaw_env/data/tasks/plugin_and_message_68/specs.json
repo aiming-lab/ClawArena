@@ -1,0 +1,108 @@
+{
+  "task_id": "plugin_and_message_68",
+  "instruction": "Complete the following setup:\n1. Install the 'matrix' plugin\n2. Log into the telegram channel\n3. Send a message to @team saying 'Setup complete, matrix is active'",
+  "canonical_instruction": "Complete the following setup:\n1. Install the 'matrix' plugin\n2. Log into the telegram channel\n3. Send a message to @team saying 'Setup complete, matrix is active'",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "channel",
+      "value": "telegram"
+    },
+    {
+      "type": "target",
+      "value": "@team"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "high_volatility"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "plugin_and_message",
+  "generator_id": "plugin_and_message",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "plugin": "matrix",
+      "channel": "telegram",
+      "target": "@team",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_plugin": "matrix",
+      "expected_target": "@team"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw plugins enable matrix",
+      "openclaw channels login --channel telegram",
+      "openclaw message send --channel telegram --target @team --message 'Setup complete, matrix is active'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "plugins_installed",
+        "condition": "field_equals",
+        "expected": {
+          "field": "name",
+          "value": "matrix"
+        },
+        "name": "plugin 'matrix' installed"
+      },
+      {
+        "type": "state",
+        "field": "channels.telegram",
+        "condition": "exists",
+        "expected": null,
+        "name": "telegram configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "@team"
+        },
+        "name": "message sent to correct target"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "plugin_and_message",
+      "params": {
+        "plugin": "matrix",
+        "channel": "telegram",
+        "target": "@team"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

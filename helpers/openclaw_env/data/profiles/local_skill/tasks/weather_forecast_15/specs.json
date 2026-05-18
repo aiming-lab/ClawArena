@@ -1,0 +1,57 @@
+{
+  "task_id": "weather_forecast_15",
+  "instruction": "I need to plan my week. Pull up a 7-day weather forecast for Sydney.",
+  "domains": [
+    "weather"
+  ],
+  "difficulty": 1,
+  "initial_state": "default",
+  "template_id": "weather_forecast",
+  "generator_id": "weather_forecast",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "location": "Sydney",
+      "days": 7
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "weather forecast --location 'Sydney' --days 7"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "forecast succeeds"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "7-day forecast for Sydney",
+        "name": "output contains forecast summary line"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "humidity",
+        "name": "output includes humidity values"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "weather_forecast",
+      "params": {
+        "location": "Sydney",
+        "days": 7
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

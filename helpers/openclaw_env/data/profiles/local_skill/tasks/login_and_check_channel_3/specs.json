@@ -1,0 +1,55 @@
+{
+  "task_id": "login_and_check_channel_3",
+  "instruction": "Log into the slack channel, then check and display its current configuration.",
+  "domains": [
+    "channel_mgmt"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "login_and_check_channel",
+  "generator_id": "login_and_check_channel",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "slack"
+    },
+    "private": {
+      "expected_channel": "slack"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw channels login --channel slack",
+      "openclaw channels list --json"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "channels.slack",
+        "condition": "exists",
+        "expected": null,
+        "name": "slack configured"
+      },
+      {
+        "type": "output",
+        "match_type": "regex",
+        "expected": "(\\{|\\}|config|status)",
+        "output_field": "last_stdout",
+        "name": "channel config displayed",
+        "ignore_case": true
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "login_and_check_channel",
+      "params": {
+        "channel": "slack"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

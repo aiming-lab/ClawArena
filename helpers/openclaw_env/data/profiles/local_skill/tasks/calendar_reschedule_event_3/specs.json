@@ -1,0 +1,52 @@
+{
+  "task_id": "calendar_reschedule_event_3",
+  "instruction": "Plans changed - I need to move 'Team standup'. First add it at 2026-03-11T14:00, then update it to 2026-03-13T10:00.",
+  "domains": [
+    "calendar"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "calendar_reschedule_event",
+  "generator_id": "calendar_reschedule_event",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "title": "Team standup",
+      "original_start": "2026-03-11T14:00",
+      "new_start": "2026-03-13T10:00"
+    },
+    "private": {
+      "expected_new_start": "2026-03-13T10:00"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "calendar add-event --title 'Team standup' --start 2026-03-11T14:00",
+      "calendar list",
+      "calendar update-event --id evt_0001 --start 2026-03-13T10:00"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "calendar_reschedule_event",
+      "params": {
+        "original_title": "Team standup",
+        "original_start": "2026-03-11T14:00",
+        "new_start": "2026-03-13T10:00"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

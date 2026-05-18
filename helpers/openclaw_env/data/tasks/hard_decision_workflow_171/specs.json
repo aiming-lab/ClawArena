@@ -1,0 +1,171 @@
+{
+  "task_id": "hard_decision_workflow_171",
+  "instruction": "Something in the Berlin release setup is stale. Review the current model, the next-step task on the board, and the sync on the calendar, repair the stale model setting, refresh the handoff file, and leave the sync and next step correctly set.",
+  "canonical_instruction": "I need the Berlin release setup cleaned up. Review the current model, the next-step task on the board, and the sync on the calendar, fix the stale model setting, refresh the handoff file, and leave the sync and next step correctly set.",
+  "instruction_variants": [
+    "Something's off in the Berlin release setup. Review the current model, the next-step task on the board, and the sync on the calendar, fix the stale model setting, update the handoff file, and leave the next step and sync correctly set.",
+    "The Berlin release setup has something stale in it. Review the current model, the next-step task on the board, and the sync on the calendar, repair the stale model setting, refresh the handoff file, and leave the next step and sync correctly set.",
+    "Something in the Berlin release setup is off. Review the current model, the next-step task on the board, and the sync on the calendar, fix the stale model setting, update the handoff file, and leave the next step and sync correctly set.",
+    "The Berlin release setup needs a cleanup pass. Review the current model, the next-step task on the board, and the sync on the calendar, repair the stale model setting, refresh the handoff file, and leave the next step and sync correctly set.",
+    "I need the Berlin release setup cleaned up. Review the current model, the next-step task on the board, and the sync on the calendar, fix the stale model setting, refresh the handoff file, and leave the sync and next step correctly set.",
+    "The Berlin release setup still has one stale detail in it. Review the current model, the next-step task on the board, and the sync on the calendar, fix the stale model setting, refresh the handoff file, and leave the sync and next step correctly set.",
+    "I need the Berlin release setup back in shape. Review the current model, the next-step task on the board, and the sync on the calendar, repair the stale model setting, refresh the handoff file, and leave the sync and next step correctly set."
+  ],
+  "visible_constraints": [],
+  "hidden_constraints": [
+    {
+      "type": "path",
+      "value": "/ops/release-handoff.txt"
+    },
+    {
+      "type": "title",
+      "value": "Berlin release follow-through"
+    },
+    {
+      "type": "title",
+      "value": "Berlin release sync"
+    },
+    {
+      "type": "priority",
+      "value": "high"
+    },
+    {
+      "type": "model",
+      "value": "openai/gpt-5.2"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_model",
+    "infer_repair",
+    "infer_schedule"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "hard_wrong_model",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "state_repair_followthrough",
+      "hard_decision_variant": 19,
+      "hard_decision_ability": "state_repair",
+      "hard_decision_ability_tags": [
+        "state_repair",
+        "state_inspection",
+        "workflow_completion"
+      ],
+      "prompt_style": "underspecified",
+      "step_count": 7
+    },
+    "private": {
+      "initial_state_overrides": {}
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw config get agent.model",
+      "tasks list --status pending",
+      "calendar list",
+      "file create --path '/ops/release-handoff.txt' --content 'Berlin refreshed release handoff notes.'",
+      "openclaw models set openai/gpt-5.2",
+      "tasks add --title 'Berlin release follow-through' --priority high --due 2026-03-09",
+      "calendar add-event --title 'Berlin release sync' --start 2026-03-10T13:00"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "file created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "files_created",
+        "condition": "field_contains",
+        "expected": {
+          "field": "path",
+          "value": "handoff"
+        },
+        "name": "handoff file path references handoff"
+      },
+      {
+        "type": "config",
+        "config_path": "agent.model",
+        "condition": "equals",
+        "expected": "openai/gpt-5.2",
+        "name": "model set to openai/gpt-5.2"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 170
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

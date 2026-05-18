@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hbench.local/schemas/data_overview.json",
+  "title": "Data Overview Schema",
+  "description": "Schema for dataset overview and summary information in the hil_s1 scenario. Provides high-level statistics about datasets including record counts, date ranges, and data quality issues.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the data overview schema",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "examples": ["1.0", "2.0"]
+    },
+    "generated_at": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when this overview was generated",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+      "examples": ["2025-03-14T10:30:00Z"]
+    },
+    "dataset": {
+      "type": "string",
+      "description": "Name or identifier of the dataset",
+      "minLength": 1,
+      "examples": ["customer_records", "transactions_v2", "user_profiles"]
+    },
+    "dataset_version": {
+      "type": "string",
+      "description": "Version of the dataset schema or data",
+      "examples": ["v1", "v2", "2.0", "2025-03-14"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of what this dataset contains",
+      "minLength": 1,
+      "examples": ["Customer master data with contact information and preferences"]
+    },
+    "record_count": {
+      "type": "integer",
+      "description": "Total number of records in the dataset",
+      "minimum": 0,
+      "examples": [1234567, 98765]
+    },
+    "file_size_bytes": {
+      "type": "integer",
+      "description": "Size of the dataset file(s) in bytes",
+      "minimum": 0,
+      "examples": [1048576, 52428800]
+    },
+    "file_size_human": {
+      "type": "string",
+      "description": "Human-readable file size (with thousands separators)",
+      "pattern": "^[0-9,]+(\\.[0-9]+)?\\s*(B|KB|MB|GB|TB)$",
+      "examples": ["1,024 KB", "50 MB", "2.5 GB"]
+    },
+    "date_range": {
+      "type": "object",
+      "description": "Date range covered by the data",
+      "properties": {
+        "earliest": {
+          "type": "string",
+          "description": "Earliest date in the dataset (YYYY-MM-DD format)",
+          "format": "date",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "examples": ["2024-01-01", "2023-06-15"]
+        },
+        "latest": {
+          "type": "string",
+          "description": "Latest date in the dataset (YYYY-MM-DD format)",
+          "format": "date",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "examples": ["2025-03-14", "2025-02-28"]
+        },
+        "span_days": {
+          "type": "integer",
+          "description": "Number of days between earliest and latest dates",
+          "minimum": 0,
+          "examples": [365, 438]
+        }
+      },
+      "required": ["earliest", "latest"],
+      "additionalProperties": false
+    },
+    "fields": {
+      "type": "array",
+      "description": "List of fields/columns in the dataset with metadata",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Field name",
+            "minLength": 1,
+            "examples": ["customer_id", "email", "created_date"]
+          },
+          "type": {
+            "type": "string",
+            "description": "Data type of the field",
+            "enum": ["string", "integer", "float", "boolean", "date", "datetime", "timestamp", "json", "array", "object"],
+            "examples": ["string", "integer", "date"]
+          },
+          "nullable": {
+            "type": "boolean",
+            "description": "Whether the field can contain null values",
+            "default": true
+          },
+          "unique": {
+            "type": "boolean",
+            "description": "Whether field values should be unique",
+            "default": false
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of what this field contains",
+            "examples": ["Unique customer identifier", "Customer email address"]
+          }
+        },
+        "required": ["name", "type"],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "statistics": {
+      "type": "object",
+      "description": "Statistical summary of the dataset",
+      "properties": {
+        "null_count": {
+          "type": "integer",
+          "description": "Total number of null/missing values across all fields",
+          "minimum": 0,
+          "examples": [0, 1234, 98765]
+        },
+        "duplicate_count": {
+          "type": "integer",
+          "description": "Number of duplicate records found",
+          "minimum": 0,
+          "examples": [0, 42, 567]
+        },
+        "completeness_percent": {
+          "type": "number",
+          "description": "Percentage of non-null values (0-100)",
+          "minimum": 0,
+          "maximum": 100,
+          "examples": [99.8, 95.5, 100.0]
+        },
+        "unique_count": {
+          "type": "integer",
+          "description": "Number of unique records (after deduplication)",
+          "minimum": 0,
+          "examples": [1234000, 98700]
+        }
+      },
+      "additionalProperties": false
+    },
+    "issues": {
+      "type": ["array", "object"],
+      "description": "Known data quality issues or concerns",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the issue",
+            "pattern": "^[A-Z]+-[0-9]+$",
+            "examples": ["ISSUE-001", "DQ-042"]
+          },
+          "severity": {
+            "type": "string",
+            "description": "Severity level of the issue",
+            "enum": ["low", "medium", "high", "critical"],
+            "default": "medium"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category of the issue",
+            "enum": ["completeness", "accuracy", "consistency", "validity", "timeliness", "uniqueness"],
+            "examples": ["completeness", "accuracy"]
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the issue",
+            "minLength": 1,
+            "examples": ["Email field contains 5% invalid email addresses", "Duplicate customer records found"]
+          },
+          "affected_fields": {
+            "type": "array",
+            "description": "List of fields affected by this issue",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "examples": [["email"], ["customer_id", "phone"]]
+          },
+          "affected_records": {
+            "type": "integer",
+            "description": "Number of records affected by this issue",
+            "minimum": 0,
+            "examples": [5000, 123]
+          },
+          "unverified": {
+            "type": "boolean",
+            "description": "Flag indicating if this issue is not yet verified",
+            "default": false
+          }
+        },
+        "required": ["id", "severity", "category", "description"],
+        "additionalProperties": false
+      }
+    },
+    "source": {
+      "type": "string",
+      "description": "Source of the data or where it was extracted from",
+      "examples": ["production database", "customer_data.csv", "API export 2025-03-14"]
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or comments about the dataset",
+      "examples": ["Data extracted from production on 2025-03-14. Contains sensitive PII."]
+    }
+  },
+  "required": ["dataset", "record_count", "date_range"],
+  "additionalProperties": false
+}

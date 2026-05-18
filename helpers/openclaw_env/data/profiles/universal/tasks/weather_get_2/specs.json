@@ -1,0 +1,59 @@
+{
+  "task_id": "weather_get_2",
+  "instruction": "I'm heading out soon. What's the weather like right now in London?",
+  "domains": [
+    "weather"
+  ],
+  "difficulty": 1,
+  "initial_state": "default",
+  "template_id": "weather_get",
+  "generator_id": "weather_get",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "location": "London"
+    },
+    "private": {
+      "expected_location": "London"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "curl -sG \"https://geocoding-api.open-meteo.com/v1/search\" --data-urlencode \"name=London\" --data-urlencode \"count=1\" --data-urlencode \"language=en\" --data-urlencode \"format=json\"",
+      "curl -sG \"https://timeapi.io/api/Time/current/zone\" --data-urlencode \"timeZone=Europe/London\"",
+      "curl -sG \"https://api.open-meteo.com/v1/forecast\" --data-urlencode \"latitude=51.5074\" --data-urlencode \"longitude=-0.1278\" --data-urlencode \"current=temperature_2m,relative_humidity_2m,weather_code\" --data-urlencode \"timezone=Europe/London\""
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "weather get succeeds"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "\"current\"",
+        "name": "output contains current weather object"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "\"temperature_2m\"",
+        "name": "output contains temperature field"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "weather_get",
+      "params": {
+        "location": "London"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

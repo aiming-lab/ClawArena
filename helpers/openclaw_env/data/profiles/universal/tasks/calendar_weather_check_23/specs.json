@@ -1,0 +1,56 @@
+{
+  "task_id": "calendar_weather_check_23",
+  "instruction": "I planned 'Outdoor workshop' for 2026-03-02 in New York. Check the forecast — if it's rainy, reschedule to 2026-03-05T10:00; otherwise book it at 2026-03-02T10:00.",
+  "domains": [
+    "calendar",
+    "weather"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "calendar_weather_check",
+  "generator_id": "calendar_weather_check",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "event_title": "Outdoor workshop",
+      "original_date": "2026-03-02",
+      "fallback_datetime": "2026-03-05T10:00",
+      "location": "New York"
+    },
+    "private": {
+      "expected_reschedule_datetime": "2026-03-05T10:00"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "curl -sG \"https://geocoding-api.open-meteo.com/v1/search\" --data-urlencode \"name=New York\" --data-urlencode \"count=1\" --data-urlencode \"language=en\" --data-urlencode \"format=json\"",
+      "curl -sG \"https://timeapi.io/api/Time/current/zone\" --data-urlencode \"timeZone=America/New_York\"",
+      "curl -sG \"https://archive-api.open-meteo.com/v1/archive\" --data-urlencode \"latitude=40.7128\" --data-urlencode \"longitude=-74.0060\" --data-urlencode \"start_date=2026-03-02\" --data-urlencode \"end_date=2026-03-02\" --data-urlencode \"daily=weather_code,temperature_2m_max,temperature_2m_min\" --data-urlencode \"timezone=America/New_York\"",
+      "gcalcli add --title 'Outdoor workshop' --when 2026-03-05T10:00 --where 'New York'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "event added to calendar"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "calendar_weather_check",
+      "params": {
+        "event_title": "Outdoor workshop",
+        "rainy_date": "2026-03-02",
+        "fallback_date": "2026-03-05T10:00",
+        "location": "New York"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

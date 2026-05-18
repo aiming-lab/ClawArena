@@ -1,0 +1,163 @@
+{
+  "task_id": "hard_decision_workflow_138",
+  "instruction": "Please use the review email note, the forecast, and the Europe/Dublin calendar for Dublin to decide whether this stays live or goes async. Leave the next step on the board, keep the daily check scheduled, put the review on the calendar if live, and only send manager@example.com an update if async.",
+  "canonical_instruction": "Please use the review email note, the forecast, and the Europe/Dublin calendar for Dublin before deciding whether this stays live or moves async. Leave the next step on the board, keep the daily check scheduled, put the review on the calendar if live, and email manager@example.com only if async.",
+  "instruction_variants": [
+    "For Dublin, use the review email note, the forecast, and the Europe/Dublin calendar to decide whether this stays live or goes async. Leave the next step on the board, keep the daily check scheduled, put the review on the calendar if live, and send manager@example.com an update only if async.",
+    "Can you use the review email note, the forecast, and the Europe/Dublin calendar for Dublin to decide whether this stays live or moves async? Leave the next step on the board, keep the daily check scheduled, put the review on the calendar if live, and send manager@example.com an update only if async.",
+    "For Dublin, check the review email note, the forecast, and the Europe/Dublin calendar, decide whether this stays live or shifts async, leave the next step on the board, keep the daily check scheduled, put the review on the calendar if live, and send manager@example.com an update only if async.",
+    "Please use the review email note, the forecast, and the Europe/Dublin calendar for Dublin before deciding whether this stays live or moves async. Leave the next step on the board, keep the daily check scheduled, put the review on the calendar if live, and email manager@example.com only if async.",
+    "I need a call on whether the Dublin ops review stays live or moves async. Use the review email note, the forecast, and the Europe/Dublin calendar, leave the next step on the board, keep the daily check scheduled, put the review on the calendar if live, and email manager@example.com only if async.",
+    "For Dublin, use the review email note, the forecast, and the Europe/Dublin calendar before deciding whether this stays live or switches async. Leave the next step on the board, keep the daily check scheduled, put the review on the calendar if live, and email manager@example.com only if async.",
+    "Please use the review email note, the forecast, and the Europe/Dublin calendar for Dublin to decide whether this stays live or moves async. Leave the next step on the board, keep the daily check scheduled, put the review on the calendar if live, and email manager@example.com only if async."
+  ],
+  "visible_constraints": [
+    {
+      "type": "location",
+      "value": "Dublin"
+    },
+    {
+      "type": "timezone",
+      "value": "Europe/Dublin"
+    },
+    {
+      "type": "query",
+      "value": "review"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "title",
+      "value": "Dublin ops next step"
+    },
+    {
+      "type": "title",
+      "value": "Dublin primary ops review"
+    },
+    {
+      "type": "priority",
+      "value": "medium"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title",
+    "infer_schedule",
+    "infer_branch",
+    "infer_message"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "challenge",
+    "hard_decision"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "email_provider",
+    "google_tasks",
+    "weather_provider"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "channel_mgmt",
+    "messaging",
+    "security",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "hard_decision_workflow",
+  "generator_id": "hard_decision_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "hard_decision_scenario": "multi_source_decision_followthrough",
+      "hard_decision_variant": 6,
+      "hard_decision_ability": "multi_source_reasoning",
+      "hard_decision_ability_tags": [
+        "multi_source_reasoning",
+        "branch_resolution",
+        "workflow_completion"
+      ],
+      "prompt_style": "brief",
+      "step_count": 9
+    },
+    "private": {
+      "initial_state_overrides": {}
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "weather forecast --location 'Dublin' --days 1",
+      "calendar today --timezone Europe/Dublin",
+      "email search --query 'review'",
+      "email read --id email_seed_5",
+      "openclaw cron list",
+      "tasks list --status pending",
+      "tasks add --title 'Dublin ops next step' --priority medium --due 2026-03-15",
+      "openclaw cron add --name multi-source-hard-ops-06 --cron '45 7 * * *' --message 'Run Dublin daily ops check'",
+      "calendar add-event --title 'Dublin primary ops review' --start 2026-03-18T11:30"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar event created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "hard_decision_workflow",
+      "params": {
+        "workflow_index": 137
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

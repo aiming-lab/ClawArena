@@ -1,0 +1,53 @@
+{
+  "task_id": "msg_broadcast_4",
+  "instruction": "Broadcast the message 'Server maintenance tonight at 11pm' to the following targets: @alice,@bob,@charlie.",
+  "domains": [
+    "messaging"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "msg_broadcast",
+  "generator_id": "msg_broadcast",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "targets": "@alice,@bob,@charlie",
+      "content": "Server maintenance tonight at 11pm"
+    },
+    "private": {
+      "expected_targets": [
+        "@alice",
+        "@bob",
+        "@charlie"
+      ],
+      "expected_count": 3
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw message broadcast --targets @alice @bob @charlie --message 'Server maintenance tonight at 11pm'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "count_gte",
+        "expected": 3,
+        "name": "broadcast sent to 3 targets"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "msg_broadcast",
+      "params": {
+        "targets": "@alice,@bob,@charlie",
+        "content": "Server maintenance tonight at 11pm"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill"
+      }
+    }
+  }
+}

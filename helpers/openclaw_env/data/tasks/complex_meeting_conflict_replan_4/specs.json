@@ -1,0 +1,141 @@
+{
+  "task_id": "complex_meeting_conflict_replan_4",
+  "instruction": "[Meeting Conflict Replan] Review calendar conflicts and create a replacement task plan. Review calendar between 2026-03-09 and 2026-03-13, create helper agent 'meeting-coordinator-04' for replanning, then create task 'Meeting Conflict Replan decision log task for Seattle (meeting)' due 2026-03-10.",
+  "canonical_instruction": "[Meeting Conflict Replan] Review calendar conflicts and create a replacement task plan. Review calendar between 2026-03-09 and 2026-03-13, create helper agent 'meeting-coordinator-04' for replanning, then create task 'Meeting Conflict Replan decision log task for Seattle (meeting)' due 2026-03-10.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "datetime",
+      "value": "2026-03-09"
+    },
+    {
+      "type": "datetime",
+      "value": "2026-03-13"
+    },
+    {
+      "type": "datetime",
+      "value": "2026-03-10"
+    },
+    {
+      "type": "title",
+      "value": "Meeting Conflict Replan decision log task for Seattle (meeting)"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "priority",
+      "value": "high"
+    },
+    {
+      "type": "model",
+      "value": "anthropic/claude-sonnet-4-5-20250929"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_model"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "life_work",
+    "online_required"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "google_calendar",
+    "google_tasks"
+  ],
+  "availability_tier": "external-risk",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "cron_webhook",
+    "agent_mgmt",
+    "security",
+    "channel_mgmt",
+    "messaging",
+    "device_node",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "complex_composed_workflow",
+  "generator_id": "complex_composed_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "complex_template": "meeting_conflict_replan",
+      "complex_variant": 4,
+      "complex_scenario": "Meeting Conflict Replan",
+      "complex_scenario_slug": "meeting_conflict_replan",
+      "step_count": 3,
+      "openclaw_steps": 1,
+      "complex_high_volatility": false,
+      "strict_online_risk": "medium",
+      "realism_tier": "life_work",
+      "causal_chain_score": 1.0,
+      "entity_consistency_pass": true,
+      "filler_step_count": 0,
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "calendar list --from 2026-03-09 --to 2026-03-13",
+      "openclaw agents add meeting-coordinator-04 --model anthropic/claude-sonnet-4-5-20250929",
+      "tasks add --title 'Meeting Conflict Replan decision log task for Seattle (meeting)' --priority high --due 2026-03-10"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "state",
+        "field": "agents.meeting-coordinator-04",
+        "condition": "exists",
+        "expected": null,
+        "name": "agent created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "complex_composed_workflow",
+      "params": {
+        "workflow_index": 23
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

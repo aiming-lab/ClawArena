@@ -1,0 +1,153 @@
+{
+  "task_id": "complex_incident_channel_triage_7",
+  "instruction": "[Incident Channel Triage] Establish incident comms and create the first triage task. Log into slack, send incident kickoff message to #ops-bridge, verify current channel configuration, then create triage task 'Incident Channel Triage risk review task for London (meeting)' due 2026-03-12.",
+  "canonical_instruction": "[Incident Channel Triage] Establish incident comms and create the first triage task. Log into slack, send incident kickoff message to #ops-bridge, verify current channel configuration, then create triage task 'Incident Channel Triage risk review task for London (meeting)' due 2026-03-12.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "datetime",
+      "value": "2026-03-12"
+    },
+    {
+      "type": "channel",
+      "value": "slack"
+    },
+    {
+      "type": "target",
+      "value": "#ops-bridge"
+    },
+    {
+      "type": "title",
+      "value": "Incident Channel Triage risk review task for London (meeting)"
+    }
+  ],
+  "hidden_constraints": [
+    {
+      "type": "priority",
+      "value": "high"
+    }
+  ],
+  "decision_requirements": [
+    "infer_priority",
+    "infer_title"
+  ],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "underspecified",
+    "high_volatility",
+    "life_work",
+    "online_required"
+  ],
+  "online_requirement": "required",
+  "provider_dependencies": [
+    "google_tasks",
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "composite",
+    "monitoring",
+    "tasks",
+    "calendar",
+    "email",
+    "weather",
+    "setup_config",
+    "plugin_skill",
+    "cron_webhook",
+    "agent_mgmt",
+    "security",
+    "channel_mgmt",
+    "messaging",
+    "device_node",
+    "file"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "complex_composed_workflow",
+  "generator_id": "complex_composed_workflow",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "complex_template": "incident_channel_triage",
+      "complex_variant": 7,
+      "complex_scenario": "Incident Channel Triage",
+      "complex_scenario_slug": "incident_channel_triage",
+      "step_count": 4,
+      "openclaw_steps": 3,
+      "complex_high_volatility": true,
+      "strict_online_risk": "high",
+      "realism_tier": "life_work",
+      "causal_chain_score": 1.0,
+      "entity_consistency_pass": true,
+      "filler_step_count": 0,
+      "prompt_style": "direct"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw channels login --channel slack",
+      "openclaw message send --channel slack --target #ops-bridge --message 'Incident Channel Triage risk review: post update for London and confirm ownership.'",
+      "openclaw channels list --json",
+      "tasks add --title 'Incident Channel Triage risk review task for London (meeting)' --priority high --due 2026-03-12"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "final command succeeds"
+      },
+      {
+        "type": "state",
+        "field": "channels.slack",
+        "condition": "exists",
+        "expected": null,
+        "name": "channel configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "message sent"
+      },
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "output",
+        "match_type": "regex",
+        "expected": "(openclaw\\ channels\\ list\\ \\-\\-json|openclaw\\ plugins\\ list|openclaw\\ message\\ search)",
+        "output_field": "command_history",
+        "name": "high-volatility flow includes verification step",
+        "ignore_case": false
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "complex_composed_workflow",
+      "params": {
+        "workflow_index": 66
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

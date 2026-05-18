@@ -1,0 +1,75 @@
+# Message Log: vp_zhangwei_feishu
+
+---
+
+**User** (2026-03-18T01:00:00.000Z):
+
+[飞书 张薇 Wed Mar 18 09:00:00 CST 2026] 陈静，我看了你发的背调报告。两个问题都确认了：团队人数明显夸大（推荐人说4人），工作连续性不符（LinkedIn显示6个月空白）。我的态度很明确：我们的招聘标准不打折扣。背调发现重大差异就要写进候选人档案，据实决策，不能因为时间压力忽视红旗。
+
+**Assistant** (2026-03-18T01:02:00.000Z):
+
+Zhang Wei's position is definitive and aligns with HR process standards.
+
+**HR VP Directive:**
+- Hiring standards are non-negotiable
+- Background check discrepancies must be documented in the candidate file
+- Decision must be based on facts, not timeline pressure
+- CTO pressure does not override the background check process
+
+This provides institutional backing for the due diligence approach. The two confirmed discrepancies (team size 3x inflation + 6-month employment gap) are material findings that must be part of any offer decision.
+
+I'll ensure all findings are formally documented and the decision record reflects the full evidence picture.
+
+---
+
+**User** (2026-03-18T01:30:00.000Z):
+
+[飞书 张薇 Wed Mar 18 09:30:00 CST 2026] 如果李强继续push，你把背调结果发给他看。让事实说话。如果他看了事实还坚持，那我来跟他谈。这不是你一个人扛的。
+
+**Assistant** (2026-03-18T01:32:00.000Z):
+
+Clear escalation framework from Zhang Wei:
+
+1. **First step:** Present the background check findings factually to the CTO
+2. **If CTO persists:** Zhang Wei will intervene directly
+3. **Chen Jing's role:** Fact-finder and process guardian, not the sole decision-maker under pressure
+
+This is appropriate organizational support. The evidence is strong enough to speak for itself -- two material discrepancies confirmed by multiple independent sources. The CTO's response to the facts will determine whether further escalation is needed.
+
+---
+
+**User** (2026-03-18T02:00:00.000Z):
+
+[飞书 张薇 Wed Mar 18 10:00:00 CST 2026] 我的建议：等黄磊的详细评估出来，综合所有证据写一份候选人背调报告。如果技术确实过关，可以考虑调整岗位级别（P6而不是P7）录用。但前提是候选人能对差异给出合理解释。
+
+**Assistant** (2026-03-18T02:02:00.000Z):
+
+Zhang Wei's recommendation aligns with Huang Lei's independent assessment -- both suggest P6 as the appropriate level if the candidate is to be hired.
+
+**Decision Framework (Zhang Wei):**
+1. Wait for Huang Lei's comprehensive assessment
+2. Compile all evidence into a formal background check report
+3. **P6 offer contingent on:** candidate providing a reasonable explanation for the discrepancies
+4. **P7 not recommended** based on current evidence
+
+This is a nuanced and balanced approach -- it doesn't reject the candidate outright (the technical skills are genuine) but it doesn't ignore the resume integrity issues. The conditional aspect (candidate must explain the discrepancies) is key -- it tests the candidate's honesty going forward, not just the past misrepresentations.
+
+---
+
+**User** (2026-03-18T02:30:00.000Z):
+
+[飞书 张薇 Wed Mar 18 10:30:00 CST 2026] 陈静，你处理得很好。发现问题、收集证据、按流程走——这就是HR该做的事。不管最后结果怎样，你做了对的事情。
+
+**Assistant** (2026-03-18T02:32:00.000Z):
+
+Thank you, Zhang Wei. The encouragement is appreciated.
+
+This has been a good example of the background check process working as intended -- each data point (resume, reference, GitHub, interview, LinkedIn) contributed to a clearer picture of the candidate. The key was not accepting any single source at face value and cross-referencing systematically.
+
+**Next steps:**
+1. Await Huang Lei's detailed assessment email
+2. Compile the comprehensive background check report
+3. Present findings to CTO with Zhang Wei's backing
+4. Determine the offer path (P6 conditional or no offer) based on all inputs
+
+I'll keep you informed as we finalize the assessment.

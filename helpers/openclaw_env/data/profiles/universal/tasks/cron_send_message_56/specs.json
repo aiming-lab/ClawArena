@@ -1,0 +1,59 @@
+{
+  "task_id": "cron_send_message_56",
+  "instruction": "Log into the whatsapp channel, then create a cron job with schedule '0 8 * * 1' that sends a daily report to #general via whatsapp.",
+  "domains": [
+    "cron_webhook",
+    "messaging"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "cron_send_message",
+  "generator_id": "cron_send_message",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "whatsapp",
+      "target": "#general",
+      "schedule": "0 8 * * 1"
+    },
+    "private": {
+      "expected_channel": "whatsapp"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw channels login --channel whatsapp",
+      "openclaw cron add --name daily-report-693abeae --cron '0 8 * * 1' --message 'Send daily report to #general via whatsapp'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "channels.whatsapp",
+        "condition": "exists",
+        "expected": null,
+        "name": "whatsapp channel configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "cron_send_message",
+      "params": {
+        "channel": "whatsapp",
+        "target": "#general",
+        "schedule": "0 8 * * 1"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

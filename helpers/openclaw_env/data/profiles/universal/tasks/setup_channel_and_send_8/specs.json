@@ -1,0 +1,63 @@
+{
+  "task_id": "setup_channel_and_send_8",
+  "instruction": "First, log into the discord channel. Then send a message to #general saying 'Channel setup complete, testing messaging.'.",
+  "domains": [
+    "channel_mgmt",
+    "messaging"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "setup_channel_and_send",
+  "generator_id": "setup_channel_and_send",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "discord",
+      "target": "#general",
+      "content": "Channel setup complete, testing messaging."
+    },
+    "private": {
+      "expected_channel": "discord",
+      "expected_target": "#general"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw channels login --channel discord",
+      "openclaw message send --channel discord --target #general --message 'Channel setup complete, testing messaging.'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "state",
+        "field": "channels.discord",
+        "condition": "exists",
+        "expected": null,
+        "name": "discord configured"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "#general"
+        },
+        "name": "message sent to correct target"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "setup_channel_and_send",
+      "params": {
+        "channel": "discord",
+        "target": "#general",
+        "content": "Channel setup complete, testing messaging."
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "task_id": "full_workflow_multi_app_12",
+  "instruction": "There's an email about 'proposal' that needs action. Search my inbox, create a follow-up task due 2026-03-12, block time at 2026-03-13T14:00 on my calendar, then let @alice know via slack that you're on it.",
+  "domains": [
+    "email",
+    "tasks",
+    "calendar",
+    "messaging"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "full_workflow_multi_app",
+  "generator_id": "full_workflow_multi_app",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "email_query": "proposal",
+      "channel": "slack",
+      "notify_target": "@alice",
+      "task_due": "2026-03-12",
+      "meeting_start": "2026-03-13T14:00"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "email search --query 'proposal'",
+      "tasks add --title 'Follow up: Project proposal' --priority high --due 2026-03-12",
+      "gcalcli add --title 'Project proposal review' --when 2026-03-13T14:00",
+      "openclaw channels login --channel slack",
+      "openclaw message send --channel slack --target @alice --message 'I am working on the proposal follow-up.'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "tasks_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "task created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "calendar block created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "notification sent"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "full_workflow_multi_app",
+      "params": {
+        "email_query": "proposal",
+        "channel": "slack",
+        "notify_target": "@alice",
+        "task_due": "2026-03-12",
+        "meeting_start": "2026-03-13T14:00"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}

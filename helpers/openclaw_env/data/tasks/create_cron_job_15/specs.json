@@ -1,0 +1,83 @@
+{
+  "task_id": "create_cron_job_15",
+  "instruction": "Create a cron job that runs on schedule '0 8 * * 1' and sends a status update message to @team.",
+  "canonical_instruction": "Create a cron job that runs on schedule '0 8 * * 1' and sends a status update message to @team.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "cron",
+      "value": "0 8 * * 1"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "single_step"
+  ],
+  "online_requirement": "none",
+  "provider_dependencies": [],
+  "availability_tier": "stable",
+  "domains": [
+    "cron_webhook"
+  ],
+  "difficulty": 2,
+  "initial_state": "default",
+  "template_id": "create_cron_job",
+  "generator_id": "create_cron_job",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "schedule": "0 8 * * 1",
+      "target": "@team",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_schedule": "0 8 * * 1"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw cron add --name status-update-fbf7da38 --cron '0 8 * * 1' --message 'Send scheduled status update to @team'"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "cron job created"
+      },
+      {
+        "type": "effect",
+        "effect_type": "cron_jobs_created",
+        "condition": "field_contains",
+        "expected": {
+          "field": "schedule",
+          "value": "0 8 * * 1"
+        },
+        "name": "cron schedule is '0 8 * * 1'"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "create_cron_job",
+      "params": {
+        "schedule": "0 8 * * 1",
+        "target": "@team"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

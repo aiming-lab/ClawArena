@@ -1,0 +1,107 @@
+{
+  "task_id": "send_and_calendar_11",
+  "instruction": "I want to reach out to @alice and lock in a meeting. Send them on slack: 'Following up — scheduling a call to discuss.'. Then book a follow-up at 2026-03-10T15:00 titled 'Follow-up with @alice'.",
+  "canonical_instruction": "I want to reach out to @alice and lock in a meeting. Send them on slack: 'Following up — scheduling a call to discuss.'. Then book a follow-up at 2026-03-10T15:00 titled 'Follow-up with @alice'.",
+  "instruction_variants": [],
+  "visible_constraints": [
+    {
+      "type": "datetime",
+      "value": "2026-03-10T15:00"
+    },
+    {
+      "type": "channel",
+      "value": "slack"
+    },
+    {
+      "type": "target",
+      "value": "@alice"
+    },
+    {
+      "type": "title",
+      "value": "Follow-up with @alice"
+    }
+  ],
+  "hidden_constraints": [],
+  "decision_requirements": [],
+  "realism_tags": [
+    "multi_step",
+    "cross_domain",
+    "high_volatility"
+  ],
+  "online_requirement": "optional",
+  "provider_dependencies": [
+    "google_calendar",
+    "channel_provider"
+  ],
+  "availability_tier": "flaky",
+  "domains": [
+    "messaging",
+    "calendar"
+  ],
+  "difficulty": 3,
+  "initial_state": "default",
+  "template_id": "send_and_calendar",
+  "generator_id": "send_and_calendar",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "channel": "slack",
+      "target": "@alice",
+      "message": "Following up — scheduling a call to discuss.",
+      "meeting_start": "2026-03-10T15:00",
+      "prompt_style": "direct"
+    },
+    "private": {
+      "expected_target": "@alice"
+    }
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "openclaw channels login --channel slack",
+      "openclaw message send --channel slack --target @alice --message 'Following up — scheduling a call to discuss.'",
+      "calendar add-event --title 'Follow-up with @alice' --start 2026-03-10T15:00"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "effect",
+        "effect_type": "messages_sent",
+        "condition": "field_equals",
+        "expected": {
+          "field": "target",
+          "value": "@alice"
+        },
+        "name": "message sent to @alice"
+      },
+      {
+        "type": "effect",
+        "effect_type": "calendar_events_created",
+        "condition": "count_gte",
+        "expected": 1,
+        "name": "follow-up meeting booked"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "send_and_calendar",
+      "params": {
+        "channel": "slack",
+        "target": "@alice",
+        "message": "Following up — scheduling a call to discuss.",
+        "meeting_start": "2026-03-10T15:00"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "local_skill",
+        "complex_task_pack": "standard",
+        "complex_scenario_profile": "life_work",
+        "complex_min_steps": 3,
+        "complex_max_steps": 5,
+        "hard_decision_variants_per_scenario": 16,
+        "hard_decision_scenario_counts": {},
+        "include_branch_sensitive": false,
+        "branch_sensitive_variants_per_scenario": 0
+      }
+    }
+  }
+}

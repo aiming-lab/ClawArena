@@ -1,0 +1,55 @@
+{
+  "task_id": "calendar_today_online_3",
+  "instruction": "I need the current date and time in Asia/Shanghai right now. Please look it up and report it.",
+  "domains": [
+    "calendar"
+  ],
+  "difficulty": 1,
+  "initial_state": "default",
+  "template_id": "calendar_today_online",
+  "generator_id": "calendar_today_online",
+  "weight": 1.0,
+  "data": {
+    "public": {
+      "timezone": "Asia/Shanghai"
+    },
+    "private": {}
+  },
+  "ground_truth": {
+    "solution_commands": [
+      "gcalcli now --timezone Asia/Shanghai --online"
+    ],
+    "evaluation_checks": [
+      {
+        "type": "output",
+        "condition": "exit_code_zero",
+        "expected": null,
+        "name": "calendar today online succeeds"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "Current date-time for Asia/Shanghai:",
+        "name": "output contains requested timezone"
+      },
+      {
+        "type": "output",
+        "condition": "contains",
+        "expected": "Source:",
+        "name": "output includes data source"
+      }
+    ],
+    "answer": null,
+    "metadata": {
+      "generator_id": "calendar_today_online",
+      "params": {
+        "timezone": "Asia/Shanghai"
+      },
+      "generation_options": {
+        "message_dry_run": false,
+        "plugin_install_mode": "mixed",
+        "command_profile": "universal"
+      }
+    }
+  }
+}
