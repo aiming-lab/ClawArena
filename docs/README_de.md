@@ -143,6 +143,8 @@ _Alle Zahlen sind makrogemittelt über die 12 Szenarien / 337 Runden und nach CR
 
 <sub>Jedes Modell wird unter seinem primären Harness gezeigt: Anthropic-Modelle über Claude Code (inkompatibel mit OpenClaw), alle anderen unter OpenClaw. Den frameworkübergreifenden Vergleich, bei dem das Harness variiert und das Modell festgehalten wird, finden Sie im Paper.</sub>
 
+> 📥 **Ein neues Ergebnis einreichen?** Siehe [submit-to-leaderboard.md](submit-to-leaderboard.md). Referenzlayouts liegen unter [`result_example/`](../result_example/); Community-Einreichungen werden in [`submissions/`](../submissions/) gesammelt.
+
 ---
 
 ## 🆚 Benchmark-Vergleich

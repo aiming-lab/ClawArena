@@ -143,6 +143,8 @@ _모든 수치는 12 개 시나리오 / 337 라운드에 대해 매크로 평균
 
 <sub>각 모델은 주된 하니스(harness) 위에서 표시됩니다: Anthropic 모델은 Claude Code 를 통해 실행되며(OpenClaw 와 비호환), 그 외의 모델은 모두 OpenClaw 위에서 표시됩니다. 모델은 고정하고 하니스를 변경하는 교차 프레임워크 비교는 논문을 참조하세요.</sub>
 
+> 📥 **새 결과를 제출하시나요?** [submit-to-leaderboard.md](submit-to-leaderboard.md) 를 참고하세요. 참고 레이아웃은 [`result_example/`](../result_example/) 에 있으며, 커뮤니티 제출물은 [`submissions/`](../submissions/) 에 모입니다.
+
 ---
 
 ## 🆚 벤치마크 비교

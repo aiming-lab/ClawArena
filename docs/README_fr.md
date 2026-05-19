@@ -143,6 +143,8 @@ _Tous les chiffres sont moyennés en macro sur les 12 scénarios / 337 manches e
 
 <sub>Chaque modèle est présenté sous son harnais principal : les modèles d'Anthropic via Claude Code (incompatibles avec OpenClaw), tous les autres sous OpenClaw. Voir l'article pour la comparaison inter-frameworks dans laquelle le harnais varie tandis que le modèle est fixé.</sub>
 
+> 📥 **Vous souhaitez soumettre un nouveau résultat ?** Consultez [submit-to-leaderboard.md](submit-to-leaderboard.md). Les modèles de référence se trouvent dans [`result_example/`](../result_example/) ; les contributions de la communauté sont regroupées dans [`submissions/`](../submissions/).
+
 ---
 
 ## 🆚 Comparaison Benchmarks

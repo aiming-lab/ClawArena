@@ -143,6 +143,8 @@ _所有数值均在 12 个场景 / 337 轮次上做宏平均，并按 CRS 排序
 
 <sub>每个模型在其主要承载框架下展示：Anthropic 模型通过 Claude Code 运行（与 OpenClaw 不兼容），其余模型均在 OpenClaw 下展示。固定模型而切换框架的跨框架对比详见论文。</sub>
 
+> 📥 **想提交新结果？** 请阅读 [submit-to-leaderboard.md](submit-to-leaderboard.md)。参考目录见 [`result_example/`](../result_example/)，社区提交统一放在 [`submissions/`](../submissions/)。
+
 ---
 
 ## 🆚 Benchmark 对比

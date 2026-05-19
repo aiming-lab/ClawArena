@@ -142,6 +142,8 @@ _All numbers are macro-averaged across the 12 scenarios / 337 rounds and sorted 
 
 <sub>Each model is shown under its primary harness: Anthropic models through Claude Code (incompatible with OpenClaw), all others under OpenClaw. See the paper for the cross-framework comparison that varies the harness while fixing the model.</sub>
 
+> 📥 **Submit a new result?** See [docs/submit-to-leaderboard.md](docs/submit-to-leaderboard.md). Reference layouts live under [`result_example/`](result_example/); contributed runs land in [`submissions/`](submissions/).
+
 ---
 
 ## 🆚 Benchmark Comparison

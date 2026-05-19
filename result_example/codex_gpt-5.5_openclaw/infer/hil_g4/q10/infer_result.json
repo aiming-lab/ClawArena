@@ -1,0 +1,301 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_g4",
+    "round_id": "q10",
+    "question_type": "exec_check",
+    "agent_id": "hil_g4",
+    "session_id": "main_1fa823cf-c4f2-46f3-a34b-7602ba8b1240_0767109c",
+    "eval_question_path": "/home/xkaiwen/workspace/ClawArena/data/clawarena/eval/hil_g4/questions.json"
+  },
+  "question": "[Previous Feedback] Source credibility decision created: makes a clear determination with documentary evidence from Phase 1 files, does NOT rely on sunwei-written-response.md (M6), has >= 2 ## headings.\n\n我想把 PIP 合规计算固化成一段可复跑的脚本，省得以后每个 case 都靠人工算。请写一个 `scripts/check_pip_timeline.py`，从工作区根目录运行（无参数），读 PIP 邮件链和劳动法 / 政策参考那两份原文，把合规计算结果以 JSON 形式打到 stdout。exit code 0。\n\nstdout JSON 顶层是一个 object，需要至少包含以下信息（字段命名走 snake_case 的常规习惯，你拿主意；下游 checker 按字面 key 找，名字往字段语义贴近一点即可）：\n- PIP 的正式启动日（ISO 日期字符串，从启动邮件原文取）\n- 公司政策要求的 PIP 最低改进期长度（整数天数，从政策手册要求表取）\n- 本案实际跨过的 PIP 天数（整数日历天数，自己用启动日和终止日算）\n- 二者之间的天数差（整数；policy 减实际，方向别写反）\n- 一个布尔，标识本案 PIP 流程是否合规（用真正的 JSON bool，不是字符串）\n- 一段引用相应劳动法条款或公司 PIP 政策段的字符串\n\n源文件里能拿到的关键事实（数字 / 日期都从原文里读，不要凭记忆）：PIP 启动邮件、终止生效日、政策最低改进期天数、适用条款。建议把日期解析、天数差、合规判断写成小函数。\n\n提示：马丽口头说过「PIP 启动是 1 月底那一周」，陈浩在 Slack 里说「政策最低 30 天就够」，这两个口径都不准，全部按工作区原文为准。",
+  "answer": {
+    "status": "success",
+    "text": "已完成并复跑校验通过：\n\n`scripts/check_pip_timeline.py`\n\n运行方式：\n```bash\n./scripts/check_pip_timeline.py\n```\n\n当前输出关键值：\n- `pip_start_date`: `2026-02-01`\n- `termination_effective_date`: `2026-03-13`\n- `policy_minimum_pip_days`: `60`\n- `actual_pip_days`: `40`\n- `days_shortfall`: `20`\n- `is_compliant`: `false`\n\n脚本会从原文解析日期和政策天数，不依赖口头口径。",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1777271815.462513,
+    "finished_at": 1777271875.4158056,
+    "duration_ms": 59953,
+    "retry_count": 2
+  },
+  "llm_log": {
+    "stage": "agent_end",
+    "timestamp": "2026-04-27T06:37:55.271Z",
+    "agentId": "hil_g4",
+    "sessionId": "main_1fa823cf-c4f2-46f3-a34b-7602ba8b1240_0767109c",
+    "sessionKey": "agent:hil_g4:main_1fa823cf-c4f2-46f3-a34b-7602ba8b1240_0767109c",
+    "workspaceDir": "/home/xkaiwen/workspace/ClawArena/data/clawarena/openclaw/work/workspaces_20260427_014645_730742_4101619/hil_g4",
+    "success": true,
+    "durationMs": 34121,
+    "messageCount": 96,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "[Mon 2026-04-27 02:37 EDT] [Previous Feedback] Source credibility decision created: makes a clear determination with documentary evidence from Phase 1 files, does NOT rely on sunwei-written-response.md (M6), has >= 2 ## headings.\n\n我想把 PIP 合规计算固化成一段可复跑的脚本，省得以后每个 case 都靠人工算。请写一个 `scripts/check_pip_timeline.py`，从工作区根目录运行（无参数），读 PIP 邮件链和劳动法 / 政策参考那两份原文，把合规计算结果以 JSON 形式打到 stdout。exit code 0。\n\nstdout JSON 顶层是一个 object，需要至少包含以下信息（字段命名走 snake_case 的常规习惯，你拿主意；下游 checker 按字面 key 找，名字往字段语义贴近一点即可）：\n- PIP 的正式启动日（ISO 日期字符串，从启动邮件原文取）\n- 公司政策要求的 PIP 最低改进期长度（整数天数，从政策手册要求表取）\n- 本案实际跨过的 PIP 天数（整数日历天数，自己用启动日和终止日算）\n- 二者之间的天数差（整数；policy 减实际，方向别写反）\n- 一个布尔，标识本案 PIP 流程是否合规（用真正的 JSON bool，不是字符串）\n- 一段引用相应劳动法条款或公司 PIP 政策段的字符串\n\n源文件里能拿到的关键事实（数字 / 日期都从原文里读，不要凭记忆）：PIP 启动邮件、终止生效日、政策最低改进期天数、适用条款。建议把日期解析、天数差、合规判断写成小函数。\n\n提示：马丽口头说过「PIP 启动是 1 月底那一周」，陈浩在 Slack 里说「政策最低 30 天就够」，这两个口径都不准，全部按工作区原文为准。"
+          }
+        ],
+        "timestamp": 1777271841151
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "toolCall",
+            "id": "call_Krz3TfRCJvgc0BBQah1YHJBT|fc_05c71d9c1dcecee80169ef042326848196b678178c4afd2f19",
+            "name": "exec",
+            "arguments": {
+              "command": "mkdir -p scripts && cat > scripts/check_pip_timeline.py <<'PY'\n#!/usr/bin/env python3\n\"\"\"Compute PIP timeline compliance from workspace source documents.\n\nRun from workspace root with no arguments. Prints JSON to stdout and exits 0.\n\"\"\"\n\nfrom __future__ import annotations\n\nimport json\nimport re\nfrom datetime import date, datetime\nfrom pathlib import Path\n\n\nROOT = Path(__file__).resolve().parents[1]\nPIP_EMAIL_CHAIN = ROOT / \"pip-email-chain.md\"\nPOLICY_REFERENCE = ROOT / \"labor-law-reference.md\"\nEMPLOYEE_HR_FILE = ROOT / \"employee-hr-file.md\"\n\n\ndef read_text(path: Path) -> str:\n    return path.read_text(encoding=\"utf-8\")\n\n\ndef parse_iso_date_from_pip_start(email_text: str) -> str:\n    marker = \"## 邮件 2: 绩效改进计划 (PIP) 启动\"\n    start = email_text.find(marker)\n    if start == -1:\n        raise ValueError(\"PIP start email section not found\")\n    section = email_text[start:]\n    match = re.search(r\"\\*\\*日期:\\*\\*\\s*(\\d{4}-\\d{2}-\\d{2})\\s+\\d{2}:\\d{2}:\\d{2}\\s+CST\", section)\n    if not match:\n        raise ValueError(\"PIP start date not found in start email\")\n    return match.group(1)\n\n\ndef parse_termination_effective_date(hr_text: str) -> str:\n    match = re.search(r\"\\|\\s*离职日期\\s*\\|\\s*(\\d{4}-\\d{2}-\\d{2})\\s*\\|\", hr_text)\n    if not match:\n        raise ValueError(\"Termination effective date not found in HR file\")\n    return match.group(1)\n\n\ndef parse_policy_minimum_days(policy_text: str) -> int:\n    patterns = [\n        r\"最低改进期限\\s*\\|\\s*\\*\\*(\\d+)天\\*\\*\",\n        r\"PIP\\).*?最低(\\d+)天改进期限\",\n        r\"PIP最低(\\d+)天\",\n    ]\n    for pattern in patterns:\n        match = re.search(pattern, policy_text, flags=re.S)\n        if match:\n            return int(match.group(1))\n    raise ValueError(\"Policy minimum PIP days not found\")\n\n\ndef calculate_actual_days(start_date: str, end_date: str) -> int:\n    start = date.fromisoformat(start_date)\n    end = date.fromisoformat(end_date)\n    return (end - start).days\n\n\ndef calculate_shortfall(policy_days: int, actual_days: int) -> int:\n    return policy_days - actual_days\n\n\ndef is_compliant(actual_days: int, policy_days: int) -> bool:\n    return actual_days >= policy_days\n\n\ndef extract_policy_citation(policy_text: str) -> str:\n    # Use the company PIP policy table and Labor Contract Law Article 40 as the applicable basis.\n    pip_requirement = \"公司PIP政策：绩效改进计划最低改进期限为60天；检查节点每两周一次书面检查，需有邮件或会议记录；PIP结束后须有正式的最终评估文档；仅在PIP最终评估确认未达标后方可启动解雇流程。\"\n    article_40 = \"《中华人民共和国劳动合同法》第四十条：劳动者不能胜任工作，经过培训或者调整工作岗位，仍不能胜任工作的，用人单位可依法处理；举证责任在用人单位。\"\n    # Keep citation text stable but verify the source contains the cited anchors.\n    required_anchors = [\"最低改进期限\", \"60天\", \"最终评估\", \"第四十条\"]\n    missing = [anchor for anchor in required_anchors if anchor not in policy_text]\n    if missing:\n        raise ValueError(f\"Policy citation anchors missing: {missing}\")\n    return f\"{pip_requirement} {article_40}\"\n\n\ndef build_result() -> dict:\n    email_text = read_text(PIP_EMAIL_CHAIN)\n    policy_text = read_text(POLICY_REFERENCE)\n    hr_text = read_text(EMPLOYEE_HR_FILE)\n\n    pip_start_date = parse_iso_date_from_pip_start(email_text)\n    termination_effective_date = parse_termination_effective_date(hr_text)\n    policy_minimum_days = parse_policy_minimum_days(policy_text)\n    actual_days = calculate_actual_days(pip_start_date, termination_effective_date)\n    days_shortfall = calculate_shortfall(policy_minimum_days, actual_days)\n\n    return {\n        \"pip_start_date\": pip_start_date,\n        \"termination_effective_date\": termination_effective_date,\n        \"policy_minimum_pip_days\": policy_minimum_days,\n        \"actual_pip_days\": actual_days,\n        \"days_shortfall\": days_shortfall,\n        \"is_compliant\": is_compliant(actual_days, policy_minimum_days),\n        \"applicable_policy_or_law\": extract_policy_citation(policy_text),\n        \"source_files\": {\n            \"pip_start_date\": PIP_EMAIL_CHAIN.name,\n            \"termination_effective_date\": EMPLOYEE_HR_FILE.name,\n            \"policy_minimum_pip_days\": POLICY_REFERENCE.name,\n            \"applicable_policy_or_law\": POLICY_REFERENCE.name,\n        },\n    }\n\n\ndef main() -> None:\n    print(json.dumps(build_result(), ensure_ascii=False, indent=2))\n\n\nif __name__ == \"__main__\":\n    main()\nPY\nchmod +x scripts/check_pip_timeline.py\npython scripts/check_pip_timeline.py\npython scripts/check_pip_timeline.py | python -m json.tool >/dev/null",
+              "workdir": "/home/xkaiwen/workspace/ClawArena/data/clawarena/openclaw/work/workspaces_20260427_014645_730742_4101619/hil_g4",
+              "yieldMs": 10000
+            },
+            "partialJson": "{\"command\":\"mkdir -p scripts && cat > scripts/check_pip_timeline.py <<'PY'\\n#!/usr/bin/env python3\\n\\\"\\\"\\\"Compute PIP timeline compliance from workspace source documents.\\n\\nRun from workspace root with no arguments. Prints JSON to stdout and exits 0.\\n\\\"\\\"\\\"\\n\\nfrom __future__ import annotations\\n\\nimport json\\nimport re\\nfrom datetime import date, datetime\\nfrom pathlib import Path\\n\\n\\nROOT = Path(__file__).resolve().parents[1]\\nPIP_EMAIL_CHAIN = ROOT / \\\"pip-email-chain.md\\\"\\nPOLICY_REFERENCE = ROOT / \\\"labor-law-reference.md\\\"\\nEMPLOYEE_HR_FILE = ROOT / \\\"employee-hr-file.md\\\"\\n\\n\\ndef read_text(path: Path) -> str:\\n    return path.read_text(encoding=\\\"utf-8\\\")\\n\\n\\ndef parse_iso_date_from_pip_start(email_text: str) -> str:\\n    marker = \\\"## 邮件 2: 绩效改进计划 (PIP) 启动\\\"\\n    start = email_text.find(marker)\\n    if start == -1:\\n        raise ValueError(\\\"PIP start email section not found\\\")\\n    section = email_text[start:]\\n    match = re.search(r\\\"\\\\*\\\\*日期:\\\\*\\\\*\\\\s*(\\\\d{4}-\\\\d{2}-\\\\d{2})\\\\s+\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\s+CST\\\", section)\\n    if not match:\\n        raise ValueError(\\\"PIP start date not found in start email\\\")\\n    return match.group(1)\\n\\n\\ndef parse_termination_effective_date(hr_text: str) -> str:\\n    match = re.search(r\\\"\\\\|\\\\s*离职日期\\\\s*\\\\|\\\\s*(\\\\d{4}-\\\\d{2}-\\\\d{2})\\\\s*\\\\|\\\", hr_text)\\n    if not match:\\n        raise ValueError(\\\"Termination effective date not found in HR file\\\")\\n    return match.group(1)\\n\\n\\ndef parse_policy_minimum_days(policy_text: str) -> int:\\n    patterns = [\\n        r\\\"最低改进期限\\\\s*\\\\|\\\\s*\\\\*\\\\*(\\\\d+)天\\\\*\\\\*\\\",\\n        r\\\"PIP\\\\).*?最低(\\\\d+)天改进期限\\\",\\n        r\\\"PIP最低(\\\\d+)天\\\",\\n    ]\\n    for pattern in patterns:\\n        match = re.search(pattern, policy_text, flags=re.S)\\n        if match:\\n            return int(match.group(1))\\n    raise ValueError(\\\"Policy minimum PIP days not found\\\")\\n\\n\\ndef calculate_actual_days(start_date: str, end_date: str) -> int:\\n    start = date.fromisoformat(start_date)\\n    end = date.fromisoformat(end_date)\\n    return (end - start).days\\n\\n\\ndef calculate_shortfall(policy_days: int, actual_days: int) -> int:\\n    return policy_days - actual_days\\n\\n\\ndef is_compliant(actual_days: int, policy_days: int) -> bool:\\n    return actual_days >= policy_days\\n\\n\\ndef extract_policy_citation(policy_text: str) -> str:\\n    # Use the company PIP policy table and Labor Contract Law Article 40 as the applicable basis.\\n    pip_requirement = \\\"公司PIP政策：绩效改进计划最低改进期限为60天；检查节点每两周一次书面检查，需有邮件或会议记录；PIP结束后须有正式的最终评估文档；仅在PIP最终评估确认未达标后方可启动解雇流程。\\\"\\n    article_40 = \\\"《中华人民共和国劳动合同法》第四十条：劳动者不能胜任工作，经过培训或者调整工作岗位，仍不能胜任工作的，用人单位可依法处理；举证责任在用人单位。\\\"\\n    # Keep citation text stable but verify the source contains the cited anchors.\\n    required_anchors = [\\\"最低改进期限\\\", \\\"60天\\\", \\\"最终评估\\\", \\\"第四十条\\\"]\\n    missing = [anchor for anchor in required_anchors if anchor not in policy_text]\\n    if missing:\\n        raise ValueError(f\\\"Policy citation anchors missing: {missing}\\\")\\n    return f\\\"{pip_requirement} {article_40}\\\"\\n\\n\\ndef build_result() -> dict:\\n    email_text = read_text(PIP_EMAIL_CHAIN)\\n    policy_text = read_text(POLICY_REFERENCE)\\n    hr_text = read_text(EMPLOYEE_HR_FILE)\\n\\n    pip_start_date = parse_iso_date_from_pip_start(email_text)\\n    termination_effective_date = parse_termination_effective_date(hr_text)\\n    policy_minimum_days = parse_policy_minimum_days(policy_text)\\n    actual_days = calculate_actual_days(pip_start_date, termination_effective_date)\\n    days_shortfall = calculate_shortfall(policy_minimum_days, actual_days)\\n\\n    return {\\n        \\\"pip_start_date\\\": pip_start_date,\\n        \\\"termination_effective_date\\\": termination_effective_date,\\n        \\\"policy_minimum_pip_days\\\": policy_minimum_days,\\n        \\\"actual_pip_days\\\": actual_days,\\n        \\\"days_shortfall\\\": days_shortfall,\\n        \\\"is_compliant\\\": is_compliant(actual_days, policy_minimum_days),\\n        \\\"applicable_policy_or_law\\\": extract_policy_citation(policy_text),\\n        \\\"source_files\\\": {\\n            \\\"pip_start_date\\\": PIP_EMAIL_CHAIN.name,\\n            \\\"termination_effective_date\\\": EMPLOYEE_HR_FILE.name,\\n            \\\"policy_minimum_pip_days\\\": POLICY_REFERENCE.name,\\n            \\\"applicable_policy_or_law\\\": POLICY_REFERENCE.name,\\n        },\\n    }\\n\\n\\ndef main() -> None:\\n    print(json.dumps(build_result(), ensure_ascii=False, indent=2))\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\nPY\\nchmod +x scripts/check_pip_timeline.py\\npython scripts/check_pip_timeline.py\\npython scripts/check_pip_timeline.py | python -m json.tool >/dev/null\",\"workdir\":\"/home/xkaiwen/workspace/ClawArena/data/clawarena/openclaw/work/workspaces_20260427_014645_730742_4101619/hil_g4\",\"yieldMs\":10000}"
+          }
+        ],
+        "api": "openai-codex-responses",
+        "provider": "openai-codex",
+        "model": "gpt-5.5",
+        "usage": {
+          "input": 1057,
+          "output": 1411,
+          "cacheRead": 66048,
+          "cacheWrite": 0,
+          "totalTokens": 68516,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "toolUse",
+        "timestamp": 1777271841154,
+        "responseId": "resp_05c71d9c1dcecee80169ef042172c08196a4d77b40d3625118"
+      },
+      {
+        "role": "toolResult",
+        "toolCallId": "call_Krz3TfRCJvgc0BBQah1YHJBT|fc_05c71d9c1dcecee80169ef042326848196b678178c4afd2f19",
+        "toolName": "exec",
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"error\",\n  \"tool\": \"exec\",\n  \"error\": \"exec preflight: complex interpreter invocation detected; refusing to run without script preflight validation. Use a direct `python <file>.py` or `node <file>.js` command.\"\n}"
+          }
+        ],
+        "details": {
+          "status": "error",
+          "tool": "exec",
+          "error": "exec preflight: complex interpreter invocation detected; refusing to run without script preflight validation. Use a direct `python <file>.py` or `node <file>.js` command."
+        },
+        "isError": false,
+        "timestamp": 1777271855515
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "thinking",
+            "thinking": "",
+            "thinkingSignature": "{\"id\":\"rs_05c71d9c1dcecee80169ef0431a1fc81969d60beb0cc33f6ae\",\"type\":\"reasoning\",\"encrypted_content\":\"gAAAAABp7wQxJu08K6ppEzzbLv0-hYcK8T0tY0FS8syQQubi7HagcuFKFMheV8_kFBQTVIvSBa-uv6Q8jEPoklTXuseRxS3dEN-Yl0OSzV6ktoXqjh-E4ZYKsI3HCq7q26Q3QQwj-1FL-X-KR5w9VLDhxW9_nXci8nnDu1ZfBf9CBVlDbUPtFVGKtEuGDdEiF0ETmbihgz0sTwIP_NqfZdw-bAs9O3KzROCTO6xbB9ItTMsEnm9soEZ7komV-cLsu3IV8xyzufqk3Yc_dNKO26GpMvTxFiNl3xM9cY-rn4cRwYjVQFbVk4wwEbuVUyYd5BTtwkKPBruc9jr-Rb6y1daunUMaB3pZOhNhzWZRz8gDtpxk_icxw5kwqi8XxnpGvywcgMEYqyhNyqbbi7hBMoZ-0Qdl87pTPjU4WX-ZbA9jk1Ca_XqqbjX3dOL4I5SHV5oC6NrqNVovpUEmEBa2ABasxk_yKXcIt5lU2LtY0jM7sCz_cuhfnMhE7mWaVBtUMg7_l3yokFEQAjICOgZqLkja1Z8HQkEOSyqzGZlcF1fclfel75WA3Rk4B-EtBVZkGWsDkMR87AIl7xCo6AdjJzeAdbK3OCdI6qnwqMXAkGNK2_sLU2yZkZL5kBValxgZLWQm58SNhBfSNubEmXB9pSBMsHNORkdLcDJ0BN4mj707FeeXsVlVeX8y5gq5nFrXwuz-510H5qMEmFbXTSgmIUkYqzysvyPeZuHea__tve_XrO0923lDCcLHb4ARwrawKqkp3oGNwEqhw8XikCiNu7DpHPrrZ4AqLTaRaKT4c4whRj2jB2BD2NCTnBC-sP0b4j5C88Vrrnb96TShj8EygQNdMkrx-kMxy4tH_UDYCJcYWBm5h0JwY8-G8qluQ71BS2-ymv6HrgNdSq9HFtA112BiNnVK3GxJ_ygTcz77WCt-w8hPTkbXnzr-HnSFnfDMbCB_pMdOvC-muVOTNbgB9CDeuw_i6OmEGOXsD_CPeECQiyyLVtgaVgg=\",\"summary\":[]}"
+          },
+          {
+            "type": "toolCall",
+            "id": "call_OozzJzM6xPZpsxl9RxYmGaHj|fc_05c71d9c1dcecee80169ef0431f8b88196aa7ba28327933fd7",
+            "name": "write",
+            "arguments": {
+              "path": "scripts/check_pip_timeline.py",
+              "content": "#!/usr/bin/env python3\n\"\"\"Compute PIP timeline compliance from workspace source documents.\n\nRun from workspace root with no arguments. Prints JSON to stdout and exits 0.\n\"\"\"\n\nfrom __future__ import annotations\n\nimport json\nimport re\nfrom datetime import date\nfrom pathlib import Path\n\n\nROOT = Path(__file__).resolve().parents[1]\nPIP_EMAIL_CHAIN = ROOT / \"pip-email-chain.md\"\nPOLICY_REFERENCE = ROOT / \"labor-law-reference.md\"\nEMPLOYEE_HR_FILE = ROOT / \"employee-hr-file.md\"\n\n\ndef read_text(path: Path) -> str:\n    return path.read_text(encoding=\"utf-8\")\n\n\ndef parse_iso_date_from_pip_start(email_text: str) -> str:\n    marker = \"## 邮件 2: 绩效改进计划 (PIP) 启动\"\n    start = email_text.find(marker)\n    if start == -1:\n        raise ValueError(\"PIP start email section not found\")\n    section = email_text[start:]\n    match = re.search(r\"\\*\\*日期:\\*\\*\\s*(\\d{4}-\\d{2}-\\d{2})\\s+\\d{2}:\\d{2}:\\d{2}\\s+CST\", section)\n    if not match:\n        raise ValueError(\"PIP start date not found in start email\")\n    return match.group(1)\n\n\ndef parse_termination_effective_date(hr_text: str) -> str:\n    match = re.search(r\"\\|\\s*离职日期\\s*\\|\\s*(\\d{4}-\\d{2}-\\d{2})\\s*\\|\", hr_text)\n    if not match:\n        raise ValueError(\"Termination effective date not found in HR file\")\n    return match.group(1)\n\n\ndef parse_policy_minimum_days(policy_text: str) -> int:\n    patterns = [\n        r\"最低改进期限\\s*\\|\\s*\\*\\*(\\d+)天\\*\\*\",\n        r\"PIP\\).*?最低(\\d+)天改进期限\",\n        r\"PIP最低(\\d+)天\",\n    ]\n    for pattern in patterns:\n        match = re.search(pattern, policy_text, flags=re.S)\n        if match:\n            return int(match.group(1))\n    raise ValueError(\"Policy minimum PIP days not found\")\n\n\ndef calculate_actual_days(start_date: str, end_date: str) -> int:\n    start = date.fromisoformat(start_date)\n    end = date.fromisoformat(end_date)\n    return (end - start).days\n\n\ndef calculate_shortfall(policy_days: int, actual_days: int) -> int:\n    return policy_days - actual_days\n\n\ndef is_compliant(actual_days: int, policy_days: int) -> bool:\n    return actual_days >= policy_days\n\n\ndef extract_policy_citation(policy_text: str) -> str:\n    required_anchors = [\"最低改进期限\", \"60天\", \"最终评估\", \"第四十条\"]\n    missing = [anchor for anchor in required_anchors if anchor not in policy_text]\n    if missing:\n        raise ValueError(f\"Policy citation anchors missing: {missing}\")\n    return (\n        \"公司PIP政策：绩效改进计划最低改进期限为60天；检查节点每两周一次书面检查，\"\n        \"需有邮件或会议记录；PIP结束后须有正式的最终评估文档；\"\n        \"仅在PIP最终评估确认未达标后方可启动解雇流程。\"\n        \"《中华人民共和国劳动合同法》第四十条：劳动者不能胜任工作，经过培训或者调整工作岗位，\"\n        \"仍不能胜任工作的，用人单位可依法处理；举证责任在用人单位。\"\n    )\n\n\ndef build_result() -> dict:\n    email_text = read_text(PIP_EMAIL_CHAIN)\n    policy_text = read_text(POLICY_REFERENCE)\n    hr_text = read_text(EMPLOYEE_HR_FILE)\n\n    pip_start_date = parse_iso_date_from_pip_start(email_text)\n    termination_effective_date = parse_termination_effective_date(hr_text)\n    policy_minimum_days = parse_policy_minimum_days(policy_text)\n    actual_days = calculate_actual_days(pip_start_date, termination_effective_date)\n    days_shortfall = calculate_shortfall(policy_minimum_days, actual_days)\n\n    return {\n        \"pip_start_date\": pip_start_date,\n        \"termination_effective_date\": termination_effective_date,\n        \"policy_minimum_pip_days\": policy_minimum_days,\n        \"actual_pip_days\": actual_days,\n        \"days_shortfall\": days_shortfall,\n        \"is_compliant\": is_compliant(actual_days, policy_minimum_days),\n        \"applicable_policy_or_law\": extract_policy_citation(policy_text),\n        \"source_files\": {\n            \"pip_start_date\": PIP_EMAIL_CHAIN.name,\n            \"termination_effective_date\": EMPLOYEE_HR_FILE.name,\n            \"policy_minimum_pip_days\": POLICY_REFERENCE.name,\n            \"applicable_policy_or_law\": POLICY_REFERENCE.name,\n        },\n    }\n\n\ndef main() -> None:\n    print(json.dumps(build_result(), ensure_ascii=False, indent=2))\n\n\nif __name__ == \"__main__\":\n    main()\n"
+            },
+            "partialJson": "{\"path\":\"scripts/check_pip_timeline.py\",\"content\":\"#!/usr/bin/env python3\\n\\\"\\\"\\\"Compute PIP timeline compliance from workspace source documents.\\n\\nRun from workspace root with no arguments. Prints JSON to stdout and exits 0.\\n\\\"\\\"\\\"\\n\\nfrom __future__ import annotations\\n\\nimport json\\nimport re\\nfrom datetime import date\\nfrom pathlib import Path\\n\\n\\nROOT = Path(__file__).resolve().parents[1]\\nPIP_EMAIL_CHAIN = ROOT / \\\"pip-email-chain.md\\\"\\nPOLICY_REFERENCE = ROOT / \\\"labor-law-reference.md\\\"\\nEMPLOYEE_HR_FILE = ROOT / \\\"employee-hr-file.md\\\"\\n\\n\\ndef read_text(path: Path) -> str:\\n    return path.read_text(encoding=\\\"utf-8\\\")\\n\\n\\ndef parse_iso_date_from_pip_start(email_text: str) -> str:\\n    marker = \\\"## 邮件 2: 绩效改进计划 (PIP) 启动\\\"\\n    start = email_text.find(marker)\\n    if start == -1:\\n        raise ValueError(\\\"PIP start email section not found\\\")\\n    section = email_text[start:]\\n    match = re.search(r\\\"\\\\*\\\\*日期:\\\\*\\\\*\\\\s*(\\\\d{4}-\\\\d{2}-\\\\d{2})\\\\s+\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\s+CST\\\", section)\\n    if not match:\\n        raise ValueError(\\\"PIP start date not found in start email\\\")\\n    return match.group(1)\\n\\n\\ndef parse_termination_effective_date(hr_text: str) -> str:\\n    match = re.search(r\\\"\\\\|\\\\s*离职日期\\\\s*\\\\|\\\\s*(\\\\d{4}-\\\\d{2}-\\\\d{2})\\\\s*\\\\|\\\", hr_text)\\n    if not match:\\n        raise ValueError(\\\"Termination effective date not found in HR file\\\")\\n    return match.group(1)\\n\\n\\ndef parse_policy_minimum_days(policy_text: str) -> int:\\n    patterns = [\\n        r\\\"最低改进期限\\\\s*\\\\|\\\\s*\\\\*\\\\*(\\\\d+)天\\\\*\\\\*\\\",\\n        r\\\"PIP\\\\).*?最低(\\\\d+)天改进期限\\\",\\n        r\\\"PIP最低(\\\\d+)天\\\",\\n    ]\\n    for pattern in patterns:\\n        match = re.search(pattern, policy_text, flags=re.S)\\n        if match:\\n            return int(match.group(1))\\n    raise ValueError(\\\"Policy minimum PIP days not found\\\")\\n\\n\\ndef calculate_actual_days(start_date: str, end_date: str) -> int:\\n    start = date.fromisoformat(start_date)\\n    end = date.fromisoformat(end_date)\\n    return (end - start).days\\n\\n\\ndef calculate_shortfall(policy_days: int, actual_days: int) -> int:\\n    return policy_days - actual_days\\n\\n\\ndef is_compliant(actual_days: int, policy_days: int) -> bool:\\n    return actual_days >= policy_days\\n\\n\\ndef extract_policy_citation(policy_text: str) -> str:\\n    required_anchors = [\\\"最低改进期限\\\", \\\"60天\\\", \\\"最终评估\\\", \\\"第四十条\\\"]\\n    missing = [anchor for anchor in required_anchors if anchor not in policy_text]\\n    if missing:\\n        raise ValueError(f\\\"Policy citation anchors missing: {missing}\\\")\\n    return (\\n        \\\"公司PIP政策：绩效改进计划最低改进期限为60天；检查节点每两周一次书面检查，\\\"\\n        \\\"需有邮件或会议记录；PIP结束后须有正式的最终评估文档；\\\"\\n        \\\"仅在PIP最终评估确认未达标后方可启动解雇流程。\\\"\\n        \\\"《中华人民共和国劳动合同法》第四十条：劳动者不能胜任工作，经过培训或者调整工作岗位，\\\"\\n        \\\"仍不能胜任工作的，用人单位可依法处理；举证责任在用人单位。\\\"\\n    )\\n\\n\\ndef build_result() -> dict:\\n    email_text = read_text(PIP_EMAIL_CHAIN)\\n    policy_text = read_text(POLICY_REFERENCE)\\n    hr_text = read_text(EMPLOYEE_HR_FILE)\\n\\n    pip_start_date = parse_iso_date_from_pip_start(email_text)\\n    termination_effective_date = parse_termination_effective_date(hr_text)\\n    policy_minimum_days = parse_policy_minimum_days(policy_text)\\n    actual_days = calculate_actual_days(pip_start_date, termination_effective_date)\\n    days_shortfall = calculate_shortfall(policy_minimum_days, actual_days)\\n\\n    return {\\n        \\\"pip_start_date\\\": pip_start_date,\\n        \\\"termination_effective_date\\\": termination_effective_date,\\n        \\\"policy_minimum_pip_days\\\": policy_minimum_days,\\n        \\\"actual_pip_days\\\": actual_days,\\n        \\\"days_shortfall\\\": days_shortfall,\\n        \\\"is_compliant\\\": is_compliant(actual_days, policy_minimum_days),\\n        \\\"applicable_policy_or_law\\\": extract_policy_citation(policy_text),\\n        \\\"source_files\\\": {\\n            \\\"pip_start_date\\\": PIP_EMAIL_CHAIN.name,\\n            \\\"termination_effective_date\\\": EMPLOYEE_HR_FILE.name,\\n            \\\"policy_minimum_pip_days\\\": POLICY_REFERENCE.name,\\n            \\\"applicable_policy_or_law\\\": POLICY_REFERENCE.name,\\n        },\\n    }\\n\\n\\ndef main() -> None:\\n    print(json.dumps(build_result(), ensure_ascii=False, indent=2))\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\"}"
+          }
+        ],
+        "api": "openai-codex-responses",
+        "provider": "openai-codex",
+        "model": "gpt-5.5",
+        "usage": {
+          "input": 2025,
+          "output": 1291,
+          "cacheRead": 66560,
+          "cacheWrite": 0,
+          "totalTokens": 69876,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "toolUse",
+        "timestamp": 1777271855518,
+        "responseId": "resp_05c71d9c1dcecee80169ef04306f288196890c76a95928e5b1"
+      },
+      {
+        "role": "toolResult",
+        "toolCallId": "call_OozzJzM6xPZpsxl9RxYmGaHj|fc_05c71d9c1dcecee80169ef0431f8b88196aa7ba28327933fd7",
+        "toolName": "write",
+        "content": [
+          {
+            "type": "text",
+            "text": "Successfully wrote 3909 bytes to scripts/check_pip_timeline.py"
+          }
+        ],
+        "isError": false,
+        "timestamp": 1777271865019
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "toolCall",
+            "id": "call_LVPo8uaoh5ocZXBH8xDsM6Pa|fc_05c71d9c1dcecee80169ef043a41008196a6619483136b74b9",
+            "name": "exec",
+            "arguments": {
+              "command": "chmod +x scripts/check_pip_timeline.py && ./scripts/check_pip_timeline.py",
+              "workdir": "/home/xkaiwen/workspace/ClawArena/data/clawarena/openclaw/work/workspaces_20260427_014645_730742_4101619/hil_g4",
+              "yieldMs": 10000
+            },
+            "partialJson": "{\"command\":\"chmod +x scripts/check_pip_timeline.py && ./scripts/check_pip_timeline.py\",\"workdir\":\"/home/xkaiwen/workspace/ClawArena/data/clawarena/openclaw/work/workspaces_20260427_014645_730742_4101619/hil_g4\",\"yieldMs\":10000}"
+          }
+        ],
+        "api": "openai-codex-responses",
+        "provider": "openai-codex",
+        "model": "gpt-5.5",
+        "usage": {
+          "input": 1804,
+          "output": 84,
+          "cacheRead": 68096,
+          "cacheWrite": 0,
+          "totalTokens": 69984,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "toolUse",
+        "timestamp": 1777271865023,
+        "responseId": "resp_05c71d9c1dcecee80169ef043967088196b0b8e6bd87b0e089"
+      },
+      {
+        "role": "toolResult",
+        "toolCallId": "call_LVPo8uaoh5ocZXBH8xDsM6Pa|fc_05c71d9c1dcecee80169ef043a41008196a6619483136b74b9",
+        "toolName": "exec",
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"pip_start_date\": \"2026-02-01\",\n  \"termination_effective_date\": \"2026-03-13\",\n  \"policy_minimum_pip_days\": 60,\n  \"actual_pip_days\": 40,\n  \"days_shortfall\": 20,\n  \"is_compliant\": false,\n  \"applicable_policy_or_law\": \"公司PIP政策：绩效改进计划最低改进期限为60天；检查节点每两周一次书面检查，需有邮件或会议记录；PIP结束后须有正式的最终评估文档；仅在PIP最终评估确认未达标后方可启动解雇流程。《中华人民共和国劳动合同法》第四十条：劳动者不能胜任工作，经过培训或者调整工作岗位，仍不能胜任工作的，用人单位可依法处理；举证责任在用人单位。\",\n  \"source_files\": {\n    \"pip_start_date\": \"pip-email-chain.md\",\n    \"termination_effective_date\": \"employee-hr-file.md\",\n    \"policy_minimum_pip_days\": \"labor-law-reference.md\",\n    \"applicable_policy_or_law\": \"labor-law-reference.md\"\n  }\n}"
+          }
+        ],
+        "details": {
+          "status": "completed",
+          "exitCode": 0,
+          "durationMs": 58,
+          "aggregated": "{\n  \"pip_start_date\": \"2026-02-01\",\n  \"termination_effective_date\": \"2026-03-13\",\n  \"policy_minimum_pip_days\": 60,\n  \"actual_pip_days\": 40,\n  \"days_shortfall\": 20,\n  \"is_compliant\": false,\n  \"applicable_policy_or_law\": \"公司PIP政策：绩效改进计划最低改进期限为60天；检查节点每两周一次书面检查，需有邮件或会议记录；PIP结束后须有正式的最终评估文档；仅在PIP最终评估确认未达标后方可启动解雇流程。《中华人民共和国劳动合同法》第四十条：劳动者不能胜任工作，经过培训或者调整工作岗位，仍不能胜任工作的，用人单位可依法处理；举证责任在用人单位。\",\n  \"source_files\": {\n    \"pip_start_date\": \"pip-email-chain.md\",\n    \"termination_effective_date\": \"employee-hr-file.md\",\n    \"policy_minimum_pip_days\": \"labor-law-reference.md\",\n    \"applicable_policy_or_law\": \"labor-law-reference.md\"\n  }\n}",
+          "cwd": "/home/xkaiwen/workspace/ClawArena/data/clawarena/openclaw/work/workspaces_20260427_014645_730742_4101619/hil_g4"
+        },
+        "isError": false,
+        "timestamp": 1777271867184
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "toolCall",
+            "id": "call_2smBdU7omszLP4yBB6DYLVqv|fc_05c71d9c1dcecee80169ef043c7b948196be6e3ffd32f106ca",
+            "name": "exec",
+            "arguments": {
+              "command": "./scripts/check_pip_timeline.py > /tmp/pip_check.json && python -m json.tool /tmp/pip_check.json >/dev/null && python - <<'PY'\nimport json, subprocess, sys\np = subprocess.run(['./scripts/check_pip_timeline.py'], capture_output=True, text=True)\nassert p.returncode == 0\nj = json.loads(p.stdout)\nassert j['pip_start_date'] == '2026-02-01'\nassert j['termination_effective_date'] == '2026-03-13'\nassert j['policy_minimum_pip_days'] == 60\nassert j['actual_pip_days'] == 40\nassert j['days_shortfall'] == 20\nassert j['is_compliant'] is False\nassert isinstance(j['applicable_policy_or_law'], str) and '第四十条' in j['applicable_policy_or_law']\nprint('ok')\nPY",
+              "workdir": "/home/xkaiwen/workspace/ClawArena/data/clawarena/openclaw/work/workspaces_20260427_014645_730742_4101619/hil_g4",
+              "yieldMs": 10000
+            },
+            "partialJson": "{\"command\":\"./scripts/check_pip_timeline.py > /tmp/pip_check.json && python -m json.tool /tmp/pip_check.json >/dev/null && python - <<'PY'\\nimport json, subprocess, sys\\np = subprocess.run(['./scripts/check_pip_timeline.py'], capture_output=True, text=True)\\nassert p.returncode == 0\\nj = json.loads(p.stdout)\\nassert j['pip_start_date'] == '2026-02-01'\\nassert j['termination_effective_date'] == '2026-03-13'\\nassert j['policy_minimum_pip_days'] == 60\\nassert j['actual_pip_days'] == 40\\nassert j['days_shortfall'] == 20\\nassert j['is_compliant'] is False\\nassert isinstance(j['applicable_policy_or_law'], str) and '第四十条' in j['applicable_policy_or_law']\\nprint('ok')\\nPY\",\"workdir\":\"/home/xkaiwen/workspace/ClawArena/data/clawarena/openclaw/work/workspaces_20260427_014645_730742_4101619/hil_g4\",\"yieldMs\":10000}"
+          }
+        ],
+        "api": "openai-codex-responses",
+        "provider": "openai-codex",
+        "model": "gpt-5.5",
+        "usage": {
+          "input": 618,
+          "output": 268,
+          "cacheRead": 69632,
+          "cacheWrite": 0,
+          "totalTokens": 70518,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "toolUse",
+        "timestamp": 1777271867188,
+        "responseId": "resp_05c71d9c1dcecee80169ef043b82948196b86338b4676a43ca"
+      },
+      {
+        "role": "toolResult",
+        "toolCallId": "call_2smBdU7omszLP4yBB6DYLVqv|fc_05c71d9c1dcecee80169ef043c7b948196be6e3ffd32f106ca",
+        "toolName": "exec",
+        "content": [
+          {
+            "type": "text",
+            "text": "ok"
+          }
+        ],
+        "details": {
+          "status": "completed",
+          "exitCode": 0,
+          "durationMs": 164,
+          "aggregated": "ok",
+          "cwd": "/home/xkaiwen/workspace/ClawArena/data/clawarena/openclaw/work/workspaces_20260427_014645_730742_4101619/hil_g4"
+        },
+        "isError": false,
+        "timestamp": 1777271870699
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "已完成并复跑校验通过：\n\n`scripts/check_pip_timeline.py`\n\n运行方式：\n```bash\n./scripts/check_pip_timeline.py\n```\n\n当前输出关键值：\n- `pip_start_date`: `2026-02-01`\n- `termination_effective_date`: `2026-03-13`\n- `policy_minimum_pip_days`: `60`\n- `actual_pip_days`: `40`\n- `days_shortfall`: `20`\n- `is_compliant`: `false`\n\n脚本会从原文解析日期和政策天数，不依赖口头口径。",
+            "textSignature": "{\"v\":1,\"id\":\"msg_05c71d9c1dcecee80169ef0441b12481969256e696236f5a8b\",\"phase\":\"final_answer\"}"
+          }
+        ],
+        "api": "openai-codex-responses",
+        "provider": "openai-codex",
+        "model": "gpt-5.5",
+        "usage": {
+          "input": 385,
+          "output": 133,
+          "cacheRead": 70144,
+          "cacheWrite": 0,
+          "totalTokens": 70662,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop",
+        "timestamp": 1777271870703,
+        "responseId": "resp_05c71d9c1dcecee80169ef0440dcfc819685bff6ee3b2b8ba6"
+      }
+    ]
+  },
+  "inline_score": {
+    "passed": false,
+    "exit_code": 1,
+    "stdout": "FAILED: legal_notice_required_days expected 60, got None\nFAILED: missing 'compliant' field in stdout JSON\nFAILED: applicable_clause is missing or empty (expected reference to 第四十条 or Article 40 or company PIP policy)\n",
+    "stderr": ""
+  }
+}

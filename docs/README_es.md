@@ -143,6 +143,8 @@ _Todos los números están macropromediados sobre los 12 escenarios / 337 rondas
 
 <sub>Cada modelo se muestra bajo su arnés principal: los modelos de Anthropic a través de Claude Code (incompatibles con OpenClaw), y los demás bajo OpenClaw. Consulte el artículo para la comparación entre frameworks que varía el arnés manteniendo fijo el modelo.</sub>
 
+> 📥 **¿Quiere enviar un nuevo resultado?** Consulte [submit-to-leaderboard.md](submit-to-leaderboard.md). Las plantillas de referencia están en [`result_example/`](../result_example/); los envíos de la comunidad se colocan en [`submissions/`](../submissions/).
+
 ---
 
 ## 🆚 Comparativa Benchmarks
