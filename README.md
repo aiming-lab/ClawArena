@@ -121,24 +121,26 @@ _All numbers are macro-averaged across the 12 scenarios / 337 rounds and sorted 
 
 | Rank | Model | Framework | TCR | MC | EC | SC | FD | **CRS** |
 |---:|---|---|--:|--:|--:|--:|--:|--:|
-| 1  | GPT-5.5            | OpenClaw    | 78.34 | 75.79 | 79.34 | 61.24 | 95.06 | **68.28** |
-| 2  | Claude Opus-4.7    | Claude Code | 76.13 | 65.26 | 80.58 | 60.06 | 94.06 | 66.31 |
-| 3  | Gemma-4-31B        | OpenClaw    | 75.37 | 81.05 | 73.14 | 56.76 | 91.90 | 63.80 |
-| 4  | GPT-5.1            | OpenClaw    | 70.33 | 75.79 | 68.18 | 58.96 | 95.37 | 63.28 |
-| 5  | Claude Sonnet-4.6  | Claude Code | 73.36 | 63.16 | 77.69 | 54.80 | 93.02 | 62.16 |
-| 6  | Claude Haiku-4.5   | Claude Code | 72.29 | 64.21 | 75.62 | 54.74 | 90.54 | 60.93 |
-| 7  | GLM-5.1            | OpenClaw    | 72.70 | 72.63 | 72.73 | 52.74 | 92.07 | 60.63 |
-| 8  | Mimo-V2.5-Pro      | OpenClaw    | 71.45 | 66.32 | 73.55 | 52.23 | 91.62 | 59.65 |
-| 9  | GPT-5.4            | OpenClaw    | 71.22 | 71.58 | 71.07 | 51.51 | 90.78 | 58.99 |
-| 10 | Gemini-3.1-Pro     | OpenClaw    | 69.57 | 66.32 | 71.07 | 50.54 | 90.23 | 57.59 |
-| 11 | Kimi-K2.5          | OpenClaw    | 69.44 | 60.00 | 73.14 | 48.86 | 90.02 | 57.24 |
-| 12 | Qwen3.6-27B        | OpenClaw    | 66.63 | 65.26 | 68.60 | 48.40 | 93.12 | 55.85 |
-| 13 | DeepSeek-V4-Pro    | OpenClaw    | 66.89 | 57.89 | 70.66 | 48.56 | 89.82 | 55.25 |
-| 14 | Qwen3.6-Plus       | OpenClaw    | 67.06 | 71.58 | 65.29 | 47.89 | 90.38 | 55.17 |
-| 15 | GPT-5.2            | OpenClaw    | 65.88 | 61.05 | 67.77 | 47.21 | 90.01 | 54.18 |
-| 16 | Qwen3.6-35B-A3B    | OpenClaw    | 60.24 | 51.58 | 63.64 | 42.17 | 88.93 | 48.86 |
-| 17 | Ling-2.6           | OpenClaw    | 55.05 | 66.32 | 50.83 | 37.62 | 87.94 | 44.07 |
-| 18 | GLM-4.7-Flash      | OpenClaw    | 54.10 | 42.11 | 57.02 | 30.55 | 77.05 | 38.82 |
+| 1  | Claude Fable-5    | Claude Code | 79.02 | 71.58 | 82.23 | 64.35 | 94.91 | **70.05** |
+| 2  | GPT-5.5           | OpenClaw    | 78.34 | 75.79 | 79.34 | 61.24 | 95.06 | 68.28 |
+| 3  | Claude Opus-4.7   | Claude Code | 76.13 | 65.26 | 80.58 | 60.06 | 94.06 | 66.31 |
+| 4  | Gemma-4-31B       | OpenClaw    | 75.37 | 81.05 | 73.14 | 56.76 | 91.90 | 63.80 |
+| 5  | GPT-5.1           | OpenClaw    | 70.33 | 75.79 | 68.18 | 58.96 | 95.37 | 63.28 |
+| 6  | Claude Sonnet-4.6 | Claude Code | 73.36 | 63.16 | 77.69 | 54.80 | 93.02 | 62.16 |
+| 7  | Claude Opus-4.8   | Claude Code | 72.31 | 58.95 | 77.69 | 55.05 | 91.77 | 61.42 |
+| 8  | Claude Haiku-4.5  | Claude Code | 72.29 | 64.21 | 75.62 | 54.74 | 90.54 | 60.93 |
+| 9  | GLM-5.1           | OpenClaw    | 72.70 | 72.63 | 72.73 | 52.74 | 92.07 | 60.63 |
+| 10 | Mimo-V2.5-Pro     | OpenClaw    | 71.45 | 66.32 | 73.55 | 52.23 | 91.62 | 59.65 |
+| 11 | GPT-5.4           | OpenClaw    | 71.22 | 71.58 | 71.07 | 51.51 | 90.78 | 58.99 |
+| 12 | Gemini-3.1-Pro    | OpenClaw    | 69.57 | 66.32 | 71.07 | 50.54 | 90.23 | 57.59 |
+| 13 | Kimi-K2.5         | OpenClaw    | 69.44 | 60.00 | 73.14 | 48.86 | 90.02 | 57.24 |
+| 14 | Qwen3.6-27B       | OpenClaw    | 66.63 | 65.26 | 68.60 | 48.40 | 93.12 | 55.85 |
+| 15 | DeepSeek-V4-Pro   | OpenClaw    | 66.89 | 57.89 | 70.66 | 48.56 | 89.82 | 55.25 |
+| 16 | Qwen3.6-Plus      | OpenClaw    | 67.06 | 71.58 | 65.29 | 47.89 | 90.38 | 55.17 |
+| 17 | GPT-5.2           | OpenClaw    | 65.88 | 61.05 | 67.77 | 47.21 | 90.01 | 54.18 |
+| 18 | Qwen3.6-35B-A3B   | OpenClaw    | 60.24 | 51.58 | 63.64 | 42.17 | 88.93 | 48.86 |
+| 19 | Ling-2.6          | OpenClaw    | 55.05 | 66.32 | 50.83 | 37.62 | 87.94 | 44.07 |
+| 20 | GLM-4.7-Flash     | OpenClaw    | 54.10 | 42.11 | 57.02 | 30.55 | 77.05 | 38.82 |
 
 <sub>Each model is shown under its primary harness: Anthropic models through Claude Code (incompatible with OpenClaw), all others under OpenClaw. See the paper for the cross-framework comparison that varies the harness while fixing the model.</sub>
 
