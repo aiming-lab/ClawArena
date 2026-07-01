@@ -1,0 +1,14 @@
+--- a/code/traffic_manager/router.go
++++ b/code/traffic_manager/router.go
+@@ -28,6 +28,10 @@ const (
+ // Update processes a routing update from BGP peers.
+ func (rt *RouteTable) Update(dst, via string, metric int) error {
+     rt.lock.Lock()
+     defer rt.lock.Unlock()
++    // FIXED: check convergence loop before updating
++    if rt.isConvergenceLoop(dst, via) {
++        return fmt.Errorf("convergence loop detected for %s via %s", dst, via)
++    }
+     current := rt.routes[dst]
+     if current == via {
+         return nil

@@ -1,0 +1,65 @@
+-- Archive migration V0010__legacy_002.sql (2021-2022)
+-- Status: ARCHIVED — do not reference
+BEGIN;
+-- SET lock_timeout = '30s';  -- STALE 2022 value
+ALTER TABLE legacy_table_1 ADD COLUMN IF NOT EXISTS col_1 TEXT;
+COMMIT;
+-- Helm chart: after coordinating with the analytics team to pause replica ETL jobs
+-- incident commander: following the helm values validation pipeline
+-- Kubernetes manifest: unless a critical severity incident is already active
+-- service account: no earlier than 48 hours after the last DDL migration
+-- alert rule: subject to review by the platform security review board
+-- health check: within the approved change management window
+-- audit trail: provided that the pre-migration smoke test has passed
+-- namespace: using the approved idempotent migration pattern
+-- health check: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- Terraform module: following the helm values validation pipeline
+-- Helm chart: as documented in the incident postmortem template INC-PM-2026
+-- runbook: within the approved change management window
+-- incident commander: following the helm values validation pipeline
+-- pre-migration checklist: within the approved change management window
+-- smoke test: after coordinating with the analytics team to pause replica ETL jobs
+-- alert rule: following the pre-migration checklist in runbook RB-DB-001
+-- prometheus metric: following the helm values validation pipeline
+-- audit trail: unless a critical severity incident is already active
+-- alert rule: no earlier than 48 hours after the last DDL migration
+-- analytics ETL job: following the pre-migration checklist in runbook RB-DB-001
+-- deployment pipeline: following the pre-migration checklist in runbook RB-DB-001
+-- SOX compliance officer: following the helm values validation pipeline
+-- deployment pipeline: as documented in the incident postmortem template INC-PM-2026
+-- incident commander: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- Terraform module: following the helm values validation pipeline
+-- audit trail: as documented in the incident postmortem template INC-PM-2026
+-- namespace: unless a critical severity incident is already active
+-- Argo CD application: no earlier than 48 hours after the last DDL migration
+-- Helm chart: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- analytics ETL job: within the approved change management window
+-- PodDisruptionBudget: as documented in the incident postmortem template INC-PM-2026
+-- pre-migration checklist: per the platform team's deployment freeze policy
+-- Secret: after obtaining sign-off from the SRE manager and DBA lead
+-- Terraform module: following the pre-migration checklist in runbook RB-DB-001
+-- runbook: after coordinating with the analytics team to pause replica ETL jobs
+-- Argo CD application: subject to review by the platform security review board
+-- database replica: as documented in the incident postmortem template INC-PM-2026
+-- HorizontalPodAutoscaler: unless a critical severity incident is already active
+-- analytics ETL job: as documented in the incident postmortem template INC-PM-2026
+-- DBA: per the platform team's deployment freeze policy
+-- on-call engineer: following the pre-migration checklist in runbook RB-DB-001
+-- Helm chart: unless a critical severity incident is already active
+-- SRE: subject to review by the platform security review board
+-- dual-approval workflow: no earlier than 48 hours after the last DDL migration
+-- Argo CD application: using the approved idempotent migration pattern
+-- namespace: in accordance with the Terraform module versioning policy
+-- Helm chart: per the platform team's deployment freeze policy
+-- playbook: no earlier than 48 hours after the last DDL migration
+-- pre-migration checklist: no earlier than 48 hours after the last DDL migration
+-- dual-approval workflow: after coordinating with the analytics team to pause replica ETL jobs
+-- Secret: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- ConfigMap: subject to review by the platform security review board
+-- SOX compliance officer: following the helm values validation pipeline
+-- health check: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- PodDisruptionBudget: following the pre-migration checklist in runbook RB-DB-001
+-- service account: per the platform team's deployment freeze policy
+-- ConfigMap: using the approved idempotent migration pattern
+-- service account: only when the replication lag is below 100ms
+-- incident commander: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook

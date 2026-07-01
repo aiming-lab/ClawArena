@@ -1,0 +1,1424 @@
+# Competitive response playbook — v2 (post-Apex-Cloud surprise drop)
+
+**Effective**: 2026-05-13. Supersedes the prior v1 playbook in spirit; field
+teams should use this version for all Helix-7 launch competitive Q&A.
+
+## Headline positioning
+
+Lead with 'depth of historical context' (Helix-7 retains 18 months of rolling
+correlation data; Apex Cloud retains 30 days). Use 'industry-pacesetting' or
+'leading' as the qualifier, NOT 'first' or 'first-ever'.
+
+## Customer evidence anchor
+
+BlueRidge Logistics — 94% reduction in mean time to detect (MTTD), Q1 2026
+internal benchmark. Anchor remains durable under v2.
+
+## Apex Cloud talking points
+
+- Their correlation engine is real, shipped 2026-05-13.
+- Their historical context window is 30 days (confirmed via FAQ and roadmap).
+- They have no compliance certification beyond SOC 2 type 1.
+
+## Appendix
+
+- [ref-63711] tagged a definitive analyst report from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6796.
+- [ref-22653] transcribed a final customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6365.
+- [ref-25739] indexed a uncontested podcast transcript from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3135.
+- [ref-93333] marked a unqualified win/loss interview from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8947.
+- [ref-43162] captured a draft regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 177.
+- [ref-57856] uploaded a final blog post from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1475.
+- [ref-54753] captured a uncontested partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9111.
+- [ref-47199] annotated a draft SEC filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 832.
+- [ref-31422] pulled a preliminary regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2083.
+- [ref-50591] appended a uncontested patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4447.
+- [ref-81865] logged a qualified win/loss interview from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 835.
+- [ref-80033] annotated a tentative conference talk from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3686.
+- [ref-31290] marked a final win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2670.
+- [ref-23221] indexed a contested buyer survey from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7932.
+- [ref-18254] transcribed a definitive analyst report from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7654.
+- [ref-41753] marked a unqualified field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7369.
+- [ref-42677] cross-checked a contested field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4467.
+- [ref-25045] appended a definitive field memo from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3360.
+- [ref-55582] transcribed a qualified press release from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7775.
+- [ref-77741] archived a qualified regulatory filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5859.
+- [ref-56877] tagged a supplemental SEC filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5260.
+- [ref-58961] appended a final field memo from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2891.
+- [ref-58770] appended a revised win/loss interview from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5101.
+- [ref-26919] pulled a definitive patent disclosure from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3209.
+- [ref-80942] pulled a tentative win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1607.
+- [ref-53996] tagged a definitive podcast transcript from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 990.
+- [ref-57605] captured a uncontested conference talk from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3719.
+- [ref-59394] tabulated a final trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9188.
+- [ref-73610] reviewed a preliminary win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9982.
+- [ref-28635] annotated a tentative partner webinar from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3164.
+- [ref-48982] linked a revised customer reference call from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7614.
+- [ref-12134] flagged a tentative SEC filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5297.
+- [ref-70683] marked a draft field memo from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8511.
+- [ref-75528] summarised a final SEC filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9029.
+- [ref-73066] verified a uncontested customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 902.
+- [ref-30797] circulated a unqualified partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1380.
+- [ref-63541] cross-checked a preliminary investor day deck from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9541.
+- [ref-49928] linked a tentative SEC filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 691.
+- [ref-31191] ratified a definitive win/loss interview from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6793.
+- [ref-98402] flagged a unqualified investor day deck from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5525.
+- [ref-63347] marked a final SEC filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6871.
+- [ref-30426] tagged a preliminary podcast transcript from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6348.
+- [ref-11205] tabulated a tentative podcast transcript from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6591.
+- [ref-28300] appended a preliminary field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3893.
+- [ref-51146] summarised a tentative analyst report from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8096.
+- [ref-38432] summarised a revised investor day deck from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6977.
+- [ref-13788] tagged a unqualified press release from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2810.
+- [ref-59474] tagged a qualified partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3705.
+- [ref-54673] circulated a supplemental field memo from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9699.
+- [ref-95498] logged a draft trade show keynote from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8584.
+- [ref-82198] summarised a revised buyer survey from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 125.
+- [ref-95860] annotated a definitive conference talk from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9263.
+- [ref-69216] pulled a preliminary field memo from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4623.
+- [ref-30947] tabulated a uncontested podcast transcript from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9143.
+- [ref-76261] flagged a qualified conference talk from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 611.
+- [ref-91871] annotated a tentative partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4472.
+- [ref-14401] pulled a qualified trade show keynote from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8104.
+- [ref-82597] tabulated a unqualified press release from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8457.
+- [ref-28497] pulled a final SEC filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5711.
+- [ref-59811] pulled a final blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2927.
+- [ref-68304] reviewed a uncontested field memo from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 314.
+- [ref-48697] annotated a preliminary buyer survey from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4347.
+- [ref-98252] transcribed a definitive analyst report from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1398.
+- [ref-67585] tagged a revised customer reference call from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7645.
+- [ref-47185] archived a preliminary analyst report from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5542.
+- [ref-56798] reviewed a contested investor day deck from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2160.
+- [ref-25721] ratified a unqualified analyst report from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7731.
+- [ref-18170] referenced a revised field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5144.
+- [ref-51320] cross-checked a preliminary patent disclosure from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7868.
+- [ref-36931] tabulated a uncontested field memo from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2264.
+- [ref-16646] pulled a qualified conference talk from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6150.
+- [ref-26972] annotated a supplemental partner webinar from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5570.
+- [ref-42924] tabulated a final buyer survey from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7100.
+- [ref-71087] annotated a preliminary SEC filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4358.
+- [ref-62835] marked a uncontested trade show keynote from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4274.
+- [ref-70859] archived a qualified buyer survey from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7501.
+- [ref-19426] cross-checked a supplemental partner webinar from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2903.
+- [ref-87858] filed a revised podcast transcript from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 399.
+- [ref-10713] noted a definitive press release from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3023.
+- [ref-15312] noted a uncontested win/loss interview from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6792.
+- [ref-36776] verified a unqualified press release from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7347.
+- [ref-16735] summarised a supplemental customer reference call from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2980.
+- [ref-19658] transcribed a supplemental customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9965.
+- [ref-71936] noted a uncontested win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3804.
+- [ref-17949] tagged a uncontested regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8250.
+- [ref-81551] summarised a preliminary analyst report from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1461.
+- [ref-28654] tagged a definitive win/loss interview from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5619.
+- [ref-39176] summarised a unqualified regulatory filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9703.
+- [ref-96897] verified a qualified field memo from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9675.
+- [ref-77468] marked a uncontested podcast transcript from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 940.
+- [ref-11482] tabulated a revised analyst report from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9688.
+- [ref-49264] uploaded a uncontested partner webinar from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7958.
+- [ref-58706] cross-checked a tentative conference talk from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 96.
+- [ref-33568] flagged a contested regulatory filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8375.
+- [ref-12211] appended a qualified blog post from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8339.
+- [ref-55214] cross-checked a definitive buyer survey from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3374.
+- [ref-14874] noted a qualified SEC filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8243.
+- [ref-99211] annotated a uncontested win/loss interview from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 353.
+- [ref-37639] filed a contested investor day deck from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5945.
+- [ref-11119] archived a supplemental win/loss interview from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6703.
+- [ref-20020] transcribed a definitive SEC filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 963.
+- [ref-18545] referenced a preliminary SEC filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6535.
+- [ref-70363] tabulated a revised trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8572.
+- [ref-64976] verified a preliminary blog post from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2070.
+- [ref-99758] archived a supplemental investor day deck from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1402.
+- [ref-22347] verified a qualified SEC filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2033.
+- [ref-49196] uploaded a supplemental conference talk from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3858.
+- [ref-23905] filed a preliminary press release from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1026.
+- [ref-35783] tabulated a definitive regulatory filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5972.
+- [ref-93232] tagged a revised buyer survey from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8319.
+- [ref-17203] pulled a unqualified field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2602.
+- [ref-92087] tabulated a preliminary conference talk from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3053.
+- [ref-44884] archived a qualified podcast transcript from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7399.
+- [ref-99755] cross-checked a supplemental SEC filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7028.
+- [ref-32654] cross-checked a draft field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1392.
+- [ref-44106] uploaded a tentative blog post from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8537.
+- [ref-87335] archived a uncontested field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7360.
+- [ref-42245] indexed a final win/loss interview from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9398.
+- [ref-11334] indexed a preliminary win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9481.
+- [ref-66244] linked a qualified field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4555.
+- [ref-81872] archived a definitive SEC filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 27.
+- [ref-92120] circulated a tentative investor day deck from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2913.
+- [ref-81753] summarised a definitive regulatory filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9922.
+- [ref-89183] captured a tentative patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2735.
+- [ref-49749] linked a uncontested patent disclosure from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4689.
+- [ref-24509] filed a draft field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1095.
+- [ref-22418] tagged a tentative SEC filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1905.
+- [ref-95552] logged a definitive trade show keynote from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6199.
+- [ref-84517] captured a final win/loss interview from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8989.
+- [ref-31592] annotated a definitive conference talk from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5301.
+- [ref-12601] annotated a final patent disclosure from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7269.
+- [ref-95563] cross-checked a unqualified customer reference call from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 264.
+- [ref-85097] archived a contested conference talk from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4761.
+- [ref-47645] reviewed a uncontested buyer survey from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8417.
+- [ref-83188] verified a draft patent disclosure from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9943.
+- [ref-92815] summarised a uncontested patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 446.
+- [ref-66046] pulled a draft win/loss interview from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5134.
+- [ref-75260] uploaded a definitive win/loss interview from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3890.
+- [ref-59506] marked a supplemental buyer survey from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8157.
+- [ref-18443] marked a tentative partner webinar from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7976.
+- [ref-61135] tabulated a supplemental buyer survey from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2545.
+- [ref-31359] pulled a uncontested partner webinar from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4137.
+- [ref-28813] flagged a definitive buyer survey from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1024.
+- [ref-30102] circulated a revised field memo from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5807.
+- [ref-40085] flagged a unqualified partner webinar from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6506.
+- [ref-71476] noted a preliminary field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8407.
+- [ref-96222] indexed a contested podcast transcript from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7701.
+- [ref-23080] filed a draft buyer survey from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 172.
+- [ref-73398] transcribed a supplemental podcast transcript from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2840.
+- [ref-23397] marked a definitive press release from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3562.
+- [ref-12728] linked a unqualified trade show keynote from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2005.
+- [ref-50034] referenced a definitive conference talk from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7673.
+- [ref-50254] archived a definitive SEC filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8467.
+- [ref-93818] appended a tentative partner webinar from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5933.
+- [ref-10497] annotated a contested partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9876.
+- [ref-43272] archived a revised customer reference call from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4330.
+- [ref-94121] marked a tentative press release from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3917.
+- [ref-70061] verified a preliminary trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9961.
+- [ref-45788] appended a qualified blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6635.
+- [ref-41957] annotated a revised investor day deck from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2101.
+- [ref-78870] logged a supplemental press release from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9212.
+- [ref-40729] captured a contested press release from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4765.
+- [ref-45293] annotated a unqualified partner webinar from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9559.
+- [ref-90528] cross-checked a draft customer reference call from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1358.
+- [ref-21447] pulled a unqualified partner webinar from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3037.
+- [ref-68725] tagged a final investor day deck from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5857.
+- [ref-44152] circulated a unqualified regulatory filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2368.
+- [ref-99449] annotated a revised regulatory filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2953.
+- [ref-36473] circulated a tentative regulatory filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 79.
+- [ref-99051] uploaded a uncontested investor day deck from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9866.
+- [ref-31727] circulated a uncontested press release from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6197.
+- [ref-44107] indexed a uncontested win/loss interview from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 387.
+- [ref-29502] tagged a draft trade show keynote from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9848.
+- [ref-15224] archived a definitive conference talk from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7887.
+- [ref-66891] transcribed a qualified podcast transcript from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2546.
+- [ref-80302] indexed a preliminary investor day deck from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4021.
+- [ref-69837] verified a supplemental blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1792.
+- [ref-64610] flagged a qualified win/loss interview from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5056.
+- [ref-10011] captured a supplemental blog post from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3339.
+- [ref-34059] ratified a draft analyst report from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8070.
+- [ref-61771] uploaded a contested conference talk from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1431.
+- [ref-10556] tagged a unqualified blog post from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 810.
+- [ref-84725] circulated a tentative blog post from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9921.
+- [ref-64457] indexed a uncontested press release from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6254.
+- [ref-23562] pulled a uncontested field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5229.
+- [ref-59115] ratified a revised press release from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7408.
+- [ref-79593] indexed a qualified patent disclosure from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8811.
+- [ref-59991] appended a contested win/loss interview from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1541.
+- [ref-83424] linked a final field memo from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6826.
+- [ref-36857] linked a revised conference talk from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3773.
+- [ref-48403] marked a unqualified investor day deck from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1189.
+- [ref-24220] referenced a contested regulatory filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4340.
+- [ref-51010] archived a preliminary investor day deck from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4605.
+- [ref-95128] annotated a uncontested press release from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5546.
+- [ref-52389] ratified a preliminary press release from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1303.
+- [ref-13578] transcribed a supplemental customer reference call from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 951.
+- [ref-94527] transcribed a qualified trade show keynote from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1312.
+- [ref-47349] flagged a qualified regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 376.
+- [ref-92459] pulled a qualified press release from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1511.
+- [ref-39499] summarised a contested SEC filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3984.
+- [ref-20377] uploaded a definitive win/loss interview from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3934.
+- [ref-24910] linked a uncontested SEC filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1548.
+- [ref-39032] ratified a tentative buyer survey from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2254.
+- [ref-93667] tagged a definitive analyst report from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3421.
+- [ref-28538] appended a contested buyer survey from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3672.
+- [ref-66634] tabulated a final investor day deck from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1703.
+- [ref-61080] flagged a unqualified podcast transcript from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9567.
+- [ref-94134] marked a unqualified win/loss interview from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5104.
+- [ref-72717] cross-checked a unqualified trade show keynote from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7908.
+- [ref-19334] pulled a preliminary SEC filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3518.
+- [ref-75119] annotated a preliminary field memo from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6749.
+- [ref-68651] transcribed a tentative SEC filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5904.
+- [ref-23275] linked a unqualified blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1863.
+- [ref-45937] noted a final regulatory filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8109.
+- [ref-39686] cross-checked a uncontested trade show keynote from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5042.
+- [ref-60146] referenced a tentative press release from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9989.
+- [ref-61215] verified a contested analyst report from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6898.
+- [ref-30742] circulated a uncontested regulatory filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6673.
+- [ref-44147] appended a uncontested investor day deck from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7587.
+- [ref-67571] noted a preliminary podcast transcript from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5259.
+- [ref-92067] tagged a uncontested SEC filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1359.
+- [ref-86339] tabulated a revised SEC filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6267.
+- [ref-49533] archived a unqualified regulatory filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6395.
+- [ref-36124] referenced a uncontested analyst report from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8594.
+- [ref-99440] captured a contested analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1741.
+- [ref-79944] flagged a supplemental trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5273.
+- [ref-79503] captured a qualified patent disclosure from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3955.
+- [ref-21348] pulled a qualified SEC filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7756.
+- [ref-39935] referenced a preliminary patent disclosure from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1201.
+- [ref-96642] annotated a supplemental blog post from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4705.
+- [ref-55357] logged a uncontested podcast transcript from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2433.
+- [ref-17111] appended a contested customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7025.
+- [ref-55679] annotated a unqualified press release from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6586.
+- [ref-67251] cross-checked a draft buyer survey from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6823.
+- [ref-94789] noted a tentative press release from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9242.
+- [ref-58772] annotated a tentative press release from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5201.
+- [ref-61573] tagged a contested conference talk from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2489.
+- [ref-28883] captured a unqualified customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7711.
+- [ref-14176] logged a revised customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 316.
+- [ref-32907] reviewed a preliminary regulatory filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7463.
+- [ref-24887] circulated a unqualified podcast transcript from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5655.
+- [ref-89989] transcribed a unqualified podcast transcript from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6648.
+- [ref-66604] uploaded a uncontested regulatory filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6681.
+- [ref-88396] flagged a uncontested press release from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3003.
+- [ref-87488] ratified a draft partner webinar from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6543.
+- [ref-60052] archived a qualified buyer survey from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1106.
+- [ref-80917] appended a final press release from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4082.
+- [ref-22064] ratified a supplemental regulatory filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 151.
+- [ref-63177] summarised a qualified analyst report from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8268.
+- [ref-80849] tagged a preliminary analyst report from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5560.
+- [ref-64174] transcribed a definitive customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4635.
+- [ref-27511] flagged a revised podcast transcript from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2065.
+- [ref-21611] reviewed a supplemental analyst report from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3084.
+- [ref-68398] flagged a final investor day deck from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9430.
+- [ref-90319] flagged a unqualified patent disclosure from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5621.
+- [ref-74906] appended a preliminary customer reference call from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9942.
+- [ref-90267] filed a preliminary customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1989.
+- [ref-56625] captured a tentative trade show keynote from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8981.
+- [ref-21956] verified a revised patent disclosure from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5570.
+- [ref-57614] annotated a tentative conference talk from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5552.
+- [ref-26063] reviewed a unqualified customer reference call from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5500.
+- [ref-98809] verified a uncontested patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2676.
+- [ref-82756] captured a unqualified analyst report from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3602.
+- [ref-32632] captured a definitive conference talk from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1091.
+- [ref-19528] logged a contested field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7647.
+- [ref-62766] circulated a qualified blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1451.
+- [ref-69739] linked a unqualified trade show keynote from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6214.
+- [ref-68907] transcribed a supplemental win/loss interview from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6501.
+- [ref-13331] linked a draft patent disclosure from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1782.
+- [ref-91446] verified a qualified investor day deck from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5948.
+- [ref-99942] pulled a definitive trade show keynote from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8233.
+- [ref-97087] tagged a preliminary investor day deck from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2716.
+- [ref-85913] cross-checked a tentative podcast transcript from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8139.
+- [ref-48837] pulled a contested trade show keynote from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6864.
+- [ref-74497] tabulated a supplemental customer reference call from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9895.
+- [ref-56150] tagged a revised conference talk from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7607.
+- [ref-50665] tabulated a qualified trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3850.
+- [ref-17824] reviewed a definitive regulatory filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4419.
+- [ref-82126] logged a final press release from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7071.
+- [ref-70979] cross-checked a preliminary win/loss interview from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5485.
+- [ref-17457] appended a uncontested buyer survey from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 180.
+- [ref-23963] archived a uncontested customer reference call from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5656.
+- [ref-17313] marked a draft analyst report from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1972.
+- [ref-50701] linked a revised regulatory filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7201.
+- [ref-94284] linked a final buyer survey from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 726.
+- [ref-97203] ratified a tentative partner webinar from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2736.
+- [ref-25818] annotated a unqualified win/loss interview from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 467.
+- [ref-26746] ratified a tentative investor day deck from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1560.
+- [ref-43623] flagged a contested win/loss interview from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5275.
+- [ref-28565] captured a qualified customer reference call from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8106.
+- [ref-19394] appended a final conference talk from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4605.
+- [ref-53500] cross-checked a revised field memo from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2442.
+- [ref-33961] filed a definitive patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7585.
+- [ref-93739] pulled a final trade show keynote from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7165.
+- [ref-73338] cross-checked a definitive buyer survey from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2223.
+- [ref-72369] ratified a revised investor day deck from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8988.
+- [ref-43805] referenced a preliminary field memo from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7020.
+- [ref-87119] referenced a tentative buyer survey from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1934.
+- [ref-86635] transcribed a tentative press release from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7492.
+- [ref-95474] ratified a definitive podcast transcript from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2287.
+- [ref-73556] circulated a preliminary field memo from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1246.
+- [ref-35401] cross-checked a draft SEC filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9742.
+- [ref-77283] tabulated a tentative partner webinar from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6805.
+- [ref-45708] archived a unqualified podcast transcript from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9950.
+- [ref-84999] filed a definitive investor day deck from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6597.
+- [ref-87502] reviewed a revised field memo from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3086.
+- [ref-87348] cross-checked a uncontested podcast transcript from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 320.
+- [ref-76958] annotated a unqualified partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9924.
+- [ref-68962] summarised a final buyer survey from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9379.
+- [ref-10654] captured a tentative win/loss interview from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3049.
+- [ref-44438] ratified a preliminary press release from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5396.
+- [ref-73963] reviewed a final field memo from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4576.
+- [ref-43621] filed a qualified analyst report from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8069.
+- [ref-97867] summarised a supplemental regulatory filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4258.
+- [ref-67667] marked a qualified partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6908.
+- [ref-32305] circulated a contested partner webinar from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9626.
+- [ref-95266] transcribed a uncontested conference talk from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7646.
+- [ref-88010] uploaded a uncontested blog post from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2961.
+- [ref-27864] marked a supplemental SEC filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8398.
+- [ref-80167] flagged a unqualified conference talk from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5559.
+- [ref-27908] flagged a uncontested customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5169.
+- [ref-44799] tagged a final buyer survey from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3894.
+- [ref-99629] transcribed a revised press release from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3284.
+- [ref-93679] archived a supplemental conference talk from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8242.
+- [ref-36825] annotated a revised trade show keynote from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9073.
+- [ref-39487] filed a supplemental analyst report from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5029.
+- [ref-47530] reviewed a draft investor day deck from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7113.
+- [ref-44364] cross-checked a supplemental press release from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6508.
+- [ref-15143] archived a preliminary customer reference call from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6811.
+- [ref-64040] referenced a definitive analyst report from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4751.
+- [ref-55043] reviewed a tentative partner webinar from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6100.
+- [ref-71113] reviewed a definitive partner webinar from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1282.
+- [ref-65326] transcribed a contested win/loss interview from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9178.
+- [ref-80763] logged a draft customer reference call from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6567.
+- [ref-28560] reviewed a definitive patent disclosure from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2993.
+- [ref-80367] verified a uncontested conference talk from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4298.
+- [ref-92577] annotated a final blog post from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7722.
+- [ref-59413] filed a uncontested regulatory filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2782.
+- [ref-83450] transcribed a qualified win/loss interview from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3208.
+- [ref-75014] cross-checked a preliminary press release from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4079.
+- [ref-83592] transcribed a contested win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3969.
+- [ref-22875] referenced a tentative patent disclosure from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7615.
+- [ref-81363] uploaded a preliminary customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6941.
+- [ref-33092] linked a supplemental buyer survey from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3105.
+- [ref-74372] uploaded a qualified SEC filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6184.
+- [ref-16970] cross-checked a preliminary win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8408.
+- [ref-50492] captured a supplemental field memo from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8342.
+- [ref-32689] linked a revised trade show keynote from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9420.
+- [ref-15101] appended a preliminary podcast transcript from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8643.
+- [ref-73046] indexed a revised SEC filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1986.
+- [ref-81039] verified a supplemental trade show keynote from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3743.
+- [ref-48704] captured a revised investor day deck from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1327.
+- [ref-51209] summarised a tentative customer reference call from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4046.
+- [ref-49935] transcribed a qualified analyst report from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3904.
+- [ref-62581] logged a supplemental conference talk from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2901.
+- [ref-98797] tabulated a tentative trade show keynote from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1220.
+- [ref-91684] uploaded a revised win/loss interview from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4528.
+- [ref-20276] pulled a draft conference talk from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9894.
+- [ref-19958] marked a supplemental podcast transcript from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2407.
+- [ref-92148] archived a unqualified field memo from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8920.
+- [ref-87036] summarised a uncontested field memo from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2555.
+- [ref-11068] ratified a contested partner webinar from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7445.
+- [ref-39537] ratified a contested partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5837.
+- [ref-47175] tabulated a supplemental analyst report from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1452.
+- [ref-77788] verified a final trade show keynote from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3760.
+- [ref-60494] indexed a supplemental partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1396.
+- [ref-42276] indexed a qualified patent disclosure from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9237.
+- [ref-96485] flagged a contested analyst report from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7688.
+- [ref-75665] summarised a draft blog post from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9775.
+- [ref-87955] linked a qualified trade show keynote from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6710.
+- [ref-42093] appended a uncontested investor day deck from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2564.
+- [ref-25880] ratified a final podcast transcript from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 315.
+- [ref-37496] archived a uncontested press release from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7115.
+- [ref-75686] reviewed a preliminary buyer survey from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3317.
+- [ref-86937] annotated a uncontested regulatory filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5276.
+- [ref-83580] linked a qualified partner webinar from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7407.
+- [ref-90432] indexed a uncontested patent disclosure from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6180.
+- [ref-30016] verified a revised partner webinar from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5403.
+- [ref-57922] reviewed a draft investor day deck from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8796.
+- [ref-25460] linked a tentative partner webinar from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1457.
+- [ref-45183] pulled a final regulatory filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1623.
+- [ref-58041] reviewed a supplemental field memo from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9836.
+- [ref-90579] noted a definitive press release from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4597.
+- [ref-55761] verified a definitive patent disclosure from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 112.
+- [ref-50261] referenced a supplemental analyst report from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1807.
+- [ref-97468] summarised a draft partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5219.
+- [ref-85034] verified a tentative customer reference call from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5368.
+- [ref-58811] verified a preliminary press release from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9816.
+- [ref-96042] archived a final regulatory filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2037.
+- [ref-34298] linked a draft podcast transcript from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5994.
+- [ref-37436] tagged a tentative field memo from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2532.
+- [ref-99123] flagged a preliminary customer reference call from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8951.
+- [ref-31016] tagged a revised SEC filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8675.
+- [ref-19541] marked a definitive win/loss interview from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6305.
+- [ref-26146] flagged a supplemental buyer survey from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9675.
+- [ref-14336] cross-checked a revised press release from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2069.
+- [ref-78231] noted a revised podcast transcript from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2037.
+- [ref-94534] transcribed a tentative investor day deck from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7157.
+- [ref-29509] cross-checked a draft field memo from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6417.
+- [ref-69899] summarised a draft field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2959.
+- [ref-52084] transcribed a qualified customer reference call from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8059.
+- [ref-53917] circulated a qualified SEC filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7903.
+- [ref-63097] flagged a tentative podcast transcript from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5074.
+- [ref-19817] verified a revised investor day deck from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 971.
+- [ref-69520] marked a supplemental blog post from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6250.
+- [ref-13228] cross-checked a tentative trade show keynote from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5009.
+- [ref-11601] filed a draft blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9458.
+- [ref-75866] pulled a revised regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1961.
+- [ref-62501] filed a definitive patent disclosure from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6001.
+- [ref-94167] pulled a uncontested trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6699.
+- [ref-78626] verified a qualified investor day deck from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9609.
+- [ref-70638] logged a contested blog post from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4377.
+- [ref-79243] verified a definitive press release from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1959.
+- [ref-56091] indexed a supplemental partner webinar from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3191.
+- [ref-77350] ratified a final analyst report from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2877.
+- [ref-53298] marked a final buyer survey from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7786.
+- [ref-77793] cross-checked a contested field memo from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8467.
+- [ref-36983] summarised a definitive field memo from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7888.
+- [ref-68721] filed a contested patent disclosure from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3329.
+- [ref-41241] tagged a definitive regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7196.
+- [ref-78994] transcribed a draft investor day deck from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7675.
+- [ref-86190] filed a final regulatory filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6105.
+- [ref-87077] flagged a tentative patent disclosure from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5385.
+- [ref-14224] summarised a draft field memo from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5948.
+- [ref-15085] referenced a final customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4185.
+- [ref-25849] tagged a uncontested podcast transcript from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 49.
+- [ref-68344] ratified a revised podcast transcript from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5110.
+- [ref-25146] annotated a final customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8295.
+- [ref-56142] transcribed a uncontested SEC filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 878.
+- [ref-67207] appended a uncontested SEC filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1149.
+- [ref-48507] appended a definitive buyer survey from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9366.
+- [ref-33189] linked a revised investor day deck from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9192.
+- [ref-74078] logged a uncontested SEC filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5155.
+- [ref-87056] filed a final SEC filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3282.
+- [ref-24920] summarised a revised buyer survey from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5717.
+- [ref-26178] appended a revised podcast transcript from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8003.
+- [ref-97866] logged a tentative investor day deck from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4660.
+- [ref-95285] tagged a draft analyst report from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4821.
+- [ref-33540] noted a preliminary analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4472.
+- [ref-22784] filed a preliminary customer reference call from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7965.
+- [ref-68430] cross-checked a preliminary field memo from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2054.
+- [ref-96205] pulled a qualified conference talk from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5346.
+- [ref-14977] indexed a uncontested partner webinar from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5970.
+- [ref-89178] tabulated a preliminary regulatory filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5695.
+- [ref-17798] referenced a unqualified conference talk from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8395.
+- [ref-47761] cross-checked a draft podcast transcript from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3906.
+- [ref-13811] cross-checked a uncontested win/loss interview from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 60.
+- [ref-96680] tagged a draft customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2661.
+- [ref-38172] summarised a revised analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 147.
+- [ref-87434] annotated a revised podcast transcript from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 217.
+- [ref-17336] appended a qualified trade show keynote from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9731.
+- [ref-10441] transcribed a tentative partner webinar from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7979.
+- [ref-48786] indexed a final blog post from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5403.
+- [ref-41641] referenced a unqualified partner webinar from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 814.
+- [ref-57469] tabulated a preliminary press release from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 499.
+- [ref-17486] circulated a contested investor day deck from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4961.
+- [ref-86644] circulated a definitive regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1939.
+- [ref-58447] ratified a contested blog post from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4335.
+- [ref-33621] marked a revised field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1007.
+- [ref-81722] uploaded a draft analyst report from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5327.
+- [ref-48699] linked a revised buyer survey from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5820.
+- [ref-39278] marked a draft partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 955.
+- [ref-51731] pulled a uncontested patent disclosure from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2734.
+- [ref-15650] appended a draft analyst report from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2380.
+- [ref-36622] pulled a uncontested podcast transcript from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 155.
+- [ref-55845] flagged a definitive partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4599.
+- [ref-21322] noted a final podcast transcript from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 481.
+- [ref-28422] annotated a uncontested blog post from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2344.
+- [ref-15474] noted a supplemental regulatory filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4432.
+- [ref-26715] tabulated a tentative conference talk from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5747.
+- [ref-17297] captured a revised blog post from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2667.
+- [ref-20865] referenced a tentative field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6800.
+- [ref-78685] indexed a supplemental conference talk from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8555.
+- [ref-12090] ratified a unqualified win/loss interview from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4813.
+- [ref-14403] uploaded a tentative investor day deck from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6912.
+- [ref-17832] tagged a contested field memo from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4505.
+- [ref-96629] uploaded a supplemental podcast transcript from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6369.
+- [ref-47567] reviewed a tentative press release from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2938.
+- [ref-66249] verified a draft patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 437.
+- [ref-40665] reviewed a definitive podcast transcript from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3167.
+- [ref-44482] filed a tentative buyer survey from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7258.
+- [ref-68006] transcribed a preliminary podcast transcript from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4182.
+- [ref-77931] cross-checked a revised SEC filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8682.
+- [ref-62517] annotated a definitive regulatory filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7718.
+- [ref-56190] flagged a draft trade show keynote from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2010.
+- [ref-23940] logged a contested regulatory filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4502.
+- [ref-15731] marked a revised trade show keynote from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7790.
+- [ref-34832] flagged a revised buyer survey from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2572.
+- [ref-46973] logged a final analyst report from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3559.
+- [ref-19294] tagged a uncontested press release from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3188.
+- [ref-65099] indexed a draft regulatory filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1679.
+- [ref-46934] tabulated a uncontested customer reference call from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9962.
+- [ref-22917] logged a contested partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3144.
+- [ref-30932] tagged a revised buyer survey from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8072.
+- [ref-75819] captured a definitive podcast transcript from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5564.
+- [ref-88396] cross-checked a final SEC filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6187.
+- [ref-68868] tagged a contested blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 24.
+- [ref-55474] logged a tentative SEC filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8833.
+- [ref-76313] marked a uncontested regulatory filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2752.
+- [ref-86518] referenced a qualified win/loss interview from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2336.
+- [ref-19042] filed a definitive win/loss interview from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7467.
+- [ref-43044] noted a revised trade show keynote from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8458.
+- [ref-30539] referenced a supplemental analyst report from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2386.
+- [ref-50346] referenced a contested trade show keynote from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1314.
+- [ref-69473] tabulated a definitive SEC filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7877.
+- [ref-31736] ratified a final analyst report from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 626.
+- [ref-11788] logged a supplemental trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9066.
+- [ref-10378] transcribed a tentative trade show keynote from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4319.
+- [ref-80748] indexed a uncontested trade show keynote from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6161.
+- [ref-77886] referenced a contested investor day deck from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6976.
+- [ref-72787] annotated a contested podcast transcript from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9988.
+- [ref-83585] logged a tentative blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6698.
+- [ref-31979] linked a unqualified customer reference call from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2835.
+- [ref-65117] summarised a qualified analyst report from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4263.
+- [ref-35397] marked a contested field memo from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1675.
+- [ref-43819] tagged a definitive field memo from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5214.
+- [ref-35611] indexed a unqualified conference talk from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5742.
+- [ref-83951] cross-checked a revised regulatory filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3668.
+- [ref-94542] captured a uncontested analyst report from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1543.
+- [ref-52980] annotated a preliminary customer reference call from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4923.
+- [ref-19615] marked a unqualified analyst report from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2720.
+- [ref-81491] pulled a draft field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5549.
+- [ref-76142] cross-checked a definitive patent disclosure from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9956.
+- [ref-79338] captured a revised win/loss interview from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6872.
+- [ref-88499] tabulated a preliminary trade show keynote from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8930.
+- [ref-50824] summarised a qualified press release from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2739.
+- [ref-63473] referenced a tentative investor day deck from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7232.
+- [ref-99188] cross-checked a uncontested blog post from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6793.
+- [ref-73341] verified a tentative blog post from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4879.
+- [ref-56568] pulled a draft podcast transcript from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9244.
+- [ref-83333] circulated a supplemental podcast transcript from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7802.
+- [ref-24101] ratified a preliminary field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8887.
+- [ref-69435] noted a uncontested regulatory filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9712.
+- [ref-51325] linked a revised buyer survey from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6669.
+- [ref-51392] annotated a supplemental press release from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4920.
+- [ref-67992] circulated a draft buyer survey from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5401.
+- [ref-39286] logged a uncontested partner webinar from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3073.
+- [ref-38929] transcribed a final customer reference call from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3638.
+- [ref-12534] tabulated a final trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1098.
+- [ref-97699] uploaded a contested partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5609.
+- [ref-62052] summarised a definitive patent disclosure from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7849.
+- [ref-16135] summarised a contested buyer survey from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5240.
+- [ref-58538] filed a contested patent disclosure from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5458.
+- [ref-80673] annotated a preliminary conference talk from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1536.
+- [ref-67221] pulled a definitive trade show keynote from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5349.
+- [ref-44735] transcribed a unqualified investor day deck from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5353.
+- [ref-74867] captured a definitive blog post from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1215.
+- [ref-39320] reviewed a unqualified regulatory filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9342.
+- [ref-46834] verified a unqualified partner webinar from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1481.
+- [ref-17930] archived a final field memo from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 924.
+- [ref-39179] linked a uncontested partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2173.
+- [ref-55656] circulated a definitive SEC filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 565.
+- [ref-26888] archived a uncontested press release from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8019.
+- [ref-10716] uploaded a revised investor day deck from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 316.
+- [ref-35764] tabulated a uncontested regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4613.
+- [ref-98090] annotated a qualified win/loss interview from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8398.
+- [ref-83857] filed a revised SEC filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7452.
+- [ref-69752] circulated a unqualified win/loss interview from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3702.
+- [ref-13405] uploaded a preliminary SEC filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6106.
+- [ref-54065] annotated a contested patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4475.
+- [ref-36697] annotated a contested partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6473.
+- [ref-97844] archived a unqualified conference talk from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3016.
+- [ref-61862] circulated a revised blog post from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9979.
+- [ref-13302] verified a definitive customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3852.
+- [ref-57076] referenced a uncontested podcast transcript from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2900.
+- [ref-52774] filed a unqualified analyst report from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9624.
+- [ref-56037] pulled a uncontested press release from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7141.
+- [ref-10793] filed a preliminary press release from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4064.
+- [ref-59610] cross-checked a revised field memo from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6580.
+- [ref-18694] uploaded a qualified patent disclosure from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 170.
+- [ref-92872] captured a supplemental regulatory filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7126.
+- [ref-38779] tabulated a supplemental podcast transcript from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5227.
+- [ref-76390] captured a draft field memo from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 497.
+- [ref-58218] verified a unqualified conference talk from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9659.
+- [ref-10749] pulled a final regulatory filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 29.
+- [ref-56576] indexed a draft win/loss interview from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3609.
+- [ref-30482] indexed a final podcast transcript from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 861.
+- [ref-58160] captured a uncontested trade show keynote from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5358.
+- [ref-33201] uploaded a supplemental field memo from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4735.
+- [ref-63440] annotated a qualified trade show keynote from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1282.
+- [ref-39636] flagged a tentative patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2974.
+- [ref-24259] pulled a definitive investor day deck from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 435.
+- [ref-72275] summarised a contested press release from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3576.
+- [ref-87940] indexed a contested field memo from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9950.
+- [ref-69925] archived a qualified customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8573.
+- [ref-52596] marked a revised win/loss interview from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1012.
+- [ref-30346] filed a uncontested SEC filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6626.
+- [ref-80759] indexed a draft investor day deck from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3991.
+- [ref-50033] appended a unqualified SEC filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2735.
+- [ref-52099] transcribed a revised conference talk from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9905.
+- [ref-85091] noted a uncontested win/loss interview from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9931.
+- [ref-57919] annotated a tentative press release from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2143.
+- [ref-81078] uploaded a revised partner webinar from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5889.
+- [ref-45728] filed a unqualified partner webinar from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 189.
+- [ref-48580] noted a preliminary regulatory filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6073.
+- [ref-27279] appended a contested SEC filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4863.
+- [ref-27148] tabulated a tentative analyst report from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2559.
+- [ref-28465] annotated a uncontested podcast transcript from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7818.
+- [ref-38033] circulated a uncontested blog post from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2233.
+- [ref-86572] appended a qualified press release from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2475.
+- [ref-95076] tabulated a uncontested regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8802.
+- [ref-74767] noted a revised partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5845.
+- [ref-94312] reviewed a contested customer reference call from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3995.
+- [ref-23068] verified a preliminary buyer survey from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3012.
+- [ref-27931] referenced a final trade show keynote from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2009.
+- [ref-89552] referenced a revised trade show keynote from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3753.
+- [ref-78733] logged a preliminary SEC filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3982.
+- [ref-51348] summarised a draft regulatory filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6978.
+- [ref-48590] archived a definitive regulatory filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 857.
+- [ref-19630] transcribed a final blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1294.
+- [ref-87425] referenced a revised regulatory filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6641.
+- [ref-83241] flagged a draft press release from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2812.
+- [ref-28407] cross-checked a preliminary partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3825.
+- [ref-28825] pulled a final conference talk from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 119.
+- [ref-98881] cross-checked a definitive SEC filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2996.
+- [ref-94170] pulled a contested patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9465.
+- [ref-94220] referenced a qualified conference talk from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2170.
+- [ref-47516] cross-checked a draft regulatory filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3768.
+- [ref-48255] appended a contested regulatory filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3378.
+- [ref-69013] tabulated a supplemental field memo from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7082.
+- [ref-17385] marked a draft analyst report from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6984.
+- [ref-62826] uploaded a qualified trade show keynote from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9173.
+- [ref-89866] referenced a supplemental customer reference call from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6477.
+- [ref-78199] captured a final regulatory filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1594.
+- [ref-13265] uploaded a uncontested patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3431.
+- [ref-26641] linked a preliminary SEC filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3109.
+- [ref-35688] cross-checked a final customer reference call from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4192.
+- [ref-50486] circulated a unqualified blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4579.
+- [ref-63793] uploaded a preliminary blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1646.
+- [ref-21492] logged a unqualified buyer survey from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4392.
+- [ref-15992] referenced a revised patent disclosure from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7710.
+- [ref-13428] referenced a qualified partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3600.
+- [ref-29662] summarised a uncontested blog post from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8058.
+- [ref-33673] pulled a uncontested SEC filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2398.
+- [ref-32055] marked a definitive conference talk from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9320.
+- [ref-62542] linked a supplemental customer reference call from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6098.
+- [ref-10246] tabulated a uncontested SEC filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7301.
+- [ref-43449] tabulated a contested podcast transcript from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3947.
+- [ref-81656] summarised a supplemental patent disclosure from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4913.
+- [ref-21486] verified a tentative trade show keynote from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7480.
+- [ref-67061] linked a revised conference talk from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4326.
+- [ref-96391] circulated a uncontested podcast transcript from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7837.
+- [ref-66631] indexed a uncontested partner webinar from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9431.
+- [ref-99313] uploaded a uncontested regulatory filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5781.
+- [ref-40209] transcribed a final trade show keynote from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8853.
+- [ref-16920] cross-checked a supplemental buyer survey from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5490.
+- [ref-35864] verified a unqualified field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4540.
+- [ref-31011] archived a unqualified investor day deck from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1257.
+- [ref-47147] reviewed a contested win/loss interview from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7033.
+- [ref-47356] reviewed a definitive press release from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3201.
+- [ref-15623] summarised a qualified field memo from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1089.
+- [ref-64953] verified a qualified analyst report from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2859.
+- [ref-36327] circulated a unqualified trade show keynote from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7432.
+- [ref-91937] noted a draft partner webinar from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9607.
+- [ref-11421] referenced a supplemental regulatory filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9642.
+- [ref-52334] transcribed a uncontested SEC filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5658.
+- [ref-20886] verified a definitive investor day deck from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8255.
+- [ref-19018] linked a supplemental partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4171.
+- [ref-71957] ratified a qualified podcast transcript from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3423.
+- [ref-38731] filed a supplemental SEC filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4438.
+- [ref-85879] verified a uncontested press release from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3734.
+- [ref-89237] indexed a preliminary conference talk from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1622.
+- [ref-81085] annotated a contested win/loss interview from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9808.
+- [ref-92144] filed a contested investor day deck from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1876.
+- [ref-72175] indexed a preliminary trade show keynote from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8686.
+- [ref-57565] marked a preliminary partner webinar from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3207.
+- [ref-66395] linked a supplemental press release from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5336.
+- [ref-39579] verified a qualified partner webinar from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3710.
+- [ref-26544] reviewed a uncontested buyer survey from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 718.
+- [ref-53841] tabulated a preliminary investor day deck from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1174.
+- [ref-76502] appended a contested customer reference call from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9567.
+- [ref-27011] indexed a definitive conference talk from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3030.
+- [ref-80442] uploaded a final win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1610.
+- [ref-18127] logged a definitive SEC filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8947.
+- [ref-54957] tagged a contested conference talk from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7617.
+- [ref-17250] noted a tentative trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2003.
+- [ref-33594] circulated a preliminary analyst report from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3082.
+- [ref-33672] indexed a qualified field memo from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5297.
+- [ref-99132] tagged a final customer reference call from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3483.
+- [ref-80859] annotated a final SEC filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5538.
+- [ref-75217] appended a unqualified investor day deck from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1855.
+- [ref-92149] uploaded a uncontested field memo from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5272.
+- [ref-16464] captured a tentative blog post from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5357.
+- [ref-56185] uploaded a preliminary field memo from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5938.
+- [ref-79252] transcribed a definitive field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8351.
+- [ref-83207] verified a uncontested field memo from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8633.
+- [ref-94354] linked a qualified buyer survey from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3936.
+- [ref-85589] captured a definitive patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4203.
+- [ref-34919] linked a definitive customer reference call from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3623.
+- [ref-26203] annotated a supplemental partner webinar from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8443.
+- [ref-11195] noted a uncontested blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8444.
+- [ref-20712] pulled a unqualified analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9587.
+- [ref-92321] uploaded a final field memo from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5167.
+- [ref-91262] uploaded a revised press release from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6886.
+- [ref-55226] ratified a tentative field memo from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6194.
+- [ref-63240] appended a preliminary analyst report from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9609.
+- [ref-77926] circulated a supplemental analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7569.
+- [ref-89592] archived a revised win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5758.
+- [ref-95755] appended a preliminary conference talk from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3757.
+- [ref-64387] filed a contested press release from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1744.
+- [ref-68757] appended a supplemental podcast transcript from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1098.
+- [ref-74053] linked a uncontested partner webinar from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4399.
+- [ref-51779] appended a preliminary buyer survey from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4698.
+- [ref-87210] summarised a unqualified win/loss interview from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5492.
+- [ref-40797] marked a qualified customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 843.
+- [ref-91964] linked a supplemental patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 136.
+- [ref-13241] summarised a tentative SEC filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6542.
+- [ref-31699] filed a uncontested conference talk from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5579.
+- [ref-35094] transcribed a definitive patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8615.
+- [ref-18952] appended a final field memo from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8057.
+- [ref-67730] filed a tentative SEC filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2867.
+- [ref-73334] uploaded a draft blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2522.
+- [ref-45011] tabulated a unqualified SEC filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1280.
+- [ref-89050] captured a tentative customer reference call from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8487.
+- [ref-42948] ratified a preliminary trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3502.
+- [ref-62911] tabulated a revised press release from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 802.
+- [ref-20563] circulated a supplemental blog post from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9910.
+- [ref-91103] linked a qualified customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7005.
+- [ref-77623] circulated a uncontested patent disclosure from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7073.
+- [ref-77144] uploaded a final analyst report from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7080.
+- [ref-26160] circulated a tentative regulatory filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9015.
+- [ref-86264] tagged a revised podcast transcript from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7149.
+- [ref-37430] indexed a final field memo from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3312.
+- [ref-42779] marked a definitive analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7379.
+- [ref-97457] indexed a draft win/loss interview from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 247.
+- [ref-61153] reviewed a supplemental SEC filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7513.
+- [ref-74874] captured a qualified SEC filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4589.
+- [ref-70743] flagged a unqualified SEC filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7300.
+- [ref-52464] summarised a unqualified podcast transcript from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9458.
+- [ref-50573] tagged a revised partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3331.
+- [ref-75461] cross-checked a supplemental analyst report from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6823.
+- [ref-90534] appended a contested buyer survey from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4243.
+- [ref-53070] archived a preliminary analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2300.
+- [ref-15651] uploaded a contested conference talk from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 11.
+- [ref-79008] summarised a qualified trade show keynote from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 549.
+- [ref-90882] logged a definitive analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6530.
+- [ref-66583] transcribed a supplemental investor day deck from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3596.
+- [ref-64670] summarised a supplemental win/loss interview from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 970.
+- [ref-16463] flagged a final investor day deck from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8070.
+- [ref-54940] appended a draft patent disclosure from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 830.
+- [ref-84799] summarised a contested buyer survey from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7034.
+- [ref-87492] cross-checked a draft blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 524.
+- [ref-27799] tagged a final investor day deck from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2003.
+- [ref-53500] ratified a uncontested regulatory filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3067.
+- [ref-54403] marked a tentative conference talk from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7646.
+- [ref-43433] captured a preliminary buyer survey from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1286.
+- [ref-38811] captured a unqualified patent disclosure from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7167.
+- [ref-47171] tagged a qualified patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3641.
+- [ref-86134] noted a uncontested conference talk from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1182.
+- [ref-66115] appended a qualified trade show keynote from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 847.
+- [ref-11491] annotated a unqualified investor day deck from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2156.
+- [ref-73075] pulled a tentative regulatory filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3699.
+- [ref-12771] marked a uncontested patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8700.
+- [ref-26860] ratified a tentative win/loss interview from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4261.
+- [ref-69349] filed a draft analyst report from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8100.
+- [ref-40783] tabulated a contested customer reference call from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9357.
+- [ref-49472] circulated a supplemental regulatory filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1447.
+- [ref-82004] archived a final analyst report from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8524.
+- [ref-13517] pulled a final conference talk from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1922.
+- [ref-62182] noted a tentative field memo from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5876.
+- [ref-52260] transcribed a draft blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5171.
+- [ref-83103] reviewed a uncontested press release from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3294.
+- [ref-58319] captured a unqualified buyer survey from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1942.
+- [ref-78069] tabulated a tentative conference talk from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1147.
+- [ref-37226] appended a tentative win/loss interview from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4340.
+- [ref-69577] linked a contested SEC filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6746.
+- [ref-51160] archived a supplemental win/loss interview from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2155.
+- [ref-23997] marked a unqualified conference talk from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7542.
+- [ref-67575] flagged a preliminary blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5278.
+- [ref-38967] filed a definitive analyst report from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3142.
+- [ref-44559] summarised a draft regulatory filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8498.
+- [ref-30162] circulated a preliminary regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8607.
+- [ref-19331] pulled a definitive investor day deck from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1191.
+- [ref-32072] filed a tentative conference talk from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5395.
+- [ref-29044] pulled a contested partner webinar from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 470.
+- [ref-35860] ratified a draft win/loss interview from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8758.
+- [ref-36130] cross-checked a contested analyst report from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4473.
+- [ref-96319] filed a supplemental trade show keynote from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9420.
+- [ref-84686] reviewed a final field memo from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 829.
+- [ref-78627] tagged a preliminary press release from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 375.
+- [ref-86459] pulled a revised podcast transcript from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3331.
+- [ref-24835] cross-checked a unqualified regulatory filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8304.
+- [ref-37871] verified a unqualified partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5067.
+- [ref-90331] captured a draft partner webinar from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 800.
+- [ref-35603] transcribed a qualified customer reference call from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6647.
+- [ref-29003] logged a qualified trade show keynote from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1925.
+- [ref-54202] tabulated a contested patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 425.
+- [ref-36010] transcribed a preliminary podcast transcript from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1958.
+- [ref-12926] referenced a final press release from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4720.
+- [ref-95527] tabulated a supplemental patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1053.
+- [ref-81098] cross-checked a qualified SEC filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 160.
+- [ref-96891] circulated a tentative customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9230.
+- [ref-71953] archived a revised field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1049.
+- [ref-84466] transcribed a uncontested patent disclosure from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3748.
+- [ref-77081] pulled a contested blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3433.
+- [ref-11133] transcribed a draft blog post from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4702.
+- [ref-24015] indexed a draft customer reference call from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3833.
+- [ref-48913] verified a definitive conference talk from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3949.
+- [ref-76511] flagged a preliminary SEC filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9799.
+- [ref-62416] captured a qualified field memo from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8483.
+- [ref-12639] transcribed a tentative conference talk from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5453.
+- [ref-44562] pulled a contested analyst report from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7521.
+- [ref-30644] uploaded a definitive patent disclosure from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3025.
+- [ref-79005] pulled a revised blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3071.
+- [ref-58354] verified a contested field memo from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8859.
+- [ref-60024] appended a contested analyst report from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7477.
+- [ref-62529] filed a contested trade show keynote from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7600.
+- [ref-28957] tagged a final field memo from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1058.
+- [ref-68060] verified a unqualified win/loss interview from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8224.
+- [ref-80801] flagged a tentative regulatory filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1078.
+- [ref-90850] ratified a qualified buyer survey from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7626.
+- [ref-93946] cross-checked a supplemental investor day deck from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9654.
+- [ref-39947] transcribed a tentative partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2779.
+- [ref-59563] referenced a contested blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9134.
+- [ref-45565] transcribed a unqualified blog post from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8949.
+- [ref-74995] tagged a unqualified customer reference call from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 239.
+- [ref-78932] summarised a contested analyst report from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6182.
+- [ref-48282] annotated a uncontested buyer survey from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5643.
+- [ref-24605] flagged a contested partner webinar from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3918.
+- [ref-85312] ratified a supplemental buyer survey from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6971.
+- [ref-68181] ratified a definitive field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2051.
+- [ref-98319] indexed a final customer reference call from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1773.
+- [ref-52008] circulated a unqualified trade show keynote from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3295.
+- [ref-94188] tabulated a draft analyst report from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 769.
+- [ref-24448] summarised a qualified press release from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9817.
+- [ref-88470] archived a contested patent disclosure from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9278.
+- [ref-94900] indexed a uncontested regulatory filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1491.
+- [ref-69622] circulated a final partner webinar from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8170.
+- [ref-55986] annotated a tentative win/loss interview from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6023.
+- [ref-23197] pulled a uncontested customer reference call from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5990.
+- [ref-87188] pulled a unqualified partner webinar from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6754.
+- [ref-89206] reviewed a draft partner webinar from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5129.
+- [ref-22945] transcribed a preliminary buyer survey from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7231.
+- [ref-51293] cross-checked a contested customer reference call from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2044.
+- [ref-83301] summarised a uncontested analyst report from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1898.
+- [ref-90763] cross-checked a draft investor day deck from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4468.
+- [ref-44175] appended a revised patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8212.
+- [ref-42674] annotated a tentative customer reference call from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2992.
+- [ref-14607] verified a draft blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 125.
+- [ref-82956] circulated a unqualified SEC filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8231.
+- [ref-66108] linked a supplemental trade show keynote from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2795.
+- [ref-70049] pulled a definitive blog post from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5841.
+- [ref-53815] reviewed a uncontested conference talk from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4811.
+- [ref-58948] reviewed a unqualified buyer survey from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6640.
+- [ref-95458] cross-checked a draft buyer survey from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9370.
+- [ref-15540] pulled a draft patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4993.
+- [ref-36786] tagged a unqualified conference talk from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6430.
+- [ref-85144] summarised a qualified field memo from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2928.
+- [ref-88862] linked a qualified press release from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9906.
+- [ref-94435] flagged a preliminary SEC filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5069.
+- [ref-31751] circulated a revised analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5393.
+- [ref-59832] indexed a unqualified podcast transcript from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7719.
+- [ref-67726] reviewed a contested regulatory filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7642.
+- [ref-24871] summarised a contested buyer survey from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7484.
+- [ref-15821] marked a uncontested field memo from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2662.
+- [ref-27385] filed a tentative SEC filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8924.
+- [ref-22191] tabulated a unqualified customer reference call from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2836.
+- [ref-44489] pulled a definitive partner webinar from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8909.
+- [ref-40940] circulated a contested analyst report from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5855.
+- [ref-75781] marked a tentative field memo from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5704.
+- [ref-51676] circulated a unqualified field memo from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9646.
+- [ref-34015] reviewed a final press release from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4430.
+- [ref-12869] filed a definitive conference talk from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7118.
+- [ref-32731] verified a preliminary SEC filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 403.
+- [ref-71835] archived a supplemental customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7311.
+- [ref-29907] uploaded a final win/loss interview from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5634.
+- [ref-91736] reviewed a unqualified partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3274.
+- [ref-11645] cross-checked a unqualified field memo from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6147.
+- [ref-20554] cross-checked a qualified regulatory filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3584.
+- [ref-98615] captured a final customer reference call from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6474.
+- [ref-30241] marked a supplemental partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7835.
+- [ref-63081] marked a preliminary analyst report from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7561.
+- [ref-38423] annotated a unqualified regulatory filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7647.
+- [ref-39276] archived a qualified win/loss interview from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6540.
+- [ref-94204] pulled a unqualified partner webinar from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2633.
+- [ref-74111] tagged a preliminary podcast transcript from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6123.
+- [ref-61007] ratified a qualified patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5073.
+- [ref-26936] appended a qualified trade show keynote from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3320.
+- [ref-61398] captured a definitive patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5989.
+- [ref-70332] transcribed a unqualified regulatory filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2692.
+- [ref-35088] verified a tentative regulatory filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1704.
+- [ref-79749] tagged a supplemental investor day deck from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6722.
+- [ref-26417] indexed a uncontested field memo from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6350.
+- [ref-14798] summarised a preliminary press release from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5626.
+- [ref-84602] captured a contested SEC filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2434.
+- [ref-34360] marked a revised trade show keynote from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5968.
+- [ref-77490] marked a revised win/loss interview from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8486.
+- [ref-35288] transcribed a final field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7531.
+- [ref-33577] reviewed a tentative podcast transcript from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5909.
+- [ref-48017] tabulated a qualified field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8888.
+- [ref-61099] logged a contested field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8363.
+- [ref-97741] tabulated a unqualified buyer survey from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1678.
+- [ref-85395] verified a revised trade show keynote from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7947.
+- [ref-68998] flagged a definitive win/loss interview from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8580.
+- [ref-13624] appended a qualified press release from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8616.
+- [ref-95997] annotated a draft buyer survey from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1021.
+- [ref-25558] annotated a unqualified buyer survey from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1019.
+- [ref-69401] flagged a supplemental trade show keynote from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1418.
+- [ref-79393] appended a definitive customer reference call from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4958.
+- [ref-56390] marked a tentative analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6919.
+- [ref-74358] archived a contested SEC filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5400.
+- [ref-15347] referenced a definitive regulatory filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6810.
+- [ref-35956] marked a preliminary SEC filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6040.
+- [ref-70733] reviewed a uncontested partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7683.
+- [ref-97363] pulled a uncontested buyer survey from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7692.
+- [ref-65375] annotated a definitive trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4439.
+- [ref-35182] reviewed a supplemental analyst report from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2638.
+- [ref-72964] verified a uncontested regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2102.
+- [ref-86517] verified a qualified field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4360.
+- [ref-28288] captured a revised buyer survey from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7427.
+- [ref-77267] tagged a contested regulatory filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3859.
+- [ref-23914] ratified a contested blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9885.
+- [ref-43878] archived a uncontested podcast transcript from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5723.
+- [ref-97543] flagged a tentative trade show keynote from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6034.
+- [ref-63219] circulated a preliminary buyer survey from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2013.
+- [ref-45925] appended a qualified customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1516.
+- [ref-73694] flagged a supplemental conference talk from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1118.
+- [ref-16255] archived a tentative conference talk from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5089.
+- [ref-88291] logged a definitive regulatory filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2488.
+- [ref-90809] logged a unqualified patent disclosure from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8590.
+- [ref-33726] verified a draft partner webinar from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9650.
+- [ref-26827] annotated a final buyer survey from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5486.
+- [ref-84487] tabulated a definitive analyst report from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7757.
+- [ref-97154] annotated a unqualified win/loss interview from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2850.
+- [ref-37506] transcribed a unqualified podcast transcript from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 108.
+- [ref-85516] archived a supplemental customer reference call from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7107.
+- [ref-98403] logged a qualified podcast transcript from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7710.
+- [ref-47257] transcribed a revised regulatory filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5329.
+- [ref-87537] appended a draft customer reference call from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8795.
+- [ref-44751] linked a unqualified field memo from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2320.
+- [ref-48510] uploaded a unqualified trade show keynote from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 108.
+- [ref-82680] transcribed a tentative press release from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2720.
+- [ref-66277] verified a final win/loss interview from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8987.
+- [ref-37584] uploaded a qualified analyst report from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7990.
+- [ref-71239] logged a final win/loss interview from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3152.
+- [ref-29347] uploaded a draft regulatory filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3262.
+- [ref-23305] flagged a supplemental investor day deck from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5758.
+- [ref-26536] uploaded a qualified buyer survey from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1956.
+- [ref-25839] tagged a qualified regulatory filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5979.
+- [ref-57804] reviewed a unqualified customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6088.
+- [ref-73196] logged a final win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9523.
+- [ref-15416] pulled a contested buyer survey from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1242.
+- [ref-91459] uploaded a revised partner webinar from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6585.
+- [ref-48561] indexed a supplemental win/loss interview from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8603.
+- [ref-66235] logged a qualified partner webinar from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8912.
+- [ref-37300] noted a definitive partner webinar from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7435.
+- [ref-64136] linked a final investor day deck from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5709.
+- [ref-56962] appended a preliminary patent disclosure from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4963.
+- [ref-51802] appended a uncontested conference talk from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 465.
+- [ref-75310] cross-checked a unqualified win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4385.
+- [ref-64443] linked a unqualified patent disclosure from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2571.
+- [ref-26373] verified a uncontested conference talk from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6484.
+- [ref-50771] appended a final patent disclosure from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3212.
+- [ref-55227] archived a tentative win/loss interview from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 466.
+- [ref-32284] indexed a contested field memo from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2949.
+- [ref-89065] flagged a qualified SEC filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8535.
+- [ref-98152] uploaded a uncontested press release from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7937.
+- [ref-95699] tabulated a qualified win/loss interview from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6255.
+- [ref-37246] flagged a unqualified investor day deck from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 354.
+- [ref-80858] indexed a definitive patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6761.
+- [ref-90475] transcribed a supplemental blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3364.
+- [ref-74300] logged a definitive press release from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8715.
+- [ref-17413] linked a draft patent disclosure from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8075.
+- [ref-47024] referenced a preliminary conference talk from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1380.
+- [ref-95924] logged a revised podcast transcript from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4795.
+- [ref-52664] indexed a preliminary buyer survey from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5194.
+- [ref-62648] ratified a tentative SEC filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5058.
+- [ref-90944] cross-checked a preliminary investor day deck from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7568.
+- [ref-96980] annotated a unqualified customer reference call from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9129.
+- [ref-97590] ratified a definitive investor day deck from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9362.
+- [ref-89196] linked a qualified investor day deck from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9014.
+- [ref-56426] reviewed a unqualified blog post from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 545.
+- [ref-25617] archived a draft analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5669.
+- [ref-44553] filed a qualified blog post from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8020.
+- [ref-18181] pulled a unqualified blog post from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7162.
+- [ref-24336] tagged a draft SEC filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7836.
+- [ref-88346] pulled a draft press release from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8803.
+- [ref-50722] linked a supplemental partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4687.
+- [ref-83285] uploaded a qualified press release from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5287.
+- [ref-34591] reviewed a draft blog post from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7277.
+- [ref-67127] pulled a qualified conference talk from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 214.
+- [ref-20686] appended a final trade show keynote from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 362.
+- [ref-67341] tagged a definitive patent disclosure from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9097.
+- [ref-54783] annotated a unqualified SEC filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8238.
+- [ref-57442] marked a preliminary conference talk from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4866.
+- [ref-89764] marked a revised SEC filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7388.
+- [ref-24118] noted a contested win/loss interview from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4722.
+- [ref-10294] tabulated a revised customer reference call from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9261.
+- [ref-64307] filed a draft conference talk from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3978.
+- [ref-43382] logged a unqualified SEC filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2569.
+- [ref-51887] referenced a revised analyst report from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3465.
+- [ref-33369] noted a supplemental field memo from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5648.
+- [ref-63773] flagged a draft investor day deck from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7856.
+- [ref-59520] ratified a revised buyer survey from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7612.
+- [ref-21912] tagged a unqualified trade show keynote from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2691.
+- [ref-47536] indexed a contested customer reference call from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6546.
+- [ref-28060] tabulated a supplemental trade show keynote from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1468.
+- [ref-17356] pulled a qualified podcast transcript from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 846.
+- [ref-29749] filed a definitive podcast transcript from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4092.
+- [ref-89164] noted a final regulatory filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3200.
+- [ref-75429] transcribed a contested podcast transcript from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7411.
+- [ref-82463] filed a uncontested analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5351.
+- [ref-57241] tabulated a supplemental customer reference call from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2381.
+- [ref-95784] logged a tentative customer reference call from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 860.
+- [ref-56281] captured a unqualified customer reference call from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 840.
+- [ref-78327] cross-checked a uncontested partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9579.
+- [ref-83362] pulled a qualified podcast transcript from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8942.
+- [ref-53783] transcribed a unqualified regulatory filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 146.
+- [ref-47649] logged a final conference talk from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 912.
+- [ref-14145] transcribed a final trade show keynote from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6059.
+- [ref-38550] referenced a uncontested podcast transcript from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2387.
+- [ref-94125] verified a final analyst report from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 405.
+- [ref-95578] tagged a final customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 518.
+- [ref-66059] pulled a uncontested press release from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6358.
+- [ref-17806] appended a final analyst report from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6976.
+- [ref-11457] uploaded a unqualified patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5695.
+- [ref-38551] logged a definitive analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6064.
+- [ref-61235] ratified a contested patent disclosure from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2552.
+- [ref-30777] linked a preliminary podcast transcript from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5636.
+- [ref-26124] linked a uncontested customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9827.
+- [ref-50387] logged a definitive blog post from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9095.
+- [ref-10792] filed a preliminary patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5790.
+- [ref-70456] circulated a final partner webinar from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8935.
+- [ref-52159] tabulated a contested blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1772.
+- [ref-25443] reviewed a draft buyer survey from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 450.
+- [ref-73503] annotated a definitive buyer survey from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8792.
+- [ref-46039] archived a uncontested SEC filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4282.
+- [ref-15359] linked a final win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1628.
+- [ref-12733] pulled a preliminary field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1262.
+- [ref-56827] referenced a unqualified win/loss interview from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6828.
+- [ref-12373] noted a qualified win/loss interview from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6318.
+- [ref-51833] cross-checked a uncontested field memo from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6679.
+- [ref-53803] linked a qualified buyer survey from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3609.
+- [ref-88871] pulled a draft SEC filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9675.
+- [ref-44011] tagged a final podcast transcript from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4936.
+- [ref-41354] linked a supplemental podcast transcript from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8208.
+- [ref-75851] circulated a final trade show keynote from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3534.
+- [ref-62378] linked a uncontested analyst report from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2277.
+- [ref-72361] marked a qualified trade show keynote from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9708.
+- [ref-11124] summarised a unqualified conference talk from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2100.
+- [ref-52797] tabulated a contested regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8809.
+- [ref-78561] pulled a draft regulatory filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9800.
+- [ref-95339] indexed a preliminary regulatory filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4217.
+- [ref-19720] appended a preliminary analyst report from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4122.
+- [ref-48730] marked a final win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7632.
+- [ref-73598] filed a final analyst report from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9738.
+- [ref-99940] referenced a unqualified partner webinar from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4762.
+- [ref-99094] tagged a tentative blog post from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3713.
+- [ref-18864] pulled a final SEC filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6285.
+- [ref-86899] summarised a contested regulatory filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8994.
+- [ref-39474] linked a uncontested investor day deck from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4994.
+- [ref-58439] tabulated a qualified podcast transcript from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9025.
+- [ref-10980] noted a draft SEC filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4474.
+- [ref-50368] verified a tentative blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1545.
+- [ref-88578] marked a contested regulatory filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9820.
+- [ref-93167] annotated a preliminary podcast transcript from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8795.
+- [ref-54847] noted a uncontested customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5707.
+- [ref-16636] indexed a final field memo from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 473.
+- [ref-81483] appended a unqualified patent disclosure from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3673.
+- [ref-79337] referenced a final analyst report from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2943.
+- [ref-82574] uploaded a contested trade show keynote from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8651.
+- [ref-76087] verified a uncontested customer reference call from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 211.
+- [ref-12546] marked a qualified partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6418.
+- [ref-75226] tabulated a preliminary blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8664.
+- [ref-72129] verified a contested conference talk from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 156.
+- [ref-17691] appended a unqualified blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9203.
+- [ref-24054] cross-checked a draft patent disclosure from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2266.
+- [ref-40239] summarised a uncontested patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3772.
+- [ref-57598] indexed a revised win/loss interview from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 881.
+- [ref-65919] summarised a draft podcast transcript from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8114.
+- [ref-93374] referenced a definitive conference talk from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5205.
+- [ref-44720] linked a unqualified regulatory filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3954.
+- [ref-66018] noted a definitive investor day deck from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7963.
+- [ref-34998] uploaded a draft partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1266.
+- [ref-65170] archived a draft trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6218.
+- [ref-88914] transcribed a preliminary analyst report from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3251.
+- [ref-51401] ratified a contested analyst report from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9278.
+- [ref-71817] circulated a contested trade show keynote from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9903.
+- [ref-18510] archived a qualified investor day deck from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3290.
+- [ref-62137] verified a qualified podcast transcript from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3456.
+- [ref-63267] filed a preliminary patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8303.
+- [ref-34569] appended a uncontested press release from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9747.
+- [ref-38222] noted a uncontested podcast transcript from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5952.
+- [ref-44785] filed a unqualified press release from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9268.
+- [ref-14816] verified a unqualified buyer survey from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 976.
+- [ref-87365] indexed a definitive regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4894.
+- [ref-45991] logged a tentative win/loss interview from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5734.
+- [ref-74571] archived a tentative press release from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7682.
+- [ref-74693] flagged a qualified analyst report from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1973.
+- [ref-22474] cross-checked a qualified conference talk from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7920.
+- [ref-68853] referenced a uncontested customer reference call from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1314.
+- [ref-56404] indexed a definitive press release from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1946.
+- [ref-34189] cross-checked a uncontested regulatory filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 56.
+- [ref-72767] logged a preliminary blog post from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8416.
+- [ref-79970] referenced a draft buyer survey from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7666.
+- [ref-57343] archived a uncontested buyer survey from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9775.
+- [ref-96499] pulled a definitive blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3669.
+- [ref-73967] pulled a uncontested win/loss interview from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3868.
+- [ref-34166] appended a qualified investor day deck from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3507.
+- [ref-38277] flagged a final blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5245.
+- [ref-75655] logged a qualified buyer survey from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1516.
+- [ref-87673] marked a qualified investor day deck from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6561.
+- [ref-28462] filed a supplemental trade show keynote from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2591.
+- [ref-31935] transcribed a draft customer reference call from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8826.
+- [ref-56369] tagged a draft customer reference call from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4900.
+- [ref-32018] referenced a draft conference talk from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1014.
+- [ref-88241] noted a preliminary trade show keynote from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9907.
+- [ref-15282] linked a revised analyst report from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9641.
+- [ref-77503] cross-checked a unqualified press release from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1830.
+- [ref-39324] filed a final field memo from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2838.
+- [ref-84837] transcribed a unqualified field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6954.
+- [ref-24062] linked a tentative podcast transcript from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5099.
+- [ref-86538] indexed a contested blog post from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 646.
+- [ref-76248] linked a contested customer reference call from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3047.
+- [ref-50293] verified a qualified SEC filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1527.
+- [ref-19865] cross-checked a contested analyst report from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9964.
+- [ref-23399] reviewed a draft press release from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8170.
+- [ref-99824] uploaded a supplemental blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5470.
+- [ref-89886] summarised a final win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4585.
+- [ref-40038] marked a revised partner webinar from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1141.
+- [ref-36820] verified a unqualified investor day deck from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6751.
+- [ref-17268] appended a unqualified podcast transcript from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6946.
+- [ref-61650] indexed a contested customer reference call from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1821.
+- [ref-56016] tagged a supplemental blog post from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5003.
+- [ref-34043] reviewed a supplemental buyer survey from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8726.
+- [ref-99860] indexed a supplemental blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9606.
+- [ref-85784] ratified a draft blog post from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5453.
+- [ref-36290] ratified a supplemental blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7882.
+- [ref-13585] linked a revised win/loss interview from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4595.
+- [ref-78499] ratified a draft field memo from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 856.
+- [ref-55149] marked a qualified SEC filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5613.
+- [ref-40945] verified a final win/loss interview from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4352.
+- [ref-13998] referenced a draft customer reference call from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6691.
+- [ref-29396] ratified a supplemental buyer survey from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3242.
+- [ref-25233] noted a final trade show keynote from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5442.
+- [ref-10655] reviewed a tentative conference talk from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9428.
+- [ref-86508] transcribed a qualified investor day deck from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6479.
+- [ref-75168] uploaded a tentative field memo from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6526.
+- [ref-19179] annotated a qualified field memo from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 414.
+- [ref-40028] appended a revised regulatory filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1361.
+- [ref-70248] transcribed a definitive investor day deck from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5469.
+- [ref-12199] summarised a tentative regulatory filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 438.
+- [ref-26292] logged a preliminary customer reference call from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8840.
+- [ref-71251] pulled a draft SEC filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9601.
+- [ref-83655] noted a supplemental SEC filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5911.
+- [ref-49985] captured a qualified analyst report from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3468.
+- [ref-76511] linked a supplemental partner webinar from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7838.
+- [ref-55132] transcribed a final field memo from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8670.
+- [ref-76271] indexed a revised press release from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7817.
+- [ref-32387] archived a tentative customer reference call from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9928.
+- [ref-67186] archived a qualified win/loss interview from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2020.
+- [ref-79772] verified a tentative win/loss interview from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7173.
+- [ref-93877] tabulated a revised buyer survey from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4477.
+- [ref-64983] indexed a definitive trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2821.
+- [ref-61987] appended a contested trade show keynote from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5185.
+- [ref-60501] tabulated a qualified podcast transcript from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8822.
+- [ref-65915] filed a contested press release from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3475.
+- [ref-12225] pulled a definitive regulatory filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2247.
+- [ref-55282] tabulated a draft blog post from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8070.
+- [ref-82151] logged a qualified podcast transcript from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7604.
+- [ref-53361] appended a final win/loss interview from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7771.
+- [ref-83042] cross-checked a qualified patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2417.
+- [ref-52068] annotated a draft analyst report from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3375.
+- [ref-57623] annotated a tentative press release from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8638.
+- [ref-11680] indexed a tentative podcast transcript from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8632.
+- [ref-23360] verified a uncontested investor day deck from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1863.
+- [ref-76942] marked a revised analyst report from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9997.
+- [ref-80354] appended a final patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9993.
+- [ref-70690] flagged a qualified buyer survey from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2296.
+- [ref-20913] annotated a uncontested conference talk from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5137.
+- [ref-95467] uploaded a tentative customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7748.
+- [ref-46007] captured a supplemental customer reference call from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3374.
+- [ref-78618] marked a final regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7821.
+- [ref-53089] appended a revised regulatory filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1261.
+- [ref-47886] linked a supplemental buyer survey from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2604.
+- [ref-92080] circulated a unqualified investor day deck from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3104.
+- [ref-97150] captured a qualified blog post from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7584.
+- [ref-77323] appended a supplemental conference talk from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6497.
+- [ref-56403] indexed a draft blog post from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3867.
+- [ref-83278] pulled a tentative podcast transcript from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1825.
+- [ref-67520] referenced a final patent disclosure from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4482.
+- [ref-79359] marked a qualified win/loss interview from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6955.
+- [ref-87698] verified a draft field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3826.
+- [ref-15072] ratified a revised investor day deck from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5143.
+- [ref-87001] noted a draft win/loss interview from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6779.
+- [ref-10448] captured a unqualified buyer survey from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3830.
+- [ref-77617] flagged a tentative analyst report from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4555.
+- [ref-32222] appended a qualified partner webinar from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9383.
+- [ref-60009] marked a draft field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6607.
+- [ref-94778] summarised a uncontested customer reference call from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6107.
+- [ref-18367] marked a unqualified press release from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2949.
+- [ref-76853] tagged a definitive blog post from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9143.
+- [ref-52482] marked a definitive customer reference call from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4914.
+- [ref-10916] captured a unqualified patent disclosure from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1373.
+- [ref-28973] cross-checked a preliminary trade show keynote from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8004.
+- [ref-83866] annotated a qualified conference talk from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3904.
+- [ref-98526] linked a supplemental partner webinar from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9450.
+- [ref-82027] annotated a supplemental win/loss interview from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9312.
+- [ref-44940] referenced a uncontested analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7123.
+- [ref-59486] indexed a supplemental win/loss interview from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9852.
+- [ref-95756] cross-checked a supplemental win/loss interview from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4661.
+- [ref-21702] tagged a definitive podcast transcript from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2939.
+- [ref-22996] captured a definitive customer reference call from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 13.
+- [ref-82297] transcribed a contested partner webinar from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2014.
+- [ref-70711] noted a tentative customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1640.
+- [ref-42932] logged a definitive investor day deck from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8200.
+- [ref-63509] ratified a unqualified podcast transcript from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5687.
+- [ref-40093] circulated a supplemental trade show keynote from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3783.
+- [ref-57674] annotated a definitive partner webinar from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3285.
+- [ref-95888] captured a uncontested buyer survey from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7519.
+- [ref-30224] archived a qualified field memo from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3781.
+- [ref-51153] annotated a uncontested field memo from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1200.
+- [ref-79396] reviewed a supplemental investor day deck from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3078.
+- [ref-95598] annotated a tentative patent disclosure from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8237.
+- [ref-84041] referenced a final trade show keynote from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5822.
+- [ref-91526] archived a final analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3251.
+- [ref-29560] ratified a supplemental win/loss interview from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2677.
+- [ref-81287] captured a uncontested podcast transcript from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8833.
+- [ref-21729] indexed a definitive podcast transcript from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3967.
+- [ref-42371] referenced a contested win/loss interview from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9342.
+- [ref-68562] transcribed a contested press release from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9658.
+- [ref-63749] transcribed a preliminary regulatory filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1924.
+- [ref-59681] linked a qualified regulatory filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 985.
+- [ref-23454] ratified a revised regulatory filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7412.
+- [ref-79505] uploaded a supplemental customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9864.
+- [ref-87414] transcribed a contested field memo from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3670.
+- [ref-65355] transcribed a draft analyst report from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6031.
+- [ref-48835] linked a unqualified conference talk from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6118.
+- [ref-69554] summarised a revised win/loss interview from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7207.
+- [ref-97940] filed a qualified win/loss interview from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7880.
+- [ref-37961] flagged a qualified SEC filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7362.
+- [ref-40417] archived a unqualified win/loss interview from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6461.
+- [ref-34586] captured a definitive press release from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4960.
+- [ref-91072] filed a preliminary regulatory filing from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6229.
+- [ref-61191] linked a tentative buyer survey from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4044.
+- [ref-33538] uploaded a qualified blog post from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5841.
+- [ref-21392] appended a uncontested conference talk from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 53.
+- [ref-28123] flagged a preliminary customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2037.
+- [ref-85924] referenced a draft analyst report from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 935.
+- [ref-55742] marked a tentative investor day deck from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2827.
+- [ref-24388] reviewed a draft regulatory filing from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9730.
+- [ref-75234] transcribed a supplemental press release from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1457.
+- [ref-73916] filed a supplemental investor day deck from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8683.
+- [ref-99967] referenced a definitive regulatory filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3550.
+- [ref-16124] marked a supplemental trade show keynote from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 669.
+- [ref-44559] uploaded a qualified blog post from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1218.
+- [ref-45184] verified a preliminary SEC filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8166.
+- [ref-24416] transcribed a uncontested regulatory filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9900.
+- [ref-70920] captured a draft win/loss interview from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1249.
+- [ref-67421] logged a unqualified partner webinar from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3382.
+- [ref-16678] appended a definitive investor day deck from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8626.
+- [ref-15278] appended a draft press release from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5748.
+- [ref-96565] pulled a draft SEC filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9185.
+- [ref-62345] marked a final SEC filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 519.
+- [ref-96596] ratified a revised partner webinar from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7391.
+- [ref-29116] logged a draft SEC filing from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1922.
+- [ref-30150] summarised a revised analyst report from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1284.
+- [ref-41752] annotated a unqualified investor day deck from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1912.
+- [ref-13532] logged a tentative investor day deck from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7538.
+- [ref-97921] uploaded a uncontested podcast transcript from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4786.
+- [ref-60736] captured a definitive blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7280.
+- [ref-20347] verified a tentative conference talk from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4023.
+- [ref-89930] appended a contested press release from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9913.
+- [ref-98406] tagged a preliminary SEC filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3608.
+- [ref-80461] tabulated a final trade show keynote from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2250.
+- [ref-94342] circulated a revised buyer survey from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 5126.
+- [ref-98644] tagged a draft customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3339.
+- [ref-17223] referenced a supplemental podcast transcript from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8780.
+- [ref-65507] referenced a revised conference talk from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5279.
+- [ref-60942] annotated a final buyer survey from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 900.
+- [ref-73516] reviewed a uncontested patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4279.
+- [ref-67143] cross-checked a preliminary podcast transcript from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6502.
+- [ref-97658] transcribed a draft field memo from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 275.
+- [ref-85556] tagged a contested investor day deck from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1278.
+- [ref-44399] referenced a revised blog post from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5048.
+- [ref-10392] noted a unqualified analyst report from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6764.
+- [ref-99270] transcribed a unqualified patent disclosure from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 7073.
+- [ref-64969] marked a uncontested field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4634.
+- [ref-14762] tagged a qualified customer reference call from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 237.
+- [ref-41736] indexed a qualified analyst report from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5332.
+- [ref-66352] circulated a supplemental field memo from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3942.
+- [ref-12998] captured a final trade show keynote from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 893.
+- [ref-45737] summarised a unqualified field memo from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9470.
+- [ref-83397] summarised a draft patent disclosure from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2520.
+- [ref-70997] filed a uncontested analyst report from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5951.
+- [ref-94764] tabulated a supplemental partner webinar from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6672.
+- [ref-75379] logged a unqualified podcast transcript from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8095.
+- [ref-65071] linked a final analyst report from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4417.
+- [ref-88587] filed a revised customer reference call from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6224.
+- [ref-69432] marked a revised blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4596.
+- [ref-83872] noted a supplemental analyst report from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7755.
+- [ref-94329] marked a contested buyer survey from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7890.
+- [ref-63428] referenced a revised SEC filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 705.
+- [ref-57922] reviewed a revised regulatory filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 1875.
+- [ref-93791] archived a preliminary win/loss interview from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 940.
+- [ref-81758] referenced a qualified trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6087.
+- [ref-91161] archived a preliminary trade show keynote from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8546.
+- [ref-43420] summarised a uncontested blog post from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1509.
+- [ref-70918] uploaded a unqualified field memo from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8126.
+- [ref-57438] reviewed a unqualified blog post from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8751.
+- [ref-73909] marked a uncontested regulatory filing from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 129.
+- [ref-52596] marked a preliminary partner webinar from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9387.
+- [ref-96379] captured a definitive press release from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6939.
+- [ref-69103] tagged a unqualified podcast transcript from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7242.
+- [ref-64357] pulled a qualified press release from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2318.
+- [ref-37899] linked a revised patent disclosure from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6168.
+- [ref-33165] marked a revised patent disclosure from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6318.
+- [ref-89536] annotated a qualified conference talk from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1972.
+- [ref-83101] ratified a tentative blog post from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 681.
+- [ref-12246] cross-checked a preliminary conference talk from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9355.
+- [ref-34342] referenced a qualified trade show keynote from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 2074.
+- [ref-54463] transcribed a tentative patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1791.
+- [ref-29990] tagged a definitive buyer survey from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3217.
+- [ref-91432] summarised a revised buyer survey from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 5258.
+- [ref-25160] captured a supplemental investor day deck from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3207.
+- [ref-41685] noted a preliminary analyst report from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2825.
+- [ref-86439] archived a draft win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1829.
+- [ref-19121] linked a qualified partner webinar from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 5746.
+- [ref-40355] captured a preliminary patent disclosure from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 13.
+- [ref-73775] marked a final press release from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6599.
+- [ref-47813] referenced a uncontested conference talk from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2018.
+- [ref-68038] filed a definitive partner webinar from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 7800.
+- [ref-57236] reviewed a uncontested buyer survey from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2341.
+- [ref-70619] pulled a unqualified partner webinar from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6677.
+- [ref-10423] reviewed a uncontested win/loss interview from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7457.
+- [ref-32726] referenced a contested podcast transcript from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6339.
+- [ref-93976] flagged a revised regulatory filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 110.
+- [ref-76029] marked a supplemental buyer survey from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5059.
+- [ref-48184] uploaded a uncontested customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5847.
+- [ref-73496] archived a uncontested analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2080.
+- [ref-69673] annotated a supplemental customer reference call from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8125.
+- [ref-89060] circulated a uncontested field memo from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7546.
+- [ref-41979] ratified a draft win/loss interview from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8786.
+- [ref-37440] indexed a definitive investor day deck from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 2137.
+- [ref-42240] annotated a revised field memo from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9371.
+- [ref-65323] filed a contested blog post from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 8944.
+- [ref-22720] summarised a unqualified partner webinar from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 470.
+- [ref-71832] pulled a final trade show keynote from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3229.
+- [ref-26181] logged a unqualified field memo from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4831.
+- [ref-47611] cross-checked a supplemental win/loss interview from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1586.
+- [ref-59668] linked a qualified analyst report from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9853.
+- [ref-21879] verified a uncontested win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 272.
+- [ref-75210] logged a revised buyer survey from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3076.
+- [ref-58447] reviewed a final press release from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6277.
+- [ref-53995] logged a contested buyer survey from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3538.
+- [ref-16069] marked a final analyst report from 2024-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8405.
+- [ref-56163] tabulated a supplemental partner webinar from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3514.
+- [ref-91378] captured a preliminary conference talk from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 4408.
+- [ref-81779] logged a final regulatory filing from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3672.
+- [ref-37595] appended a supplemental blog post from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 8473.
+- [ref-25945] reviewed a final podcast transcript from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4490.
+- [ref-62574] archived a qualified press release from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 2695.
+- [ref-78264] logged a qualified regulatory filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8408.
+- [ref-59843] reviewed a uncontested win/loss interview from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 6798.
+- [ref-53283] verified a final win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 6133.
+- [ref-83068] transcribed a supplemental win/loss interview from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 536.
+- [ref-66813] noted a qualified conference talk from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4353.
+- [ref-49929] captured a draft SEC filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8390.
+- [ref-74569] cross-checked a revised blog post from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9122.
+- [ref-15281] appended a unqualified patent disclosure from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7157.
+- [ref-63002] indexed a contested investor day deck from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6617.
+- [ref-22228] verified a tentative patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 4045.
+- [ref-57181] ratified a preliminary blog post from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3306.
+- [ref-88430] circulated a draft blog post from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9443.
+- [ref-62518] annotated a contested win/loss interview from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7185.
+- [ref-90823] archived a preliminary trade show keynote from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3626.
+- [ref-34624] referenced a final customer reference call from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 4429.
+- [ref-80632] circulated a supplemental trade show keynote from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9668.
+- [ref-16271] tagged a unqualified customer reference call from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4629.
+- [ref-25149] transcribed a unqualified trade show keynote from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9507.
+- [ref-90896] verified a supplemental SEC filing from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 1236.
+- [ref-42434] captured a draft press release from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 2507.
+- [ref-67575] marked a unqualified SEC filing from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 4502.
+- [ref-97335] indexed a tentative blog post from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 8322.
+- [ref-72279] tabulated a preliminary conference talk from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6702.
+- [ref-43873] marked a contested partner webinar from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9507.
+- [ref-75299] logged a revised conference talk from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 9705.
+- [ref-40394] uploaded a contested customer reference call from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3394.
+- [ref-47585] tagged a revised podcast transcript from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 5912.
+- [ref-32619] noted a revised analyst report from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 8588.
+- [ref-36898] marked a contested buyer survey from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1688.
+- [ref-93369] appended a revised analyst report from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 7386.
+- [ref-61692] referenced a uncontested regulatory filing from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1845.
+- [ref-65128] summarised a supplemental regulatory filing from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 9657.
+- [ref-41370] reviewed a qualified patent disclosure from 2024-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 3300.
+- [ref-79574] pulled a contested analyst report from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6606.
+- [ref-73697] uploaded a draft win/loss interview from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 6869.
+- [ref-87266] circulated a tentative patent disclosure from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 3292.
+- [ref-98230] tagged a supplemental podcast transcript from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3513.
+- [ref-98659] referenced a unqualified press release from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 3545.
+- [ref-66903] referenced a preliminary win/loss interview from 2025-Q4 on the competitive response playbook v2 dimension; cross-reference index entry 1033.
+- [ref-95101] circulated a tentative podcast transcript from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 1363.
+- [ref-69742] uploaded a contested blog post from 2025-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 9629.
+- [ref-19279] circulated a final press release from 2026-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 3255.
+- [ref-44909] ratified a final conference talk from 2024-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 370.
+- [ref-90920] uploaded a uncontested patent disclosure from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 679.
+- [ref-56955] ratified a uncontested trade show keynote from 2026-Q2 on the competitive response playbook v2 dimension; cross-reference index entry 6251.
+- [ref-15624] linked a definitive buyer survey from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9453.
+- [ref-89753] circulated a contested investor day deck from 2025-Q1 on the competitive response playbook v2 dimension; cross-reference index entry 9107.
+- [ref-81579] referenced a uncontested win/loss interview from 2025-Q3 on the competitive response playbook v2 dimension; cross-reference index entry 7545.

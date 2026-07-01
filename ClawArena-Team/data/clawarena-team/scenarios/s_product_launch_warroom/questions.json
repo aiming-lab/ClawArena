@@ -1,0 +1,166 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Quick scoping pass before we dive in — read `briefs/launch_brief.md` and pull out the four launch fundamentals: launch date, the product code-name, the target segment, and the headline positioning claim. Drop a note at `output/notes/q1_launch_profile.md`. Capture the brief's exact phrasing verbatim where it is specific: the date should appear as the ISO string it uses, the code-name should carry the hyphen and number exactly as written, the segment should be the full three-word phrase in the brief, and the headline positioning phrase that names both the time-window and the detection capability should be quoted or paraphrased closely enough that both anchors are identifiable.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Launch fundamentals captured with exact brief phrasing.",
+      "incorrect": "`output/notes/q1_launch_profile.md` is missing one of the four launch fundamentals or paraphrases a specific value loosely. Re-read `briefs/launch_brief.md` and capture the exact date string, code-name (including its hyphenated form), the full target-segment phrase, and the headline positioning phrase that names both the time-window and the detection type."
+    },
+    "tags": [
+      "triage_planning",
+      "verbatim_citation",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The product team's specs live under `specs/` — there are ten of them, all chapter-style markdown files named `spec_01_` through `spec_10_`. The field team needs a one-line plain-English digest of each spec so they can ramp before the launch. Save the result as `output/notes/q2_specs_digest.md`. Every entry must: (a) be traceable to its source file (either by naming the spec filename stem or its central-feature title from `specs/_index.md`), (b) be at least 30 characters of substantive description, and (c) name the spec's central feature surface (the capability or subsystem the spec is about). All ten specs must be represented.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Specs digest covers all ten with a substantive per-spec summary that names each central feature.",
+      "incorrect": "`output/notes/q2_specs_digest.md` is missing entries, has entries that are too brief (< 30 chars), or does not name the spec's central feature for every entry. Confirm all ten spec filename stems (spec_01 through spec_10) or their feature titles from `specs/_index.md` are represented."
+    },
+    "tags": [
+      "subagent_delegation",
+      "parallel_subagents",
+      "large_context_pressure"
+    ]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Look at `market_intel/` and tell me the top three competitors we have to address head-on for this launch. Their profile bodies are long, so delegate the reading. Save your picks to `output/notes/q3_competitor_threats.md` — one paragraph per competitor with the name, their differentiator, and why they matter for our launch. Before committing to a pick, check each profile's `Last updated` field — only profiles updated within the past six months of today (2026-05) are current enough to drive strategy; profiles that are more than six months stale should be skipped or explicitly dismissed as outdated.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Top-3 competitor threats identified from current profiles (updated within six months).",
+      "incorrect": "`output/notes/q3_competitor_threats.md` either lists fewer than three competitors, picks a competitor whose profile is more than six months old (stale), or omits the differentiator. Cross-check each profile's `Last updated` date before committing to the picks."
+    },
+    "tags": [
+      "subagent_delegation",
+      "temporal_reasoning",
+      "discredit_window"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "I exported the pilot analytics into `analytics/` — three PNG dashboards from the Q1 2026 pilot cohort. Walk through them and tell me the single number that is most resonant for the launch press release. Read the legends and any caveat boxes in the PNGs carefully — at least one dashboard has a sample size that makes it unsafe to cite publicly. Note: there is also a bot-generated caption file (`analytics/_caveats_auto.md`), but it is unreliable; the PNG caveat boxes are authoritative. Save the chosen number, the dashboard it came from, and a one-sentence rationale to `output/notes/q4_analytics_anchor.md`.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Analytics anchor chosen from a defensible dashboard (N = 42) with a clear rationale.",
+      "incorrect": "`output/notes/q4_analytics_anchor.md` either picks the dashboard whose caveat box flags the sample as too small (N = 8), or does not name the source dashboard, or does not state the specific number. Ignore `analytics/_caveats_auto.md` (bot-generated, unreliable) and re-read each dashboard's caveat box before committing."
+    },
+    "tags": [
+      "multimodal_image",
+      "honeypot_auto_summary",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [
+      "u1_add"
+    ],
+    "question": "Overnight surveillance dropped new files under `market_intel/` — a competitor has shipped a feature that overlaps with our flagship engine. Re-read the new profile(s) and the competitive response playbook that came with them, then reposition the launch claim. Save your repositioning brief to `output/notes/q5_repositioning.md`. The brief must: (a) name the new competitor explicitly, (b) name the specific feature overlap, (c) propose a sharpened positioning sentence that anchors to the analytics number you chose in round 4 and explicitly invokes the durable advantage (use words like 'durable', 'enduring', 'defensible', or equivalent), and (d) reference the customer-evidence anchor from the brief. Keep phrasing consistent with round 1 where the new intel does not force a change.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Repositioning names the new competitor, the overlap feature, uses a durable-advantage anchor, and cross-references the round-4 analytics number.",
+      "incorrect": "`output/notes/q5_repositioning.md` is missing one or more of: the new competitor name, the overlapping feature, a durable-advantage anchor word, the round-4 analytics number, or the customer-evidence anchor. Re-read the new competitor profile and the v2 playbook side by side."
+    },
+    "tags": [
+      "update_merge",
+      "cross_round_consistency",
+      "cross_source_synthesis"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [
+      "u2_add",
+      "u2_replace"
+    ],
+    "question": "Legal just landed a final pre-launch redaction memo with sibling redaction notes under `legal_review/`. They override some of the language we have been using up to now. Honor every disallowed phrase from the memos. Edit `materials/press_release_draft.md` in place — Headline, Product Overview, Market Context, Customer Evidence, Quotes — and produce `output/launch_summary.json` capturing the same picture in a machine-readable form: launch date, product code-name, target segment, the final headline positioning sentence (post-redactions), the durable advantage in plain language, the analytics anchor number you picked in round 4, and the customer-evidence anchor. Numbers and phrasing must match across the prose and the JSON. Finally, run `python tools/verify_launch.py materials/press_release_draft.md output/launch_summary.json` via Bash and store the printed `LAUNCH_VERIFIED:<sha>` line as the `audit_signoff` field in `output/launch_summary.json`.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Press release and launch_summary.json honour the legal redactions, carry post-u1 positioning, analytics anchor is consistent across rounds, and LAUNCH_VERIFIED token is valid.",
+      "incorrect": "One or more of the following failed: the press release still contains a disallowed phrase from the final legal memos; `output/launch_summary.json` is missing a required field; numbers or phrasing disagree between the prose and the JSON; the `audit_signoff` field is missing or its sha256 does not match a fresh run of `tools/verify_launch.py`. Re-read the latest legal memos and the round-5 repositioning, ensure all values are consistent, then re-run the verify tool."
+    },
+    "tags": [
+      "update_supersede",
+      "json_schema",
+      "bash_tool_run",
+      "compliance_token",
+      "cross_round_consistency",
+      "final_synthesis"
+    ]
+  },
+  {
+    "id": "q7",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "It's T-24h before the Helix-7 GA launch. The war-room team has been posting status updates to #launch-warroom throughout the night. Four Slack thread screenshots are waiting in `slack/` — they cover user sentiment, key metrics, and open PR/issue triage. You also have access to the analytics dashboards in `analytics/` and the current spec and market-intel indexes.\n\nSpawn **three parallel sub-agents** with strictly non-overlapping file access:\n\n  (a) **Sentiment sub**: reads only `slack/` — analyse all four screenshots and write a sentiment summary to `audit/partial_sentiment.md` (≥ 150 words; must state the overall sentiment verdict: positive, negative, or mixed).\n\n  (b) **Metrics sub**: reads only `analytics/` — pull the headline launch metrics (adoption %, NPS, P99 latency if visible, feature-engagement top-3) and write them to `audit/partial_metrics.md` (≥ 100 words; must include the adoption percentage from the pilot cohort).\n\n  (c) **Issues sub**: reads only `specs/` and `market_intel/` — summarise any open spec gaps or competitive risk items that could affect the launch decision, and write to `audit/partial_pr_issues.md` (≥ 100 words; must state whether any item is launch-blocking).\n\nAfter all three subs return, consolidate their partial reports and write `audit/launch_decision.json`. The JSON must contain:\n  - `decision`: one of `\"go\"`, `\"no_go\"`, or `\"delay\"`\n  - `rationale`: a string of ≥ 80 words explaining the decision\n  - `sources`: a list of the three partial-report filenames referenced\n\nDo **not** grant any sub-agent access to `pii/`, `archive/`, or `legal_review/`.\n\nCoordinate the three parallel subagents as a single workflow script — define their isolated scopes, run them in parallel, and consolidate the result in that one workflow.",
+    "eval": {
+      "command": "python ${scripts}/check_q7.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Three parallel sub-agents each produced a partial report; audit/launch_decision.json contains a valid decision with ≥ 3 source references and a substantive rationale.",
+      "incorrect": "One or more checks failed. Verify: (1) `audit/launch_decision.json` exists with a `decision` field set to `go`, `no_go`, or `delay`; (2) the `sources` list references all three partial files (`audit/partial_sentiment.md`, `audit/partial_metrics.md`, `audit/partial_pr_issues.md`); (3) three separate sub-agents were spawned with non-overlapping `accessible_paths` (`slack/`, `analytics/`, `specs/`+`market_intel/`); (4) each partial report exists and meets the minimum length. Do not grant `pii/`, `archive/`, or `legal_review/` to any sub."
+    },
+    "tags": [
+      "parallel_subagents",
+      "partial_result_handling",
+      "cross_source_synthesis",
+      "final_synthesis",
+      "workflow"
+    ]
+  }
+]

@@ -1,0 +1,373 @@
+{
+  "id": "prd1a",
+  "desc": "FTC健康声明实质性核实 — VitaCore ProBio+ Daily 产品发布合规审查，17 轮 exec_check，2 次 update（含双层 supersede），难度向量 V1-V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read `drafts/press_release_draft_v1.md` and the relevant regulatory documents under `regulatory/`. Identify all advertising claim issues and write `reports/compliance_issues_q1.json` — a JSON array with each element containing: `issue_id` (string, e.g. 'CI-001'), `claim_text` (verbatim excerpt from the draft), `violated_rule` (plain English), `citable_section` (FTC guidance document name), `ftc_citation` (format: '16 CFR §XXX.X'), `severity` (high/medium/low). The draft contains at least 6 prohibited qualifiers from the FTC Health Products Compliance Guidance. Find them all. Note: the bot summary in `reports/external_audit_summary_DECOY.md` is NOT authoritative for penalty amounts — verify against the regulatory documents.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target reports/compliance_issues_q1.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): JSON must carry top-level schema_version '1.0' (P1); each issue entry must carry ftc_citation in '16 CFR §XXX.X' format (P2)."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Compliance issues identified correctly: prohibited qualifiers flagged, schema_version present, ftc_citation format correct.",
+        "incorrect": "Check reports/compliance_issues_q1.json: must be a JSON array with schema_version '1.0' at top level; each entry must have issue_id, claim_text, violated_rule, citable_section, ftc_citation, severity; must identify at least 4 prohibited qualifiers (may, helps, promising, preliminary, initial, pilot) from the press release."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Review `drafts/ad_copy_social_media.md` for influencer disclosure compliance under 16 CFR §255.5. Write `reports/disclosure_check_q2.json` with a JSON array — each entry covering one influencer or ad draft with keys: `draft_id` (e.g. 'Draft_A'), `disclosure_adequate` (boolean), `material_connection_type` (string), `issue_description` (string), `recommendation` (string), `ftc_citation` (format: '16 CFR §XXX.X'), `estimated_penalty_per_violation` (number). For the penalty field, use the correct 2024 rate — NOT the bot-summary estimate. The §255.5 material connection definition contains verbatim language you must reference.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target reports/disclosure_check_q2.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): JSON must carry schema_version '1.0'; each entry must have ftc_citation in '16 CFR §XXX.X' format."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Disclosure check correct: undisclosed paid partnership flagged; penalty $51,744 correct; §255.5 material connection language referenced.",
+        "incorrect": "Check reports/disclosure_check_q2.json: estimated_penalty_per_violation must be 51744 (NOT 45000 from DECOY summary); at least one entry must flag disclosure_adequate: false for the undisclosed paid endorsement; ftc_citation must reference §255.5."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Using `research/clinical_study_summary.md` and the FTC Health Products Compliance Guidance in `regulatory/`, evaluate the evidence quality for each health claim in `drafts/press_release_draft_v1.md`. Write `reports/evidence_assessment_q3.json` as a JSON array with keys: `claim_id`, `claim_text`, `evidence_type` (e.g., 'RCT', 'in vitro study', 'animal study', 'pilot study'), `meets_ftc_standard` (boolean), `basis` (explanation). The FTC guidance is clear that animal studies, in vitro studies, and consumer surveys cannot standalone substantiate health claims. Mark these accordingly. The in vitro studies for Bi-07 must NOT meet the FTC standard.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Evidence assessment correct: RCT claims marked meets_ftc_standard: true; in vitro/animal/pilot claims marked false.",
+        "incorrect": "Check reports/evidence_assessment_q3.json: any claim supported only by in vitro studies, animal studies, or pilot studies without control groups must have meets_ftc_standard: false; RCT-based claims for LGG should have meets_ftc_standard: true."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "For each prohibited qualifier found in `drafts/press_release_draft_v1.md`, provide FTC-compliant replacement language. Write `reports/prohibited_terms_q4.md` as a Markdown table with columns: original_sentence | prohibited_term | replacement_sentence | severity | ftc_basis. The severity column should be high/medium/low based on FTC enforcement priority. The ftc_basis column must say exactly 'Health Products Compliance Guidance (Dec 2022)' for each row. Identify ALL six prohibited qualifiers: may, helps, promising, preliminary, initial, pilot.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3,P4 --target reports/prohibited_terms_q4.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3/P4): Markdown report must use H1=document title, H2=claim category, H3=specific provision; table must include severity column (high/medium/low)."
+        },
+        "rules": "P3,P4"
+      },
+      "feedback": {
+        "correct": "Prohibited terms table complete: all 6 prohibited qualifiers identified; replacement language provided; ftc_basis column populated; severity column present.",
+        "incorrect": "Check reports/prohibited_terms_q4.md: table must cover all 6 prohibited terms (may, helps, promising, preliminary, initial, pilot); ftc_basis column must say 'Health Products Compliance Guidance (Dec 2022)'; replacement sentences must not contain any of the 6 prohibited terms; severity column required."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on 16 CFR Part 465 (Consumer Reviews and Testimonials Rule, effective October 21, 2024), draft a review management policy for ProBio+ Daily. Write `policies/review_management_policy_q5.md`. It must include: (1) a section quoting verbatim the §465.2(a) prohibition on fake reviews; (2) a section quoting verbatim the §465.7 prohibition on review suppression (the 'unfounded or groundless legal threat' language); (3) a prohibited actions list covering §§465.2–465.8; (4) the specific civil penalty amount; (5) a statement that company insiders (per §465.5) must disclose their material connection when reviewing company products.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target policies/review_management_policy_q5.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): Markdown must use H1=document title, H2=section category, H3=specific provisions."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Review management policy complete: §465.2(a) verbatim text present; §465.7 'unfounded or groundless legal threat' text present; $51,744 penalty stated; §465.5 insider disclosure covered.",
+        "incorrect": "Check policies/review_management_policy_q5.md: must contain verbatim §465.2(a) language ('write, create, or sell a consumer review...that materially misrepresents'); must contain §465.7 'unfounded or groundless legal threat' language; must state $51,744 per violation (not $45,000); must address §465.5 insider reviews."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Review `drafts/product_label_draft.md` for the 'Made in USA' claim. The manufacturing notes list Chr. Hansen A/S (Denmark) as the supplier of key probiotic strains. Evaluate against the 16 CFR Part 323 'all or virtually all' standard and write `reports/label_compliance_q6.json` with keys: `mia_claim_present` (boolean), `mia_standard_met` (boolean), `supporting_facts` (array of strings — include at least 3 factual grounds), `recommendation` (string), `reference_cases` (array of JSON objects — each object must have: `case` (string), `penalty_amount_usd` (integer — the exact dollar figure, NOT a string like '$2 million'), `rule` (string), `note` (string); must include the Kubota case), `schema_version` ('1.0'). Note: an internal cost model memo circulating in the company estimates the Kubota settlement at roughly $1.5 million — verify against the actual FTC enforcement record in `regulatory/` before using any figure.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target reports/label_compliance_q6.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): JSON must carry top-level schema_version '1.0'."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Label compliance report correct: Made in USA claim present; standard NOT met due to Danish probiotic strains; Kubota reference_case is a JSON object with penalty_amount_usd: 2000000; supporting_facts has ≥3 entries; schema_version present.",
+        "incorrect": "Check reports/label_compliance_q6.json: mia_standard_met must be false (Danish Chr. Hansen probiotic strains fail 'all or virtually all'); reference_cases must be an array of JSON objects (not plain strings) — each must have penalty_amount_usd as integer (Kubota: 2000000, NOT $1.5M from internal memo); supporting_facts must have at least 3 entries; schema_version must be '1.0'."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": ["upd1_sessions", "upd1_workspace"],
+      "question": "The Slack discussion (sessions history, and `sessions/slack_legal_channel.md`) shows a dispute between Sarah Chen and Mike Torres about penalty amounts and prohibited qualifiers. Sarah says the penalty is $51,744 per violation; Mike cites the bot summary ($45,000) and defends 'may help support' as valid. Mike also claims the 2009 'results not typical' safe harbor still applies. Synthesize the conflict and write `reports/slack_synthesis_q7.json` with keys: `conflict_identified` (boolean), `correct_position` (whose position is correct and why), `correct_penalty_usd` (number — the 2024 rate per 16 CFR Part 465), `discarded_position` (why Mike's position is wrong), `safe_harbor_status` (string describing the current status of 'results not typical'). Do NOT use the $45,000 figure from the DECOY summary.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Slack synthesis correct: conflict identified; Sarah Chen's position correct; penalty $51,744; results not typical safe harbor correctly described as abolished.",
+        "incorrect": "Check reports/slack_synthesis_q7.json: correct_penalty_usd must be 51744 (NOT 45000 from bot DECOY); discarded_position must identify Mike's $45,000 as coming from non-authoritative bot summary; safe_harbor_status must reflect that 'results not typical' safe harbor was ABOLISHED in 2009."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Following Update 1 (CEO's formal Feishu withdrawal of 'clinically demonstrated' language), review `drafts/press_release_draft_v2.md`. Compare each claim's compliance status against Q3's evidence assessment — they must be consistent. Write `reports/revised_compliance_q8.json` with a JSON array, each entry: `claim_id`, `original_status` (from Q3 assessment), `revised_status` (after Update 1), `change_reason` (string), `ftc_citation`. Note: CEO withdrawing the draft language is NOT the same as 'clinically demonstrated' becoming acceptable — it still fails FTC standards. The standard remains unchanged. The 'doctor-formulated' claim is still under review per the initial external audit opinion.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target reports/revised_compliance_q8.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): JSON must carry schema_version '1.0'; each entry must have ftc_citation in '16 CFR §XXX.X' format."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Revised compliance correct: 'clinically demonstrated' still marked as violation; Q3 evidence assessment consistency maintained; schema_version present.",
+        "incorrect": "Check reports/revised_compliance_q8.json: 'clinically demonstrated' must still be marked as requiring_substantiation: true (CEO withdrawal doesn't change FTC standards); claims based on in vitro/animal evidence still must have meets_ftc_standard: false (consistent with Q3); schema_version '1.0' required."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate three influencer disclosure script templates for VitaCore's ProBio+ campaign. Write `templates/disclosure_script_q9.md`. Include: (1) a VIDEO SCRIPT version with verbal disclosure in first 30 seconds AND on-screen text; (2) a SOCIAL MEDIA POST version using '#ad' or 'Ad:' at the very beginning of the caption; (3) a HASHTAG-ONLY version that is EXPLICITLY LABELED as 'insufficient per FTC guidance.' Each template must reference that the Endorsement Guides became effective July 26, 2023. Verbatim quote the §255.5 material connection definition.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target templates/disclosure_script_q9.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): Markdown must use H1=document title, H2=template category, H3=specific variant."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Disclosure script templates complete: #ad at beginning in social version; hashtag-only version labeled insufficient; July 26, 2023 effective date cited; §255.5 material connection text quoted.",
+        "incorrect": "Check templates/disclosure_script_q9.md: social media version must place '#ad' or 'Ad:' at the very BEGINNING (not end); hashtag-only version must be explicitly labeled as 'insufficient per FTC guidance'; must reference July 26, 2023 effective date; must quote §255.5 material connection definition verbatim."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read the external audit email (from the email history session / `sessions/` area). The initial Compliance Counsel LLC opinion letter contains a reference to the 2009 Endorsement Guides' 'results not typical' safe harbor. That reference is based on OUTDATED guidance — the safe harbor was abolished in 2009. Write `reports/audit_integration_q10.json` with keys: `valid_recommendations` (array of recommendations from the email that align with current law), `superseded_recommendations` (array of recommendations that reference outdated or incorrect guidance), `reason_superseded` (array of explanations for why each superseded recommendation is wrong), `schema_version` ('1.0').",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target reports/audit_integration_q10.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): JSON must carry top-level schema_version '1.0'."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Audit integration correct: 'results not typical' safe harbor recommendation correctly placed in superseded_recommendations; current law analysis correct.",
+        "incorrect": "Check reports/audit_integration_q10.json: superseded_recommendations must include the 'results not typical' safe harbor reference (it was abolished in 2009, not currently valid); reason_superseded must explain the 2009 abolition; schema_version '1.0' required."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": ["upd2_sessions", "upd2_workspace"],
+      "question": "Review the green/environmental claims on `drafts/product_label_draft.md` against 16 CFR Part 260 (Green Guides), and the new `research/green_claims_test_reports.md` (from Update 2). Write `reports/green_claims_q11.json` as a JSON array with each claim entry containing: `claim`, `compliant` (boolean), `qualification_required` (boolean), `basis` (citing specific §260.x section), `ftc_citation`. The biodegradable claim fails the one-year standard per §260.8 — mark it non-compliant. The recyclable claim requires 60% access documentation per §260.12. This must be consistent with Q6's label compliance findings.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target reports/green_claims_q11.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): JSON must carry schema_version '1.0'; each entry must have ftc_citation in '16 CFR §XXX.X' format."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Green claims assessment correct: biodegradable marked non-compliant citing §260.8; recyclable claim requires qualification citing §260.12 60% threshold; eco-friendly requires qualification citing §260.1.",
+        "incorrect": "Check reports/green_claims_q11.json: 'Biodegradable Capsule Shells' must be compliant: false (HDPE fails one-year standard per §260.8); 'Recyclable Packaging' must note 60% facility access requirement per §260.12; ftc_citation required for each entry; schema_version '1.0' required."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Update 2 brought a revised external audit opinion (email_revised_audit_v2) that SUPERSEDES the initial audit opinion. The revised opinion: (1) withdraws the conditional permission for 'Doctor-formulated' — now requires_substantiation: true; (2) adds a finding on 'Biodegradable Capsule Shells'; (3) retracts the 'results not typical' safe harbor reference. Write `reports/final_compliance_q12.json` with keys: `superseded_items` (array of plain strings — each string names one item from the initial audit that is now overridden; do NOT use objects/dicts; the 'results not typical' retraction must appear as a string entry), `active_items` (array of strings listing at least 5 currently valid compliance requirements), `update_source` (must be exactly 'email_revised_audit_v2'), `doctor_formulated_requires_substantiation` (boolean — must be true after the supersede), `schema_version` ('1.0').",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target reports/final_compliance_q12.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): JSON must carry schema_version '1.0'; any citation entries must use '16 CFR §XXX.X' format."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Final compliance correct: update_source exactly 'email_revised_audit_v2'; doctor_formulated_requires_substantiation: true; superseded_items is a string array with 'results not typical' retraction entry; active_items has ≥5 entries.",
+        "incorrect": "Check reports/final_compliance_q12.json: update_source must be exactly 'email_revised_audit_v2'; doctor_formulated_requires_substantiation must be true; superseded_items must be an array of PLAIN STRINGS (not objects/dicts) with at least one string mentioning 'results not typical' retraction; active_items must list at least 5 current compliance requirements; schema_version '1.0' required."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate a one-page compliance training card for VitaCore's marketing team. Write `training/ad_compliance_card_q13.md`. It must include: (1) the 6 prohibited qualifiers (may, helps, promising, preliminary, initial, pilot) in a clearly formatted list; (2) an example of compliant '#ad' / 'Ad:' disclosure at the beginning of a post; (3) the effective date of 16 CFR Part 255 (July 26, 2023); (4) a 'What NOT to Say' section listing at least 3 claim types that require proof-level substantiation; (5) a severity column in any prohibited terms table. Do NOT repeat the prompts — apply your earlier feedback about heading structure.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3,P4 --target training/ad_compliance_card_q13.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3/P4): Markdown must use H1=document title, H2=claim category, H3=specific provision; any prohibited terms table must include severity column."
+        },
+        "rules": "P3,P4"
+      },
+      "feedback": {
+        "correct": "Training card complete: all 6 prohibited qualifiers listed; #ad disclosure example present; July 26, 2023 date cited; severity column in tables; P3/P4 structure applied.",
+        "incorrect": "Check training/ad_compliance_card_q13.md: must list all 6 prohibited qualifiers (may, helps, promising, preliminary, initial, pilot); must include an example of '#ad' or 'Ad:' at the BEGINNING of a post; must reference July 26, 2023 (Part 255 effective date); severity column required in any prohibited terms table."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Prepare the final press release incorporating all compliance revisions from Q1-Q12. Write `final/press_release_final_20260603.md` (the file MUST use this exact name following the P5 convention). Include: (1) a section `## Compliance Review Summary` listing all issues resolved; (2) no claim text that appeared in Q1's violation list; (3) a `ftc_basis_summary` paragraph listing the governing regulations; (4) a `compliance_reviewed_by` field; (5) a `review_date` in ISO 8601 format. The total_violations_identified from Q1 must be consistent — if Q1 found N issues, that same number must appear in the compliance summary.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3,P5 --target final/press_release_final_20260603.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3/P5): Markdown must use H1/H2/H3 heading structure; file must be named 'press_release_final_20260603.md' exactly (P5 naming convention)."
+        },
+        "rules": "P3,P5"
+      },
+      "feedback": {
+        "correct": "Final press release present with correct filename, compliance review summary, ftc_basis_summary, compliance_reviewed_by, and ISO 8601 review_date.",
+        "incorrect": "Check final/press_release_final_20260603.md: file must exist with EXACTLY that filename (P5); must contain '## Compliance Review Summary' section; must include ftc_basis_summary paragraph; must include compliance_reviewed_by and review_date in ISO 8601 format; prohibited terms from Q1 must not appear."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compute the SHA-256 hash of the EXACT bytes of `final/press_release_final_20260603.md` and write `final/signoff_final_20260603.txt` (P5 naming required). The file must contain a single line: `VERIFIED:<hash>:<filename>` where hash is the 64-character lowercase hexadecimal SHA-256 digest and filename is `press_release_final_20260603.md`. You must actually run the hash computation — a placeholder or manually typed hash will not match when the validator recomputes it.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P5 --target final/signoff_final_20260603.txt",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P5): signoff file must be named 'signoff_final_20260603.txt' exactly."
+        },
+        "rules": "P5"
+      },
+      "feedback": {
+        "correct": "Sign-off token valid: VERIFIED:<sha256>:press_release_final_20260603.md matches recomputed digest.",
+        "incorrect": "Check final/signoff_final_20260603.txt: must contain exactly one line matching VERIFIED:[a-f0-9]{64}:press_release_final_20260603.md where the hash is the actual SHA-256 of the press release file (recomputed by the validator)."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compile the final machine-readable compliance summary for the compliance registry. Write `final/compliance_summary_q16.json`. Required fields with exact names: `schema_version` ('1.0'), `total_violations_identified` (integer — count from Q1), `violations_resolved` (integer — how many were addressed), `active_penalty_risk_usd` (number — must be a multiple of $51,744, reflecting the per-violation rate for unresolved issues), `governing_regulations` (array — must include BOTH '16 CFR Part 255' AND '16 CFR Part 465'), `review_date` (ISO 8601 date string). The governing_regulations array must contain those exact strings.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target final/compliance_summary_q16.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): JSON must carry top-level schema_version '1.0'."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Compliance summary correct: schema_version '1.0'; total_violations_identified is an integer; active_penalty_risk_usd is a multiple of 51744; governing_regulations contains both '16 CFR Part 255' and '16 CFR Part 465'.",
+        "incorrect": "Check final/compliance_summary_q16.json: schema_version must be '1.0'; total_violations_identified must be a positive integer; active_penalty_risk_usd must be a positive multiple of 51744 (NOT 45000); governing_regulations array must contain exactly '16 CFR Part 255' AND '16 CFR Part 465' as strings."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Reconstruct the complete decision timeline across all sessions and updates. Write `reports/decision_timeline_q17.json` with a top-level key `events` (array). Each event: `event_id` (string), `timestamp` (ISO 8601 date), `channel` (slack/feishu/email/discord/main), `actor` (string), `decision` (string), `supersedes_event_id` (string or null). Two supersede chains must be represented: (1) CEO's Feishu Update 1 message formally superseding his earlier informal approval of 'clinically demonstrated'; (2) email_revised_audit_v2 (Update 2) superseding the initial Compliance Counsel LLC email on 'Doctor-formulated'. Include at least 8 events total.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q17.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Decision timeline correct: at least 8 events; both supersede chains represented; timestamps in ISO 8601 format.",
+        "incorrect": "Check reports/decision_timeline_q17.json: events array must have at least 8 entries; at least one entry must have supersedes_event_id pointing to an earlier event (CEO Update 1 superseding earlier Feishu approval); at least one entry must reference email_revised_audit_v2 superseding the initial audit email on 'Doctor-formulated'; all timestamps in ISO 8601 format."
+      }
+    }
+  ]
+}

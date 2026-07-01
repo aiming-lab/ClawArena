@@ -1,0 +1,41 @@
+# GitLab CI Main Configuration
+# Includes stage-split sub-configurations from .gitlab/ci/
+# Last modified: 2025-01-10
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+
+include:
+  - local: '.gitlab/ci/build.yml'
+  - local: '.gitlab/ci/test.yml'
+  - local: '.gitlab/ci/deploy.yml'
+
+# Global cache configuration
+cache:
+  key:
+    files:
+      - Gemfile.lock
+  paths:
+    - vendor/bundle
+
+# BUG: artifacts:expire_in uses non-standard format "30d" (should be "30 days")
+# Valid formats: '42 seconds', '3 mins 4 sec', '2h20min', '6 mos 1 day', 'never'
+default:
+  artifacts:
+    expire_in: 30d
+    when: on_success
+
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: always
+    - when: never

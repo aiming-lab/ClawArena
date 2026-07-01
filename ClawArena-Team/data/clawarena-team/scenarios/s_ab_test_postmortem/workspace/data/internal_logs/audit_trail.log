@@ -1,0 +1,74 @@
+# EXP-2421 Audit Trail — automated event log
+# Format: [timestamp] [event_type] [actor] [details]
+
+[2026-03-15 09:00:00] [DESIGN_REVIEW] [jordan.exp] Initial experiment design reviewed. Hypothesis: +1.5% CVR lift from CTA redesign.
+[2026-03-16 11:30:00] [POWER_ANALYSIS] [stats-bot] Power analysis completed. Required n=38,400 per arm for 80% power at MDE 0.5%.
+[2026-03-17 14:00:00] [RISK_REVIEW] [pm-team] Risk register updated. Risk 1: iOS 14 WKWebView color rendering (medium prob, high impact). Mitigation: simulator testing.
+[2026-03-18 10:00:00] [QA_SIGN_OFF] [qa-team] PRD signed off. Note: iOS 14 simulator testing NOT completed for mobile segments.
+[2026-03-20 09:00:00] [IMPLEMENTATION] [eng-checkout] Feature flag exp_2421_cta_redesign implemented. Hex color #ff6633 set for treatment arm.
+[2026-03-22 15:00:00] [UNIT_TEST] [ci-bot] Unit tests passed. CSS snapshot tests on desktop Chrome/Firefox/Safari passed.
+[2026-03-23 10:00:00] [MISSING_MOBILE_TEST] [qa-team] WARNING: iOS 14 WKWebView test NOT run. Ticket #88432-mobile raised but deprioritized.
+[2026-04-01 09:00:00] [PRE_LAUNCH_HOLDOUT] [jordan.exp] 7-day holdout test started in desktop_eu (10% traffic). Early numbers: +0.8% lift.
+[2026-04-07 17:00:00] [HOLDOUT_RESULT] [stats-bot] 7-day holdout desktop_eu: +1.1% lift, p=0.043. Green light for broader rollout.
+[2026-04-09 09:00:00] [LAUNCH_APPROVAL] [alex.exec] VP Conversion approved Phase 1 launch. Expected: +1.5% overall.
+[2026-04-10 00:01:00] [SEGMENT_SNAPSHOT] [priya.data] segment=desktop_eu cvr=0.1018 delta=-0.0201
+[2026-04-10 00:29:00] [VARIANCE_CHECK] [monitoring-bot] segment=desktop_us cvr=0.0903 delta=-0.0192
+[2026-04-10 02:33:00] [METRIC_SAMPLE] [jordan.exp] segment=desktop_eu cvr=0.125 delta=-0.0238
+[2026-04-10 04:12:00] [ALERT_CHECK] [infra-bot] segment=desktop_us cvr=0.1028 delta=-0.0232
+[2026-04-10 06:00:00] [PHASE1_START] [infra-bot] Phase 1 (10% ramp, desktop_us + desktop_eu) started.
+[2026-04-10 06:09:00] [METRIC_SAMPLE] [infra-bot] segment=desktop_us cvr=0.0927 delta=-0.0181
+[2026-04-10 06:47:00] [SEGMENT_SNAPSHOT] [infra-bot] segment=mobile_us cvr=0.0893 delta=-0.0159
+[2026-04-10 08:32:00] [METRIC_SAMPLE] [infra-bot] segment=desktop_us cvr=0.0919 delta=-0.0183
+[2026-04-10 09:17:00] [MONITORING_ALERT] [jordan.exp] Day 1 metrics nominal. mobile_us at -1.1% (within early noise band).
+[2026-04-10 10:58:00] [METRIC_SAMPLE] [priya.data] segment=mobile_us cvr=0.0958 delta=-0.0165
+[2026-04-10 11:46:00] [VARIANCE_CHECK] [jordan.exp] segment=mobile_eu cvr=0.0975 delta=-0.0220
+[2026-04-10 12:00:00] [PHASE2_START] [infra-bot] Phase 2 (50% ramp, all segments including mobile_us + mobile_eu) started.
+[2026-04-10 13:05:00] [MONITORING_UPDATE] [jordan.exp] 6h snapshot: overall -0.3%, within noise. mobile_us at -1.1% flagged for watch.
+[2026-04-10 13:19:00] [SEGMENT_SNAPSHOT] [priya.data] segment=desktop_eu cvr=0.1048 delta=-0.0059
+[2026-04-10 14:48:00] [VARIANCE_CHECK] [stats-bot] segment=mobile_us cvr=0.1118 delta=-0.0320
+[2026-04-10 15:40:00] [SEGMENT_SNAPSHOT] [priya.data] segment=desktop_us cvr=0.0772 delta=-0.0173
+[2026-04-10 16:38:00] [ALERT_CHECK] [jordan.exp] segment=desktop_eu cvr=0.0649 delta=-0.0261
+[2026-04-10 17:03:00] [SEGMENT_SNAPSHOT] [jordan.exp] segment=mobile_us cvr=0.0729 delta=-0.0107
+[2026-04-10 17:13:00] [SEGMENT_SNAPSHOT] [jordan.exp] segment=desktop_us cvr=0.0922 delta=-0.0113
+[2026-04-10 17:48:00] [VARIANCE_CHECK] [priya.data] segment=mobile_eu cvr=0.1 delta=-0.0221
+[2026-04-10 18:00:00] [PHASE3_RAMP] [infra-bot] Phase 3 (100% ramp) triggered as day-10 metric was within ±0.5% on desktop segments.
+[2026-04-10 18:02:00] [SEGMENT_SNAPSHOT] [jordan.exp] segment=desktop_us cvr=0.0916 delta=-0.0238
+[2026-04-10 19:42:00] [DATA_SCIENCE_ALERT] [priya.data] ALERT: mobile_us at -2.1%. Cross-tab running. iOS 14 user agent correlation detected.
+[2026-04-10 20:15:00] [SEGMENT_SNAPSHOT] [jordan.exp] segment=desktop_eu cvr=0.0965 delta=-0.0215
+[2026-04-10 21:17:00] [ALERT_CHECK] [monitoring-bot] segment=mobile_eu cvr=0.1012 delta=-0.0248
+[2026-04-10 22:50:00] [VARIANCE_CHECK] [infra-bot] segment=desktop_eu cvr=0.106 delta=-0.0245
+[2026-04-10 23:22:00] [SEGMENT_SNAPSHOT] [priya.data] segment=desktop_us cvr=0.1025 delta=-0.0227
+[2026-04-11 00:00:00] [AUTOMATED_REPORT] [stats-bot] 24h aggregate: overall -2.3%. mobile_us -3.8% (statistical significance p<0.001).
+[2026-04-11 01:05:00] [SEGMENT_SNAPSHOT] [jordan.exp] segment=mobile_us cvr=0.0841 delta=-0.0248
+[2026-04-11 01:40:00] [SEGMENT_SNAPSHOT] [infra-bot] segment=desktop_us cvr=0.0856 delta=-0.0146
+[2026-04-11 02:56:00] [ALERT_CHECK] [stats-bot] segment=desktop_us cvr=0.1003 delta=-0.0208
+[2026-04-11 06:03:00] [SEGMENT_SNAPSHOT] [infra-bot] segment=desktop_us cvr=0.1033 delta=-0.0156
+[2026-04-11 06:54:00] [ALERT_CHECK] [stats-bot] segment=mobile_eu cvr=0.1148 delta=-0.0168
+[2026-04-11 07:27:00] [VARIANCE_CHECK] [jordan.exp] segment=desktop_eu cvr=0.0923 delta=-0.0164
+[2026-04-11 07:56:00] [ALERT_CHECK] [priya.data] segment=mobile_eu cvr=0.0852 delta=-0.0169
+[2026-04-11 07:59:00] [VARIANCE_CHECK] [infra-bot] segment=desktop_us cvr=0.0948 delta=-0.0180
+[2026-04-11 08:30:00] [ROOT_CAUSE_IDENTIFIED] [priya.data] CONFIRMED: checkout_button_color #ff6633 renders as grey #d3d3d3 on iOS 14 WKWebView. Bugzilla #88432.
+[2026-04-11 09:00:00] [EXEC_ESCALATION] [alex.exec] P1 escalation. Postmortem required by EOD. Decision needed.
+[2026-04-11 09:15:00] [AI_BOT_FLAGGED] [jordan.exp] WARNING: ai_summaries/exp_review_bot.md incorrectly claims desktop_eu as primary cause. Do not use.
+[2026-04-11 09:30:00] [RECOMMENDATION] [priya.data] Recommendation: rollback_to_A or partial_rollback_mobile_us. Final decision to reviewer.
+[2026-04-11 10:58:00] [ALERT_CHECK] [infra-bot] segment=desktop_eu cvr=0.0945 delta=-0.0243
+[2026-04-11 11:53:00] [SEGMENT_SNAPSHOT] [priya.data] segment=desktop_us cvr=0.0808 delta=-0.0075
+[2026-04-11 12:27:00] [VARIANCE_CHECK] [infra-bot] segment=desktop_eu cvr=0.0951 delta=-0.0235
+[2026-04-11 14:21:00] [METRIC_SAMPLE] [stats-bot] segment=mobile_us cvr=0.1131 delta=-0.0157
+[2026-04-11 14:47:00] [METRIC_SAMPLE] [priya.data] segment=desktop_eu cvr=0.0928 delta=-0.0182
+[2026-04-11 15:06:00] [METRIC_SAMPLE] [priya.data] segment=desktop_eu cvr=0.0832 delta=-0.0199
+[2026-04-11 15:37:00] [ALERT_CHECK] [priya.data] segment=mobile_eu cvr=0.0788 delta=-0.0205
+[2026-04-11 15:51:00] [METRIC_SAMPLE] [priya.data] segment=desktop_eu cvr=0.1066 delta=-0.0131
+[2026-04-11 16:26:00] [SEGMENT_SNAPSHOT] [infra-bot] segment=desktop_eu cvr=0.0974 delta=-0.0278
+[2026-04-11 16:51:00] [ALERT_CHECK] [priya.data] segment=desktop_us cvr=0.1119 delta=-0.0132
+[2026-04-11 17:30:00] [SEGMENT_SNAPSHOT] [monitoring-bot] segment=mobile_us cvr=0.0958 delta=-0.0194
+[2026-04-11 18:09:00] [VARIANCE_CHECK] [monitoring-bot] segment=mobile_eu cvr=0.0804 delta=-0.0209
+[2026-04-11 18:37:00] [METRIC_SAMPLE] [infra-bot] segment=desktop_us cvr=0.0953 delta=-0.0246
+[2026-04-11 18:52:00] [ALERT_CHECK] [stats-bot] segment=mobile_us cvr=0.1169 delta=-0.0218
+[2026-04-11 18:52:00] [METRIC_SAMPLE] [priya.data] segment=mobile_us cvr=0.1168 delta=-0.0160
+[2026-04-11 19:01:00] [SEGMENT_SNAPSHOT] [monitoring-bot] segment=desktop_eu cvr=0.1123 delta=-0.0227
+[2026-04-11 19:20:00] [ALERT_CHECK] [stats-bot] segment=mobile_us cvr=0.08 delta=-0.0178
+[2026-04-11 19:22:00] [METRIC_SAMPLE] [stats-bot] segment=desktop_us cvr=0.0831 delta=-0.0159
+[2026-04-11 20:13:00] [METRIC_SAMPLE] [monitoring-bot] segment=desktop_us cvr=0.082 delta=-0.0142
+[2026-04-11 22:49:00] [VARIANCE_CHECK] [infra-bot] segment=mobile_eu cvr=0.1006 delta=-0.0190
+[2026-04-11 22:58:00] [ALERT_CHECK] [monitoring-bot] segment=mobile_eu cvr=0.0583 delta=-0.0188

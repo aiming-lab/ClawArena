@@ -1,0 +1,148 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "You've just taken on this case as consulting radiologist. Patient P-2026-0884 (Zhang Wei) has been referred for a cross-disciplinary review — the referral letter is in briefs/referral_letter_zh_en.docx and the oncologist's pre-notes are in briefs/oncologist_notes.md.\n\nBefore diving into the images, please write a 5-section triage plan in output/triage_plan.md covering: (1) patient_context, (2) imaging_review, (3) clinical_correlation, (4) comparison_with_prior, (5) recommendation. The plan must explicitly reference the patient ID P-2026-0884 and the chief complaint ('cough 3 weeks' / '咳嗽三周').",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "triage_plan.md contains 5 sections and references the patient ID plus chief complaint.",
+      "incorrect": "Check that output/triage_plan.md exists, has 5 sections (## headings), and mentions both P-2026-0884 and 'cough' (or '咳嗽')."
+    },
+    "tags": [
+      "triage_planning",
+      "multilingual",
+      "office_docx",
+      "subagent_delegation"
+    ]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Please delegate to a VLM-capable subagent to analyse the three CT slices in images/ (ct_axial_slice12.png, ct_coronal_slice08.png, ct_sagittal_slice17.png). The subagent should read each image and write the imaging findings to findings/imaging_finding.md, including: the lobe where the lesion is located, the lesion size in mm, and the approximate ROI centre coordinates from the axial slice.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "findings/imaging_finding.md contains 'right lower lobe', a size near 14 mm, and ROI coordinates referencing the axial slice, produced via a VLM subagent session (session_reuse >= 1).",
+      "incorrect": "Make sure the imaging findings file mentions the correct lobe (right lower lobe), the lesion size (~14 mm), and that you used a VLM subagent to read the PNG images rather than guessing."
+    },
+    "tags": [
+      "multimodal_image",
+      "session_reuse",
+      "stateful_subagent",
+      "subagent_delegation",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Using the **same subagent session** from the previous step (to preserve context and avoid re-loading the large image set), load the referral letter briefs/referral_letter_zh_en.docx into that session as additional context. Then write notes/symptom_correlation.md that synthesises the bilingual chief complaint with the imaging findings — include both the English phrase 'cough 3 weeks' and the Chinese equivalent '咳嗽' (or '咳嗽三周') in the note.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "notes/symptom_correlation.md contains both 'cough 3 weeks' (or equivalent) and '咳嗽', and the subagent session was reused (session_reuse >= 2).",
+      "incorrect": "Re-read the referral letter in briefs/referral_letter_zh_en.docx and make sure the symptom correlation note includes the bilingual chief complaint. Also ensure you reused the same VLM subagent session from q2, not a freshly spawned one."
+    },
+    "tags": [
+      "session_reuse",
+      "incremental_context_load",
+      "office_docx",
+      "multilingual",
+      "stateful_subagent",
+      "cross_source_synthesis"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Read the prior imaging report at reports/prior_imaging_2024-08.pdf to obtain the 2024 lesion size. Then write analysis/comparison.md comparing the prior size with the current 14 mm measurement. The file must contain the prior size (in mm), the current size (14 mm), the size delta (current minus prior), and a statement about whether the growth rate supports a biopsy recommendation.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "analysis/comparison.md contains prior size 9 mm, current 14 mm, delta +5 mm, and a statement supporting biopsy.",
+      "incorrect": "Read reports/prior_imaging_2024-08.pdf — it contains the 2024 baseline size (9 mm). Your comparison.md must show prior, current, and delta, and conclude on biopsy justification."
+    },
+    "tags": [
+      "cross_source_synthesis",
+      "office_pdf",
+      "temporal_reasoning",
+      "numerical_extraction",
+      "verbatim_citation"
+    ]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [
+      "u1_radiologist_addendum"
+    ],
+    "question": "The radiologist has filed an addendum (now in briefs/radiologist_addendum.md). Note that the AI summary in ai_summaries/radiology_bot.md incorrectly states the lesion is in the 'left upper lobe' — this is wrong. The correct location, confirmed by the radiologist's addendum and the three-plane CT, is the right lower lobe.\n\nPlease write the final diagnosis in findings/diagnosis.md. It must state the correct lobe (right lower lobe) and include the ROI centre coordinates (420, 280) from the axial slice. If you mention the AI bot's claim at all, you must include an explicit correction.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "findings/diagnosis.md states 'right lower lobe', includes ROI coordinates near (420,280), and if the bot's 'left upper lobe' is cited it is accompanied by a clear negation.",
+      "incorrect": "The AI bot's lobe attribution ('left upper lobe') is WRONG — the correct lobe is right lower lobe per the radiologist addendum and the CT images. Make sure your diagnosis reflects the correct lobe and includes the ROI coordinates."
+    },
+    "tags": [
+      "modality_decoy",
+      "ai_hallucination_decoy",
+      "discredit_window",
+      "update_merge",
+      "multilingual"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Write the final recommendation as audit/recommendation.json with the following fields: decision (must be 'recommend_biopsy'), lesion_size_mm (integer), lobe (must be 'right lower lobe'), urgency (must be 'urgent'), roi_x (integer), roi_y (integer), reviewer (your name or 'consulting_radiologist'), decision_date (YYYY-MM-DD format).\n\nAfter writing the file, run `python tools/verify_recommendation.py audit/recommendation.json` and paste the hex value into the compliance_token field of the same JSON.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "audit/recommendation.json has all required fields with correct values and a valid compliance_token.",
+      "incorrect": "Check that audit/recommendation.json contains: decision='recommend_biopsy', lobe='right lower lobe', urgency='urgent', lesion_size_mm=14, roi_x=420, roi_y=280, and a compliance_token generated by running tools/verify_recommendation.py."
+    },
+    "tags": [
+      "json_schema",
+      "cross_round_consistency",
+      "compliance_token",
+      "bash_tool_run",
+      "final_synthesis"
+    ]
+  }
+]

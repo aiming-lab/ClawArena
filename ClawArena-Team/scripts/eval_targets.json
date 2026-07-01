@@ -1,0 +1,254 @@
+{
+  "_README": "ClawArena-Team main-agent evaluation target registry. Each entry's `main` is injected via `-m` JSON; the subagent pool comes from configs/eval_base.yaml (local gemma). `main` only declares text -- non-text inputs are handled by the vlm/omni subagents (ClawArena-Team design). Targets that use `api_key_env` read the key from the environment (export GEMINI_API_KEY / OPENROUTER_API_KEY / ANTHROPIC_API_KEY before running run_eval_targets.py). Start the dependent services first: gemini/openrouter connect directly to the cloud; codex needs a ChatMock-style proxy (:8920); bedrock needs litellm (:4000); local-* needs serve_main_agent.py (:8910). The 127.0.0.1 api_base values and `api_key: EMPTY`/`anything` placeholders are for these local proxies and carry no secrets.",
+  "targets": [
+    {
+      "id": "gemini-3.1-pro",
+      "group": "gemini",
+      "main": {
+        "provider": "gemini",
+        "model_id": "gemini-3.1-pro-preview",
+        "api_key_env": "GEMINI_API_KEY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "gemini-3.5-flash",
+      "group": "gemini",
+      "main": {
+        "provider": "gemini",
+        "model_id": "gemini-3.5-flash",
+        "api_key_env": "GEMINI_API_KEY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "or-deepseek-v4-pro",
+      "group": "openrouter",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "deepseek/deepseek-v4-pro",
+        "api_base": "https://openrouter.ai/api/v1",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "or-qwen3.7-max",
+      "group": "openrouter",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "qwen/qwen3.7-max",
+        "api_base": "https://openrouter.ai/api/v1",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "or-kimi-k2.6",
+      "group": "openrouter",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "moonshotai/kimi-k2.6",
+        "api_base": "https://openrouter.ai/api/v1",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "or-mimo-v2.5-pro",
+      "group": "openrouter",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "xiaomi/mimo-v2.5-pro",
+        "api_base": "https://openrouter.ai/api/v1",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "or-qwen3-coder-free",
+      "group": "openrouter-free",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "qwen/qwen3-coder:free",
+        "api_base": "https://openrouter.ai/api/v1",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "or-kimi-k2.6-free",
+      "group": "openrouter-free",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "moonshotai/kimi-k2.6:free",
+        "api_base": "https://openrouter.ai/api/v1",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "or-qwen3-next-free",
+      "group": "openrouter-free",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "qwen/qwen3-next-80b-a3b-instruct:free",
+        "api_base": "https://openrouter.ai/api/v1",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "codex-gpt-5.5",
+      "group": "codex",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "gpt-5.5",
+        "api_base": "http://127.0.0.1:8920/v1",
+        "api_key": "anything",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "codex-gpt-5.4",
+      "group": "codex",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "gpt-5.4",
+        "api_base": "http://127.0.0.1:8920/v1",
+        "api_key": "anything",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "anthropic-claude-sonnet-4-6",
+      "group": "anthropic",
+      "main": {
+        "provider": "anthropic",
+        "model_id": "claude-sonnet-4-6",
+        "api_key_env": "ANTHROPIC_API_KEY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "bedrock-claude-opus-4-6",
+      "group": "bedrock",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "claude-opus-4-6",
+        "api_base": "http://127.0.0.1:4000/v1",
+        "api_key": "EMPTY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "bedrock-claude-sonnet-4-6",
+      "group": "bedrock",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "claude-sonnet-4-6",
+        "api_base": "http://127.0.0.1:4000/v1",
+        "api_key": "EMPTY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "bedrock-claude-haiku-4-5",
+      "group": "bedrock",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "claude-haiku-4-5",
+        "api_base": "http://127.0.0.1:4000/v1",
+        "api_key": "EMPTY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "local-gemma-31b",
+      "group": "local",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "gemma-4-31b-it-main",
+        "api_base": "http://127.0.0.1:8910/v1",
+        "api_key": "EMPTY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "local-qwen3.6-27b",
+      "group": "local",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "qwen3.6-27b",
+        "api_base": "http://127.0.0.1:8910/v1",
+        "api_key": "EMPTY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    },
+    {
+      "id": "local-glm-4.7-flash",
+      "group": "local",
+      "main": {
+        "provider": "openai_compat",
+        "model_id": "glm-4.7-flash",
+        "api_base": "http://127.0.0.1:8910/v1",
+        "api_key": "EMPTY",
+        "modalities": {
+          "text": true
+        },
+        "max_tokens": 24000
+      }
+    }
+  ]
+}

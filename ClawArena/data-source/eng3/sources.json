@@ -1,0 +1,190 @@
+{
+  "id": "eng3",
+  "title": "SRE 生产事故复盘（Postmortem）",
+  "primary_incident": "Cloudflare Incident June 20, 2024",
+  "sources": [
+    {
+      "url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "title": "Cloudflare incident on June 20, 2024",
+      "type": "official postmortem",
+      "verified": true,
+      "key_facts": "Incident start 17:47 UTC, end 19:27 UTC, duration 100 min (17:47→19:27). DDoS rule deployed 14:14-17:06 UTC. Peak CDN error rate 2.1%, peak 5xx 3.45%, TTFB P99 3x normal. Western Europe capacity loss 10%, Eastern Europe 4%. Backbone congestion window 17:33-17:50 UTC. Traffic Manager bug first triggered 18:17 UTC. DDoS rule disabled 19:34 UTC. Buggy Lua functions: get_cookie_key(), has_valid_cookie_broken(), parent_key_generator() (self-referencing via tail call). Two independent causal chains: (1) DDoS rule + Lua infinite loop, (2) backbone congestion triggering Traffic Manager latent bug."
+    },
+    {
+      "url": "https://blog.cloudflare.com/cloudflare-incident-on-october-30-2023/",
+      "title": "Cloudflare incident on October 30, 2023",
+      "type": "official postmortem",
+      "verified": true,
+      "key_facts": "Impact start 2023-10-30T19:54:00Z, end 2023-10-30T20:31:00Z, duration 37 minutes. Root cause: deployment tool bug returned staging build GUID mixed with production releases. Affected 11 services: Workers KV, Pages, Access, WARP, Images API, Cache Purge, Workers dashboard, AI Gateway, Waiting Room, Turnstile, Cloudflare Dashboard. HTTP 401 errors from KV, HTTP 500 from Pages. Resolved via break-glass mechanism bypassing normal tooling. 5 corrective actions prioritized for the quarter."
+    },
+    {
+      "url": "https://blog.cloudflare.com/thanksgiving-2023-security-incident/",
+      "title": "Thanksgiving 2023 Security Incident",
+      "type": "official postmortem",
+      "verified": true,
+      "key_facts": "Attack window November 14-24, 2023. Initial access via Atlassian at 2023-11-15T16:28:38Z. Detection at 2023-11-23T16:00Z. Threat actor accessed 36 Jira tickets (of 2.06M), 202 Confluence pages (of 194.1K), downloaded 76 of 11.9K Bitbucket repositories. Root cause: failure to rotate credentials after October 2023 Okta breach. Attacker installed Sliver C2 framework. Remediation: rotated 5000+ production credentials, forensic triage of 4893 systems, reimaged all global network machines."
+    },
+    {
+      "url": "https://blog.cloudflare.com/cloudflare-incident-on-november-14-2024-resulting-in-lost-logs/",
+      "title": "Cloudflare incident on November 14, 2024 — Lost Logs",
+      "type": "official postmortem",
+      "verified": true,
+      "key_facts": "Duration approximately 3.5 hours. ~55% of logs normally sent to customers were lost. Scale: 4.5 trillion logs sent daily. Buffer count increased from ~1 million to ~40 million globally (40x). Root cause: blank Logfwdr configuration + failsafe misconfiguration caused log routing to all customers instead of configured Logpush subscribers + Buftee buffer system protective mechanisms not activated."
+    },
+    {
+      "url": "https://www.cloudflare.com/business-sla/",
+      "title": "Cloudflare Business Service Level Agreement",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "SLA uptime commitment: 100%. Credit formula: Service Credit = (Outage Period minutes * Affected Customer Ratio) / Scheduled Availability minutes. Affected Customer Ratio = unique IPs affected / total unique IPs. Claims must be submitted within 5 business days of incident. Maximum annual credits cannot exceed one month cumulative service fees. SLA excludes issues outside Cloudflare's reasonable control."
+    },
+    {
+      "url": "https://github.blog/news-insights/company-news/github-availability-report-april-2024/",
+      "title": "GitHub Availability Report: April 2024",
+      "type": "official postmortem",
+      "verified": true,
+      "key_facts": "Incident 1: 2024-04-05T08:11Z-08:58Z (47 min), DB load balancer change caused connection failures, web errors peaked 6%, API errors 10%, 100,000+ Actions workflows failed. Incident 2: 2024-04-10T08:18Z (120 min), unbounded query overloaded primary DB, 17% failure rate for web file editing. Incident 3: 2024-04-10T18:33Z-19:03Z (30 min), compute-intensive DB query, 100% GitHub Pages deployment failures."
+    },
+    {
+      "url": "https://github.blog/news-insights/company-news/github-availability-report-august-2024/",
+      "title": "GitHub Availability Report: August 2024",
+      "type": "official postmortem",
+      "verified": true,
+      "key_facts": "Incident: 2024-08-14T23:02Z-23:38Z, duration 36 minutes. Root cause: erroneous configuration change to GitHub.com databases impacted health check pings from routing service, making production read-only DB endpoint inaccessible. All GitHub services inaccessible for all users. No data loss or corruption. Resolved by reverting config change."
+    }
+  ],
+  "anchors": [
+    {
+      "name": "incident_start_utc",
+      "value": "2024-06-20T17:47:00Z",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "首个 HTTP 请求处理进程中毒时刻，事故官方起始点"
+    },
+    {
+      "name": "incident_end_utc",
+      "value": "2024-06-20T19:27:00Z",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "错误率回归基线时刻，事故官方结束点"
+    },
+    {
+      "name": "duration_minutes",
+      "value": "100",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "17:47→19:27 精确为 100 分钟，check 允许 ±2 分钟容差"
+    },
+    {
+      "name": "ddos_rule_deploy_start_utc",
+      "value": "2024-06-20T14:14:00Z",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "DDoS 缓解规则开始渐进式部署"
+    },
+    {
+      "name": "ddos_rule_deploy_end_utc",
+      "value": "2024-06-20T17:06:00Z",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "DDoS 规则全局部署完成"
+    },
+    {
+      "name": "peak_cdn_error_rate_pct",
+      "value": "2.1",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "峰值时 CDN HTTP 请求收到通用错误页的百分比，30 分钟峰值窗口内 1.4-2.1%"
+    },
+    {
+      "name": "peak_5xx_total_pct",
+      "value": "3.45",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "含源站错误的总 5xx 响应峰值百分比"
+    },
+    {
+      "name": "ttfb_p99_multiplier",
+      "value": "3",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "99 百分位 TTFB 相对正常值倍数"
+    },
+    {
+      "name": "europe_west_capacity_loss_pct",
+      "value": "10",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "西欧区域 HTTP 请求处理能力损失百分比"
+    },
+    {
+      "name": "europe_east_capacity_loss_pct",
+      "value": "4",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "东欧区域 HTTP 请求处理能力损失百分比"
+    },
+    {
+      "name": "backbone_congestion_start_utc",
+      "value": "2024-06-20T17:33:00Z",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "骨干网拥塞事件开始时刻（第二条独立因果链触发点）"
+    },
+    {
+      "name": "backbone_congestion_end_utc",
+      "value": "2024-06-20T17:50:00Z",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "骨干网拥塞事件结束时刻"
+    },
+    {
+      "name": "traffic_manager_bug_trigger_utc",
+      "value": "2024-06-20T18:17:00Z",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "Traffic Manager 潜在 bug 被触发时刻"
+    },
+    {
+      "name": "ddos_rule_disabled_utc",
+      "value": "2024-06-20T19:34:00Z",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "DDoS 规则被全局禁用时刻（缓解行动完成）"
+    },
+    {
+      "name": "lua_buggy_function_1",
+      "value": "get_cookie_key",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "含无限 tail-call 递归逻辑的 Lua 函数名，verbatim 引用"
+    },
+    {
+      "name": "lua_buggy_function_2",
+      "value": "has_valid_cookie_broken",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "与前序校验结果不一致的 cookie 验证函数名，verbatim 引用"
+    },
+    {
+      "name": "lua_recursive_generator",
+      "value": "parent_key_generator",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-june-20-2024/",
+      "note": "自引用导致无限 tail-call 的 key 生成器函数名，verbatim 引用"
+    },
+    {
+      "name": "sla_credit_formula",
+      "value": "(Outage Period minutes * Affected Customer Ratio) / Scheduled Availability minutes",
+      "source_url": "https://www.cloudflare.com/business-sla/",
+      "note": "Cloudflare Business SLA 官方积分计算公式，Q9 中须精确逐字引用"
+    },
+    {
+      "name": "sla_claim_deadline_business_days",
+      "value": "5",
+      "source_url": "https://www.cloudflare.com/business-sla/",
+      "note": "事故发生后客户提交 SLA 积分申领的最大工作日数"
+    },
+    {
+      "name": "oct30_incident_start_utc",
+      "value": "2023-10-30T19:54:00Z",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-october-30-2023/",
+      "note": "Oct 30 2023 对比参考事故起始时刻"
+    },
+    {
+      "name": "oct30_duration_minutes",
+      "value": "37",
+      "source_url": "https://blog.cloudflare.com/cloudflare-incident-on-october-30-2023/",
+      "note": "Oct 30 2023 事故持续时长（V5 失真 bot 摘要中误用此值替换 June 20 事故时长）"
+    },
+    {
+      "name": "github_apr5_actions_workflows_failed",
+      "value": "100000",
+      "source_url": "https://github.blog/news-insights/company-news/github-availability-report-april-2024/",
+      "note": "GitHub 2024-04-05 事故中失败的 Actions workflow 数量，跨平台对比锚点"
+    }
+  ]
+}

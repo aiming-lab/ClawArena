@@ -1,0 +1,98 @@
+name: Deploy to Production
+# OIDC-based deployment workflow
+# Last modified: 2025-02-01 by Alice (added OIDC step)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'production'
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REGISTRY: 123456789.dkr.ecr.us-east-1.amazonaws.com
+
+jobs:
+  validate:
+    name: Validate Deployment
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate config
+        run: ./scripts/validate_config.sh
+
+  deploy:
+    name: Deploy Application
+    runs-on: ubuntu-latest
+    needs: validate
+    environment: production
+    # BUG: Missing id-token: write permission — OIDC JWT cannot be generated without it.
+    # BUG: deployments: read — after April 1, 2025 this no longer allows approve/reject.
+    permissions:
+      contents: read
+      deployments: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::123456789:role/GitHubActionsRole
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Pull and tag image
+        run: |
+          docker pull ${{ env.ECR_REGISTRY }}/myapp:${{ github.sha }}
+          docker tag ${{ env.ECR_REGISTRY }}/myapp:${{ github.sha }} \
+            ${{ env.ECR_REGISTRY }}/myapp:latest
+
+      - name: Update ECS service
+        run: |
+          aws ecs update-service \
+            --cluster production \
+            --service myapp \
+            --force-new-deployment
+
+      - name: Wait for deployment
+        run: |
+          aws ecs wait services-stable \
+            --cluster production \
+            --services myapp
+
+      - name: Create GitHub deployment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const deployment = await github.rest.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.sha,
+              environment: 'production',
+              auto_merge: false,
+              required_contexts: []
+            });
+            console.log('Deployment created:', deployment.data.id);
+
+  rollback:
+    name: Rollback on Failure
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: failure()
+    permissions:
+      contents: read
+      deployments: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Execute rollback
+        run: ./scripts/rollback.sh

@@ -1,0 +1,56 @@
+# .gitlab/ci/build_updated.yml
+# UPDATED version after MR #445 (merged 2025-03-20)
+# This supersedes the rules in the email thread (Update 1)
+# compile job now only runs on DEFAULT BRANCH (not all branches)
+
+compile:
+  stage: build
+  image: node:20-alpine
+  # NEW RULES (supersedes old: if '$CI_COMMIT_BRANCH')
+  # Now only runs on the default branch
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  cache:
+    key:
+      files:
+        - yarn.lock
+        - package-lock.json
+    policy: pull-push
+    paths:
+      - node_modules/
+      - .yarn/cache/
+  script:
+    - yarn install --frozen-lockfile
+    - yarn build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+
+docker-build:
+  stage: build
+  image: docker:24
+  services:
+    - docker:24-dind
+  needs:
+    - compile
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+  cache:
+    key: docker-layer-cache
+    policy: pull-push
+    paths:
+      - .docker-cache/
+
+# NOTE: On feature branches and MR pipelines, 'compile' does NOT run.
+# Any job that 'needs: compile' must use 'optional: true' to avoid
+# pipeline errors on non-default-branch pipelines.
+#
+# Correct syntax for dependent jobs:
+#   needs:
+#     - job: compile
+#       optional: true

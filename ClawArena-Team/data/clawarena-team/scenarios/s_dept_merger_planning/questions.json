@@ -1,0 +1,128 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Hi, we just kicked off the cardiac center merger with St. Alban's and Riverside General. The brief and charter are both in `requests/`. Before we start pulling HR data, I need a scope intake note that maps out what we're actually planning. Can you read both documents and write a triage note to `output/scope_intake.md`? I need: the three domains we're covering (staff, equipment, org structure), the 7-day deadline and what the final deliverable must contain, the four stakeholders involved and their roles, and a flag on any known data challenges mentioned in the charter. Keep each domain as its own section — don't merge them.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Scope intake note captures all three merger domains, the 7-day deadline, all four stakeholders, and flags the known data challenges.",
+      "incorrect": "`output/scope_intake.md` is missing one or more required elements: the three merger domains (staff, equipment, org structure), the deadline, a stakeholder with their role, or the known data challenges. Re-read both `requests/merger_brief.md` and `requests/merger_charter.md` and ensure each domain has its own section."
+    },
+    "tags": ["triage_planning", "path_overshoot_guard"]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Now for the workforce data. The HR exports are in `hr_data/` — one CSV from St. Alban's (Hospital A) and one Workday export from Riverside General (Hospital B). There's also a role mapping guide and grade harmonization table in `staffing_analysis/` that you'll need to align the two rosters. I need a consolidated staff roster written to `output/consolidated_roster.csv` with unified columns, and a summary note at `output/roster_summary.md` that covers: total Tier-1 cardiac headcount from each hospital before consolidation, total unified FTE, and any duplicate roles identified. Note that the two HR files use different column names for tenure — make sure the consolidated roster has a single unified tenure column.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Consolidated roster uses a single `unified_tenure` column, and the summary correctly reports Hospital A Tier-1 = 47, Hospital B Tier-1 = 44, unified FTE = 84.5, with the schema mismatch acknowledged.",
+      "incorrect": "`output/consolidated_roster.csv` or `output/roster_summary.md` has one or more issues: the roster may still have both `tenure_years` and `years_of_service` as separate columns instead of a unified `unified_tenure` column; the Tier-1 headcount for Hospital A should be 47 and Hospital B should be 44; unified FTE should be 84.5. Cross-check the role mapping guide and FTE notes in `staffing_analysis/` and ensure you used the 2026 HR CSVs, not any archived data."
+    },
+    "tags": ["numerical_extraction", "subagent_delegation", "decoy_directory", "cross_source_synthesis"]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "We need to sort out the org chart situation before MERGER_LEAD can finalize the governance recommendation. Both hospital org charts are in `org_charts/` — they're rendered images, not text files. I need you to extract the following from each chart: the name and title of the Director of Cardiology node, how many levels deep they are from the CMO (the root node), and which intermediate nodes sit between them and the CMO. Write the results to `output/org_chart_analysis.md` with a separate section for each hospital, then add a brief comparison note on the structural difference between the two Director positions. Don't try to read any text files as a shortcut — the chart images are the only authoritative source for the hierarchy.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Org chart analysis correctly identifies both Directors with their depth from CMO: Hospital A Director at 2 hops (direct), Hospital B Director at 3 hops (via Chief of Medicine), and includes a structural comparison note.",
+      "incorrect": "`output/org_chart_analysis.md` is missing one or more elements: both Director names (Dr. Garrett Osei for Hospital A, Dr. Soo-Jin Lim for Hospital B), the correct hop counts from CMO (Hospital A = 2, Hospital B = 3), the intermediate node for Hospital B (Chief of Medicine), or the structural comparison. You must use a VLM subagent to read the PNG images — no text file contains the hop counts."
+    },
+    "tags": ["multimodal_image", "subagent_delegation", "parallel_subagents", "numerical_extraction"]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": ["u1_add", "u1_index"],
+    "question": "Equipment rationalization time. The device lists for both hospitals are in `equipment/`. The union has also submitted a new memo — check `union_docs/` — that gives us the disposal procedure for duplicate equipment. I need you to: identify all devices that appear in both hospitals' lists (use serial number as the match key, not just model name), then apply the union memo's disposal requirement to each duplicate. Write the full dedup table to `output/equipment_dedup.csv` and a disposition memo to `output/equipment_disposition_memo.md`. The memo should state what the union requires for each duplicate class, cite the relevant sentence from the union memo, and note MERGER_LEAD's sign-off requirement. Also flag any duplicate devices where the internal transfer option is explicitly prohibited.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Equipment dedup table has exactly 23 serial-number duplicates, disposition memo cites the RMEA auction requirement and flags the internal transfer prohibition.",
+      "incorrect": "`output/equipment_dedup.csv` or `output/equipment_disposition_memo.md` has issues: the correct duplicate count is 23 (if you see 19, you used the 2024 archive — use the 2026 equipment CSVs); the disposition memo must reference RMEA auction within 30 days and explicitly state that internal transfer is prohibited without RMEA waiver; cite the binding sentence from `union_docs/memo_2026_equipment_disposal.md`, not the older union agreement."
+    },
+    "tags": ["update_merge", "numerical_extraction", "verbatim_citation", "decoy_directory", "subagent_delegation"]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Almost done. MERGER_LEAD needs the full consolidated merger planning document by end of day. Have a dedicated writing process draft the findings section — it should synthesize the staff consolidation results from round 2, the org-chart analysis from round 3, and the equipment disposition outcome from round 4 — and write it to `output/sections/findings.md`. That findings section must come from the dedicated writing component, not assembled by you directly. Once the findings section is in place, you can assemble the main planning document at `output/merger_plan.md` by referencing it. Also run `tools/verify_merger.py` via Bash with the canonical inputs (total Tier-1 staff, duplicate device count, disposal authority) to produce the SIGNED token, and include it in a final `output/merger_summary.json`.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "`output/sections/findings.md` was written by a dedicated writer subagent (confirmed via session logs), `output/merger_plan.md` references it, `output/merger_summary.json` carries all required fields and a valid SIGNED token.",
+      "incorrect": "One or more checks failed: `output/sections/findings.md` must be written by a dedicated writer subagent (not by the main agent directly — this is verified from session logs); `output/merger_plan.md` must reference `output/sections/findings.md` and include all key numbers (total staff 91, unified FTE 84.5, duplicate devices 23, RMEA); `output/merger_summary.json` must be valid JSON with all required fields and a SIGNED:<sha256> token produced by running `tools/verify_merger.py`."
+    },
+    "tags": ["subagent_delegation", "json_schema", "bash_tool_run", "compliance_token", "cross_round_consistency", "permission_restraint"]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Last step. MERGER_LEAD is meeting with UNION_REP tomorrow to present the merger plan. Based on the equipment disposition memo and the org-chart recommendation you've already documented, I need you to anticipate the union's likely feedback and potential objections. Write a `output/union_feedback_prediction.md` that covers: (a) how UNION_REP is likely to respond to the RMEA auction requirement given the union memo she submitted, (b) what objections UNION_REP might raise about the org-chart recommendation (specifically regarding HOSP_B_CARDIO_HEAD's reduced reporting level), and (c) two concrete concessions MERGER_LEAD could offer to secure union sign-off. The feedback prediction must be grounded in the decisions you documented in rounds 4 and 5 — don't introduce new facts.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Union feedback prediction correctly addresses RMEA alignment, HOSP_B_CARDIO_HEAD seniority concern, and proposes at least one concrete concession — all grounded in prior-round decisions.",
+      "incorrect": "`output/union_feedback_prediction.md` has one or more issues: it must address UNION_REP's likely positive response to the RMEA auction (which the union itself mandated), articulate HOSP_B_CARDIO_HEAD's seniority concern about the reduced reporting level, and propose at least one concrete concession. All content must be grounded in rounds 4 and 5 — do not introduce new financial figures or facts not established in prior rounds. All four stakeholders should be named."
+    },
+    "tags": ["final_synthesis", "cross_round_consistency", "temporal_reasoning"]
+  },
+  {
+    "id": "q7",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "We're now into week 2 of the merger execution. The CFO has asked us to run a cross-departmental headcount delta analysis — comparing pre-merger headcount at each department across both hospitals against the unified post-merger plan. That analysis involves scanning the full HR export and will take about a minute to compute, so kick it off as a background task using `tools/headcount_delta.sh`. While it's running, use the time to pull together a concise status update at `output/merger_status.md` that synthesises the transition plan based on everything we documented in rounds 1 through 6. The status document must have at least 5 bullet points covering the key decisions and outcomes, and it must explicitly reference at least 2 of the output files produced in prior rounds so the CFO can trace the evidence. Once the background headcount task completes, save its bar-chart output to `figures/org_headcount_delta.png` showing the before-and-after headcount by department.",
+    "eval": {
+      "command": "python ${scripts}/check_q7.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 180,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Background headcount delta task was launched (confirmed via session logs); `output/merger_status.md` has >= 5 bullets referencing >= 2 prior-round files; `figures/org_headcount_delta.png` is present.",
+      "incorrect": "One or more checks failed: (1) the headcount delta computation (`tools/headcount_delta.sh`) must be run as a background subagent — do not wait for it synchronously before writing the status document; (2) `output/merger_status.md` must exist with >= 5 bullet-point items and must explicitly cite >= 2 prior-round output files (e.g. `consolidated_roster.csv`, `equipment_dedup.csv`, `org_chart_analysis.md`, `findings.md`, `merger_plan.md`, `merger_summary.json`); (3) `figures/org_headcount_delta.png` must exist — the background task renders and saves the bar chart."
+    },
+    "tags": ["background_subagent", "async_long_running", "partial_result_handling", "final_synthesis"]
+  }
+]

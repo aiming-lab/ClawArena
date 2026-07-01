@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: billing-service
+  namespace: argocd
+spec:
+  project: platform
+  source:
+    repoURL: https://gitops.mercatorrobotics.com/helm-charts
+    targetRevision: v2.8.19
+    chart: billing-service
+    helm:
+      releaseName: billing-service
+      valueFiles:
+      - values-prod.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

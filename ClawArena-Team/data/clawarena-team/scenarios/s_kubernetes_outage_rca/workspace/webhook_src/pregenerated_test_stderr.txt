@@ -1,0 +1,31 @@
+=== RUN   TestValidateNamespace_BasicOK
+--- PASS: TestValidateNamespace_BasicOK (0.00s)
+=== RUN   TestValidateNamespace_MissingLabel
+--- PASS: TestValidateNamespace_MissingLabel (0.00s)
+=== RUN   TestValidateNamespace_ConcurrentAccess
+==================
+WARNING: DATA RACE
+Read at 0x00c0001a4000 by goroutine 12:
+  github.com/example/payment-admission-webhook.validateNamespace()
+      /workspace/webhook_src/webhook.go:86 +0x4c
+  github.com/example/payment-admission-webhook.TestValidateNamespace_ConcurrentAccess.func1()
+      /workspace/webhook_src/webhook_test.go:42 +0x3c
+
+Previous write at 0x00c0001a4000 by goroutine 18:
+  github.com/example/payment-admission-webhook.refreshNamespaceCache.func1()
+      /workspace/webhook_src/webhook.go:38 +0x68
+
+Goroutine 12 (running) created at:
+  github.com/example/payment-admission-webhook.TestValidateNamespace_ConcurrentAccess()
+      /workspace/webhook_src/webhook_test.go:42 +0x124
+
+Goroutine 18 (running) created at:
+  github.com/example/payment-admission-webhook.TestValidateNamespace_ConcurrentAccess()
+      /workspace/webhook_src/webhook_test.go:55 +0x1c8
+==================
+    webhook_test.go:42: data race detected: validateNamespace concurrent access
+--- FAIL: TestValidateNamespace_ConcurrentAccess (0.01s)
+=== RUN   TestAdmitPod_Integration
+--- PASS: TestAdmitPod_Integration (0.00s)
+FAIL
+FAIL	github.com/example/payment-admission-webhook	0.124s

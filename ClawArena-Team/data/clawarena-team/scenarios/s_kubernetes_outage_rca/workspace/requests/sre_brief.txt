@@ -1,0 +1,38 @@
+SRE Incident Brief — EU-West-2 Production Outage
+Incident ID: INC-2026-0514-001
+Date: 2026-05-14
+Start: 03:11 UTC
+End: 03:41 UTC (estimated containment)
+Reported by: PagerDuty auto-trigger, confirmed by on-call SRE Jordan Varela
+
+== Summary ==
+
+The payment-svc microservice in namespace payments began returning HTTP 504
+at 03:11 UTC and triggered an OOM cascade across three adjacent pods. The
+root cause is suspected to be an interaction between:
+
+  1. A newly deployed admission webhook (v2.4.1) introduced at 02:50 UTC.
+  2. A helm upgrade of the payment-svc chart to version 1.18.3 at 02:55 UTC.
+  3. A node kernel patch applied to node pool eu-west-2a during the maintenance
+     window at 02:30 UTC.
+
+== Your tasks ==
+
+Please investigate and produce the following outputs:
+
+  output/rca_plan.md            — Work plan covering all five investigation areas
+  output/oom_evidence.md        — OOM-killed pod identity + memory limit evidence
+  output/code_and_dashboard.md  — Webhook code race analysis + grafana cross-check
+  output/rca_summary.json       — Final structured RCA summary (after hotfix lands)
+  output/postmortem.md          — Full postmortem with timeline, root cause, actions
+
+The vendor has been contacted about the helm chart memory regression.
+An emergency hotfix may land in your workspace today.
+
+Postmortem is due by 2026-05-20.
+
+== Contacts ==
+
+On-call SRE:       Jordan Varela <jordan.varela@example.com>
+Platform Lead:     Sam Okafor <sam.okafor@example.com>
+Vendor Contact:    releases@k8s-vendor.example.com

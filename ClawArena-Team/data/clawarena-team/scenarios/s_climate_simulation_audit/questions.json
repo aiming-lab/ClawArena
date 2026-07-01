@@ -1,0 +1,167 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Wei Liang（首席研究员）请你对 clim-sim-v5-2026q2 仿真做系统性审查。背景请读 briefs/principal_investigator_request.md 和 briefs/peer_review_notes.md。\n\n请先写一份审查计划落到 output/audit_plan.md，至少包含 5 个 section（如数据完整性、schema 验证、季度输出分析、视频帧分析、模型对比）。计划中须明确引用流域编号 W-12 以及模拟 ID v5 或 clim-sim-v5。",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "audit_plan.md 含 5 section 且引用 W-12 / v5。",
+      "incorrect": "audit_plan.md 缺 section 或未引用 W-12、v5 关键标识。"
+    },
+    "tags": [
+      "triage_planning",
+      "verbatim_citation",
+      "large_context_pressure"
+    ]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "data/historical_monthly.parquet 体量较大，请委托 subagent 装入并推断 schema，将结果写到 output/schema_inferred.md。\n\n需包含：（1）列名及类型；（2）行数确认；（3）时间步说明（月分辨率）。不需要逐行列举数据，只需 schema 摘要。",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "schema_inferred.md 含 >= 4 列、月频时间步说明、parquet 引用，且有 subagent 记录。",
+      "incorrect": "schema_inferred.md 缺列信息或时间步说明，或未使用 subagent。"
+    },
+    "tags": [
+      "schema_by_shape",
+      "parquet_query",
+      "large_context_pressure",
+      "subagent_delegation",
+      "incremental_context_load"
+    ]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "在同一个 subagent session 中追加读取 data/model_outputs_v5/ 下 4 个季度的 parquet 文件，写 analysis/quarterly_summary.md，汇总每个季度的 SPI 预测均值与干旱概率。\n\n建议复用之前已装入历史数据的同一 subagent session——这样可节省 context 加载开销。",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "quarterly_summary.md 引用 4 个季度 + session 复用 >= 2 次。",
+      "incorrect": "缺季度引用或未复用同一 subagent session。"
+    },
+    "tags": [
+      "parquet_query",
+      "incremental_context_load",
+      "session_reuse",
+      "stateful_subagent"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "visualizations/spi_heatmap_anim.mp4 是 W-12 流域的 SPI 热力图动画，共 360 帧（12fps，30s）。**仅画面有关键信号**（无有效音轨），请按时间戳采帧分析，定位干旱**峰值帧号**。\n\n将结果写到 findings/peak_frame.md，须包含帧号与理由。",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "peak_frame.md 含帧号 142 (±3) + 视频/heatmap 引用 + 峰值/干旱关键字。",
+      "incorrect": "帧号不在 142±3 范围内，或缺少视频引用。"
+    },
+    "tags": [
+      "multimodal_video",
+      "video_frame_reading",
+      "modality_decoy",
+      "ai_hallucination_decoy"
+    ]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "对比 v5 与 v4 的干旱预测时间：v5 预测峰值在 2027 Q2，而 v4 基线模型预测在 Q3（晚一个季度）。\n\nai_summaries/climate_bot.md 中的 AI 摘要也给出了预测——请判断它是否正确，并在对比中给予说明。\n\n请参考 papers/ 目录下的中英文方法学文件，写 findings/model_comparison.md，须包含 Q2 的明确引用，以及对 AI 摘要的评价。",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "model_comparison.md 含 Q2 + 若含 Q3 有否定上下文 + 含中英文献引用。",
+      "incorrect": "未引用 Q2，或 Q3 未被否定，或缺方法学文献引用。"
+    },
+    "tags": [
+      "ai_hallucination_decoy",
+      "discredit_window",
+      "multilingual",
+      "cross_source_synthesis",
+      "office_docx"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [
+      "u1_observed_validation"
+    ],
+    "question": "请实际运行 code/validate_against_obs.py 脚本，计算 v5 模型对 2025 年实测数据的偏差。\n\n将结果写到 analysis/validation_score.md，须包含 bias / RMSE 等数值指标。\n\n另外，briefs/validation_addendum.md 补发了一份补充说明，请结合它一并说明验证结论。",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "validation_score.md 含浮点数偏差值 + 统计指标关键词 + 脚本引用。",
+      "incorrect": "缺数值偏差、统计关键词或脚本执行引用。"
+    },
+    "tags": [
+      "code_execution",
+      "bash_tool_run",
+      "update_merge",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q7",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "基于前六轮分析，写最终委托决策文件 audit/commission_decision.json，须包含字段：\n- decision（取 'commission_v5_with_observed_validation'）\n- basin_id（'W-12'）\n- simulation_id（含 'clim-sim-v5'）\n- peak_frame（142）\n- compliance_token（运行 code/calc_spi.py 后 bash 计算得到的 sha256 hex，对 'W-12:clim-sim-v5-2026q2:commission' 字符串计算）\n\n跨轮一致性要求：peak_frame 必须与 findings/peak_frame.md 中的帧号一致。",
+    "eval": {
+      "command": "python ${scripts}/check_q7.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "commission_decision.json 字段齐全 + decision 正确 + W-12 + v5 + peak_frame 142±3 + token 非空。",
+      "incorrect": "字段缺失、decision 值不正确，或 peak_frame 与 peak_frame.md 不一致。"
+    },
+    "tags": [
+      "final_synthesis",
+      "cross_round_consistency",
+      "compliance_token",
+      "json_schema",
+      "schema_by_shape"
+    ]
+  }
+]

@@ -1,0 +1,627 @@
+{
+  "pipeline_version": "2.1.3",
+  "last_updated": "2024-11-15T14:32:00Z",
+  "updated_by": "jordan.chen@nexaretail.com",
+  "environment": "production",
+  "status": "deprecated",
+  "deprecation_date": "2024-12-01",
+  "replacement_config": "pipeline_config_v3.json",
+
+  "data_sources": {
+    "primary_database": {
+      "host": "prod-db-01.nexaretail.internal",
+      "port": 5432,
+      "database": "customer_analytics",
+      "schema": "public",
+      "connection_pool_size": 10,
+      "timeout_seconds": 30,
+      "ssl_enabled": true,
+      "ssl_verify": true
+    },
+    "secondary_database": {
+      "host": "prod-db-02.nexaretail.internal",
+      "port": 5432,
+      "database": "customer_analytics_replica",
+      "schema": "public",
+      "connection_pool_size": 5,
+      "timeout_seconds": 45,
+      "read_only": true
+    },
+    "data_warehouse": {
+      "type": "snowflake",
+      "account": "nexaretail.us-west-2",
+      "warehouse": "ANALYTICS_WH",
+      "database": "CUSTOMER_DATA",
+      "schema": "RAW",
+      "role": "ANALYTICS_ROLE",
+      "connection_timeout": 60
+    }
+  },
+
+  "churn_analysis_config": {
+    "churn_threshold_days": 45,
+    "comment": "DEPRECATED: Using 45-day threshold, should be 30 days per new methodology",
+    "calculation_method": "pearson_correlation",
+    "historical_window_days": 90,
+    "prediction_horizon_days": 30,
+    "minimum_customer_age_days": 14,
+    "exclude_status": ["on_hold", "seasonal_pause", "enterprise_pilot"],
+
+    "risk_scoring": {
+      "enabled": true,
+      "model_type": "logistic_regression",
+      "score_range": [0, 100],
+      "high_risk_threshold": 80,
+      "medium_risk_threshold": 50,
+      "low_risk_threshold": 0,
+      "recalculation_frequency_hours": 24
+    },
+
+    "feature_weights": {
+      "days_since_last_login": 0.21,
+      "support_ticket_count": 0.18,
+      "feature_usage_breadth": 0.16,
+      "payment_failure_count": 0.14,
+      "session_frequency_trend": 0.12,
+      "integration_count": 0.09,
+      "team_member_count": 0.07,
+      "subscription_tier_numeric": 0.03
+    },
+
+    "correlation_features": [
+      "login_frequency",
+      "session_duration_avg",
+      "feature_adoption_rate",
+      "support_interaction_count",
+      "payment_failure_events",
+      "usage_decline_rate",
+      "team_collaboration_score",
+      "integration_depth",
+      "custom_workflow_count",
+      "api_call_volume"
+    ],
+
+    "cohort_definitions": {
+      "new_customers": {
+        "min_days": 0,
+        "max_days": 90,
+        "expected_churn_rate": 0.16
+      },
+      "early_adopters": {
+        "min_days": 91,
+        "max_days": 180,
+        "expected_churn_rate": 0.10
+      },
+      "established_users": {
+        "min_days": 181,
+        "max_days": 365,
+        "expected_churn_rate": 0.05
+      },
+      "loyal_customers": {
+        "min_days": 366,
+        "max_days": 9999,
+        "expected_churn_rate": 0.029
+      }
+    }
+  },
+
+  "field_mappings": {
+    "comment": "DEPRECATED: Old field names, incompatible with current schema",
+    "customer_table": {
+      "table_name": "customers",
+      "primary_key": "customer_id",
+      "signup_date_field": "signup_date",
+      "last_active_field": "last_active",
+      "plan_type_field": "plan_type",
+      "status_field": "account_status",
+      "monthly_spend_field": "monthly_spend",
+      "support_tickets_field": "support_tickets"
+    },
+    "transaction_table": {
+      "table_name": "transactions_v1",
+      "primary_key": "transaction_id",
+      "customer_id_field": "customer_id",
+      "date_field": "transaction_date",
+      "revenue_field": "transaction_amount",
+      "comment": "CRITICAL ERROR: Field is actually named 'order_value' not 'transaction_amount'",
+      "channel_field": "channel",
+      "comment2": "WARNING: channel field does not exist in v1, only in v2"
+    },
+    "usage_table": {
+      "table_name": "product_usage",
+      "customer_id_field": "customer_id",
+      "event_date_field": "event_timestamp",
+      "feature_name_field": "feature_id",
+      "session_id_field": "session_uuid"
+    },
+    "support_table": {
+      "table_name": "support_tickets",
+      "ticket_id_field": "ticket_id",
+      "customer_id_field": "customer_id",
+      "created_date_field": "created_at",
+      "resolved_date_field": "resolved_at",
+      "status_field": "ticket_status",
+      "priority_field": "priority_level"
+    }
+  },
+
+  "data_processing": {
+    "date_format_parsing": {
+      "primary_format": "YYYY-MM-DD",
+      "fallback_formats": ["M/D/YYYY", "MM/DD/YYYY", "DD-MM-YYYY"],
+      "timezone": "America/Los_Angeles",
+      "handle_invalid_dates": "set_null",
+      "expected_format_consistency": 0.88,
+      "comment": "Approximately 12% of records use M/D/YYYY format"
+    },
+
+    "data_quality_checks": {
+      "enabled": true,
+      "duplicate_detection": {
+        "enabled": true,
+        "key_fields": ["customer_id", "transaction_id"],
+        "action_on_duplicate": "keep_first"
+      },
+      "missing_value_handling": {
+        "numeric_fields_strategy": "median_imputation",
+        "categorical_fields_strategy": "mode_imputation",
+        "date_fields_strategy": "drop_row",
+        "minimum_completeness_threshold": 0.95
+      },
+      "outlier_detection": {
+        "enabled": true,
+        "method": "IQR",
+        "iqr_multiplier": 1.5,
+        "action_on_outlier": "flag_and_include",
+        "fields_to_check": [
+          "monthly_spend",
+          "transaction_amount",
+          "session_duration",
+          "support_ticket_count"
+        ]
+      },
+      "data_type_validation": {
+        "enabled": true,
+        "strict_mode": false,
+        "attempt_coercion": true
+      }
+    },
+
+    "feature_engineering": {
+      "derived_features": [
+        {
+          "name": "customer_lifetime_days",
+          "formula": "days_between(current_date, signup_date)",
+          "data_type": "integer"
+        },
+        {
+          "name": "days_since_last_activity",
+          "formula": "days_between(current_date, last_active)",
+          "data_type": "integer"
+        },
+        {
+          "name": "average_transaction_value",
+          "formula": "sum(transaction_amount) / count(transactions)",
+          "data_type": "float"
+        },
+        {
+          "name": "transaction_frequency",
+          "formula": "count(transactions) / customer_lifetime_days",
+          "data_type": "float"
+        },
+        {
+          "name": "support_ticket_rate",
+          "formula": "count(support_tickets) / (customer_lifetime_days / 30)",
+          "data_type": "float"
+        },
+        {
+          "name": "feature_adoption_count",
+          "formula": "count(distinct(feature_id))",
+          "data_type": "integer"
+        },
+        {
+          "name": "usage_trend_30d",
+          "formula": "(sessions_last_7d * 4.3) / sessions_previous_23d",
+          "data_type": "float"
+        }
+      ],
+
+      "aggregation_windows": {
+        "short_term": 7,
+        "medium_term": 30,
+        "long_term": 90,
+        "unit": "days"
+      },
+
+      "normalization": {
+        "method": "z_score",
+        "apply_to_features": [
+          "monthly_spend",
+          "session_duration_avg",
+          "transaction_frequency"
+        ]
+      }
+    },
+
+    "data_transformation": {
+      "categorical_encoding": {
+        "method": "one_hot",
+        "fields": ["plan_type", "account_status", "geographic_region"],
+        "handle_unknown": "ignore",
+        "drop_first": false
+      },
+      "text_processing": {
+        "enabled": false,
+        "comment": "Text analysis not currently used in churn model"
+      },
+      "time_series_features": {
+        "enabled": true,
+        "extract_components": ["day_of_week", "month", "quarter", "is_weekend"],
+        "cyclic_encoding": true
+      }
+    }
+  },
+
+  "model_configuration": {
+    "algorithm": "logistic_regression",
+    "library": "scikit-learn",
+    "version": "1.2.1",
+
+    "hyperparameters": {
+      "penalty": "l2",
+      "C": 1.0,
+      "solver": "lbfgs",
+      "max_iter": 1000,
+      "class_weight": "balanced",
+      "random_state": 42
+    },
+
+    "training": {
+      "test_size": 0.2,
+      "validation_split": 0.25,
+      "stratify_by": "churn_label",
+      "random_seed": 42,
+      "cross_validation_folds": 5,
+      "shuffle": true
+    },
+
+    "feature_selection": {
+      "method": "pearson_correlation",
+      "correlation_threshold": 0.1,
+      "variance_threshold": 0.01,
+      "remove_multicollinear": true,
+      "vif_threshold": 5.0
+    },
+
+    "performance_thresholds": {
+      "minimum_accuracy": 0.75,
+      "minimum_precision": 0.70,
+      "minimum_recall": 0.65,
+      "minimum_f1_score": 0.70,
+      "minimum_auc_roc": 0.80
+    },
+
+    "retraining_schedule": {
+      "frequency": "monthly",
+      "day_of_month": 1,
+      "automatic": true,
+      "approval_required": false,
+      "notify_on_completion": true,
+      "notification_recipients": [
+        "jordan.chen@nexaretail.com",
+        "analytics-team@nexaretail.com"
+      ]
+    }
+  },
+
+  "output_configuration": {
+    "report_generation": {
+      "enabled": true,
+      "formats": ["pdf", "html", "markdown"],
+      "output_directory": "/home/analytics/reports/churn",
+      "filename_pattern": "churn_report_{quarter}_{year}.{format}",
+      "include_visualizations": true,
+      "include_customer_lists": false,
+      "include_raw_data": false
+    },
+
+    "data_exports": {
+      "customer_risk_scores": {
+        "enabled": true,
+        "format": "csv",
+        "output_path": "/home/analytics/exports/risk_scores",
+        "filename_pattern": "customer_risk_scores_{date}.csv",
+        "include_fields": [
+          "customer_id",
+          "risk_score",
+          "risk_category",
+          "predicted_churn_probability",
+          "last_updated"
+        ],
+        "encryption": true
+      },
+
+      "churn_cohort_analysis": {
+        "enabled": true,
+        "format": "json",
+        "output_path": "/home/analytics/exports/cohort_analysis",
+        "filename_pattern": "cohort_analysis_{quarter}_{year}.json",
+        "include_historical_comparison": true
+      },
+
+      "executive_summary": {
+        "enabled": true,
+        "format": "pdf",
+        "output_path": "/home/analytics/exports/executive",
+        "filename_pattern": "executive_summary_{quarter}_{year}.pdf",
+        "page_limit": 5,
+        "include_recommendations": true
+      }
+    },
+
+    "database_updates": {
+      "update_customer_risk_scores": {
+        "enabled": true,
+        "table": "customer_risk_scores",
+        "upsert_strategy": "replace",
+        "batch_size": 1000
+      },
+      "log_analysis_run": {
+        "enabled": true,
+        "table": "analysis_execution_log",
+        "include_metadata": true
+      }
+    },
+
+    "visualization_config": {
+      "default_style": "seaborn",
+      "color_palette": "nexaretail_brand",
+      "figure_size": [12, 8],
+      "dpi": 300,
+      "font_family": "Arial",
+      "include_watermark": true,
+      "chart_types": {
+        "churn_rate_trend": "line",
+        "cohort_analysis": "heatmap",
+        "segment_comparison": "bar",
+        "risk_distribution": "histogram",
+        "correlation_matrix": "heatmap"
+      }
+    }
+  },
+
+  "notification_configuration": {
+    "email_alerts": {
+      "enabled": true,
+      "smtp_server": "smtp.nexaretail.internal",
+      "smtp_port": 587,
+      "use_tls": true,
+      "from_address": "analytics-noreply@nexaretail.com",
+
+      "alert_conditions": [
+        {
+          "name": "high_churn_rate",
+          "condition": "churn_rate > 0.10",
+          "severity": "high",
+          "recipients": [
+            "executive-team@nexaretail.com",
+            "customer-success-leadership@nexaretail.com"
+          ],
+          "message_template": "ALERT: Q{quarter} churn rate of {churn_rate}% exceeds 10% threshold"
+        },
+        {
+          "name": "churn_rate_increase",
+          "condition": "churn_rate_delta > 0.005",
+          "severity": "medium",
+          "recipients": [
+            "customer-success-team@nexaretail.com",
+            "analytics-team@nexaretail.com"
+          ],
+          "message_template": "NOTICE: Churn rate increased by {churn_rate_delta_pct}% QoQ"
+        },
+        {
+          "name": "model_performance_degradation",
+          "condition": "model_accuracy < 0.75",
+          "severity": "high",
+          "recipients": [
+            "jordan.chen@nexaretail.com",
+            "data-science-team@nexaretail.com"
+          ],
+          "message_template": "WARNING: Churn model accuracy dropped to {model_accuracy}"
+        },
+        {
+          "name": "high_risk_customer_surge",
+          "condition": "high_risk_count > 3000",
+          "severity": "medium",
+          "recipients": [
+            "customer-success-leadership@nexaretail.com"
+          ],
+          "message_template": "ALERT: {high_risk_count} customers now in high-risk category"
+        }
+      ]
+    },
+
+    "slack_integration": {
+      "enabled": true,
+      "webhook_url": "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXX",
+      "default_channel": "#customer-analytics",
+      "notification_types": [
+        "analysis_complete",
+        "high_churn_alert",
+        "model_retrained",
+        "error_occurred"
+      ],
+      "mention_users": ["@jordan", "@sarah_cs"],
+      "include_charts": true
+    },
+
+    "dashboard_updates": {
+      "enabled": true,
+      "tableau_server": "nexaretail.tableau.com",
+      "workbook_name": "Customer Churn Dashboard",
+      "auto_refresh": true,
+      "refresh_schedule": "daily_at_6am"
+    }
+  },
+
+  "logging_configuration": {
+    "log_level": "INFO",
+    "log_format": "json",
+    "log_output": [
+      {
+        "type": "file",
+        "path": "/var/log/analytics/churn_pipeline.log",
+        "rotation": "daily",
+        "retention_days": 90
+      },
+      {
+        "type": "syslog",
+        "host": "logs.nexaretail.internal",
+        "port": 514,
+        "protocol": "tcp"
+      }
+    ],
+    "include_timestamps": true,
+    "include_user_context": true,
+    "mask_sensitive_data": true,
+    "sensitive_fields": [
+      "customer_email",
+      "customer_phone",
+      "payment_method"
+    ]
+  },
+
+  "security_configuration": {
+    "authentication": {
+      "method": "oauth2",
+      "token_endpoint": "https://auth.nexaretail.internal/oauth/token",
+      "client_id": "analytics_pipeline",
+      "scopes": ["read:customers", "read:transactions", "write:analytics"]
+    },
+    "authorization": {
+      "role_based": true,
+      "required_roles": ["analytics_user", "churn_analyst"],
+      "admin_roles": ["analytics_admin", "data_science_lead"]
+    },
+    "data_encryption": {
+      "at_rest": true,
+      "in_transit": true,
+      "algorithm": "AES-256",
+      "key_management": "aws_kms",
+      "key_rotation_days": 90
+    },
+    "audit_logging": {
+      "enabled": true,
+      "log_all_data_access": true,
+      "retention_period_days": 365,
+      "compliance_standards": ["SOC2", "GDPR"]
+    }
+  },
+
+  "error_handling": {
+    "retry_policy": {
+      "max_retries": 3,
+      "retry_delay_seconds": 60,
+      "exponential_backoff": true,
+      "backoff_multiplier": 2
+    },
+    "failure_actions": {
+      "on_data_load_failure": "alert_and_skip",
+      "on_model_failure": "alert_and_use_previous",
+      "on_output_failure": "alert_and_retry",
+      "on_critical_error": "alert_and_halt"
+    },
+    "fallback_strategies": {
+      "missing_data_source": "use_cached_data",
+      "model_unavailable": "use_rule_based_scoring",
+      "output_destination_unavailable": "queue_for_retry"
+    }
+  },
+
+  "performance_optimization": {
+    "caching": {
+      "enabled": true,
+      "cache_backend": "redis",
+      "cache_host": "cache.nexaretail.internal",
+      "cache_ttl_seconds": 3600,
+      "cache_keys": [
+        "customer_data",
+        "model_predictions",
+        "aggregated_metrics"
+      ]
+    },
+    "parallel_processing": {
+      "enabled": true,
+      "max_workers": 8,
+      "chunk_size": 1000,
+      "use_multiprocessing": true
+    },
+    "query_optimization": {
+      "use_indexes": true,
+      "batch_queries": true,
+      "limit_result_sets": true,
+      "max_rows_per_query": 100000
+    }
+  },
+
+  "maintenance": {
+    "cleanup_schedule": {
+      "temporary_files": "daily",
+      "old_logs": "weekly",
+      "cache_entries": "daily",
+      "archived_reports": "monthly"
+    },
+    "retention_policies": {
+      "raw_data": 365,
+      "processed_data": 730,
+      "model_artifacts": 1825,
+      "reports": 1095,
+      "unit": "days"
+    },
+    "backup_configuration": {
+      "enabled": true,
+      "frequency": "daily",
+      "backup_destination": "s3://nexaretail-backups/analytics/churn",
+      "retention_count": 30,
+      "compression": true
+    }
+  },
+
+  "metadata": {
+    "config_schema_version": "2.1",
+    "created_date": "2024-06-15",
+    "created_by": "jordan.chen@nexaretail.com",
+    "last_modified": "2024-11-15",
+    "modified_by": "jordan.chen@nexaretail.com",
+    "review_frequency": "quarterly",
+    "next_review_date": "2025-02-01",
+    "approved_by": "emily.zhang@nexaretail.com",
+    "approval_date": "2024-06-20",
+    "change_log": [
+      {
+        "date": "2024-11-15",
+        "author": "jordan.chen@nexaretail.com",
+        "changes": "Marked as deprecated, recommend migration to v3 config",
+        "reason": "New methodology requires updated field mappings and threshold"
+      },
+      {
+        "date": "2024-09-10",
+        "author": "jordan.chen@nexaretail.com",
+        "changes": "Updated notification recipients, added Slack integration",
+        "reason": "Team restructuring"
+      },
+      {
+        "date": "2024-07-22",
+        "author": "marcus.rodriguez@nexaretail.com",
+        "changes": "Modified feature weights based on Q2 model retraining",
+        "reason": "Model performance improvement"
+      }
+    ],
+    "related_documents": [
+      "churn_methodology_v2.pdf",
+      "data_dictionary_2024.xlsx",
+      "model_performance_report_q3_2024.pdf"
+    ],
+    "tags": ["deprecated", "churn_analysis", "customer_analytics", "production"]
+  }
+}

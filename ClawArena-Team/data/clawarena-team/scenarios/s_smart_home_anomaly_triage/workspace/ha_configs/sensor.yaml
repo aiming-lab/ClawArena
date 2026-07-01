@@ -1,0 +1,31 @@
+# Sensor Definitions
+
+- platform: template
+  sensors:
+    humidity_alert_active:
+      friendly_name: "Basement Humidity Alert Active"
+      value_template: >-
+        {{ states('sensor.humidity_basement_01') | float > 85 }}
+
+- platform: mqtt
+  name: "Basement Humidity"
+  device_id: humidity_basement_01
+  state_topic: "homeassistant/sensor/humidity_basement_01/state"
+  unit_of_measurement: "%"
+  device_class: humidity
+  unique_id: humidity_basement_01
+
+- platform: mqtt
+  name: "Basement Temperature"
+  device_id: temp_basement_01
+  state_topic: "homeassistant/sensor/temp_basement_01/state"
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: temp_basement_01
+
+- platform: mqtt
+  name: "Basement Smoke Detector"
+  device_id: smoke_basement_01
+  state_topic: "homeassistant/sensor/smoke_basement_01/state"
+  device_class: smoke
+  unique_id: smoke_basement_01

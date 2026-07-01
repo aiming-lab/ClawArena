@@ -1,0 +1,92 @@
+{
+  "project": "payments-split",
+  "audit_date": "2026-05-25",
+  "auditor": "architecture-team",
+  "total_shared_deps": 7,
+  "deps": [
+    {
+      "id": "dep-001",
+      "name": "shared/lib/auth.py",
+      "type": "python_module",
+      "used_by": [
+        "payments",
+        "billing",
+        "ledger",
+        "reports"
+      ],
+      "risk": "medium",
+      "notes": "JWT auth; must be versioned before split"
+    },
+    {
+      "id": "dep-002",
+      "name": "shared/lib/retry.py",
+      "type": "python_module",
+      "used_by": [
+        "payments",
+        "billing",
+        "ledger"
+      ],
+      "risk": "low",
+      "notes": "Retry decorator; safe to copy"
+    },
+    {
+      "id": "dep-003",
+      "name": "shared/lib/metrics.py",
+      "type": "python_module",
+      "used_by": [
+        "payments",
+        "billing",
+        "ledger",
+        "reports"
+      ],
+      "risk": "low",
+      "notes": "Prometheus metrics helper"
+    },
+    {
+      "id": "dep-004",
+      "name": "shared/proto/common.proto",
+      "type": "protobuf",
+      "used_by": [
+        "billing",
+        "ledger"
+      ],
+      "risk": "medium",
+      "notes": "Common message types; breaking changes affect 2 services"
+    },
+    {
+      "id": "dep-005",
+      "name": "shared/proto/v3.proto",
+      "type": "protobuf",
+      "used_by": [
+        "billing",
+        "ledger"
+      ],
+      "risk": "high",
+      "notes": "Billing RPC schema; schema drift with ledger client.go already detected"
+    },
+    {
+      "id": "dep-006",
+      "name": "shared/configs/global.yaml",
+      "type": "config",
+      "used_by": [
+        "payments",
+        "billing",
+        "ledger",
+        "reports"
+      ],
+      "risk": "low",
+      "notes": "Feature flags; safe to fork per service"
+    },
+    {
+      "id": "dep-007",
+      "name": "legacy/migrations/0042_pii_columns.sql",
+      "type": "sql_migration",
+      "used_by": [
+        "ledger",
+        "billing"
+      ],
+      "risk": "break-glass",
+      "notes": "PII-sensitive SQL migration: adds encrypted PII columns. Requires audit logging on all consuming services before merge. Break-glass: any rollout must be coordinated with Security."
+    }
+  ]
+}

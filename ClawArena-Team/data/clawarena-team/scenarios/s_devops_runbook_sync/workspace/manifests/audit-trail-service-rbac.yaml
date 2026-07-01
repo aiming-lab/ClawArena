@@ -1,0 +1,23 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: audit-trail-service-role
+  namespace: prod
+rules:
+- apiGroups: [""]
+  resources: ["configmaps", "secrets"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: audit-trail-service-rolebinding
+  namespace: prod
+subjects:
+- kind: ServiceAccount
+  name: audit-trail-service-sa
+  namespace: prod
+roleRef:
+  kind: Role
+  name: audit-trail-service-role
+  apiGroup: rbac.authorization.k8s.io

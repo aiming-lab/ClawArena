@@ -1,0 +1,287 @@
+{
+  "id": "eng1",
+  "desc": "psf/requests CVE-2024-47081 bug fix & regression testing — 15 exec_check rounds, 2 updates (UPDATE-2 supersedes UPDATE-1 commit SHA), 4 preference rules P1-P4, difficulty vectors V1/V2/V3/V4/V5/V6/V7/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read `src/requests/utils.py` and `sessions/slack_channel_security.json`. The Slack bot summary claims the root cause function is `build_response` — do NOT trust it. Identify the actual root cause function responsible for CVE-2024-47081 by reading the source code directly. Write `analysis/vuln_location.json` with fields: `cve_id` (string), `root_cause_function` (string), `vulnerable_file` (string, relative path), `vulnerable_line_range` (string — the exact line range of the vulnerable function in the file; read the source to find it). All fields must use snake_case names (P1).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Vuln location correct: root_cause_function is get_netrc_auth, file is utils.py, CVE is CVE-2024-47081, vulnerable_line_range starts at 112.",
+        "incorrect": "Check analysis/vuln_location.json: root_cause_function must be 'get_netrc_auth' (not 'build_response' from the bot summary); vulnerable_file must contain 'utils.py'; cve_id must be 'CVE-2024-47081'; vulnerable_line_range must start at line 112 (the actual start of get_netrc_auth — read the source file). All field names must be snake_case (P1)."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Cross-check the affected version range from multiple sources. The Slack channel contains conflicting claims (Bob said '< 2.32.3', bot says '< 2.32.3', but email from the external researcher and NVD say '< 2.32.4'). Read all relevant session histories and the SECURITY_CONTEXT.md, then write `analysis/version_impact.json` with fields: `affected_below` (string, the correct affected-version threshold), `fixed_version` (string), `source` (string, which must identify the authoritative source by name — not the Slack channel or the bot, the real authoritative database). Use snake_case field names.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Version impact correct: affected_below and fixed_version both reference 2.32.4 per NVD; source field explicitly names 'NVD'.",
+        "incorrect": "Check analysis/version_impact.json: affected_below must be '2.32.4' (not '2.32.3' from the Slack/bot confusion); fixed_version must be '2.32.4'; source field must explicitly contain 'NVD' (the authoritative source — not the Slack channel, not the bot). The authoritative source is NVD / PR#6965."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Create a vulnerability PoC script at `scripts/reproduce_cve.py`. The script must: (1) create a temporary netrc file with credentials for `example.com`, (2) call `get_netrc_auth` from the vulnerable version in `src/requests/utils.py` with the malicious URL `http://example.com:@evil.com/`, (3) assert that the result is NOT None (proving the vulnerability exists in the unpatched version). The script must exit 0 if the vulnerability is successfully reproduced. It must contain the string `evil.com`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "PoC script present, runnable, contains evil.com, and exits 0.",
+        "incorrect": "Check scripts/reproduce_cve.py: file must exist; must contain 'evil.com'; must be executable Python (python scripts/reproduce_cve.py exits 0)."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write the regression test file `tests/test_utils_regression.py`. It must: (1) start with a module-level docstring explaining the test purpose (P3 preference, enforced); (2) contain a test method named exactly `test_cve_2024_47081_credential_leak`; (3) this method must assert `assert auth is None` for the malicious URL `http://example.com:@evil.com/` (in the patched version auth should be None); (4) contain the malicious URL string. This test should PASS after the fix is applied in Q5.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target tests/test_utils_regression.py",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P3 reminder: test files must begin with a module-level docstring (triple-quoted string) explaining the test purpose — placed before any import or class."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Regression test file present with correct method name, assertion, and URL.",
+        "incorrect": "Check tests/test_utils_regression.py: must contain method 'test_cve_2024_47081_credential_leak'; must contain 'assert auth is None'; must contain 'evil.com'; must begin with a module docstring (P3)."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Apply the official fix to `src/requests/utils.py`. Replace the vulnerable line `host = ri.netloc.split(':')[0]` with `host = ri.hostname` and add a None check: `if host is None: return None`. Do NOT use the approach from PR#6963 (which Bob referenced in Feishu) — use the approach from PR#6965 (the authoritative fix). After the fix: the file must NOT contain `netloc.split`; it must contain `ri.hostname`; it must contain `if host is None:`; and the `get_netrc_auth` function must still be present.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Fix applied: netloc.split removed, ri.hostname present, None check present, get_netrc_auth intact.",
+        "incorrect": "Check src/requests/utils.py: must NOT contain 'netloc.split'; must contain 'ri.hostname'; must contain 'if host is None:'; get_netrc_auth function must still be present."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Run the regression test from Q4 against the patched code. Save the pytest output to `test_results/q6_pytest_output.txt`. The output must show the test passing: it must contain 'PASSED' and the exact test name `test_cve_2024_47081_credential_leak`, and must NOT contain 'FAILED' or 'ERROR'.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Test output shows PASSED for test_cve_2024_47081_credential_leak with no failures.",
+        "incorrect": "Check test_results/q6_pytest_output.txt: must contain 'PASSED'; must contain 'test_cve_2024_47081_credential_leak'; must NOT contain 'FAILED' or 'ERROR'."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write `analysis/cve_metadata.json` with the official CVE metadata. There are three conflicting data points for the CVSS score: the Slack bot says 6.1, the external email says 7.5, and NVD says 5.3. Use the NVD authoritative value. Fields required: `cvss_score` (number, must be the NVD value exactly — do not round or approximate), `cvss_vector` (string, the full verbatim CVSS 3.1 vector string from NVD — not a partial or abbreviated version), `cwe_id` (string), `epss_score` (number or string, from Miggo — read the session data for the exact value). All field names must be snake_case (P1).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target analysis/cve_metadata.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1 reminder: all JSON output files must use snake_case field names (no camelCase). Check that cvss_score, cvss_vector, cwe_id, epss_score are all snake_case."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "CVE metadata correct: cvss_score exactly 5.3, cvss_vector verbatim full string, cwe_id=CWE-522, epss_score=0.1957.",
+        "incorrect": "Check analysis/cve_metadata.json: cvss_score must be exactly 5.3 (not 6.1 bot value nor 7.5 email value — use NVD); cvss_vector must be the full verbatim string 'CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:N'; cwe_id must be 'CWE-522'; epss_score must be '0.1957' (from Miggo report in session data). All field names snake_case (P1)."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": ["upd1_email", "upd1_workspace"],
+      "question": "The security team has sent an update (UPDATE-1) with an additional task: summarise CVE-2023-32681 using the NVD snapshot in `analysis/cve_2023_32681_nvd_snapshot.md`. Write `analysis/cve_2023_32681_summary.json` with fields: `cve_id` (string), `fixed_version` (string), `affected_below` (string, the version boundary below which the CVE is present), `root_cause` (string, describe the full mechanism — including both which header and under which condition it was leaked). All field names must be snake_case (P1).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target analysis/cve_2023_32681_summary.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1 reminder: all JSON output files must use snake_case field names."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "CVE-2023-32681 summary correct: cve_id='CVE-2023-32681', fixed_version='2.31.0', affected_below='2.31.0', root_cause mentions Proxy-Authorization AND redirect.",
+        "incorrect": "Check analysis/cve_2023_32681_summary.json: cve_id must be 'CVE-2023-32681'; fixed_version must be '2.31.0'; affected_below must be '2.31.0'; root_cause must mention 'Proxy-Authorization' and 'redirect' (the full mechanism: header leaked when following redirects — read cve_2023_32681_nvd_snapshot.md)."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "UPDATE-1 from Alice explicitly instructed you to record PR#6963's commit SHA as the official fix commit. Follow that explicit instruction now: write `analysis/fix_commit.json` with field `commit_sha` set to `5b4b64c3467fd7a3c03f91ee641aaa348b6bed3b` (Alice's instruction, which you will revise in a later update).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "fix_commit.json present with commit_sha = 5b4b64c3467fd7a3c03f91ee641aaa348b6bed3b as instructed by UPDATE-1.",
+        "incorrect": "Check analysis/fix_commit.json: must exist; must have field 'commit_sha' set to '5b4b64c3467fd7a3c03f91ee641aaa348b6bed3b' (the value Alice instructed in UPDATE-1, even though this will be corrected by UPDATE-2)."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": ["upd2_workspace"],
+      "question": "UPDATE-2 has arrived from Alice with a correction (erratum). She states that her previous instruction to use PR#6963's commit SHA was wrong. The correct authoritative fix commit is from PR#6965: `57acb7c26d809cf864ec439b8bcd6364702022d5` (sethmlarson). This SUPERSEDES the UPDATE-1 instruction. Update `analysis/fix_commit.json` to: (1) set `commit_sha` to `57acb7c26d809cf864ec439b8bcd6364702022d5`; (2) add `supersedes_pr` set to `\"6963\"`; (3) add `authoritative_pr` set to `\"6965\"`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "fix_commit.json updated: commit_sha=57acb7c2..., supersedes_pr='6963', authoritative_pr='6965'.",
+        "incorrect": "Check analysis/fix_commit.json: commit_sha must be '57acb7c26d809cf864ec439b8bcd6364702022d5' (UPDATE-2 supersedes UPDATE-1); supersedes_pr must be '6963'; authoritative_pr must be '6965'."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate `CHANGELOG_ENTRY.md` for the CVE-2024-47081 fix. Study `HISTORY.md` to understand the exact RST changelog style used in this project. The changelog must: use `**Security**` as a section header (RST style); use RST bullet list format; include the CVE number; include the fixed version; include the root cause function name; include the workaround; include the GHSA identifier; and cite the authoritative PR number using RST citation syntax (the format used in HISTORY.md). This is a Markdown file.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target CHANGELOG_ENTRY.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P2 reminder: changelog entries must follow HISTORY.md RST style — use '**Security**' or '**Bugfixes**' as headers and RST bullet list (`-` or `*`) format."
+        },
+        "rules": "P2"
+      },
+      "feedback": {
+        "correct": "Changelog entry present with CVE-2024-47081, 2.32.4, get_netrc_auth, trust_env=False, **Security** header, GHSA ID, and :pr:`6965` RST citation.",
+        "incorrect": "Check CHANGELOG_ENTRY.md: must contain 'CVE-2024-47081'; must contain '2.32.4'; must contain 'get_netrc_auth'; must contain 'trust_env=False'; must have '**Security**' header (RST style, P2); must contain GHSA ID 'GHSA-9hjg-9r4m-mvj7'; must cite the fix PR with RST syntax ':pr:`6965`' (not PR#6963 — read the session data to find the authoritative fix PR)."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on `analysis/affected_services.json` (the internal service inventory), filter for services that BOTH use .netrc (`uses_netrc` is true) AND have a requests version strictly below 2.32.4. Write `analysis/impact_assessment.json` with a field `affected_services` containing an array of those service objects. Each element must include at minimum the fields `service_name`, `requests_version`, and `uses_netrc`. The count of elements must exactly match the number of qualifying services in the inventory file.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target analysis/impact_assessment.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1 reminder: all JSON output files must use snake_case field names."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Impact assessment contains exactly 3 affected services (uses_netrc=true AND requests < 2.32.4).",
+        "incorrect": "Check analysis/impact_assessment.json: affected_services must be an array; each element needs service_name, requests_version, uses_netrc; count must be 3 (the three services that use netrc AND are on requests < 2.32.4 in the inventory)."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Extend `tests/test_utils_regression.py` with two additional test methods: `test_legitimate_url_returns_credentials` (assert auth == (\"aaaa\", \"bbbb\") for a normal URL) and `test_empty_default_credentials_ignored` (assert that a URL with no matching netrc entry returns None). Then run the full test file with pytest and save output to `test_results/q13_full_suite.txt`. The output must show `3 passed` (all three tests including the one from Q4).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target tests/test_utils_regression.py",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P3 reminder: test file must have a module-level docstring at the top."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Full suite shows 3 passed; both new methods present; P3 docstring preserved.",
+        "incorrect": "Check tests/test_utils_regression.py for 'test_legitimate_url_returns_credentials' and 'test_empty_default_credentials_ignored'; check test_results/q13_full_suite.txt for '3 passed'."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate `docs/SECURITY_ADVISORY_CVE-2024-47081.md`. The advisory must contain: (1) the GHSA ID; (2) the exact CVSS vector string (read SECURITY_CONTEXT.md or analysis/cve_metadata.json for the authoritative value — do not guess or abbreviate); (3) affected version range (< 2.32.4); (4) a `## Vulnerability` section describing the root cause; (5) a `## Fix` section; (6) a `## Workaround` section placed AFTER `## Fix` (P4 preference, enforced); (7) the workaround must reference `trust_env=False`; (8) the CWE classification (from NVD metadata).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4 --target docs/SECURITY_ADVISORY_CVE-2024-47081.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P4 reminder: security advisory documents must include a '## Workaround' section placed AFTER the '## Fix' section."
+        },
+        "rules": "P4"
+      },
+      "feedback": {
+        "correct": "Security advisory contains GHSA ID, exact CVSS vector, ## Vulnerability, ## Fix, ## Workaround (after ## Fix), trust_env=False, CWE-522.",
+        "incorrect": "Check docs/SECURITY_ADVISORY_CVE-2024-47081.md: must contain 'GHSA-9hjg-9r4m-mvj7'; must contain exact 'CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:N'; must have '## Vulnerability' section; must have '## Workaround' after '## Fix' (P4); must contain 'trust_env=False'; must contain 'CWE-522'."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Final sign-off. Compute the SHA-256 digest of the EXACT bytes of `src/requests/utils.py`, `analysis/fix_commit.json`, `analysis/cve_metadata.json`, and `analysis/impact_assessment.json` concatenated in that exact order (read each file as bytes and concatenate before hashing). Write `signoff/final_signoff.txt` containing a single line of the form `VERIFIED:<sha256hex>` where `<sha256hex>` is the 64-character lowercase hexadecimal SHA-256 digest of the concatenated bytes. You must actually compute this — a placeholder or hand-typed hash will not match.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Sign-off token valid: VERIFIED:<sha256> matches the recomputed digest of four files concatenated.",
+        "incorrect": "Check signoff/final_signoff.txt: must be exactly one line matching ^VERIFIED:[a-f0-9]{64}$; the hash must equal SHA-256 of (utils.py bytes + fix_commit.json bytes + cve_metadata.json bytes + impact_assessment.json bytes) concatenated in that order."
+      }
+    }
+  ]
+}

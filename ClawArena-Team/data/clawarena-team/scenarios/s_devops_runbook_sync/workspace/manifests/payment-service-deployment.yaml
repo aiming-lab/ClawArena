@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-service
+  namespace: prod
+  labels:
+    app: payment-service
+    team: platform
+    version: "1.0.26"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: payment-service
+  template:
+    metadata:
+      labels:
+        app: payment-service
+        version: "1.0.26"
+    spec:
+      serviceAccountName: payment-service-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      containers:
+      - name: payment-service
+        image: registry.mercatorrobotics.com/payment-service:1.0.26
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+        resources:
+          requests:
+            cpu: 452m
+            memory: 384Mi
+          limits:
+            cpu: 1059m
+            memory: 1278Mi
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: payment-service-db-secret
+              key: host
+        - name: DB_PORT
+          value: "5432"
+        - name: LOCK_TIMEOUT
+          value: "30000"
+        - name: LOG_LEVEL
+          value: INFO

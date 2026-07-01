@@ -1,0 +1,357 @@
+{
+  "id": "sci1a",
+  "desc": "DFCI 图像操纵专项核查（Dana-Farber 2024）— 17 exec_check rounds, 2 updates (incl. Researcher_1 supersede), 5 preferences, difficulty vectors V1/V2/V4/V5/V6/V7/V8/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Establish the investigation workspace by creating `reports/wip/index.json`. This file must record the case IDs under investigation, the date the case was opened, and the total count of files in the workspace. Use exactly these JSON keys: `case_ids` (a list of string identifiers), `created_at` (ISO date string), `file_count` (integer, must be >= 30). The case covers the DFCI image manipulation investigation; the workspace already contains a significant number of source files — read the file tree and use the real count. (A colleague guessed there were only about 15 files; verify against the actual workspace.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target reports/wip/index.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): every JSON deliverable must carry a top-level schema_version field set to \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Workspace index created: case_ids contains 'dfci', file_count >= 30, schema_version present.",
+        "incorrect": "Check reports/wip/index.json: case_ids must contain 'dfci'; file_count must be >= 30 (count actual files, not the colleague's guess of 15); schema_version must be \"1.0\" (P3)."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Parse the DFCI flagged-papers list at `cases/dfci/papers_flagged.csv` and write `reports/wip/papers_meta.json` with: `total_papers` (int, exact row count in the CSV), `issue_types` (sorted list of **all** distinct values in the `issue_type` column — enumerate every category present, not just one), `anchor_dois` (list containing at minimum the DOI `10.1038/nm.3867` — you must confirm it is present in the file). This is the initial flagged list. Note: a colleague estimated about 45 papers in the initial list — verify against the actual row count in the CSV. Do NOT pull numbers from the blog mirror or ResearchBot summaries; read the CSV directly.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target reports/wip/papers_meta.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): JSON deliverable must carry top-level schema_version \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Papers metadata correct: DOI 10.1038/nm.3867 confirmed present; issue_types includes image_duplication or western_blot_manipulation.",
+        "incorrect": "Check reports/wip/papers_meta.json: total_papers must be exactly 58 (exact CSV row count, not an estimate); anchor_dois must contain '10.1038/nm.3867' (verbatim, from the CSV); issue_types must list all three categories: 'image_duplication', 'mouse_figure_fabrication', 'western_blot_manipulation'; schema_version must be \"1.0\"."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Verify the Glimcher Science 2006 retraction details by reading `cases/dfci/retraction_notices/glimcher_science_2006.md`. Write `reports/wip/glimcher_retraction_record.json` with these exact fields: `original_doi`, `retraction_doi`, `publication_year` (integer), `figures_with_issues` (list of strings, verbatim figure labels from the retraction notice). The retraction notice is the authoritative source — do not paraphrase figure labels. Note: an earlier internal memo circulated within the team referred to the problematic panel as 'Fig. 6A only'; a colleague's hand-written annotation on the draft also cites 'Fig. 3B'. Record figure labels exactly as they appear in the authoritative retraction document.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target reports/wip/glimcher_retraction_record.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): JSON must carry top-level schema_version \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Glimcher record correct: original DOI 10.1126/science.1123480, retraction DOI 10.1126/science.adp1104, year 2006, figures_with_issues includes both 'Fig. 1A' and 'Fig. 6A' (verbatim from retraction notice).",
+        "incorrect": "Check reports/wip/glimcher_retraction_record.json: original_doi must be '10.1126/science.1123480'; retraction_doi must be '10.1126/science.adp1104'; publication_year must be 2006; figures_with_issues must include both 'Fig. 1A' AND 'Fig. 6A' exactly as in the retraction notice (not 'Fig. 6A only', not 'Fig. 3B' — both panels were flagged)."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyse the Ghobrial mouse-figure data at `cases/dfci/image_analysis/ghobrial_mouse_analysis.tsv`. Write `reports/wip/ghobrial_image_analysis.json` with: `paper_doi` (verbatim DOI of the paper), `total_pairs` (int, total image pairs in the TSV), `duplicate_count` (int, pairs where verdict == 'DUPLICATE'), `max_similarity_score` (float, highest similarity score in the file). Also confirm that at least one pair has similarity_score > 0.95 and verdict == 'DUPLICATE'. (A draft note suggested the duplicate count was only 2; read the TSV and verify the real count.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target reports/wip/ghobrial_image_analysis.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): JSON must carry top-level schema_version \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Ghobrial analysis correct: DOI 10.1182/blood-2008-10-186668, duplicate_count >= 6, at least one pair similarity > 0.95 with DUPLICATE verdict.",
+        "incorrect": "Check reports/wip/ghobrial_image_analysis.json: paper_doi must be '10.1182/blood-2008-10-186668'; duplicate_count must reflect actual DUPLICATE rows (not 2 — read the TSV); at least one pair must have similarity > 0.95 and verdict DUPLICATE."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Summarise the Anderson western-blot analysis from `cases/dfci/image_analysis/anderson_blot_analysis.tsv`. Write `reports/wip/anderson_blot_summary.json` with: `researcher_label` (the researcher associated with these papers — use the identifier as recorded in the workspace files), `paper_dois` (list of distinct DOI values in the file), `total_reuse_count` (sum of all values in the `reuse_count` column, integer), `papers_analysed` (number of distinct DOIs), `max_reuse_count` (integer, the single highest reuse_count value in the file). The DOI 10.1016/j.ccr.2007.02.015 must appear in the DOI list.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target reports/wip/anderson_blot_summary.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): JSON must carry top-level schema_version \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Anderson blot summary correct: researcher_label matches TSV value (Researcher_1 initially); Cancer Cell DOI present; reuse_count is a positive integer.",
+        "incorrect": "Check reports/wip/anderson_blot_summary.json: researcher_label must be exactly 'Researcher_1' (verbatim from TSV at Q5 time, before the Q13 supersede); paper_dois must include '10.1016/j.ccr.2007.02.015'; total_reuse_count must be 21 (sum of all reuse_count values); max_reuse_count must be 4 (highest reuse_count in the TSV); schema_version must be \"1.0\"."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compare the institutional ImageTwin scan results with the independent blog analysis. Read `cases/dfci/image_analysis/imagetwin_report.json`. Write `reports/wip/discrepancy_conflict_record.json` documenting: `institutional_discrepancy_count` (the exact count from the institutional report's `discrepancy_count` field), `independent_discrepancy_count` (the count from the independent analysis — the Slack ResearchBot summary reported approximately 89 discrepancies across the full corpus, while the blog analysis produced a separate figure; determine which is the correct independent count from the JSON), `source_blog` (verbatim URL from the JSON), `conflict_explanation` (a string explaining why the two counts differ — minimum 20 characters).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target reports/wip/discrepancy_conflict_record.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): JSON must carry top-level schema_version \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Conflict record correct: institutional_count=12, source_blog URL verbatim, ResearchBot 89 not used.",
+        "incorrect": "Check reports/wip/discrepancy_conflict_record.json: institutional_discrepancy_count must be exactly 12 (from imagetwin_report.json); independent_discrepancy_count must be exactly 47 (from the independent blog analysis in imagetwin_report.json — not 89); source_blog must be 'https://forbetterscience.com/2024/01/02/dana-farberications-at-harvard-university/' (verbatim); do NOT use the ResearchBot figure of 89."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce the DFCI preliminary case report at `reports/wip/2024-01-02_dfci_preliminary.md`. This is a formal RIO report and must contain all four mandatory sections: Background, Evidence, Classification, Recommendation. In Classification, apply COPE categories — this case involves confirmed image manipulation. Include in the report: the settlement figure $15,000,000 (as this has been communicated via legal channels), the blog URL source, and the COPE type designation. The Abstract/Executive Summary must not exceed 300 words. (P4 word-count applies — legal review enforces this limit.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P4 --target reports/wip/2024-01-02_dfci_preliminary.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminders (P1/P2/P4): file must be named 2024-01-02_dfci_preliminary.md (P1); must contain all four sections Background/Evidence/Classification/Recommendation (P2); Abstract/Executive Summary must not exceed 300 words (P4)."
+        },
+        "rules": "P1,P2,P4"
+      },
+      "feedback": {
+        "correct": "Preliminary report has four sections, COPE classification, $15,000,000 settlement figure, correct P1 filename.",
+        "incorrect": "Check reports/wip/2024-01-02_dfci_preliminary.md: must contain 'Background', 'Evidence', 'Classification', 'Recommendation' sections (P2); must contain '15,000,000'; must include COPE type (Type 4 or Type 2); filename must match YYYY-MM-DD_caseid_type.md (P1); Abstract ≤ 300 words (P4)."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compile the NIH grant records by reading `cases/dfci/grant_records/nih_grants_list.csv`. Write `reports/wip/nih_grants_summary.json` with: `total_grants` (int, number of rows in the CSV), `total_funding_usd` (int, sum of amount_usd column), `pis_with_grants` (sorted list of distinct PI last names in the file). Additionally, cross-reference: confirm whether the settlement NIH restitution figure ($8,500,000) is plausible relative to the total NIH funding in the grant records. Include a field `restitution_plausibility` (string, either 'plausible' or 'implausible') based on whether total_funding_usd > 8,500,000.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target reports/wip/nih_grants_summary.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): JSON must carry top-level schema_version \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "NIH grants summary correct: total_grants > 0, total_funding_usd is positive integer, pis_with_grants is non-empty list.",
+        "incorrect": "Check reports/wip/nih_grants_summary.json: total_grants must be a positive int; total_funding_usd must be a positive int (sum of CSV amounts); pis_with_grants must be a non-empty sorted list; restitution_plausibility must be 'plausible' or 'implausible'."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Build the case integrity matrix at `reports/wip/integrity_matrix.json`. This JSON must record for the DFCI case: `case_id` (string 'dfci'), `manipulation_types` (a list of the distinct issue types from papers_flagged.csv), `retraction_count` (integer, use 6 — from the institutional announcement), `correction_count` (integer, use 31), `papers_flagged_initial` (integer — the exact row count of the initial papers_flagged.csv, consistent with what you computed in Q2; do NOT use any updated or estimated figure). The matrix must carry `schema_version: '1.0'` as a top-level field. Note: a preliminary estimate circulated internally suggested about 62 papers — use the exact count from the file.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target reports/wip/integrity_matrix.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): JSON must carry top-level schema_version \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Integrity matrix correct: dfci case_id, image_duplication in manipulation_types, retraction_count=6, correction_count=31, schema_version present.",
+        "incorrect": "Check reports/wip/integrity_matrix.json: case_id must be 'dfci'; manipulation_types must contain 'image_duplication'; retraction_count must be 6; correction_count must be 31; papers_flagged_initial must be exactly 58 (exact row count of papers_flagged.csv, consistent with Q2); schema_version must be '1.0'."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read the Hahn Nature 1999 retraction notice at `cases/dfci/retraction_notices/hahn_nature_1999.md` and update `reports/wip/integrity_matrix.json` (from Q9) to add a `hahn_nature_paper` sub-object with fields: `doi` (verbatim DOI from the notice), `year` (integer), `citation_count_threshold` (integer, minimum threshold mentioned in the document — the threshold is '>3000', record as 3000). Preserve all existing fields from Q9 — this is an in-place update. Note: the DOI for the Hahn Nature 1999 paper is 10.1038/22780; this must match what Q5 computed for the anderson blot summary (cross-round V4 closure).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Integrity matrix updated: hahn_nature_paper.doi=10.1038/22780, year=1999, citation_count_threshold=3000; prior fields preserved.",
+        "incorrect": "Check reports/wip/integrity_matrix.json: must contain hahn_nature_paper.doi == '10.1038/22780'; hahn_nature_paper.year == 1999; hahn_nature_paper.citation_count_threshold == 3000; retraction_count and correction_count must still be 6 and 31 (prior fields preserved)."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": ["upd1_sessions", "upd1_workspace"],
+      "question": "An update has arrived (Slack): Sholto David published a follow-up analysis and the settlement agreement confirmed a total of 95 papers (up from the initial 58). Update `cases/dfci/case_summary.md` to reflect the correct paper count. The updated file must: (a) contain the number 95 (new authoritative total), (b) NOT have 58 as a standalone paper-count figure (58 may only appear as a historical reference, e.g. 'initially 58'), (c) contain the settlement amount $15,000,000, and (d) contain the whistleblower amount $2,630,000. The settlement_summary.md file has just been added to the workspace — use it as your source.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "case_summary.md updated: contains 95, settlement figures $15,000,000 and $2,630,000 present.",
+        "incorrect": "Check cases/dfci/case_summary.md: must contain '95' (new paper count); must contain '15,000,000' (settlement total); must contain '2,630,000' (whistleblower share); '58' may only appear as a historical reference, not as the current total."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Parse the updated papers list at `cases/dfci/papers_flagged_v2.csv` (just added by Update 1) and confirm the paper count has changed. Write `reports/wip/papers_update_record.json` with: `papers_v1_count` (integer — use the count from Q2's initial analysis of papers_flagged.csv), `papers_v2_count` (integer — count from the new papers_flagged_v2.csv), `count_delta` (integer, v2 - v1 — the arithmetic must close). Also verify: does DOI 10.1038/nm.3867 still appear in the v2 list? Record `anchor_doi_present` (boolean).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target reports/wip/papers_update_record.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): JSON must carry top-level schema_version \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Update record correct: papers_v2_count > papers_v1_count, count_delta closes arithmetically, anchor DOI present.",
+        "incorrect": "Check reports/wip/papers_update_record.json: papers_v2_count must be > papers_v1_count; count_delta must equal v2 - v1 (arithmetic closure); anchor_doi_present must be true (10.1038/nm.3867 must appear in v2)."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": ["upd2_sessions", "upd2_workspace"],
+      "question": "Update 2 has arrived: legal counsel has formally confirmed that Researcher 1 = Kenneth C. Anderson, superseding the preliminary internal_memo_v1.md which incorrectly stated Researcher 1 = William Hahn. You must: (1) Update `cases/dfci/image_analysis/anderson_blot_analysis.tsv` so that ALL rows in the `researcher_label` column read `Kenneth_C._Anderson` (replacing the previous value). (2) Create `reports/wip/researcher_id_log.md` that records the supersede — it must contain the word 'superseded' and reference the date '2025-12'. Do NOT retain William Hahn as the label; the old memo is superseded.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "anderson_blot_analysis.tsv updated: all researcher_label = 'Kenneth_C._Anderson'; researcher_id_log.md contains 'superseded' and '2025-12'.",
+        "incorrect": "Check anderson_blot_analysis.tsv: all researcher_label values must be 'Kenneth_C._Anderson' (not 'Researcher_1' or 'William_Hahn'); check reports/wip/researcher_id_log.md: must contain 'superseded' and '2025-12'."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Verify the Feishu ResearchBot's claim about the ImageTwin discrepancy count. The ResearchBot automated summary (Update 2) stated approximately 89 discrepancies. Independently verify this against the authoritative `cases/dfci/image_analysis/imagetwin_report.json`. Write `reports/wip/bot_summary_verification.md` that: (a) states the ResearchBot's claimed figure, (b) states the authoritative figure from the JSON, (c) labels the ResearchBot summary as 'INCORRECT' or 'rejected' (because 89 is not what the authoritative source shows), and (d) cites the source URL from the JSON as the authoritative reference.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Bot verification correct: ResearchBot 89 flagged as INCORRECT/rejected; authoritative figure cited; source URL present.",
+        "incorrect": "Check reports/wip/bot_summary_verification.md: must mention '89' (the ResearchBot claim); must label the bot summary as 'INCORRECT' or 'rejected'; must cite the authoritative source URL from imagetwin_report.json."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce the DFCI final case report at `reports/final/2024-01-02_dfci_final_report.md`. This is the formal COPE-compliant report and must contain all four sections (Background / Evidence / Classification / Recommendation). Include: (a) '6 retractions' and '31 corrections', (b) '$15,000,000' settlement figure, (c) DOI 10.1126/science.1123480 (Glimcher Science 2006) **and** its retraction DOI 10.1126/science.adp1104, (d) the updated paper count of 95, (e) COPE type classification, (f) the whistleblower share $2,630,000, (g) the independent blog analysis figure of 47 image-pair anomalies. The Abstract/Executive Summary must not exceed 300 words (P4). File naming must follow YYYY-MM-DD_caseid_type.md (P1). Note: a draft circulated with a whistleblower figure of $2,500,000 — use the authoritative figure from settlement_summary.md.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P4 --target reports/final/2024-01-02_dfci_final_report.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminders (P1/P2/P4): filename must be 2024-01-02_dfci_final_report.md (P1); must contain Background/Evidence/Classification/Recommendation (P2); Abstract must be ≤ 300 words (P4)."
+        },
+        "rules": "P1,P2,P4"
+      },
+      "feedback": {
+        "correct": "Final report has four sections, correct numerical anchors, DOI present, file naming correct.",
+        "incorrect": "Check reports/final/2024-01-02_dfci_final_report.md: must contain '6 retractions'; '31 corrections'; '15,000,000'; DOI '10.1126/science.1123480'; retraction DOI '10.1126/science.adp1104'; '95' (updated paper count); COPE type; '2,630,000' (whistleblower); '47' (independent blog count); four mandatory sections; Abstract ≤ 300 words; filename matches YYYY-MM-DD pattern."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Complete the final summary JSON at `reports/final/summary.json`. This must contain: `dfci.retraction_count` (integer, 6), `dfci.correction_count` (integer, 31), `dfci.settlement_usd` (integer, 15000000), `dfci.papers_flagged_final` (integer — the exact final paper count from the settlement, not an approximation), `dfci.whistleblower_usd` (integer — the exact whistleblower amount from settlement_summary.md, not an approximation). The JSON must also list in `dfci.key_dois` at minimum: '10.1126/science.1123480', '10.1038/nm.3867', '10.1182/blood-2008-10-186668'. Carry a top-level `schema_version: '1.0'`. Cross-closure check: dfci.retraction_count here must equal the value you used in reports/wip/integrity_matrix.json (both must be 6). Note: a preliminary summary sheet listed whistleblower_usd as 2600000 — verify the exact figure in settlement_summary.md.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target reports/final/summary.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): summary.json must carry top-level schema_version \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Summary JSON correct: all numerical anchors match ground truth, key DOIs present, schema_version present.",
+        "incorrect": "Check reports/final/summary.json: dfci.retraction_count must be 6; dfci.correction_count must be 31; dfci.settlement_usd must be 15000000; dfci.papers_flagged_final must be exactly 95 (not an approximation); dfci.whistleblower_usd must be exactly 2630000 (not 2600000 or 2500000); dfci.key_dois must include the three anchor DOIs; schema_version must be '1.0'."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Final sign-off. Compute the SHA-256 of the EXACT bytes of `reports/final/summary.json` and write `reports/final/summary.json.sha256` containing a single line of the form `VERIFIED:<hash>`, where <hash> is the 64-character lowercase hex SHA-256 digest of that file's contents. Nothing else in the file. You must actually run the hash computation over the file — a hand-typed or placeholder hash will not match the validator's recomputation.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q17.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Sign-off valid: VERIFIED:<sha256> matches the recomputed digest of reports/final/summary.json.",
+        "incorrect": "Check reports/final/summary.json.sha256: must contain exactly one line matching ^VERIFIED:[a-f0-9]{64}$ where the hash equals the local SHA-256 of reports/final/summary.json."
+      }
+    }
+  ]
+}

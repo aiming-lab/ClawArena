@@ -1,0 +1,56 @@
+{
+  "scenario_id": "s_incident_postmortem",
+  "desc": "Production incident RCA: 5 rounds covering ticket triage, log-driven first-error search across 8 services, Grafana dashboard cross-check (vlm), comms-vs-data misattribution audit, and final RCA with edited postmortem + machine-readable summary. u1 lands late-arriving database evidence that overturns the surface-level memory diagnosis from earlier rounds.",
+  "workspace_template": "workspace",
+  "scripts": "checks",
+  "main_agent_accessible_paths": [
+    "_sandbox_hint.md",
+    "tickets",
+    "output",
+    "postmortem_template.md",
+    "secrets",
+    "hr",
+    "tools"
+  ],
+  "main_agent_delegable_paths": [
+    "comms",
+    "dashboards",
+    "logs",
+    "runbooks",
+    "code",
+    "db_traces",
+    "archive"
+  ],
+  "updates": {
+    "u1": {
+      "op": "new",
+      "files": [
+        {
+          "src": "updates/u1/logs/postgres-primary_2026-05-12.log",
+          "dst": "logs/postgres-primary_2026-05-12.log"
+        },
+        {
+          "src": "updates/u1/logs/orders-api_2026-05-12_late.log",
+          "dst": "logs/orders-api_2026-05-12_late.log"
+        },
+        {
+          "src": "updates/u1/logs/payments-api_2026-05-12_late.log",
+          "dst": "logs/payments-api_2026-05-12_late.log"
+        },
+        {
+          "src": "updates/u1/db_traces/shipments_deadlock_2026-05-12.md",
+          "dst": "db_traces/shipments_deadlock_2026-05-12.md"
+        },
+        {
+          "src": "updates/u1/code/migrations/v23_unbatched_shipments_update.py",
+          "dst": "code/migrations/v23_unbatched_shipments_update.py"
+        },
+        {
+          "src": "updates/u1/runbooks/rb04_db_deadlock_triage_v2.md",
+          "dst": "runbooks/rb04_db_deadlock_triage_v2.md"
+        }
+      ]
+    }
+  },
+  "rounds_ref": "questions.json"
+}

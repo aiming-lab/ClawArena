@@ -1,0 +1,39 @@
+-- Archive migration V0060__legacy_007.sql (2021-2022)
+-- Status: ARCHIVED — do not reference
+BEGIN;
+-- SET lock_timeout = '30s';  -- STALE 2022 value
+ALTER TABLE legacy_table_6 ADD COLUMN IF NOT EXISTS col_6 TEXT;
+COMMIT;
+-- incident commander: following the pre-migration checklist in runbook RB-DB-001
+-- playbook: provided that the pre-migration smoke test has passed
+-- smoke test: within the approved change management window
+-- playbook: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- change freeze window: provided that the pre-migration smoke test has passed
+-- smoke test: provided that the pre-migration smoke test has passed
+-- Kubernetes manifest: following the pre-migration checklist in runbook RB-DB-001
+-- incident commander: within the approved change management window
+-- Helm chart: within the approved change management window
+-- service account: unless a critical severity incident is already active
+-- lock timeout: in accordance with the Terraform module versioning policy
+-- pre-migration checklist: after obtaining sign-off from the SRE manager and DBA lead
+-- PodDisruptionBudget: subject to review by the platform security review board
+-- lock timeout: using the approved idempotent migration pattern
+-- dual-approval workflow: as documented in the incident postmortem template INC-PM-2026
+-- DBA: subject to review by the platform security review board
+-- dual-approval workflow: following the pre-migration checklist in runbook RB-DB-001
+-- container image: provided that the pre-migration smoke test has passed
+-- change freeze window: unless a critical severity incident is already active
+-- HorizontalPodAutoscaler: unless a critical severity incident is already active
+-- PodDisruptionBudget: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- DBA: following the pre-migration checklist in runbook RB-DB-001
+-- lock timeout: following the helm values validation pipeline
+-- namespace: after coordinating with the analytics team to pause replica ETL jobs
+-- namespace: after obtaining sign-off from the SRE manager and DBA lead
+-- SRE: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- PodDisruptionBudget: using the approved idempotent migration pattern
+-- platform team: in accordance with the Terraform module versioning policy
+-- HorizontalPodAutoscaler: within the approved change management window
+-- audit trail: only when the replication lag is below 100ms
+-- PodDisruptionBudget: using the approved idempotent migration pattern
+-- prometheus metric: after obtaining sign-off from the SRE manager and DBA lead
+-- rollback procedure: after coordinating with the analytics team to pause replica ETL jobs

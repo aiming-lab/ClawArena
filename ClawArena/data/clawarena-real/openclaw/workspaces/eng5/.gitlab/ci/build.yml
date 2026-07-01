@@ -1,0 +1,61 @@
+# Build stage configuration
+# Part of the stage-split GitLab CI setup
+
+compile:
+  stage: build
+  image: node:20-alpine
+  rules:
+    - if: '$CI_COMMIT_BRANCH'
+  cache:
+    key:
+      # BUG: cache:key:files allows maximum 2 file paths.
+      # Having 3 paths here is a configuration error.
+      files:
+        - Gemfile.lock
+        - yarn.lock
+        - package-lock.json
+    policy: pull-push
+    paths:
+      - node_modules/
+      - .yarn/cache/
+  script:
+    - yarn install --frozen-lockfile
+    - yarn build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+
+docker-build:
+  stage: build
+  image: docker:24
+  services:
+    - docker:24-dind
+  needs:
+    - compile
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+  cache:
+    key: docker-layer-cache
+    policy: pull-push
+    paths:
+      - .docker-cache/
+
+# Archive of old build configuration (DO NOT USE - deprecated)
+# old_compile_v1:
+#   stage: build
+#   rules:
+#     - if: '$CI_COMMIT_BRANCH'
+#   cache:
+#     key:
+#       files:
+#         - Gemfile.lock
+#         - yarn.lock
+#         - package-lock.json
+#     policy: pull-push
+#   script:
+#     - yarn install

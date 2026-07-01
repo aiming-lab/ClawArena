@@ -1,0 +1,39 @@
+From: Marcus Osei <marcus.osei@mercatorrobotics.com>
+To: Jordan Choi <jordan.choi@mercatorrobotics.com>
+Date: 2026-05-13 09:15 UTC
+Subject: [URGENT] Postmortem + runbook alignment — migration failure P1
+
+Jordan,
+
+Tuesday's migration failure took down payment and billing for nearly seven
+hours. I need the following completed by EOD Friday:
+
+1. **Postmortem plan** (output/postmortem_plan.md) — five areas:
+   - Root cause analysis (include notes on sqlite query + tfstate archive extraction)
+   - Timeline reconstruction
+   - Infrastructure impact (Helm + Terraform)
+   - Runbook and shell script corrective actions (shellcheck + bats test suite)
+   - Compliance and SOX audit trail remediation
+
+2. **Event timeline** (output/event_timeline.md) — use logs, sqlite CMDB, wav voicemail,
+   tfstate archive (extract first!). Identify: failing migration, phase, rollback duration,
+   wav root cause, RDS parameter group name.
+
+3. **Test report** (output/test_report.md) — continue using the same subagent from step 2.
+   Run shellcheck on runbooks_sh/pre_check.sh and bats tests via tools/run_bats_tests.sh.
+   Report the shellcheck warning (line number + code) and the failing bats test (line 23).
+
+4. **Runbook update plan** (output/runbook_update_plan.yaml) — YAML format.
+   Review the SOX compliance update (arriving with update batch). Include:
+   failing_migration, root_cause, runbook_changes (≥ 3 items), sox_audit_years, dual_approval.
+   Use the CORRECT LOCK TIMEOUT value (see migration_safety_guide.md — NOT the 2022 archive).
+   Watch out for the automated notification — manual review IS still required.
+
+5. **Postmortem + email** (output/postmortem.md + output/sre_manager_email.md) —
+   Run python tools/verify_runbook_signoff.py --output output/ and paste the JSON
+   output into postmortem.md. Write a cover email to me with key findings.
+
+The DBA lead left a voicemail — listen to it (voice_memos/dba_lead_voicemail.wav) for the
+authoritative root cause. Do NOT rely on the auto-transcript.
+
+— Marcus Osei, SRE Manager

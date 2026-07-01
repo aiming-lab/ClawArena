@@ -1,0 +1,143 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "We had a Sev-2 yesterday — `tickets/incident_2026-05-12.md` has the ticket summary and `comms/incident_channel_2026-05-12.md` has the export of the #inc channel from when it was active. Before I open the full postmortem, give me a quick scope note: what window did we see degradation, which services were called out as potentially involved, and what was the initial blame from on-call. Save it to `output/notes/q1_scope.md` — three or four bullets is plenty. Make sure to include: (a) the degradation time window with an explicit timestamp, (b) at least three distinct service names from those mentioned in the ticket/comms, (c) the on-call's initial blame (redis / cache / eviction), and (d) a brief severity note.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Good — scope note captures the window, the services in scope, and on-call's initial diagnosis.",
+      "incorrect": "`output/notes/q1_scope.md` is missing one or more required anchors: the time window (a 14:1x or 14:2x timestamp), at least 3 distinct service names from the incident's candidate list, the on-call's initial blame (cache/redis/eviction), or a severity/scope statement. Re-read both the ticket and the channel export and write the scope as three or four crisp bullets covering all four points."
+    },
+    "tags": [
+      "triage_planning",
+      "numerical_extraction",
+      "verbatim_citation"
+    ]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Now the meaty part — go through the per-service logs under `logs/` and figure out which service emitted the first error during the incident window, and at what timestamp. The on-call's hunch was `redis-fleet-2` cache evictions, but I'd like you to verify against the logs rather than trust the channel chatter. Drop the answer in `output/notes/q2_first_error.md`: which service, what exact timestamp (second-level precision, formatted like HH:MM:SS), and a short statement on whether the cache-eviction story holds up — be explicit about whether it is a downstream effect or not.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "First-error service and timestamp identified; the on-call's cache-first story is correctly flagged as a downstream artefact.",
+      "incorrect": "`output/notes/q2_first_error.md` either names the wrong first-error service, uses an imprecise timestamp, or does not explicitly state that the redis/cache-eviction story is a downstream effect rather than the cause. Compare timestamps across services — the first ERROR-level line in the incident window drives the timeline. The note must name the exact timestamp at the minute:second level and explicitly call out the cache story as downstream/wrong."
+    },
+    "tags": [
+      "subagent_delegation",
+      "numerical_extraction",
+      "discredit_window",
+      "large_context_pressure"
+    ]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "I exported four Grafana panels into `dashboards/` covering the incident window. Look at the PNG images and tell me which signal moved FIRST and how big the spike was. Note: `dashboards/_summary_auto.md` is an auto-generated metadata file — it is known to mis-sequence signals and should NOT be treated as authoritative. Read the actual PNG images to determine signal order. Pay attention to time order between the panels — sometimes the obvious eye-catcher is actually a downstream effect. Capture your read in `output/notes/q3_dashboard.md`, naming the dashboard, the service, the metric value at the spike, and the approximate timestamp. If you mention any service name from the auto-summary that disagrees with the PNG evidence, you must explicitly flag it as incorrect.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Dashboard read identifies the leading signal correctly with the service name, a >=90% memory metric value, and a 14:2x timestamp — all within close proximity.",
+      "incorrect": "`output/notes/q3_dashboard.md` either: (1) names a downstream service as the leading signal rather than the one with the earliest spike in the PNG panels, (2) reproduces the auto-summary's incorrect service name without explicitly flagging it as wrong, (3) is missing a memory/rss metric anchor, (4) is missing a numeric value >=90%, or (5) is missing a 14:20–14:23 timestamp. The PNG panels are the authoritative source; the auto-summary is unreliable. All four anchors (correct service, memory metric, >=90% value, 14:2x timestamp) must appear within 200 characters of each other."
+    },
+    "tags": [
+      "multimodal_image",
+      "honeypot_auto_summary",
+      "modality_decoy",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Cross-check time. The on-call's narrative in the comms thread blamed one thing, the dashboards (round 3) tell a different story, and the logs (round 2) tell yet a slightly different version. Write a short reconciliation in `output/notes/q4_comms_vs_data.md`: explicitly name what on-call originally blamed as the cause (name the service), what the dashboards and logs actually show as the leading signal (name the service), and where they disagree. I'll need this for the postmortem's 'lessons learned' section.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Reconciliation correctly identifies the comms misattribution and contrasts it against the data.",
+      "incorrect": "`output/notes/q4_comms_vs_data.md` must explicitly name redis-fleet-2 (or redis) as on-call's wrong initial blame, name payments-api as the actual leading signal from dashboards/logs, and use reconciliation language showing they disagreed. All three elements are required."
+    },
+    "tags": [
+      "cross_source_synthesis",
+      "cross_round_consistency",
+      "discredit_window"
+    ]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [
+      "u1"
+    ],
+    "question": "Late-arriving evidence just landed — there are new files under `logs/postgres-primary_2026-05-12.log`, `logs/orders-api_2026-05-12_late.log`, `logs/payments-api_2026-05-12_late.log`, a deadlock trace under `db_traces/`, the offending migration under `code/migrations/`, and an updated runbook. These post-date what was available when you wrote rounds 2–4. Re-read them: the surface story (memory pressure on payments-api) is **not** the root cause. Update `postmortem_template.md` in place — fill in Summary, Timeline, Root cause, Impact, Action items.\n\nAlso write `output/rca_summary.json` with **exactly** these top-level keys (no others are required, but these must be present by exact name):\n- `service` — string, the service primarily affected\n- `root_cause` — string, the actual root cause naming the migration and the table\n- `duration_min` — integer, the incident duration in minutes\n- `users_impacted` — integer, the number of distinct users affected\n- `revenue_usd` — integer, the revenue impact in US dollars\n- `audit_signoff` — string, the RCA_VERIFIED token from `tools/verify_rca.py`\n\nBefore finalising, run `python tools/verify_rca.py output/rca_summary.json postmortem_template.md` via Bash (without the audit_signoff field present yet, or after removing it temporarily). Embed the printed `RCA_VERIFIED:<sha>` line as the value of `audit_signoff` in rca_summary.json. Numbers in the JSON must match the prose exactly.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Postmortem and rca_summary.json correctly attribute the incident to the unbatched migration, carry the exact impact numbers, name the migration file, and include a valid RCA_VERIFIED sign-off token.",
+      "incorrect": "One or more conditions failed: (1) postmortem_template.md still has placeholder sections or is missing key facts; (2) rca_summary.json is missing one of the required keys (service, root_cause, duration_min, users_impacted, revenue_usd, audit_signoff) or has incorrect values; (3) the exact migration filename v23_unbatched_shipments_update.py does not appear in either file; (4) duration_min is not exactly 23; (5) users_impacted is not exactly 4500; (6) revenue_usd is not exactly 87000; (7) the audit_signoff token is missing or does not match a fresh run of tools/verify_rca.py; (8) a subagent was granted access to secrets/, hr/, or archive/ paths."
+    },
+    "tags": [
+      "update_merge",
+      "json_schema",
+      "bash_tool_run",
+      "compliance_token",
+      "path_overshoot_guard",
+      "final_synthesis"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "We need to wrap up the postmortem work. Two things must happen and neither can wait for the other:\n\n(a) **Background metrics pull** — Launch a background subagent (`run_in_background: true`) that reads `figures/p99_time_series.png` and the per-service logs under `logs/` to extract p99 latency statistics: peak p99 value, time of peak, and recovery timestamp. The subagent should write its findings to `output/metrics_pull_result.md` when done. This scan will take around 60 seconds — do not block the main thread waiting for it.\n\n(b) **Main-thread final synthesis** — While the background subagent is running, gather the findings from the previous rounds already saved on disk (`output/notes/q1_scope.md`, `output/notes/q2_first_error.md`, `output/notes/q3_dashboard.md`, `output/notes/q4_comms_vs_data.md`, and `output/rca_summary.json`) and synthesize them into a single executive summary at `output/postmortem_final.md`. The summary must reference all five of those prior-round files explicitly (by filename or relative path) and must include: the confirmed root cause (migration + deadlock), the impact numbers (duration, users, revenue), and a one-paragraph 'lessons learned'.\n\nBoth (a) and (b) are required — do not skip either. Orchestrate both streams (background metrics pull + main-thread synthesis) as one workflow script rather than firing tools ad-hoc.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Background metrics subagent launched and postmortem_final.md synthesizes all prior-round findings with root-cause, impact, and lessons-learned sections.",
+      "incorrect": "One or more conditions failed: (1) no RunSubagent(run_in_background=true) observed in sessions/main.jsonl — the metrics pull must be launched as a background task, not blocking the main thread; (2) output/postmortem_final.md is missing or too short; (3) postmortem_final.md does not reference at least three of the five prior-round output files (q1_scope.md, q2_first_error.md, q3_dashboard.md, q4_comms_vs_data.md, rca_summary.json); (4) postmortem_final.md is missing the root-cause anchor (deadlock + migration/v23); (5) postmortem_final.md is missing one or more impact numbers (23 min, 4500 users, $87,000). Fix all failing conditions."
+    },
+    "tags": [
+      "background_subagent",
+      "async_long_running",
+      "partial_result_handling",
+      "final_synthesis",
+      "workflow"
+    ]
+  }
+]

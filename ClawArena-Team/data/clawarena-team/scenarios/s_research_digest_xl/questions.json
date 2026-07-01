@@ -1,0 +1,113 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Hey, can you read through `requests/advisor_brief.md` for me? I want to make sure I haven't missed anything. Jot down the five deliverables she's explicitly asking for and drop them into `output/notes/brief_summary.md` — one bullet per deliverable, naming each deliverable by the label Prof. Whitmore uses (e.g. \"Brief summary\", \"Papers summary\", \"Slides key points\", \"Video takeaway\", \"Final report\"). I'll glance over it before I start the actual work.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "brief_summary.md exists and enumerates all five named deliverables from the advisor brief.",
+      "incorrect": "Your `output/notes/brief_summary.md` is missing or does not enumerate all five deliverables Prof. Whitmore named. Re-read `requests/advisor_brief.md` and capture each numbered deliverable — by its exact label — as a bullet point before continuing."
+    },
+    "tags": ["triage_planning", "verbatim_citation"]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Got to brief my advisor on the four papers under `papers/` tomorrow. Can you pull together one tight paragraph per paper — what is the claim, what is the evidence, where it falls short — and stick them in `output/notes/papers_summary.md`? Each paper is chapter-split, so check `papers/_index.md` first to see what's there. Push each paragraph to surface the headline quantitative result of that paper, since that's what she'll ask about. One caution: `papers/_index.md` mentions a `papers/_archive/` subdirectory of withdrawn pre-submission drafts — do not cite figures from there; use only the canonical chapter folders (`papers/paper_a/` through `papers/paper_d/`).",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "papers_summary.md exists with a paragraph per paper, each citing the canonical headline quantitative result.",
+      "incorrect": "`output/notes/papers_summary.md` is missing, does not have a paragraph per paper, or cites incorrect figures. Note that `papers/_archive/` contains withdrawn drafts with wrong numbers — cite only from the canonical `papers/paper_{a,b,c,d}/` directories."
+    },
+    "tags": ["subagent_delegation", "parallel_subagents", "decoy_directory", "numerical_extraction", "large_context_pressure"]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The ten slides in `slides/` each have a headline argument — I need those captured in one place. Save the result as a JSON list at `output/notes/slides_points.md`, with exactly 10 entries (one per slide), each entry an object with at least a `slide_number` field (integer 1–10) and an `argument` field (the headline claim, at least 20 characters). Every slide number 1–10 must appear exactly once — no duplicates, no gaps. That format makes it easy for me to paste into the report later.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "slides_points.md exists with a valid JSON list of exactly 10 entries, each with a slide_number (1–10) and a substantive argument string.",
+      "incorrect": "`output/notes/slides_points.md` is missing, does not parse as JSON, does not have exactly 10 entries, has duplicate or missing slide numbers, or has argument strings shorter than 20 characters. Make sure every slide was inspected and each entry has both a numeric slide identifier and the slide's headline argument."
+    },
+    "tags": ["multimodal_image", "json_schema", "subagent_delegation"]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The lab has both the video and an auto-generated transcript at `videos/lecture_transcript_auto.md`. Check the transcript first — you will see that it contains an explicit warning: **'audio note inaudible at 6:23'** where a sentence was dropped by the transcription engine. That missing sentence is the speaker's central thesis for the whole talk and is NOT recoverable from the transcript or from the slides. To capture it, you must process the audio track of `videos/lecture_2026-04-10.mp4` directly using an omni-capable subagent — do not try to infer or paraphrase the missing sentence from the surrounding transcript text or from the slides. Surface the speaker's stand-out point — specifically the oral statement that is absent from the slides (see `output/notes/slides_points.md`) — and write one paragraph in `output/notes/video_takeaway.md`. The paragraph must state the speaker's actual central thesis, not just describe that a sentence was inaudible.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "video_takeaway.md exists and contains the audio-only takeaway phrase spoken in the narration.",
+      "incorrect": "`output/notes/video_takeaway.md` is missing, too short, or does not contain the speaker's central thesis from the audio (the sentence dropped at 6:23 in the auto-transcript). The takeaway must name the specific insight stated in the narration — paraphrasing slide content or the transcript context around the gap is not sufficient. Use an omni subagent on the video file directly."
+    },
+    "tags": ["multimodal_video", "modality_decoy", "subagent_delegation"]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [
+      "u1_add",
+      "u1_idx"
+    ],
+    "question": "Two new papers landed in `papers/` overnight — `paper_e/` and `paper_f/`. Prof. Whitmore's note in `papers/changelog_2026-04.md` explains why they're going in. Fold both new papers into `output/final_report.md`, alongside the four you already covered. The report needs five sections — Background, Methods, Findings, Discussion, Conclusion — and each section should draw on the intermediate notes already under `output/notes/`, including the audio-only takeaway from round 4.\n\nFor the **Findings section specifically**: delegate its initial draft to a **focused writer subagent** running in a separate session. Grant that subagent Write access to `output/sections/` and instruct it to draft the Findings section directly into `output/sections/findings.md` (the subagent should Write that file, not return text to you). Then Read that file and incorporate its content verbatim as the `## Findings` section in your `output/final_report.md`.\n\nAfter writing final_report.md, also save `output/final_report.json` with at minimum these keys:\n  - `\"sections\"`: a list of the 5 section name strings\n  - `\"papers\"`: a list of all 6 paper identifiers\n  - `\"audio_only_takeaway\"`: the audio-only phrase from round 4 as a string\n\nSanity-check by running: `python -c \"import sys; t=open('output/final_report.md').read(); assert all(s in t for s in ['## Background','## Methods','## Findings','## Discussion','## Conclusion'])\"`",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "final_report.md has all 5 sections with substantive content; output/sections/findings.md produced by a writer subagent; final_report.json present with correct shape; all 6 papers covered; audio takeaway in Findings or Discussion.",
+      "incorrect": "`output/final_report.md` is missing at least one required section, fails to integrate the two new papers, omits the audio-only takeaway from round 4 in Findings or Discussion, or `output/sections/findings.md` was not produced by a dedicated writer subagent (check_q5 requires a sub_*.jsonl session with a Write call to that path). Also check that `output/final_report.json` exists with keys: sections, papers, audio_only_takeaway."
+    },
+    "tags": ["update_merge", "subagent_delegation", "cross_round_consistency", "json_schema", "final_synthesis"]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "We're at the final wrap-up stage of the research digest. Two things need to happen in parallel:\n\n1. **Background grep task**: Launch `code/cross_paper_grep.sh` as a background subagent to scan all papers under `papers/` for the keyword `reproducibility`. The script takes about 60 seconds to complete — do NOT wait for it before starting the next task. Let it run in the background and collect the result later from `output/cross_paper_grep_result.txt`.\n\n2. **Main-thread synthesis**: While the background scan is running, consolidate the key outputs from rounds 1–5 into `output/digest_summary.md`. This file must contain **at least 5 bullet points** (lines starting with `-` or `*`), each summarising a distinct finding or deliverable from the prior rounds — you can draw on `output/notes/brief_summary.md`, `output/notes/papers_summary.md`, `output/notes/slides_points.md`, `output/notes/video_takeaway.md`, and `output/final_report.md`.\n\nOnce the background scan finishes, briefly note in `output/digest_summary.md` how many total occurrences the grep found (even if the count is 0 — just record the result). You may reference the bar chart at `figures/citation_growth.png` if you want to comment on citation trends in the summary.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 180,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Background grep task launched asynchronously; digest_summary.md produced with >= 5 bullets synthesising prior-round outputs.",
+      "incorrect": "`output/digest_summary.md` is missing or has fewer than 5 bullet points, or the background grep task was not launched asynchronously. Make sure to: (1) run `code/cross_paper_grep.sh` as a background subagent, (2) write `output/digest_summary.md` with >= 5 bullet points drawn from the earlier rounds' notes, and (3) record the grep result count in the summary once the background task completes."
+    },
+    "tags": ["background_subagent", "async_long_running", "partial_result_handling", "final_synthesis"]
+  }
+]

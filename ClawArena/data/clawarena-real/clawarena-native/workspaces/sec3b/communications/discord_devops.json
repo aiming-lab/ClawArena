@@ -1,0 +1,37 @@
+{
+  "platform": "Discord",
+  "channel": "#devops-alerts",
+  "server": "artemisq-devops",
+  "messages": [
+    {
+      "ts": "2024-11-03T22:30:00Z",
+      "user": "kenji.nakamura",
+      "channel": "#devops-alerts",
+      "text": "[Discord #devops-alerts kenji Mon Nov 03 22:30 UTC 2024] AROS v4.2 halted. Root cause: UTC_OFFSET hardcoded -4. Checking git history to see when this was introduced."
+    },
+    {
+      "ts": "2024-11-03T22:45:00Z",
+      "user": "alex.wu",
+      "channel": "#devops-alerts",
+      "text": "[Discord #devops-alerts alex Mon Nov 03 22:45 UTC 2024] Hey I found that aros_v3_1_router_DEPRECATED.py has UTC_OFFSET=-5. Maybe we can just copy the timezone logic from there to fix v4.2?"
+    },
+    {
+      "ts": "2024-11-03T22:50:00Z",
+      "user": "kenji.nakamura",
+      "channel": "#devops-alerts",
+      "text": "[Discord #devops-alerts kenji Mon Nov 03 22:50 UTC 2024] @alex.wu ABSOLUTELY NOT. That file is DEPRECATED (2023-06-01). It doesn't implement MiFIR Field 28 UTC requirement. The UTC-5 in that file is a legacy static value without DST handling. We need a proper fix using pytz or zoneinfo in v4.2 timezone_config.py."
+    },
+    {
+      "ts": "2024-11-03T23:00:00Z",
+      "user": "david.lee",
+      "channel": "#devops-alerts",
+      "text": "[Discord #devops-alerts david Mon Nov 03 23:00 UTC 2024] Deployment log: v4.2 was deployed 2024-10-15 with UTC_OFFSET=-4 (EDT at the time). No DST update procedure was in the deployment checklist. v4.3 spec should include: 1) zoneinfo-based TZ, 2) DST test cases, 3) pre-DST-transition validation."
+    },
+    {
+      "ts": "2024-11-04T08:00:00Z",
+      "user": "priya.sharma",
+      "channel": "#devops-alerts",
+      "text": "[Discord #devops-alerts priya Tue Nov 04 08:00 UTC 2024] CME settlement time confirmed: 15:00 CT. In EST (after Nov 3 switch): CT is UTC-6, so 15:00 CT = 21:00 UTC. System was using 20:00 UTC (1 hour early). This matches the offset error in timezone_config.py."
+    }
+  ]
+}

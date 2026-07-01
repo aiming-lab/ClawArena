@@ -1,0 +1,49 @@
+# clawarena-team evaluation base config: fixed subagent pool (local gemma vLLM); main is injected via --model/-m.
+#
+# Purpose: when evaluating various "closed-source / open-source main models", reuse the same subagent
+# pool (llm/vlm/omni route to local gemma endpoints, served by scripts/serve_gemma-4-31b.py (:8900)
+# and serve_gemma-4-omni.py (:8902)).
+# main is not declared here — it is passed via -m by scripts/run_eval_targets.py per the target registry.
+#
+# Usage (single-target single-scenario check, see run_eval_targets.py):
+#   clawarena-team run -d data/clawarena-team -t s_finance_options_pricing \
+#     --config configs/eval_base.yaml -m '{"main":{...}}' -o results/eval/<target>
+
+paths:
+  data: data/clawarena-team/
+  run_output: results/eval/
+
+# Note: max_tokens is the per-turn generation cap (passed through into the vLLM request payload via ModelConfig.extra).
+# Without a cap, vLLM generates up to max_model_len (128k); runaway/repetitive generation can produce hundreds of
+# thousands of tokens and exceed 600s, which combined with the provider's 600s x 3 retries yields a 30min "fake
+# deadlock". Capping at 24000 lets runaway generation terminate naturally within the timeout.
+model_pool:
+  llm:
+    provider: openai_compat
+    model_id: gemma-4-31b-it
+    api_base: http://127.0.0.1:8900/v1
+    api_key: EMPTY
+    name: gemma-4-31b-it-text
+    modalities: {text: true}
+    max_tokens: 24000
+  vlm:
+    provider: openai_compat
+    model_id: gemma-4-31b-it
+    api_base: http://127.0.0.1:8900/v1
+    api_key: EMPTY
+    name: gemma-4-31b-it-vl
+    modalities: {text: true, image: 48, video: 8}
+    max_tokens: 24000
+  omni:
+    provider: openai_compat
+    model_id: gemma-4-e4b-it
+    api_base: http://127.0.0.1:8902/v1
+    api_key: EMPTY
+    name: gemma-4-e4b-it
+    modalities: {text: true, image: 24, audio: 4, video: 4}
+    max_tokens: 24000
+
+probe:
+  enabled: true
+  timeout_sec: 30
+  max_tokens: 4

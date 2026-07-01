@@ -1,0 +1,382 @@
+        # Helm values for payment-svc chart 1.18.4 (HOTFIX)
+        # This file contains the CORRECTED memory limit: 2048Mi
+        # Previous value in 1.18.3: 512Mi (regression — do not use)
+        # Authoritative correct value: correct_memory_limit_mi = 2048
+
+        replicaCount: 5
+
+        image:
+          repository: registry.internal/payment-svc
+          pullPolicy: IfNotPresent
+          tag: "1.18.4"
+
+        serviceAccount:
+          create: true
+          name: payment-svc
+
+        service:
+          type: ClusterIP
+          port: 80
+          targetPort: 8080
+
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "2048Mi"    # FIXED: restored from regression (was 512Mi in 1.18.3)
+            cpu: "1000m"
+
+        sidecar:
+          enabled: true
+          image: envoyproxy/envoy:v1.29.0
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+
+        autoscaling:
+          enabled: true
+          minReplicas: 3
+          maxReplicas: 20
+          targetCPUUtilizationPercentage: 70
+          targetMemoryUtilizationPercentage: 80
+
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+
+        ingress:
+          enabled: true
+          className: nginx
+          hosts:
+            - host: payment.internal.example.com
+              paths:
+                - path: /
+                  pathType: Prefix
+
+        nodeSelector:
+          kubernetes.io/os: linux
+          node-pool: "eu-west-2a"
+
+        # -----------------------------------------------------------------------
+        # Extended tuning notes (added in 1.18.4 hotfix for operational guidance)
+        # -----------------------------------------------------------------------
+
+        # Tuning note 1: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 2: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 3: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 4: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 5: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 6: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 7: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 8: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 9: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 10: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 11: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 12: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 13: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 14: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 15: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 16: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 17: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 18: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 19: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 20: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 21: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 22: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 23: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 24: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 25: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 26: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 27: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 28: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 29: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 30: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 31: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 32: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 33: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 34: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 35: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 36: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 37: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 38: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 39: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 40: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 41: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 42: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 43: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 44: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 45: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 46: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 47: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 48: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 49: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 50: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 51: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 52: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 53: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 54: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 55: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 56: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 57: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 58: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 59: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 60: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 61: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 62: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 63: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 64: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 65: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 66: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 67: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 68: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 69: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 70: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 71: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 72: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 73: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 74: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 75: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 76: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 77: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 78: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 79: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 80: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 81: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 82: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 83: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 84: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 85: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 86: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 87: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 88: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 89: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 90: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 91: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 92: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 93: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 94: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 95: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 96: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 97: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 98: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 99: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 100: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 101: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 102: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 103: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 104: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 105: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 106: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 107: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 108: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 109: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 110: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 111: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 112: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 113: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 114: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 115: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 116: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 117: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 118: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 119: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 120: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 121: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 122: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 123: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 124: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 125: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 126: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 127: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 128: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 129: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 130: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 131: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 132: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 133: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 134: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 135: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 136: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 137: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 138: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 139: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 140: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 141: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 142: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 143: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 144: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 145: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 146: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 147: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 148: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 149: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 150: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 151: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 152: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 153: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 154: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 155: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 156: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 157: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 158: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 159: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 160: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 161: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 162: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 163: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 164: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 165: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 166: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 167: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 168: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 169: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 170: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 171: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 172: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 173: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 174: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 175: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 176: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 177: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 178: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 179: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 180: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 181: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 182: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 183: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 184: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 185: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 186: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 187: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 188: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 189: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 190: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 191: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 192: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 193: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 194: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 195: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 196: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 197: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 198: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 199: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 200: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 201: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 202: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 203: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 204: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 205: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 206: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 207: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 208: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 209: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 210: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 211: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 212: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 213: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 214: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 215: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 216: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 217: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 218: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 219: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 220: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 221: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 222: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 223: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 224: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 225: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 226: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 227: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 228: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 229: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 230: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 231: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 232: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 233: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 234: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 235: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 236: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 237: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 238: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 239: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 240: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 241: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 242: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 243: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 244: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 245: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 246: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 247: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 248: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 249: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 250: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 251: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 252: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 253: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 254: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 255: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 256: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 257: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 258: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 259: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 260: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 261: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 262: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 263: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 264: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 265: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 266: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 267: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 268: Consider adjusting replicaCount based on observed load patterns in the payments namespace.
+# Tuning note 269: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 270: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 271: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 272: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 273: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 274: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 275: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 276: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 277: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 278: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 279: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 280: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 281: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 282: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 283: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 284: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 285: Consider adjusting affinity.podAntiAffinity based on observed load patterns in the payments namespace.
+# Tuning note 286: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 287: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 288: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 289: Consider adjusting image.tag based on observed load patterns in the payments namespace.
+# Tuning note 290: Consider adjusting ingress.className based on observed load patterns in the payments namespace.
+# Tuning note 291: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 292: Consider adjusting resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 293: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 294: Consider adjusting livenessProbe.timeoutSeconds based on observed load patterns in the payments namespace.
+# Tuning note 295: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 296: Consider adjusting readinessProbe.failureThreshold based on observed load patterns in the payments namespace.
+# Tuning note 297: Consider adjusting sidecar.resources.limits.memory based on observed load patterns in the payments namespace.
+# Tuning note 298: Consider adjusting nodeSelector.node-pool based on observed load patterns in the payments namespace.
+# Tuning note 299: Consider adjusting autoscaling.maxReplicas based on observed load patterns in the payments namespace.
+# Tuning note 300: Consider adjusting replicaCount based on observed load patterns in the payments namespace.

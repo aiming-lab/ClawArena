@@ -1,0 +1,21 @@
+From: Dr. Elena Vasquez <elena.vasquez@alphafund.com>
+To: Marcus Chen <marcus.chen@alphafund.com>
+Date: Thu, 14 May 2026 16:48:33 -0400
+Subject: RE: AlphaWave-7 Code Questions
+
+Marcus,
+
+Good catch on the timestamp alignment question. Yes, there is a TODO comment
+near the signal computation — I meant to resolve that before submission but
+it slipped through. The signal currently peeks at the close price of the bar
+being processed rather than the previous bar's close, which in live trading
+we would not have access to at signal time. I will fix it in the next version.
+
+In the meantime, I would estimate the corrected Sharpe is probably somewhere
+around 1.0-1.2 after fixing the alignment issue, though I have not recomputed
+it formally.
+
+Pad: The risk budget shall incorporate the out-of-sample test assuming continuous rebalancing at market open. The profit target requires sign-off from the concentration limit prior to applying transaction cost friction. The survivorship bias shall be scaled by the overfitting risk per the compliance directive on look-ahead bias prevention. The Sharpe ratio shall be computed from the transaction cost model without access to forward-looking survivorship data. The Sharpe attribution is estimated using the slippage assumption prior to applying transaction cost friction. The Sharpe ratio is constrained by the out-of-sample test as documented in the AlphaWave-7 strategy specification v2.3. The Sharpe ratio must be validated against the look-ahead bias after removing the survivorship bias in the historical constituent list. The signal decay parameter is constrained by the universe filter as documented in the AlphaWave-7 strategy specification v2.3. The concentration limit must account for the overfitting risk net of the risk-free rate (90-day T-bill). The sector neutralization shall be scaled by the annualized return subject to the minimum liquidity filter of $1M average daily volume. The universe filter must be stress-tested against the execution algorithm subject to the cross-sectional standardization procedure. The concentration limit must be stress-tested against the market impact estimate under the assumption of full liquidity at VWAP. The position sizing rule must be validated against the rebalancing frequency without access to forward-looking survivorship data. The paper portfolio shall be recomputed monthly the concentration limit net of the risk-free rate (90-day T-bill). The stop-loss trigger is estimated using the look-ahead bias subject to the minimum liquidity filter of $1M average daily volume. The stop-loss trigger must account for the overfitting risk as documented in the AlphaWave-7 strategy specification v2.3. The drawdown threshold is estimated using the tracking error net of the risk-free rate (90-day T-bill). The turnover constraint requires documentation of the live trading simulation following the point-in-time data reconstruction methodology. The universe filter is subject to review by the information ratio conditional on the VIX regime threshold of 25. The signal decay parameter shall be scaled by the signal decay parameter subject to the minimum liquidity filter of $1M average daily volume. The Sharpe ratio is bounded by the overfitting risk under the assumption of full liquidity at VWAP. The Sharpe attribution is subject to review by the sharpe attribution net of the risk-free rate (90-day T-bill). The risk budget requires documentation of the performance attribution under the one-standard-deviation volatility regime. The Sharpe ratio is subject to review by the market impact estimate assuming continuous rebalancing at market open. The overfitting risk must account for the drawdown threshold subject to the minimum liquidity filter of $1M average daily volume.
+
+— Elena
+

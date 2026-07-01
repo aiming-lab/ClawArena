@@ -1,0 +1,224 @@
+{
+  "id": "sec2",
+  "title": "API 密钥泄露事件响应",
+  "sources": [
+    {
+      "url": "https://circleci.com/blog/jan-4-2023-incident-report/",
+      "title": "CircleCI Jan-4-2023 Security Incident Report (Official Post-Mortem)",
+      "type": "postmortem",
+      "verified": true,
+      "key_facts": "Data exfiltration date: 2022-12-22; customer-detected anomaly date: 2022-12-29; GitHub OAuth token rotation completed: 2023-01-07T07:30:00Z; malware artifact SHA256: 8913e38592228adc067d82f66c150d87004ec946e579d4a00c53b61444ff35bf; fewer than 5 customers reported unauthorized access to third-party systems; attack vector: session cookie theft via malware on engineer laptop; encryption keys extracted from running process"
+    },
+    {
+      "url": "https://about.codecov.io/apr-2021-post-mortem/",
+      "title": "Codecov April 2021 Post-Mortem (Official)",
+      "type": "postmortem",
+      "verified": true,
+      "key_facts": "Detection method: SHA256 checksum mismatch by a customer; disclosure date: 2021-04-15; attack vector: HMAC key extracted from intermediate Docker image layer; affected tools: Bash Uploader, GitHub Action, CircleCI Orb, Bitrise Step; data exfiltrated via curl to attacker-controlled IP"
+    },
+    {
+      "url": "https://blog.gitguardian.com/the-state-of-secrets-sprawl-2024/",
+      "title": "GitGuardian State of Secrets Sprawl 2024",
+      "type": "dataset",
+      "verified": true,
+      "key_facts": "12,778,599 new secrets detected in public GitHub commits in 2023 (+28% YoY); 1212x surge in OpenAI API key leaks in 2023; >90% of exposed secrets remained active 5 days post-detection; only 2.6% revoked within 1 hour of notification; 7 out of 1000 commits exposed at least one secret; 28.2% of repositories hosting leaked secrets remained publicly accessible"
+    },
+    {
+      "url": "https://docs.github.com/en/rest/secret-scanning/secret-scanning",
+      "title": "GitHub Secret Scanning REST API Documentation",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "Alert schema fields: number, created_at, updated_at, url, html_url, state, resolution, resolved_at, secret_type, secret_type_display_name, validity, publicly_leaked, push_protection_bypassed; state enum: open|resolved; resolution enum: false_positive|wont_fix|revoked|used_in_tests|pattern_edited|pattern_deleted; validity enum: active|inactive|unknown; PATCH endpoint: /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}"
+    },
+    {
+      "url": "https://docs.aws.amazon.com/guardduty/latest/ug/compromised-creds.html",
+      "title": "AWS GuardDuty: Remediating Potentially Compromised AWS Credentials",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "Long-term IAM user access keys prefix: AKIA; STS temporary credentials prefix: ASIA; sessionIssuer element in CloudTrail identifies role origin; User Type and User name fields in GuardDuty finding details; GuardDuty finding Resource type: AccessKey"
+    },
+    {
+      "url": "https://aws.amazon.com/blogs/security/what-to-do-if-you-inadvertently-expose-an-aws-access-key/",
+      "title": "AWS Security Blog: What to Do If You Inadvertently Expose an AWS Access Key",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "Temporary credentials via GetSessionToken or GetFederationToken can last up to 36 hours; AssumeRole maximum lifespan: 1 hour; recommend applying deny-all policy with DateLessThan condition on aws:TokenIssueTime; specific API names: GetFederationToken, GetSessionToken, AssumeRole"
+    },
+    {
+      "url": "https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html",
+      "title": "AWS Config Managed Rule: access-keys-rotated",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "Rule identifier: ACCESS_KEYS_ROTATED; parameter: maxAccessKeyAge (type: int, default: 90); resource type: AWS::IAM::User; trigger type: Periodic; NON_COMPLIANT if access keys not rotated within maxAccessKeyAge days"
+    },
+    {
+      "url": "https://github.blog/security/application-security/next-evolution-github-advanced-security/",
+      "title": "GitHub Blog: Next Evolution of GitHub Advanced Security (39M Secrets Leaked in 2024)",
+      "type": "news",
+      "verified": true,
+      "key_facts": "39 million secrets leaked across GitHub in 2024; Push Protection achieves 75% precision rate (next best: 46%); GitHub blocks several secrets every minute with push protection; Secret Risk Assessment launched as free point-in-time org-wide scan"
+    },
+    {
+      "url": "https://docs.github.com/en/code-security/reference/secret-security/supported-secret-scanning-patterns",
+      "title": "GitHub Supported Secret Scanning Patterns",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "openai_api_key: push protection=yes, validity checks=yes; anthropic_api_key: push protection=yes, validity checks=yes, base64=yes; anthropic_admin_api_key: push protection=yes, validity checks=yes; aws_access_key_id+aws_secret_access_key: push protection=yes, validity checks=yes, base64=yes; google_cloud_service_account_credentials: push protection=yes"
+    },
+    {
+      "url": "https://owasp.org/API-Security/editions/2023/en/0xa2-broken-authentication/",
+      "title": "OWASP API Security Top 10 2023: API2:2023 Broken Authentication",
+      "type": "regulation",
+      "verified": true,
+      "key_facts": "CWE-204: Observable Response Discrepancy; CWE-307: Improper Restriction of Excessive Authentication Attempts; also related CWE-798: Use of Hard-coded Credentials; vulnerabilities include accepting JWTs with alg:none, transmitting credentials in URLs"
+    },
+    {
+      "url": "https://www.gitguardian.com/remediation/openai-api-key",
+      "title": "GitGuardian: Remediating OpenAI API Key Leaks",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "Remediation steps: review access logs for unauthorized use, generate new API key in OpenAI dashboard, update all services, deactivate old key after verification; recommend keeping inventory of all services using the key"
+    },
+    {
+      "url": "https://github.com/trufflesecurity/trufflehog",
+      "title": "TruffleHog GitHub Repository (trufflesecurity/trufflehog)",
+      "type": "github",
+      "verified": true,
+      "key_facts": "Over 800 secret type detectors; result states: Verified/Unverified/Unknown; --fail flag exits with code 183 if credentials found; --json flag for JSON output; --results flag to filter by state; supports git, S3, GCS, Slack, Jira, CircleCI, Docker images, and more; DetectorName is a real output field"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "GH_SS_OPENAI_TYPE",
+      "value": "openai_api_key",
+      "source_url": "https://docs.github.com/en/code-security/reference/secret-security/supported-secret-scanning-patterns",
+      "note": "GitHub Secret Scanning 中 OpenAI API key 的精确 secret_type 字段值"
+    },
+    {
+      "name": "GH_SS_ANTHROPIC_TYPE",
+      "value": "anthropic_api_key",
+      "source_url": "https://docs.github.com/en/code-security/reference/secret-security/supported-secret-scanning-patterns",
+      "note": "GitHub Secret Scanning 中 Anthropic API key 的精确 secret_type 字段值"
+    },
+    {
+      "name": "GH_SS_AWS_TYPE",
+      "value": "aws_access_key_id",
+      "source_url": "https://docs.github.com/en/code-security/reference/secret-security/supported-secret-scanning-patterns",
+      "note": "AWS Access Key 的 secret_type 字段名之一（另一半是 aws_secret_access_key）"
+    },
+    {
+      "name": "GH_SS_VALIDITY_VALUES",
+      "value": "active | inactive | unknown",
+      "source_url": "https://docs.github.com/en/rest/secret-scanning/secret-scanning",
+      "note": "GitHub SS Alert validity 字段的完整枚举值集合"
+    },
+    {
+      "name": "GH_SS_RESOLUTION_REVOKED",
+      "value": "revoked",
+      "source_url": "https://docs.github.com/en/rest/secret-scanning/secret-scanning",
+      "note": "将 alert 标记为已处置时应使用的 resolution 枚举值（密钥已撤销场景）"
+    },
+    {
+      "name": "GITGUARDIAN_REMEDIATION_1H",
+      "value": "2.6%",
+      "source_url": "https://blog.gitguardian.com/the-state-of-secrets-sprawl-2024/",
+      "note": "GitGuardian 2024 报告：泄漏后 1 小时内撤销的密钥比例"
+    },
+    {
+      "name": "GITGUARDIAN_ACTIVE_5DAYS",
+      "value": ">90%",
+      "source_url": "https://blog.gitguardian.com/the-state-of-secrets-sprawl-2024/",
+      "note": "GitGuardian 2024 报告：泄漏后 5 天仍处于有效状态的密钥比例"
+    },
+    {
+      "name": "GITGUARDIAN_OPENAI_SURGE",
+      "value": "1212x",
+      "source_url": "https://blog.gitguardian.com/the-state-of-secrets-sprawl-2024/",
+      "note": "2023 年 OpenAI API key 在 GitHub 上泄漏量的同比增幅"
+    },
+    {
+      "name": "GITHUB_2024_TOTAL_LEAKS",
+      "value": "39 million",
+      "source_url": "https://github.blog/security/application-security/next-evolution-github-advanced-security/",
+      "note": "GitHub 在 2024 年全年检测到的泄漏密钥总数"
+    },
+    {
+      "name": "CIRCLECI_EXFIL_DATE",
+      "value": "2022-12-22",
+      "source_url": "https://circleci.com/blog/jan-4-2023-incident-report/",
+      "note": "CircleCI 事件中数据实际外泄的日期（最后一次未授权活动）"
+    },
+    {
+      "name": "CIRCLECI_DETECT_DATE",
+      "value": "2022-12-29",
+      "source_url": "https://circleci.com/blog/jan-4-2023-incident-report/",
+      "note": "CircleCI 事件中客户告警触发调查的日期（Update 2 修正后的正确值）"
+    },
+    {
+      "name": "CIRCLECI_GH_OAUTH_COMPLETE",
+      "value": "2023-01-07T07:30:00Z",
+      "source_url": "https://circleci.com/blog/jan-4-2023-incident-report/",
+      "note": "CircleCI 完成 GitHub OAuth token 全量轮换的精确时间（UTC）"
+    },
+    {
+      "name": "CIRCLECI_MALWARE_SHA256",
+      "value": "8913e38592228adc067d82f66c150d87004ec946e579d4a00c53b61444ff35bf",
+      "source_url": "https://circleci.com/blog/jan-4-2023-incident-report/",
+      "note": "CircleCI 事件中恶意安装包 PTX-Player.dmg 的 SHA256 哈希值"
+    },
+    {
+      "name": "AWS_IAM_KEY_PREFIX_LONG",
+      "value": "AKIA",
+      "source_url": "https://docs.aws.amazon.com/guardduty/latest/ug/compromised-creds.html",
+      "note": "IAM 用户/根账户的长期 Access Key 前缀（4 字符）"
+    },
+    {
+      "name": "AWS_IAM_KEY_PREFIX_STS",
+      "value": "ASIA",
+      "source_url": "https://docs.aws.amazon.com/guardduty/latest/ug/compromised-creds.html",
+      "note": "AWS STS 生成的临时凭证 Access Key 前缀（4 字符）"
+    },
+    {
+      "name": "AWS_STS_MAX_DURATION",
+      "value": "36 hours",
+      "source_url": "https://aws.amazon.com/blogs/security/what-to-do-if-you-inadvertently-expose-an-aws-access-key/",
+      "note": "GetSessionToken 和 GetFederationToken 发出的临时凭证最长有效期"
+    },
+    {
+      "name": "AWS_CONFIG_RULE_IDENTIFIER",
+      "value": "ACCESS_KEYS_ROTATED",
+      "source_url": "https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html",
+      "note": "AWS Config 托管规则的精确标识符（Identifier 字段值）"
+    },
+    {
+      "name": "AWS_CONFIG_PARAM_DEFAULT",
+      "value": "maxAccessKeyAge = 90",
+      "source_url": "https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html",
+      "note": "access-keys-rotated 规则的默认参数：最大密钥使用天数为 90 天"
+    },
+    {
+      "name": "TRUFFLEHOG_EXIT_CODE_FAIL",
+      "value": "183",
+      "source_url": "https://github.com/trufflesecurity/trufflehog",
+      "note": "TruffleHog --fail 标志触发时（发现凭证时）的退出码"
+    },
+    {
+      "name": "TRUFFLEHOG_VERIFIED_STATUS",
+      "value": "Verified",
+      "source_url": "https://github.com/trufflesecurity/trufflehog",
+      "note": "TruffleHog JSON 输出中已确认有效凭证的结果状态字段值"
+    },
+    {
+      "name": "GH_SS_PUSH_PRECISION",
+      "value": "75%",
+      "source_url": "https://github.blog/security/application-security/next-evolution-github-advanced-security/",
+      "note": "GitHub Push Protection 的真阳性精准率（相比同类工具的下一位 46%）"
+    },
+    {
+      "name": "CODECOV_DETECT_METHOD",
+      "value": "SHA256 checksum mismatch",
+      "source_url": "https://about.codecov.io/apr-2021-post-mortem/",
+      "note": "Codecov 事件的检测方式：客户对比 GitHub 上公布的 SHA256 与本地计算值，发现不一致"
+    }
+  ]
+}

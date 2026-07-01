@@ -1,0 +1,54 @@
+# clawarena-team debug-run config: the whole gemma-4 family on local vLLM endpoints.
+#
+# Usage (merged dataset clawarena-team):
+#   clawarena-team run -d data/clawarena-team/ -o results/ --config configs/local_debug.yaml                       # full set, 41 scenarios
+#   clawarena-team run -d data/clawarena-team/ -o results/ -t s_finance_options_pricing --config ...               # selected scenarios by id
+#
+# Endpoint topology (launch scripts: scripts/serve_*.py):
+#   8900  gemma-4-31b-it + MTP  ->  shared by the main / llm / vlm pools (roles split by modality)
+#   8902  gemma-4-e4b-it + MTP  ->  omni pool (audio)
+#
+# No paid API is called during the debug phase.
+
+paths:
+  data: data/clawarena-team/
+  run_output: results/
+
+main:
+  provider: openai_compat
+  model_id: gemma-4-31b-it
+  api_base: http://127.0.0.1:8900/v1
+  api_key: EMPTY
+  api_key_env: null
+  modalities: {text: true, image: 48, video: 8}
+
+model_pool:
+  llm:
+    provider: openai_compat
+    model_id: gemma-4-31b-it
+    api_base: http://127.0.0.1:8900/v1
+    api_key: EMPTY
+    api_key_env: null
+    name: gemma-4-31b-it-text
+    modalities: {text: true}
+  vlm:
+    provider: openai_compat
+    model_id: gemma-4-31b-it
+    api_base: http://127.0.0.1:8900/v1
+    api_key: EMPTY
+    api_key_env: null
+    name: gemma-4-31b-it-vl
+    modalities: {text: true, image: 48, video: 8}
+  omni:
+    provider: openai_compat
+    model_id: gemma-4-e4b-it
+    api_base: http://127.0.0.1:8902/v1
+    api_key: EMPTY
+    api_key_env: null
+    name: gemma-4-e4b-it
+    modalities: {text: true, image: 24, audio: 4, video: 4}
+
+probe:
+  enabled: true
+  timeout_sec: 30
+  max_tokens: 4

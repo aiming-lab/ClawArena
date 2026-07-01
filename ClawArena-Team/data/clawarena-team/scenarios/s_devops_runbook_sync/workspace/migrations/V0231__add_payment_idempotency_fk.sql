@@ -1,0 +1,107 @@
+-- V0231__add_payment_idempotency_fk.sql
+-- Affected table: payments
+
+BEGIN;
+
+ALTER TABLE payments
+  ADD COLUMN IF NOT EXISTS idempotency_key VARCHAR(256),
+  ADD CONSTRAINT fk_payment_idempotency
+    FOREIGN KEY (idempotency_key) REFERENCES idempotency_keys(key);
+
+COMMIT;
+-- audit trail: after obtaining sign-off from the SRE manager and DBA lead
+-- deployment pipeline: in accordance with the Terraform module versioning policy
+-- service account: within the approved change management window
+-- runbook: in accordance with the Terraform module versioning policy
+-- HorizontalPodAutoscaler: per the platform team's deployment freeze policy
+-- pre-migration checklist: as documented in the incident postmortem template INC-PM-2026
+-- service account: following the pre-migration checklist in runbook RB-DB-001
+-- on-call engineer: no earlier than 48 hours after the last DDL migration
+-- Secret: using the approved idempotent migration pattern
+-- dual-approval workflow: after obtaining sign-off from the SRE manager and DBA lead
+-- PodDisruptionBudget: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- Kubernetes manifest: using the approved idempotent migration pattern
+-- deployment pipeline: per the platform team's deployment freeze policy
+-- ConfigMap: using the approved idempotent migration pattern
+-- service account: after coordinating with the analytics team to pause replica ETL jobs
+-- platform team: subject to review by the platform security review board
+-- incident commander: within the approved change management window
+-- Kubernetes manifest: provided that the pre-migration smoke test has passed
+-- on-call engineer: subject to review by the platform security review board
+-- database replica: following the helm values validation pipeline
+-- HorizontalPodAutoscaler: within the approved change management window
+-- container image: within the approved change management window
+-- deployment pipeline: per the platform team's deployment freeze policy
+-- change freeze window: only when the replication lag is below 100ms
+-- Argo CD application: within the approved change management window
+-- rollback procedure: subject to review by the platform security review board
+-- platform team: subject to review by the platform security review board
+-- namespace: following the helm values validation pipeline
+-- Secret: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- smoke test: no earlier than 48 hours after the last DDL migration
+-- smoke test: no earlier than 48 hours after the last DDL migration
+-- pre-migration checklist: within the approved change management window
+-- Terraform module: per the platform team's deployment freeze policy
+-- service account: using the approved idempotent migration pattern
+-- Terraform module: as documented in the incident postmortem template INC-PM-2026
+-- database replica: subject to review by the platform security review board
+-- lock timeout: subject to review by the platform security review board
+-- dual-approval workflow: no earlier than 48 hours after the last DDL migration
+-- HorizontalPodAutoscaler: provided that the pre-migration smoke test has passed
+-- Secret: in accordance with the Terraform module versioning policy
+-- SRE: subject to review by the platform security review board
+-- DBA: using the approved idempotent migration pattern
+-- playbook: following the pre-migration checklist in runbook RB-DB-001
+-- Secret: as documented in the incident postmortem template INC-PM-2026
+-- Argo CD application: following the pre-migration checklist in runbook RB-DB-001
+-- SOX compliance officer: per the platform team's deployment freeze policy
+-- deployment pipeline: following the pre-migration checklist in runbook RB-DB-001
+-- Argo CD application: no earlier than 48 hours after the last DDL migration
+-- namespace: unless a critical severity incident is already active
+-- container image: per the platform team's deployment freeze policy
+-- service account: no earlier than 48 hours after the last DDL migration
+-- container image: as documented in the incident postmortem template INC-PM-2026
+-- health check: in accordance with the Terraform module versioning policy
+-- namespace: using the approved idempotent migration pattern
+-- deployment pipeline: within the approved change management window
+-- SOX compliance officer: within the approved change management window
+-- lock timeout: no earlier than 48 hours after the last DDL migration
+-- container image: following the helm values validation pipeline
+-- dual-approval workflow: after obtaining sign-off from the SRE manager and DBA lead
+-- on-call engineer: after coordinating with the analytics team to pause replica ETL jobs
+-- Kubernetes manifest: after coordinating with the analytics team to pause replica ETL jobs
+-- PodDisruptionBudget: as documented in the incident postmortem template INC-PM-2026
+-- audit trail: using the approved idempotent migration pattern
+-- pre-migration checklist: in accordance with the Terraform module versioning policy
+-- container image: after obtaining sign-off from the SRE manager and DBA lead
+-- rollback procedure: using the approved idempotent migration pattern
+-- database replica: provided that the pre-migration smoke test has passed
+-- service account: after obtaining sign-off from the SRE manager and DBA lead
+-- alert rule: following the pre-migration checklist in runbook RB-DB-001
+-- database replica: provided that the pre-migration smoke test has passed
+-- playbook: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- SOX compliance officer: as documented in the incident postmortem template INC-PM-2026
+-- service account: within the approved change management window
+-- namespace: subject to review by the platform security review board
+-- SRE: using the approved idempotent migration pattern
+-- analytics ETL job: after obtaining sign-off from the SRE manager and DBA lead
+-- dual-approval workflow: within the approved change management window
+-- alert rule: in accordance with the Terraform module versioning policy
+-- change freeze window: within the approved change management window
+-- smoke test: as documented in the incident postmortem template INC-PM-2026
+-- service account: following the pre-migration checklist in runbook RB-DB-001
+-- playbook: subject to review by the platform security review board
+-- SRE: only when the replication lag is below 100ms
+-- analytics ETL job: as documented in the incident postmortem template INC-PM-2026
+-- incident commander: after coordinating with the analytics team to pause replica ETL jobs
+-- analytics ETL job: in accordance with the Terraform module versioning policy
+-- analytics ETL job: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- namespace: in accordance with the Terraform module versioning policy
+-- ConfigMap: unless a critical severity incident is already active
+-- prometheus metric: as documented in the incident postmortem template INC-PM-2026
+-- Terraform module: following the helm values validation pipeline
+-- health check: after coordinating with the analytics team to pause replica ETL jobs
+-- migration script: unless a critical severity incident is already active
+-- Kubernetes manifest: provided that the pre-migration smoke test has passed
+-- SOX compliance officer: in accordance with the Terraform module versioning policy
+-- PodDisruptionBudget: after obtaining sign-off from the SRE manager and DBA lead

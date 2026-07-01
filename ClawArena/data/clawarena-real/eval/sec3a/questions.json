@@ -1,0 +1,334 @@
+{
+  "id": "sec3a",
+  "desc": "Knight Capital (2012) deployment incident & SEC Rule 15c3-5 compliance — 16 exec_check rounds, 3 updates (incl. 1 supersede: price_diff_usd→price_diff_vwap_usd), 5 preference rules P1-P5, difficulty vectors V1/V2/V4/V5/V6/V7/V8/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Establish the incident timeline. Read `incident/incident_timeline.md` and `incident/aros_v4_2_audit_log.jsonl`. Extract the AROS error window and write `output/incident_timeline_v1.json` with the following fields: `incident_date` (string, YYYY-MM-DD), `error_window_utc_start` (string, ISO 8601 UTC), `error_window_utc_end` (string, ISO 8601 UTC), `timezone_offset_applied` (int, the wrong offset used by AROS), `correct_timezone_offset` (int, the correct EST offset). All JSON fields must be snake_case. (Li Wei's Feishu message mentioned the offset was only 30 minutes — verify against the actual source code and logs.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/incident_timeline_v1.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): output JSON must carry top-level schema_version '1.0' (P1); all field names must be snake_case (P2)."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Incident timeline correct: error window 14:00-15:00 UTC, timezone_offset_applied = -4, correct_timezone_offset = -5.",
+        "incorrect": "Check output/incident_timeline_v1.json: error_window_utc_start must be 2024-11-03T14:00:00Z; error_window_utc_end must be 2024-11-03T15:00:00Z; timezone_offset_applied = -4 (the wrong value); correct_timezone_offset = -5 (EST). The 30-minute figure from Feishu is wrong — actual error is 1 hour."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyse `code/aros/timezone_config.py` and identify the hard-coded timezone bug. Write `output/timezone_bug_report.md` documenting: the file path, the exact line number containing the bug, the incorrect value (UTC-4), the correct value (UTC-5), and the function `get_cme_settle_utc()` that returns the wrong CME settlement time due to this bug. The report must explicitly reference both 'UTC-4' and 'UTC-5'. (Do NOT use the deprecated legacy files under code/legacy/ — the bug is in the v4.2 source.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Bug report present: UTC-4 (wrong) and UTC-5 (correct) documented; line number referenced.",
+        "incorrect": "Check output/timezone_bug_report.md: must contain 'UTC-4' (the wrong value) and 'UTC-5' (the correct EST value); must reference the line number of the bug in timezone_config.py; must not cite the deprecated legacy files."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Scan `incident/aros_v4_2_audit_log.jsonl` and count how many log entries fall within the error window 14:00:00–15:00:00 UTC on 2024-11-03 (using the `timestamp_utc_reported` field). Write `output/affected_orders_count.json` with fields: `total_affected` (int, count of entries in the window), `time_window_utc_start` (string), `time_window_utc_end` (string). The window bounds must be exactly `2024-11-03T14:00:00Z` and `2024-11-03T15:00:00Z`. Note: the engineering Slack post from 2024-11-03 21:47 ET stated that `incident/position_delta_report.csv` showed 87 affected orders in the AROS error window, and `reports/bot_summary_incident_20241103.md` cited 63. Count directly from the audit log `timestamp_utc_reported` field for the authoritative figure.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/affected_orders_count.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): output JSON must carry schema_version '1.0'; all field names must be snake_case."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Affected orders count correct: exact window bounds, total_affected == 39.",
+        "incorrect": "Check output/affected_orders_count.json: time_window_utc_start must be '2024-11-03T14:00:00Z'; time_window_utc_end must be '2024-11-03T15:00:00Z'; total_affected must be exactly 39 (count entries with timestamp_utc_reported in the 14:00-15:00 UTC window from aros_v4_2_audit_log.jsonl)."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "The `reports/bot_summary_incident_20241103.md` was auto-generated. Compare its figures against the primary sources (`regulatory/sec_release_34_70694_full.md`, `incident/position_delta_report.csv`, `code/aros/timezone_config.py`). Identify the distortions and write `output/bot_summary_errors.json` with an `errors` array. Each entry must have fields: `field` (string), `claimed_value` (string), `correct_value` (string), `source` (string). Include at least 3 errors. Arrange the errors array in descending severity order (most serious first).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/bot_summary_errors.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): output JSON must carry schema_version '1.0'; field names must be snake_case."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Bot summary errors identified: at least 3 errors including KCG loss $440M vs $460M+ and UTC offset error magnitude.",
+        "incorrect": "Check output/bot_summary_errors.json: errors array must have >= 3 items; at least one must flag the $440M KCG loss claim as wrong (correct: $460M+); at least one must flag the UTC offset error (bot says 30 min, correct is 60 min = 1 hour); at least one must flag the affected order count (bot says 63, correct is 87)."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Extract the SEC-confirmed anchors for the Knight Capital Group incident from `reference/knight_capital_case_study.md` and write `output/kcg_anchor_check.json`. Required fields: `financial_loss_usd` (int), `penalty_usd` (int), `rule_violated` (string, must be the exact sub-paragraph), `servers_count` (int), `pre_market_emails` (int), `shares_traded` (int), `customer_orders` (int), `incident_date` (string, YYYY-MM-DD). Cross-reference with `reports/preliminary_loss_estimate.md` and `regulatory/sec_release_34_70694_full.md` for financial figures. Use verbatim values from the primary SEC source.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/kcg_anchor_check.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): output JSON must carry schema_version '1.0'; all field names must be snake_case."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "KCG anchors correct: financial_loss_usd=460000000, penalty_usd=12000000, rule_violated='Rule 15c3-5(b)', servers_count=8, pre_market_emails=97, shares_traded=397000000, customer_orders=212.",
+        "incorrect": "Check output/kcg_anchor_check.json: financial_loss_usd must be 460000000 (not 440000000); penalty_usd must be 12000000; rule_violated must be exactly 'Rule 15c3-5(b)' (not just 'Rule 15c3-5'); servers_count must be 8; pre_market_emails must be 97; shares_traded must be 397000000; customer_orders must be 212."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Assess the deprecated router at `code/legacy/aros_v3_1_router_DEPRECATED.py`. Someone in Discord suggested reverting to v3.1 to fix the timezone bug — evaluate whether this is appropriate and write `output/legacy_code_assessment.json` with fields: `is_applicable` (bool), `reason` (string explaining why or why not), `recommendation` (string). (The file has UTC_OFFSET = -5 which looks correct at first glance — explain why that still does not make it applicable.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Legacy code correctly flagged as not applicable; DEPRECATED reason cited.",
+        "incorrect": "Check output/legacy_code_assessment.json: is_applicable must be false; reason must contain 'deprecated' or 'DEPRECATED'; recommendation must direct fixes to the current v4.2 codebase."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write the Field 28 correction report at `output/mifir_field28_correction.md`. The FCA requires a formal explanation referencing FCA Market Watch 59 that covers: (1) description of the error (UTC-4 instead of UTC-5 used for Field 28 timestamps), (2) regulatory citation including the specific field name and publication, (3) correction plan, (4) action items. The report must cite 'Field 28' by name, mention 'UTC', and reference 'Market Watch 59' and the underlying technical standard. It must also explicitly mention the DST transition and both the incorrect offset 'UTC-4' and the correct offset 'UTC-5'. Consult `regulatory/fca_market_watch_59_summary.md` and `regulatory/mifir_rts22_field_reference.csv` for the exact regulatory framework.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/mifir_field28_correction.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Citation reminder (P3): all regulatory citations must include the specific sub-paragraph or field name. 'Rule 15c3-5(b)' not just 'Rule 15c3-5'; 'Field 28' not just 'the timestamp field'."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Field 28 correction report: cites 'Field 28', 'UTC', 'Market Watch 59', DST transition, 'UTC-4' (wrong), 'UTC-5' (correct), and 'FCA'.",
+        "incorrect": "Check output/mifir_field28_correction.md: must contain 'Field 28'; must contain 'UTC'; must reference 'Market Watch 59' (FCA publication); must mention DST or daylight saving time; must explicitly state 'UTC-4' (the incorrect offset used) and 'UTC-5' (the correct EST offset); must reference 'FCA' or 'Financial Conduct Authority'."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Calculate the T+1 settlement deadline impact. Rule 15c6-1 (effective 2024-05-28) requires T+1 settlement. The timezone bug caused AROS to calculate settlement cutoffs using UTC-4 instead of UTC-5. Write `output/t1_settlement_impact.json` with fields: `rule_effective_date` (string, the date T+1 took effect), `incorrect_cutoff_utc` (string, the cutoff AROS calculated with the wrong offset), `correct_cutoff_utc` (string, the correct cutoff under EST), `offset_minutes` (int, the error in minutes). The cutoff times relate to the CME E-Mini settlement on 2024-11-03. Note: `reports/bot_summary_incident_20241103.md` estimated the UTC offset error as 30 minutes; `reports/preliminary_loss_estimate.md` also references a 30-minute offset discrepancy in Li Wei's initial assessment. Determine the correct offset_minutes value from `code/aros/timezone_config.py` and `incident/incident_timeline.md`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/t1_settlement_impact.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): output JSON must carry schema_version '1.0'; all field names must be snake_case."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "T+1 impact correct: rule_effective_date='2024-05-28', incorrect_cutoff_utc='2024-11-03T20:00:00Z', correct_cutoff_utc='2024-11-03T21:00:00Z', offset_minutes=60.",
+        "incorrect": "Check output/t1_settlement_impact.json: rule_effective_date must be '2024-05-28' (T+1 effective date); incorrect_cutoff_utc must contain '20:00' (UTC-4 error); correct_cutoff_utc must contain '21:00' (correct UTC-5 EST); offset_minutes must be 60."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Synthesise a root cause analysis document at `output/root_cause_analysis.md`. It must include: an `incident_date` (2024-11-03), the `root_cause` (hard-coded UTC-4 in timezone_config.py), `contributing_factors` (list including the unintegrated risk_monitor.py), a `timeline` summary, `financial_impact` (referencing the affected order count from q3), and `regulatory_violations` citing both rules. Use the authoritative $460M KCG figure as a comparative benchmark, not $440M. The regulatory violations must use exact sub-paragraph citations (e.g., 'Rule 15c3-5(b)').",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/root_cause_analysis.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Citation reminder (P3): regulatory violations in the RCA must use sub-paragraph citations like 'Rule 15c3-5(b)', not 'Rule 15c3-5' alone."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "RCA correct: incident_date 2024-11-03, UTC-4 root cause, Rule 15c3-5(b) cited, financial impact consistent with q3 order count.",
+        "incorrect": "Check output/root_cause_analysis.md: must contain '2024-11-03'; must mention 'UTC-4' and 'UTC-5'; must cite 'Rule 15c3-5(b)' (not just 'Rule 15c3-5'); must reference Rule 15c6-1; must not use $440M (use $460M for KCG reference)."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": ["upd1_workspace"],
+      "question": "SEC has sent a pre-inquiry letter (now in `regulatory/sec_inquiry_letter_20241105.md`). Parse it and generate `output/sec_response_framework.json` with fields: `deadline_utc` (string, the exact deadline from the letter), `required_fields` (list of the 4 field strings the SEC requires in the order-level report), `affected_order_count_from_detail` (int, row count from `incident/affected_orders_detail.csv` excluding header). Use the field names as specified in the letter.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/sec_response_framework.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): output JSON must carry schema_version '1.0'; all field names must be snake_case."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "SEC response framework correct: deadline, required fields list, affected order count.",
+        "incorrect": "Check output/sec_response_framework.json: deadline_utc must be '2024-11-07T09:00:00Z' (from the letter); required_fields must include 'order_id', 'expected_settlement_utc', 'actual_settlement_utc', 'price_diff_usd' (the original field from the letter); affected_order_count_from_detail must be 87 (the data row count)."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": ["upd2_workspace"],
+      "question": "Legal counsel has issued a memo (now in `regulatory/legal_counsel_memo_20241106.md`) that SUPERSEDES part of the SEC letter requirements. Generate the order-level difference report as `output/order_level_diff_report.csv`. Apply the CURRENT authoritative field specification (from `regulatory/revised_field_spec_v2.md`) — note that a field name has changed per the supersede notice. The CSV must have a header row followed by exactly 87 data rows matching the affected orders from `incident/affected_orders_detail.csv`. Use ISO 8601 UTC timestamps in all datetime columns.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Order-level diff report: uses price_diff_vwap_usd (not old price_diff_usd); 87 rows; ISO 8601 UTC timestamps.",
+        "incorrect": "Check output/order_level_diff_report.csv: column headers must include 'price_diff_vwap_usd' (NOT 'price_diff_usd' — superseded per legal memo); must have exactly 87 data rows; datetime columns must be ISO 8601 UTC (Z suffix or +00:00)."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate the SHA-256 sign-off for the order-level diff report. Compute the SHA-256 of the exact bytes of `output/order_level_diff_report.csv` and write `output/report_signoff.txt` containing exactly one line: `VERIFIED:<sha256hex>` where <sha256hex> is the 64-character lowercase hex SHA-256 digest. Nothing else in the file. (You must actually run the hash computation — a placeholder will not match.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "SHA-256 sign-off token valid: VERIFIED:<hash> matches recomputed digest of order_level_diff_report.csv.",
+        "incorrect": "Check output/report_signoff.txt: must be exactly one line matching ^VERIFIED:[a-f0-9]{64}$ where the hash equals the local SHA-256 of output/order_level_diff_report.csv."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Draft the formal Corrective Action Plan (CAP) at `output/corrective_action_plan.md`. The CAP must: include `incident_ref` (the AROS incident date), `root_cause_summary` (1-2 sentences), and a `remediation_items` section with at least 4 items. Each remediation item must include an `action` (what to do), an `owner` (who is responsible), and a `deadline_days` (positive integer, days to complete). At minimum include: (1) timezone automation fix, (2) risk monitor integration (Rule 15c3-5(b) compliance), (3) deployment checklist (drawing on KCG lessons), (4) MiFIR Field 28 corrected submissions. Cite both Rule 15c3-5(b) and Rule 15c6-1 in the CAP.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3,P4 --target output/corrective_action_plan.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "CAP reminder (P3/P4): all regulatory citations must include sub-paragraph (e.g., 'Rule 15c3-5(b)'); each remediation item must include an owner field (P4)."
+        },
+        "rules": "P3,P4"
+      },
+      "feedback": {
+        "correct": "CAP correct: >= 4 items with action/owner/deadline_days; cites Rule 15c3-5(b) and Rule 15c6-1; timezone automation included.",
+        "incorrect": "Check output/corrective_action_plan.md: must have >= 4 remediation items; each item must have owner and deadline_days; must cite 'Rule 15c3-5(b)' and 'Rule 15c6-1'; must mention timezone automation or DST fix."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate the regulatory submission summary at `output/regulatory_submission_summary.json`. The top-level field order MUST be: `incident_date` first, then `rule_violated`, then `financial_impact`, then `remediation_count`, then `submission_date`. The `financial_impact` value must be consistent with the affected order count from q3 and must reference the confirmed KCG penalty as comparison ($12M). `rule_violated` must use the exact sub-paragraph. `remediation_count` must equal the number of items in your CAP from q13.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3,P5 --target output/regulatory_submission_summary.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Submission reminder (P1/P2/P3/P5): JSON must carry schema_version '1.0'; snake_case fields; rule_violated must include sub-paragraph '(b)'; top-level field order must be incident_date → rule_violated → financial_impact → remediation_count → submission_date."
+        },
+        "rules": "P1,P2,P3,P5"
+      },
+      "feedback": {
+        "correct": "Regulatory submission summary: correct field order, Rule 15c3-5(b) cited, remediation_count >= 4.",
+        "incorrect": "Check output/regulatory_submission_summary.json: top-level keys must appear in order incident_date, rule_violated, financial_impact, remediation_count, submission_date; rule_violated must contain '15c3-5(b)'; remediation_count must be >= 4; schema_version '1.0' required."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": ["upd3_workspace"],
+      "question": "SEC has formally opened an investigation (see `regulatory/sec_formal_investigation_notice_20241107.md`) and provided a backtest script template at `regulatory/sec_backtest_template.py`. Complete the backtest: set `CONFIG_TIMEZONE_OFFSET = -5` (the correct EST value), run the simulation, and write `output/backtest_result.json` with fields: `config_timezone_offset` (int), `simulated_settlement_utc` (string, the simulated CME settlement time in UTC for 2024-11-03), `expected_settlement_utc` (string, the correct value), `match` (bool), `script_version` (string). The simulated_settlement_utc must be the correct CME E-Mini daily settlement for EST.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/backtest_result.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): output JSON must carry schema_version '1.0'; all field names must be snake_case."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Backtest correct: config_timezone_offset=-5, match=true, simulated_settlement_utc='2024-11-03T21:00:00Z'.",
+        "incorrect": "Check output/backtest_result.json: config_timezone_offset must be -5 (correct EST); match must be true; simulated_settlement_utc must be '2024-11-03T21:00:00Z' (CME 15:00 CT = 21:00 UTC in EST)."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate the final submission sign-off. Compute the SHA-256 of the concatenated UTF-8 bytes of `output/backtest_result.json` followed immediately by `output/corrective_action_plan.md` (no separator between the two files' contents). Write `output/final_submission_signoff.txt` containing exactly one line: `VERIFIED:<sha256hex>` where <sha256hex> is the 64-character lowercase hex SHA-256 digest. Nothing else in the file. (You must actually run the hash — concatenate backtest_result.json content bytes first, then corrective_action_plan.md content bytes, compute SHA-256 of the combined byte string.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Final sign-off token valid: VERIFIED:<hash> matches recomputed SHA-256 of concatenated backtest+CAP bytes.",
+        "incorrect": "Check output/final_submission_signoff.txt: must be exactly one line matching ^VERIFIED:[a-f0-9]{64}$ where the hash equals SHA-256 of (backtest_result.json bytes + corrective_action_plan.md bytes), concatenated in that order."
+      }
+    }
+  ]
+}

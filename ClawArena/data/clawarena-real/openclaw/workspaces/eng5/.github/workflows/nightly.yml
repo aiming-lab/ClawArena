@@ -1,0 +1,85 @@
+name: Nightly Build
+# Scheduled nightly build and security scan
+# Last modified: 2025-01-25 by Bob (added concurrency control)
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # 2am UTC daily
+  workflow_dispatch:
+
+# BUG: queue: max + cancel-in-progress: true is a FORBIDDEN combination.
+# This causes a workflow validation error at runtime.
+# Reference: https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency
+concurrency:
+  group: nightly-build
+  cancel-in-progress: true
+  queue: max
+
+jobs:
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: myapp:latest
+          format: sarif
+          output: trivy-results.sarif
+
+      - name: Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-results.sarif
+
+  dependency-audit:
+    name: Dependency Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-nightly-${{ github.sha }}
+
+      - name: Audit dependencies
+        run: npm audit --audit-level moderate
+
+  performance-test:
+    name: Performance Benchmark
+    runs-on: ubuntu-latest
+    needs: security-scan
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run k6 benchmarks
+        run: |
+          docker run --rm -i grafana/k6 run - <tests/perf/load_test.js
+
+      - name: Save benchmark results
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-results-${{ github.run_id }}
+          path: k6-results.json
+
+  notify-results:
+    name: Notify Results
+    runs-on: ubuntu-latest
+    needs: [security-scan, dependency-audit, performance-test]
+    if: always()
+    steps:
+      - name: Report summary
+        run: |
+          echo "Nightly build completed at $(date -u)"
+          echo "Run ID: ${{ github.run_id }}"

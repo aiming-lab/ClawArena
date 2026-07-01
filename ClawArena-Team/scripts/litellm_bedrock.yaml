@@ -1,0 +1,23 @@
+# litellm proxy: bridge AWS Bedrock Claude models to an OpenAI-compatible endpoint (:4000).
+# Point ClawArena-Team at http://127.0.0.1:4000/v1 with provider `openai_compat`.
+# Auth: set AWS_BEARER_TOKEN_BEDROCK (and region) in the environment before starting
+# the proxy (see scripts/serve_litellm.sh).
+# Note: Bedrock Claude generally requires the cross-region inference prefix `us.`
+# (calling a bare modelId may be rejected for on-demand use). Model availability also
+# depends on which models your AWS account has been granted access to -- adjust the
+# list below to the Claude models enabled in your account/region.
+model_list:
+  - model_name: claude-opus-4-6
+    litellm_params:
+      model: bedrock/us.anthropic.claude-opus-4-6-v1
+      aws_region_name: us-east-1
+  - model_name: claude-sonnet-4-6
+    litellm_params:
+      model: bedrock/us.anthropic.claude-sonnet-4-6
+      aws_region_name: us-east-1
+  - model_name: claude-haiku-4-5
+    litellm_params:
+      model: bedrock/us.anthropic.claude-haiku-4-5-20251001-v1:0
+      aws_region_name: us-east-1
+litellm_settings:
+  drop_params: true

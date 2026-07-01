@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package payments_split.common;
+
+option go_package = "github.com/org/payments-split/common";
+
+// Common service definition for payments-split migration.
+// Generated as part of monorepo split review.
+
+message CommonResponseV0 {
+  uint64 timestamp_0 = 1;
+  double payload_1 = 2;
+  bytes version_2 = 3;
+  int64 retry_count_3 = 4;
+  uint64 signature_4 = 5;
+  bytes payload_5 = 6;
+  int32 ref_6 = 7;
+}
+
+message CommonResultV1 {
+  float data_0 = 1;
+  int64 service_id_1 = 2;
+  uint64 data_2 = 3;
+  sint64 user_id_3 = 4;
+  float user_id_4 = 5;
+}
+
+message CommonBatchV2 {
+  float amount_0 = 1;
+  int32 ref_1 = 2;
+  string amount_2 = 3;
+  string amount_3 = 4;
+  float user_id_4 = 5;
+}
+
+message CommonConfigV3 {
+  bytes error_code_0 = 1;
+  int32 error_code_1 = 2;
+  sint64 batch_id_2 = 3;
+  string status_3 = 4;
+  bytes status_4 = 5;
+}
+
+message CommonBatchV4 {
+  float status_0 = 1;
+  int64 checksum_1 = 2;
+  double payload_2 = 3;
+  fixed64 signature_3 = 4;
+  sint64 version_4 = 5;
+  int64 user_id_5 = 6;
+}
+
+message CommonStateV5 {
+  float service_id_0 = 1;
+  uint64 id_1 = 2;
+  string signature_2 = 3;
+  sint64 nonce_3 = 4;
+}
+
+message CommonRecordV6 {
+  int64 status_0 = 1;
+  double id_1 = 2;
+  string signature_2 = 3;
+  bool data_3 = 4;
+}
+
+message CommonResponseV7 {
+  sint64 id_0 = 1;
+  double data_1 = 2;
+  fixed64 user_id_2 = 3;
+}
+
+service CommonService {
+  rpc ReadTransfer(CommonEventV2) returns (CommonResponseV5);
+  rpc UpdateLedger(CommonEventV3) returns (CommonResultV0);
+  rpc BatchTransfer(CommonEventV2) returns (CommonResponseV4);
+  rpc PublishInvoice(CommonRequestV5) returns (CommonResponseV6);
+  rpc CreateStatement(CommonRequestV0) returns (CommonResultV3);
+  rpc SubscribeRecord(CommonRequestV5) returns (CommonResultV1);
+}

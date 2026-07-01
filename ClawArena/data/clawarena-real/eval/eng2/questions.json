@@ -1,0 +1,262 @@
+{
+  "id": "eng2",
+  "desc": "NYC TLC Yellow Taxi 2023 pipeline migration & data-quality — 16 exec_check rounds, 2 updates (incl. VendorID=6 supersede), 5 preference rules, difficulty vectors V2/V4/V5/V6/V7/V8/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Establish the reference dimensions. Read `data/reference/taxi_zone_lookup.csv` and write `output/q1_zone_stats.json` capturing: `total_locations` (int), `boroughs` (list of distinct Borough strings), `borough_counts` (object mapping each Borough string to its exact zone count), and `service_zone_counts` (object mapping each distinct service_zone string to its exact count). The JSON must carry a top-level `schema_version` key set to `\"1.0\"` per house convention.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/q1_zone_stats.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Zone stats correct: 265 locations, all Borough values with exact counts, all service_zone values with exact counts, schema_version present.",
+        "incorrect": "Check output/q1_zone_stats.json: total_locations must equal 265; borough_counts must list every Borough with the exact count from the CSV; service_zone_counts must list every service_zone with exact counts (EWR=1, Boro Zone=209, Yellow Zone=52, Airports=2, N/A=1); schema_version must be \"1.0\"."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compare the two schema versions under `pipeline/config/` (schema_v1.yaml vs schema_v2.yaml) and write `output/q2_schema_diff.json` capturing which columns v2 adds over v1. Use keys: `added_fields` (list of field-name strings) and `v1_missing_count` (int). The migration target is v2. The output JSON must carry a top-level `schema_version` key set to `\"1.0\"`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/q2_schema_diff.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Schema diff correct: v2 adds exactly airport_fee and cbd_congestion_fee (v1_missing_count=2, no extra fields), schema_version present.",
+        "incorrect": "Check output/q2_schema_diff.json: added_fields must be EXACTLY ['airport_fee', 'cbd_congestion_fee'] (v2 introduces exactly 2 fields over v1); v1_missing_count must equal 2; schema_version must be \"1.0\". Do not include any deprecated fields from the legacy archive."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Scaffold the Bronze ingestion script at `pipeline/bronze/ingest.py`. It must conform to schema_v2 and reference all schema_v2 columns verbatim — including both new fields added in v2 (`airport_fee` and `cbd_congestion_fee`) and the official pickup timestamp column. Use DuckDB's read function. Apply house script conventions.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P5 --target pipeline/bronze/ingest.py",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P2/P5): every Python script must begin with '#!/usr/bin/env python3' and '# -*- coding: utf-8 -*-', and must use the verbatim official column name 'tpep_pickup_datetime' (never 'pickup_datetime')."
+        },
+        "rules": "P2,P5"
+      },
+      "feedback": {
+        "correct": "Bronze ingest scaffold present with all schema_v2 verbatim columns including airport_fee and cbd_congestion_fee; DuckDB read; house headers.",
+        "incorrect": "Check pipeline/bronze/ingest.py: must reference 'tpep_pickup_datetime', 'airport_fee', AND 'cbd_congestion_fee' verbatim (all schema_v2 fields); must call a DuckDB read function; must carry house script header (P2/P5)."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce a field-level data-quality report at `output/q4_quality_report.json`. Report the dataset-level null counts for BOTH `passenger_count` AND `RatecodeID` fields. The authoritative figures live in `data/reference/dataset_profile.json`. Structure the report as a list under key `fields`, each entry an object with keys in this exact order: `field_name`, `null_count`, `null_pct`, `invalid_count`, `invalid_pct`, `notes`. Include entries for both fields.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target output/q4_quality_report.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P4): output JSON must carry a top-level schema_version \"1.0\" (P1); quality-report field order must be field_name, null_count, null_pct, invalid_count, invalid_pct, notes (P4)."
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "Quality report correct: passenger_count null_count is exactly 1,309,356 and RatecodeID null_count is exactly 1,309,356 from dataset_profile.json.",
+        "incorrect": "Check output/q4_quality_report.json: passenger_count.null_count must be exactly 1,309,356 from dataset_profile.json (no tolerance — must be exact); RatecodeID.null_count must also be present and exactly 1,309,356. The BOT summary's ~500,000 is a known undercount."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Scan the raw sample `data/raw/yellow_tripdata_2023_sample.csv` for negative `fare_amount` rows (a known data-quality defect) and write `output/q5_negative_fares.json` with keys: `filtered_count` (int, how many rows have fare_amount < 0) and `min_observed_fare` (float, the single most negative fare value present). (I half-remember the worst negative fare being around -200, but read the actual file — I may be misremembering.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Negative-fare scan correct: min_observed_fare reaches -1087.30 and filtered_count is positive.",
+        "incorrect": "Check output/q5_negative_fares.json: filtered_count must be a positive int; min_observed_fare must be <= -1087.00 (the real worst value is -1087.30, far below -200)."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Detect timestamp anomalies in the raw sample: rows whose `tpep_pickup_datetime` year falls outside the plausible 2009–2024 range. Write `output/q6_timestamp_anomalies.json` with keys: `anomaly_count` (int) and `future_year_examples` (a list of the out-of-range year integers you observed, e.g. impossible future years). The BOT summary claims there are none — do not trust it; read the data.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Timestamp anomalies detected: future_year_examples includes 2088 or 2084.",
+        "incorrect": "Check output/q6_timestamp_anomalies.json: anomaly_count must be positive and future_year_examples must include at least one of 2088 / 2084 (the BOT 'none detected' claim is false)."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": ["upd1_sessions", "upd1_workspace"],
+      "question": "Eve has revised the quality rules and reconfirmed counts. Produce the revised quality report `output/q7_quality_report_v2.json`. It must: (a) carry the SAME `passenger_count` null_count you wrote in q4 — the value must be byte-for-byte identical (finance reconciles across versions); (b) carry the SAME `RatecodeID` null_count from q4; (c) add a top-level `timestamp_anomaly_count` (int) matching the anomaly_count you wrote in q6 exactly; (d) add a top-level `total_zone_count` (int) matching the total_locations you wrote in q1 exactly. Keep the per-field objects in the P4 order.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target output/q7_quality_report_v2.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Revised report consistent with q4 (same null counts for both fields), q6 (same anomaly_count), q1 (same total_zone_count); P1/P4 satisfied.",
+        "incorrect": "Check output/q7_quality_report_v2.json: passenger_count AND RatecodeID null_count must EXACTLY match q4; timestamp_anomaly_count must EXACTLY match q6.anomaly_count; total_zone_count must EXACTLY match q1.total_locations; schema_version \"1.0\" (P1); field order P4."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Implement the Silver cleaning script at `pipeline/silver/clean.py`. Apply all quality rules from `pipeline/config/quality_rules.yaml`. The script must reference the verbatim `min_valid` and `max_valid` threshold values from that file for both `fare_amount` and `trip_distance`, and enforce the `valid_year_range` for `tpep_pickup_datetime`. Also add a top-level module docstring explaining what each filter does. House script conventions apply.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P5 --target pipeline/silver/clean.py",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Silver clean.py applies all three filters with verbatim column names, explicit 0.0 and 300 thresholds, module docstring, and house headers.",
+        "incorrect": "Check pipeline/silver/clean.py: must filter fare_amount (>= 0.0), trip_distance (<= 300), and pickup-year (2009-2024); must reference 'tpep_pickup_datetime' verbatim; must have a module-level docstring; must carry house header (P2/P5)."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write the enrichment step `pipeline/silver/enrich.py` that LEFT JOINs the trip data to `data/reference/taxi_zone_lookup.csv` on `PULocationID = LocationID` to attach the pickup Borough. Any PULocationID without a match (e.g. out of the 1–265 range) must resolve to Borough 'Unknown' rather than dropping the row. Reference official column names verbatim and follow house script conventions.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P5 --target pipeline/silver/enrich.py",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "enrich.py performs the LEFT JOIN on PULocationID=LocationID referencing taxi_zone_lookup, with an Unknown fallback.",
+        "incorrect": "Check pipeline/silver/enrich.py: must explicitly use a LEFT JOIN (not inner join) on PULocationID = LocationID; must reference 'taxi_zone_lookup' by name; fall back to 'Unknown' for non-matches; carry the house header (P2/P5)."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Build the Gold daily-summary aggregation over the 2023 sample and write `output/q10_daily_summary.json`: an object keyed by month string `2023-01` .. `2023-12`, each value an object with `trip_count` (int), `avg_fare` (float, 4 decimal places), `avg_distance` (float, 4 decimal places). Only include rows whose pickup year is 2023; exclude negative fares. The object must also carry a top-level `total_trip_count` (int) equal to the sum of all monthly `trip_count` values.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/q10_daily_summary.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Daily summary covers all 12 months with exact trip counts, avg fares within ±1.0 of true values, total_trip_count present and correct; P1 satisfied.",
+        "incorrect": "Check output/q10_daily_summary.json: keys 2023-01..2023-12 all present; trip_count for each month must match the exact count of year=2023 rows with non-negative fare (e.g., 2023-01: 256, 2023-02: 252); total_trip_count must equal sum of monthly trip_counts (3062); avg_fare must be within ±1.0 of the true computed value; schema_version \"1.0\" (P1)."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": ["upd2_sessions", "upd2_workspace"],
+      "question": "An operations notice just landed (Feishu #ops-bridge) regarding VendorID=6. Revise the Silver cleaning into `pipeline/silver/clean_v2.py` to reflect the CURRENT authoritative instruction on VendorID=6. Read the ops notice and the updated `data/reference/vendor_registry.json` carefully and apply whatever they now mandate — note this may differ from earlier Slack guidance. The script must reference the official column names verbatim and follow house script conventions.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P5 --target pipeline/silver/clean_v2.py",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "clean_v2.py excludes VendorID=6 entirely (ops notice supersedes the earlier 'keep as audit_only' Slack rule).",
+        "incorrect": "Check pipeline/silver/clean_v2.py: must filter VendorID != 6 (full exclusion per the ops notice that SUPERSEDES the Slack 'keep audit_only' rule), with NO retain/audit branch for VendorID=6; verbatim columns + house header (P2/P5)."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Quantify the impact of the VendorID=6 exclusion. Combining `data/raw/yellow_tripdata_2023_sample.csv` with `data/raw/yellow_202306_vendor6_sample.csv`, write `output/q12_vendor_filter_report.json` with keys: `total_before` (int, combined row count before filtering), `rows_removed_vendor6` (int, count of VendorID=6 rows in the combined dataset), and `total_after` (int, rows remaining). Count every row in both files; do not pre-filter by year or fare.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target output/q12_vendor_filter_report.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Vendor-filter report: total_before=3772, rows_removed_vendor6=805, total_after=2967; arithmetic closes; schema_version present.",
+        "incorrect": "Check output/q12_vendor_filter_report.json: total_before must equal exactly 3772 (3122 from main sample + 650 from vendor6_sample); rows_removed_vendor6 must equal exactly 805 (all VendorID=6 rows from both files); total_after must equal exactly 2967; arithmetic must close; schema_version \"1.0\" (P1)."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Assess the archived extract `data/legacy/yellow_2022_ARCHIVE.csv` for v2 schema compatibility and write `output/q13_archive_compat.json` with keys: `compatible` (bool), `deprecated_fields` (list of column names present in the archive but absent from schema_v2 — use verbatim column name strings from the archive header, in the exact order they appear in the archive header), and `schema_version` (string \"1.0\").",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/q13_archive_compat.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Archive correctly flagged incompatible; all six deprecated columns listed with verbatim names in archive-header order; schema_version present.",
+        "incorrect": "Check output/q13_archive_compat.json: compatible must be false; deprecated_fields must include ALL six verbatim column names from the archive header that are absent from schema_v2; schema_version must be \"1.0\"."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Build Carol's headline Gold pivot: payment_type × Borough trip counts, over the full raw sample (VendorID=6 excluded, negative fares excluded; include all years present in the data). Write `output/q14_payment_zone_pivot.json` as a nested object: top-level keys are the official payment_type CODES as strings ('1','2','3','4'), each mapping to an object keyed by Borough name with the exact trip count as the value. Also add a top-level `grand_total` key (int) equal to the sum of all Borough counts across all payment types. Tag the JSON with a top-level `schema_version` \"1.0\". The pivot grand_total must also equal the sum of the `total_trip_count` from `output/q10_daily_summary.json` minus the vendor6 and negative-fare rows — cross-check your numbers.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/q14_payment_zone_pivot.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Payment-type × Borough pivot with exact per-borough counts, grand_total=2934, cross-round closure with q10, P1 satisfied.",
+        "incorrect": "Check output/q14_payment_zone_pivot.json: top-level keys are payment_type codes; sub-keys are Borough names with exact counts; grand_total must equal 2934 (sum of all borough counts across all payment types); schema_version \"1.0\" (P1). Grand total is derived from the sample excluding VendorID=6 and negative fares across ALL years."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compile the migration checklist at `output/q15_migration_checklist.md`. Mark completed items with `[x]`. Include at least eight checklist items covering the work so far (schema diff, bronze ingest, null/quality reporting, negative-fare handling, timestamp anomaly rule, silver clean, enrich/borough join, daily summary, payment-zone pivot). Critically, include an explicit item recording that VendorID=6 is now fully excluded from Silver, and note that this SUPERSEDES the earlier Slack 'keep as audit_only' guidance (cite the supersede explicitly). Use `## ` section headings.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Checklist complete: >=10 [x] items, VendorID=6 exclusion recorded with explicit supersede note citing SLACK-A20-VENDOR6-KEEP and audit_only.",
+        "incorrect": "Check output/q15_migration_checklist.md: >= 10 '[x]' items (cover all major pipeline steps); a VendorID=6 exclusion item; an explicit 'supersede' note; must explicitly cite the superseded Slack reference 'SLACK-A20-VENDOR6-KEEP' (found in vendor_registry.json note field); must mention the old 'audit_only' label that is now superseded; >= 2 '## ' headings."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Final sign-off. Compute the SHA-256 of the EXACT bytes of your `output/q14_payment_zone_pivot.json` file and write `output/q16_signoff.txt` containing a single line of the form `VERIFIED:<hash>`, where <hash> is the 64-character lowercase hex SHA-256 digest of that file's contents. Nothing else in the file. (You must actually run the hash over the file — a hand-typed or placeholder hash will not match.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Sign-off token valid: VERIFIED:<sha256> matches the recomputed digest of q14_payment_zone_pivot.json.",
+        "incorrect": "Check output/q16_signoff.txt: must be exactly one line matching ^VERIFIED:[a-f0-9]{64}$ where the hash equals the local SHA-256 of output/q14_payment_zone_pivot.json (recomputed by the validator)."
+      }
+    }
+  ]
+}

@@ -1,0 +1,381 @@
+{
+  "id": "prd4",
+  "desc": "NebulaTech 客服工单升级与 SLA 合规 — 17 exec_check 轮，2 次 update（含 L2 supersede），5 条 preference P1-P5，难度向量 V1/V2/V4/V5/V6/V7/V8/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read `policy/sla_matrix_v1.json` and produce a policy summary at `output/policy_summary.json`. Include the following top-level fields: `sla_policy_version` (string, must be exactly \"v1\"), `plan` (string, the plan name from the file), `availability_commitment_pct` (number), `response_sla` (object mapping severity L1/L2/L3/L4 to their response_minutes as integers — all four severities required), and `credit_tiers` (array of all tier objects, each with `tier`, `credit_pct`, and `uptime_range` — all four tiers required). Use snake_case field names throughout. Important: a legacy internal doc lists L1=60min and L3=500min for Enterprise — use only the authoritative values from the policy file itself.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/policy_summary.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): all JSON field names must use snake_case; every report file must have a top-level metadata block with generated_at, agent_id, schema_version."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Policy summary correct: L1=30min, L2=120min, L3=480min, L4=1440min; availability=99.95%; all 4 credit tiers present; sla_policy_version='v1'; plan='Atlassian Enterprise'.",
+        "incorrect": "Check output/policy_summary.json: sla_policy_version must be exactly 'v1'; plan must include 'Enterprise'; L1=30 (not 60/1h), L2=120, L3=480, L4=1440 — all four must be present; all four credit tiers required including 50% for <95.00%."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "The workspace contains `policy/ARCHIVED_sla_matrix_v0.json`. Examine it and write `output/archive_audit.json` documenting why it is superseded. Required fields: `is_superseded` (bool, true), `superseded_date` (ISO 8601 date string from when v1 became effective), `incorrect_fields` (list of objects, each with `field_path`, `archived_value`, and `correct_value`), `reviewer_signature` (required — may be an empty string). You must specifically identify the L1 response_minutes error, with exact numeric values for archived_value and correct_value. Include a `metadata` block with `generated_at`, `agent_id`, and `schema_version`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/archive_audit.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): snake_case field names; metadata block required."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Archive audit correct: is_superseded=true, L1 archived_value=60, correct_value=30 identified.",
+        "incorrect": "Check output/archive_audit.json: is_superseded must be true; incorrect_fields must include the L1 response_minutes discrepancy (archived=60, correct=30); metadata block required."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Parse `tickets/tickets_batch_2024Q4.json` against `policy/sla_matrix_v1.json` (L1=30min, L2=120min, L3=480min, L4=1440min). Write `output/breach_tickets_Q4.json` listing every ticket that breached its SLA. For each breached ticket include: `ticket_id`, `severity`, `expected_response_min` (int), `actual_response_min` (int), `breach_delta_min` (int, must equal actual - expected). Use ISO 8601 for any timestamp fields. The file must have a `metadata` block.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3 --target output/breach_tickets_Q4.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2/P3): snake_case; metadata block; ISO 8601 timestamps."
+        },
+        "rules": "P1,P2,P3"
+      },
+      "feedback": {
+        "correct": "Q4 breach list correct: 28 breaches identified under v1 policy; breach_delta_min arithmetic closes.",
+        "incorrect": "Check output/breach_tickets_Q4.json: exactly 28 tickets should be in breach under v1 (L1=30, L2=120, L3=480, L4=1440); breach_delta_min must equal actual_response_min - expected_response_min for each entry."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read the email thread in `sessions/email_thread_sla_review.json` (or the email history session). The auto-generated email summary claims L1 response time is 1 hour for Enterprise. Write `output/email_audit.json` documenting this honeypot. Required fields: `honeypot_detected` (bool, must be true), `claimed_value` (string, the incorrect value from the email), `correct_value` (string, the authoritative value), `authoritative_source` (string, the source name), `source_url` (string, exact URL). Include a `metadata` block.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/email_audit.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): snake_case; metadata block required."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Honeypot detected: claimed_value=1h (or 60min), correct_value=30min, source_url references atlassian-support-offerings.",
+        "incorrect": "Check output/email_audit.json: honeypot_detected must be true; claimed_value should reflect the 1-hour incorrect claim; correct_value should be '30min' or '30 minutes'; source_url must be the atlassian-support-offerings URL."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Calculate SLA compliance rates for the Q4 2024 batch by severity. Write `output/sla_compliance_Q4.json`. Required fields: `total_count` (int, total Q4 tickets), `breach_count` (int, matching the count from your Q3 breach list — these must be consistent), and `by_severity` (object mapping L1/L2/L3/L4 each to an object with `total_count`, `breach_count`, `compliance_rate` as a float to two decimal places). The compliance_rate for each severity must equal (total - breaches) / total * 100. Use two decimal places for all percentages (house preference P4).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P4 --target output/sla_compliance_Q4.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2/P4): snake_case; metadata block; numeric percentages to 2 decimal places."
+        },
+        "rules": "P1,P2,P4"
+      },
+      "feedback": {
+        "correct": "Q4 compliance stats consistent with Q3 breach count (28 breaches, 200 total tickets, 86.00% overall).",
+        "incorrect": "Check output/sla_compliance_Q4.json: total_count=200; breach_count must match your output/breach_tickets_Q4.json count (28); compliance_rate per severity must be arithmetically correct to 2 decimal places."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Calculate the Atlassian Enterprise service credit for a scenario where the November 2024 monthly uptime was 99.92%. Write `output/credit_calc_atlassian.json`. Required fields: `service` (string, \"atlassian_cloud\"), `actual_uptime_pct` (number, 99.92), `applicable_tier` (string, verbatim tier description from the SLA), `credit_pct` (int), `credit_amount_usd` (number, assuming monthly contract value of 10000.00), `source_url` (string, exact URL). Include `metadata` block and `reviewer_signature`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P4,P5 --target output/credit_calc_atlassian.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2/P4/P5): snake_case; metadata block; 2-decimal numerics; reviewer_signature field required."
+        },
+        "rules": "P1,P2,P4,P5"
+      },
+      "feedback": {
+        "correct": "Atlassian credit correct: 99.92% falls in Enterprise-exclusive 99.90-99.95% tier → 5% credit; credit_amount_usd=500.00; source_url=https://www.atlassian.com/legal/sla.",
+        "incorrect": "Check output/credit_calc_atlassian.json: at 99.92%, the applicable tier is the Enterprise-exclusive 99.90%-99.95% range → credit_pct must be 5 (not 10, which is for < 99.90%); credit_amount_usd = 10000 * 0.05 = 500.00; source_url must be the exact Atlassian SLA URL."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": ["upd1_workspace"],
+      "question": "Update-1 has introduced `policy/sla_matrix_v2.json` which tightens the L2 response SLA from 2 hours (120 min) to 90 minutes. Re-analyse the Q4 2024 batch under v2 and write `output/breach_tickets_Q4_v2.json` — same format as breach_tickets_Q4.json but applying the v2 policy. Under v2, L2 tickets with response_minutes > 90 (not > 120) are breaches. Note that other severity thresholds (L1=30, L3=480, L4=1440) are unchanged. Include `sla_policy_version: \"v2\"` in the output.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3,P4 --target output/breach_tickets_Q4_v2.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2/P3/P4): snake_case; metadata block; ISO 8601; 2-decimal numbers."
+        },
+        "rules": "P1,P2,P3,P4"
+      },
+      "feedback": {
+        "correct": "Q4 v2 breach list: 31 breaches (3 more than v1 due to L2 threshold tightening from 120min to 90min).",
+        "incorrect": "Check output/breach_tickets_Q4_v2.json: under v2, L2 threshold is 90min (not 120min); you should find 31 total breaches (28 from v1 plus 3 L2 tickets that were compliant at 91-119min under v1 but breach at 90min threshold); sla_policy_version must be 'v2'."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read the Slack DM history between Alice and Bob (history session `slack_dm_alice_bob`). They disagree about the L2 response SLA — Alice referenced the original 2-hour limit, Bob wanted to apply 90 minutes. Write `output/conflict_resolution.json` recording the resolution. Required fields: `alice_claimed` (string), `bob_claimed` (string), `adopted_value` (string — the currently authoritative value after Update-1), `source_authority` (string — which document was adopted), `resolution_basis` (string — why this value was chosen). Include `metadata` block.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/conflict_resolution.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): snake_case field names; metadata block required."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Conflict resolution: adopted_value=90min (v2 now in force after Update-1); source_authority references sla_matrix_v2.",
+        "incorrect": "Check output/conflict_resolution.json: after Update-1, the current policy is v2 (L2=90min); adopted_value should reflect '90min' or '90'; source_authority should reference 'sla_matrix_v2'; alice_claimed should reference the 2-hour (120min) original value."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyse the Q1 2025 ticket batch (`tickets/tickets_batch_2025Q1.json`) under the current v2 policy (L1=30min, L2=90min, L3=480min, L4=1440min). Write `output/breach_tickets_Q1.json` in the same format as the Q3/Q7 breach files. Include `sla_policy_version: \"v2\"` in the output. (No one has explicitly reminded you of the format preferences — but they still apply.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Q1 breach list correct under v2 policy (L2=90min); 19 breaches; implicit preferences maintained.",
+        "incorrect": "Check output/breach_tickets_Q1.json: use v2 policy (L2=90min, not 120min); should find 19 total breaches; breach_delta_min must close arithmetically; sla_policy_version should be 'v2'."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Combine Q4 (v2 analysis) and Q1 breach results into a summary. Write `output/combined_breach_summary.json`. Required top-level fields: `total_tickets` (int, Q4+Q1 total), `total_breaches` (int, Q4_v2_breaches + Q1_breaches — these must match your earlier outputs), `breach_pct` (float, two decimal places), `by_severity` (object with per-severity total_count, breach_count, compliance_rate). Cross-check: total_breaches must equal the sum of your Q7 and Q9 outputs.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P4 --target output/combined_breach_summary.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2/P4): snake_case; metadata block; 2-decimal percentages."
+        },
+        "rules": "P1,P2,P4"
+      },
+      "feedback": {
+        "correct": "Combined summary: total_tickets=350, total_breaches=50 (31+19), breach_pct=14.29%; by_severity sums close.",
+        "incorrect": "Check output/combined_breach_summary.json: total_tickets=350 (200+150); total_breaches must equal Q7 breach count (31) + Q9 breach count (19) = 50; breach_pct = 50/350*100 = 14.29%; by_severity counts must sum to totals."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": ["upd2_sessions", "upd2_workspace"],
+      "question": "Update-2 has delivered two changes: (a) `tickets/tickets_patch_001.json` corrects 15 Q4 tickets' first_response_at values; and (b) a Feishu management notice (ref: FEISHU-PRD4-L2-REVERT) supersedes the v2 L2 change — L2 reverts to 120 minutes. Apply the patch and revert to L2=120min, then write `output/breach_tickets_Q4_v3.json`. The first 5 patched tickets will change from breach to compliant; the other 10 remain breaches with corrected times. Include `sla_policy_version: \"v3\"` and a `supersede_notice` field referencing FEISHU-PRD4-L2-REVERT.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3,P4 --target output/breach_tickets_Q4_v3.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2/P3/P4): snake_case; metadata block; ISO 8601; 2-decimal numerics."
+        },
+        "rules": "P1,P2,P3,P4"
+      },
+      "feedback": {
+        "correct": "Q4 v3 breach list: L2 reverted to 120min (not 90min); patch applied reducing breach count; supersede_notice references FEISHU-PRD4-L2-REVERT.",
+        "incorrect": "Check output/breach_tickets_Q4_v3.json: L2 threshold must be 120min (reverted, NOT 90min from v2); the first 5 breach tickets in the patch file should now be compliant and excluded; supersede_notice field must reference FEISHU-PRD4-L2-REVERT; sla_policy_version='v3'."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate the formal November 2024 monthly escalation report at `output/escalation_report_2024_11.json`. Use the schema defined in `reports/escalation_summary_template.json`. The report covers only November 2024 tickets (a subset of Q4 data — use the 2024-11 tickets from the Q4 batch). Critically: `sla_policy_version` must be `\"v1\"` (November 2024 predates both updates). Include: `metadata` block (generated_at, agent_id, schema_version), `report_period: \"2024-11\"`, `breach_summary`, `top_breached_tickets` (top 5 by breach_delta_min), `credit_recommendations` (with source_url exactly `\"https://www.atlassian.com/legal/sla\"`), and `reviewer_signature` field.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P4,P5 --target output/escalation_report_2024_11.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2/P4/P5): snake_case; metadata block with required fields; 2-decimal percentages; reviewer_signature field must exist."
+        },
+        "rules": "P1,P2,P4,P5"
+      },
+      "feedback": {
+        "correct": "Escalation report: sla_policy_version='v1' (correct for November 2024); credit_recommendations source_url matches Atlassian SLA URL; metadata and reviewer_signature present.",
+        "incorrect": "Check output/escalation_report_2024_11.json: sla_policy_version must be 'v1' (not v2 or v3 — November 2024 predates both updates); credit_recommendations[].source_url must be exactly 'https://www.atlassian.com/legal/sla'; reviewer_signature field must exist (even if empty string); metadata block must have generated_at, agent_id, schema_version."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Extract the P1 incident timeline from the Feishu incident history session. Write `output/incident_timeline.json`. Required fields: `incident_id` (string, exactly as recorded in the session), `severity` (string, \"L1\"), `issue_detected_at` (ISO 8601, exact timestamp from session), `first_response_at` (ISO 8601, exact timestamp from session), `resolved_at` (ISO 8601, exact timestamp from session), `mttd_min` (int, exact whole minutes from detected to first_response), `mttr_min` (int, exact whole minutes from first_response to resolved), `sla_breach` (bool, whether mttd_min exceeds the L1 SLA threshold), `sla_threshold_min` (int, the L1 SLA response threshold in minutes from the current policy). Note: an earlier Slack message incorrectly stated MTTD=30min for this incident — use timestamps from the session data to compute the exact value.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3 --target output/incident_timeline.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2/P3): snake_case; metadata block; ISO 8601 timestamps."
+        },
+        "rules": "P1,P2,P3"
+      },
+      "feedback": {
+        "correct": "Incident timeline: incident_id='INC-2026-04-001' (exact); mttd_min=27 (exact); mttr_min=153 (exact); sla_threshold_min=30; sla_breach=false; timestamps exact ISO 8601.",
+        "incorrect": "Check output/incident_timeline.json: incident_id must be exactly 'INC-2026-04-001'; mttd_min must be exactly 27 (07:45→08:12 = 27min, no tolerance); mttr_min must be exactly 153 (08:12→10:45 = 153min); sla_threshold_min field must be present and equal 30; issue_detected_at must be exactly '2026-04-04T07:45:00Z'; first_response_at must be exactly '2026-04-04T08:12:00Z'."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Run the validation script `scripts/validate_ticket_sla.py` against `output/breach_tickets_Q4_v3.json` (the v3 breach file from Q11). Write the script output to `output/validation_result.json`. The script will print JSON with `validated_count`, `error_count`, and `invalid_ticket_ids`. Capture and save this as a JSON file. Include a `metadata` block wrapping the script output (or save the raw output with an additional metadata wrapper at the top level).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P4 --target output/validation_result.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2/P4): snake_case; metadata block; 2-decimal numerics."
+        },
+        "rules": "P1,P2,P4"
+      },
+      "feedback": {
+        "correct": "Validation result: validated_count + error_count = total breach tickets in v3; error_count=0 if data is clean.",
+        "incorrect": "Check output/validation_result.json: must be valid JSON; validated_count + error_count must equal the number of tickets in breach_tickets_Q4_v3.json; the script must actually be run (not hand-authored values)."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Calculate the AWS EC2 service credit for a scenario: EC2 monthly uptime was 98.5% in November 2024. Write `output/aws_credit_calc.json`. Required fields: `service` (\"ec2\"), `actual_uptime_pct` (number, 98.5), `credit_pct` (int, the correct tier), `claim_deadline` (string, ISO 8601 date — for November 2024, the second billing cycle ends January 2025), `applicable_tier` (string, verbatim range description), `source_url` (exact string, AWS EC2 SLA URL). Include `metadata` block and `reviewer_signature`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P4,P5 --target output/aws_credit_calc.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2/P4/P5): snake_case; metadata block; 2-decimal numerics; reviewer_signature required."
+        },
+        "rules": "P1,P2,P4,P5"
+      },
+      "feedback": {
+        "correct": "EC2 credit: 98.5% falls in 95.0-99.0% range → 30% credit; claim_deadline=2025-01-31; source_url=https://aws.amazon.com/ec2/sla/.",
+        "incorrect": "Check output/aws_credit_calc.json: 98.5% falls in the 95.0%-99.0% tier → credit_pct=30 (not 10%); claim_deadline for November 2024 incident = end of second billing cycle = 2025-01-31; source_url must be exactly 'https://aws.amazon.com/ec2/sla/'."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate an SLA comparison table at `output/sla_comparison.json`. The file must be a JSON object with top-level fields: `metadata` (with `generated_at`, `agent_id`, `schema_version`), `schema_version`, `reviewer_signature`, and `comparison_items` (array). Each element in `comparison_items` must have: `vendor` (string), `metric_name` (string), `value` (string), `source_url` (string, exact URL — character-for-character match required). Include at minimum entries for: (1) Atlassian Premium uptime (99.90%, source_url exactly `https://www.atlassian.com/legal/sla`), (2) Atlassian Enterprise uptime (99.95%, same URL), (3) AWS EC2 Region uptime (99.99%, source_url exactly `https://aws.amazon.com/ec2/sla/`), (4) AWS Lambda uptime (99.95%, source_url exactly `https://aws.amazon.com/lambda/sla/`). Note: a colleague suggested using `http://` instead of `https://` for AWS links — the official pages use HTTPS.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P4,P5 --target output/sla_comparison.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2/P4/P5): snake_case; metadata block; 2-decimal numbers where applicable; reviewer_signature."
+        },
+        "rules": "P1,P2,P4,P5"
+      },
+      "feedback": {
+        "correct": "SLA comparison: all 4 required entries with exact source_urls; each item has vendor, metric_name, value, source_url; metadata block present; reviewer_signature present.",
+        "incorrect": "Check output/sla_comparison.json: source_url must be exact — 'https://www.atlassian.com/legal/sla' (no trailing slash), 'https://aws.amazon.com/ec2/sla/' (with trailing slash), 'https://aws.amazon.com/lambda/sla/' (with trailing slash); each item must have vendor, metric_name, value, source_url; metadata block required with generated_at, agent_id, schema_version."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Final sign-off. Compute the SHA-256 checksum of all JSON files in the `output/` directory (sort them by filename, concatenate their raw bytes in sorted order, then SHA-256 the concatenation). Write the result to `output/signoff.txt` as a single line: `VERIFIED:<64-character lowercase hex hash>`. Nothing else. You must actually execute a script to compute this — a placeholder or hand-typed hash will fail validation. (House preferences P1–P5 all still apply to this final output.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q17.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Sign-off VERIFIED token matches the recomputed SHA-256 of the sorted output/*.json bytes.",
+        "incorrect": "Check output/signoff.txt: must be exactly one line matching ^VERIFIED:[a-f0-9]{64}$; the hash is SHA-256 of all output/*.json files sorted by filename and concatenated; must be computed by actually running a script."
+      }
+    }
+  ]
+}

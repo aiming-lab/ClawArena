@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package payments_split.payments;
+
+option go_package = "github.com/org/payments-split/payments";
+
+// Payments service definition for payments-split migration.
+// Generated as part of monorepo split review.
+
+message PaymentsStateV0 {
+  bytes timestamp_0 = 1;
+  uint64 payload_1 = 2;
+  string service_id_2 = 3;
+}
+
+message PaymentsStateV1 {
+  double data_0 = 1;
+  uint64 batch_id_1 = 2;
+  int32 version_2 = 3;
+  int64 ref_3 = 4;
+}
+
+message PaymentsResponseV2 {
+  sint64 timestamp_0 = 1;
+  uint64 checksum_1 = 2;
+  int64 signature_2 = 3;
+}
+
+message PaymentsStateV3 {
+  uint64 service_id_0 = 1;
+  int64 amount_1 = 2;
+  bool retry_count_2 = 3;
+  uint64 data_3 = 4;
+}
+
+message PaymentsConfigV4 {
+  uint64 id_0 = 1;
+  int64 amount_1 = 2;
+  float signature_2 = 3;
+  float amount_3 = 4;
+  fixed64 checksum_4 = 5;
+  string nonce_5 = 6;
+}
+
+message PaymentsResponseV5 {
+  string checksum_0 = 1;
+  bytes service_id_1 = 2;
+  bool service_id_2 = 3;
+}
+
+message PaymentsRequestV6 {
+  float version_0 = 1;
+  string service_id_1 = 2;
+  float error_code_2 = 3;
+  int64 ref_3 = 4;
+  string ref_4 = 5;
+  bool amount_5 = 6;
+  string batch_id_6 = 7;
+}
+
+message PaymentsRecordV7 {
+  sint64 service_id_0 = 1;
+  int32 checksum_1 = 2;
+  uint64 status_2 = 3;
+  fixed64 signature_3 = 4;
+}
+
+service PaymentsService {
+  rpc ReadInvoice(PaymentsRequestV0) returns (PaymentsResponseV0);
+  rpc SubscribeTransfer(PaymentsEventV1) returns (PaymentsResultV5);
+  rpc ReadPayment(PaymentsRequestV2) returns (PaymentsResultV2);
+  rpc DeleteBalance(PaymentsEventV2) returns (PaymentsResultV3);
+  rpc UpdateInvoice(PaymentsEventV3) returns (PaymentsResponseV2);
+  rpc SubscribeBalance(PaymentsEventV4) returns (PaymentsResultV1);
+}

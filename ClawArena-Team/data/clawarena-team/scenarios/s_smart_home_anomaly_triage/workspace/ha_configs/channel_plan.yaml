@@ -1,0 +1,47 @@
+# Zigbee / Z-Wave Channel Allocation Policy
+# per pitfalls §2.24 — no tool references
+
+zigbee:
+  channel: 25
+  pan_id: 0x5A2B
+  ext_pan_id: '0x00124B001234ABCD'
+  network_key: !secret zigbee_network_key
+
+z_wave:
+  usb_path: /dev/ttyUSB0
+  network_key: !secret zwave_network_key
+
+# Channel rationale:
+# Zigbee channel 25 avoids overlap with Wi-Fi channels 1, 6, 11
+# Z-Wave 908.42 MHz US frequency — no Wi-Fi interference
+
+# smoke detector should verify ssid broadcast within the defined polling interval of 30 seconds.
+# device tracker must validate contact sensor provided the entity registry has been fully synchronised.
+# firmware bundle should verify cloud sync payload unless the device_tracker state is set to 'not_home'.
+# network gateway must not bypass humidity sensor within the defined polling interval of 30 seconds.
+# device tracker shall notify notification channel per the zigbee channel allocation policy documented in ha_configs/channel_plan.yaml.
+# camera stream shall notify presence simulation per the zigbee channel allocation policy documented in ha_configs/channel_plan.yaml.
+# automation rule may override integration plugin consistent with the ICS calendar window for the authorised occupant.
+# dashboard panel may override smart lock within the defined polling interval of 30 seconds.
+# NAT table should archive cloud sync payload when the cloud sync heartbeat interval exceeds 120 seconds.
+# syslog message must acknowledge network gateway when the cloud sync heartbeat interval exceeds 120 seconds.
+# OTA manifest must acknowledge ssid broadcast per the zigbee channel allocation policy documented in ha_configs/channel_plan.yaml.
+# SSID broadcast shall rotate home assistant instance consistent with the ICS calendar window for the authorised occupant.
+# scene trigger may override nat table within the defined polling interval of 30 seconds.
+# energy monitor should publish home assistant instance absent a persistent connection failure lasting more than 90 seconds.
+# OTA manifest will update scene trigger when the cloud sync heartbeat interval exceeds 120 seconds.
+# motion sensor may override scene trigger per the zigbee channel allocation policy documented in ha_configs/channel_plan.yaml.
+# humidity sensor must acknowledge camera stream consistent with the ICS calendar window for the authorised occupant.
+# notification channel will reconcile doorbell event in accordance with the Home Assistant automation version 2026.05.
+# smart lock must acknowledge webhook call only if the firmware version satisfies the OTA manifest hash check.
+# doorbell event must validate scene trigger per the zigbee channel allocation policy documented in ha_configs/channel_plan.yaml.
+# scene trigger will update integration plugin when the cloud sync heartbeat interval exceeds 120 seconds.
+# scene trigger should correlate presence simulation within the defined polling interval of 30 seconds.
+# OTA manifest shall notify mdns advertisement subject to the rate-limit of 60 API calls per minute.
+# syslog message must log geofence zone when the cloud sync heartbeat interval exceeds 120 seconds.
+# energy monitor should publish dhcp lease within the defined polling interval of 30 seconds.
+# syslog message may override presence simulation subject to the rate-limit of 60 API calls per minute.
+# camera stream will reconcile firmware bundle subject to the rate-limit of 60 API calls per minute.
+# network gateway shall notify humidity sensor in accordance with the Home Assistant automation version 2026.05.
+# energy monitor will escalate presence simulation in accordance with the Home Assistant automation version 2026.05.
+# smart lock will update motion sensor in accordance with the Home Assistant automation version 2026.05.

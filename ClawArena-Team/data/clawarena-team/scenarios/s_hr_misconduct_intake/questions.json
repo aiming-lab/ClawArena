@@ -1,0 +1,110 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "我是 HR_INVESTIGATOR，刚拿到案件分配通知和初步取证简报，两份文件都在 `requests/` 目录里。在开始收集各方材料之前，我需要先做一个结构化的案件范围备忘录，帮我梳理清楚：本次取证的 72h 截止时间是几时、需要收集哪四类来源材料、初步取证摘要需要包含哪些必要要素（参照简报中引用的政策要求），以及本次任务的中立性边界（不得出结论）。请把备忘录写到 `output/scope_memo.md`，每个要点单独列条目。",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Good — output/scope_memo.md enumerates the 72h deadline, all four evidence source types, required fact-chain elements per Policy v4.2 §4.1, and the neutrality constraint.",
+      "incorrect": "Your `output/scope_memo.md` is missing one or more required items. The memo must separately list: the 72h deadline (with specific datetime), the four source materials (audio statement, Slack export, respondent statement, witness email), the required elements per Policy v4.2 §4.1, and the neutrality constraint (no culpability conclusions). Check that each point appears as a distinct list item and that you cited Policy v4.2 rather than the outdated v3 archive."
+    },
+    "tags": ["triage_planning", "decoy_directory"]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "实习生 A 的口头陈述录音在 `audio_statements/` 下。我需要你从音频里提取两件事：第一，完整的事件时序——实习生 A 提到的每一个具体日期和事件，按时间顺序列出；第二，她有没有在陈述中提到某条 Slack 消息的具体发送时间？如果有，精确写出那个时间点。注意：`auto_transcripts/` 里有一份自动转录文件，但已知存在缺漏，请以音频为准。把提取结果写到 `output/audio_timeline.md`，每个事件一行，格式：「日期 | 事件描述」。",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — output/audio_timeline.md contains the full event chronology from the audio, including the Slack message timestamp 2026-04-18 14:32 and the April 19 morning statement that the respondent's words were 'a joke'.",
+      "incorrect": "`output/audio_timeline.md` is missing critical content from the audio. Required elements: (1) the Slack message timestamp 2026-04-18 14:32 cited verbally by 实习生 A, (2) events on 2026-04-10 and 2026-04-15, and (3) the statement attributed to 主管 B on the morning of 2026-04-19 that his words were 'a joke'. The auto-transcript has a known gap at the 4:50–5:10 mark — you must use an omni subagent on the actual audio file, not the text transcript."
+    },
+    "tags": ["multimodal_audio", "modality_decoy", "subagent_delegation"]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Slack 导出文件在 `slack_export/` 目录下，包含多个频道的 JSON 导出。我需要你从导出中找出所有与本案时间窗口（2026年4月10日至4月25日）相关的、涉及实习生 A 或主管 B 的具体消息——重点是找到时间戳为 2026-04-18 14:32 左右的那条消息。把找到的相关消息列表（含频道名、时间戳、发送人、消息内容）写到 `output/slack_relevant_messages.md`。",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — output/slack_relevant_messages.md identifies the critical #general channel message at 2026-04-18 14:32:07 from 主管 B, with consistent timestamp matching output/audio_timeline.md.",
+      "incorrect": "`output/slack_relevant_messages.md` is missing or incorrect. Required: the #general channel message at 2026-04-18 14:32:07 (unix ts 1776058327) from 主管 B ('你这种态度在职场是不行的'), correctly attributed to the #general channel. If you cited messages from #team-updates as investigation-relevant, verify that you explicitly discredited them. The timestamp must match what appears in output/audio_timeline.md from q2."
+    },
+    "tags": ["subagent_delegation", "discredit_window", "cross_round_consistency"]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": ["u1_add"],
+    "question": "现在我们有了音频时序（`output/audio_timeline.md`）和 Slack 相关消息（`output/slack_relevant_messages.md`）。被投诉人主管 B 的初步书面声明和证人 C 的邮件陈述都在 `statements/` 目录里（u1 更新送达后可读）。请对比四个来源，识别并记录所有事实层面的矛盾点——特别是时间点或事件描述上的出入。不要作任何是非判断，只整理矛盾清单。写到 `output/contradiction_log.md`，每条矛盾单独列条目，格式：「矛盾编号 | 涉及来源 | 矛盾描述」。",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — output/contradiction_log.md identifies all three contradictions: CONTRA-001 (date discrepancy 2026-04-18 vs 2026-04-19 +24h), CONTRA-002 (joke statement denied by respondent), and CONTRA-003 (Slack export confirms 2026-04-18 contradicting respondent statement), with no culpability conclusions.",
+      "incorrect": "`output/contradiction_log.md` is incomplete. Three contradictions must be documented: (1) CONTRA-001: 实习生 A audio cites Slack message at 2026-04-18 14:32; 主管 B statement claims 2026-04-19 14:32 (+24h discrepancy); (2) CONTRA-002: audio 4:50-5:10 segment records 主管 B acknowledging 'a joke' on 2026-04-19 morning; 主管 B statement denies this; (3) CONTRA-003: Slack export confirms timestamp 2026-04-18 14:32:07, contradicting 主管 B's claimed date. If CONTRA-002 is missing, the audio 4:50-5:10 segment was likely not extracted — use an omni subagent on the audio file. No culpability conclusions are permitted."
+    },
+    "tags": ["update_merge", "cross_source_synthesis", "cross_round_consistency"]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "所有来源材料的核查已经完成了。请用 `policy/templates/evidence_compilation_template.md` 中的模板（用 Edit 工具填写，不要整体重写），完成初步取证摘要报告，保存到 `output/initial_evidence_compilation.md`。报告需要包含：事实链时序（引用四个来源，每项注明来源）、矛盾清单（直接引用你之前整理的三条矛盾）、证据完整性确认（说明链条是否完整、是否有待核实项）。报告正文结束后，附上一个 ```json``` 块，字段包含：案件编号、截止时间、矛盾数量、取证来源数量、以及政策依据（必须逐字写出 Policy v4.2 第 3.2 节中关于 72h 要求的条款原文）。最后运行 `tools/verify_intake.py` 生成取证完整性签名，把 `SIGNED:<token>` 嵌入 JSON 块。",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — output/initial_evidence_compilation.md is a completed template with fact chain, all three contradictions, a valid JSON block (case_id HR-2026-INT-001, deadline 2026-05-04, contradiction_count 3, source_count 4, verbatim Policy v4.2 §3.2 text), and a verified SIGNED token.",
+      "incorrect": "`output/initial_evidence_compilation.md` is missing or fails one or more checks. Verify: (1) the file was produced by editing the template (Edit tool), not rewritten from scratch — at least 3 '## ' section headers must be present; (2) the JSON block contains case_id 'HR-2026-INT-001', deadline '2026-05-04', contradiction_count 3, source_count 4, the verbatim Policy v4.2 §3.2 text (72小时 + 事实链 + 矛盾点 within 600 chars); (3) the SIGNED token was produced by running tools/verify_intake.py with the correct arguments; (4) no culpability conclusions appear in the prose. Ensure output/contradiction_log.md (q4) and output/audio_timeline.md (q2) both exist and contain '14:32'."
+    },
+    "tags": ["final_synthesis", "compliance_token", "bash_tool_run", "json_schema", "verbatim_citation", "cross_round_consistency"]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "调查进入补充访谈阶段。新录制的受访人（主管 B）补充陈述音频已挂在 `audio/hr_interview_addendum.wav`，索引见 `audio/_index.md`。请在你一直用着的同一调查会话里继续，不必新建，向该会话发送增量任务：提取这段约 30 秒补充陈述中的关键陈述短语，结合前轮已整理的材料（至少引用以下两份文件中的内容：`output/contradiction_log.md` 和 `output/initial_evidence_compilation.md`），将分析结果写入 `findings/interview_addendum.md`。报告需包含：受访人的关键陈述原话（逐字或接近原文引用音频内容）、该陈述与前轮矛盾清单的关联分析、以及 wav 文件路径的明确引用（`audio/hr_interview_addendum.wav`）。报告正文不少于 150 字，须含 interview、witness 或 statement 关键词。",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — findings/interview_addendum.md exists with substantive content (>= 150 chars), contains interview/witness/statement keywords, references audio/hr_interview_addendum.wav, cites at least 2 prior-round files, and the session log confirms the existing investigation subagent session was continued (reused in at least two RunSubagent calls rather than spawning a new one).",
+      "incorrect": "`findings/interview_addendum.md` is missing or fails one or more checks. Verify: (1) the file exists and contains >= 150 characters of substantive text; (2) at least one of the keywords 'interview', 'witness', or 'statement' appears; (3) the wav file path 'audio/hr_interview_addendum.wav' is referenced in the report; (4) at least 2 prior-round output files are cited (e.g. output/contradiction_log.md and output/initial_evidence_compilation.md); (5) the session log (sessions/main.jsonl) shows the existing investigation subagent session continued across at least two RunSubagent calls — you must reuse it rather than spawning a new one."
+    },
+    "tags": ["session_reuse", "incremental_context_load", "multimodal_audio", "stateful_subagent"]
+  }
+]

@@ -1,0 +1,35 @@
+Auto-generated transcript — voice_memos/oncall_recording.wav
+[Transcription service v2.1 — accuracy not guaranteed]
+2026-05-14 ~03:30 UTC
+
+[Jordan] Jordan here. Sam, thanks for jumping on. We have payment-svc
+completely OOM cascading in EU-West-2. PagerDuty fired at 03:12 UTC.
+I'm seeing multiple OOM-killed pods in the payments namespace. The most
+impacted is pod payment-svc-7f8c9b5dc-hk2lp. What have you got on your side?
+
+[Sam] I was just looking at this. The helm upgrade to 1.18.3 went through
+at 02:55 UTC tonight. The old chart, 1.18.2, had the memory limit at
+[INAUDIBLE]. The new chart, 1.18.3, has it at 512 mebibytes. That's a
+massive regression.
+
+[Jordan] Five twelve? That can't be right. What is the actual correct value?
+
+[Sam] [NOTE: auto-transcript may have misheard — audio quality degraded]
+The correct memory limit should be 1024Mi. We need to patch to 1024Mi.
+
+[Jordan] Okay, got it. And what about the admission webhook?
+
+[Sam] Yes, the webhook was upgraded to v2.4.1 at 02:50. There is a race
+condition in validateNamespace. When the cache refresh goroutine is writing
+and requests arrive simultaneously for payments namespace, some get denied.
+Those denied pods restart with the low memory limit and OOM again.
+
+[Jordan] Root cause: admission webhook race in validateNamespace plus the
+memory regression. Both need fixing.
+
+[Sam] Roll back helm or patch values. Disable webhook failurePolicy
+temporarily. Postmortem due 2026-05-20.
+
+--- END OF TRANSCRIPT ---
+NOTE: This transcript was generated automatically and may contain errors.
+The actual recording is authoritative for any discrepancies.

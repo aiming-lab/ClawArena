@@ -1,0 +1,20 @@
+# DDoS Mitigation Rule — 2024-06-20
+# Deployment started: 2024-06-20T14:14:00Z
+# Deployment completed: 2024-06-20T17:06:00Z
+# Disabled: 2024-06-20T19:34:00Z
+
+rule_id: ddos-mit-2024-0620
+version: "1.0"
+enabled: true
+deployment:
+  strategy: gradual_rollout
+  deploy_start: "2024-06-20T14:14:00Z"
+  deploy_complete: "2024-06-20T17:06:00Z"
+  disabled_at: "2024-06-20T19:34:00Z"
+rate_limit:
+  requests_per_second: 50
+  burst: 100
+  lua_handler: rule_engine_v1.lua
+  entry_function: validate_request
+# INCIDENT NOTE: This rule triggered the Lua infinite-recursion bug in v1 engine.
+# The lua_handler reference to rule_engine_v1.lua caused process poisoning at 2024-06-20T17:47:00Z.

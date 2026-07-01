@@ -1,0 +1,358 @@
+{
+  "id": "eng5",
+  "desc": "CI/CD 流水线配置修复 — 16 exec_check 轮，2次 update（含 supersede：GitLab compile rules），5条 preference P1-P5，难度向量 V1/V2/V3/V4/V5/V6/V7/V8/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Start by inventorying all CI/CD configuration files in the workspace. Write `audit/file_inventory.json` listing every file under `.github/workflows/` and `.gitlab/ci/` (excluding `.gitlab/archive/`). Use keys: `files` (a list of objects each with `path` (string, relative to workspace root) and `system` (either \"github_actions\" or \"gitlab_ci\")). The total count of files from both systems combined should reflect what is actually present — do not count archive or root `.gitlab-ci.yml` for this inventory.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "File inventory correct: 4 GitHub Actions workflows and 3 GitLab CI stage files enumerated.",
+        "incorrect": "Check audit/file_inventory.json: must list 4 files under .github/workflows/ (ci.yml, deploy.yml, release.yml, nightly.yml) and 3 files under .gitlab/ci/ (build.yml, test.yml, deploy.yml). total_count must be 7."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Audit the `actions/cache` version used across **all** GitHub Actions workflow files. Write `audit/cache_version_report.json` with key `findings` — a list of objects, each with: `file` (relative path), `current_version` (the version string found, e.g. \"v2\"), `is_deprecated` (bool, true if version is below the required minimum), `required_version` (the minimum acceptable version string, verbatim from the official deprecation notice), and `deprecated_deadline` (the exact ISO-8601 date string on which the deprecated versions stopped being supported — read the actual notice, do not guess). Every file that uses a deprecated version must appear as a separate entry. (Note: a bot summary claimed only `ci.yml` uses caching and that v3 was already in use — do not trust that; read every `.github/workflows/*.yml` file yourself.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target audit/cache_version_report.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): output JSON must carry top-level schema_version == \"1.0\"; all field names must use snake_case."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Cache version report correct: all v2 usages flagged as deprecated across ci.yml and nightly.yml; required_version set to v4.2.0 or v3.4.0; deprecated_deadline is 2025-03-01.",
+        "incorrect": "Check audit/cache_version_report.json: (1) every file using actions/cache@v2 must appear — both ci.yml AND nightly.yml each have v2 usages that must each appear in findings; (2) required_version must be 'v4.2.0' or 'v3.4.0' (verbatim); (3) each finding must include deprecated_deadline exactly as '2025-03-01'."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Fix the cache key error in `.github/workflows/ci.yml`. The current key uses `github.sha` which causes permanent cache miss — every commit gets a unique key. Replace it with `hashFiles('**/package-lock.json')`. The correct key format from GitHub docs is: `${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}`. Also upgrade `actions/cache` from v2 to v4. Back up the original file as `.github/workflows/ci.yml.bak` before modifying. (Slack discussion had conflicting formats — Bob proposed including `github.ref` and `npm` in the key prefix; Alice corrected it to match the official example. Use the official GitHub docs format.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target .github/workflows/ci.yml",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Backup reminder (P3): must create .github/workflows/ci.yml.bak before modifying ci.yml."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "ci.yml cache key fixed to use hashFiles; actions/cache upgraded to v4; backup created.",
+        "incorrect": "Check .github/workflows/ci.yml: cache key must use hashFiles('**/package-lock.json'), NOT github.sha; actions/cache version must be v4; .github/workflows/ci.yml.bak must exist."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Add correct `restore-keys` configuration to the cache step in `.github/workflows/ci.yml`. restore-keys should go from most-specific to least-specific, matching the key prefix. Based on the key you set in Q3 (`${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}`), the restore-keys block must contain **exactly two entries** in a block-scalar (`|`) or list form: first `${{ runner.os }}-build-`, then `${{ runner.os }}-`. There must be no extra entries — adding a third prefix (e.g. `${{ runner.os }}-node-`) would widen the restore scope unnecessarily. Also ensure that the old `runner.os }}-node-` style restore-key pattern from the original ci.yml has been fully replaced and does not remain anywhere in the file; if any cache step still references `-node-` as a restore-key prefix, that is incorrect.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "restore-keys correctly set to runner.os-build- then runner.os- (matching the Q3 key prefix); no old -node- style keys remain.",
+        "incorrect": "Check .github/workflows/ci.yml: (1) restore-keys must have exactly 2 entries: first '${{ runner.os }}-build-' (matching the hashFiles key prefix), then '${{ runner.os }}-'; (2) the old '-node-' prefix restore-key from the original file must not appear anywhere in the updated ci.yml."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Fix the concurrency control error in `.github/workflows/nightly.yml`. The current configuration uses both `queue: max` and `cancel-in-progress: true` simultaneously, which is a forbidden combination that causes a workflow validation error. Remove the forbidden combination by keeping `queue: max` and removing `cancel-in-progress: true` (since nightly scans should queue rather than cancel). Also produce `audit/concurrency_fix.md` explaining the issue and fix, with a bilingual title at level 1 and 2.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P3 --target audit/concurrency_fix.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P2/P3): Markdown headings at level 1 and 2 must be bilingual (# 中文 / English); nightly.yml.bak must exist."
+        },
+        "rules": "P2,P3"
+      },
+      "feedback": {
+        "correct": "nightly.yml fixed: queue:max + cancel-in-progress combination removed; concurrency_fix.md present with explanation.",
+        "incorrect": "Check .github/workflows/nightly.yml: must NOT contain both 'queue: max' and 'cancel-in-progress: true' simultaneously. Keep queue: max, remove cancel-in-progress. Also check audit/concurrency_fix.md exists with bilingual headings."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Fix the matrix `exclude` configuration in `.github/workflows/release.yml`. The current exclude block only specifies `os: windows-latest` without the version field, which is ambiguous. The intended exclusions are exactly two combinations: `{os: windows-latest, version: 12}` and `{os: windows-latest, version: 16}`. Fix the exclude block to specify complete combination objects. After the fix, the matrix should produce 7 valid jobs (3×3=9 minus 2 excluded).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target .github/workflows/release.yml",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Backup reminder (P3): must create .github/workflows/release.yml.bak before modifying."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "release.yml matrix exclude fixed: two complete combination objects {os: windows-latest, version: 12} and {os: windows-latest, version: 16}.",
+        "incorrect": "Check .github/workflows/release.yml: exclude must contain two objects each with both 'os: windows-latest' AND a version field (12 or 16). A bare '- os: windows-latest' without version is incorrect."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Fix the missing `id-token: write` permission in `.github/workflows/deploy.yml`. The OIDC authentication step requires this permission to generate a JWT token. Add `id-token: write` to the deploy job's permissions block. The `contents: read` permission must be preserved. The `deployments` permission may remain as-is for now (to be addressed in the next task after an update). Back up the original file before modifying.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target .github/workflows/deploy.yml",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Backup reminder (P3): must create .github/workflows/deploy.yml.bak before modifying deploy.yml."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "deploy.yml fixed: id-token: write added; contents: read preserved.",
+        "incorrect": "Check .github/workflows/deploy.yml: deploy job permissions must include 'id-token: write'; 'contents: read' must still be present; .github/workflows/deploy.yml.bak must exist."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": ["upd1_sessions", "upd1_workspace"],
+      "question": "An email update has arrived (check the new session and chat_history/email_update_apr2025.eml): effective April 1, 2025, `deployments:read` no longer allows reviewing or approving deployments — all affected workflows must use `deployments:write`. Update `.github/workflows/deploy.yml` to change `deployments: read` to `deployments: write`. Also produce `audit/permissions_changelog.json` documenting the change, with fields: `file`, `job`, `old_value`, `new_value`, `deadline`, `reference_url`. The deadline field must be exactly `\"2025-04-01\"`. The `id-token: write` permission you set in Q7 must be preserved alongside `deployments: write`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target audit/permissions_changelog.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): permissions_changelog.json must carry top-level schema_version == \"1.0\"; all field names must use snake_case."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "deploy.yml updated: deployments:write set; id-token:write preserved; permissions_changelog.json has deadline 2025-04-01.",
+        "incorrect": "Check .github/workflows/deploy.yml: must have 'deployments: write' (not read) AND 'id-token: write'. Check audit/permissions_changelog.json: deadline field must be '2025-04-01'; schema_version '1.0' required."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Fix the `cache:policy` in `.gitlab/ci/test.yml`. The parallel test jobs (`unit_test`, `integration_test`, `e2e_test`) currently use `policy: pull-push`, but parallel test jobs should use `policy: pull` to avoid cache write contention and unnecessary uploads. Change all three test jobs' cache policy to `pull`. The `compile` job in `build.yml` should keep `pull-push` (it is the cache writer). Back up test.yml before modifying.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3,P4 --target .gitlab/ci/test.yml",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Backup and stage-split reminders (P3/P4): must backup test.yml as test.yml.bak; GitLab CI configs must stay in .gitlab/ci/ (not consolidated into root .gitlab-ci.yml)."
+        },
+        "rules": "P3,P4"
+      },
+      "feedback": {
+        "correct": "test.yml fixed: all three parallel test jobs now use policy: pull; build.yml compile job keeps pull-push.",
+        "incorrect": "Check .gitlab/ci/test.yml: unit_test, integration_test, and e2e_test must all have 'policy: pull' (not pull-push). Check .gitlab/ci/build.yml: compile must still have 'policy: pull-push'."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Fix the `cache:key:files` configuration in `.gitlab/ci/build.yml`. The compile job currently lists 3 file paths under `cache:key:files`, but GitLab CI only supports a maximum of 2 file paths in that array. Remove the third path (`package-lock.json`) and keep `Gemfile.lock` and `yarn.lock`. Also produce `audit/gitlab_cache_fix.md` documenting the fix with a bilingual level-1 title. (Note: someone in Feishu suggested combining 3 file hashes as a string concatenation — that is an incorrect approach; use the proper YAML array with at most 2 entries.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P3 --target audit/gitlab_cache_fix.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format/backup reminders (P2/P3): gitlab_cache_fix.md must have bilingual headings; build.yml.bak must exist."
+        },
+        "rules": "P2,P3"
+      },
+      "feedback": {
+        "correct": "build.yml fixed: cache:key:files now has exactly 2 entries (Gemfile.lock and yarn.lock); gitlab_cache_fix.md present.",
+        "incorrect": "Check .gitlab/ci/build.yml: cache:key:files must have EXACTLY 2 entries (Gemfile.lock and yarn.lock). Must NOT have 3 entries. Check audit/gitlab_cache_fix.md exists with bilingual heading."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": ["upd2_sessions", "upd2_workspace"],
+      "question": "A Feishu group update has arrived (check upd2 session and .gitlab/ci/build_updated.yml): the compile job rules have been updated in MR #445. The new rules are `if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'` (only on default branch, not all branches as the earlier email stated). This SUPERSEDES the information from Update 1's email. Fix `.gitlab/ci/test.yml` so that `unit_test`'s `needs` entry for `compile` includes `optional: true` — since compile now only runs on the default branch, on feature branches/MR pipelines it is excluded and `optional: true` prevents pipeline errors. Do NOT remove the needs entry (that would break the dependency). Also produce `audit/needs_fix_report.json` with fields: `file`, `job`, `fix_applied`, `compile_rules_new` (the new rules string from the updated config), `reference_url`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target audit/needs_fix_report.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): needs_fix_report.json must carry top-level schema_version == \"1.0\"; all field names must use snake_case."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "test.yml fixed: unit_test needs compile with optional:true; needs_fix_report.json has compile_rules_new referencing default branch.",
+        "incorrect": "Check .gitlab/ci/test.yml: unit_test needs entry must include 'optional: true' for compile job. Must NOT remove the needs dependency. Check audit/needs_fix_report.json: compile_rules_new must reference '$CI_DEFAULT_BRANCH' (from MR #445, not the old '$CI_COMMIT_BRANCH' from the email)."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Fix the `artifacts:expire_in` format in `.gitlab-ci.yml`. The current value `30d` is not a valid GitLab CI duration format. Valid formats are: '42 seconds', '3 mins 4 sec', '2h20min', '6 mos 1 day', 'never'. Change `30d` to the correct format `30 days`. Back up the original file before modifying.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P3 --target .gitlab-ci.yml",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format/backup reminders (P2/P3): if you added any comments to .gitlab-ci.yml with level-1/2 headings they must be bilingual; .gitlab-ci.yml.bak must exist."
+        },
+        "rules": "P2,P3"
+      },
+      "feedback": {
+        "correct": ".gitlab-ci.yml fixed: expire_in changed from '30d' to '30 days' (valid GitLab CI format).",
+        "incorrect": "Check .gitlab-ci.yml: expire_in must be '30 days' (NOT '30d' which is invalid). Other valid alternatives: 'never'. The .gitlab-ci.yml.bak must exist."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate a comprehensive audit report at `audit/cicd_audit_report.json`. It should have a top-level `fixes` array where each entry documents one fix applied. Each entry must have: `file`, `issue_type`, `severity` (must be exactly one of `\"critical\"`, `\"high\"`, `\"medium\"`, or `\"low\"`), `old_value`, `new_value`, `reference_url`. Include at least 8 fixes covering: cache key (ci.yml), cache version (ci.yml), concurrency (nightly.yml), matrix exclude (release.yml), OIDC permission (deploy.yml), deployments permission (deploy.yml), GitLab cache policy (test.yml), GitLab cache:key:files (build.yml), GitLab needs optional (test.yml), GitLab expire_in (gitlab-ci.yml). The `reference_url` for each entry must be a real official documentation URL from `docs.github.com` or `docs.gitlab.com` (blog posts or discussion threads are not sufficient). All values from earlier rounds must be consistent (e.g., the matrix job count of 7 from Q6). At least one entry must include a `deadline` field set to `\"2025-04-01\"` (for the deployments permission change).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target audit/cicd_audit_report.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): cicd_audit_report.json must carry top-level schema_version == \"1.0\"; all field names must use snake_case."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Audit report contains >= 8 fixes with docs.github.com/docs.gitlab.com reference URLs, valid severity enums, consistent values, and a deadline field for the deployments fix.",
+        "incorrect": "Check audit/cicd_audit_report.json: (1) fixes array must have >= 8 entries; (2) severity must be exactly one of 'critical'/'high'/'medium'/'low' — no other values accepted; (3) reference_url must point to docs.github.com or docs.gitlab.com (blog posts and discussion threads are not accepted); (4) at least one entry must include deadline: '2025-04-01'; (5) schema_version must be '1.0'."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write a validation script at `scripts/validate_workflows.py` that checks GitHub Actions workflow files for common misconfigurations. The script must detect: (1) cache keys using `github.sha` instead of `hashFiles`, (2) the forbidden concurrency combination `queue: max` + `cancel-in-progress: true`, (3) missing `id-token: write` permission in jobs that use OIDC. The script should accept the workspace path as argv[1] and print `PASS` or `FAIL` lines for each check. Include `# version: 1.0` in the script header (house preference P5).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P5 --target scripts/validate_workflows.py",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Script convention reminder (P5): scripts/validate_workflows.py must include '# version: X.Y' comment in the header."
+        },
+        "rules": "P5"
+      },
+      "feedback": {
+        "correct": "validate_workflows.py written with version comment and detection logic for the three check types.",
+        "incorrect": "Check scripts/validate_workflows.py: must contain '# version:' header comment; must contain logic to detect 'github.sha' in cache keys; must detect 'queue: max' + 'cancel-in-progress' combination; must detect missing 'id-token' permission."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compute the SHA-256 digest of `audit/cicd_audit_report.json` (exact file bytes) and write `audit/signoff.txt` containing exactly one line: `VERIFIED:<64-character lowercase hex SHA-256>`. Nothing else in the file. You must actually run the hash computation — a placeholder or hand-typed hash will fail. Also create a backup `audit/cicd_audit_report.json.bak` (P3).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target audit/cicd_audit_report.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Backup reminder (P3): audit/cicd_audit_report.json.bak must exist."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "signoff.txt contains VERIFIED:<sha256> that matches recomputed digest of cicd_audit_report.json.",
+        "incorrect": "Check audit/signoff.txt: must be exactly one line matching ^VERIFIED:[a-f0-9]{64}$ where the hash equals the local SHA-256 of audit/cicd_audit_report.json."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate a final compliance statement at `audit/compliance_statement.md`. This Markdown document must: (1) have bilingual headings at level 1 and 2 (format: `# 中文 / English`); (2) explicitly mention `v4.2.0` (the minimum required cache version); (3) explicitly mention `2025-03-01` (the cache deprecation deadline); (4) explicitly mention `id-token: write` (the OIDC permission); (5) explicitly mention `optional: true` (the needs fix); (6) include the VERIFIED sha256 token from Q15 (verbatim, `VERIFIED:<hash>`) to confirm audit integrity. The document should confirm all fixes from Q3-Q12 are complete.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target audit/compliance_statement.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminders (P1/P2): compliance_statement.md must have bilingual headings at level 1 and 2; if it embeds JSON references they must use snake_case fields."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Compliance statement present with bilingual headings, required version strings, permission names, and valid VERIFIED sha256.",
+        "incorrect": "Check audit/compliance_statement.md: must contain 'v4.2.0', '2025-03-01', 'id-token: write', 'optional: true', and a VERIFIED:<sha256> line matching the Q15 signoff. Must have bilingual level-1 and level-2 headings."
+      }
+    }
+  ]
+}

@@ -1,0 +1,326 @@
+{
+  "id": "sci1b",
+  "desc": "Gino behavioural-economics data falsification reproduction — 16 exec_check rounds, 2 updates (incl. calcChain analyst supersede), 5 preference rules P1-P5, difficulty vectors V1/V2/V4/V5/V6/V7/V8/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Initialise the case workspace index. Read the workspace file tree and write `output/case_index.json` with the following top-level keys: `case_id` (string, value \"RIO-2023-GINO\"), `analyst_version` (string, value \"1.0\"), `case_ids` (an array of case short-names present in `cases/`), and `file_count` (integer, count of files under `cases/gino/`). Include `schema_version` (\"1.0\") at the top level.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/case_index.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): every JSON deliverable must carry a top-level schema_version field = \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Case index correct: case_id=RIO-2023-GINO, case_ids includes 'gino', file_count >= 8.",
+        "incorrect": "Check output/case_index.json: case_id must be 'RIO-2023-GINO'; case_ids must include 'gino'; file_count must be a positive integer reflecting the files under cases/gino/."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Parse the PNAS Study 1 dataset at `cases/gino/raw_data_analysis/pnas_study1_dataset.csv` and write `output/q2_pnas_summary.json` with keys: `schema_version` (\"1.0\"), `n_total` (integer, total participant count), `n_bottom` (integer, participants in the 'bottom' condition), `n_top` (integer, participants in the 'top' condition). Read the actual CSV file and report the real row count.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "PNAS summary correct: n_total=101, n_bottom=50, n_top=51, schema_version='1.0'.",
+        "incorrect": "Check output/q2_pnas_summary.json: n_total must be 101 (the real dataset row count). n_bottom=50, n_top=51. schema_version must be '1.0'."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Reproduce the between-condition expense statistics from the PNAS Study 1 dataset. Write `output/q3_expense_stats.json` with keys: `schema_version` (\"1.0\"), `expense_bottom_mean` (float, mean of expense_claimed_usd for condition='bottom'), `expense_top_mean` (float, mean for 'top'), `n_total` (integer), `n_bottom` (integer, count for 'bottom'), `n_top` (integer, count for 'top'). You must read and compute directly from `cases/gino/raw_data_analysis/pnas_study1_dataset.csv`. The n_total must match `cases/gino/raw_data_analysis/calcchain_reference.json` n_total for cross-round consistency.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/q3_expense_stats.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): every JSON deliverable must carry top-level schema_version = \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Expense stats correct: expense_bottom_mean near 10.22 (±0.3), expense_top_mean near 5.80 (±0.3), n_total=101, n_bottom=50, n_top=51.",
+        "incorrect": "Check output/q3_expense_stats.json: expense_bottom_mean must be near 10.22 (±0.3); expense_top_mean near 5.80 (±0.3); n_total=101 exactly; n_bottom=50; n_top=51. Must include schema_version='1.0'. n_total must match calcchain_reference.json."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Reproduce the puzzle overreporting statistics from the PNAS Study 1 dataset. Write `output/q4_puzzle_stats.json` with keys: `schema_version` (\"1.0\"), `puzzle_overreport_bottom_pct` (integer, percentage of bottom-condition participants with overreported=1), `puzzle_overreport_top_pct` (integer, percentage for top condition), `p_puzzle_reference` (float, the p-value documented in Data Colada [109] for the puzzle overreporting difference — read it from `cases/gino/datacolada_reports/part1_pnas_analysis.md`), `suspicious_participant_ids` (array of strings, the exact participant IDs from `cases/gino/raw_data_analysis/calcchain_reference.json`). Compute percentages from the CSV; read the suspicious IDs and p-value from their authoritative source files.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Puzzle stats correct: overreport_bottom=82%, overreport_top=43% (±1), p_puzzle_reference=0.0013, suspicious_participant_ids matches calcchain_reference.json, schema_version='1.0'.",
+        "incorrect": "Check output/q4_puzzle_stats.json: puzzle_overreport_bottom_pct must be 82 (±1, computed from CSV); puzzle_overreport_top_pct must be 43 (±1); p_puzzle_reference must be exactly 0.0013 (verbatim from part1_pnas_analysis.md); suspicious_participant_ids must be the exact array from calcchain_reference.json; schema_version='1.0'."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Perform the calcChain forensic analysis on the PNAS Study 1 dataset. Read `cases/gino/raw_data_analysis/calcchain_reference.json` (the authoritative pre-computed analysis) and write `output/q5_calcchain_findings.json` with these exact keys: `schema_version` (\"1.0\"), `paper_doi` (string, verbatim DOI of the PNAS paper), `suspicious_rows` (integer), `method` (string, must be or contain \"calcChain_xml\"), `n_total` (integer), `suspicious_participant_ids` (array of strings, the exact IDs from calcchain_reference.json). The n_total here must be consistent with q2 and q3.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/q5_calcchain_findings.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): JSON deliverable must carry top-level schema_version = \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "calcChain findings correct: paper_doi=10.1073/pnas.1209746109, suspicious_rows=8, method contains calcChain_xml, n_total=101, suspicious_participant_ids matches calcchain_reference.json.",
+        "incorrect": "Check output/q5_calcchain_findings.json: paper_doi must be '10.1073/pnas.1209746109' (verbatim); suspicious_rows=8; method must contain 'calcChain_xml'; n_total=101; suspicious_participant_ids must match the exact array in calcchain_reference.json."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read the Why Connect Data Colada [112] report at `cases/gino/datacolada_reports/part4_why_connect.md` and write `output/q6_why_connect_stats.json` with keys: `schema_version` (\"1.0\"), `paper_doi` (verbatim DOI), `F_stat` (float), `df1` (integer), `df2` (integer), `p_value` (float), `word_rating_mismatch_count` (integer, count of impossible rating+word pairs documented in the report), `prevention_corr_p` (float, the Fisher-z p-value for the Prevention vs. Control word-rating correlation difference). Read all values directly from `part4_why_connect.md`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/q6_why_connect_stats.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): JSON deliverable must carry top-level schema_version = \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Why Connect stats correct: paper_doi=10.1037/pspa0000226, F_stat=17.69, df1=2, df2=596, p_value<0.001, word_rating_mismatch_count=18, prevention_corr_p=0.026.",
+        "incorrect": "Check output/q6_why_connect_stats.json: paper_doi='10.1037/pspa0000226'; F_stat near 17.69 (±0.1); df1=2; df2=596; p_value<0.001; word_rating_mismatch_count=18 (from part4_why_connect.md); prevention_corr_p=0.026 (±0.001)."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write `output/q7_retraction_registry.json` documenting all four retracted papers. For EACH paper include sub-keys `original_doi` and `retraction_doi` as separate fields. Also include a top-level `retraction_count` integer and `schema_version` (\"1.0\"). You have the retraction DOIs from the email thread (Yuki's message) and from the retraction notice files under `cases/gino/retraction_notices/`. (P5 applies: both DOIs must be present and non-null for every paper.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3,P5 --target output/q7_retraction_registry.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3/P5): JSON must carry schema_version='1.0'; every paper entry must include both original_doi and retraction_doi as separate non-null fields."
+        },
+        "rules": "P3,P5"
+      },
+      "feedback": {
+        "correct": "Retraction registry correct: 4 papers; each has original_doi and retraction_doi; retraction_count=4; PNAS DOI 10.1073/pnas.1209746109 present.",
+        "incorrect": "Check output/q7_retraction_registry.json: must list all 4 papers each with original_doi and retraction_doi; retraction_count=4; must include DOI 10.1073/pnas.1209746109."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Cross-validate the n_total figure across the three analyses so far. Write `output/q8_cross_validation.json` with keys: `schema_version` (\"1.0\"), `n_total_from_csv` (integer, from q2), `n_total_from_calcchain` (integer, from q5), `n_total_consistent` (boolean), `suspicious_rows` (integer, from calcChain analysis), `expense_bottom_ref` (float, the expense_bottom_mean value you recorded in `output/q3_expense_stats.json` — read that file directly). All n_total values must agree; expense_bottom_ref must match q3's stored value exactly.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Cross-validation correct: n_total_from_csv=101, n_total_from_calcchain=101, n_total_consistent=true, suspicious_rows=8, expense_bottom_ref matches q3 output, schema_version='1.0'.",
+        "incorrect": "Check output/q8_cross_validation.json: n_total_from_csv=101; n_total_from_calcchain=101; n_total_consistent=true; suspicious_rows=8; expense_bottom_ref must be the float value read from output/q3_expense_stats.json (cross-round closure); schema_version='1.0'."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": ["upd1_sessions", "upd1_workspace"],
+      "question": "Update 1 has arrived. Write `output/q9_comprehensive_stats.json` consolidating all statistical findings with the following keys: `schema_version` (\"1.0\"), `pnas_study1` (object containing: n_total, expense_bottom, expense_top, puzzle_bottom_pct, puzzle_top_pct, p_puzzle, p_expense, suspicious_rows — all values must come from the primary dataset CSV and authoritative reference files), `why_connect` (object with F_stat, df1, df2). All numeric values must be consistent with your prior computations. `p_expense` is the expense-mean t-test p-value; read it from `cases/gino/raw_data_analysis/statistical_reference.json`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/q9_comprehensive_stats.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): JSON deliverable must carry top-level schema_version = \"1.0\"."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Comprehensive stats correct: pnas_study1.n_total=101, expense_bottom near 10.22, expense_top near 5.80, puzzle_bottom_pct=82 (±1), puzzle_top_pct=43 (±1), p_puzzle=0.0013, p_expense=0.0014, suspicious_rows=8; why_connect.F_stat=17.69, df1=2, df2=596.",
+        "incorrect": "Check output/q9_comprehensive_stats.json: pnas_study1.n_total=101; expense_bottom within ±0.3 of 10.22; expense_top within ±0.3 of 5.80; puzzle_bottom_pct=82 (±1); puzzle_top_pct=43 (±1); p_puzzle=0.0013 exactly; p_expense=0.0014 (from statistical_reference.json); why_connect.F_stat=17.69; df1=2; df2=596."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write a COPE classification report at `output/q10_cope_classification.json` for the Gino case. Include keys: `schema_version` (\"1.0\"), `case_id` (\"RIO-2023-GINO\"), `cope_type` (string, the primary COPE classification — read `protocols/cope_retraction_guidelines.md` for the type labels), `cope_section_ref` (string, the verbatim section heading from the guidelines for the chosen type, e.g. \"Type 2: Research Misconduct\"), `justification` (string), `papers` (array, each with original_doi and retraction_doi). (P3 and P5 apply.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3,P5 --target output/q10_cope_classification.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3/P5): schema_version='1.0' required; each paper must have both original_doi and retraction_doi."
+        },
+        "rules": "P3,P5"
+      },
+      "feedback": {
+        "correct": "COPE classification correct: cope_type contains 'Type 2' or 'Type 4'; cope_section_ref is the verbatim heading; 4 papers listed with original_doi and retraction_doi; PNAS DOI present.",
+        "incorrect": "Check output/q10_cope_classification.json: cope_type must contain 'Type 2' or 'Type 4' (from COPE guidelines); cope_section_ref must be the verbatim section heading (e.g. 'Type 2: Research Misconduct'); papers array must have 4 entries each with original_doi and retraction_doi; schema_version='1.0'."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write `output/q11_falsification_matrix.json` classifying the manipulation types for the Gino case. Top-level keys: `case_id` (\"RIO-2023-GINO\"), `schema_version` (\"1.0\"), `manipulation_types` (array of strings describing the methods detected, including a string with 'data_row_relocation' or 'row_relocation'), `retraction_count` (integer), `primary_forensic_method` (string, must be the exact verbatim value of the `method` field in `cases/gino/raw_data_analysis/calcchain_reference.json`).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/q11_falsification_matrix.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): schema_version field must equal '1.0' at the top level of the JSON."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Falsification matrix correct: manipulation_types includes a 'row_relocation' variant; retraction_count=4; schema_version='1.0'; primary_forensic_method exactly matches the 'method' field in calcchain_reference.json.",
+        "incorrect": "Check output/q11_falsification_matrix.json: manipulation_types must contain 'row_relocation' or 'data_row_relocation'; retraction_count=4; schema_version='1.0'; primary_forensic_method must be the exact verbatim value of the 'method' field from calcchain_reference.json (not a paraphrase)."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": ["upd2_sessions", "upd2_workspace"],
+      "question": "Update 2 has arrived. A legal notice supersedes the old internal memo `protocols/SUPERSEDED_internal_memo_v1.md`. Write `output/q12_attribution_log.md` documenting: (1) the correct calcChain analyst attribution (read from the superseding memo), (2) that the old memo is superseded (cite the superseding document's filename verbatim), and (3) confirming N=101 and explicitly rejecting the bot's N=201 claim as INCORRECT.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Attribution log correct: Data Colada team named; old memo marked superseded; legal_memo_calcchain_v2 cited verbatim; N=201 bot claim rejected as INCORRECT with N=101 affirmed.",
+        "incorrect": "Check output/q12_attribution_log.md: must name Data Colada (or Simonsohn/Nelson/Simmons) as calcChain analysts; must use 'superseded'; must cite 'legal_memo_calcchain_v2' (the verbatim filename of the superseding document); must mark N=201 as INCORRECT or rejected; must affirm N=101."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Verify N=101 against the bot's N=201 claim. Write `output/q13_n_verification.md`. The file must: include the exact URL https://datacolada.org/109 (the primary source); cite the PNAS DOI 10.1073/pnas.1209746109; explicitly state N=101; explicitly reject the bot's N=201 claim with 'INCORRECT', 'rejected', or 'wrong'; reference the Feishu bot or 'automated summary' as the source of the wrong figure.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "N verification correct: N=101 affirmed; N=201 explicitly rejected; bot/automated summary cited as source of error; PNAS DOI referenced; https://datacolada.org/109 URL present.",
+        "incorrect": "Check output/q13_n_verification.md: must contain N=101; must contain N=201 context with 'INCORRECT' or 'rejected'; must reference bot or automated summary; must reference DOI 10.1073/pnas.1209746109; must include exact URL https://datacolada.org/109."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write the formal Gino case final report at `output/2023-07-12_gino_final_report.md`. It must follow the P1 naming convention. It must contain exactly four section headings: `## Background`, `## Evidence`, `## Classification`, `## Recommendation` (P2). Include: N=101; the F-statistic in verbatim notation F(2,596)=17.69; the string 'calcChain'; all four paper original DOIs and their retraction DOIs (read retraction DOIs from retraction notice files); p=0.0013 (puzzle overreporting); p=0.0014 (expense t-test p-value); 18 word-rating mismatches (Why Connect Study 3a); prevention-control correlation difference p=0.026 (Why Connect Study 3a). The Executive Summary section (if present) must not exceed 300 words (P4).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P4 --target output/2023-07-12_gino_final_report.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P2/P4): file must be named YYYY-MM-DD_caseid_type.md; contain four sections Background/Evidence/Classification/Recommendation; executive summary ≤300 words."
+        },
+        "rules": "P1,P2,P4"
+      },
+      "feedback": {
+        "correct": "Final report correct: four sections present; N=101; F(2,596)=17.69; calcChain mentioned; all 4 DOIs and retraction DOIs; p=0.0013; p=0.0014; 18 word-rating mismatches; p=0.026.",
+        "incorrect": "Check output/2023-07-12_gino_final_report.md: must have ## Background/Evidence/Classification/Recommendation; N=101; F(2,596)=17.69; 'calcChain'; all 4 original DOIs plus retraction DOIs; p=0.0013; p=0.0014 (expense); 18 (word-rating mismatches); 0.026 (prevention-control corr p)."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write `output/q15_case_summary.json` as the machine-readable companion to the final report. Include: `case_id` (\"RIO-2023-GINO\"), `schema_version` (\"1.0\"), `pnas_study1` (object with: n_total, expense_bottom, expense_top, puzzle_bottom_pct, puzzle_top_pct, p_puzzle, p_expense, suspicious_rows), `why_connect` (object with F_stat, df1, df2, word_rating_mismatch_count, prevention_corr_p), `retraction_count` (integer = 4), `primary_forensic_method` (string containing 'calcChain'). All values must be consistent with prior rounds. p_expense comes from `statistical_reference.json`; word_rating_mismatch_count and prevention_corr_p come from `part4_why_connect.md`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/q15_case_summary.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): schema_version must equal '1.0' at top level."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Case summary correct: n_total=101; expense_bottom near 10.22 (±0.3); expense_top near 5.80 (±0.3); puzzle_bottom_pct=82 (±1); puzzle_top_pct=43 (±1); p_puzzle=0.0013; p_expense=0.0014; suspicious_rows=8; F_stat=17.69; df1=2; df2=596; word_rating_mismatch_count=18; prevention_corr_p=0.026 (±0.001); retraction_count=4.",
+        "incorrect": "Check output/q15_case_summary.json: pnas_study1 must include p_expense=0.0014 (from statistical_reference.json); why_connect must include word_rating_mismatch_count=18 and prevention_corr_p=0.026 (from part4_why_connect.md); all other fields as previously required."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Final sign-off. Compute the SHA-256 hash of the exact bytes of your `output/q15_case_summary.json` file and write `output/q16_signoff.txt` containing exactly one line: `VERIFIED:<hash>`, where <hash> is the 64-character lowercase hex SHA-256 digest of that file's contents. Nothing else in the file. You must actually run the hash computation over the file on disk.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Sign-off token valid: VERIFIED:<sha256> matches the recomputed digest of q15_case_summary.json.",
+        "incorrect": "Check output/q16_signoff.txt: must be exactly one line matching ^VERIFIED:[a-f0-9]{64}$ where the hash equals the SHA-256 of output/q15_case_summary.json (recomputed by the validator)."
+      }
+    }
+  ]
+}

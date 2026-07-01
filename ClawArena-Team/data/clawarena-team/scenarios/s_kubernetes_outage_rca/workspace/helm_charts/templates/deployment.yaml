@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "payment-svc.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "payment-svc.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "payment-svc.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "payment-svc.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.service.targetPort }}
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+        livenessProbe:
+          {{- toYaml .Values.livenessProbe | nindent 12 }}
+        readinessProbe:
+          {{- toYaml .Values.readinessProbe | nindent 12 }}
+      {{- if .Values.sidecar.enabled }}
+      - name: envoy-sidecar
+        image: {{ .Values.sidecar.image }}
+        resources:
+          {{- toYaml .Values.sidecar.resources | nindent 12 }}
+      {{- end }}

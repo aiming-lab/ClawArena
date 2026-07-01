@@ -1,0 +1,79 @@
+# Test stage configuration
+# Part of the stage-split GitLab CI setup
+
+unit_test:
+  stage: test
+  image: node:20-alpine
+  # BUG: needs references 'compile' which is excluded from pipeline on non-default branches
+  # (compile job has rules: if '$CI_COMMIT_BRANCH', but unit_test runs on MR too)
+  # Fix: add optional: true to the needs entry.
+  needs:
+    - compile
+  # BUG: parallel test jobs should use policy: pull (not pull-push) to reduce server load.
+  # Using pull-push in parallel jobs causes race conditions and unnecessary cache uploads.
+  cache:
+    key:
+      files:
+        - yarn.lock
+    policy: pull-push
+    paths:
+      - node_modules/
+  script:
+    - yarn install --frozen-lockfile
+    - yarn test:unit --coverage
+  coverage: '/Lines\s*:\s*([\d.]+)%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    expire_in: 7 days
+
+integration_test:
+  stage: test
+  image: node:20-alpine
+  needs:
+    - compile
+  # BUG: Same issue - parallel test job using pull-push
+  cache:
+    key:
+      files:
+        - yarn.lock
+    policy: pull-push
+    paths:
+      - node_modules/
+  services:
+    - postgres:14
+    - redis:7
+  variables:
+    POSTGRES_DB: testdb
+    POSTGRES_PASSWORD: testpass
+  script:
+    - yarn install --frozen-lockfile
+    - yarn test:integration
+  artifacts:
+    reports:
+      junit: test-results/junit.xml
+    expire_in: 3 days
+
+e2e_test:
+  stage: test
+  image: mcr.microsoft.com/playwright:v1.40.0-focal
+  needs:
+    - compile
+  cache:
+    key:
+      files:
+        - yarn.lock
+    # This one is also using pull-push - should be pull
+    policy: pull-push
+    paths:
+      - node_modules/
+  script:
+    - yarn install --frozen-lockfile
+    - yarn test:e2e
+  artifacts:
+    when: on_failure
+    paths:
+      - playwright-report/
+    expire_in: 2 days

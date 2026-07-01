@@ -1,0 +1,312 @@
+{
+  "id": "eng4",
+  "desc": "FinEdge Analytics PostgreSQL 16 慢查询诊断与索引优化 — 14 exec_check 轮次，2 次 update（含 supersede），5 条 preference，难度向量 V1/V2/V3/V4/V5/V6/V7/V8/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read `reports/pgstatstatements_snapshot.csv` and identify the top-5 slow queries by `mean_exec_time`. Write `work/slow_queries_top5.json` as a JSON array (length exactly 5) with each element containing these fields: `queryid` (integer), `query_preview` (first 80 chars of the query text), `mean_exec_time_ms` (float, must match the CSV value exactly within 1%), `calls` (integer). Sort descending by mean_exec_time_ms. Note: our monitoring dashboard shows the top-5 starting from queryid 1001 — but the dashboard may be showing a different time window. Read the actual CSV data for the authoritative values.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target work/slow_queries_top5.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): work products must be in work/ directory; JSON field names must be snake_case."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Top-5 slow queries identified correctly: queryid set {1003,1014,1010,1013,1017}, mean_exec_time_ms values match CSV within 1%, sorted descending.",
+        "incorrect": "Check work/slow_queries_top5.json: queryid set must be exactly {1003,1014,1010,1013,1017} (top-5 by mean_exec_time from CSV — NOT starting at 1001); mean_exec_time_ms must match CSV values within 1% (e.g., queryid 1003 = 12450.67ms, 1014 = 9870.34ms)."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read `reports/explain_plans/query_001_before.json` (EXPLAIN FORMAT JSON output). Extract the top-level plan node's key metrics and write `work/q001_analysis.json` with these fields: `node_type` (string, exact node type from the plan), `total_cost` (float), `plan_rows` (integer, exact value from Plan Rows field), `actual_rows` (integer, exact value from Actual Rows field), `scan_type` (string, same as node_type for top-level node), `rows_estimate_error_pct` (float, calculated as abs(plan_rows - actual_rows) / actual_rows * 100, rounded to 2 decimal places). (A colleague estimated the rows_estimate_error_pct is over 5000% because plan_rows is near zero — read the actual EXPLAIN JSON fields and compute precisely.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target work/q001_analysis.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): work products must be in work/; JSON field names must be snake_case."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Query-001 analysis correct: Seq Scan, total_cost ~2876543.20, plan_rows=450, actual_rows=24891, rows_estimate_error_pct=98.19.",
+        "incorrect": "Check work/q001_analysis.json: plan_rows must be exactly 450, actual_rows exactly 24891 (from EXPLAIN JSON fields); rows_estimate_error_pct = abs(450-24891)/24891*100 = 98.19 (not 5000+ — the colleague's estimate is wrong)."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on the Query-001 EXPLAIN output and `db/schema.sql`, design an index recommendation. Write `work/q001_index_recommendation.json` with fields: `table_name` (string), `index_type` (string, must be one of the official PostgreSQL index types: btree/hash/gin/gist/spgist/brin), `columns` (array of column name strings), `where_clause` (string or null), `rationale` (string, must cite a specific documentation URL or section). Note: Sreedhar suggested using a Hash index for the service_id equality lookup — evaluate whether that is appropriate for this query's full predicate pattern, which includes a range on created_at.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3 --target work/q001_index_recommendation.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2/P3): work/ directory; snake_case fields; rationale must cite a documentation URL."
+        },
+        "rules": "P1,P2,P3"
+      },
+      "feedback": {
+        "correct": "Index recommendation correct: btree type (not hash, since range query on created_at requires btree), columns include service_id, rationale cites documentation.",
+        "incorrect": "Check work/q001_index_recommendation.json: index_type must be 'btree' (Hash indexes support only = equality, not range queries on created_at per https://www.postgresql.org/docs/current/indexes-types.html); columns must include service_id; rationale must cite a URL."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate the CREATE INDEX DDL for the first batch of index recommendations and record them in an optimization log. Write `work/index_ddl_batch1.sql` containing at least 3 CREATE INDEX CONCURRENTLY statements for the events and notifications tables (house preference P4: production indexes require CONCURRENTLY). Also write `work/optimization_log.jsonl` (one JSON object per line) where each entry has fields: `timestamp` (ISO string), `action` (must be 'create_index'), `ddl` (the CREATE INDEX statement), `rationale` (brief reason). (Reminder: the CONCURRENTLY requirement applies even though we haven't re-stated P4 here.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target work/index_ddl_batch1.sql",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P4): work products in work/ directory; all CREATE INDEX statements must use CONCURRENTLY."
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "DDL batch correct: all CREATE INDEX use CONCURRENTLY; optimization_log.jsonl has action='create_index' entries.",
+        "incorrect": "Check work/index_ddl_batch1.sql: all CREATE INDEX statements must include CONCURRENTLY keyword; check work/optimization_log.jsonl: each line must be valid JSON with action='create_index'."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read `archive/old_optimization_plan_v0.md` and evaluate the recommendations it contains. Write `work/archive_review.json` with fields: `is_outdated` (bool), `outdated_recommendations` (array, each element with `original_text` (string, must be a verbatim excerpt from the archive file) and `reason_outdated` (string explaining why it's wrong — must explicitly state what the index type supports (equality) and what it cannot support (range))), `valid_recommendations` (array of strings).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target work/archive_review.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): work/ directory; snake_case fields."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Archive review correct: is_outdated=true, outdated_recommendations cites Hash index limitation (no range support).",
+        "incorrect": "Check work/archive_review.json: is_outdated must be true; outdated_recommendations must include the Hash Index recommendation and reason_outdated must explain that Hash indexes support only = (equality) and not range queries."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyse the statistics failure in Query-004. Read `reports/explain_plans/query_004_before.json` and `db/seed_stats.sql`. Write `work/q004_stats_analysis.json` with fields: `table_name` (string), `column_name` (string), `n_distinct` (float, from the authoritative pg_stats snapshot in seed_stats.sql — NOT from any bot/chat summary), `correlation` (float, from the same snapshot), `estimated_selectivity` (float, plan_rows / total_rows of notifications table ≈ 12000000), `actual_selectivity` (float, actual_rows / total_rows), `diagnosis` (string, one of: 'stale_statistics' / 'skewed_distribution' / 'correlated_columns'). Hint: Sreedhar's message on Slack DM claims n_distinct = -1 for this column — verify against the actual pg_stats data in seed_stats.sql.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target work/q004_stats_analysis.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): work/ directory; snake_case fields."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Stats analysis correct: n_distinct=-0.23 (from seed_stats.sql, NOT the bot's -1), diagnosis='stale_statistics'.",
+        "incorrect": "Check work/q004_stats_analysis.json: n_distinct must be -0.23 (authoritative from db/seed_stats.sql — Sreedhar's Slack bot claim of -1.0 is incorrect); diagnosis must be 'stale_statistics'."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": ["upd1_sessions", "upd1_workspace"],
+      "question": "The first batch of indexes has been created. Compare the before and after EXPLAIN plans for Query-001 through Query-009. Write `work/optimization_comparison.json` with a `results` array (exactly 9 elements, one per query), each element containing: `query_id` (string like 'query_001'), `before_node_type` (string), `after_node_type` (string), `before_total_cost` (float), `after_total_cost` (float), `cost_reduction_pct` (float, rounded to 2 decimal places, formula: (before-after)/before*100), `before_actual_time_ms` (float), `after_actual_time_ms` (float). Important: the before_total_cost for query_001 must match what you extracted in Q2 — cross-round consistency is mandatory.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target work/optimization_comparison.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): work/ directory; snake_case fields."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Comparison correct: 9 entries, query_001 after_node_type='Index Only Scan', cost_reduction_pct computed correctly, before_total_cost matches Q2.",
+        "incorrect": "Check work/optimization_comparison.json: results array must have exactly 9 elements; query_001 after_node_type must be 'Index Only Scan'; cost_reduction_pct = (before-after)/before*100 rounded to 2dp; before_total_cost for query_001 must match your Q2 value (~2876543.20)."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyse Query-010 (now available from Update 1 in `reports/slow_query_report_week2.md`). Write `work/q010_join_analysis.json` with fields: `join_type` (string), `hash_batches` (integer), `has_disk_spill` (bool — true if Batches > 1 or Sort Method contains 'external'), `spill_size_kb` (integer, 0 if no spill), `recommendation` (string, one of: 'increase_work_mem' / 'rewrite_query' / 'add_index' / 'create_statistics'). Base your initial recommendation on the EXPLAIN data available in Update 1. (Update 2 has not arrived yet.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target work/q010_join_analysis.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): work/ directory; snake_case fields."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Query-010 join analysis correct: has_disk_spill=true (hash_batches=8), initial recommendation is 'increase_work_mem'.",
+        "incorrect": "Check work/q010_join_analysis.json: has_disk_spill must be true (Hash Batches=8 in the EXPLAIN); hash_batches must be > 1; initial recommendation before Update 2 should be 'increase_work_mem'."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Design a Partial Index for Query-011 which queries `orders WHERE billed IS NOT TRUE`. Write `work/q011_partial_index.sql` containing a CREATE INDEX CONCURRENTLY statement with a WHERE clause semantically equivalent to `billed IS NOT TRUE`. Also write `work/q011_partial_index_rationale.md` explaining why a Partial Index is more efficient than a full B-Tree index on `billed`, and cite the official PostgreSQL documentation for Partial Indexes. (File naming follows the q{N}_ prefix convention per P5.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4,P5 --target work/q011_partial_index.sql",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P4/P5): work/ directory; CONCURRENTLY required; SQL file named q{N}_ prefix."
+        },
+        "rules": "P1,P4,P5"
+      },
+      "feedback": {
+        "correct": "Partial index SQL correct: WHERE clause for billed IS NOT TRUE present, CONCURRENTLY used, rationale cites official docs.",
+        "incorrect": "Check work/q011_partial_index.sql: must contain WHERE clause equivalent to 'billed IS NOT TRUE'; must use CONCURRENTLY; check work/q011_partial_index_rationale.md: must reference partial index documentation."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": ["upd2_sessions", "upd2_workspace"],
+      "question": "An architecture decision just arrived (Update 2). The Principal Architect has explicitly superseded the CTO's work_mem=256MB recommendation. Apply the new instruction: update `work/q010_join_analysis.json` to set recommendation to the value now mandated by the architect's decision. Also create `work/q010_create_statistics.sql` containing the CREATE STATISTICS DDL specified by the architect, using 'dependencies' statistics kind on the relevant columns. (You must identify and apply the supersede — do not simply stack the two contradictory recommendations.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target work/q010_create_statistics.sql",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): work products must be in work/ directory."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Supersede applied correctly: q010_join_analysis.json recommendation='create_statistics'; q010_create_statistics.sql uses CREATE STATISTICS with 'dependencies'.",
+        "incorrect": "Check work/q010_join_analysis.json: recommendation must be 'create_statistics' (NOT 'increase_work_mem' — the architect's Update 2 supersedes the CTO's Update 1 directive); check work/q010_create_statistics.sql: must use CREATE STATISTICS syntax with 'dependencies' option."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Design a Covering Index for Query-012 to enable Index Only Scan. The query is `SELECT u.email, u.name, u.updated_at FROM users WHERE u.email = $1`. Write `work/q012_covering_index.sql` containing a CREATE INDEX statement where: (a) the index key column is `email` (the filter predicate), and (b) the INCLUDE clause covers the additional columns `name` and `updated_at` needed for an Index Only Scan without heap fetches. Note: a colleague suggested putting all three columns (email, name, updated_at) in the key — evaluate whether email belongs in the key or INCLUDE for this access pattern. (Production DDL convention applies here even though not restated.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target work/q012_covering_index.sql",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P4): work/ directory; CONCURRENTLY required for all production CREATE INDEX."
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "Covering index correct: INCLUDE clause covers name and updated_at; CONCURRENTLY used.",
+        "incorrect": "Check work/q012_covering_index.sql: must use INCLUDE keyword; INCLUDE must cover name and updated_at columns; must use CONCURRENTLY."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Summarise the scan types across all queries you have processed. Write `work/scan_type_summary.json` with fields: `total_queries` (integer, must equal 12 — Queries 001 through 012), `scan_type_distribution` (object mapping scan type name string to count integer), `seq_scan_remaining` (array of query_id strings that still have Seq Scan in their after/current plan). Important: total_queries must be 12 (the 9 original plus the 3 from Update 2). Use the after-plans where available, and the current/before plans for Query-010 through Query-012.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target work/scan_type_summary.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): work/ directory; snake_case fields."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Scan type summary correct: total_queries=12, scan_type_distribution present, seq_scan_remaining < 4.",
+        "incorrect": "Check work/scan_type_summary.json: total_queries must be exactly 12 (9 original + 3 from Update 2); scan_type_distribution must be a non-empty object; seq_scan_remaining should contain fewer than 4 query IDs (most were optimized)."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read `reports/slow_query_report_week3.md`. The notifications table requires manual ANALYZE after a bulk DELETE that left stale statistics. Write `work/analyze_plan.json` with fields: `tables_need_analyze` (array, each element with `table_name`, `reason`, `last_autovacuum`, `n_dead_tup`). Also write `work/run_analyze.sh` (a bash script containing at least `ANALYZE notifications;` as a psql command). The tables_need_analyze array must include 'notifications'. (Remember: all work products go to work/ — this applies even though P1 has not been re-stated.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "ANALYZE plan correct: notifications included with stale statistics reason; run_analyze.sh contains ANALYZE notifications.",
+        "incorrect": "Check work/analyze_plan.json: tables_need_analyze must include 'notifications' with a reason mentioning stale statistics or bulk delete; check work/run_analyze.sh: must contain 'ANALYZE notifications' statement."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate the final optimization report and compute a SHA-256 sign-off. Write `work/final_optimization_report.json` as a structured JSON report with fields: `total_queries_optimized` (integer, must equal 12 — matching Q12's total_queries), `indexes_created` (array of DDL strings, length must match the number of entries in work/optimization_log.jsonl), `statistics_created` (array, must include the CREATE STATISTICS statement from Q10), `work_mem_modified` (bool, must be false — per the architect's supersede directive), `seq_scan_remaining_count` (integer). Then compute the SHA-256 digest of the exact bytes of `work/final_optimization_report.json` and write `work/signoff.txt` containing exactly one line: `VERIFIED:<64-hex-lowercase-sha256>`. (You must actually run the hash — a placeholder will not match.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Final report and sign-off correct: total_queries_optimized=12, work_mem_modified=false, VERIFIED hash matches recomputed digest.",
+        "incorrect": "Check work/final_optimization_report.json: total_queries_optimized must be 12 (matching Q12); work_mem_modified must be false (architect superseded the work_mem change); check work/signoff.txt: must match ^VERIFIED:[a-f0-9]{64}$ where hash equals sha256 of the report file."
+      }
+    }
+  ]
+}

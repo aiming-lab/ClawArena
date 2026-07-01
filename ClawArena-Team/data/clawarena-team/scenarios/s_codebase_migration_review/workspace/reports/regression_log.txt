@@ -1,0 +1,41 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.9, pytest-8.2.0, pluggy-1.4.0
+rootdir: /workspace/evaluation
+collected 15 items
+
+evaluation/tests/test_split.py::test_payments_basic PASSED                [ 6%]
+evaluation/tests/test_split.py::test_billing_idempotency PASSED            [13%]
+evaluation/tests/test_split.py::test_ledger_balance_read PASSED            [20%]
+evaluation/tests/test_split.py::test_reports_generation PASSED             [26%]
+evaluation/tests/test_split.py::test_payments_retry PASSED                 [33%]
+evaluation/tests/test_split.py::test_billing_reconcile_smoke PASSED        [40%]
+evaluation/tests/test_split.py::test_ledger_schema_version PASSED          [46%]
+evaluation/tests/test_split.py::test_reports_csv_export PASSED             [53%]
+evaluation/tests/test_split.py::test_payments_dedup PASSED                 [60%]
+evaluation/tests/test_split.py::test_billing_pii_audit PASSED              [66%]
+evaluation/tests/test_split.py::test_ledger_coverage_gate PASSED           [73%]
+evaluation/tests/test_split.py::test_reports_auth PASSED                   [80%]
+evaluation/tests/test_split.py::test_payment_idempotency_after_split FAILED [86%]
+evaluation/tests/test_split.py::test_billing_final_smoke PASSED            [93%]
+evaluation/tests/test_split.py::test_ledger_final_smoke PASSED             [100%]
+
+=================================== FAILURES ===================================
+__________________ test_payment_idempotency_after_split _______________________
+
+    def test_payment_idempotency_after_split():
+        # After the monorepo split, payments service must honour idempotency keys
+        # for duplicate requests routed via the new service boundary.
+        key = "idem-split-boundary"
+        first_result = _simulate_payment(key, amount=100)
+        # Bug: post-split boundary re-routes request; idempotency store is lost.
+        # The split service generates a new tx-id ignoring the original key.
+        second_result = _simulate_payment(key + "-boundary-reload", amount=100)
+>       assert first_result == second_result, (
+            f"idempotency violated after split for key={key!r}: "
+            f"first={first_result!r}, second={second_result!r}"
+        )
+E       AssertionError: idempotency violated after split for key='idem-split-boundary': first='tx-588', second='tx-783'
+E       assert 'tx-588' == 'tx-783'
+
+evaluation/tests/test_split.py:78: AssertionError
+========================= 1 failed, 14 passed in 12.44s ========================

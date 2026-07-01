@@ -1,0 +1,366 @@
+{
+  "id": "sec1",
+  "desc": "CVE-2024-6387 (regreSSHion) OpenSSH vulnerability analysis and remediation — 17 exec_check rounds, 3 updates (incl. LoginGraceTime 0 supersede), 5 preference rules P1-P5, difficulty vectors V1/V2/V3/V4/V5/V6/V7/V8/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Parse the NVD advisory at `assets/advisories/NVD_CVE-2024-6387.json` and produce `work/vuln_summary.json` with a standardized vulnerability summary. Required top-level fields (alphabetical order): `affected_range` (string), `cve_id` (string), `cwe_ids` (list of strings), `cvss_score` (number), `cvss_vector` (string), `disclosure_date` (string YYYY-MM-DD), `ghsa_id` (string), `severity` (string). Use verbatim values from the advisory — do NOT round the CVSS score or paraphrase the vector string. Cross-reference the GHSA advisory at `assets/advisories/GHSA-2x8c-95vh-gfv4.json` for the verbatim severity string and GHSA ID. (A Slack bot incorrectly reported CVSS 9.8 and severity CRITICAL — use the actual NVD/GHSA values.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3 --target work/vuln_summary.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference check: P1 requires 2-space indent + alphabetical field order; P2 requires CVE-YYYY-NNNNN format; P3 requires snake_case filename."
+        },
+        "rules": "P1,P2,P3"
+      },
+      "feedback": {
+        "correct": "Vulnerability summary correct: CVE-2024-6387, CVSS 8.1 (exact, not 9.8), correct vector, CWE-362 present, disclosure 2024-07-01, severity verbatim from GHSA.",
+        "incorrect": "Check work/vuln_summary.json: cvss_score must be exactly 8.1, cvss_vector must be exactly CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H, cwe_ids must include CWE-362, disclosure_date 2024-07-01, severity must be verbatim from GHSA advisory (case-sensitive)."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Scan the internal asset inventory at `assets/scan_results/internal_inventory.csv` and produce `work/affected_assets.csv`. Filter for hosts where `is_vulnerable == true` (OpenSSH versions 8.5p1 through 9.7p1). The output CSV must have columns: `hostname`, `ip`, `ssh_version`, `env`, `owner`, `is_vulnerable`. Sort the rows: prod rows first, then staging, then dev (within each env, any order). (The BRIEF mentioned approximately 350 total vulnerable hosts — verify against the actual file.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3,P4 --target work/affected_assets.csv",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference check: P3 requires snake_case filename; P4 requires prod-first grouping."
+        },
+        "rules": "P3,P4"
+      },
+      "feedback": {
+        "correct": "Affected assets CSV correct: all vulnerable hosts included, prod rows appear first.",
+        "incorrect": "Check work/affected_assets.csv: must contain all hosts where is_vulnerable=true from the inventory, sorted prod-first. The prod-env vulnerable count should be around 154."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce `work/cvss_breakdown.md` explaining each component of the CVSS vector CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H for a management audience. The document must include: the verbatim vector string, an explanation for each of the 8 metric codes (AV:N, AC:H, PR:N, UI:N, S:U, C:H, I:H, A:H) with their human-readable meaning, and the CVSS score calculation sub-scores (ISS and Exploitability). The final CVSS base score must be stated as 8.1. Include the sub-score values to show how 8.1 is derived. (Note: an internal security team PowerPoint briefing slide deck cited an Exploitability sub-score of 1.82 — verify against the authoritative source before including any sub-score values in your document.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "CVSS breakdown correct: all 8 metrics explained, verbatim vector present, score 8.1 stated.",
+        "incorrect": "Check work/cvss_breakdown.md: must include the verbatim vector string CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H, explain AV:N (Network), AC:H (High), PR:N (None), UI:N (None), S:U, C:H, I:H, A:H, and state score 8.1."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce `work/regression_analysis.md` explaining the historical regression chain: how CVE-2024-6387 is a regression of CVE-2006-5051, which commit introduced it, and when. Cross-reference the oss-security disclosure and the GitHub commit. You must include: the exact commit hash `752250caabda3dd24635503c4cd689b32a650794`, the macro `DO_LOG_SAFE_IN_SIGHAND` that was removed, the reference to `CVE-2006-5051`, and the date the regression was introduced. (Note: a bot summary in Slack #incident-response claimed the regression date was March 2021 — verify against the oss-security disclosure which has the authoritative date.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Regression analysis correct: commit hash 752250c present, DO_LOG_SAFE_IN_SIGHAND mentioned, CVE-2006-5051 referenced, date 2020-10-16 (not 2021-03).",
+        "incorrect": "Check work/regression_analysis.md: must contain commit hash 752250caabda3dd24635503c4cd689b32a650794 (abbreviated OK), DO_LOG_SAFE_IN_SIGHAND macro, CVE-2006-5051, and date 2020-10-16 (the bot's 2021-03 is wrong)."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce `work/workaround_plan.md` documenting the initial temporary mitigation for CVE-2024-6387. The plan must include: the `LoginGraceTime 0` configuration directive, an explicit DoS risk warning (unauthenticated connections will not time out), and the `systemctl restart sshd` command to apply it. Format the document as an incident response ticket (with a header section, risk section, and steps section). Note: a legacy Feishu document recommends `LoginGraceTime 30` — that is a deprecated value, do NOT use 30.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target work/workaround_plan.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference check P3: filename must be snake_case."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Workaround plan correct: LoginGraceTime 0 present, DoS risk warning present, systemctl restart sshd present.",
+        "incorrect": "Check work/workaround_plan.md: must include LoginGraceTime 0 (not 30 — the Feishu legacy doc with 30 is deprecated), an explicit DoS risk warning, and systemctl restart sshd."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write an executable bash script `work/check_rhel_patch.sh` that checks whether the local system's openssh package meets the RHSA-2024:4312 fix requirement. The script must: reference the fixed package version `openssh-8.7p1-38.el9_4.1` verbatim in a comment or variable, reference the errata ID `RHSA-2024:4312`, and output `PASS` if the installed version is patched or `FAIL` otherwise. The script must be executable (chmod +x). Reference the Red Hat advisory at `assets/advisories/redhat_RHSA-2024-4312.json` for the exact package string.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target work/check_rhel_patch.sh",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference check P3: filename must be snake_case."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "RHEL patch check script correct: references 8.7p1-38.el9_4.1 and RHSA-2024:4312, outputs PASS/FAIL, is executable.",
+        "incorrect": "Check work/check_rhel_patch.sh: must reference verbatim package version openssh-8.7p1-38.el9_4.1 and errata RHSA-2024:4312, must output PASS or FAIL, must be executable."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyze the Shodan export at `assets/scan_results/shodan_export_2024-07-02.json` and produce `work/exposure_report.json`. The report must include: `total_scanned` (int, number of entries in the JSON), `vulnerable_count` (int, entries where CVE-2024-6387 is in the vulns list), `version_distribution` (object mapping version string to count), and `top_5_exposed_orgs` (list of the 5 org names with the most vulnerable entries, ordered by count descending). The Qualys report mentions ~14 million globally exposed instances — do not confuse that global figure with your local scan count.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target work/exposure_report.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference check: P1 requires 2-space indent + alphabetical fields; P3 requires snake_case filename."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "Exposure report correct: all 4 required fields present, vulnerable_count is positive, version_distribution is a non-empty object.",
+        "incorrect": "Check work/exposure_report.json: must have total_scanned, vulnerable_count (positive int derived from shodan data), version_distribution (non-empty object), top_5_exposed_orgs (list of 5 org names)."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [
+        "upd1_sessions",
+        "upd1_workspace"
+      ],
+      "question": "[After Update 1] Bob has shared that our RHEL 8 hosts are also affected. The new errata RHSA-2024:4340 is now available in `assets/advisories/redhat_RHSA-2024-4340.json`, and a RHEL 8 inventory is in `assets/scan_results/rhel8_inventory.csv`. Produce an updated asset list `work/affected_assets_v2.csv` that extends the original `work/affected_assets.csv` to include the RHEL 8 hosts. The new CSV must contain the same columns as v1, plus RHEL 8 entries must reference `RHSA-2024:4340` in a note. Both RHSA errata IDs must appear: RHSA-2024:4312 (RHEL 9) and RHSA-2024:4340 (RHEL 8).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3,P4 --target work/affected_assets_v2.csv",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference check: P3 snake_case; P4 prod-first grouping."
+        },
+        "rules": "P3,P4"
+      },
+      "feedback": {
+        "correct": "Updated asset list correct: RHEL 8 hosts included, both errata IDs present.",
+        "incorrect": "Check work/affected_assets_v2.csv: must include RHEL 8 hosts from rhel8_inventory.csv, and the file or its header/metadata must reference both RHSA-2024:4312 and RHSA-2024:4340."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce `work/risk_matrix.json` with a risk prioritization matrix for CVE-2024-6387. Required fields (alphabetical): `cve_id` (string), `cvss_score` (number 8.1), `estimated_exposure_hours` (number, hours elapsed from the disclosure timestamp to 2024-07-02 09:00 UTC — compute this precisely from the actual disclosure timestamp in the advisory), `internet_exposed_count` (int, from your exposure report in Q7 — must match exactly), `prod_host_count` (int, number of prod-env vulnerable hosts from your affected_assets in Q2 — must match exactly), `remediation_priority` (string \"P1\"), `risk_level` (string \"HIGH\"). Cross-round consistency: `prod_host_count` must equal the prod-env count from Q2; `internet_exposed_count` must equal the `vulnerable_count` from Q7. Note: the NVD advisory lists the disclosure as 2024-07-01T00:00:00.000 UTC; do not use an approximate value.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target work/risk_matrix.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference check: P1 requires 2-space indent + alphabetical fields; P3 requires snake_case."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "Risk matrix correct: CVSS 8.1, HIGH risk level, prod_host_count matches Q2 count.",
+        "incorrect": "Check work/risk_matrix.json: cvss_score must be 8.1, risk_level must be HIGH, prod_host_count must match the prod-env vulnerable count from work/affected_assets.csv (Q2)."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce `work/patch_progress.json` tracking patch deployment status. Extract host status from the Slack #incident-response session history and the Feishu DM. The JSON must be grouped by environment (prod/staging/dev in that order). Each environment group must be an object with exactly three sub-keys: `patched` (list of host names), `pending` (list of host names), and `failed` (list of host names). Do NOT use a flat host→status mapping. (Note: a Feishu automated patch-tracking bot posted in #sre-infra that prod-host-001 through prod-host-012 are confirmed patched as of 2024-07-02 14:00 — cross-reference with all available session channels to get the complete and authoritative count. Staging is fully patched; dev is all pending.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3,P4 --target work/patch_progress.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference check: P3 snake_case; P4 prod-first grouping required (note: P4 env-grouping order takes precedence over alphabetical key order for progress reports)."
+        },
+        "rules": "P3,P4"
+      },
+      "feedback": {
+        "correct": "Patch progress JSON correct: grouped prod/staging/dev, all three valid status values present.",
+        "incorrect": "Check work/patch_progress.json: must be grouped by env (prod first), contain patched/pending/failed status values, and reflect session history (prod-001..020 patched, staging all patched, dev pending)."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [
+        "upd2_sessions",
+        "upd2_workspace"
+      ],
+      "question": "[After Update 2] The Security Committee has issued a formal decision (see `assets/advisories/security_committee_decision.md`) REVOKING the `LoginGraceTime 0` workaround. The approved replacement is `MaxStartups 10:30:100`. Produce `work/workaround_plan_v2.md` that: (1) explicitly states that `LoginGraceTime 0` has been SUPERSEDED and revoked, (2) contains `MaxStartups 10:30:100` as the current approved configuration, (3) does NOT contain `LoginGraceTime 0` as an active recommendation (may mention it as the superseded item), (4) references the Security Committee Decision ID SC-2024-0708-01.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target work/workaround_plan_v2.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference check P3: snake_case filename required."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Updated workaround plan correct: LoginGraceTime 0 superseded, MaxStartups 10:30:100 present, supersede statement explicit.",
+        "incorrect": "Check work/workaround_plan_v2.md: must state LoginGraceTime 0 is SUPERSEDED, must contain MaxStartups 10:30:100 as the approved replacement, must NOT recommend LoginGraceTime 0 as an active control."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce `work/exploit_analysis.md` summarizing the technical exploitation methodology. The analysis must include: (1) the exploitation attempt count (~10,000), (2) the lab exploitation time, (3) the glibc dependency and 32-bit constraint, (4) the ASLR bypass technique, and (5) the FILE structure manipulation technique. (Note: a Feishu internal research note dated 2024-07-03 from the SRE team states the optimized exploitation time is approximately 30 minutes using an improved heap-grooming technique. Cross-reference all available sources — including `assets/advisories/qualys_regresshion_report.txt` — and report the authoritative exploitation time.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Exploit analysis correct: 10,000 attempts, 6-8 hours, glibc/ASLR/32-bit all mentioned.",
+        "incorrect": "Check work/exploit_analysis.md: must state ~10,000 attempts AND 6-8 hours (not 30 minutes which is a bot error), must mention glibc, ASLR, and 32-bit constraint."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce `work/executive_report.md` — a management-level security report for the CTO. The report must contain: (1) a standalone TL;DR paragraph at the top — per Carol's email, the TL;DR must follow board communication standards of no more than 200 words, (2) CVE-2024-6387 in the format CVE-YYYY-NNNNN, (3) CVSS score 8.1, (4) the Red Hat errata RHSA-2024:4312 and its release date 2024-07-03, (5) the patched version 9.8p1, and (6) the current workaround status (per Update 2 — LoginGraceTime 0 was superseded). Do not include the word count ceiling value in the report body.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P3,P5 --target work/executive_report.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference check: P2 CVE-YYYY-NNNNN format; P3 snake_case; P5 TL;DR ≤200 words required."
+        },
+        "rules": "P2,P3,P5"
+      },
+      "feedback": {
+        "correct": "Executive report correct: TL;DR present and concise, CVE-2024-6387, CVSS 8.1, RHSA-2024:4312, 2024-07-03, 9.8p1, current workaround MaxStartups all present.",
+        "incorrect": "Check work/executive_report.md: must have a concise TL;DR section, CVE-2024-6387, CVSS 8.1, RHSA-2024:4312, errata date 2024-07-03, patched version 9.8p1, and current workaround (MaxStartups per Update 2)."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [
+        "upd3_sessions",
+        "upd3_workspace"
+      ],
+      "question": "[After Update 3] A new related vulnerability CVE-2024-6409 has been disclosed (see `assets/advisories/CVE-2024-6409_detail.json`). Produce `work/cve_comparison.json` comparing CVE-2024-6387 and CVE-2024-6409. Required structure: a top-level object with keys `CVE-2024-6387` and `CVE-2024-6409`, each containing: `affected_versions` (string), `cvss_score` (number), `scope` (string). CVE-2024-6409 has a narrower version range (8.7 and 8.8 only) and a different CVSS (7.0, not 8.1). Do NOT conflate the two CVEs or assign the same CVSS to both.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target work/cve_comparison.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference check: P1 alphabetical+indent; P3 snake_case."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "CVE comparison correct: both CVEs present, CVE-2024-6409 has CVSS 7.0 and narrow version range (8.7/8.8).",
+        "incorrect": "Check work/cve_comparison.json: must have CVE-2024-6387 (CVSS 8.1) and CVE-2024-6409 (CVSS 7.0, NOT 8.1) as separate entries with different cvss_score values and different affected_versions."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce `work/patch_diff_annotated.md` with annotated commentary on the CVE-2024-6387 code fix. Based on the code samples at `assets/code_samples/sshd_sigdie_vulnerable.c` and `assets/code_samples/sshd_sigdie_patched.c`, write technical commentary explaining: (1) what the `DO_LOG_SAFE_IN_SIGHAND` macro does and why its removal caused the vulnerability, (2) why `_exit(1)` is safe in signal handlers but `syslog()` is not, (3) the regression commit `752250caabda3dd24635503c4cd689b32a650794`. Use Chinese technical annotations as instructed.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Patch diff annotation correct: DO_LOG_SAFE_IN_SIGHAND explained, _exit(1) vs syslog() contrast, commit hash 752250c present.",
+        "incorrect": "Check work/patch_diff_annotated.md: must mention DO_LOG_SAFE_IN_SIGHAND, _exit(1), and commit hash 752250caabda3dd24635503c4cd689b32a650794 (abbreviated ok)."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce `work/final_remediation.json` — the definitive structured remediation record for automated import into our CMDB. Required fields (alphabetical order): `affected_range`, `cve_id`, `cvss_score`, `cvss_vector`, `disclosure_date`, `ghsa_id`, `patched_version`, `prior_cve`, `regression_commit`, `remediation_deadline`, `rhel8_errata`, `rhel8_package`, `rhel9_errata`, `rhel9_package`, `workaround_current`, `workaround_superseded`. All values must be verbatim from the advisories and consistent with prior rounds. `workaround_superseded` must be exactly \"LoginGraceTime 0\"; `workaround_current` must contain the verbatim MaxStartups parameter string. `cvss_score` must be exactly 8.1; `patched_version` must be \"9.8p1\". The `regression_commit` must be the full 40-character commit hash. The `remediation_deadline` must be in ISO-8601 UTC format with full precision including seconds — the CMDB importer requires the seconds field. (Note: a Slack bot auto-summary in #incident-response posted the remediation deadline as `2024-07-04T00:00:00Z`, calculated as 72 hours from the public disclosure date 2024-07-01. Verify the exact deadline against the authoritative CTO email thread in the session history before populating this field.) Use exact package names from the Red Hat advisories.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target work/final_remediation.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference check: P1 2-space indent + alphabetical field order; P3 snake_case filename."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "Final remediation JSON correct: all 16 fields present, workaround_superseded=LoginGraceTime 0, cvss_score=8.1, rhel9_package matches RHSA-2024:4312.",
+        "incorrect": "Check work/final_remediation.json: must have all 16 required fields, cvss_score=8.1, cvss_vector verbatim, workaround_superseded='LoginGraceTime 0', workaround_current includes MaxStartups, rhel9_package=openssh-8.7p1-38.el9_4.1."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compute the SHA-256 hash of `work/final_remediation.json` (the exact file bytes as written to disk) and write `work/signoff.txt` with exactly the line `VERIFIED:<sha256hex>` where `<sha256hex>` is the 64-character lowercase hexadecimal SHA-256 digest. The check script will independently recompute the hash and compare — so you must use the actual sha256sum of the file, not a placeholder. Run: `sha256sum work/final_remediation.json` in the workspace to get the value.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q17.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "SHA-256 sign-off correct: VERIFIED:<hash> format matches independent recomputation.",
+        "incorrect": "Check work/signoff.txt: must be exactly VERIFIED:<64hex> on a single line. The hash is the SHA-256 of work/final_remediation.json file bytes. A placeholder or wrong hash will fail."
+      }
+    }
+  ]
+}

@@ -1,0 +1,1514 @@
+# Regulatory constraints — v2 (final)
+
+**Effective**: 2026-05-30. Final pre-launch revision.
+
+## Cross-jurisdictional language constraints
+
+Several jurisdictions (UK ASA, EU DSA, Australia ACMA) treat 'first' and
+'first-ever' claims as substantiation-required. The launch council has
+decided to redact such language preemptively to avoid post-launch curation
+of the press release. Reference `memo_06_final_redactions.md` for the
+canonical list of disallowed phrases and approved replacements.
+
+## Appendix — jurisdictional case log
+
+- [ref-69523] pulled a qualified press release from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9792.
+- [ref-72416] pulled a draft regulatory filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3012.
+- [ref-84784] summarised a unqualified blog post from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3802.
+- [ref-48671] logged a final analyst report from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4247.
+- [ref-96283] verified a tentative investor day deck from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7629.
+- [ref-53900] summarised a supplemental customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8804.
+- [ref-18925] flagged a supplemental partner webinar from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1118.
+- [ref-70328] appended a revised conference talk from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 423.
+- [ref-42996] uploaded a draft buyer survey from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5652.
+- [ref-42174] pulled a preliminary customer reference call from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7436.
+- [ref-26027] tabulated a qualified blog post from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6906.
+- [ref-21978] tabulated a uncontested customer reference call from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3957.
+- [ref-84377] reviewed a final buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 766.
+- [ref-70286] reviewed a contested podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9928.
+- [ref-67978] logged a supplemental patent disclosure from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5748.
+- [ref-67171] indexed a revised win/loss interview from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4928.
+- [ref-71941] summarised a preliminary partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5328.
+- [ref-40093] uploaded a qualified buyer survey from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8124.
+- [ref-42032] captured a definitive partner webinar from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9803.
+- [ref-30514] referenced a unqualified conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6928.
+- [ref-31575] captured a tentative conference talk from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4790.
+- [ref-18430] appended a uncontested regulatory filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5625.
+- [ref-12455] linked a unqualified trade show keynote from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9043.
+- [ref-41642] appended a qualified press release from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4061.
+- [ref-37309] verified a tentative SEC filing from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5835.
+- [ref-17767] linked a tentative press release from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6525.
+- [ref-19224] pulled a tentative customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4907.
+- [ref-92137] ratified a draft trade show keynote from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5208.
+- [ref-34974] archived a uncontested partner webinar from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5540.
+- [ref-32000] appended a supplemental SEC filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3460.
+- [ref-15341] logged a draft podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1493.
+- [ref-81119] transcribed a uncontested buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7456.
+- [ref-11637] flagged a qualified conference talk from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3488.
+- [ref-72606] transcribed a uncontested regulatory filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4032.
+- [ref-16633] uploaded a definitive patent disclosure from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3064.
+- [ref-30588] reviewed a tentative win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1393.
+- [ref-21902] captured a tentative SEC filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9903.
+- [ref-51004] noted a draft blog post from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2869.
+- [ref-71260] pulled a final SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8839.
+- [ref-76726] summarised a unqualified customer reference call from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5557.
+- [ref-99306] noted a preliminary customer reference call from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 462.
+- [ref-55832] ratified a final buyer survey from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 880.
+- [ref-44224] filed a supplemental podcast transcript from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4874.
+- [ref-27296] verified a draft buyer survey from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3424.
+- [ref-37288] tagged a revised analyst report from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9147.
+- [ref-37520] cross-checked a unqualified buyer survey from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1072.
+- [ref-34181] tagged a unqualified trade show keynote from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1191.
+- [ref-66939] appended a draft blog post from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 386.
+- [ref-90594] captured a preliminary trade show keynote from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 864.
+- [ref-29917] logged a qualified press release from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6107.
+- [ref-31019] flagged a supplemental buyer survey from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3336.
+- [ref-26265] noted a contested analyst report from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1908.
+- [ref-64272] annotated a definitive SEC filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5787.
+- [ref-26179] cross-checked a supplemental regulatory filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9530.
+- [ref-92607] reviewed a qualified conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4375.
+- [ref-84099] tabulated a draft win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5877.
+- [ref-22050] appended a qualified regulatory filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8606.
+- [ref-95210] appended a draft customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 918.
+- [ref-63735] archived a qualified buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2964.
+- [ref-87355] summarised a qualified podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8401.
+- [ref-25470] indexed a definitive conference talk from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1991.
+- [ref-15740] annotated a supplemental partner webinar from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5495.
+- [ref-17516] filed a supplemental customer reference call from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1949.
+- [ref-46556] reviewed a uncontested podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3964.
+- [ref-51803] pulled a draft investor day deck from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2389.
+- [ref-45442] appended a preliminary analyst report from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9801.
+- [ref-77648] annotated a tentative investor day deck from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5563.
+- [ref-75519] reviewed a unqualified buyer survey from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7670.
+- [ref-48060] indexed a final podcast transcript from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6052.
+- [ref-61343] cross-checked a final podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5443.
+- [ref-88088] indexed a tentative conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8544.
+- [ref-81145] appended a revised patent disclosure from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6539.
+- [ref-16264] annotated a definitive patent disclosure from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5163.
+- [ref-14702] cross-checked a uncontested podcast transcript from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2987.
+- [ref-91763] noted a definitive press release from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2677.
+- [ref-16030] ratified a unqualified podcast transcript from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5247.
+- [ref-57090] verified a unqualified win/loss interview from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8094.
+- [ref-64753] tabulated a final win/loss interview from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3359.
+- [ref-68102] cross-checked a final patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7094.
+- [ref-16976] tabulated a revised partner webinar from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3488.
+- [ref-99011] flagged a definitive patent disclosure from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6638.
+- [ref-42102] ratified a qualified blog post from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5083.
+- [ref-61089] pulled a qualified partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4709.
+- [ref-45888] captured a contested customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 563.
+- [ref-13705] tagged a revised podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9775.
+- [ref-20692] referenced a final regulatory filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1151.
+- [ref-48658] captured a draft field memo from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9462.
+- [ref-96637] indexed a revised patent disclosure from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2382.
+- [ref-27193] logged a supplemental blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6247.
+- [ref-92286] logged a tentative partner webinar from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6266.
+- [ref-52855] tagged a uncontested customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5425.
+- [ref-80525] transcribed a unqualified analyst report from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3549.
+- [ref-62883] cross-checked a definitive trade show keynote from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4800.
+- [ref-22412] uploaded a qualified patent disclosure from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6363.
+- [ref-29817] indexed a preliminary trade show keynote from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3640.
+- [ref-95298] noted a tentative regulatory filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9310.
+- [ref-80774] verified a contested investor day deck from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9389.
+- [ref-91749] filed a final analyst report from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4471.
+- [ref-90116] cross-checked a tentative blog post from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8800.
+- [ref-43021] annotated a supplemental press release from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2420.
+- [ref-19836] flagged a definitive blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4734.
+- [ref-66788] cross-checked a uncontested buyer survey from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1662.
+- [ref-54973] flagged a qualified investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7272.
+- [ref-95910] tagged a supplemental partner webinar from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4564.
+- [ref-17487] transcribed a contested customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7758.
+- [ref-38051] appended a revised win/loss interview from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4244.
+- [ref-94277] reviewed a preliminary field memo from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8600.
+- [ref-79325] filed a definitive regulatory filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9465.
+- [ref-94894] archived a preliminary partner webinar from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1870.
+- [ref-15205] uploaded a final customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5704.
+- [ref-67735] verified a uncontested partner webinar from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1512.
+- [ref-70977] appended a draft conference talk from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9390.
+- [ref-41071] appended a unqualified patent disclosure from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6614.
+- [ref-93982] circulated a supplemental regulatory filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4358.
+- [ref-80956] logged a draft partner webinar from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6205.
+- [ref-51140] summarised a unqualified field memo from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 923.
+- [ref-58905] summarised a draft buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2622.
+- [ref-61479] captured a tentative customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9106.
+- [ref-11281] summarised a unqualified investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 961.
+- [ref-50449] circulated a qualified investor day deck from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1794.
+- [ref-82597] linked a revised conference talk from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1775.
+- [ref-85715] reviewed a qualified SEC filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6381.
+- [ref-76548] tabulated a uncontested press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3986.
+- [ref-91415] uploaded a qualified press release from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7648.
+- [ref-48072] uploaded a final field memo from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 406.
+- [ref-99169] captured a definitive conference talk from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5588.
+- [ref-76589] captured a preliminary conference talk from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7393.
+- [ref-41103] circulated a revised SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5474.
+- [ref-36708] circulated a unqualified field memo from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 16.
+- [ref-58045] noted a final press release from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 561.
+- [ref-11692] annotated a draft podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4732.
+- [ref-96751] reviewed a contested conference talk from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4553.
+- [ref-73268] appended a uncontested customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 34.
+- [ref-29827] summarised a preliminary buyer survey from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1283.
+- [ref-72405] cross-checked a tentative SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2471.
+- [ref-53748] noted a definitive conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6482.
+- [ref-29369] cross-checked a unqualified customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 538.
+- [ref-10340] verified a tentative trade show keynote from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9040.
+- [ref-10530] tagged a tentative field memo from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8703.
+- [ref-23298] filed a supplemental patent disclosure from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1476.
+- [ref-85073] circulated a draft blog post from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7473.
+- [ref-65704] transcribed a final win/loss interview from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5309.
+- [ref-62587] captured a contested trade show keynote from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9553.
+- [ref-20528] annotated a qualified win/loss interview from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8198.
+- [ref-11706] referenced a uncontested podcast transcript from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7040.
+- [ref-91445] logged a unqualified analyst report from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 944.
+- [ref-27608] tabulated a qualified SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7515.
+- [ref-48251] marked a draft customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6459.
+- [ref-16083] archived a qualified buyer survey from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6487.
+- [ref-44394] archived a contested buyer survey from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9759.
+- [ref-84115] tagged a unqualified win/loss interview from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5616.
+- [ref-32091] marked a revised trade show keynote from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 309.
+- [ref-56893] indexed a supplemental partner webinar from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7270.
+- [ref-73268] tabulated a contested blog post from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5966.
+- [ref-82459] tagged a supplemental SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4046.
+- [ref-94074] noted a uncontested SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5147.
+- [ref-89935] referenced a qualified partner webinar from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8262.
+- [ref-31550] logged a revised patent disclosure from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9710.
+- [ref-30045] verified a definitive press release from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5687.
+- [ref-22488] summarised a revised customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6785.
+- [ref-58138] filed a revised conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 253.
+- [ref-54402] tabulated a uncontested podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8891.
+- [ref-64221] marked a contested partner webinar from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4872.
+- [ref-15002] uploaded a supplemental patent disclosure from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8789.
+- [ref-67831] cross-checked a supplemental partner webinar from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3129.
+- [ref-76345] uploaded a definitive podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8278.
+- [ref-63116] tabulated a tentative SEC filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3870.
+- [ref-92562] captured a qualified podcast transcript from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6272.
+- [ref-25182] transcribed a draft analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1028.
+- [ref-37143] marked a uncontested partner webinar from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9491.
+- [ref-47834] cross-checked a contested customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4436.
+- [ref-87108] appended a tentative win/loss interview from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2527.
+- [ref-74985] noted a revised investor day deck from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2036.
+- [ref-82467] referenced a definitive partner webinar from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5353.
+- [ref-41556] logged a unqualified win/loss interview from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6202.
+- [ref-86026] filed a preliminary blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6688.
+- [ref-46974] filed a tentative partner webinar from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1356.
+- [ref-41967] appended a qualified SEC filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9909.
+- [ref-54928] logged a uncontested press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 120.
+- [ref-33670] transcribed a definitive customer reference call from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4247.
+- [ref-55269] circulated a final trade show keynote from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7129.
+- [ref-80491] marked a preliminary patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9036.
+- [ref-91069] transcribed a preliminary investor day deck from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7087.
+- [ref-10147] summarised a preliminary podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3729.
+- [ref-55123] uploaded a contested regulatory filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 778.
+- [ref-62877] circulated a draft buyer survey from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4057.
+- [ref-91083] appended a revised regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6755.
+- [ref-59068] uploaded a qualified patent disclosure from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4744.
+- [ref-86275] appended a revised patent disclosure from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8347.
+- [ref-71436] noted a draft press release from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7565.
+- [ref-79026] tagged a uncontested win/loss interview from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8927.
+- [ref-85915] archived a definitive podcast transcript from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6129.
+- [ref-91386] filed a contested regulatory filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 103.
+- [ref-13290] annotated a uncontested patent disclosure from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5542.
+- [ref-41794] referenced a final buyer survey from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5632.
+- [ref-74160] transcribed a supplemental press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2884.
+- [ref-75932] annotated a supplemental win/loss interview from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9729.
+- [ref-44334] pulled a uncontested podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2775.
+- [ref-48091] archived a draft win/loss interview from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2497.
+- [ref-75772] tagged a unqualified field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7310.
+- [ref-68937] transcribed a supplemental buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1818.
+- [ref-86468] ratified a definitive podcast transcript from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1795.
+- [ref-59733] filed a final investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4019.
+- [ref-61271] verified a definitive customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6216.
+- [ref-62528] logged a definitive press release from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3407.
+- [ref-19652] summarised a supplemental win/loss interview from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6939.
+- [ref-86883] ratified a final blog post from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2186.
+- [ref-90096] pulled a revised press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6728.
+- [ref-20781] circulated a draft press release from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4231.
+- [ref-49417] captured a contested podcast transcript from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1343.
+- [ref-70964] verified a supplemental trade show keynote from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4606.
+- [ref-73694] uploaded a qualified patent disclosure from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5559.
+- [ref-77194] appended a revised blog post from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8072.
+- [ref-22045] tagged a unqualified investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1582.
+- [ref-37856] appended a qualified win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6227.
+- [ref-27465] indexed a draft investor day deck from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 873.
+- [ref-72634] logged a definitive conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6810.
+- [ref-94064] annotated a supplemental customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2362.
+- [ref-70453] flagged a qualified win/loss interview from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3725.
+- [ref-85063] transcribed a final analyst report from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6214.
+- [ref-54449] filed a uncontested regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1524.
+- [ref-10267] verified a supplemental customer reference call from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4131.
+- [ref-38510] pulled a final buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8159.
+- [ref-77468] archived a tentative SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6543.
+- [ref-38737] filed a preliminary analyst report from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5257.
+- [ref-45729] flagged a tentative press release from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4890.
+- [ref-52391] summarised a revised press release from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9975.
+- [ref-67754] flagged a final analyst report from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7808.
+- [ref-89430] archived a uncontested analyst report from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2977.
+- [ref-54825] verified a tentative patent disclosure from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1473.
+- [ref-73184] transcribed a supplemental win/loss interview from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5654.
+- [ref-85595] archived a definitive investor day deck from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2605.
+- [ref-91354] linked a unqualified customer reference call from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1265.
+- [ref-76193] tagged a draft blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8900.
+- [ref-33324] flagged a supplemental trade show keynote from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4594.
+- [ref-30541] marked a revised buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2394.
+- [ref-48511] logged a tentative win/loss interview from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7437.
+- [ref-49040] filed a uncontested podcast transcript from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4390.
+- [ref-41622] referenced a uncontested press release from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3151.
+- [ref-90436] captured a definitive regulatory filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 984.
+- [ref-77465] cross-checked a uncontested blog post from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2041.
+- [ref-63027] reviewed a qualified patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5500.
+- [ref-80560] filed a preliminary press release from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4243.
+- [ref-61060] tabulated a draft field memo from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2454.
+- [ref-53884] noted a preliminary press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2726.
+- [ref-43369] referenced a draft conference talk from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2608.
+- [ref-83766] summarised a draft field memo from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4828.
+- [ref-73557] pulled a uncontested regulatory filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8905.
+- [ref-48305] uploaded a qualified win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4429.
+- [ref-29075] archived a preliminary buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7744.
+- [ref-94668] circulated a unqualified buyer survey from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1477.
+- [ref-51853] summarised a draft partner webinar from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5880.
+- [ref-21266] filed a definitive investor day deck from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6424.
+- [ref-48537] ratified a definitive investor day deck from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9865.
+- [ref-47951] annotated a final press release from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8982.
+- [ref-59729] reviewed a preliminary blog post from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4491.
+- [ref-38421] logged a qualified patent disclosure from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8963.
+- [ref-98632] marked a supplemental podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2555.
+- [ref-76661] transcribed a draft blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5982.
+- [ref-71465] appended a final press release from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3688.
+- [ref-43104] filed a definitive partner webinar from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4162.
+- [ref-83493] logged a preliminary press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8680.
+- [ref-30856] annotated a unqualified conference talk from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3250.
+- [ref-47318] summarised a draft analyst report from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 440.
+- [ref-89227] referenced a tentative press release from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 68.
+- [ref-58022] captured a revised patent disclosure from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9172.
+- [ref-53404] reviewed a supplemental customer reference call from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2285.
+- [ref-69470] transcribed a contested win/loss interview from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 476.
+- [ref-98220] pulled a tentative patent disclosure from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8848.
+- [ref-42582] pulled a unqualified partner webinar from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3697.
+- [ref-14495] circulated a unqualified customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 918.
+- [ref-60237] verified a qualified patent disclosure from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1305.
+- [ref-21852] uploaded a draft buyer survey from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7134.
+- [ref-35837] linked a final customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1906.
+- [ref-48136] flagged a contested blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2607.
+- [ref-92753] flagged a draft analyst report from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1595.
+- [ref-99540] uploaded a qualified buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6943.
+- [ref-90151] pulled a revised field memo from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6386.
+- [ref-75824] indexed a draft investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6523.
+- [ref-23276] reviewed a final conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8121.
+- [ref-64990] appended a preliminary field memo from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9706.
+- [ref-99905] tagged a qualified press release from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9998.
+- [ref-65907] logged a preliminary regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6505.
+- [ref-78517] flagged a uncontested field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3998.
+- [ref-12042] captured a contested customer reference call from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 697.
+- [ref-54878] referenced a final analyst report from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6537.
+- [ref-92912] linked a contested trade show keynote from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5600.
+- [ref-28431] logged a final podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1780.
+- [ref-26754] uploaded a tentative analyst report from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 15.
+- [ref-15814] tabulated a final analyst report from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3187.
+- [ref-63617] circulated a contested win/loss interview from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7141.
+- [ref-82181] annotated a qualified customer reference call from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5247.
+- [ref-74523] logged a supplemental regulatory filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4950.
+- [ref-65133] indexed a contested buyer survey from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9587.
+- [ref-76677] annotated a draft investor day deck from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7088.
+- [ref-28236] flagged a preliminary press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6552.
+- [ref-36718] tagged a tentative podcast transcript from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3786.
+- [ref-51159] cross-checked a revised press release from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 727.
+- [ref-40286] cross-checked a contested field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6138.
+- [ref-94255] marked a supplemental patent disclosure from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9121.
+- [ref-93553] annotated a preliminary trade show keynote from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6048.
+- [ref-20693] filed a draft analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 616.
+- [ref-73905] ratified a draft partner webinar from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7365.
+- [ref-83697] logged a preliminary customer reference call from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9433.
+- [ref-70154] transcribed a revised field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9073.
+- [ref-82565] appended a supplemental conference talk from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9098.
+- [ref-77147] pulled a unqualified conference talk from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6984.
+- [ref-21721] verified a definitive customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5135.
+- [ref-46670] archived a definitive field memo from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2609.
+- [ref-69699] transcribed a preliminary customer reference call from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5629.
+- [ref-78095] marked a supplemental buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7573.
+- [ref-83906] summarised a revised SEC filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5948.
+- [ref-29041] circulated a unqualified SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5113.
+- [ref-54633] captured a contested blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9089.
+- [ref-71037] tabulated a contested investor day deck from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8768.
+- [ref-53811] verified a definitive patent disclosure from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1878.
+- [ref-28320] reviewed a preliminary conference talk from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1116.
+- [ref-58373] appended a unqualified trade show keynote from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 734.
+- [ref-51101] referenced a preliminary analyst report from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2757.
+- [ref-60028] marked a draft partner webinar from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 639.
+- [ref-91401] noted a contested win/loss interview from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8277.
+- [ref-40494] tabulated a qualified partner webinar from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6194.
+- [ref-71019] pulled a definitive field memo from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9121.
+- [ref-59873] annotated a draft investor day deck from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 224.
+- [ref-85046] summarised a definitive investor day deck from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7986.
+- [ref-67117] pulled a final buyer survey from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1650.
+- [ref-41231] appended a draft press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8202.
+- [ref-35241] uploaded a definitive analyst report from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6117.
+- [ref-32259] logged a unqualified customer reference call from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4268.
+- [ref-51501] flagged a unqualified press release from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1198.
+- [ref-65419] filed a uncontested podcast transcript from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9533.
+- [ref-90457] archived a definitive customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7502.
+- [ref-19440] tagged a contested analyst report from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2211.
+- [ref-33281] ratified a draft investor day deck from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9771.
+- [ref-31230] tagged a contested customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1618.
+- [ref-22892] cross-checked a qualified win/loss interview from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4841.
+- [ref-50079] referenced a revised buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 519.
+- [ref-59932] referenced a tentative analyst report from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6060.
+- [ref-82881] tabulated a contested investor day deck from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6889.
+- [ref-43473] filed a qualified SEC filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4943.
+- [ref-45388] logged a preliminary SEC filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7872.
+- [ref-13581] logged a qualified conference talk from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1480.
+- [ref-22291] verified a tentative blog post from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1224.
+- [ref-66789] captured a draft investor day deck from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3581.
+- [ref-64324] annotated a supplemental patent disclosure from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7655.
+- [ref-31641] archived a definitive trade show keynote from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2538.
+- [ref-20997] referenced a final blog post from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5902.
+- [ref-14713] tabulated a contested analyst report from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5550.
+- [ref-26386] marked a definitive press release from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8081.
+- [ref-13050] annotated a revised patent disclosure from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3294.
+- [ref-76345] noted a definitive regulatory filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 694.
+- [ref-95612] referenced a definitive partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4011.
+- [ref-19945] flagged a unqualified buyer survey from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7599.
+- [ref-18289] tabulated a qualified trade show keynote from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3916.
+- [ref-61715] reviewed a revised customer reference call from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9649.
+- [ref-14203] cross-checked a preliminary analyst report from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2419.
+- [ref-19321] uploaded a final patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6799.
+- [ref-89510] appended a contested customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9504.
+- [ref-21856] tagged a contested press release from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6045.
+- [ref-45507] tagged a preliminary partner webinar from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 271.
+- [ref-27683] annotated a revised conference talk from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6517.
+- [ref-84724] appended a qualified customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4909.
+- [ref-43169] captured a preliminary regulatory filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8888.
+- [ref-28601] verified a preliminary analyst report from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4172.
+- [ref-89761] verified a tentative podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2486.
+- [ref-58016] transcribed a revised win/loss interview from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2069.
+- [ref-86731] annotated a draft SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5914.
+- [ref-81903] summarised a contested patent disclosure from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8739.
+- [ref-58102] summarised a contested podcast transcript from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4158.
+- [ref-86914] archived a tentative SEC filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6117.
+- [ref-16082] reviewed a definitive blog post from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7710.
+- [ref-25894] captured a contested buyer survey from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2588.
+- [ref-57635] reviewed a contested investor day deck from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9684.
+- [ref-12782] indexed a final regulatory filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9968.
+- [ref-79176] filed a revised trade show keynote from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4308.
+- [ref-87900] reviewed a definitive press release from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 682.
+- [ref-49910] circulated a draft field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9121.
+- [ref-21352] cross-checked a qualified partner webinar from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6979.
+- [ref-84191] indexed a preliminary conference talk from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9699.
+- [ref-82481] ratified a final investor day deck from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8216.
+- [ref-44689] ratified a supplemental podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7232.
+- [ref-19025] reviewed a tentative regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7055.
+- [ref-17272] reviewed a supplemental analyst report from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2159.
+- [ref-65282] cross-checked a preliminary customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7159.
+- [ref-22094] cross-checked a unqualified analyst report from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6959.
+- [ref-25305] annotated a tentative patent disclosure from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4658.
+- [ref-75599] verified a draft buyer survey from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 737.
+- [ref-79581] filed a revised buyer survey from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4759.
+- [ref-46821] verified a supplemental partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2340.
+- [ref-66813] summarised a draft patent disclosure from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1113.
+- [ref-97602] noted a unqualified conference talk from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2012.
+- [ref-30661] marked a revised SEC filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7464.
+- [ref-27691] marked a definitive analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2415.
+- [ref-25828] filed a contested press release from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5358.
+- [ref-53025] summarised a revised investor day deck from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8604.
+- [ref-44047] noted a revised investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3948.
+- [ref-28347] archived a draft patent disclosure from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1317.
+- [ref-46828] circulated a contested conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5384.
+- [ref-55422] flagged a draft SEC filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3499.
+- [ref-63965] verified a final podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8161.
+- [ref-22995] cross-checked a uncontested blog post from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1909.
+- [ref-81115] referenced a uncontested win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7934.
+- [ref-22310] logged a qualified investor day deck from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3339.
+- [ref-68496] referenced a final patent disclosure from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2219.
+- [ref-37444] marked a uncontested podcast transcript from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 647.
+- [ref-79381] indexed a preliminary SEC filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8475.
+- [ref-51637] flagged a unqualified regulatory filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1596.
+- [ref-44283] appended a uncontested analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6926.
+- [ref-76624] filed a preliminary investor day deck from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8062.
+- [ref-68409] indexed a revised analyst report from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 162.
+- [ref-58927] captured a tentative buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1530.
+- [ref-13596] circulated a tentative analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2384.
+- [ref-65488] logged a revised analyst report from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6105.
+- [ref-48009] noted a final press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2967.
+- [ref-94687] flagged a definitive press release from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9639.
+- [ref-16628] uploaded a tentative trade show keynote from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1171.
+- [ref-86310] circulated a uncontested podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8773.
+- [ref-38843] annotated a definitive customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1038.
+- [ref-17492] circulated a supplemental press release from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2307.
+- [ref-97757] referenced a preliminary blog post from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5712.
+- [ref-74302] uploaded a supplemental regulatory filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1606.
+- [ref-84587] ratified a tentative regulatory filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1834.
+- [ref-11419] captured a unqualified blog post from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8504.
+- [ref-13202] marked a unqualified investor day deck from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2690.
+- [ref-39801] summarised a revised buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2250.
+- [ref-39405] linked a revised investor day deck from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4830.
+- [ref-58711] captured a supplemental partner webinar from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6599.
+- [ref-70544] indexed a draft patent disclosure from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9703.
+- [ref-84246] archived a contested investor day deck from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3271.
+- [ref-12044] marked a preliminary customer reference call from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9478.
+- [ref-55631] appended a definitive field memo from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4198.
+- [ref-78659] linked a final win/loss interview from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1787.
+- [ref-22203] noted a contested customer reference call from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7943.
+- [ref-22662] indexed a uncontested press release from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9083.
+- [ref-53609] verified a definitive blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1957.
+- [ref-75400] marked a supplemental win/loss interview from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2390.
+- [ref-61428] logged a preliminary buyer survey from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6332.
+- [ref-23854] indexed a unqualified partner webinar from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6747.
+- [ref-48040] logged a revised win/loss interview from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1681.
+- [ref-44318] annotated a qualified win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6900.
+- [ref-24605] captured a draft investor day deck from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3690.
+- [ref-53360] flagged a qualified analyst report from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2615.
+- [ref-97295] indexed a uncontested partner webinar from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9849.
+- [ref-92669] reviewed a qualified analyst report from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1632.
+- [ref-77967] circulated a revised conference talk from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6155.
+- [ref-21376] cross-checked a supplemental regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3537.
+- [ref-19544] annotated a preliminary blog post from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6353.
+- [ref-93602] marked a qualified field memo from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5210.
+- [ref-31495] marked a supplemental blog post from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5125.
+- [ref-72419] pulled a definitive field memo from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6414.
+- [ref-38470] logged a unqualified win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5835.
+- [ref-60914] uploaded a definitive conference talk from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4689.
+- [ref-33954] indexed a draft SEC filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6118.
+- [ref-91740] indexed a uncontested blog post from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6032.
+- [ref-93834] pulled a qualified field memo from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 218.
+- [ref-54644] flagged a preliminary SEC filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7490.
+- [ref-17116] noted a final partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5850.
+- [ref-93666] pulled a tentative buyer survey from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9472.
+- [ref-84468] annotated a preliminary investor day deck from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7042.
+- [ref-83960] summarised a draft regulatory filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8803.
+- [ref-43432] archived a qualified patent disclosure from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5748.
+- [ref-46643] captured a uncontested buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4691.
+- [ref-31118] reviewed a contested buyer survey from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4275.
+- [ref-20155] logged a tentative analyst report from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4408.
+- [ref-29748] annotated a contested podcast transcript from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8457.
+- [ref-25517] tabulated a qualified analyst report from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2739.
+- [ref-74408] circulated a draft press release from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9637.
+- [ref-77582] appended a definitive SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3817.
+- [ref-86610] linked a uncontested partner webinar from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1848.
+- [ref-65979] annotated a tentative buyer survey from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5082.
+- [ref-79388] summarised a tentative press release from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1529.
+- [ref-82353] appended a preliminary analyst report from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7128.
+- [ref-13416] tabulated a contested trade show keynote from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5790.
+- [ref-74147] tagged a supplemental analyst report from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3233.
+- [ref-81816] referenced a contested win/loss interview from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6827.
+- [ref-83090] pulled a qualified podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1999.
+- [ref-61254] verified a preliminary regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3541.
+- [ref-54187] archived a unqualified SEC filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4196.
+- [ref-83763] transcribed a qualified win/loss interview from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 18.
+- [ref-79723] captured a qualified press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1895.
+- [ref-35471] tabulated a contested patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6507.
+- [ref-63692] tabulated a contested partner webinar from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 290.
+- [ref-35619] marked a tentative trade show keynote from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1605.
+- [ref-18700] tagged a tentative investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7311.
+- [ref-46275] verified a final patent disclosure from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8497.
+- [ref-65509] uploaded a unqualified buyer survey from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7598.
+- [ref-23619] tagged a preliminary partner webinar from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1385.
+- [ref-48173] annotated a preliminary press release from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5102.
+- [ref-49920] noted a uncontested analyst report from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9856.
+- [ref-94075] summarised a final press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 908.
+- [ref-73474] circulated a tentative win/loss interview from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6975.
+- [ref-90214] reviewed a supplemental podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3221.
+- [ref-12166] tabulated a definitive field memo from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9122.
+- [ref-56678] linked a uncontested win/loss interview from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6554.
+- [ref-29473] noted a preliminary patent disclosure from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2653.
+- [ref-16079] reviewed a final regulatory filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5289.
+- [ref-85952] marked a qualified partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5571.
+- [ref-26365] logged a supplemental buyer survey from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5463.
+- [ref-68414] archived a contested analyst report from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7896.
+- [ref-20750] appended a qualified regulatory filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6828.
+- [ref-38105] filed a contested customer reference call from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4319.
+- [ref-68045] referenced a preliminary field memo from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8047.
+- [ref-39684] filed a preliminary podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8844.
+- [ref-84930] logged a definitive customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8473.
+- [ref-89932] logged a final investor day deck from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1259.
+- [ref-26413] summarised a final SEC filing from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9469.
+- [ref-49715] indexed a unqualified trade show keynote from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3561.
+- [ref-70427] transcribed a tentative buyer survey from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4933.
+- [ref-47331] tagged a draft trade show keynote from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2016.
+- [ref-94453] cross-checked a revised trade show keynote from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4092.
+- [ref-50902] captured a qualified buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4958.
+- [ref-75234] circulated a uncontested win/loss interview from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1110.
+- [ref-90928] archived a final customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1887.
+- [ref-71769] referenced a supplemental regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5641.
+- [ref-52796] captured a tentative field memo from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7469.
+- [ref-69593] captured a revised conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3595.
+- [ref-57785] cross-checked a revised partner webinar from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 68.
+- [ref-14515] marked a tentative conference talk from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5997.
+- [ref-42625] ratified a contested win/loss interview from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1239.
+- [ref-59130] uploaded a contested investor day deck from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3861.
+- [ref-50418] filed a supplemental investor day deck from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4840.
+- [ref-33161] summarised a revised blog post from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6552.
+- [ref-32915] summarised a preliminary field memo from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2556.
+- [ref-88844] referenced a definitive win/loss interview from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 284.
+- [ref-23974] noted a tentative SEC filing from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9995.
+- [ref-17600] circulated a contested conference talk from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5253.
+- [ref-20391] filed a preliminary win/loss interview from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3060.
+- [ref-12303] annotated a unqualified podcast transcript from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8955.
+- [ref-79877] captured a uncontested conference talk from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2164.
+- [ref-70199] marked a draft partner webinar from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7795.
+- [ref-39806] flagged a final conference talk from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7200.
+- [ref-89500] archived a unqualified regulatory filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7668.
+- [ref-29322] archived a supplemental field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2028.
+- [ref-71048] indexed a preliminary analyst report from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1873.
+- [ref-85837] indexed a contested podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5122.
+- [ref-57328] cross-checked a contested regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3092.
+- [ref-56533] indexed a preliminary press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4513.
+- [ref-15595] linked a revised partner webinar from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7770.
+- [ref-78986] linked a preliminary buyer survey from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6635.
+- [ref-88760] pulled a contested partner webinar from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4567.
+- [ref-93368] transcribed a revised trade show keynote from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9530.
+- [ref-33100] annotated a final analyst report from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6610.
+- [ref-38787] tabulated a contested buyer survey from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6956.
+- [ref-82118] uploaded a preliminary SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7696.
+- [ref-99336] linked a final trade show keynote from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9062.
+- [ref-60364] summarised a supplemental regulatory filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6618.
+- [ref-83480] appended a definitive customer reference call from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8190.
+- [ref-65938] tabulated a contested regulatory filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5137.
+- [ref-91250] annotated a contested partner webinar from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4344.
+- [ref-31992] archived a tentative podcast transcript from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5583.
+- [ref-37380] marked a supplemental trade show keynote from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3584.
+- [ref-15053] pulled a preliminary SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8793.
+- [ref-17691] noted a contested win/loss interview from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5216.
+- [ref-70528] indexed a preliminary SEC filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7310.
+- [ref-98422] appended a supplemental podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2694.
+- [ref-11229] verified a contested podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7222.
+- [ref-10952] ratified a uncontested regulatory filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9111.
+- [ref-35474] reviewed a definitive analyst report from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2854.
+- [ref-22148] verified a final blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 73.
+- [ref-89206] marked a revised win/loss interview from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9493.
+- [ref-68812] ratified a qualified trade show keynote from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7551.
+- [ref-54811] logged a tentative SEC filing from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7419.
+- [ref-40205] circulated a unqualified buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8019.
+- [ref-48353] tabulated a draft regulatory filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8710.
+- [ref-16293] linked a preliminary trade show keynote from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5926.
+- [ref-46786] logged a final patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 797.
+- [ref-21010] captured a draft podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4945.
+- [ref-22274] tabulated a draft field memo from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9037.
+- [ref-97304] ratified a preliminary field memo from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2618.
+- [ref-66244] uploaded a uncontested podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3328.
+- [ref-70691] tagged a supplemental SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8392.
+- [ref-64722] uploaded a definitive field memo from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4803.
+- [ref-56904] pulled a supplemental field memo from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1901.
+- [ref-32524] logged a contested SEC filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4467.
+- [ref-38215] filed a qualified patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3787.
+- [ref-47974] uploaded a contested partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1046.
+- [ref-39851] pulled a revised field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4228.
+- [ref-95325] linked a unqualified conference talk from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 225.
+- [ref-98111] pulled a draft SEC filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8460.
+- [ref-79995] captured a definitive analyst report from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6126.
+- [ref-13939] archived a final field memo from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 692.
+- [ref-64496] uploaded a definitive customer reference call from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3261.
+- [ref-48968] circulated a revised trade show keynote from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2862.
+- [ref-42342] indexed a supplemental conference talk from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9357.
+- [ref-34661] verified a definitive analyst report from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3983.
+- [ref-26020] summarised a preliminary buyer survey from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2163.
+- [ref-74293] indexed a final customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3671.
+- [ref-85355] transcribed a preliminary patent disclosure from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8985.
+- [ref-33800] appended a unqualified buyer survey from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3104.
+- [ref-62825] transcribed a revised blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7689.
+- [ref-13121] annotated a qualified patent disclosure from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5142.
+- [ref-19627] circulated a qualified customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9845.
+- [ref-12414] indexed a uncontested patent disclosure from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8534.
+- [ref-22562] marked a revised trade show keynote from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3871.
+- [ref-55713] summarised a supplemental investor day deck from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3464.
+- [ref-95056] tagged a draft blog post from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4002.
+- [ref-13942] logged a unqualified partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9703.
+- [ref-10340] cross-checked a uncontested regulatory filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 787.
+- [ref-28942] annotated a supplemental investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5894.
+- [ref-83590] filed a tentative patent disclosure from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4179.
+- [ref-55301] marked a uncontested SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8371.
+- [ref-76483] transcribed a qualified blog post from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3257.
+- [ref-72652] referenced a tentative field memo from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4071.
+- [ref-73472] ratified a draft regulatory filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9736.
+- [ref-52791] uploaded a uncontested win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6627.
+- [ref-18971] tabulated a uncontested press release from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 302.
+- [ref-93975] filed a uncontested buyer survey from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 890.
+- [ref-88493] verified a uncontested press release from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2503.
+- [ref-56816] filed a uncontested trade show keynote from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2803.
+- [ref-17913] flagged a supplemental buyer survey from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 498.
+- [ref-54629] summarised a contested patent disclosure from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8760.
+- [ref-39582] noted a uncontested partner webinar from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1098.
+- [ref-63854] linked a final trade show keynote from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5095.
+- [ref-48541] annotated a qualified podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4802.
+- [ref-96706] circulated a definitive win/loss interview from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4661.
+- [ref-77880] linked a draft partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7754.
+- [ref-92217] noted a tentative customer reference call from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1297.
+- [ref-85232] logged a draft customer reference call from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3702.
+- [ref-21211] marked a qualified investor day deck from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4381.
+- [ref-71874] tabulated a definitive analyst report from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 966.
+- [ref-52567] cross-checked a revised trade show keynote from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6762.
+- [ref-77382] summarised a tentative conference talk from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6635.
+- [ref-16447] noted a final podcast transcript from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1615.
+- [ref-58646] circulated a supplemental press release from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2604.
+- [ref-13194] circulated a definitive blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3042.
+- [ref-91272] reviewed a uncontested partner webinar from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4935.
+- [ref-61103] indexed a unqualified field memo from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5150.
+- [ref-19690] archived a uncontested conference talk from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3153.
+- [ref-94791] appended a preliminary investor day deck from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6364.
+- [ref-21123] summarised a final trade show keynote from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7433.
+- [ref-82500] linked a definitive trade show keynote from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3338.
+- [ref-77545] referenced a preliminary win/loss interview from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3414.
+- [ref-30547] appended a qualified buyer survey from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1473.
+- [ref-28478] flagged a revised investor day deck from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3712.
+- [ref-18867] tabulated a revised SEC filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 962.
+- [ref-81161] linked a draft blog post from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1029.
+- [ref-89384] captured a revised conference talk from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8073.
+- [ref-39374] annotated a definitive buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8209.
+- [ref-51286] circulated a unqualified analyst report from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2758.
+- [ref-11821] marked a uncontested buyer survey from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5439.
+- [ref-74191] referenced a preliminary podcast transcript from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3587.
+- [ref-10056] transcribed a uncontested trade show keynote from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2256.
+- [ref-55485] archived a final field memo from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3832.
+- [ref-79031] archived a final analyst report from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 540.
+- [ref-28747] appended a final customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3513.
+- [ref-80433] filed a qualified customer reference call from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2739.
+- [ref-92792] logged a unqualified patent disclosure from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4403.
+- [ref-40273] cross-checked a final press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8174.
+- [ref-49193] uploaded a unqualified buyer survey from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1339.
+- [ref-59022] verified a definitive analyst report from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4994.
+- [ref-85056] logged a final buyer survey from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7843.
+- [ref-49327] flagged a draft blog post from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 19.
+- [ref-93486] verified a uncontested press release from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9695.
+- [ref-24363] ratified a contested press release from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5837.
+- [ref-40517] captured a preliminary buyer survey from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3607.
+- [ref-89285] cross-checked a definitive trade show keynote from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5809.
+- [ref-65436] appended a preliminary field memo from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4715.
+- [ref-14147] noted a preliminary analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2437.
+- [ref-97059] verified a final buyer survey from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3676.
+- [ref-29926] captured a final win/loss interview from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6765.
+- [ref-22278] tagged a preliminary regulatory filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3305.
+- [ref-72480] tagged a final analyst report from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3119.
+- [ref-70525] annotated a draft investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9104.
+- [ref-28560] archived a tentative partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1936.
+- [ref-42873] circulated a qualified patent disclosure from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6725.
+- [ref-47087] flagged a definitive patent disclosure from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2661.
+- [ref-52146] logged a preliminary regulatory filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8985.
+- [ref-64917] transcribed a preliminary podcast transcript from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8404.
+- [ref-80630] transcribed a final patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 931.
+- [ref-22590] referenced a unqualified investor day deck from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3889.
+- [ref-68925] tagged a preliminary analyst report from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1025.
+- [ref-20397] linked a supplemental field memo from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3978.
+- [ref-72728] linked a draft blog post from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1604.
+- [ref-12870] transcribed a supplemental regulatory filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2711.
+- [ref-26247] annotated a supplemental podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1934.
+- [ref-42482] marked a revised press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5093.
+- [ref-95202] filed a preliminary press release from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1890.
+- [ref-79364] marked a qualified customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4132.
+- [ref-18989] transcribed a final investor day deck from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 82.
+- [ref-14436] summarised a final SEC filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2626.
+- [ref-67075] verified a final SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2646.
+- [ref-67615] referenced a revised podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3561.
+- [ref-94776] verified a revised win/loss interview from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4332.
+- [ref-49404] reviewed a preliminary SEC filing from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4026.
+- [ref-21373] tabulated a final field memo from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4326.
+- [ref-26866] linked a draft SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6561.
+- [ref-37809] cross-checked a preliminary podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1211.
+- [ref-33126] noted a qualified blog post from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7509.
+- [ref-89566] summarised a final blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6452.
+- [ref-45858] cross-checked a unqualified customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6446.
+- [ref-88855] annotated a draft trade show keynote from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1920.
+- [ref-79490] flagged a contested SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8411.
+- [ref-26243] circulated a unqualified investor day deck from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4403.
+- [ref-65530] summarised a revised patent disclosure from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 69.
+- [ref-28791] circulated a uncontested blog post from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6142.
+- [ref-95876] linked a revised field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7213.
+- [ref-70688] circulated a revised blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5497.
+- [ref-55440] tabulated a unqualified SEC filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2698.
+- [ref-66094] linked a contested press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 771.
+- [ref-11523] linked a supplemental press release from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6527.
+- [ref-75710] transcribed a supplemental podcast transcript from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5806.
+- [ref-89098] indexed a preliminary customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4754.
+- [ref-82233] captured a uncontested buyer survey from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4878.
+- [ref-91006] transcribed a supplemental win/loss interview from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6214.
+- [ref-50405] pulled a draft customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1838.
+- [ref-32120] tabulated a unqualified blog post from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 903.
+- [ref-31552] marked a revised win/loss interview from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 920.
+- [ref-92507] uploaded a final regulatory filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9026.
+- [ref-30026] noted a revised blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9105.
+- [ref-63882] linked a tentative win/loss interview from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9188.
+- [ref-81475] uploaded a draft patent disclosure from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4192.
+- [ref-34836] linked a tentative blog post from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2552.
+- [ref-48084] flagged a unqualified field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7912.
+- [ref-63807] uploaded a revised customer reference call from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4674.
+- [ref-73760] marked a unqualified conference talk from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5243.
+- [ref-89845] uploaded a supplemental buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9095.
+- [ref-78661] linked a uncontested field memo from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6140.
+- [ref-61407] flagged a unqualified win/loss interview from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6381.
+- [ref-43348] tabulated a unqualified patent disclosure from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3819.
+- [ref-44845] marked a contested patent disclosure from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6870.
+- [ref-91565] cross-checked a revised investor day deck from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3082.
+- [ref-54661] noted a preliminary investor day deck from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3221.
+- [ref-92687] tagged a tentative conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6173.
+- [ref-85215] uploaded a contested patent disclosure from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 535.
+- [ref-47184] cross-checked a unqualified trade show keynote from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3124.
+- [ref-30260] filed a preliminary press release from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7694.
+- [ref-79394] verified a contested SEC filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4750.
+- [ref-70161] indexed a contested regulatory filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5646.
+- [ref-96568] annotated a final analyst report from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2322.
+- [ref-67804] ratified a unqualified win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7224.
+- [ref-22273] verified a contested buyer survey from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7256.
+- [ref-11882] tabulated a supplemental trade show keynote from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8933.
+- [ref-25882] cross-checked a final customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8497.
+- [ref-25227] logged a contested trade show keynote from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5510.
+- [ref-65983] appended a revised partner webinar from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5000.
+- [ref-15737] indexed a supplemental analyst report from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5112.
+- [ref-66848] filed a final win/loss interview from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4236.
+- [ref-33952] reviewed a unqualified field memo from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1589.
+- [ref-26590] captured a revised regulatory filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7654.
+- [ref-90106] indexed a tentative field memo from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4630.
+- [ref-22068] marked a unqualified buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9573.
+- [ref-33989] indexed a preliminary customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1745.
+- [ref-44037] noted a contested trade show keynote from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9776.
+- [ref-33057] logged a draft buyer survey from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4399.
+- [ref-95583] logged a unqualified blog post from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 721.
+- [ref-90085] referenced a final investor day deck from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7463.
+- [ref-52704] indexed a draft customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7241.
+- [ref-59559] transcribed a contested regulatory filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2279.
+- [ref-15027] ratified a supplemental partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5081.
+- [ref-57733] pulled a revised analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5869.
+- [ref-56325] annotated a uncontested patent disclosure from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5862.
+- [ref-76883] archived a preliminary analyst report from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2706.
+- [ref-76334] filed a contested conference talk from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1838.
+- [ref-54041] transcribed a revised field memo from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4851.
+- [ref-62809] noted a final regulatory filing from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5187.
+- [ref-32306] archived a unqualified regulatory filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9998.
+- [ref-39772] reviewed a final trade show keynote from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4237.
+- [ref-97491] uploaded a supplemental podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4811.
+- [ref-79231] logged a draft partner webinar from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7845.
+- [ref-92700] circulated a supplemental patent disclosure from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6355.
+- [ref-15905] tabulated a draft buyer survey from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4116.
+- [ref-96940] summarised a definitive customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4577.
+- [ref-13769] indexed a uncontested SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1246.
+- [ref-22776] uploaded a unqualified customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 621.
+- [ref-79532] flagged a unqualified analyst report from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7290.
+- [ref-64074] uploaded a supplemental SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4995.
+- [ref-20180] archived a supplemental SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6277.
+- [ref-92978] cross-checked a preliminary customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4084.
+- [ref-36064] ratified a contested conference talk from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7701.
+- [ref-44703] tagged a qualified press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8511.
+- [ref-92879] linked a qualified customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4538.
+- [ref-56818] linked a qualified patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2125.
+- [ref-31529] tagged a supplemental conference talk from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1889.
+- [ref-68486] ratified a contested buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1944.
+- [ref-80177] verified a tentative investor day deck from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4370.
+- [ref-86506] indexed a revised blog post from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9625.
+- [ref-93590] noted a draft buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7101.
+- [ref-31554] uploaded a supplemental investor day deck from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1364.
+- [ref-64109] captured a supplemental analyst report from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 802.
+- [ref-14493] reviewed a final conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 918.
+- [ref-65204] flagged a contested regulatory filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5285.
+- [ref-73827] marked a preliminary investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8710.
+- [ref-70547] captured a unqualified podcast transcript from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5833.
+- [ref-13367] marked a definitive podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 738.
+- [ref-65937] summarised a revised blog post from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3530.
+- [ref-57180] pulled a qualified win/loss interview from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8753.
+- [ref-63606] noted a supplemental blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6899.
+- [ref-17547] cross-checked a uncontested analyst report from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9540.
+- [ref-14668] cross-checked a uncontested trade show keynote from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9235.
+- [ref-20019] tabulated a revised patent disclosure from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 860.
+- [ref-27902] verified a tentative field memo from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 890.
+- [ref-54671] logged a supplemental patent disclosure from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9110.
+- [ref-79132] circulated a tentative podcast transcript from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8084.
+- [ref-83234] filed a final investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5878.
+- [ref-80476] indexed a final patent disclosure from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6847.
+- [ref-36618] uploaded a preliminary field memo from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 775.
+- [ref-98145] captured a tentative buyer survey from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1338.
+- [ref-12565] marked a supplemental press release from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8700.
+- [ref-42079] noted a supplemental partner webinar from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4801.
+- [ref-60386] annotated a definitive trade show keynote from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7832.
+- [ref-67196] archived a qualified investor day deck from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1820.
+- [ref-65180] filed a unqualified blog post from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9224.
+- [ref-28966] flagged a supplemental regulatory filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6354.
+- [ref-24533] ratified a supplemental podcast transcript from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4882.
+- [ref-30397] tabulated a tentative press release from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8562.
+- [ref-13474] filed a uncontested analyst report from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6072.
+- [ref-59973] marked a draft podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8429.
+- [ref-68650] uploaded a unqualified field memo from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2446.
+- [ref-11840] reviewed a definitive analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9713.
+- [ref-82854] reviewed a qualified blog post from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5504.
+- [ref-61484] noted a preliminary trade show keynote from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7534.
+- [ref-66465] ratified a revised SEC filing from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 122.
+- [ref-98817] marked a draft customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2485.
+- [ref-80223] captured a draft buyer survey from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1282.
+- [ref-90532] logged a unqualified analyst report from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4485.
+- [ref-81887] reviewed a definitive regulatory filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5619.
+- [ref-79889] ratified a tentative buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2928.
+- [ref-98038] tabulated a preliminary blog post from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2736.
+- [ref-18936] transcribed a supplemental press release from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 792.
+- [ref-20140] tabulated a unqualified field memo from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2182.
+- [ref-20849] summarised a final podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8342.
+- [ref-15127] transcribed a unqualified SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2540.
+- [ref-98661] appended a revised field memo from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9364.
+- [ref-72322] indexed a qualified partner webinar from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1082.
+- [ref-96629] tabulated a revised conference talk from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1265.
+- [ref-29357] cross-checked a supplemental partner webinar from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7005.
+- [ref-18194] captured a draft press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9206.
+- [ref-11265] marked a contested conference talk from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9139.
+- [ref-44500] tagged a supplemental SEC filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4983.
+- [ref-19128] annotated a final SEC filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 329.
+- [ref-19700] noted a uncontested win/loss interview from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1482.
+- [ref-73821] noted a draft conference talk from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1584.
+- [ref-60090] uploaded a qualified customer reference call from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4968.
+- [ref-81047] referenced a supplemental conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9746.
+- [ref-51648] appended a uncontested field memo from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6812.
+- [ref-44356] verified a definitive buyer survey from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6594.
+- [ref-45526] appended a supplemental regulatory filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 338.
+- [ref-47520] linked a definitive partner webinar from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6800.
+- [ref-58085] transcribed a supplemental analyst report from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1757.
+- [ref-23797] summarised a uncontested win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7798.
+- [ref-56601] filed a unqualified investor day deck from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4407.
+- [ref-67772] logged a tentative analyst report from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5797.
+- [ref-29122] summarised a definitive trade show keynote from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6162.
+- [ref-42389] linked a qualified analyst report from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1131.
+- [ref-93981] archived a revised field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8537.
+- [ref-13958] referenced a contested SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 952.
+- [ref-99900] indexed a final conference talk from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9237.
+- [ref-34488] captured a unqualified investor day deck from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 96.
+- [ref-38634] tabulated a final win/loss interview from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3007.
+- [ref-30828] linked a preliminary conference talk from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2274.
+- [ref-50513] uploaded a uncontested conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 556.
+- [ref-65299] tabulated a definitive buyer survey from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3046.
+- [ref-59960] indexed a definitive field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7779.
+- [ref-18534] referenced a definitive conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4595.
+- [ref-71794] transcribed a uncontested conference talk from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7794.
+- [ref-59387] referenced a final press release from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8321.
+- [ref-80391] flagged a uncontested blog post from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5743.
+- [ref-39017] marked a qualified conference talk from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4783.
+- [ref-76161] captured a preliminary regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2131.
+- [ref-11317] circulated a preliminary SEC filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6714.
+- [ref-42958] archived a supplemental buyer survey from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2533.
+- [ref-21679] tabulated a contested press release from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9800.
+- [ref-92718] captured a revised conference talk from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7199.
+- [ref-18658] captured a contested conference talk from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 516.
+- [ref-15855] tagged a draft regulatory filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 199.
+- [ref-70146] referenced a supplemental press release from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1621.
+- [ref-41247] logged a uncontested investor day deck from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5603.
+- [ref-86435] filed a draft podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9167.
+- [ref-55032] pulled a uncontested customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7716.
+- [ref-76412] filed a unqualified partner webinar from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1829.
+- [ref-56350] captured a unqualified partner webinar from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9657.
+- [ref-79495] transcribed a unqualified analyst report from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 322.
+- [ref-46356] filed a qualified podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8144.
+- [ref-98247] verified a contested regulatory filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2116.
+- [ref-78985] verified a draft analyst report from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8150.
+- [ref-14224] cross-checked a definitive analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3547.
+- [ref-79825] uploaded a contested field memo from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8884.
+- [ref-91371] tabulated a tentative patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6795.
+- [ref-61731] flagged a revised patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5454.
+- [ref-71625] logged a uncontested regulatory filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8309.
+- [ref-72926] verified a preliminary blog post from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5856.
+- [ref-60383] flagged a definitive field memo from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 797.
+- [ref-52349] annotated a qualified customer reference call from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1942.
+- [ref-19306] annotated a supplemental press release from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9358.
+- [ref-25604] appended a supplemental blog post from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6524.
+- [ref-70850] summarised a preliminary field memo from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2936.
+- [ref-44127] archived a supplemental trade show keynote from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3456.
+- [ref-72570] verified a uncontested partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 456.
+- [ref-88419] summarised a supplemental trade show keynote from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3150.
+- [ref-66575] annotated a tentative SEC filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6765.
+- [ref-16448] noted a final partner webinar from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6945.
+- [ref-74732] flagged a draft patent disclosure from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6019.
+- [ref-16868] referenced a definitive win/loss interview from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6817.
+- [ref-96861] pulled a draft SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6090.
+- [ref-35035] logged a uncontested customer reference call from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4163.
+- [ref-47424] pulled a qualified regulatory filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9977.
+- [ref-23614] noted a definitive analyst report from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1796.
+- [ref-14778] archived a definitive conference talk from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4356.
+- [ref-99067] annotated a qualified regulatory filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5273.
+- [ref-55348] tabulated a draft podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1126.
+- [ref-58315] transcribed a unqualified analyst report from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2649.
+- [ref-28566] summarised a supplemental partner webinar from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3759.
+- [ref-57556] logged a supplemental partner webinar from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9057.
+- [ref-94920] indexed a qualified blog post from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9409.
+- [ref-10486] pulled a unqualified press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6672.
+- [ref-19182] pulled a revised podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2556.
+- [ref-88504] reviewed a contested field memo from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8379.
+- [ref-93645] logged a qualified SEC filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4113.
+- [ref-83581] marked a uncontested podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1507.
+- [ref-98392] cross-checked a preliminary partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7972.
+- [ref-70528] circulated a tentative patent disclosure from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 315.
+- [ref-97978] noted a qualified analyst report from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 114.
+- [ref-91606] transcribed a supplemental regulatory filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1336.
+- [ref-66998] verified a uncontested trade show keynote from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3054.
+- [ref-64326] tagged a revised conference talk from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8804.
+- [ref-58188] uploaded a supplemental regulatory filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 546.
+- [ref-58044] annotated a final field memo from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4379.
+- [ref-81453] archived a final win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7723.
+- [ref-85198] annotated a qualified patent disclosure from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4049.
+- [ref-10075] marked a final podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5364.
+- [ref-61541] archived a revised press release from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8108.
+- [ref-17169] cross-checked a draft blog post from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4171.
+- [ref-22606] marked a uncontested patent disclosure from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2951.
+- [ref-78567] archived a draft win/loss interview from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8865.
+- [ref-16519] pulled a definitive podcast transcript from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2303.
+- [ref-54322] pulled a preliminary conference talk from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5907.
+- [ref-81904] circulated a preliminary investor day deck from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1086.
+- [ref-22376] cross-checked a final customer reference call from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8596.
+- [ref-22973] logged a supplemental podcast transcript from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8438.
+- [ref-26502] summarised a final regulatory filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5052.
+- [ref-57853] pulled a preliminary analyst report from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4451.
+- [ref-88529] transcribed a supplemental win/loss interview from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7873.
+- [ref-42432] pulled a qualified win/loss interview from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 887.
+- [ref-28175] archived a unqualified conference talk from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9744.
+- [ref-67129] filed a definitive trade show keynote from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2619.
+- [ref-93512] ratified a draft customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3725.
+- [ref-89554] circulated a final patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 493.
+- [ref-49311] appended a preliminary trade show keynote from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2936.
+- [ref-89137] annotated a revised win/loss interview from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7776.
+- [ref-98413] appended a final patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1542.
+- [ref-28476] ratified a preliminary patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3142.
+- [ref-31170] noted a uncontested regulatory filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2805.
+- [ref-38927] appended a definitive SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 98.
+- [ref-81680] summarised a definitive blog post from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4972.
+- [ref-58859] filed a qualified conference talk from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4740.
+- [ref-56044] uploaded a qualified field memo from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9059.
+- [ref-67179] verified a qualified partner webinar from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9585.
+- [ref-89429] tabulated a unqualified customer reference call from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6832.
+- [ref-97664] logged a contested field memo from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5987.
+- [ref-45428] filed a draft trade show keynote from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2775.
+- [ref-40179] appended a definitive regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2490.
+- [ref-13078] transcribed a unqualified SEC filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 411.
+- [ref-97143] marked a draft podcast transcript from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9435.
+- [ref-81609] ratified a qualified blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5933.
+- [ref-56934] summarised a unqualified SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5873.
+- [ref-28399] linked a qualified trade show keynote from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6547.
+- [ref-89535] referenced a supplemental partner webinar from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8029.
+- [ref-66357] annotated a draft regulatory filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2853.
+- [ref-82291] noted a revised field memo from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9613.
+- [ref-78007] flagged a contested win/loss interview from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1172.
+- [ref-40126] transcribed a preliminary buyer survey from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9318.
+- [ref-11990] captured a final SEC filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7095.
+- [ref-88888] marked a supplemental win/loss interview from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9196.
+- [ref-35692] captured a draft conference talk from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2817.
+- [ref-29727] reviewed a qualified press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4334.
+- [ref-21434] appended a contested partner webinar from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6487.
+- [ref-31379] noted a final trade show keynote from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9051.
+- [ref-61676] tabulated a preliminary buyer survey from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2723.
+- [ref-81446] filed a unqualified customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7422.
+- [ref-44905] annotated a final partner webinar from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8756.
+- [ref-16776] ratified a supplemental patent disclosure from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3159.
+- [ref-74621] cross-checked a preliminary investor day deck from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4337.
+- [ref-30734] indexed a preliminary customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3134.
+- [ref-73739] ratified a supplemental conference talk from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6805.
+- [ref-93734] linked a tentative conference talk from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 229.
+- [ref-64991] flagged a preliminary partner webinar from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3050.
+- [ref-39353] tabulated a preliminary analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3049.
+- [ref-31831] annotated a revised SEC filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4972.
+- [ref-97609] verified a tentative investor day deck from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1668.
+- [ref-63290] cross-checked a uncontested regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3197.
+- [ref-50848] linked a definitive trade show keynote from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8053.
+- [ref-22994] pulled a contested customer reference call from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7858.
+- [ref-77821] annotated a tentative customer reference call from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6004.
+- [ref-71191] tabulated a qualified regulatory filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 495.
+- [ref-10318] circulated a final podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4699.
+- [ref-36715] annotated a definitive win/loss interview from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7742.
+- [ref-73420] filed a unqualified blog post from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9410.
+- [ref-77764] noted a contested podcast transcript from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2526.
+- [ref-41027] referenced a contested conference talk from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 168.
+- [ref-50776] circulated a qualified customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4030.
+- [ref-15659] verified a contested win/loss interview from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3343.
+- [ref-53767] summarised a tentative blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6293.
+- [ref-52317] referenced a revised regulatory filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4976.
+- [ref-23509] reviewed a tentative win/loss interview from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9837.
+- [ref-86587] appended a supplemental buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 834.
+- [ref-28119] flagged a unqualified customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7996.
+- [ref-64510] summarised a uncontested buyer survey from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3321.
+- [ref-57878] ratified a unqualified SEC filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5798.
+- [ref-24126] linked a preliminary buyer survey from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8915.
+- [ref-44641] marked a final win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6497.
+- [ref-20850] referenced a tentative partner webinar from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 830.
+- [ref-81377] tabulated a contested analyst report from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6683.
+- [ref-71500] archived a preliminary field memo from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6271.
+- [ref-34181] summarised a definitive customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1843.
+- [ref-34201] referenced a qualified analyst report from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6605.
+- [ref-32054] circulated a definitive blog post from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1091.
+- [ref-85746] uploaded a draft partner webinar from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7124.
+- [ref-60719] tabulated a unqualified SEC filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2383.
+- [ref-68602] logged a unqualified podcast transcript from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7582.
+- [ref-21831] indexed a unqualified field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4325.
+- [ref-99780] marked a tentative buyer survey from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3205.
+- [ref-91428] cross-checked a tentative win/loss interview from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2506.
+- [ref-61630] noted a tentative buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2975.
+- [ref-78151] appended a unqualified SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9866.
+- [ref-14014] cross-checked a definitive partner webinar from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4699.
+- [ref-36933] circulated a uncontested buyer survey from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1296.
+- [ref-46605] appended a unqualified SEC filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6006.
+- [ref-69382] flagged a supplemental blog post from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3010.
+- [ref-79264] referenced a draft conference talk from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6970.
+- [ref-25018] transcribed a draft win/loss interview from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5298.
+- [ref-51850] linked a preliminary field memo from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9768.
+- [ref-15812] tagged a final SEC filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1640.
+- [ref-82630] archived a draft SEC filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4871.
+- [ref-17035] filed a revised field memo from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3681.
+- [ref-95982] noted a tentative SEC filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6669.
+- [ref-69244] uploaded a preliminary partner webinar from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7027.
+- [ref-31265] marked a supplemental customer reference call from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9369.
+- [ref-47748] referenced a preliminary partner webinar from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6291.
+- [ref-93427] indexed a draft press release from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7806.
+- [ref-14377] verified a qualified SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8788.
+- [ref-71749] uploaded a preliminary blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7453.
+- [ref-88099] ratified a unqualified analyst report from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7695.
+- [ref-74461] filed a contested partner webinar from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4101.
+- [ref-76155] ratified a contested buyer survey from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6902.
+- [ref-19715] linked a uncontested podcast transcript from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7763.
+- [ref-22277] transcribed a uncontested trade show keynote from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2397.
+- [ref-34410] pulled a qualified partner webinar from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9559.
+- [ref-37012] marked a preliminary partner webinar from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8386.
+- [ref-36910] flagged a contested patent disclosure from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7652.
+- [ref-27908] uploaded a preliminary trade show keynote from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8644.
+- [ref-48060] uploaded a revised SEC filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 295.
+- [ref-94453] logged a tentative partner webinar from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9105.
+- [ref-27369] linked a uncontested podcast transcript from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9282.
+- [ref-90021] reviewed a supplemental SEC filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9752.
+- [ref-20259] annotated a draft SEC filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8645.
+- [ref-81063] pulled a preliminary press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7686.
+- [ref-28352] captured a tentative win/loss interview from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8701.
+- [ref-77034] reviewed a draft press release from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4246.
+- [ref-41539] appended a contested investor day deck from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1702.
+- [ref-77637] indexed a supplemental regulatory filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3009.
+- [ref-21419] circulated a contested investor day deck from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5179.
+- [ref-74047] logged a qualified blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1023.
+- [ref-46629] ratified a draft win/loss interview from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 495.
+- [ref-70072] captured a qualified investor day deck from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2086.
+- [ref-43011] archived a final SEC filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1041.
+- [ref-86295] transcribed a supplemental regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8242.
+- [ref-26376] marked a qualified win/loss interview from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3185.
+- [ref-54804] appended a final field memo from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 665.
+- [ref-23392] indexed a qualified podcast transcript from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4834.
+- [ref-87158] flagged a revised buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1262.
+- [ref-64615] pulled a final analyst report from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7446.
+- [ref-53814] ratified a contested regulatory filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4794.
+- [ref-54112] cross-checked a preliminary trade show keynote from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1052.
+- [ref-73724] noted a unqualified buyer survey from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 374.
+- [ref-87700] indexed a uncontested conference talk from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1757.
+- [ref-70541] tagged a qualified press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6846.
+- [ref-76946] flagged a final conference talk from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5150.
+- [ref-42289] filed a uncontested blog post from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4395.
+- [ref-65707] reviewed a contested trade show keynote from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8370.
+- [ref-59960] linked a unqualified analyst report from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6794.
+- [ref-98608] appended a definitive win/loss interview from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4534.
+- [ref-75485] pulled a qualified press release from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 507.
+- [ref-84305] indexed a preliminary blog post from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1243.
+- [ref-32987] referenced a qualified press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7288.
+- [ref-82568] reviewed a revised buyer survey from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 489.
+- [ref-11711] appended a preliminary conference talk from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 83.
+- [ref-86434] logged a draft regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4496.
+- [ref-19423] pulled a uncontested regulatory filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6379.
+- [ref-99651] reviewed a supplemental customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4032.
+- [ref-67950] referenced a qualified conference talk from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8824.
+- [ref-44332] appended a tentative trade show keynote from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6239.
+- [ref-32886] verified a contested patent disclosure from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8272.
+- [ref-99072] linked a unqualified analyst report from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2770.
+- [ref-42326] circulated a draft field memo from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8493.
+- [ref-86952] flagged a tentative partner webinar from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5303.
+- [ref-73581] noted a contested trade show keynote from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9384.
+- [ref-23185] noted a preliminary partner webinar from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6040.
+- [ref-94331] circulated a uncontested press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9766.
+- [ref-64186] annotated a contested regulatory filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8977.
+- [ref-44363] transcribed a draft customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5595.
+- [ref-10270] marked a tentative win/loss interview from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9284.
+- [ref-31159] referenced a contested buyer survey from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9570.
+- [ref-18691] verified a tentative regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6682.
+- [ref-42555] captured a preliminary customer reference call from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 179.
+- [ref-46928] captured a tentative blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7776.
+- [ref-79783] verified a supplemental analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1168.
+- [ref-67874] referenced a unqualified customer reference call from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4201.
+- [ref-10774] tabulated a draft podcast transcript from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6160.
+- [ref-27664] linked a preliminary analyst report from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3125.
+- [ref-87570] flagged a tentative win/loss interview from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5917.
+- [ref-92436] transcribed a final field memo from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4843.
+- [ref-89474] archived a supplemental regulatory filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1344.
+- [ref-56852] logged a contested SEC filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2888.
+- [ref-19327] transcribed a contested SEC filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3365.
+- [ref-26310] captured a contested blog post from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3309.
+- [ref-86182] circulated a revised field memo from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5884.
+- [ref-54328] uploaded a draft win/loss interview from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5257.
+- [ref-94552] noted a tentative trade show keynote from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9932.
+- [ref-73786] captured a preliminary patent disclosure from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1131.
+- [ref-30938] noted a tentative buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3709.
+- [ref-83168] captured a preliminary field memo from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 121.
+- [ref-72700] pulled a final win/loss interview from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8231.
+- [ref-80603] logged a final conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5617.
+- [ref-45811] archived a qualified customer reference call from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7940.
+- [ref-75207] verified a contested SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 893.
+- [ref-15031] indexed a draft podcast transcript from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3262.
+- [ref-47517] marked a contested podcast transcript from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5708.
+- [ref-61756] referenced a final podcast transcript from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8133.
+- [ref-38000] appended a uncontested investor day deck from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3921.
+- [ref-57100] verified a final blog post from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5457.
+- [ref-29836] flagged a tentative podcast transcript from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8954.
+- [ref-29979] noted a unqualified conference talk from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8160.
+- [ref-57289] noted a qualified investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3454.
+- [ref-31282] logged a final customer reference call from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7547.
+- [ref-19649] archived a final customer reference call from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5092.
+- [ref-51721] summarised a uncontested win/loss interview from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7184.
+- [ref-49952] marked a draft patent disclosure from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8774.
+- [ref-26205] pulled a unqualified blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7123.
+- [ref-45439] uploaded a unqualified conference talk from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9742.
+- [ref-76870] noted a revised patent disclosure from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4021.
+- [ref-58919] ratified a supplemental regulatory filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9389.
+- [ref-15019] pulled a supplemental conference talk from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8559.
+- [ref-48877] captured a unqualified win/loss interview from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8517.
+- [ref-63057] verified a unqualified buyer survey from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3642.
+- [ref-55820] linked a draft field memo from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1192.
+- [ref-60606] appended a definitive podcast transcript from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6329.
+- [ref-66183] marked a final press release from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7675.
+- [ref-83091] indexed a uncontested investor day deck from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2444.
+- [ref-61026] uploaded a draft patent disclosure from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8880.
+- [ref-12192] logged a unqualified win/loss interview from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7398.
+- [ref-66842] summarised a uncontested buyer survey from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 350.
+- [ref-56188] noted a qualified analyst report from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9496.
+- [ref-51225] indexed a preliminary win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 46.
+- [ref-40228] tagged a supplemental trade show keynote from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4779.
+- [ref-78730] flagged a revised field memo from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2689.
+- [ref-52346] tabulated a tentative press release from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4181.
+- [ref-73705] reviewed a tentative press release from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 183.
+- [ref-69510] cross-checked a draft podcast transcript from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2830.
+- [ref-83672] annotated a revised investor day deck from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2641.
+- [ref-94017] linked a revised partner webinar from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1800.
+- [ref-90178] circulated a contested press release from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4839.
+- [ref-95794] referenced a unqualified buyer survey from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8124.
+- [ref-86807] captured a final SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1088.
+- [ref-15219] linked a unqualified analyst report from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7310.
+- [ref-97388] pulled a preliminary trade show keynote from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 218.
+- [ref-28604] reviewed a supplemental patent disclosure from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1686.
+- [ref-28269] appended a contested investor day deck from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4396.
+- [ref-26555] marked a contested podcast transcript from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8356.
+- [ref-30200] logged a supplemental conference talk from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 52.
+- [ref-43136] captured a supplemental buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8341.
+- [ref-54862] marked a qualified podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6981.
+- [ref-70022] indexed a unqualified investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2155.
+- [ref-77605] tabulated a uncontested buyer survey from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 897.
+- [ref-36472] archived a draft investor day deck from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6004.
+- [ref-25717] summarised a qualified podcast transcript from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7634.
+- [ref-46232] circulated a supplemental investor day deck from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6019.
+- [ref-24090] marked a uncontested conference talk from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5366.
+- [ref-35277] appended a preliminary partner webinar from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5267.
+- [ref-17959] noted a supplemental regulatory filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9405.
+- [ref-75502] ratified a qualified customer reference call from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6132.
+- [ref-29414] verified a definitive press release from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1121.
+- [ref-75860] annotated a preliminary podcast transcript from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1778.
+- [ref-40569] pulled a unqualified customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3046.
+- [ref-11871] flagged a uncontested field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3947.
+- [ref-38295] linked a qualified customer reference call from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4167.
+- [ref-82111] noted a preliminary partner webinar from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 205.
+- [ref-37033] ratified a contested buyer survey from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3928.
+- [ref-19418] noted a supplemental conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 163.
+- [ref-12544] uploaded a draft blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8569.
+- [ref-45184] archived a preliminary analyst report from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1432.
+- [ref-91605] linked a draft patent disclosure from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1690.
+- [ref-16927] annotated a definitive press release from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5740.
+- [ref-18195] tagged a supplemental customer reference call from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3659.
+- [ref-79153] logged a uncontested win/loss interview from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1106.
+- [ref-67984] circulated a draft SEC filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1567.
+- [ref-20912] linked a uncontested blog post from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 554.
+- [ref-38159] indexed a draft podcast transcript from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9600.
+- [ref-98254] ratified a tentative win/loss interview from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3805.
+- [ref-15905] uploaded a contested podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9826.
+- [ref-42125] captured a final buyer survey from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7718.
+- [ref-92299] tabulated a revised patent disclosure from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8556.
+- [ref-36953] filed a definitive conference talk from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9062.
+- [ref-39581] annotated a tentative trade show keynote from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 434.
+- [ref-28183] uploaded a uncontested win/loss interview from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6978.
+- [ref-79287] logged a unqualified press release from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2334.
+- [ref-12149] referenced a qualified SEC filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3371.
+- [ref-61364] filed a definitive analyst report from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4666.
+- [ref-88460] captured a qualified win/loss interview from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5681.
+- [ref-58100] uploaded a uncontested patent disclosure from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5163.
+- [ref-82664] archived a tentative buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3954.
+- [ref-85894] indexed a tentative press release from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5961.
+- [ref-51779] appended a qualified SEC filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9052.
+- [ref-80761] flagged a draft partner webinar from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7912.
+- [ref-24581] ratified a final investor day deck from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5101.
+- [ref-62880] pulled a contested SEC filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5611.
+- [ref-31459] noted a final partner webinar from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6824.
+- [ref-13245] noted a tentative press release from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7717.
+- [ref-74927] filed a definitive press release from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4067.
+- [ref-63259] archived a tentative customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1678.
+- [ref-19646] pulled a preliminary field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5264.
+- [ref-44936] captured a qualified patent disclosure from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6842.
+- [ref-21282] captured a draft partner webinar from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2221.
+- [ref-76792] flagged a unqualified blog post from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1181.
+- [ref-18372] pulled a definitive investor day deck from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2850.
+- [ref-51363] summarised a qualified podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5167.
+- [ref-80936] appended a contested analyst report from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3339.
+- [ref-52974] indexed a revised press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1107.
+- [ref-71634] summarised a revised analyst report from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2482.
+- [ref-76140] ratified a definitive investor day deck from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7811.
+- [ref-34547] referenced a uncontested win/loss interview from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1608.
+- [ref-82694] archived a draft patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7923.
+- [ref-84893] reviewed a definitive SEC filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5893.
+- [ref-27165] annotated a supplemental analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9276.
+- [ref-95722] logged a uncontested blog post from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6648.
+- [ref-64717] tagged a definitive blog post from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2491.
+- [ref-89886] tagged a preliminary buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 574.
+- [ref-93890] summarised a definitive customer reference call from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3455.
+- [ref-47050] verified a definitive customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7429.
+- [ref-68197] uploaded a unqualified analyst report from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8906.
+- [ref-70982] logged a unqualified conference talk from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4870.
+- [ref-23958] logged a revised conference talk from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2624.
+- [ref-86483] transcribed a final customer reference call from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3928.
+- [ref-68938] linked a uncontested buyer survey from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4832.
+- [ref-47896] appended a supplemental press release from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 804.
+- [ref-16238] annotated a definitive analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2533.
+- [ref-32592] circulated a contested investor day deck from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2587.
+- [ref-70214] circulated a final analyst report from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 626.
+- [ref-42659] appended a uncontested customer reference call from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2777.
+- [ref-25044] circulated a revised press release from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9730.
+- [ref-41562] tagged a tentative buyer survey from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2286.
+- [ref-40288] appended a tentative customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1166.
+- [ref-94877] tagged a uncontested trade show keynote from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1111.
+- [ref-99316] circulated a unqualified patent disclosure from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1498.
+- [ref-32748] flagged a supplemental trade show keynote from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3538.
+- [ref-10175] tagged a qualified blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7501.
+- [ref-19097] captured a unqualified customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7646.
+- [ref-74517] ratified a draft win/loss interview from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9329.
+- [ref-48371] noted a supplemental customer reference call from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5287.
+- [ref-53815] uploaded a supplemental partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8906.
+- [ref-79146] linked a definitive customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1969.
+- [ref-66010] referenced a final win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7855.
+- [ref-28809] ratified a supplemental press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 805.
+- [ref-88533] tagged a preliminary conference talk from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4298.
+- [ref-18524] logged a final conference talk from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8896.
+- [ref-33198] logged a revised blog post from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6139.
+- [ref-63719] ratified a supplemental regulatory filing from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7495.
+- [ref-79700] flagged a uncontested analyst report from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 313.
+- [ref-87629] appended a preliminary trade show keynote from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9667.
+- [ref-86353] uploaded a preliminary podcast transcript from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1831.
+- [ref-90073] tagged a unqualified regulatory filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4511.
+- [ref-89684] referenced a unqualified investor day deck from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5614.
+- [ref-30465] logged a definitive press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4842.
+- [ref-13313] flagged a definitive win/loss interview from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7181.
+- [ref-34488] annotated a contested buyer survey from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5716.
+- [ref-56273] tagged a definitive customer reference call from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9567.
+- [ref-80449] logged a unqualified customer reference call from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7961.
+- [ref-88809] verified a tentative conference talk from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 559.
+- [ref-84980] summarised a final partner webinar from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7048.
+- [ref-75248] indexed a definitive trade show keynote from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8571.
+- [ref-70439] uploaded a final conference talk from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3149.
+- [ref-13498] reviewed a final blog post from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2591.
+- [ref-80806] logged a contested patent disclosure from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5551.
+- [ref-13051] pulled a definitive investor day deck from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8722.
+- [ref-50802] verified a unqualified podcast transcript from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9831.
+- [ref-47552] flagged a uncontested field memo from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3321.
+- [ref-79775] uploaded a uncontested blog post from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3782.
+- [ref-83347] captured a revised SEC filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6366.
+- [ref-52732] annotated a tentative SEC filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8067.
+- [ref-65228] cross-checked a final investor day deck from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2846.
+- [ref-90251] indexed a revised buyer survey from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 145.
+- [ref-43793] logged a tentative analyst report from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 449.
+- [ref-94623] filed a definitive trade show keynote from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1323.
+- [ref-11146] circulated a draft patent disclosure from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3371.
+- [ref-60451] annotated a final buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3976.
+- [ref-21345] archived a draft regulatory filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5839.
+- [ref-12406] verified a definitive analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3500.
+- [ref-39954] circulated a preliminary press release from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8383.
+- [ref-76836] annotated a revised patent disclosure from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 614.
+- [ref-52802] appended a preliminary blog post from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1353.
+- [ref-59124] appended a tentative customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2782.
+- [ref-34984] tabulated a uncontested win/loss interview from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1361.
+- [ref-86205] tabulated a preliminary regulatory filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7528.
+- [ref-85069] marked a final win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7641.
+- [ref-11027] flagged a revised blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8578.
+- [ref-37368] filed a tentative investor day deck from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 504.
+- [ref-33332] verified a definitive partner webinar from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8777.
+- [ref-86432] appended a tentative press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5937.
+- [ref-38809] verified a uncontested regulatory filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6130.
+- [ref-32513] noted a qualified podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3972.
+- [ref-33475] flagged a tentative customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6709.
+- [ref-80361] ratified a supplemental trade show keynote from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 482.
+- [ref-22030] pulled a revised customer reference call from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 228.
+- [ref-95063] circulated a revised regulatory filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2352.
+- [ref-32275] appended a contested SEC filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5149.
+- [ref-27739] tabulated a qualified investor day deck from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3247.
+- [ref-25749] uploaded a definitive trade show keynote from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4463.
+- [ref-64729] uploaded a preliminary podcast transcript from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6574.
+- [ref-77803] marked a contested field memo from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6365.
+- [ref-61653] tabulated a contested podcast transcript from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6052.
+- [ref-21630] verified a preliminary blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3006.
+- [ref-12666] archived a uncontested partner webinar from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5469.
+- [ref-24622] marked a tentative patent disclosure from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4156.
+- [ref-33312] transcribed a unqualified patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2906.
+- [ref-75626] circulated a contested investor day deck from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1893.
+- [ref-20722] referenced a uncontested field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1337.
+- [ref-73784] circulated a preliminary conference talk from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8894.
+- [ref-39523] archived a draft press release from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8431.
+- [ref-75401] ratified a draft analyst report from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 9944.
+- [ref-92891] linked a draft field memo from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2541.
+- [ref-96395] tagged a unqualified press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1710.
+- [ref-53923] linked a revised blog post from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2738.
+- [ref-91145] linked a qualified conference talk from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9073.
+- [ref-66236] summarised a uncontested conference talk from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1153.
+- [ref-26314] linked a unqualified conference talk from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2266.
+- [ref-90739] flagged a uncontested regulatory filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9758.
+- [ref-57719] annotated a draft conference talk from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6706.
+- [ref-25027] circulated a qualified customer reference call from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5660.
+- [ref-38092] logged a revised field memo from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7320.
+- [ref-92188] reviewed a supplemental patent disclosure from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3925.
+- [ref-95614] circulated a revised patent disclosure from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7096.
+- [ref-92186] reviewed a unqualified SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4174.
+- [ref-43674] tagged a preliminary conference talk from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4286.
+- [ref-92546] cross-checked a contested podcast transcript from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7739.
+- [ref-19097] linked a supplemental buyer survey from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7887.
+- [ref-18953] marked a revised podcast transcript from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4344.
+- [ref-76535] pulled a supplemental blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5108.
+- [ref-17799] archived a draft regulatory filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7409.
+- [ref-15548] archived a revised field memo from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4049.
+- [ref-10350] uploaded a revised podcast transcript from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3648.
+- [ref-51150] annotated a qualified patent disclosure from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5454.
+- [ref-15923] flagged a definitive SEC filing from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2421.
+- [ref-80537] appended a preliminary press release from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5671.
+- [ref-80053] summarised a uncontested partner webinar from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9013.
+- [ref-81345] uploaded a supplemental buyer survey from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8217.
+- [ref-70216] flagged a definitive buyer survey from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1336.
+- [ref-65637] tabulated a supplemental trade show keynote from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6569.
+- [ref-86215] indexed a supplemental customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4857.
+- [ref-54443] appended a tentative blog post from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4007.
+- [ref-56459] archived a contested investor day deck from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8400.
+- [ref-19637] reviewed a draft blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8541.
+- [ref-11928] linked a revised customer reference call from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 305.
+- [ref-45080] tagged a revised analyst report from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7012.
+- [ref-59101] tagged a draft blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9396.
+- [ref-14267] cross-checked a qualified conference talk from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2180.
+- [ref-59089] tabulated a definitive blog post from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9640.
+- [ref-67358] circulated a final podcast transcript from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1430.
+- [ref-39657] summarised a unqualified regulatory filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7285.
+- [ref-31831] captured a definitive conference talk from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2966.
+- [ref-92518] marked a supplemental win/loss interview from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8402.
+- [ref-63940] verified a supplemental trade show keynote from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2898.
+- [ref-34307] logged a revised patent disclosure from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4882.
+- [ref-28996] tagged a definitive win/loss interview from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4604.
+- [ref-91881] linked a final conference talk from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4592.
+- [ref-82368] reviewed a draft win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5913.
+- [ref-48058] logged a unqualified partner webinar from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8817.
+- [ref-31143] tagged a preliminary analyst report from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5550.
+- [ref-19049] noted a contested conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7787.
+- [ref-66573] annotated a tentative win/loss interview from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5746.
+- [ref-16286] flagged a draft blog post from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9232.
+- [ref-98828] referenced a contested trade show keynote from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3030.
+- [ref-48682] annotated a draft regulatory filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2142.
+- [ref-33113] archived a final investor day deck from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5269.
+- [ref-10949] transcribed a qualified blog post from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8719.
+- [ref-97567] referenced a unqualified conference talk from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3689.
+- [ref-77452] tabulated a preliminary regulatory filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4235.
+- [ref-57273] pulled a tentative trade show keynote from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6481.
+- [ref-28032] appended a tentative SEC filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1036.
+- [ref-56446] flagged a uncontested regulatory filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7566.
+- [ref-47020] tabulated a contested regulatory filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9323.
+- [ref-23813] linked a tentative regulatory filing from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4677.
+- [ref-63648] appended a tentative podcast transcript from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3515.
+- [ref-95037] appended a tentative win/loss interview from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2194.
+- [ref-83795] verified a final trade show keynote from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 5019.
+- [ref-76223] logged a contested analyst report from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9220.
+- [ref-46597] appended a definitive analyst report from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 742.
+- [ref-64015] indexed a revised investor day deck from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6601.
+- [ref-58462] flagged a final conference talk from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5993.
+- [ref-93600] marked a contested investor day deck from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2784.
+- [ref-25363] uploaded a final field memo from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5487.
+- [ref-87631] reviewed a revised conference talk from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9188.
+- [ref-52644] uploaded a tentative press release from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 620.
+- [ref-26494] pulled a supplemental patent disclosure from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9232.
+- [ref-44220] linked a revised partner webinar from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4559.
+- [ref-38353] uploaded a qualified investor day deck from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 234.
+- [ref-75666] logged a preliminary win/loss interview from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5909.
+- [ref-67791] verified a contested podcast transcript from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3031.
+- [ref-52604] transcribed a qualified buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6981.
+- [ref-50654] archived a contested conference talk from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 820.
+- [ref-90674] flagged a definitive press release from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 759.
+- [ref-27349] summarised a preliminary win/loss interview from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7309.
+- [ref-38181] transcribed a revised customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5808.
+- [ref-40818] tagged a definitive field memo from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6078.
+- [ref-47434] referenced a preliminary investor day deck from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7479.
+- [ref-19048] appended a draft investor day deck from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2111.
+- [ref-96252] linked a contested regulatory filing from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6885.
+- [ref-58934] ratified a qualified press release from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2906.
+- [ref-49204] flagged a qualified press release from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8077.
+- [ref-74116] pulled a draft press release from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 570.
+- [ref-70612] appended a definitive partner webinar from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 5209.
+- [ref-63645] logged a preliminary conference talk from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5774.
+- [ref-36992] captured a uncontested blog post from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6740.
+- [ref-83780] uploaded a tentative press release from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2616.
+- [ref-16292] annotated a final investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2485.
+- [ref-15528] ratified a final field memo from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2534.
+- [ref-55365] cross-checked a tentative conference talk from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5476.
+- [ref-70510] verified a uncontested press release from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8480.
+- [ref-94118] verified a qualified customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2926.
+- [ref-36963] appended a definitive conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3171.
+- [ref-56506] reviewed a qualified investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5652.
+- [ref-40799] reviewed a draft conference talk from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2321.
+- [ref-55973] reviewed a qualified buyer survey from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 610.
+- [ref-91064] captured a contested investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1970.
+- [ref-77874] circulated a unqualified buyer survey from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 7155.
+- [ref-29968] captured a uncontested investor day deck from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 562.
+- [ref-92249] indexed a uncontested patent disclosure from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6764.
+- [ref-25479] archived a preliminary podcast transcript from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9140.
+- [ref-37986] linked a uncontested SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2797.
+- [ref-44371] archived a revised regulatory filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 977.
+- [ref-26796] captured a qualified blog post from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 531.
+- [ref-77048] tagged a contested customer reference call from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2051.
+- [ref-17233] filed a supplemental regulatory filing from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6791.
+- [ref-77490] transcribed a final press release from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2667.
+- [ref-89904] pulled a unqualified trade show keynote from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6928.
+- [ref-82982] filed a revised partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4067.
+- [ref-10100] annotated a tentative buyer survey from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4624.
+- [ref-93949] appended a qualified blog post from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1178.
+- [ref-17357] linked a final customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 353.
+- [ref-18725] filed a draft customer reference call from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9503.
+- [ref-74001] circulated a contested blog post from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 2636.
+- [ref-20264] tagged a tentative patent disclosure from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8795.
+- [ref-87273] ratified a qualified investor day deck from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 3095.
+- [ref-23609] cross-checked a supplemental regulatory filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4955.
+- [ref-50765] noted a tentative blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 254.
+- [ref-74085] tagged a contested podcast transcript from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8572.
+- [ref-35212] verified a qualified trade show keynote from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7986.
+- [ref-72161] tabulated a uncontested regulatory filing from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6478.
+- [ref-42926] uploaded a draft buyer survey from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 1007.
+- [ref-69754] tagged a final customer reference call from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 3212.
+- [ref-10885] circulated a preliminary SEC filing from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4407.
+- [ref-59402] ratified a draft investor day deck from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 8639.
+- [ref-12719] appended a preliminary patent disclosure from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5789.
+- [ref-45590] archived a contested conference talk from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2602.
+- [ref-28875] reviewed a preliminary investor day deck from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6043.
+- [ref-46559] summarised a contested SEC filing from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 489.
+- [ref-75707] linked a supplemental buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7008.
+- [ref-81352] reviewed a qualified win/loss interview from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2848.
+- [ref-68134] appended a unqualified buyer survey from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9066.
+- [ref-43150] filed a uncontested buyer survey from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5571.
+- [ref-61721] tagged a uncontested blog post from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 769.
+- [ref-46060] indexed a definitive win/loss interview from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5666.
+- [ref-47228] ratified a uncontested blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 1426.
+- [ref-14927] ratified a supplemental customer reference call from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 4391.
+- [ref-95130] transcribed a qualified press release from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 5075.
+- [ref-96408] circulated a contested blog post from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2663.
+- [ref-29763] linked a draft conference talk from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 4811.
+- [ref-79668] tabulated a contested patent disclosure from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 6144.
+- [ref-15200] archived a uncontested patent disclosure from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9152.
+- [ref-85120] filed a supplemental regulatory filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 7075.
+- [ref-64562] captured a unqualified analyst report from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8659.
+- [ref-37892] captured a unqualified customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 9098.
+- [ref-10770] tagged a tentative win/loss interview from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2235.
+- [ref-42722] flagged a revised patent disclosure from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3456.
+- [ref-72236] logged a definitive customer reference call from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 725.
+- [ref-22945] noted a preliminary buyer survey from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 9891.
+- [ref-19763] reviewed a qualified customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 7917.
+- [ref-59020] cross-checked a revised podcast transcript from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 3307.
+- [ref-17499] pulled a final conference talk from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 1091.
+- [ref-87469] linked a contested podcast transcript from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6362.
+- [ref-32710] appended a uncontested blog post from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 1479.
+- [ref-57247] marked a uncontested regulatory filing from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 9275.
+- [ref-25879] ratified a definitive buyer survey from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 2430.
+- [ref-33514] circulated a preliminary investor day deck from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8398.
+- [ref-79298] logged a supplemental investor day deck from 2026-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8643.
+- [ref-54895] reviewed a uncontested win/loss interview from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 6082.
+- [ref-24829] filed a tentative conference talk from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4344.
+- [ref-92508] flagged a revised customer reference call from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 6250.
+- [ref-14912] uploaded a contested blog post from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 6523.
+- [ref-90448] noted a revised conference talk from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 2512.
+- [ref-38720] cross-checked a final partner webinar from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 8990.
+- [ref-68009] uploaded a final field memo from 2026-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 642.
+- [ref-68039] noted a draft conference talk from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 8279.
+- [ref-13675] appended a uncontested blog post from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 842.
+- [ref-55119] transcribed a revised trade show keynote from 2024-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 3526.
+- [ref-16101] logged a draft win/loss interview from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 638.
+- [ref-21308] filed a revised blog post from 2025-Q3 on the regulatory constraints v2 dimension; cross-reference index entry 4351.
+- [ref-76008] logged a draft field memo from 2025-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 4744.
+- [ref-47521] appended a draft blog post from 2024-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 7521.
+- [ref-33657] circulated a uncontested customer reference call from 2024-Q4 on the regulatory constraints v2 dimension; cross-reference index entry 5126.
+- [ref-42228] annotated a definitive field memo from 2025-Q2 on the regulatory constraints v2 dimension; cross-reference index entry 8559.
+- [ref-68745] verified a definitive win/loss interview from 2025-Q1 on the regulatory constraints v2 dimension; cross-reference index entry 2597.

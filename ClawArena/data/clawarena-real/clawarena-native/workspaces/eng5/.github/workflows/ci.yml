@@ -1,0 +1,127 @@
+name: CI Pipeline
+# Main continuous integration workflow
+# Last modified: 2025-01-15 by Bob (added caching)
+
+on:
+  push:
+    branches: [main, develop, feature/**]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_VERSION: '20'
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  lint:
+    name: Lint Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      # BUG: cache key uses github.sha — every commit gets a unique key, defeating caching.
+      # Should use hashFiles('**/package-lock.json') instead.
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run Prettier check
+        run: npm run format:check
+
+  test-unit:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test -- --coverage
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+
+  test-integration:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: test-unit
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Cache pip packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run integration tests
+        run: pytest tests/integration/ -v
+
+  build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    needs: [test-unit, test-integration]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        run: |
+          docker buildx build --platform linux/amd64,linux/arm64 \
+            -t myapp:${{ github.sha }} \
+            --push .
+
+  notify:
+    name: Notify on Failure
+    runs-on: ubuntu-latest
+    needs: [lint, test-unit, test-integration, build]
+    if: failure()
+    steps:
+      - name: Send Slack notification
+        run: echo "Pipeline failed for ${{ github.sha }}"

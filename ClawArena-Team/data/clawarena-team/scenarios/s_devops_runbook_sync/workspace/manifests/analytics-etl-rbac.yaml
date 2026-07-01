@@ -1,0 +1,23 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: analytics-etl-role
+  namespace: prod
+rules:
+- apiGroups: [""]
+  resources: ["configmaps", "secrets"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: analytics-etl-rolebinding
+  namespace: prod
+subjects:
+- kind: ServiceAccount
+  name: analytics-etl-sa
+  namespace: prod
+roleRef:
+  kind: Role
+  name: analytics-etl-role
+  apiGroup: rbac.authorization.k8s.io

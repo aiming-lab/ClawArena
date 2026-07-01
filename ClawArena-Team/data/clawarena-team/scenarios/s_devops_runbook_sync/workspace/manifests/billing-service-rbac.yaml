@@ -1,0 +1,23 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: billing-service-role
+  namespace: prod
+rules:
+- apiGroups: [""]
+  resources: ["configmaps", "secrets"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: billing-service-rolebinding
+  namespace: prod
+subjects:
+- kind: ServiceAccount
+  name: billing-service-sa
+  namespace: prod
+roleRef:
+  kind: Role
+  name: billing-service-role
+  apiGroup: rbac.authorization.k8s.io

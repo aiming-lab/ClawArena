@@ -1,0 +1,90 @@
+# Helm values for payment-svc chart 1.18.3
+# WARNING: The memory limit below was inadvertently reduced during
+# an automated template refactor. The correct value is 2048Mi.
+
+replicaCount: 5
+
+image:
+  repository: registry.internal/payment-svc
+  pullPolicy: IfNotPresent
+  tag: "1.18.3"
+
+serviceAccount:
+  create: true
+  name: payment-svc
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "200m"
+  limits:
+    memory: "512Mi"    # BUG: should be 2048Mi — regressed from 1.18.2 default
+    cpu: "1000m"
+
+sidecar:
+  enabled: true
+  image: envoyproxy/envoy:v1.29.0
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "50m"
+    limits:
+      memory: "128Mi"
+      cpu: "200m"
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 20
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /readyz
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  timeoutSeconds: 3
+  failureThreshold: 3
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "30"
+  hosts:
+    - host: payment.internal.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+nodeSelector:
+  kubernetes.io/os: linux
+  node-pool: "eu-west-2a"
+
+tolerations: []
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchLabels:
+            app: payment-svc
+        topologyKey: kubernetes.io/hostname

@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package payments_split.billing;
+
+option go_package = "github.com/org/payments-split/billing";
+
+// BillingService — shared proto for the billing split service.
+// WARNING: cross-service RPC schema diff identified during migration review.
+// See architecture/cross_service_rpc_diff.md for details.
+
+message ChargeRequest {
+  string transaction_id = 1;
+  string user_id = 2;
+  int64 amount_cents = 3;
+  string currency = 4;
+  string idempotency_key = 6;
+  string source_account = 7;
+}
+
+message ChargeResponse {
+  string charge_id = 1;
+  string status = 2;
+  int64 processed_at_epoch = 3;
+  string ledger_ref = 4;
+}
+
+message ReconcileRequest {
+  string batch_id = 1;
+  string from_service = 2;
+  int64 start_epoch = 3;
+  int64 end_epoch = 4;
+  repeated string transaction_ids = 5;
+}
+
+message ReconcileResponse {
+  string reconcile_id = 1;
+  int64 matched_count = 2;
+  int64 unmatched_count = 3;
+  repeated string unmatched_ids = 4;
+}
+
+service BillingService {
+  // NOTE: ProcessCharge uses int64 amount_cents; ledger client.go:117
+  // uses float64 amount — INCOMPATIBLE schema (detected in migration review).
+  rpc ProcessCharge(ChargeRequest) returns (ChargeResponse);
+  rpc ReconcileWithLedger(ReconcileRequest) returns (ReconcileResponse);
+  rpc GetBalance(ChargeRequest) returns (ChargeResponse);
+}

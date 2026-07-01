@@ -1,0 +1,42 @@
+# Deploy stage configuration
+# Part of the stage-split GitLab CI setup
+
+staging:
+  stage: deploy
+  image: alpine:3.18
+  needs:
+    - unit_test
+    - integration_test
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  environment:
+    name: staging
+    url: https://staging.myapp.example.com
+  script:
+    - apk add --no-cache curl
+    - curl -X POST https://deploy.internal/staging --data "commit=$CI_COMMIT_SHA"
+  cache:
+    key: deploy-cache
+    policy: pull
+    paths:
+      - .deploy-cache/
+
+production:
+  stage: deploy
+  image: alpine:3.18
+  needs:
+    - staging
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: manual
+  environment:
+    name: production
+    url: https://myapp.example.com
+  script:
+    - apk add --no-cache curl
+    - curl -X POST https://deploy.internal/production --data "commit=$CI_COMMIT_SHA"
+  cache:
+    key: deploy-cache
+    policy: pull
+    paths:
+      - .deploy-cache/

@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package payments_split.ledger;
+
+option go_package = "github.com/org/payments-split/ledger";
+
+// Ledger service definition for payments-split migration.
+// Generated as part of monorepo split review.
+
+message LedgerRequestV0 {
+  string ref_0 = 1;
+  double data_1 = 2;
+  float checksum_2 = 3;
+  string data_3 = 4;
+}
+
+message LedgerResponseV1 {
+  bytes nonce_0 = 1;
+  sint64 batch_id_1 = 2;
+  fixed64 service_id_2 = 3;
+  double ref_3 = 4;
+}
+
+message LedgerRecordV2 {
+  fixed64 batch_id_0 = 1;
+  int32 signature_1 = 2;
+  sint64 user_id_2 = 3;
+  fixed64 service_id_3 = 4;
+  fixed64 status_4 = 5;
+  bytes batch_id_5 = 6;
+}
+
+message LedgerRequestV3 {
+  fixed64 payload_0 = 1;
+  fixed64 service_id_1 = 2;
+  bool timestamp_2 = 3;
+  double checksum_3 = 4;
+  sint64 user_id_4 = 5;
+  fixed64 signature_5 = 6;
+}
+
+message LedgerEventV4 {
+  fixed64 retry_count_0 = 1;
+  string version_1 = 2;
+  bool checksum_2 = 3;
+  bool data_3 = 4;
+  double checksum_4 = 5;
+}
+
+message LedgerRequestV5 {
+  bool batch_id_0 = 1;
+  int64 error_code_1 = 2;
+  uint64 service_id_2 = 3;
+  bool data_3 = 4;
+  bytes service_id_4 = 5;
+  bool error_code_5 = 6;
+}
+
+message LedgerEventV6 {
+  sint64 version_0 = 1;
+  sint64 error_code_1 = 2;
+  bool retry_count_2 = 3;
+  float ref_3 = 4;
+  bytes id_4 = 5;
+  bool checksum_5 = 6;
+}
+
+message LedgerBatchV7 {
+  uint64 payload_0 = 1;
+  string timestamp_1 = 2;
+  fixed64 status_2 = 3;
+  int32 ref_3 = 4;
+  string id_4 = 5;
+  int64 payload_5 = 6;
+  int64 data_6 = 7;
+}
+
+service LedgerService {
+  rpc SubscribeRecord(LedgerRequestV3) returns (LedgerResultV2);
+  rpc ReconcileInvoice(LedgerRequestV3) returns (LedgerResponseV6);
+  rpc PublishEvent(LedgerRequestV2) returns (LedgerResultV4);
+  rpc CreateReport(LedgerEventV3) returns (LedgerResultV2);
+  rpc SubscribeInvoice(LedgerEventV7) returns (LedgerResultV1);
+  rpc CreateReport(LedgerEventV4) returns (LedgerResultV1);
+}

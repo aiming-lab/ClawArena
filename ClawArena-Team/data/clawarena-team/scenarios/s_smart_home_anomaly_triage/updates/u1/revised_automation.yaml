@@ -1,0 +1,2617 @@
+# Revised Home Assistant Automations — IntegraTech Solutions OTA Update
+# Version: 3.2.1 | Generated: 2026-05-16 02:35 PDT
+# Reference: IT-OTA-2026-CHEN-0516
+# This file replaces the previous automations.yaml during the OTA staging window.
+
+# KEY CHANGE: OTA_STAGING_DEVICE automation added
+# MAC a4:cf:12:8e:7b:3d is now registered as a trusted OTA staging device.
+# Its DHCP activity during the 02:00-04:00 window should not trigger security alerts.
+
+- id: 'automation_ota_staging_whitelist'
+  alias: 'OTA Staging Device — Suppress Alert'
+  description: 'Suppresses security alert for MAC a4:cf:12:8e:7b:3d during OTA window'
+  trigger:
+    - platform: event
+      event_type: dhcp_device_new
+      event_data:
+        mac: 'a4:cf:12:8e:7b:3d'
+  condition:
+    - condition: time
+      after: '02:00:00'
+      before: '04:00:00'
+  action:
+    - service: notify.oncall_pager
+      data:
+        title: 'OTA Staging in Progress — Non-Security Event'
+        message: 'IntegraTech staging device a4:cf:12:8e:7b:3d connected — OTA window active'
+    - service: persistent_notification.create
+      data:
+        title: 'Vendor OTA Session Active'
+        message: 'Device a4:cf:12:8e:7b:3d is IntegraTech staging laptop. Classification: non-malicious.'
+
+- id: 'automation_revised_0001'
+  alias: 'Revised Auto Rule 1 — Geofencing Rules'
+  description: 'Updated by IntegraTech OTA v3.2.1: scene trigger must not bypass in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 1'
+        message: 'Thermostat setpoint event at {{ now() }}'
+
+- id: 'automation_revised_0002'
+  alias: 'Revised Auto Rule 2 — Geofencing Rules'
+  description: 'Updated by IntegraTech OTA v3.2.1: integration plugin may override absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 2'
+        message: 'Device tracker event at {{ now() }}'
+
+- id: 'automation_revised_0003'
+  alias: 'Revised Auto Rule 3 — Notification Routing'
+  description: 'Updated by IntegraTech OTA v3.2.1: DHCP lease must log absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 3'
+        message: 'Zigbee coordinator event at {{ now() }}'
+
+- id: 'automation_revised_0004'
+  alias: 'Revised Auto Rule 4 — Energy Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: motion sensor will reconcile within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 4'
+        message: 'Scene trigger event at {{ now() }}'
+
+- id: 'automation_revised_0005'
+  alias: 'Revised Auto Rule 5 — Data Retention'
+  description: 'Updated by IntegraTech OTA v3.2.1: firmware bundle must validate subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 5'
+        message: 'Device tracker event at {{ now() }}'
+
+- id: 'automation_revised_0006'
+  alias: 'Revised Auto Rule 6 — Firmware Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: dashboard panel should verify absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 6'
+        message: 'Arp entry event at {{ now() }}'
+
+- id: 'automation_revised_0007'
+  alias: 'Revised Auto Rule 7 — Voice Assistant Integration'
+  description: 'Updated by IntegraTech OTA v3.2.1: ARP entry should publish in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 7'
+        message: 'Smoke detector event at {{ now() }}'
+
+- id: 'automation_revised_0008'
+  alias: 'Revised Auto Rule 8 — Voice Assistant Integration'
+  description: 'Updated by IntegraTech OTA v3.2.1: automation rule shall retain absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 8'
+        message: 'Automation rule event at {{ now() }}'
+
+- id: 'automation_revised_0009'
+  alias: 'Revised Auto Rule 9 — Network Binding'
+  description: 'Updated by IntegraTech OTA v3.2.1: zigbee coordinator will update absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 9'
+        message: 'Camera stream event at {{ now() }}'
+
+- id: 'automation_revised_0010'
+  alias: 'Revised Auto Rule 10 — Energy Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: home assistant instance must validate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 10'
+        message: 'Geofence zone event at {{ now() }}'
+
+- id: 'automation_revised_0011'
+  alias: 'Revised Auto Rule 11 — Presence Detection'
+  description: 'Updated by IntegraTech OTA v3.2.1: network gateway should archive within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 11'
+        message: 'Network gateway event at {{ now() }}'
+
+- id: 'automation_revised_0012'
+  alias: 'Revised Auto Rule 12 — Webhook Handling'
+  description: 'Updated by IntegraTech OTA v3.2.1: contact sensor must acknowledge absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 12'
+        message: 'Camera stream event at {{ now() }}'
+
+- id: 'automation_revised_0013'
+  alias: 'Revised Auto Rule 13 — Scene Control'
+  description: 'Updated by IntegraTech OTA v3.2.1: home assistant instance shall retain absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 13'
+        message: 'Doorbell event event at {{ now() }}'
+
+- id: 'automation_revised_0014'
+  alias: 'Revised Auto Rule 14 — Protocol Bridging'
+  description: 'Updated by IntegraTech OTA v3.2.1: camera stream should verify absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 14'
+        message: 'Nat table event at {{ now() }}'
+
+- id: 'automation_revised_0015'
+  alias: 'Revised Auto Rule 15 — Multi-factor Authentication'
+  description: 'Updated by IntegraTech OTA v3.2.1: smart lock may override in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: numeric_state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 15'
+        message: 'Presence simulation event at {{ now() }}'
+
+- id: 'automation_revised_0016'
+  alias: 'Revised Auto Rule 16 — Access Control'
+  description: 'Updated by IntegraTech OTA v3.2.1: smoke detector will update within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: state
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 16'
+        message: 'Thermostat setpoint event at {{ now() }}'
+
+- id: 'automation_revised_0017'
+  alias: 'Revised Auto Rule 17 — Access Control'
+  description: 'Updated by IntegraTech OTA v3.2.1: OTA manifest shall retain within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 17'
+        message: 'Home assistant instance event at {{ now() }}'
+
+- id: 'automation_revised_0018'
+  alias: 'Revised Auto Rule 18 — Calendar Synchronisation'
+  description: 'Updated by IntegraTech OTA v3.2.1: integration plugin may override subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 18'
+        message: 'Z-wave mesh event at {{ now() }}'
+
+- id: 'automation_revised_0019'
+  alias: 'Revised Auto Rule 19 — Incident Response'
+  description: 'Updated by IntegraTech OTA v3.2.1: network gateway must not bypass within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 19'
+        message: 'Dashboard panel event at {{ now() }}'
+
+- id: 'automation_revised_0020'
+  alias: 'Revised Auto Rule 20 — Privacy Controls'
+  description: 'Updated by IntegraTech OTA v3.2.1: contact sensor may override absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 20'
+        message: 'Notification channel event at {{ now() }}'
+
+- id: 'automation_revised_0021'
+  alias: 'Revised Auto Rule 21 — Geofencing Rules'
+  description: 'Updated by IntegraTech OTA v3.2.1: OTA manifest will update absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 21'
+        message: 'Thermostat setpoint event at {{ now() }}'
+
+- id: 'automation_revised_0022'
+  alias: 'Revised Auto Rule 22 — Audit Trail'
+  description: 'Updated by IntegraTech OTA v3.2.1: contact sensor must acknowledge subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 22'
+        message: 'Presence simulation event at {{ now() }}'
+
+- id: 'automation_revised_0023'
+  alias: 'Revised Auto Rule 23 — Alert Escalation'
+  description: 'Updated by IntegraTech OTA v3.2.1: network gateway should correlate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 23'
+        message: 'Geofence zone event at {{ now() }}'
+
+- id: 'automation_revised_0024'
+  alias: 'Revised Auto Rule 24 — Audit Trail'
+  description: 'Updated by IntegraTech OTA v3.2.1: OTA manifest must validate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 24'
+        message: 'Device tracker event at {{ now() }}'
+
+- id: 'automation_revised_0025'
+  alias: 'Revised Auto Rule 25 — Energy Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: cloud sync payload should correlate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 25'
+        message: 'Energy monitor event at {{ now() }}'
+
+- id: 'automation_revised_0026'
+  alias: 'Revised Auto Rule 26 — Remote Access'
+  description: 'Updated by IntegraTech OTA v3.2.1: SSID broadcast must validate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: time
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 26'
+        message: 'Ota manifest event at {{ now() }}'
+
+- id: 'automation_revised_0027'
+  alias: 'Revised Auto Rule 27 — Energy Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: SSID broadcast must validate in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: template
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 27'
+        message: 'Alert threshold event at {{ now() }}'
+
+- id: 'automation_revised_0028'
+  alias: 'Revised Auto Rule 28 — Geofencing Rules'
+  description: 'Updated by IntegraTech OTA v3.2.1: zigbee coordinator may override absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 28'
+        message: 'Entity state event at {{ now() }}'
+
+- id: 'automation_revised_0029'
+  alias: 'Revised Auto Rule 29 — Dashboard Configuration'
+  description: 'Updated by IntegraTech OTA v3.2.1: entity state should correlate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 29'
+        message: 'Home assistant instance event at {{ now() }}'
+
+- id: 'automation_revised_0030'
+  alias: 'Revised Auto Rule 30 — Incident Response'
+  description: 'Updated by IntegraTech OTA v3.2.1: notification channel must acknowledge in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: numeric_state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 30'
+        message: 'Nat table event at {{ now() }}'
+
+- id: 'automation_revised_0031'
+  alias: 'Revised Auto Rule 31 — Automation Engine'
+  description: 'Updated by IntegraTech OTA v3.2.1: DHCP lease must validate in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 31'
+        message: 'Doorbell event event at {{ now() }}'
+
+- id: 'automation_revised_0032'
+  alias: 'Revised Auto Rule 32 — Audit Trail'
+  description: 'Updated by IntegraTech OTA v3.2.1: DHCP lease should archive within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 32'
+        message: 'Notification channel event at {{ now() }}'
+
+- id: 'automation_revised_0033'
+  alias: 'Revised Auto Rule 33 — Firmware Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: presence simulation should publish absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 33'
+        message: 'Mdns advertisement event at {{ now() }}'
+
+- id: 'automation_revised_0034'
+  alias: 'Revised Auto Rule 34 — Incident Response'
+  description: 'Updated by IntegraTech OTA v3.2.1: webhook call must acknowledge absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 34'
+        message: 'Ssid broadcast event at {{ now() }}'
+
+- id: 'automation_revised_0035'
+  alias: 'Revised Auto Rule 35 — Integration Layer'
+  description: 'Updated by IntegraTech OTA v3.2.1: syslog message may override within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: state
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 35'
+        message: 'Cloud sync payload event at {{ now() }}'
+
+- id: 'automation_revised_0036'
+  alias: 'Revised Auto Rule 36 — Presence Detection'
+  description: 'Updated by IntegraTech OTA v3.2.1: geofence zone will escalate subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 36'
+        message: 'Z-wave mesh event at {{ now() }}'
+
+- id: 'automation_revised_0037'
+  alias: 'Revised Auto Rule 37 — Scene Control'
+  description: 'Updated by IntegraTech OTA v3.2.1: device tracker should archive subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: time
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 37'
+        message: 'Notification channel event at {{ now() }}'
+
+- id: 'automation_revised_0038'
+  alias: 'Revised Auto Rule 38 — Integration Layer'
+  description: 'Updated by IntegraTech OTA v3.2.1: thermostat setpoint should correlate in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: template
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 38'
+        message: 'Smart lock event at {{ now() }}'
+
+- id: 'automation_revised_0039'
+  alias: 'Revised Auto Rule 39 — Automation Engine'
+  description: 'Updated by IntegraTech OTA v3.2.1: presence simulation should verify within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 39'
+        message: 'Motion sensor event at {{ now() }}'
+
+- id: 'automation_revised_0040'
+  alias: 'Revised Auto Rule 40 — Calendar Synchronisation'
+  description: 'Updated by IntegraTech OTA v3.2.1: camera stream should publish subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 40'
+        message: 'Integration plugin event at {{ now() }}'
+
+- id: 'automation_revised_0041'
+  alias: 'Revised Auto Rule 41 — Cloud Backup'
+  description: 'Updated by IntegraTech OTA v3.2.1: network gateway shall trigger subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: numeric_state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 41'
+        message: 'Dashboard panel event at {{ now() }}'
+
+- id: 'automation_revised_0042'
+  alias: 'Revised Auto Rule 42 — Rollback Procedures'
+  description: 'Updated by IntegraTech OTA v3.2.1: notification channel must log in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: time
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 42'
+        message: 'Humidity sensor event at {{ now() }}'
+
+- id: 'automation_revised_0043'
+  alias: 'Revised Auto Rule 43 — Geofencing Rules'
+  description: 'Updated by IntegraTech OTA v3.2.1: zigbee coordinator will reconcile within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 43'
+        message: 'Camera stream event at {{ now() }}'
+
+- id: 'automation_revised_0044'
+  alias: 'Revised Auto Rule 44 — Entity State Machine'
+  description: 'Updated by IntegraTech OTA v3.2.1: smoke detector must validate subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: state
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 44'
+        message: 'Home assistant instance event at {{ now() }}'
+
+- id: 'automation_revised_0045'
+  alias: 'Revised Auto Rule 45 — Calendar Synchronisation'
+  description: 'Updated by IntegraTech OTA v3.2.1: thermostat setpoint must acknowledge in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: template
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 45'
+        message: 'Device tracker event at {{ now() }}'
+
+- id: 'automation_revised_0046'
+  alias: 'Revised Auto Rule 46 — Privacy Controls'
+  description: 'Updated by IntegraTech OTA v3.2.1: z-wave mesh must log in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: state
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 46'
+        message: 'Syslog message event at {{ now() }}'
+
+- id: 'automation_revised_0047'
+  alias: 'Revised Auto Rule 47 — Data Retention'
+  description: 'Updated by IntegraTech OTA v3.2.1: webhook call will escalate subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: template
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 47'
+        message: 'Firmware bundle event at {{ now() }}'
+
+- id: 'automation_revised_0048'
+  alias: 'Revised Auto Rule 48 — Notification Routing'
+  description: 'Updated by IntegraTech OTA v3.2.1: motion sensor must validate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 48'
+        message: 'Home assistant instance event at {{ now() }}'
+
+- id: 'automation_revised_0049'
+  alias: 'Revised Auto Rule 49 — Diagnostic Logging'
+  description: 'Updated by IntegraTech OTA v3.2.1: device tracker must not bypass absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 49'
+        message: 'Firmware bundle event at {{ now() }}'
+
+- id: 'automation_revised_0050'
+  alias: 'Revised Auto Rule 50 — Network Binding'
+  description: 'Updated by IntegraTech OTA v3.2.1: webhook call must not bypass absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 50'
+        message: 'Zigbee coordinator event at {{ now() }}'
+
+- id: 'automation_revised_0051'
+  alias: 'Revised Auto Rule 51 — Firmware Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: presence simulation should archive subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 51'
+        message: 'Cloud sync payload event at {{ now() }}'
+
+- id: 'automation_revised_0052'
+  alias: 'Revised Auto Rule 52 — Cloud Backup'
+  description: 'Updated by IntegraTech OTA v3.2.1: home assistant instance should verify in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: time
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 52'
+        message: 'Dhcp lease event at {{ now() }}'
+
+- id: 'automation_revised_0053'
+  alias: 'Revised Auto Rule 53 — Cloud Backup'
+  description: 'Updated by IntegraTech OTA v3.2.1: integration plugin must not bypass in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: numeric_state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 53'
+        message: 'Home assistant instance event at {{ now() }}'
+
+- id: 'automation_revised_0054'
+  alias: 'Revised Auto Rule 54 — Alert Escalation'
+  description: 'Updated by IntegraTech OTA v3.2.1: humidity sensor shall trigger absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 54'
+        message: 'Motion sensor event at {{ now() }}'
+
+- id: 'automation_revised_0055'
+  alias: 'Revised Auto Rule 55 — Security Zones'
+  description: 'Updated by IntegraTech OTA v3.2.1: humidity sensor shall trigger in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: time
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 55'
+        message: 'Firmware bundle event at {{ now() }}'
+
+- id: 'automation_revised_0056'
+  alias: 'Revised Auto Rule 56 — Access Control'
+  description: 'Updated by IntegraTech OTA v3.2.1: automation rule will reconcile subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 56'
+        message: 'Camera stream event at {{ now() }}'
+
+- id: 'automation_revised_0057'
+  alias: 'Revised Auto Rule 57 — Entity State Machine'
+  description: 'Updated by IntegraTech OTA v3.2.1: geofence zone shall trigger in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: time
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 57'
+        message: 'Nat table event at {{ now() }}'
+
+- id: 'automation_revised_0058'
+  alias: 'Revised Auto Rule 58 — Diagnostic Logging'
+  description: 'Updated by IntegraTech OTA v3.2.1: mDNS advertisement must log within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: time
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 58'
+        message: 'Doorbell event event at {{ now() }}'
+
+- id: 'automation_revised_0059'
+  alias: 'Revised Auto Rule 59 — Alert Escalation'
+  description: 'Updated by IntegraTech OTA v3.2.1: mDNS advertisement should publish absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 59'
+        message: 'Webhook call event at {{ now() }}'
+
+- id: 'automation_revised_0060'
+  alias: 'Revised Auto Rule 60 — Presence Detection'
+  description: 'Updated by IntegraTech OTA v3.2.1: OTA manifest must validate in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: numeric_state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 60'
+        message: 'Entity state event at {{ now() }}'
+
+- id: 'automation_revised_0061'
+  alias: 'Revised Auto Rule 61 — Integration Layer'
+  description: 'Updated by IntegraTech OTA v3.2.1: geofence zone should correlate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 61'
+        message: 'Cloud sync payload event at {{ now() }}'
+
+- id: 'automation_revised_0062'
+  alias: 'Revised Auto Rule 62 — Geofencing Rules'
+  description: 'Updated by IntegraTech OTA v3.2.1: device tracker shall notify subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: template
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 62'
+        message: 'Device tracker event at {{ now() }}'
+
+- id: 'automation_revised_0063'
+  alias: 'Revised Auto Rule 63 — Calendar Synchronisation'
+  description: 'Updated by IntegraTech OTA v3.2.1: zigbee coordinator must acknowledge in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: time
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 63'
+        message: 'Network gateway event at {{ now() }}'
+
+- id: 'automation_revised_0064'
+  alias: 'Revised Auto Rule 64 — Update Policy'
+  description: 'Updated by IntegraTech OTA v3.2.1: z-wave mesh should correlate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 64'
+        message: 'Z-wave mesh event at {{ now() }}'
+
+- id: 'automation_revised_0065'
+  alias: 'Revised Auto Rule 65 — Diagnostic Logging'
+  description: 'Updated by IntegraTech OTA v3.2.1: notification channel must log absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 65'
+        message: 'Network gateway event at {{ now() }}'
+
+- id: 'automation_revised_0066'
+  alias: 'Revised Auto Rule 66 — Incident Response'
+  description: 'Updated by IntegraTech OTA v3.2.1: humidity sensor must not bypass within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 66'
+        message: 'Arp entry event at {{ now() }}'
+
+- id: 'automation_revised_0067'
+  alias: 'Revised Auto Rule 67 — Energy Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: presence simulation shall notify subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: time
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 67'
+        message: 'Entity state event at {{ now() }}'
+
+- id: 'automation_revised_0068'
+  alias: 'Revised Auto Rule 68 — Access Control'
+  description: 'Updated by IntegraTech OTA v3.2.1: automation rule shall retain within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 68'
+        message: 'Smart lock event at {{ now() }}'
+
+- id: 'automation_revised_0069'
+  alias: 'Revised Auto Rule 69 — Integration Layer'
+  description: 'Updated by IntegraTech OTA v3.2.1: notification channel will escalate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 69'
+        message: 'Alert threshold event at {{ now() }}'
+
+- id: 'automation_revised_0070'
+  alias: 'Revised Auto Rule 70 — Access Control'
+  description: 'Updated by IntegraTech OTA v3.2.1: z-wave mesh must log in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 70'
+        message: 'Contact sensor event at {{ now() }}'
+
+- id: 'automation_revised_0071'
+  alias: 'Revised Auto Rule 71 — Entity State Machine'
+  description: 'Updated by IntegraTech OTA v3.2.1: energy monitor should correlate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 71'
+        message: 'Presence simulation event at {{ now() }}'
+
+- id: 'automation_revised_0072'
+  alias: 'Revised Auto Rule 72 — Cloud Backup'
+  description: 'Updated by IntegraTech OTA v3.2.1: dashboard panel must validate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 72'
+        message: 'Home assistant instance event at {{ now() }}'
+
+- id: 'automation_revised_0073'
+  alias: 'Revised Auto Rule 73 — Rollback Procedures'
+  description: 'Updated by IntegraTech OTA v3.2.1: smoke detector should correlate in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: numeric_state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 73'
+        message: 'Entity state event at {{ now() }}'
+
+- id: 'automation_revised_0074'
+  alias: 'Revised Auto Rule 74 — Update Policy'
+  description: 'Updated by IntegraTech OTA v3.2.1: syslog message may override subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: state
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 74'
+        message: 'Alert threshold event at {{ now() }}'
+
+- id: 'automation_revised_0075'
+  alias: 'Revised Auto Rule 75 — Device Registry'
+  description: 'Updated by IntegraTech OTA v3.2.1: zigbee coordinator should publish subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: time
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 75'
+        message: 'Entity state event at {{ now() }}'
+
+- id: 'automation_revised_0076'
+  alias: 'Revised Auto Rule 76 — Geofencing Rules'
+  description: 'Updated by IntegraTech OTA v3.2.1: scene trigger will escalate subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: time
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 76'
+        message: 'Dhcp lease event at {{ now() }}'
+
+- id: 'automation_revised_0077'
+  alias: 'Revised Auto Rule 77 — Geofencing Rules'
+  description: 'Updated by IntegraTech OTA v3.2.1: mDNS advertisement should publish in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 77'
+        message: 'Entity state event at {{ now() }}'
+
+- id: 'automation_revised_0078'
+  alias: 'Revised Auto Rule 78 — Rollback Procedures'
+  description: 'Updated by IntegraTech OTA v3.2.1: contact sensor will reconcile absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 78'
+        message: 'Automation rule event at {{ now() }}'
+
+- id: 'automation_revised_0079'
+  alias: 'Revised Auto Rule 79 — Dashboard Configuration'
+  description: 'Updated by IntegraTech OTA v3.2.1: ARP entry shall retain absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 79'
+        message: 'Entity state event at {{ now() }}'
+
+- id: 'automation_revised_0080'
+  alias: 'Revised Auto Rule 80 — Interoperability Matrix'
+  description: 'Updated by IntegraTech OTA v3.2.1: syslog message should publish within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 80'
+        message: 'Humidity sensor event at {{ now() }}'
+
+- id: 'automation_revised_0081'
+  alias: 'Revised Auto Rule 81 — Multi-factor Authentication'
+  description: 'Updated by IntegraTech OTA v3.2.1: NAT table must not bypass subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 81'
+        message: 'Ssid broadcast event at {{ now() }}'
+
+- id: 'automation_revised_0082'
+  alias: 'Revised Auto Rule 82 — Data Retention'
+  description: 'Updated by IntegraTech OTA v3.2.1: network gateway must not bypass subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: numeric_state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 82'
+        message: 'Integration plugin event at {{ now() }}'
+
+- id: 'automation_revised_0083'
+  alias: 'Revised Auto Rule 83 — Device Registry'
+  description: 'Updated by IntegraTech OTA v3.2.1: notification channel shall notify in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 83'
+        message: 'Dashboard panel event at {{ now() }}'
+
+- id: 'automation_revised_0084'
+  alias: 'Revised Auto Rule 84 — Protocol Bridging'
+  description: 'Updated by IntegraTech OTA v3.2.1: home assistant instance will escalate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 84'
+        message: 'Geofence zone event at {{ now() }}'
+
+- id: 'automation_revised_0085'
+  alias: 'Revised Auto Rule 85 — Integration Layer'
+  description: 'Updated by IntegraTech OTA v3.2.1: entity state shall rotate subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 85'
+        message: 'Automation rule event at {{ now() }}'
+
+- id: 'automation_revised_0086'
+  alias: 'Revised Auto Rule 86 — Network Binding'
+  description: 'Updated by IntegraTech OTA v3.2.1: home assistant instance must log subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: time
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 86'
+        message: 'Presence simulation event at {{ now() }}'
+
+- id: 'automation_revised_0087'
+  alias: 'Revised Auto Rule 87 — Device Registry'
+  description: 'Updated by IntegraTech OTA v3.2.1: motion sensor must validate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 87'
+        message: 'Contact sensor event at {{ now() }}'
+
+- id: 'automation_revised_0088'
+  alias: 'Revised Auto Rule 88 — Incident Response'
+  description: 'Updated by IntegraTech OTA v3.2.1: automation rule must validate in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: template
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 88'
+        message: 'Alert threshold event at {{ now() }}'
+
+- id: 'automation_revised_0089'
+  alias: 'Revised Auto Rule 89 — Alert Escalation'
+  description: 'Updated by IntegraTech OTA v3.2.1: network gateway should verify in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: numeric_state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 89'
+        message: 'Device tracker event at {{ now() }}'
+
+- id: 'automation_revised_0090'
+  alias: 'Revised Auto Rule 90 — Diagnostic Logging'
+  description: 'Updated by IntegraTech OTA v3.2.1: doorbell event must validate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 90'
+        message: 'Notification channel event at {{ now() }}'
+
+- id: 'automation_revised_0091'
+  alias: 'Revised Auto Rule 91 — Multi-factor Authentication'
+  description: 'Updated by IntegraTech OTA v3.2.1: DHCP lease may override absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 91'
+        message: 'Arp entry event at {{ now() }}'
+
+- id: 'automation_revised_0092'
+  alias: 'Revised Auto Rule 92 — Dashboard Configuration'
+  description: 'Updated by IntegraTech OTA v3.2.1: DHCP lease shall rotate subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: template
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 92'
+        message: 'Automation rule event at {{ now() }}'
+
+- id: 'automation_revised_0093'
+  alias: 'Revised Auto Rule 93 — Interoperability Matrix'
+  description: 'Updated by IntegraTech OTA v3.2.1: thermostat setpoint will escalate subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: template
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 93'
+        message: 'Integration plugin event at {{ now() }}'
+
+- id: 'automation_revised_0094'
+  alias: 'Revised Auto Rule 94 — Entity State Machine'
+  description: 'Updated by IntegraTech OTA v3.2.1: entity state should verify subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: time
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 94'
+        message: 'Motion sensor event at {{ now() }}'
+
+- id: 'automation_revised_0095'
+  alias: 'Revised Auto Rule 95 — Access Control'
+  description: 'Updated by IntegraTech OTA v3.2.1: NAT table must acknowledge within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 95'
+        message: 'Automation rule event at {{ now() }}'
+
+- id: 'automation_revised_0096'
+  alias: 'Revised Auto Rule 96 — Security Zones'
+  description: 'Updated by IntegraTech OTA v3.2.1: syslog message will update within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 96'
+        message: 'Ota manifest event at {{ now() }}'
+
+- id: 'automation_revised_0097'
+  alias: 'Revised Auto Rule 97 — Protocol Bridging'
+  description: 'Updated by IntegraTech OTA v3.2.1: z-wave mesh must log subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 97'
+        message: 'Presence simulation event at {{ now() }}'
+
+- id: 'automation_revised_0098'
+  alias: 'Revised Auto Rule 98 — Diagnostic Logging'
+  description: 'Updated by IntegraTech OTA v3.2.1: z-wave mesh must acknowledge in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: numeric_state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 98'
+        message: 'Notification channel event at {{ now() }}'
+
+- id: 'automation_revised_0099'
+  alias: 'Revised Auto Rule 99 — Scene Control'
+  description: 'Updated by IntegraTech OTA v3.2.1: doorbell event must validate in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 99'
+        message: 'Z-wave mesh event at {{ now() }}'
+
+- id: 'automation_revised_0100'
+  alias: 'Revised Auto Rule 100 — Calendar Synchronisation'
+  description: 'Updated by IntegraTech OTA v3.2.1: notification channel should verify absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 100'
+        message: 'Home assistant instance event at {{ now() }}'
+
+- id: 'automation_revised_0101'
+  alias: 'Revised Auto Rule 101 — Remote Access'
+  description: 'Updated by IntegraTech OTA v3.2.1: device tracker will reconcile within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: time
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 101'
+        message: 'Mdns advertisement event at {{ now() }}'
+
+- id: 'automation_revised_0102'
+  alias: 'Revised Auto Rule 102 — Firmware Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: webhook call will reconcile within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: time
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 102'
+        message: 'Energy monitor event at {{ now() }}'
+
+- id: 'automation_revised_0103'
+  alias: 'Revised Auto Rule 103 — Presence Detection'
+  description: 'Updated by IntegraTech OTA v3.2.1: alert threshold will update subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: template
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 103'
+        message: 'Contact sensor event at {{ now() }}'
+
+- id: 'automation_revised_0104'
+  alias: 'Revised Auto Rule 104 — Energy Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: camera stream must acknowledge within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: time
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 104'
+        message: 'Scene trigger event at {{ now() }}'
+
+- id: 'automation_revised_0105'
+  alias: 'Revised Auto Rule 105 — Audit Trail'
+  description: 'Updated by IntegraTech OTA v3.2.1: cloud sync payload shall retain in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: numeric_state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 105'
+        message: 'Smart lock event at {{ now() }}'
+
+- id: 'automation_revised_0106'
+  alias: 'Revised Auto Rule 106 — Entity State Machine'
+  description: 'Updated by IntegraTech OTA v3.2.1: mDNS advertisement must not bypass within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: state
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 106'
+        message: 'Zigbee coordinator event at {{ now() }}'
+
+- id: 'automation_revised_0107'
+  alias: 'Revised Auto Rule 107 — Cloud Backup'
+  description: 'Updated by IntegraTech OTA v3.2.1: network gateway should publish absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 107'
+        message: 'Zigbee coordinator event at {{ now() }}'
+
+- id: 'automation_revised_0108'
+  alias: 'Revised Auto Rule 108 — Calendar Synchronisation'
+  description: 'Updated by IntegraTech OTA v3.2.1: contact sensor shall notify within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 108'
+        message: 'Ota manifest event at {{ now() }}'
+
+- id: 'automation_revised_0109'
+  alias: 'Revised Auto Rule 109 — Dashboard Configuration'
+  description: 'Updated by IntegraTech OTA v3.2.1: humidity sensor must log within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 109'
+        message: 'Smoke detector event at {{ now() }}'
+
+- id: 'automation_revised_0110'
+  alias: 'Revised Auto Rule 110 — Access Control'
+  description: 'Updated by IntegraTech OTA v3.2.1: device tracker will escalate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 110'
+        message: 'Smart lock event at {{ now() }}'
+
+- id: 'automation_revised_0111'
+  alias: 'Revised Auto Rule 111 — Energy Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: cloud sync payload must acknowledge within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 111'
+        message: 'Dashboard panel event at {{ now() }}'
+
+- id: 'automation_revised_0112'
+  alias: 'Revised Auto Rule 112 — Cloud Backup'
+  description: 'Updated by IntegraTech OTA v3.2.1: automation rule will escalate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 112'
+        message: 'Entity state event at {{ now() }}'
+
+- id: 'automation_revised_0113'
+  alias: 'Revised Auto Rule 113 — Remote Access'
+  description: 'Updated by IntegraTech OTA v3.2.1: thermostat setpoint must acknowledge in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: time
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 113'
+        message: 'Contact sensor event at {{ now() }}'
+
+- id: 'automation_revised_0114'
+  alias: 'Revised Auto Rule 114 — Diagnostic Logging'
+  description: 'Updated by IntegraTech OTA v3.2.1: NAT table must validate in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: template
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 114'
+        message: 'Nat table event at {{ now() }}'
+
+- id: 'automation_revised_0115'
+  alias: 'Revised Auto Rule 115 — Geofencing Rules'
+  description: 'Updated by IntegraTech OTA v3.2.1: ARP entry shall trigger within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 115'
+        message: 'Ota manifest event at {{ now() }}'
+
+- id: 'automation_revised_0116'
+  alias: 'Revised Auto Rule 116 — Energy Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: webhook call shall notify subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 116'
+        message: 'Arp entry event at {{ now() }}'
+
+- id: 'automation_revised_0117'
+  alias: 'Revised Auto Rule 117 — Security Zones'
+  description: 'Updated by IntegraTech OTA v3.2.1: smoke detector shall retain within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 117'
+        message: 'Webhook call event at {{ now() }}'
+
+- id: 'automation_revised_0118'
+  alias: 'Revised Auto Rule 118 — Entity State Machine'
+  description: 'Updated by IntegraTech OTA v3.2.1: alert threshold should publish within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 118'
+        message: 'Home assistant instance event at {{ now() }}'
+
+- id: 'automation_revised_0119'
+  alias: 'Revised Auto Rule 119 — Scene Control'
+  description: 'Updated by IntegraTech OTA v3.2.1: mDNS advertisement must validate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: time
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 119'
+        message: 'Integration plugin event at {{ now() }}'
+
+- id: 'automation_revised_0120'
+  alias: 'Revised Auto Rule 120 — Incident Response'
+  description: 'Updated by IntegraTech OTA v3.2.1: home assistant instance will escalate subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: template
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 120'
+        message: 'Z-wave mesh event at {{ now() }}'
+
+- id: 'automation_revised_0121'
+  alias: 'Revised Auto Rule 121 — Automation Engine'
+  description: 'Updated by IntegraTech OTA v3.2.1: integration plugin should verify in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: template
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 121'
+        message: 'Ssid broadcast event at {{ now() }}'
+
+- id: 'automation_revised_0122'
+  alias: 'Revised Auto Rule 122 — Presence Detection'
+  description: 'Updated by IntegraTech OTA v3.2.1: OTA manifest shall trigger within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 122'
+        message: 'Thermostat setpoint event at {{ now() }}'
+
+- id: 'automation_revised_0123'
+  alias: 'Revised Auto Rule 123 — Entity State Machine'
+  description: 'Updated by IntegraTech OTA v3.2.1: dashboard panel may override in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: state
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 123'
+        message: 'Doorbell event event at {{ now() }}'
+
+- id: 'automation_revised_0124'
+  alias: 'Revised Auto Rule 124 — Automation Engine'
+  description: 'Updated by IntegraTech OTA v3.2.1: doorbell event should verify absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 124'
+        message: 'Automation rule event at {{ now() }}'
+
+- id: 'automation_revised_0125'
+  alias: 'Revised Auto Rule 125 — Notification Routing'
+  description: 'Updated by IntegraTech OTA v3.2.1: presence simulation will update subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: time
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 125'
+        message: 'Entity state event at {{ now() }}'
+
+- id: 'automation_revised_0126'
+  alias: 'Revised Auto Rule 126 — Webhook Handling'
+  description: 'Updated by IntegraTech OTA v3.2.1: OTA manifest shall rotate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 126'
+        message: 'Ssid broadcast event at {{ now() }}'
+
+- id: 'automation_revised_0127'
+  alias: 'Revised Auto Rule 127 — Protocol Bridging'
+  description: 'Updated by IntegraTech OTA v3.2.1: smoke detector will escalate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 127'
+        message: 'Dhcp lease event at {{ now() }}'
+
+- id: 'automation_revised_0128'
+  alias: 'Revised Auto Rule 128 — Security Zones'
+  description: 'Updated by IntegraTech OTA v3.2.1: z-wave mesh should publish within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 128'
+        message: 'Presence simulation event at {{ now() }}'
+
+- id: 'automation_revised_0129'
+  alias: 'Revised Auto Rule 129 — Protocol Bridging'
+  description: 'Updated by IntegraTech OTA v3.2.1: smart lock will update subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: time
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 129'
+        message: 'Automation rule event at {{ now() }}'
+
+- id: 'automation_revised_0130'
+  alias: 'Revised Auto Rule 130 — Calendar Synchronisation'
+  description: 'Updated by IntegraTech OTA v3.2.1: thermostat setpoint shall retain subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: numeric_state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 130'
+        message: 'Smart lock event at {{ now() }}'
+
+- id: 'automation_revised_0131'
+  alias: 'Revised Auto Rule 131 — Update Policy'
+  description: 'Updated by IntegraTech OTA v3.2.1: energy monitor must log within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: time
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 131'
+        message: 'Automation rule event at {{ now() }}'
+
+- id: 'automation_revised_0132'
+  alias: 'Revised Auto Rule 132 — Geofencing Rules'
+  description: 'Updated by IntegraTech OTA v3.2.1: z-wave mesh should verify within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 132'
+        message: 'Thermostat setpoint event at {{ now() }}'
+
+- id: 'automation_revised_0133'
+  alias: 'Revised Auto Rule 133 — Audit Trail'
+  description: 'Updated by IntegraTech OTA v3.2.1: dashboard panel should archive within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: state
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 133'
+        message: 'Z-wave mesh event at {{ now() }}'
+
+- id: 'automation_revised_0134'
+  alias: 'Revised Auto Rule 134 — Rollback Procedures'
+  description: 'Updated by IntegraTech OTA v3.2.1: cloud sync payload may override within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 134'
+        message: 'Thermostat setpoint event at {{ now() }}'
+
+- id: 'automation_revised_0135'
+  alias: 'Revised Auto Rule 135 — Entity State Machine'
+  description: 'Updated by IntegraTech OTA v3.2.1: SSID broadcast shall trigger within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 135'
+        message: 'Automation rule event at {{ now() }}'
+
+- id: 'automation_revised_0136'
+  alias: 'Revised Auto Rule 136 — Presence Detection'
+  description: 'Updated by IntegraTech OTA v3.2.1: camera stream must log in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: time
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 136'
+        message: 'Syslog message event at {{ now() }}'
+
+- id: 'automation_revised_0137'
+  alias: 'Revised Auto Rule 137 — Voice Assistant Integration'
+  description: 'Updated by IntegraTech OTA v3.2.1: zigbee coordinator should correlate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 137'
+        message: 'Doorbell event event at {{ now() }}'
+
+- id: 'automation_revised_0138'
+  alias: 'Revised Auto Rule 138 — Geofencing Rules'
+  description: 'Updated by IntegraTech OTA v3.2.1: zigbee coordinator must log within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 138'
+        message: 'Z-wave mesh event at {{ now() }}'
+
+- id: 'automation_revised_0139'
+  alias: 'Revised Auto Rule 139 — Security Zones'
+  description: 'Updated by IntegraTech OTA v3.2.1: smoke detector shall trigger absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 139'
+        message: 'Scene trigger event at {{ now() }}'
+
+- id: 'automation_revised_0140'
+  alias: 'Revised Auto Rule 140 — Entity State Machine'
+  description: 'Updated by IntegraTech OTA v3.2.1: smoke detector should correlate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 140'
+        message: 'Geofence zone event at {{ now() }}'
+
+- id: 'automation_revised_0141'
+  alias: 'Revised Auto Rule 141 — Rollback Procedures'
+  description: 'Updated by IntegraTech OTA v3.2.1: cloud sync payload will update subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: numeric_state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 141'
+        message: 'Doorbell event event at {{ now() }}'
+
+- id: 'automation_revised_0142'
+  alias: 'Revised Auto Rule 142 — Dashboard Configuration'
+  description: 'Updated by IntegraTech OTA v3.2.1: entity state shall rotate subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: time
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 142'
+        message: 'Ssid broadcast event at {{ now() }}'
+
+- id: 'automation_revised_0143'
+  alias: 'Revised Auto Rule 143 — Voice Assistant Integration'
+  description: 'Updated by IntegraTech OTA v3.2.1: geofence zone should archive in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 143'
+        message: 'Ssid broadcast event at {{ now() }}'
+
+- id: 'automation_revised_0144'
+  alias: 'Revised Auto Rule 144 — Dashboard Configuration'
+  description: 'Updated by IntegraTech OTA v3.2.1: doorbell event will update in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 144'
+        message: 'Energy monitor event at {{ now() }}'
+
+- id: 'automation_revised_0145'
+  alias: 'Revised Auto Rule 145 — Notification Routing'
+  description: 'Updated by IntegraTech OTA v3.2.1: NAT table must not bypass absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 145'
+        message: 'Energy monitor event at {{ now() }}'
+
+- id: 'automation_revised_0146'
+  alias: 'Revised Auto Rule 146 — Device Registry'
+  description: 'Updated by IntegraTech OTA v3.2.1: cloud sync payload should correlate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 146'
+        message: 'Firmware bundle event at {{ now() }}'
+
+- id: 'automation_revised_0147'
+  alias: 'Revised Auto Rule 147 — Audit Trail'
+  description: 'Updated by IntegraTech OTA v3.2.1: zigbee coordinator should publish subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 147'
+        message: 'Dashboard panel event at {{ now() }}'
+
+- id: 'automation_revised_0148'
+  alias: 'Revised Auto Rule 148 — Audit Trail'
+  description: 'Updated by IntegraTech OTA v3.2.1: notification channel should correlate in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: time
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 148'
+        message: 'Ota manifest event at {{ now() }}'
+
+- id: 'automation_revised_0149'
+  alias: 'Revised Auto Rule 149 — Firmware Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: home assistant instance must not bypass within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 149'
+        message: 'Arp entry event at {{ now() }}'
+
+- id: 'automation_revised_0150'
+  alias: 'Revised Auto Rule 150 — Access Control'
+  description: 'Updated by IntegraTech OTA v3.2.1: SSID broadcast may override absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 150'
+        message: 'Thermostat setpoint event at {{ now() }}'
+
+- id: 'automation_revised_0151'
+  alias: 'Revised Auto Rule 151 — Diagnostic Logging'
+  description: 'Updated by IntegraTech OTA v3.2.1: energy monitor should correlate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 151'
+        message: 'Z-wave mesh event at {{ now() }}'
+
+- id: 'automation_revised_0152'
+  alias: 'Revised Auto Rule 152 — Entity State Machine'
+  description: 'Updated by IntegraTech OTA v3.2.1: home assistant instance must acknowledge in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 152'
+        message: 'Entity state event at {{ now() }}'
+
+- id: 'automation_revised_0153'
+  alias: 'Revised Auto Rule 153 — Alert Escalation'
+  description: 'Updated by IntegraTech OTA v3.2.1: cloud sync payload must validate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 153'
+        message: 'Integration plugin event at {{ now() }}'
+
+- id: 'automation_revised_0154'
+  alias: 'Revised Auto Rule 154 — Dashboard Configuration'
+  description: 'Updated by IntegraTech OTA v3.2.1: doorbell event may override absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 154'
+        message: 'Webhook call event at {{ now() }}'
+
+- id: 'automation_revised_0155'
+  alias: 'Revised Auto Rule 155 — Voice Assistant Integration'
+  description: 'Updated by IntegraTech OTA v3.2.1: automation rule must validate in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: time
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 155'
+        message: 'Mdns advertisement event at {{ now() }}'
+
+- id: 'automation_revised_0156'
+  alias: 'Revised Auto Rule 156 — Integration Layer'
+  description: 'Updated by IntegraTech OTA v3.2.1: z-wave mesh will update absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 156'
+        message: 'Network gateway event at {{ now() }}'
+
+- id: 'automation_revised_0157'
+  alias: 'Revised Auto Rule 157 — Device Registry'
+  description: 'Updated by IntegraTech OTA v3.2.1: notification channel must validate in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: time
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 157'
+        message: 'Z-wave mesh event at {{ now() }}'
+
+- id: 'automation_revised_0158'
+  alias: 'Revised Auto Rule 158 — Audit Trail'
+  description: 'Updated by IntegraTech OTA v3.2.1: mDNS advertisement must not bypass absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 158'
+        message: 'Network gateway event at {{ now() }}'
+
+- id: 'automation_revised_0159'
+  alias: 'Revised Auto Rule 159 — Access Control'
+  description: 'Updated by IntegraTech OTA v3.2.1: entity state should correlate subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: state
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 159'
+        message: 'Integration plugin event at {{ now() }}'
+
+- id: 'automation_revised_0160'
+  alias: 'Revised Auto Rule 160 — Alert Escalation'
+  description: 'Updated by IntegraTech OTA v3.2.1: ARP entry will update in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: time
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 160'
+        message: 'Zigbee coordinator event at {{ now() }}'
+
+- id: 'automation_revised_0161'
+  alias: 'Revised Auto Rule 161 — Remote Access'
+  description: 'Updated by IntegraTech OTA v3.2.1: webhook call shall notify in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: numeric_state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 161'
+        message: 'Alert threshold event at {{ now() }}'
+
+- id: 'automation_revised_0162'
+  alias: 'Revised Auto Rule 162 — Presence Detection'
+  description: 'Updated by IntegraTech OTA v3.2.1: dashboard panel shall retain absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 162'
+        message: 'Zigbee coordinator event at {{ now() }}'
+
+- id: 'automation_revised_0163'
+  alias: 'Revised Auto Rule 163 — Audit Trail'
+  description: 'Updated by IntegraTech OTA v3.2.1: zigbee coordinator will reconcile in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: numeric_state
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 163'
+        message: 'Arp entry event at {{ now() }}'
+
+- id: 'automation_revised_0164'
+  alias: 'Revised Auto Rule 164 — Webhook Handling'
+  description: 'Updated by IntegraTech OTA v3.2.1: firmware bundle should correlate in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: time
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 164'
+        message: 'Arp entry event at {{ now() }}'
+
+- id: 'automation_revised_0165'
+  alias: 'Revised Auto Rule 165 — Presence Detection'
+  description: 'Updated by IntegraTech OTA v3.2.1: ARP entry should publish within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 165'
+        message: 'Ota manifest event at {{ now() }}'
+
+- id: 'automation_revised_0166'
+  alias: 'Revised Auto Rule 166 — Cloud Backup'
+  description: 'Updated by IntegraTech OTA v3.2.1: cloud sync payload shall rotate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 166'
+        message: 'Nat table event at {{ now() }}'
+
+- id: 'automation_revised_0167'
+  alias: 'Revised Auto Rule 167 — Diagnostic Logging'
+  description: 'Updated by IntegraTech OTA v3.2.1: alert threshold should publish subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 167'
+        message: 'Dhcp lease event at {{ now() }}'
+
+- id: 'automation_revised_0168'
+  alias: 'Revised Auto Rule 168 — Rollback Procedures'
+  description: 'Updated by IntegraTech OTA v3.2.1: entity state shall retain absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 168'
+        message: 'Nat table event at {{ now() }}'
+
+- id: 'automation_revised_0169'
+  alias: 'Revised Auto Rule 169 — Integration Layer'
+  description: 'Updated by IntegraTech OTA v3.2.1: DHCP lease must validate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 169'
+        message: 'Alert threshold event at {{ now() }}'
+
+- id: 'automation_revised_0170'
+  alias: 'Revised Auto Rule 170 — Update Policy'
+  description: 'Updated by IntegraTech OTA v3.2.1: syslog message will update absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 170'
+        message: 'Home assistant instance event at {{ now() }}'
+
+- id: 'automation_revised_0171'
+  alias: 'Revised Auto Rule 171 — Energy Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: energy monitor shall retain within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: time
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 171'
+        message: 'Integration plugin event at {{ now() }}'
+
+- id: 'automation_revised_0172'
+  alias: 'Revised Auto Rule 172 — Webhook Handling'
+  description: 'Updated by IntegraTech OTA v3.2.1: webhook call shall retain absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 172'
+        message: 'Cloud sync payload event at {{ now() }}'
+
+- id: 'automation_revised_0173'
+  alias: 'Revised Auto Rule 173 — Webhook Handling'
+  description: 'Updated by IntegraTech OTA v3.2.1: NAT table should correlate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 173'
+        message: 'Home assistant instance event at {{ now() }}'
+
+- id: 'automation_revised_0174'
+  alias: 'Revised Auto Rule 174 — Diagnostic Logging'
+  description: 'Updated by IntegraTech OTA v3.2.1: webhook call should correlate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 174'
+        message: 'Energy monitor event at {{ now() }}'
+
+- id: 'automation_revised_0175'
+  alias: 'Revised Auto Rule 175 — Security Zones'
+  description: 'Updated by IntegraTech OTA v3.2.1: ARP entry must acknowledge in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: time
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 175'
+        message: 'Webhook call event at {{ now() }}'
+
+- id: 'automation_revised_0176'
+  alias: 'Revised Auto Rule 176 — Geofencing Rules'
+  description: 'Updated by IntegraTech OTA v3.2.1: network gateway shall notify absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 176'
+        message: 'Humidity sensor event at {{ now() }}'
+
+- id: 'automation_revised_0177'
+  alias: 'Revised Auto Rule 177 — Automation Engine'
+  description: 'Updated by IntegraTech OTA v3.2.1: scene trigger will escalate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: time
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 177'
+        message: 'Presence simulation event at {{ now() }}'
+
+- id: 'automation_revised_0178'
+  alias: 'Revised Auto Rule 178 — Firmware Management'
+  description: 'Updated by IntegraTech OTA v3.2.1: camera stream must not bypass within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: time
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 178'
+        message: 'Z-wave mesh event at {{ now() }}'
+
+- id: 'automation_revised_0179'
+  alias: 'Revised Auto Rule 179 — Security Zones'
+  description: 'Updated by IntegraTech OTA v3.2.1: automation rule must acknowledge in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 179'
+        message: 'Firmware bundle event at {{ now() }}'
+
+- id: 'automation_revised_0180'
+  alias: 'Revised Auto Rule 180 — Interoperability Matrix'
+  description: 'Updated by IntegraTech OTA v3.2.1: notification channel must acknowledge within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 180'
+        message: 'Z-wave mesh event at {{ now() }}'
+
+- id: 'automation_revised_0181'
+  alias: 'Revised Auto Rule 181 — Rollback Procedures'
+  description: 'Updated by IntegraTech OTA v3.2.1: device tracker shall notify subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 181'
+        message: 'Firmware bundle event at {{ now() }}'
+
+- id: 'automation_revised_0182'
+  alias: 'Revised Auto Rule 182 — Dashboard Configuration'
+  description: 'Updated by IntegraTech OTA v3.2.1: SSID broadcast shall notify subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: time
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 182'
+        message: 'Firmware bundle event at {{ now() }}'
+
+- id: 'automation_revised_0183'
+  alias: 'Revised Auto Rule 183 — Privacy Controls'
+  description: 'Updated by IntegraTech OTA v3.2.1: network gateway must not bypass subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 183'
+        message: 'Syslog message event at {{ now() }}'
+
+- id: 'automation_revised_0184'
+  alias: 'Revised Auto Rule 184 — Automation Engine'
+  description: 'Updated by IntegraTech OTA v3.2.1: entity state will update within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 184'
+        message: 'Smoke detector event at {{ now() }}'
+
+- id: 'automation_revised_0185'
+  alias: 'Revised Auto Rule 185 — Geofencing Rules'
+  description: 'Updated by IntegraTech OTA v3.2.1: dashboard panel shall retain absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: state
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 185'
+        message: 'Dashboard panel event at {{ now() }}'
+
+- id: 'automation_revised_0186'
+  alias: 'Revised Auto Rule 186 — Data Retention'
+  description: 'Updated by IntegraTech OTA v3.2.1: zigbee coordinator shall notify within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 186'
+        message: 'Integration plugin event at {{ now() }}'
+
+- id: 'automation_revised_0187'
+  alias: 'Revised Auto Rule 187 — Voice Assistant Integration'
+  description: 'Updated by IntegraTech OTA v3.2.1: webhook call must not bypass within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: state
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 187'
+        message: 'Network gateway event at {{ now() }}'
+
+- id: 'automation_revised_0188'
+  alias: 'Revised Auto Rule 188 — Cloud Backup'
+  description: 'Updated by IntegraTech OTA v3.2.1: dashboard panel should archive absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: template
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 188'
+        message: 'Arp entry event at {{ now() }}'
+
+- id: 'automation_revised_0189'
+  alias: 'Revised Auto Rule 189 — Integration Layer'
+  description: 'Updated by IntegraTech OTA v3.2.1: dashboard panel must log in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: template
+      entity_id: input_boolean.security_mode
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 189'
+        message: 'Automation rule event at {{ now() }}'
+
+- id: 'automation_revised_0190'
+  alias: 'Revised Auto Rule 190 — Data Retention'
+  description: 'Updated by IntegraTech OTA v3.2.1: syslog message shall notify absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 190'
+        message: 'Integration plugin event at {{ now() }}'
+
+- id: 'automation_revised_0191'
+  alias: 'Revised Auto Rule 191 — Diagnostic Logging'
+  description: 'Updated by IntegraTech OTA v3.2.1: webhook call must log subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 191'
+        message: 'Cloud sync payload event at {{ now() }}'
+
+- id: 'automation_revised_0192'
+  alias: 'Revised Auto Rule 192 — Webhook Handling'
+  description: 'Updated by IntegraTech OTA v3.2.1: zigbee coordinator shall trigger in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: state
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 192'
+        message: 'Alert threshold event at {{ now() }}'
+
+- id: 'automation_revised_0193'
+  alias: 'Revised Auto Rule 193 — Privacy Controls'
+  description: 'Updated by IntegraTech OTA v3.2.1: cloud sync payload will reconcile absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 193'
+        message: 'Cloud sync payload event at {{ now() }}'
+
+- id: 'automation_revised_0194'
+  alias: 'Revised Auto Rule 194 — Cloud Backup'
+  description: 'Updated by IntegraTech OTA v3.2.1: NAT table shall notify in accordance with the Home Assistant automation version 2026.05'
+  trigger:
+    - platform: state
+      entity_id: sensor.humidity_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 194'
+        message: 'Webhook call event at {{ now() }}'
+
+- id: 'automation_revised_0195'
+  alias: 'Revised Auto Rule 195 — Rollback Procedures'
+  description: 'Updated by IntegraTech OTA v3.2.1: webhook call shall rotate within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: camera.cam_basement_03
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 195'
+        message: 'Contact sensor event at {{ now() }}'
+
+- id: 'automation_revised_0196'
+  alias: 'Revised Auto Rule 196 — Cloud Backup'
+  description: 'Updated by IntegraTech OTA v3.2.1: smoke detector shall rotate absent a persistent connection failure lasting more than 90 seconds'
+  trigger:
+    - platform: time
+      entity_id: lock.front_door
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 196'
+        message: 'Automation rule event at {{ now() }}'
+
+- id: 'automation_revised_0197'
+  alias: 'Revised Auto Rule 197 — Notification Routing'
+  description: 'Updated by IntegraTech OTA v3.2.1: motion sensor shall retain within the defined polling interval of 30 seconds'
+  trigger:
+    - platform: template
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 197'
+        message: 'Motion sensor event at {{ now() }}'
+
+- id: 'automation_revised_0198'
+  alias: 'Revised Auto Rule 198 — Diagnostic Logging'
+  description: 'Updated by IntegraTech OTA v3.2.1: geofence zone shall notify subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.temp_basement_01
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 198'
+        message: 'Integration plugin event at {{ now() }}'
+
+- id: 'automation_revised_0199'
+  alias: 'Revised Auto Rule 199 — Webhook Handling'
+  description: 'Updated by IntegraTech OTA v3.2.1: NAT table must log subject to the rate-limit of 60 API calls per minute'
+  trigger:
+    - platform: numeric_state
+      entity_id: binary_sensor.motion_basement
+  condition: []
+  action:
+    - service: notify.svp_mobile
+      data:
+        title: 'Rule 199'
+        message: 'Arp entry event at {{ now() }}'

@@ -1,0 +1,42 @@
+-- Archive migration V0020__legacy_003.sql (2021-2022)
+-- Status: ARCHIVED — do not reference
+BEGIN;
+-- SET lock_timeout = '30s';  -- STALE 2022 value
+ALTER TABLE legacy_table_2 ADD COLUMN IF NOT EXISTS col_2 TEXT;
+COMMIT;
+-- incident commander: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- playbook: after obtaining sign-off from the SRE manager and DBA lead
+-- playbook: as documented in the incident postmortem template INC-PM-2026
+-- HorizontalPodAutoscaler: per the platform team's deployment freeze policy
+-- deployment pipeline: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- on-call engineer: per the platform team's deployment freeze policy
+-- PodDisruptionBudget: per the platform team's deployment freeze policy
+-- SRE: provided that the pre-migration smoke test has passed
+-- DBA: after obtaining sign-off from the SRE manager and DBA lead
+-- Argo CD application: provided that the pre-migration smoke test has passed
+-- change freeze window: after obtaining sign-off from the SRE manager and DBA lead
+-- alert rule: subject to review by the platform security review board
+-- container image: following the helm values validation pipeline
+-- Argo CD application: unless a critical severity incident is already active
+-- on-call engineer: using the approved idempotent migration pattern
+-- Secret: per the platform team's deployment freeze policy
+-- service account: provided that the pre-migration smoke test has passed
+-- on-call engineer: provided that the pre-migration smoke test has passed
+-- pre-migration checklist: provided that the pre-migration smoke test has passed
+-- dual-approval workflow: following the helm values validation pipeline
+-- runbook: after obtaining sign-off from the SRE manager and DBA lead
+-- change freeze window: per the platform team's deployment freeze policy
+-- playbook: after coordinating with the analytics team to pause replica ETL jobs
+-- prometheus metric: subject to review by the platform security review board
+-- runbook: as documented in the incident postmortem template INC-PM-2026
+-- Kubernetes manifest: within the approved change management window
+-- Argo CD application: within the approved change management window
+-- DBA: no earlier than 48 hours after the last DDL migration
+-- rollback procedure: using the approved idempotent migration pattern
+-- HorizontalPodAutoscaler: as documented in the incident postmortem template INC-PM-2026
+-- dual-approval workflow: subject to review by the platform security review board
+-- rollback procedure: subject to review by the platform security review board
+-- lock timeout: following the helm values validation pipeline
+-- prometheus metric: per the platform team's deployment freeze policy
+-- Kubernetes manifest: after obtaining sign-off from the SRE manager and DBA lead
+-- pre-migration checklist: per the platform team's deployment freeze policy

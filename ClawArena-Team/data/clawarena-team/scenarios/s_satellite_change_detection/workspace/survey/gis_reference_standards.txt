@@ -1,0 +1,624 @@
+GIS Change Detection Reference Standards — Internal Working Document
+Prepared by: GIS Analytics Division | Version: 3.2 | Date: 2025-11-01
+
+Section 1: Remote Sensing Change Detection Methodology
+
+Change detection in agricultural parcels relies on multi-temporal satellite
+imagery acquired under comparable atmospheric and phenological conditions.
+The following methodological framework applies to all boundary dispute analyses
+conducted by this division.
+
+1.1 Image Pre-processing
+All imagery must undergo atmospheric correction (FLAASH or QUAC algorithm)
+prior to change detection analysis. Geometric registration must achieve
+sub-pixel accuracy (<= 0.5 pixel RMS error) relative to a reference dataset.
+Cloud masking: scenes with >5% cloud cover over the target parcel are rejected.
+
+1.2 Change Detection Algorithms
+Primary: Normalized Difference Vegetation Index (NDVI) differencing
+  NDVI = (NIR - Red) / (NIR + Red)
+  Delta_NDVI threshold for agricultural land conversion: 0.15
+Secondary: Object-Based Image Analysis (OBIA) for boundary delineation
+  Segmentation scale: 50-80 (Multiresolution Segmentation)
+  Shape weight: 0.3 | Compactness: 0.5
+
+1.3 Area Calculation
+Area is calculated in the projected coordinate system (CGCS2000 / Gauss-Kruger)
+using pixel counting for raster analysis and polygon area for vector output.
+Conversion factor: 1 pixel (3m GSD) = 0.0009 hectares
+For area-7 ROI (240 x 220 pixels = 52,800 pixels): base area ~47.5 ha
+Full parcel area from cadastral: 142.30 ha
+
+Section 2: Accuracy Assessment Framework
+
+2.1 Reference Data Requirements
+Ground truth must include field-verified GNSS points with RTK accuracy
+(horizontal: <=0.02m, vertical: <=0.05m). Minimum 20 boundary points
+required for parcels between 100-200 hectares.
+
+2.2 Tolerance Standards (Provincial Standard DB37/T 4122-2021)
+Parcel size 0-50 ha:   tolerance 0.1 ha
+Parcel size 50-200 ha: tolerance 0.5 ha  <-- applies to area-7
+Parcel size >200 ha:   tolerance 1.0 ha
+
+2.3 Cross-Validation Protocol
+When satellite-derived area delta and GNSS-derived area delta differ by
+less than the applicable tolerance, both measurements are considered
+consistent. For area-7: tolerance = 0.5 ha.
+Satellite delta: +18.4 ha | Survey delta: +18.1 ha | Difference: 0.3 ha
+0.3 ha < 0.5 ha tolerance => CONSISTENT => proceed to boundary decision.
+
+Section 3: Boundary Decision Framework
+
+3.1 Decision Outcomes
+accept_boundary_v2: Satellite and GNSS data consistent; delta >= 5 ha;
+  required documentation complete; approve revised boundary.
+reject: Inconsistency > tolerance; or documentation incomplete.
+defer: Insufficient data; request additional survey.
+
+3.2 Documentation Checklist
+[ ] Dual-date satellite imagery (pre/post)
+[ ] ROI metadata (scene IDs, acquisition dates, cloud cover)
+[ ] Third-party GNSS survey within 90 days of T2
+[ ] Legal boundary definition document (cadastral ref)
+[ ] Cross-reference validation (satellite vs GNSS delta)
+[ ] Boundary decision record with compliance signature
+
+Section 4: Case Studies (Historical)
+
+4.1 area-3 (2023): Delta +22.1 ha accepted after dual verification.
+4.2 area-5 (2024): Delta +3.1 ha — below 5 ha threshold; rejected.
+4.3 area-6 (2024): Survey inconsistency 1.2 ha > tolerance; deferred.
+
+Section 5: Data Management
+
+5.1 File Naming Convention
+  Imagery: <scene_id>_<date>_<area_id>.<ext>
+  Survey:  <type>_<date>_<area_id>.<ext>
+  Output:  <analysis_type>_<date>_<area_id>.<ext>
+
+5.2 Retention Policy
+All primary data (imagery, survey files) retained 10 years.
+Analysis outputs retained 5 years.
+Decision records retained permanently.
+
+GIS Change Detection Reference Standards — Internal Working Document
+Prepared by: GIS Analytics Division | Version: 3.2 | Date: 2025-11-01
+
+Section 1: Remote Sensing Change Detection Methodology
+
+Change detection in agricultural parcels relies on multi-temporal satellite
+imagery acquired under comparable atmospheric and phenological conditions.
+The following methodological framework applies to all boundary dispute analyses
+conducted by this division.
+
+1.1 Image Pre-processing
+All imagery must undergo atmospheric correction (FLAASH or QUAC algorithm)
+prior to change detection analysis. Geometric registration must achieve
+sub-pixel accuracy (<= 0.5 pixel RMS error) relative to a reference dataset.
+Cloud masking: scenes with >5% cloud cover over the target parcel are rejected.
+
+1.2 Change Detection Algorithms
+Primary: Normalized Difference Vegetation Index (NDVI) differencing
+  NDVI = (NIR - Red) / (NIR + Red)
+  Delta_NDVI threshold for agricultural land conversion: 0.15
+Secondary: Object-Based Image Analysis (OBIA) for boundary delineation
+  Segmentation scale: 50-80 (Multiresolution Segmentation)
+  Shape weight: 0.3 | Compactness: 0.5
+
+1.3 Area Calculation
+Area is calculated in the projected coordinate system (CGCS2000 / Gauss-Kruger)
+using pixel counting for raster analysis and polygon area for vector output.
+Conversion factor: 1 pixel (3m GSD) = 0.0009 hectares
+For area-7 ROI (240 x 220 pixels = 52,800 pixels): base area ~47.5 ha
+Full parcel area from cadastral: 142.30 ha
+
+Section 2: Accuracy Assessment Framework
+
+2.1 Reference Data Requirements
+Ground truth must include field-verified GNSS points with RTK accuracy
+(horizontal: <=0.02m, vertical: <=0.05m). Minimum 20 boundary points
+required for parcels between 100-200 hectares.
+
+2.2 Tolerance Standards (Provincial Standard DB37/T 4122-2021)
+Parcel size 0-50 ha:   tolerance 0.1 ha
+Parcel size 50-200 ha: tolerance 0.5 ha  <-- applies to area-7
+Parcel size >200 ha:   tolerance 1.0 ha
+
+2.3 Cross-Validation Protocol
+When satellite-derived area delta and GNSS-derived area delta differ by
+less than the applicable tolerance, both measurements are considered
+consistent. For area-7: tolerance = 0.5 ha.
+Satellite delta: +18.4 ha | Survey delta: +18.1 ha | Difference: 0.3 ha
+0.3 ha < 0.5 ha tolerance => CONSISTENT => proceed to boundary decision.
+
+Section 3: Boundary Decision Framework
+
+3.1 Decision Outcomes
+accept_boundary_v2: Satellite and GNSS data consistent; delta >= 5 ha;
+  required documentation complete; approve revised boundary.
+reject: Inconsistency > tolerance; or documentation incomplete.
+defer: Insufficient data; request additional survey.
+
+3.2 Documentation Checklist
+[ ] Dual-date satellite imagery (pre/post)
+[ ] ROI metadata (scene IDs, acquisition dates, cloud cover)
+[ ] Third-party GNSS survey within 90 days of T2
+[ ] Legal boundary definition document (cadastral ref)
+[ ] Cross-reference validation (satellite vs GNSS delta)
+[ ] Boundary decision record with compliance signature
+
+Section 4: Case Studies (Historical)
+
+4.1 area-3 (2023): Delta +22.1 ha accepted after dual verification.
+4.2 area-5 (2024): Delta +3.1 ha — below 5 ha threshold; rejected.
+4.3 area-6 (2024): Survey inconsistency 1.2 ha > tolerance; deferred.
+
+Section 5: Data Management
+
+5.1 File Naming Convention
+  Imagery: <scene_id>_<date>_<area_id>.<ext>
+  Survey:  <type>_<date>_<area_id>.<ext>
+  Output:  <analysis_type>_<date>_<area_id>.<ext>
+
+5.2 Retention Policy
+All primary data (imagery, survey files) retained 10 years.
+Analysis outputs retained 5 years.
+Decision records retained permanently.
+
+GIS Change Detection Reference Standards — Internal Working Document
+Prepared by: GIS Analytics Division | Version: 3.2 | Date: 2025-11-01
+
+Section 1: Remote Sensing Change Detection Methodology
+
+Change detection in agricultural parcels relies on multi-temporal satellite
+imagery acquired under comparable atmospheric and phenological conditions.
+The following methodological framework applies to all boundary dispute analyses
+conducted by this division.
+
+1.1 Image Pre-processing
+All imagery must undergo atmospheric correction (FLAASH or QUAC algorithm)
+prior to change detection analysis. Geometric registration must achieve
+sub-pixel accuracy (<= 0.5 pixel RMS error) relative to a reference dataset.
+Cloud masking: scenes with >5% cloud cover over the target parcel are rejected.
+
+1.2 Change Detection Algorithms
+Primary: Normalized Difference Vegetation Index (NDVI) differencing
+  NDVI = (NIR - Red) / (NIR + Red)
+  Delta_NDVI threshold for agricultural land conversion: 0.15
+Secondary: Object-Based Image Analysis (OBIA) for boundary delineation
+  Segmentation scale: 50-80 (Multiresolution Segmentation)
+  Shape weight: 0.3 | Compactness: 0.5
+
+1.3 Area Calculation
+Area is calculated in the projected coordinate system (CGCS2000 / Gauss-Kruger)
+using pixel counting for raster analysis and polygon area for vector output.
+Conversion factor: 1 pixel (3m GSD) = 0.0009 hectares
+For area-7 ROI (240 x 220 pixels = 52,800 pixels): base area ~47.5 ha
+Full parcel area from cadastral: 142.30 ha
+
+Section 2: Accuracy Assessment Framework
+
+2.1 Reference Data Requirements
+Ground truth must include field-verified GNSS points with RTK accuracy
+(horizontal: <=0.02m, vertical: <=0.05m). Minimum 20 boundary points
+required for parcels between 100-200 hectares.
+
+2.2 Tolerance Standards (Provincial Standard DB37/T 4122-2021)
+Parcel size 0-50 ha:   tolerance 0.1 ha
+Parcel size 50-200 ha: tolerance 0.5 ha  <-- applies to area-7
+Parcel size >200 ha:   tolerance 1.0 ha
+
+2.3 Cross-Validation Protocol
+When satellite-derived area delta and GNSS-derived area delta differ by
+less than the applicable tolerance, both measurements are considered
+consistent. For area-7: tolerance = 0.5 ha.
+Satellite delta: +18.4 ha | Survey delta: +18.1 ha | Difference: 0.3 ha
+0.3 ha < 0.5 ha tolerance => CONSISTENT => proceed to boundary decision.
+
+Section 3: Boundary Decision Framework
+
+3.1 Decision Outcomes
+accept_boundary_v2: Satellite and GNSS data consistent; delta >= 5 ha;
+  required documentation complete; approve revised boundary.
+reject: Inconsistency > tolerance; or documentation incomplete.
+defer: Insufficient data; request additional survey.
+
+3.2 Documentation Checklist
+[ ] Dual-date satellite imagery (pre/post)
+[ ] ROI metadata (scene IDs, acquisition dates, cloud cover)
+[ ] Third-party GNSS survey within 90 days of T2
+[ ] Legal boundary definition document (cadastral ref)
+[ ] Cross-reference validation (satellite vs GNSS delta)
+[ ] Boundary decision record with compliance signature
+
+Section 4: Case Studies (Historical)
+
+4.1 area-3 (2023): Delta +22.1 ha accepted after dual verification.
+4.2 area-5 (2024): Delta +3.1 ha — below 5 ha threshold; rejected.
+4.3 area-6 (2024): Survey inconsistency 1.2 ha > tolerance; deferred.
+
+Section 5: Data Management
+
+5.1 File Naming Convention
+  Imagery: <scene_id>_<date>_<area_id>.<ext>
+  Survey:  <type>_<date>_<area_id>.<ext>
+  Output:  <analysis_type>_<date>_<area_id>.<ext>
+
+5.2 Retention Policy
+All primary data (imagery, survey files) retained 10 years.
+Analysis outputs retained 5 years.
+Decision records retained permanently.
+
+GIS Change Detection Reference Standards — Internal Working Document
+Prepared by: GIS Analytics Division | Version: 3.2 | Date: 2025-11-01
+
+Section 1: Remote Sensing Change Detection Methodology
+
+Change detection in agricultural parcels relies on multi-temporal satellite
+imagery acquired under comparable atmospheric and phenological conditions.
+The following methodological framework applies to all boundary dispute analyses
+conducted by this division.
+
+1.1 Image Pre-processing
+All imagery must undergo atmospheric correction (FLAASH or QUAC algorithm)
+prior to change detection analysis. Geometric registration must achieve
+sub-pixel accuracy (<= 0.5 pixel RMS error) relative to a reference dataset.
+Cloud masking: scenes with >5% cloud cover over the target parcel are rejected.
+
+1.2 Change Detection Algorithms
+Primary: Normalized Difference Vegetation Index (NDVI) differencing
+  NDVI = (NIR - Red) / (NIR + Red)
+  Delta_NDVI threshold for agricultural land conversion: 0.15
+Secondary: Object-Based Image Analysis (OBIA) for boundary delineation
+  Segmentation scale: 50-80 (Multiresolution Segmentation)
+  Shape weight: 0.3 | Compactness: 0.5
+
+1.3 Area Calculation
+Area is calculated in the projected coordinate system (CGCS2000 / Gauss-Kruger)
+using pixel counting for raster analysis and polygon area for vector output.
+Conversion factor: 1 pixel (3m GSD) = 0.0009 hectares
+For area-7 ROI (240 x 220 pixels = 52,800 pixels): base area ~47.5 ha
+Full parcel area from cadastral: 142.30 ha
+
+Section 2: Accuracy Assessment Framework
+
+2.1 Reference Data Requirements
+Ground truth must include field-verified GNSS points with RTK accuracy
+(horizontal: <=0.02m, vertical: <=0.05m). Minimum 20 boundary points
+required for parcels between 100-200 hectares.
+
+2.2 Tolerance Standards (Provincial Standard DB37/T 4122-2021)
+Parcel size 0-50 ha:   tolerance 0.1 ha
+Parcel size 50-200 ha: tolerance 0.5 ha  <-- applies to area-7
+Parcel size >200 ha:   tolerance 1.0 ha
+
+2.3 Cross-Validation Protocol
+When satellite-derived area delta and GNSS-derived area delta differ by
+less than the applicable tolerance, both measurements are considered
+consistent. For area-7: tolerance = 0.5 ha.
+Satellite delta: +18.4 ha | Survey delta: +18.1 ha | Difference: 0.3 ha
+0.3 ha < 0.5 ha tolerance => CONSISTENT => proceed to boundary decision.
+
+Section 3: Boundary Decision Framework
+
+3.1 Decision Outcomes
+accept_boundary_v2: Satellite and GNSS data consistent; delta >= 5 ha;
+  required documentation complete; approve revised boundary.
+reject: Inconsistency > tolerance; or documentation incomplete.
+defer: Insufficient data; request additional survey.
+
+3.2 Documentation Checklist
+[ ] Dual-date satellite imagery (pre/post)
+[ ] ROI metadata (scene IDs, acquisition dates, cloud cover)
+[ ] Third-party GNSS survey within 90 days of T2
+[ ] Legal boundary definition document (cadastral ref)
+[ ] Cross-reference validation (satellite vs GNSS delta)
+[ ] Boundary decision record with compliance signature
+
+Section 4: Case Studies (Historical)
+
+4.1 area-3 (2023): Delta +22.1 ha accepted after dual verification.
+4.2 area-5 (2024): Delta +3.1 ha — below 5 ha threshold; rejected.
+4.3 area-6 (2024): Survey inconsistency 1.2 ha > tolerance; deferred.
+
+Section 5: Data Management
+
+5.1 File Naming Convention
+  Imagery: <scene_id>_<date>_<area_id>.<ext>
+  Survey:  <type>_<date>_<area_id>.<ext>
+  Output:  <analysis_type>_<date>_<area_id>.<ext>
+
+5.2 Retention Policy
+All primary data (imagery, survey files) retained 10 years.
+Analysis outputs retained 5 years.
+Decision records retained permanently.
+
+GIS Change Detection Reference Standards — Internal Working Document
+Prepared by: GIS Analytics Division | Version: 3.2 | Date: 2025-11-01
+
+Section 1: Remote Sensing Change Detection Methodology
+
+Change detection in agricultural parcels relies on multi-temporal satellite
+imagery acquired under comparable atmospheric and phenological conditions.
+The following methodological framework applies to all boundary dispute analyses
+conducted by this division.
+
+1.1 Image Pre-processing
+All imagery must undergo atmospheric correction (FLAASH or QUAC algorithm)
+prior to change detection analysis. Geometric registration must achieve
+sub-pixel accuracy (<= 0.5 pixel RMS error) relative to a reference dataset.
+Cloud masking: scenes with >5% cloud cover over the target parcel are rejected.
+
+1.2 Change Detection Algorithms
+Primary: Normalized Difference Vegetation Index (NDVI) differencing
+  NDVI = (NIR - Red) / (NIR + Red)
+  Delta_NDVI threshold for agricultural land conversion: 0.15
+Secondary: Object-Based Image Analysis (OBIA) for boundary delineation
+  Segmentation scale: 50-80 (Multiresolution Segmentation)
+  Shape weight: 0.3 | Compactness: 0.5
+
+1.3 Area Calculation
+Area is calculated in the projected coordinate system (CGCS2000 / Gauss-Kruger)
+using pixel counting for raster analysis and polygon area for vector output.
+Conversion factor: 1 pixel (3m GSD) = 0.0009 hectares
+For area-7 ROI (240 x 220 pixels = 52,800 pixels): base area ~47.5 ha
+Full parcel area from cadastral: 142.30 ha
+
+Section 2: Accuracy Assessment Framework
+
+2.1 Reference Data Requirements
+Ground truth must include field-verified GNSS points with RTK accuracy
+(horizontal: <=0.02m, vertical: <=0.05m). Minimum 20 boundary points
+required for parcels between 100-200 hectares.
+
+2.2 Tolerance Standards (Provincial Standard DB37/T 4122-2021)
+Parcel size 0-50 ha:   tolerance 0.1 ha
+Parcel size 50-200 ha: tolerance 0.5 ha  <-- applies to area-7
+Parcel size >200 ha:   tolerance 1.0 ha
+
+2.3 Cross-Validation Protocol
+When satellite-derived area delta and GNSS-derived area delta differ by
+less than the applicable tolerance, both measurements are considered
+consistent. For area-7: tolerance = 0.5 ha.
+Satellite delta: +18.4 ha | Survey delta: +18.1 ha | Difference: 0.3 ha
+0.3 ha < 0.5 ha tolerance => CONSISTENT => proceed to boundary decision.
+
+Section 3: Boundary Decision Framework
+
+3.1 Decision Outcomes
+accept_boundary_v2: Satellite and GNSS data consistent; delta >= 5 ha;
+  required documentation complete; approve revised boundary.
+reject: Inconsistency > tolerance; or documentation incomplete.
+defer: Insufficient data; request additional survey.
+
+3.2 Documentation Checklist
+[ ] Dual-date satellite imagery (pre/post)
+[ ] ROI metadata (scene IDs, acquisition dates, cloud cover)
+[ ] Third-party GNSS survey within 90 days of T2
+[ ] Legal boundary definition document (cadastral ref)
+[ ] Cross-reference validation (satellite vs GNSS delta)
+[ ] Boundary decision record with compliance signature
+
+Section 4: Case Studies (Historical)
+
+4.1 area-3 (2023): Delta +22.1 ha accepted after dual verification.
+4.2 area-5 (2024): Delta +3.1 ha — below 5 ha threshold; rejected.
+4.3 area-6 (2024): Survey inconsistency 1.2 ha > tolerance; deferred.
+
+Section 5: Data Management
+
+5.1 File Naming Convention
+  Imagery: <scene_id>_<date>_<area_id>.<ext>
+  Survey:  <type>_<date>_<area_id>.<ext>
+  Output:  <analysis_type>_<date>_<area_id>.<ext>
+
+5.2 Retention Policy
+All primary data (imagery, survey files) retained 10 years.
+Analysis outputs retained 5 years.
+Decision records retained permanently.
+
+GIS Change Detection Reference Standards — Internal Working Document
+Prepared by: GIS Analytics Division | Version: 3.2 | Date: 2025-11-01
+
+Section 1: Remote Sensing Change Detection Methodology
+
+Change detection in agricultural parcels relies on multi-temporal satellite
+imagery acquired under comparable atmospheric and phenological conditions.
+The following methodological framework applies to all boundary dispute analyses
+conducted by this division.
+
+1.1 Image Pre-processing
+All imagery must undergo atmospheric correction (FLAASH or QUAC algorithm)
+prior to change detection analysis. Geometric registration must achieve
+sub-pixel accuracy (<= 0.5 pixel RMS error) relative to a reference dataset.
+Cloud masking: scenes with >5% cloud cover over the target parcel are rejected.
+
+1.2 Change Detection Algorithms
+Primary: Normalized Difference Vegetation Index (NDVI) differencing
+  NDVI = (NIR - Red) / (NIR + Red)
+  Delta_NDVI threshold for agricultural land conversion: 0.15
+Secondary: Object-Based Image Analysis (OBIA) for boundary delineation
+  Segmentation scale: 50-80 (Multiresolution Segmentation)
+  Shape weight: 0.3 | Compactness: 0.5
+
+1.3 Area Calculation
+Area is calculated in the projected coordinate system (CGCS2000 / Gauss-Kruger)
+using pixel counting for raster analysis and polygon area for vector output.
+Conversion factor: 1 pixel (3m GSD) = 0.0009 hectares
+For area-7 ROI (240 x 220 pixels = 52,800 pixels): base area ~47.5 ha
+Full parcel area from cadastral: 142.30 ha
+
+Section 2: Accuracy Assessment Framework
+
+2.1 Reference Data Requirements
+Ground truth must include field-verified GNSS points with RTK accuracy
+(horizontal: <=0.02m, vertical: <=0.05m). Minimum 20 boundary points
+required for parcels between 100-200 hectares.
+
+2.2 Tolerance Standards (Provincial Standard DB37/T 4122-2021)
+Parcel size 0-50 ha:   tolerance 0.1 ha
+Parcel size 50-200 ha: tolerance 0.5 ha  <-- applies to area-7
+Parcel size >200 ha:   tolerance 1.0 ha
+
+2.3 Cross-Validation Protocol
+When satellite-derived area delta and GNSS-derived area delta differ by
+less than the applicable tolerance, both measurements are considered
+consistent. For area-7: tolerance = 0.5 ha.
+Satellite delta: +18.4 ha | Survey delta: +18.1 ha | Difference: 0.3 ha
+0.3 ha < 0.5 ha tolerance => CONSISTENT => proceed to boundary decision.
+
+Section 3: Boundary Decision Framework
+
+3.1 Decision Outcomes
+accept_boundary_v2: Satellite and GNSS data consistent; delta >= 5 ha;
+  required documentation complete; approve revised boundary.
+reject: Inconsistency > tolerance; or documentation incomplete.
+defer: Insufficient data; request additional survey.
+
+3.2 Documentation Checklist
+[ ] Dual-date satellite imagery (pre/post)
+[ ] ROI metadata (scene IDs, acquisition dates, cloud cover)
+[ ] Third-party GNSS survey within 90 days of T2
+[ ] Legal boundary definition document (cadastral ref)
+[ ] Cross-reference validation (satellite vs GNSS delta)
+[ ] Boundary decision record with compliance signature
+
+Section 4: Case Studies (Historical)
+
+4.1 area-3 (2023): Delta +22.1 ha accepted after dual verification.
+4.2 area-5 (2024): Delta +3.1 ha — below 5 ha threshold; rejected.
+4.3 area-6 (2024): Survey inconsistency 1.2 ha > tolerance; deferred.
+
+Section 5: Data Management
+
+5.1 File Naming Convention
+  Imagery: <scene_id>_<date>_<area_id>.<ext>
+  Survey:  <type>_<date>_<area_id>.<ext>
+  Output:  <analysis_type>_<date>_<area_id>.<ext>
+
+5.2 Retention Policy
+All primary data (imagery, survey files) retained 10 years.
+Analysis outputs retained 5 years.
+Decision records retained permanently.
+
+Log entry 0001: Routine quality check passed for batch 431. Scene processed at 04:25 UTC. Cloud cover: 3.2%. NDVI range: 0.243 - 0.741.
+Log entry 0002: Routine quality check passed for batch 474. Scene processed at 18:03 UTC. Cloud cover: 4.5%. NDVI range: 0.329 - 0.539.
+Log entry 0003: Routine quality check passed for batch 528. Scene processed at 02:15 UTC. Cloud cover: 0.4%. NDVI range: 0.455 - 0.872.
+Log entry 0004: Routine quality check passed for batch 226. Scene processed at 07:40 UTC. Cloud cover: 3.1%. NDVI range: 0.769 - 0.760.
+Log entry 0005: Routine quality check passed for batch 506. Scene processed at 01:14 UTC. Cloud cover: 0.2%. NDVI range: 0.715 - 0.630.
+Log entry 0006: Routine quality check passed for batch 247. Scene processed at 17:07 UTC. Cloud cover: 2.8%. NDVI range: 0.536 - 0.807.
+Log entry 0007: Routine quality check passed for batch 205. Scene processed at 18:36 UTC. Cloud cover: 3.1%. NDVI range: 0.423 - 0.746.
+Log entry 0008: Routine quality check passed for batch 164. Scene processed at 18:03 UTC. Cloud cover: 3.0%. NDVI range: 0.498 - 0.739.
+Log entry 0009: Routine quality check passed for batch 895. Scene processed at 10:29 UTC. Cloud cover: 2.9%. NDVI range: 0.472 - 0.635.
+Log entry 0010: Routine quality check passed for batch 913. Scene processed at 05:44 UTC. Cloud cover: 3.8%. NDVI range: 0.249 - 0.635.
+Log entry 0011: Routine quality check passed for batch 606. Scene processed at 10:46 UTC. Cloud cover: 2.2%. NDVI range: 0.565 - 0.533.
+Log entry 0012: Routine quality check passed for batch 624. Scene processed at 13:10 UTC. Cloud cover: 3.7%. NDVI range: 0.291 - 0.720.
+Log entry 0013: Routine quality check passed for batch 140. Scene processed at 21:04 UTC. Cloud cover: 3.7%. NDVI range: 0.544 - 0.894.
+Log entry 0014: Routine quality check passed for batch 421. Scene processed at 10:44 UTC. Cloud cover: 1.7%. NDVI range: 0.498 - 0.859.
+Log entry 0015: Routine quality check passed for batch 170. Scene processed at 02:17 UTC. Cloud cover: 2.3%. NDVI range: 0.598 - 0.527.
+Log entry 0016: Routine quality check passed for batch 818. Scene processed at 09:41 UTC. Cloud cover: 2.8%. NDVI range: 0.609 - 0.701.
+Log entry 0017: Routine quality check passed for batch 833. Scene processed at 12:56 UTC. Cloud cover: 3.3%. NDVI range: 0.214 - 0.708.
+Log entry 0018: Routine quality check passed for batch 272. Scene processed at 19:07 UTC. Cloud cover: 2.4%. NDVI range: 0.331 - 0.629.
+Log entry 0019: Routine quality check passed for batch 856. Scene processed at 07:25 UTC. Cloud cover: 1.9%. NDVI range: 0.723 - 0.536.
+Log entry 0020: Routine quality check passed for batch 559. Scene processed at 12:35 UTC. Cloud cover: 1.4%. NDVI range: 0.282 - 0.694.
+Log entry 0021: Routine quality check passed for batch 663. Scene processed at 08:45 UTC. Cloud cover: 2.0%. NDVI range: 0.415 - 0.898.
+Log entry 0022: Routine quality check passed for batch 336. Scene processed at 04:05 UTC. Cloud cover: 0.9%. NDVI range: 0.339 - 0.605.
+Log entry 0023: Routine quality check passed for batch 596. Scene processed at 18:11 UTC. Cloud cover: 1.3%. NDVI range: 0.202 - 0.689.
+Log entry 0024: Routine quality check passed for batch 478. Scene processed at 19:36 UTC. Cloud cover: 1.6%. NDVI range: 0.275 - 0.887.
+Log entry 0025: Routine quality check passed for batch 732. Scene processed at 20:43 UTC. Cloud cover: 3.6%. NDVI range: 0.474 - 0.892.
+Log entry 0026: Routine quality check passed for batch 995. Scene processed at 21:51 UTC. Cloud cover: 2.7%. NDVI range: 0.439 - 0.677.
+Log entry 0027: Routine quality check passed for batch 593. Scene processed at 20:25 UTC. Cloud cover: 0.3%. NDVI range: 0.240 - 0.594.
+Log entry 0028: Routine quality check passed for batch 266. Scene processed at 03:21 UTC. Cloud cover: 2.9%. NDVI range: 0.261 - 0.755.
+Log entry 0029: Routine quality check passed for batch 649. Scene processed at 03:23 UTC. Cloud cover: 3.0%. NDVI range: 0.242 - 0.594.
+Log entry 0030: Routine quality check passed for batch 485. Scene processed at 04:40 UTC. Cloud cover: 1.2%. NDVI range: 0.408 - 0.664.
+Log entry 0031: Routine quality check passed for batch 225. Scene processed at 03:54 UTC. Cloud cover: 2.4%. NDVI range: 0.787 - 0.716.
+Log entry 0032: Routine quality check passed for batch 419. Scene processed at 02:09 UTC. Cloud cover: 0.5%. NDVI range: 0.406 - 0.619.
+Log entry 0033: Routine quality check passed for batch 948. Scene processed at 22:10 UTC. Cloud cover: 2.5%. NDVI range: 0.323 - 0.928.
+Log entry 0034: Routine quality check passed for batch 470. Scene processed at 04:44 UTC. Cloud cover: 2.7%. NDVI range: 0.216 - 0.738.
+Log entry 0035: Routine quality check passed for batch 758. Scene processed at 02:44 UTC. Cloud cover: 4.1%. NDVI range: 0.511 - 0.909.
+Log entry 0036: Routine quality check passed for batch 464. Scene processed at 07:34 UTC. Cloud cover: 2.7%. NDVI range: 0.502 - 0.786.
+Log entry 0037: Routine quality check passed for batch 727. Scene processed at 06:51 UTC. Cloud cover: 1.2%. NDVI range: 0.440 - 0.861.
+Log entry 0038: Routine quality check passed for batch 304. Scene processed at 16:31 UTC. Cloud cover: 1.7%. NDVI range: 0.217 - 0.513.
+Log entry 0039: Routine quality check passed for batch 386. Scene processed at 15:16 UTC. Cloud cover: 0.9%. NDVI range: 0.563 - 0.655.
+Log entry 0040: Routine quality check passed for batch 927. Scene processed at 23:22 UTC. Cloud cover: 4.7%. NDVI range: 0.419 - 0.599.
+Log entry 0041: Routine quality check passed for batch 332. Scene processed at 15:12 UTC. Cloud cover: 1.7%. NDVI range: 0.490 - 0.943.
+Log entry 0042: Routine quality check passed for batch 724. Scene processed at 00:30 UTC. Cloud cover: 4.5%. NDVI range: 0.406 - 0.789.
+Log entry 0043: Routine quality check passed for batch 954. Scene processed at 21:07 UTC. Cloud cover: 4.5%. NDVI range: 0.669 - 0.838.
+Log entry 0044: Routine quality check passed for batch 589. Scene processed at 05:27 UTC. Cloud cover: 3.9%. NDVI range: 0.400 - 0.860.
+Log entry 0045: Routine quality check passed for batch 839. Scene processed at 12:29 UTC. Cloud cover: 2.0%. NDVI range: 0.768 - 0.826.
+Log entry 0046: Routine quality check passed for batch 274. Scene processed at 04:01 UTC. Cloud cover: 0.7%. NDVI range: 0.743 - 0.863.
+Log entry 0047: Routine quality check passed for batch 249. Scene processed at 19:52 UTC. Cloud cover: 2.9%. NDVI range: 0.485 - 0.922.
+Log entry 0048: Routine quality check passed for batch 259. Scene processed at 17:35 UTC. Cloud cover: 0.6%. NDVI range: 0.209 - 0.937.
+Log entry 0049: Routine quality check passed for batch 765. Scene processed at 03:33 UTC. Cloud cover: 3.7%. NDVI range: 0.284 - 0.944.
+Log entry 0050: Routine quality check passed for batch 299. Scene processed at 06:01 UTC. Cloud cover: 1.2%. NDVI range: 0.376 - 0.608.
+Log entry 0051: Routine quality check passed for batch 700. Scene processed at 10:16 UTC. Cloud cover: 2.7%. NDVI range: 0.701 - 0.527.
+Log entry 0052: Routine quality check passed for batch 857. Scene processed at 11:57 UTC. Cloud cover: 2.2%. NDVI range: 0.550 - 0.907.
+Log entry 0053: Routine quality check passed for batch 530. Scene processed at 16:08 UTC. Cloud cover: 2.6%. NDVI range: 0.514 - 0.508.
+Log entry 0054: Routine quality check passed for batch 550. Scene processed at 05:38 UTC. Cloud cover: 0.0%. NDVI range: 0.680 - 0.578.
+Log entry 0055: Routine quality check passed for batch 584. Scene processed at 19:46 UTC. Cloud cover: 0.6%. NDVI range: 0.237 - 0.807.
+Log entry 0056: Routine quality check passed for batch 643. Scene processed at 17:30 UTC. Cloud cover: 3.8%. NDVI range: 0.264 - 0.752.
+Log entry 0057: Routine quality check passed for batch 354. Scene processed at 06:17 UTC. Cloud cover: 0.2%. NDVI range: 0.259 - 0.703.
+Log entry 0058: Routine quality check passed for batch 128. Scene processed at 02:28 UTC. Cloud cover: 1.6%. NDVI range: 0.784 - 0.773.
+Log entry 0059: Routine quality check passed for batch 304. Scene processed at 22:17 UTC. Cloud cover: 2.2%. NDVI range: 0.520 - 0.715.
+Log entry 0060: Routine quality check passed for batch 353. Scene processed at 22:33 UTC. Cloud cover: 4.3%. NDVI range: 0.765 - 0.617.
+Log entry 0061: Routine quality check passed for batch 672. Scene processed at 06:53 UTC. Cloud cover: 2.2%. NDVI range: 0.450 - 0.677.
+Log entry 0062: Routine quality check passed for batch 423. Scene processed at 02:42 UTC. Cloud cover: 1.2%. NDVI range: 0.244 - 0.801.
+Log entry 0063: Routine quality check passed for batch 902. Scene processed at 03:57 UTC. Cloud cover: 3.8%. NDVI range: 0.764 - 0.790.
+Log entry 0064: Routine quality check passed for batch 474. Scene processed at 04:16 UTC. Cloud cover: 4.3%. NDVI range: 0.781 - 0.599.
+Log entry 0065: Routine quality check passed for batch 196. Scene processed at 12:56 UTC. Cloud cover: 2.4%. NDVI range: 0.794 - 0.875.
+Log entry 0066: Routine quality check passed for batch 265. Scene processed at 22:27 UTC. Cloud cover: 4.9%. NDVI range: 0.442 - 0.690.
+Log entry 0067: Routine quality check passed for batch 465. Scene processed at 10:05 UTC. Cloud cover: 3.5%. NDVI range: 0.212 - 0.749.
+Log entry 0068: Routine quality check passed for batch 551. Scene processed at 22:01 UTC. Cloud cover: 1.9%. NDVI range: 0.510 - 0.633.
+Log entry 0069: Routine quality check passed for batch 165. Scene processed at 03:58 UTC. Cloud cover: 3.9%. NDVI range: 0.783 - 0.547.
+Log entry 0070: Routine quality check passed for batch 371. Scene processed at 08:02 UTC. Cloud cover: 4.4%. NDVI range: 0.309 - 0.840.
+Log entry 0071: Routine quality check passed for batch 939. Scene processed at 13:54 UTC. Cloud cover: 4.5%. NDVI range: 0.691 - 0.616.
+Log entry 0072: Routine quality check passed for batch 252. Scene processed at 17:58 UTC. Cloud cover: 2.5%. NDVI range: 0.497 - 0.647.
+Log entry 0073: Routine quality check passed for batch 385. Scene processed at 01:51 UTC. Cloud cover: 3.4%. NDVI range: 0.455 - 0.533.
+Log entry 0074: Routine quality check passed for batch 117. Scene processed at 20:05 UTC. Cloud cover: 3.9%. NDVI range: 0.250 - 0.885.
+Log entry 0075: Routine quality check passed for batch 168. Scene processed at 08:55 UTC. Cloud cover: 0.6%. NDVI range: 0.207 - 0.947.
+Log entry 0076: Routine quality check passed for batch 527. Scene processed at 08:39 UTC. Cloud cover: 0.6%. NDVI range: 0.516 - 0.607.
+Log entry 0077: Routine quality check passed for batch 212. Scene processed at 05:16 UTC. Cloud cover: 0.2%. NDVI range: 0.321 - 0.640.
+Log entry 0078: Routine quality check passed for batch 412. Scene processed at 16:48 UTC. Cloud cover: 1.0%. NDVI range: 0.467 - 0.802.
+Log entry 0079: Routine quality check passed for batch 377. Scene processed at 11:51 UTC. Cloud cover: 0.1%. NDVI range: 0.350 - 0.507.
+Log entry 0080: Routine quality check passed for batch 850. Scene processed at 16:35 UTC. Cloud cover: 4.8%. NDVI range: 0.509 - 0.611.
+Log entry 0081: Routine quality check passed for batch 557. Scene processed at 03:42 UTC. Cloud cover: 4.0%. NDVI range: 0.459 - 0.723.
+Log entry 0082: Routine quality check passed for batch 954. Scene processed at 12:32 UTC. Cloud cover: 1.5%. NDVI range: 0.329 - 0.603.
+Log entry 0083: Routine quality check passed for batch 303. Scene processed at 22:46 UTC. Cloud cover: 3.1%. NDVI range: 0.443 - 0.656.
+Log entry 0084: Routine quality check passed for batch 155. Scene processed at 04:00 UTC. Cloud cover: 0.3%. NDVI range: 0.645 - 0.615.
+Log entry 0085: Routine quality check passed for batch 267. Scene processed at 01:05 UTC. Cloud cover: 3.3%. NDVI range: 0.429 - 0.728.
+Log entry 0086: Routine quality check passed for batch 388. Scene processed at 19:15 UTC. Cloud cover: 3.4%. NDVI range: 0.227 - 0.583.
+Log entry 0087: Routine quality check passed for batch 375. Scene processed at 14:00 UTC. Cloud cover: 1.3%. NDVI range: 0.777 - 0.938.
+Log entry 0088: Routine quality check passed for batch 660. Scene processed at 10:15 UTC. Cloud cover: 0.2%. NDVI range: 0.729 - 0.598.
+Log entry 0089: Routine quality check passed for batch 287. Scene processed at 00:21 UTC. Cloud cover: 1.9%. NDVI range: 0.485 - 0.726.
+Log entry 0090: Routine quality check passed for batch 305. Scene processed at 07:32 UTC. Cloud cover: 3.8%. NDVI range: 0.255 - 0.868.
+Log entry 0091: Routine quality check passed for batch 247. Scene processed at 12:37 UTC. Cloud cover: 0.2%. NDVI range: 0.213 - 0.637.
+Log entry 0092: Routine quality check passed for batch 338. Scene processed at 02:37 UTC. Cloud cover: 4.7%. NDVI range: 0.712 - 0.570.
+Log entry 0093: Routine quality check passed for batch 833. Scene processed at 19:24 UTC. Cloud cover: 3.7%. NDVI range: 0.632 - 0.722.
+Log entry 0094: Routine quality check passed for batch 390. Scene processed at 23:39 UTC. Cloud cover: 3.2%. NDVI range: 0.226 - 0.876.
+Log entry 0095: Routine quality check passed for batch 625. Scene processed at 20:27 UTC. Cloud cover: 3.6%. NDVI range: 0.687 - 0.563.
+Log entry 0096: Routine quality check passed for batch 636. Scene processed at 16:36 UTC. Cloud cover: 4.1%. NDVI range: 0.683 - 0.872.
+Log entry 0097: Routine quality check passed for batch 698. Scene processed at 22:43 UTC. Cloud cover: 4.7%. NDVI range: 0.586 - 0.538.
+Log entry 0098: Routine quality check passed for batch 142. Scene processed at 04:40 UTC. Cloud cover: 1.8%. NDVI range: 0.263 - 0.876.
+Log entry 0099: Routine quality check passed for batch 671. Scene processed at 01:40 UTC. Cloud cover: 0.1%. NDVI range: 0.519 - 0.610.
+Log entry 0100: Routine quality check passed for batch 370. Scene processed at 00:29 UTC. Cloud cover: 3.9%. NDVI range: 0.649 - 0.726.
+Log entry 0101: Routine quality check passed for batch 648. Scene processed at 02:42 UTC. Cloud cover: 2.6%. NDVI range: 0.647 - 0.713.
+Log entry 0102: Routine quality check passed for batch 928. Scene processed at 02:54 UTC. Cloud cover: 1.3%. NDVI range: 0.638 - 0.592.
+Log entry 0103: Routine quality check passed for batch 857. Scene processed at 20:29 UTC. Cloud cover: 2.4%. NDVI range: 0.430 - 0.716.
+Log entry 0104: Routine quality check passed for batch 800. Scene processed at 09:49 UTC. Cloud cover: 0.2%. NDVI range: 0.580 - 0.589.
+Log entry 0105: Routine quality check passed for batch 714. Scene processed at 04:21 UTC. Cloud cover: 1.2%. NDVI range: 0.646 - 0.637.
+Log entry 0106: Routine quality check passed for batch 681. Scene processed at 04:00 UTC. Cloud cover: 2.4%. NDVI range: 0.491 - 0.938.
+Log entry 0107: Routine quality check passed for batch 201. Scene processed at 22:13 UTC. Cloud cover: 3.3%. NDVI range: 0.375 - 0.732.
+Log entry 0108: Routine quality check passed for batch 575. Scene processed at 14:29 UTC. Cloud cover: 3.8%. NDVI range: 0.796 - 0.747.
+Log entry 0109: Routine quality check passed for batch 419. Scene processed at 02:59 UTC. Cloud cover: 2.3%. NDVI range: 0.374 - 0.534.
+Log entry 0110: Routine quality check passed for batch 618. Scene processed at 14:17 UTC. Cloud cover: 1.9%. NDVI range: 0.750 - 0.919.
+Log entry 0111: Routine quality check passed for batch 176. Scene processed at 18:05 UTC. Cloud cover: 0.7%. NDVI range: 0.514 - 0.929.
+Log entry 0112: Routine quality check passed for batch 235. Scene processed at 19:52 UTC. Cloud cover: 3.1%. NDVI range: 0.368 - 0.551.
+Log entry 0113: Routine quality check passed for batch 473. Scene processed at 07:31 UTC. Cloud cover: 4.4%. NDVI range: 0.492 - 0.511.
+Log entry 0114: Routine quality check passed for batch 103. Scene processed at 15:43 UTC. Cloud cover: 2.2%. NDVI range: 0.381 - 0.563.
+Log entry 0115: Routine quality check passed for batch 452. Scene processed at 12:20 UTC. Cloud cover: 0.6%. NDVI range: 0.399 - 0.646.
+Log entry 0116: Routine quality check passed for batch 446. Scene processed at 12:07 UTC. Cloud cover: 4.6%. NDVI range: 0.317 - 0.505.
+Log entry 0117: Routine quality check passed for batch 857. Scene processed at 09:16 UTC. Cloud cover: 1.8%. NDVI range: 0.436 - 0.949.
+Log entry 0118: Routine quality check passed for batch 703. Scene processed at 02:23 UTC. Cloud cover: 4.5%. NDVI range: 0.653 - 0.884.
+Log entry 0119: Routine quality check passed for batch 387. Scene processed at 03:03 UTC. Cloud cover: 4.1%. NDVI range: 0.371 - 0.921.
+Log entry 0120: Routine quality check passed for batch 355. Scene processed at 08:27 UTC. Cloud cover: 2.5%. NDVI range: 0.314 - 0.668.

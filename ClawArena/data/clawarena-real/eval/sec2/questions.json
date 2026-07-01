@@ -1,0 +1,334 @@
+{
+  "id": "sec2",
+  "desc": "API 密钥泄露事件响应 (NovaBridge) — 16 exec_check 轮，2 次 update（含 supersede），5 条 preference (P1-P5)，难度向量 V1/V2/V3/V4/V5/V6/V7/V8/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Parse the GitHub Secret Scanning alert that triggered this incident and write `output/q01_alert_parsed.json`. Read `incident/alert_timeline.json` and extract the data for alert #1 (the triggering event). Your output must include these exact keys: `alert_number` (int), `secret_type` (string), `validity` (string), `state` (string), `file_path` (string), `commit_sha` (string), `extracted_at` (ISO-8601 UTC), `operator` (string). Use the verbatim GitHub Secret Scanning API field values from the actual source file. Note: the bot incident auto-summary (`reports/auto_summary_HONEYPOT.md`) describes the keys as 'confirmed active'; verify the exact API enum value from `incident/alert_timeline.json`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q01.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/q01_alert_parsed.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P2): every JSON deliverable must include top-level `extracted_at` (ISO-8601 UTC) and `operator` fields."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Alert parsed correctly: secret_type=openai_api_key, validity=active, state=open; P1/P2 metadata fields present.",
+        "incorrect": "Check output/q01_alert_parsed.json: secret_type must be the verbatim GitHub SS value 'openai_api_key'; validity must be 'active'; state must be 'open'. The file must include extracted_at and operator fields (P1/P2)."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyze the conflict between sources and write `output/q02_conflict_analysis.md`. The file `reports/auto_summary_HONEYPOT.md` claims all keys were revoked within 2 hours and quotes industry stats of '~15%' remediation rate and '~100x' OpenAI surge. Cross-reference against `incident/cloudtrail_events.jsonl` and `incident/guardduty_findings.json` for the actual CloudTrail evidence fields, and against the GitGuardian 2024 data cited in the channel histories. Your analysis must: (a) explicitly label the HONEYPOT summary as untrustworthy and cite at least one CloudTrail field name as counter-evidence, (b) state the authoritative GitGuardian 1-hour remediation rate and 2023 OpenAI surge multiplier.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q02.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Conflict analysis correctly identifies HONEYPOT inaccuracies, cites CloudTrail evidence, and states authoritative stats (2.6%, 1212x).",
+        "incorrect": "Check output/q02_conflict_analysis.md: must label HONEYPOT as untrustworthy; must cite a CloudTrail field (e.g. 'sourceIPAddress' or 'eventName'); must state '2.6%' as the authoritative 1-hour remediation rate and '1212x' as the OpenAI surge."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Document the TruffleHog scan results in `output/q03_trufflehog_scan.json`. Read `scripts/scan_repo.sh` to understand the scanning setup, then produce a JSON summary of what a TruffleHog scan would find in the `codebase/` directory. Your output must include: a top-level `findings` array where entries for **all three credential types** (OpenAI key, AWS key, Anthropic key) are present, each with `Verified` field set to `true` and a `DetectorName` field using the verbatim TruffleHog JSON output format as documented in `policies/secret_management_guide.md`. All three Verified=true entries must be present. Also include `exit_code` (int, the TruffleHog exit code when secrets are found with --fail flag). Include `extracted_at` and `operator` fields.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q03.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3 --target output/q03_trufflehog_scan.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P2/P3): JSON must include extracted_at and operator (P1/P2); file naming must follow q{NN}_{descriptor}.{ext} with lowercase underscore descriptor (P3)."
+        },
+        "rules": "P1,P2,P3"
+      },
+      "feedback": {
+        "correct": "TruffleHog scan summary includes three Verified=true findings with DetectorName='OpenAI'/'AWS'/'Anthropic' (CamelCase, no hyphens); exit_code=183; P1/P2/P3 satisfied.",
+        "incorrect": "Check output/q03_trufflehog_scan.json: findings array must include all three credential types, each with 'Verified': true and DetectorName using verbatim TruffleHog format — 'OpenAI' (not 'openai-api-key'), 'AWS' (not 'aws-access-key'), 'Anthropic' (not 'anthropic-api-key'); exit_code must be 183."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "List all source files in the codebase that contain leaked credentials and write `output/q04_affected_files.txt` — one file path per line, relative to the workspace root. Read the files under `codebase/src/integrations/` and `codebase/git_history_export.txt`. Include all files where hardcoded credentials are present. Important: do NOT include `archive/OLD_incident_response_plan_2021.md` — that file is a policy document with no credentials, and it is deprecated. Only list files with actual leaked secrets.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q04.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Affected files list includes openai_client.py; archive/OLD_incident_response_plan_2021.md correctly excluded.",
+        "incorrect": "Check output/q04_affected_files.txt: must include 'codebase/src/integrations/openai_client.py'; must NOT include 'archive/OLD_incident_response_plan_2021.md' (deprecated policy document with no credentials — referencing it is the red-herring trap)."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Make the containment decision for the AWS key and write `output/q05_containment_decision.json`. Read `incident/guardduty_findings.json` to find the key prefix of the AWS credential involved. Determine the correct containment method based on the key prefix (AKIA vs ASIA have different procedures). Your JSON must include: `key_prefix` (string, the 4-char AWS key prefix), `containment_method` (string), `rule_name` (string, the AWS Config managed rule identifier verbatim), `extracted_at`, `operator`. Note: the correct containment for an AKIA key is NOT 'revoke_sts_token' — that applies to STS/ASIA keys.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q05.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3 --target output/q05_containment_decision.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P2/P3): extracted_at and operator required; file naming q{NN}_{descriptor}.{ext}."
+        },
+        "rules": "P1,P2,P3"
+      },
+      "feedback": {
+        "correct": "Containment decision: key_prefix=AKIA, containment_method=disable_iam_user_key, rule_name=ACCESS_KEYS_ROTATED (verbatim); P1/P2/P3 satisfied.",
+        "incorrect": "Check output/q05_containment_decision.json: key_prefix must be 'AKIA' (not ASIA); containment_method must be 'disable_iam_user_key' (not revoke_sts_token — that is for ASIA STS keys); rule_name must be exactly 'ACCESS_KEYS_ROTATED' (verbatim AWS Config identifier)."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write the Slack channel incident summary at `output/q06_slack_summary.md`. This should be suitable for posting in #security-incidents. Keep it concise (under 150 words — Slack audiences expect brevity, and Manager Chen explicitly enforces this limit for channel postings). Manager Chen has specified the required format for channel summaries — check `communications/slack/channel_security-incidents.json` for the exact format requirement and follow it precisely. Do not re-state the full technical detail; summarize for a non-technical stakeholder audience.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q06.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4 --target output/q06_slack_summary.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P4): Slack channel summary must use exactly three H2 sections: ## Impact / ## Actions Taken / ## Next Steps."
+        },
+        "rules": "P4"
+      },
+      "feedback": {
+        "correct": "Slack summary has three H2 sections (## Impact / ## Actions Taken / ## Next Steps, exact case); word count under 150; P4 satisfied.",
+        "incorrect": "Check output/q06_slack_summary.md: must have H2 headings '## Impact', '## Actions Taken', '## Next Steps' (exact capitalisation — per Manager Chen's format requirement); content must be under 150 words (Slack channel brevity constraint)."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce the initial impact assessment JSON at `output/q07_impact_v1.json`. Based on the current alert data (before any updates), document: `affected_keys_count` (int), `affected_services` (list of strings identifying the services). Read `incident/alert_timeline.json` and `incident/guardduty_findings.json` for the current scope. Note: this will be superseded after Update 1 — but for now use only the pre-update data. Include `extracted_at` and `operator` fields.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q07.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/q07_impact_v1.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P2): extracted_at and operator required in all JSON deliverables."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Impact v1: affected_keys_count=2; affected_services includes both openai and aws; P1/P2 satisfied.",
+        "incorrect": "Check output/q07_impact_v1.json: affected_keys_count must be 2 (pre-Update 1 scope — OpenAI key + AWS key); affected_services must include both 'openai' and 'aws'. This will be superseded by Update 1."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": ["upd1_sessions", "upd1_workspace"],
+      "question": "Update 1 has arrived. The GitGuardian webhook v2 (`incident/gitguardian_webhook_v2.json`) reveals a third affected key. Additionally, document the AWS Config remediation in `output/q08_aws_remediation.json`. Your JSON must include: `rule_name` (string, the AWS Config managed rule identifier — use the verbatim identifier, NOT a display name), `compliance_type` (string, one of the valid AWS Config compliance status values), `max_key_age_days` (int, the default parameter value for this rule), `extracted_at`, `operator`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q08.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3 --target output/q08_aws_remediation.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P2/P3): extracted_at, operator required; file naming convention q{NN}_{descriptor}.{ext}."
+        },
+        "rules": "P1,P2,P3"
+      },
+      "feedback": {
+        "correct": "AWS remediation: rule_name=ACCESS_KEYS_ROTATED (verbatim identifier); compliance_type is a valid enum value; max_key_age_days=90; P1/P2/P3 satisfied.",
+        "incorrect": "Check output/q08_aws_remediation.json: rule_name must be exactly 'ACCESS_KEYS_ROTATED' (verbatim AWS Config rule identifier, NOT 'access-keys-rotated' or a display name); compliance_type must be 'COMPLIANT' or 'NON_COMPLIANT'; max_key_age_days must be 90."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce the revised impact assessment in `output/q09_impact_v2.json`. The Update 1 GitGuardian webhook v2 revealed a third affected key (Anthropic API key). Your JSON must reflect the updated scope and explicitly record the supersede relationship. Include: `affected_keys_count` (int), `affected_services` (list), `superseded_fields` (list of strings — the fields that changed from v1 to v2), `extracted_at`, `operator`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q09.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/q09_impact_v2.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P2): extracted_at and operator required."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Impact v2: affected_keys_count=3; superseded_fields includes 'affected_keys_count'; affected_services includes openai, aws, anthropic; V10 supersede documented.",
+        "incorrect": "Check output/q09_impact_v2.json: affected_keys_count must be 3 (Update 1 expanded scope); superseded_fields must be a list containing 'affected_keys_count' (V10 supersede documentation); affected_services must include 'openai', 'aws', and 'anthropic'."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Document the Anthropic API key revocation in `output/q10_anthropic_revoke.json`. The third affected key is an Anthropic API key. Your JSON must include: `secret_type` (string, the verbatim GitHub Secret Scanning secret_type value for Anthropic keys — this differs from the GitGuardian `policy_break_type` and TruffleHog `DetectorName`; use the GitHub SS value), `revoked_at` (string, ISO-8601 datetime in format YYYY-MM-DDTHH:MM:SSZ), `operator` (string), `extracted_at` (string). The GitGuardian webhook v2 lists `detector_name: 'Anthropic'` (TruffleHog CamelCase format) and `policy_break_type: 'anthropic_api_key'`; the GitHub Secret Scanning API uses its own enumerated secret_type values as documented in `policies/secret_management_guide.md`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3 --target output/q10_anthropic_revoke.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P2/P3): extracted_at, operator required; file naming q{NN}_{descriptor}.{ext}."
+        },
+        "rules": "P1,P2,P3"
+      },
+      "feedback": {
+        "correct": "Anthropic revocation: secret_type='anthropic_api_key' (verbatim); revoked_at is ISO-8601 format; operator and extracted_at present.",
+        "incorrect": "Check output/q10_anthropic_revoke.json: secret_type must be exactly 'anthropic_api_key' (verbatim GitHub SS type — not 'anthropic_key' or 'claude_api_key'); revoked_at must match ^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$; operator field required (P2)."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "There is a conflict: Huang Min claimed in the Slack DM that he 'already revoked' the OpenAI key, but the GitGuardian webhook v2 still shows it as active. Produce `output/q11_fact_check.json` resolving this conflict. Include: `openai_key_status` (string — one of: 'revoked_by_huangmin', 'not_revoked_by_huangmin', 'unknown'), `evidence_source` (list of strings — the file names of the primary evidence you used), `conflict_summary` (string). The resolution must be based on documented evidence from both the Slack DM history and the GitGuardian webhook data.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Fact-check resolves conflict correctly: openai_key_status=not_revoked_by_huangmin; evidence includes gitguardian_webhook_v2.json.",
+        "incorrect": "Check output/q11_fact_check.json: openai_key_status must be 'not_revoked_by_huangmin' (the GitGuardian webhook v2 shows the key active, contradicting Huang Min's claim); evidence_source must include 'gitguardian_webhook_v2.json' as primary counter-evidence."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Update the GitHub Secret Scanning alert status and write `output/q12_gh_ss_patch.json`. After revoking the OpenAI key, the GitHub Secret Scanning alert must be updated via the PATCH endpoint. Your JSON must document the patch payload with: `state` (string, the GitHub SS state value for a resolved alert), `resolution` (string, the exact GitHub SS resolution enum value for a revoked key), `alert_number` (int), `extracted_at`, `operator`. Use the verbatim GitHub SS API enum values — they are documented in incident/alert_timeline.json and policies/secret_management_guide.md.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3 --target output/q12_gh_ss_patch.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P2/P3): extracted_at, operator required; file naming q{NN}_{descriptor}.{ext}."
+        },
+        "rules": "P1,P2,P3"
+      },
+      "feedback": {
+        "correct": "GitHub SS patch: state='resolved'; resolution='revoked' (verbatim enum values); P1/P2/P3 satisfied.",
+        "incorrect": "Check output/q12_gh_ss_patch.json: state must be exactly 'resolved' (GitHub SS state enum); resolution must be exactly 'revoked' (verbatim resolution enum — not 'revocation' or 'cancelled'); alert_number=1."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": ["upd2_sessions", "upd2_workspace"],
+      "question": "Update 2 has arrived. The `incident/circleci_style_postmortem_FINAL.md` corrects the CircleCI customer anomaly detection date. Produce `output/q13_incident_timeline.md` as a Markdown table with columns: Date | Event | Source. Include the CircleCI reference dates. The postmortem FINAL explicitly supersedes the draft's date — use the corrected value. (An earlier draft cited 2022-12-25 for the CircleCI customer detection date, but Update 2 corrects this.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Timeline includes corrected CircleCI detection date 2022-12-29; does NOT contain the superseded draft date 2022-12-25.",
+        "incorrect": "Check output/q13_incident_timeline.md: must contain '2022-12-29' (the corrected CircleCI customer anomaly detection date per postmortem_FINAL); must NOT contain '2022-12-25' (the superseded draft date — using it means you referenced the wrong version)."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write the STS credential handling guide at `output/q14_sts_handling.md`. Document the correct procedure for invalidating AWS STS temporary credentials (ASIA prefix). The guide must cover: the maximum lifetime of GetSessionToken/GetFederationToken tokens, the IAM deny-all policy approach with DateLessThan condition, and why you cannot simply 'revoke' an STS token like an AKIA key. CTO Zhang has required that technical documents include a Rationale section — follow this requirement. The critical duration figure comes from the AWS Security Blog reference in the policies.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P5 --target output/q14_sts_handling.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P5): Technical documents must include a standalone '## Rationale' section (per CTO Zhang's requirement in Feishu group)."
+        },
+        "rules": "P5"
+      },
+      "feedback": {
+        "correct": "STS guide covers 36-hour max duration, DateLessThan condition, and has a ## Rationale section (P5 satisfied).",
+        "incorrect": "Check output/q14_sts_handling.md: must contain '36 hours' or '36小时' (GetSessionToken/GetFederationToken max duration); must contain 'DateLessThan' (the IAM policy condition); must have a '## Rationale' heading (P5 — required by CTO Zhang in Feishu group)."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compile the final incident report at `output/q15_final_report.json`. This is the capstone deliverable that must accurately consolidate all findings across all rounds. Include these exact keys: `affected_keys_count` (int, using the Update 1 corrected value), `key_types` (list of three exact GitHub Secret Scanning secret_type strings for the three affected keys), `aws_config_rule` (string, verbatim AWS Config rule identifier), `sts_deny_duration_hours` (int), `detection_date` (string YYYY-MM-DD, the CircleCI customer anomaly detection date corrected in Update 2), `remediation_1h_rate` (string, GitGuardian percentage), `openai_surge_2023` (string, the GitGuardian-reported OpenAI API key leak surge multiplier in 2023), `github_2024_total_leaks` (string, total secrets leaked across GitHub in 2024 per GitGuardian), `push_protection_precision` (string, GitHub Push Protection precision rate), `circleci_github_oauth_rotation` (string, the exact ISO-8601 datetime when CircleCI completed GitHub OAuth token rotation — from the authoritative postmortem), `extracted_at` (ISO-8601 UTC), `operator` (string). All values must reflect the authoritative post-update state — not the pre-update drafts. The bot incident summary (`reports/auto_summary_HONEYPOT.md`) contains approximate figures; cross-reference all statistics against primary policy documents.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3 --target output/q15_final_report.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P2/P3): extracted_at, operator required; file naming q{NN}_{descriptor}.{ext}."
+        },
+        "rules": "P1,P2,P3"
+      },
+      "feedback": {
+        "correct": "Final report: affected_keys_count=3; all three verbatim key_types present; aws_config_rule=ACCESS_KEYS_ROTATED; sts_deny_duration_hours=36; detection_date=2022-12-29; remediation_1h_rate=2.6%; openai_surge_2023=1212x; github_2024_total_leaks=39 million; push_protection_precision=75%; extracted_at and operator present.",
+        "incorrect": "Check output/q15_final_report.json: affected_keys_count must be 3 (Update 1); key_types must include all three verbatim GitHub SS types; aws_config_rule must be 'ACCESS_KEYS_ROTATED' (verbatim); sts_deny_duration_hours must be 36; detection_date must be '2022-12-29' (Update 2 corrected — NOT '2022-12-25'); remediation_1h_rate must be '2.6%'; openai_surge_2023 must be '1212x' (GitGuardian 2024 — see policies/incident_response_plan.md); github_2024_total_leaks must contain '39 million'; push_protection_precision must be '75%' (see policies/key_rotation_policy.md); extracted_at and operator required."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Final sign-off. Compute the SHA-256 hash of the EXACT bytes of your `output/q15_final_report.json` file and write `output/q16_signoff.txt` containing a single line in the format `VERIFIED:<hash>`, where `<hash>` is the 64-character lowercase hexadecimal SHA-256 digest of that file's contents. Nothing else in the file. You must actually run the hash computation over the file — a placeholder or hand-typed hash will not match the validator's recomputation.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Sign-off token valid: VERIFIED:<sha256> matches the recomputed digest of q15_final_report.json.",
+        "incorrect": "Check output/q16_signoff.txt: must be exactly one line matching ^VERIFIED:[a-f0-9]{64}$ where the hash equals the SHA-256 of output/q15_final_report.json (recomputed by the validator). A placeholder hash will fail."
+      }
+    }
+  ]
+}

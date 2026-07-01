@@ -1,0 +1,33 @@
+From: releases@k8s-vendor.example.com
+To: platform-team@example.com
+Subject: [URGENT] Helm Chart 1.18.3 Memory Regression — Hotfix 1.18.4 Available
+Date: Thu, 14 May 2026 04:15:00 +0000
+Message-ID: <vendor-hotfix-001@k8s-vendor.example.com>
+
+Team,
+
+We have identified a critical memory regression introduced in chart version
+1.18.3 released on 2026-05-13. The default memory limit in values.yaml was
+inadvertently reduced from 2048Mi to 512Mi during an automated template
+refactor. This change was not caught by our CI suite because the integration
+test cluster has more permissive resource quotas.
+
+The affected chart version is 1.18.3. If you are running this version,
+your payment-svc pods will be subject to OOM kills under normal production
+load.
+
+We have published emergency hotfix 1.18.4 to our chart repository with the
+following change:
+
+  resources:
+    limits:
+      memory: 2048Mi    # restored from incorrectly reduced 512Mi
+
+Please upgrade immediately using:
+  helm upgrade payment-svc vendor-charts/payment-svc --version 1.18.4 -n payments
+
+The full release notes are attached in your workspace.
+
+Sincerely,
+Vendor Release Engineering
+releases@k8s-vendor.example.com

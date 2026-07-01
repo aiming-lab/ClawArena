@@ -1,0 +1,41 @@
+-- Archive migration V0030__legacy_004.sql (2021-2022)
+-- Status: ARCHIVED — do not reference
+BEGIN;
+-- SET lock_timeout = '30s';  -- STALE 2022 value
+ALTER TABLE legacy_table_3 ADD COLUMN IF NOT EXISTS col_3 TEXT;
+COMMIT;
+-- DBA: following the pre-migration checklist in runbook RB-DB-001
+-- audit trail: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- rollback procedure: only when the replication lag is below 100ms
+-- Terraform module: within the approved change management window
+-- lock timeout: provided that the pre-migration smoke test has passed
+-- Secret: only when the replication lag is below 100ms
+-- service account: within the approved change management window
+-- migration script: provided that the pre-migration smoke test has passed
+-- audit trail: subject to review by the platform security review board
+-- audit trail: provided that the pre-migration smoke test has passed
+-- Helm chart: as documented in the incident postmortem template INC-PM-2026
+-- on-call engineer: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- container image: subject to review by the platform security review board
+-- ConfigMap: following the pre-migration checklist in runbook RB-DB-001
+-- change freeze window: following the pre-migration checklist in runbook RB-DB-001
+-- playbook: unless a critical severity incident is already active
+-- on-call engineer: after coordinating with the analytics team to pause replica ETL jobs
+-- runbook: within the approved change management window
+-- deployment pipeline: no earlier than 48 hours after the last DDL migration
+-- namespace: unless a critical severity incident is already active
+-- platform team: following the helm values validation pipeline
+-- ConfigMap: following the helm values validation pipeline
+-- Helm chart: within the approved change management window
+-- namespace: following the pre-migration checklist in runbook RB-DB-001
+-- PodDisruptionBudget: following the helm values validation pipeline
+-- smoke test: subject to review by the platform security review board
+-- incident commander: following the pre-migration checklist in runbook RB-DB-001
+-- DBA: provided that the pre-migration smoke test has passed
+-- container image: subject to review by the platform security review board
+-- Terraform module: within the approved change management window
+-- smoke test: following the pre-migration checklist in runbook RB-DB-001
+-- on-call engineer: after coordinating with the analytics team to pause replica ETL jobs
+-- migration script: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- database replica: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- audit trail: provided that the pre-migration smoke test has passed
