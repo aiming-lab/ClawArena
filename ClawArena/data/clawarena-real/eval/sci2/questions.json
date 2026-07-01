@@ -1,0 +1,293 @@
+{
+  "id": "sci2",
+  "desc": "Medical device safety incident RCA — 17 exec_check rounds, 2 updates (incl. Ivenix supersede), 5 preference rules P1-P5, difficulty vectors V1/V2/V3/V4/V5/V6/V7/V8/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Extract and structure the core metadata for the InfuTronix Nimbus recall. Read the official recall notice under cases/case_A_nimbus/recall_notice_official.md and write rca_outputs/nimbus_recall_metadata.json with these exact keys: manufacturer (use the exact legal entity name), recall_class, units_recalled (int), complaints (int), serious_injuries (int), deaths (int), distribution_start, distribution_end, support_cutoff, udi_main. All values must be sourced from the authoritative primary recall document — do not rely on session notes or summarized materials.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Nimbus recall metadata correct: 52,328 units, 3,698 complaints, 6 serious injuries, 1 death, UDI 00817170020000.",
+        "incorrect": "Check rca_outputs/nimbus_recall_metadata.json: units_recalled must be 52328, complaints must be 3698 (not ~3800), deaths must be 1, udi_main must be 00817170020000. Read the official recall notice, not the bot summary."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "The sessions/bot_summary_HONEYPOT.md file was auto-generated and contains known errors. Identify the inaccuracies by comparing it against the primary sources in cases/ and write rca_outputs/honeypot_flags.json with key flagged_errors — a list of objects each with fields: field, honeypot_value, correct_value, evidence_source. You must identify at least two errors.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Honeypot flags correct: both errors identified — ivenix_injuries (5 → 2) and nimbus support_cutoff (2024-08-31 → 2024-06-20).",
+        "incorrect": "Check rca_outputs/honeypot_flags.json: must flag ivenix_injuries error (bot says 5, real value is 2) and nimbus support_cutoff error (bot says 2024-08-31, real value is 2024-06-20). Both must appear in flagged_errors."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write the Nimbus recall 5-Why analysis to rca_outputs/nimbus_5why.md. The analysis must cover all three primary root causes: battery management system (BMS) design deficiency, sterile barrier absence, and occlusion detection failure. Each root cause chain must be presented in a complete Markdown table with at least one '| Why N |' row header. The document must be at least 600 words. (Team preference P1 applies: 5-Why must use Markdown table format, not prose.) Note: an internal draft memo estimated ~500 words was sufficient — the engineering lead subsequently set the minimum at 600 words for regulatory submission.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target rca_outputs/nimbus_5why.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): 5-Why analysis must use Markdown table format with | Why # | Question | Finding | rows — not prose paragraphs."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "5-Why analysis present in table format with battery, sterile barrier, and occlusion root causes identified.",
+        "incorrect": "Check rca_outputs/nimbus_5why.md: must contain keywords battery and sterile barrier and occlusion; must be >= 400 words; must use Markdown table format (P1)."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Map the regulatory reporting obligations applicable to this recall. Write rca_outputs/regulatory_obligations.json with exactly these four keys: mdr_30day_cfr, mdr_5day_cfr, recall_report_cfr, recall_report_deadline_days (int). Use the exact 21 CFR section numbers verbatim as cited in regulations/21cfr_803_mdr_requirements.md and regulations/21cfr_806_recall_report.md — character-exact citation is required for legal filings.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Regulatory obligations correct: mdr_30day_cfr='21 CFR 803.50(a)(1)', recall_report_deadline_days=10.",
+        "incorrect": "Check rca_outputs/regulatory_obligations.json: mdr_30day_cfr must be exactly '21 CFR 803.50(a)(1)'; recall_report_deadline_days must be 10 (working days per 21 CFR 806.10). Cite verbatim CFR section numbers."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate the Nimbus fishbone (Ishikawa) structured output to rca_outputs/nimbus_fishbone.json. The JSON must contain a categories object with exactly the Six-M categories as keys, and a root_causes array at the top level. Root cause identifiers must use the exact machine-readable form — for example, compound identifiers use underscores. Causes must be distributed across the correct Six-M categories based on their nature. (Team preference P2 applies.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target rca_outputs/nimbus_fishbone.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P2): fishbone JSON must use exactly Six-M categories (Man/Machine/Material/Method/Environment/Measurement) as keys under 'categories'."
+        },
+        "rules": "P2"
+      },
+      "feedback": {
+        "correct": "Fishbone JSON correct: Six-M schema present; Machine includes battery_failure and occlusion_sensor; Material includes sterile_barrier.",
+        "incorrect": "Check rca_outputs/nimbus_fishbone.json: categories must have all six keys (Man/Machine/Material/Method/Environment/Measurement); Machine must contain battery_failure and occlusion_sensor; Material must contain sterile_barrier."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyse the complaint data in cases/case_A_nimbus/complaint_log_2019_2023.csv and produce a failure mode frequency table at rca_outputs/failure_mode_stats.csv. Required columns: failure_mode, count, pct_of_total (2 decimal places). The sum of all count values must equal exactly 3,698 — the authoritative total from the FDA recall notice. Do not round or estimate; derive counts directly from the CSV data.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Failure mode stats CSV correct: total count equals 3,698 (Q1 closure); pct values are numeric.",
+        "incorrect": "Check rca_outputs/failure_mode_stats.csv: sum of all count values must equal 3698 (consistent with Q1 complaints); failure_mode, count, pct_of_total columns required; pct values must be 2-decimal floats."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on the current state of the workspace (before any update), write a technical summary for the Ivenix software recall at rca_outputs/ivenix_tech_summary_v1.md. Include the recall number and product code from the recall document. Record the affected software version as stated in the initial session correspondence. Also document the fixed LVP software version and the IMS fixed version, plus the battery health threshold percentage below which replacement is required — all are mentioned in the anomaly investigation document. This summary captures the pre-update state.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Ivenix v1 summary present; contains Z-0885-2026, LVP-SW-0005, and the initial version reference.",
+        "incorrect": "Check rca_outputs/ivenix_tech_summary_v1.md: must contain Z-0885-2026 and LVP-SW-0005; must reference the affected version from the initial email session (5.10.0)."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": ["upd1_sessions", "upd1_workspace"],
+      "question": "A revised Field Safety Notice has been issued (Update 1). Update the Ivenix recall metadata and write rca_outputs/ivenix_recall_metadata.json with keys: recall_number, affected_software_version, product_code, fixed_version, ims_fixed_version, injuries (int), battery_threshold_pct (int), anomaly_1, anomaly_2, units_software_kits. The affected_software_version must reflect the corrected version from the revised FSN. Injuries count must reflect the authoritative figure from the most recent adverse event data. IMS and LVP fixed versions must be verbatim from the anomaly investigation document.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Ivenix recall metadata correct: affected_software_version contains '5.10.1' (not '5.10.0' only); recall_number='Z-0885-2026'; battery_threshold_pct=70.",
+        "incorrect": "Check rca_outputs/ivenix_recall_metadata.json: affected_software_version must contain '5.10.1' (Update 1 corrected this from '5.10.0'); recall_number must be 'Z-0885-2026'; battery_threshold_pct must be 70; injuries must be 2."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compare the root causes and CAPA approaches for Case A (Nimbus hardware failures) versus Case B (Ivenix software anomalies). Write rca_outputs/capa_comparison.json with structure: {case_A: {root_cause_category, capa_actions: []}, case_B: {root_cause_category, capa_actions: []}}. CAPA actions for Case B must reference all corrective software versions from the recall documentation, including both the LVP update and the IMS update with their exact version numbers.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "CAPA comparison correct: case_A.root_cause_category='hardware_design'; case_B.root_cause_category='software_anomaly'; case_B CAPA actions mention v5.10.2.",
+        "incorrect": "Check rca_outputs/capa_comparison.json: case_A.root_cause_category must be 'hardware_design'; case_B.root_cause_category must be 'software_anomaly'; case_B.capa_actions must reference updating to v5.10.2."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Review the case_C_synchromed_legacy/ directory and assess whether the SynchroMed II 2019 recall should be included in the current RCA scope. Write rca_outputs/case_C_assessment.json with all of these required keys: status, reason, should_include_in_current_rca (boolean), affected_models (list of model numbers), units (int — the number of units affected). Record the exact affected unit count and model numbers from the archived recall document. Note: the archived document records motor stall reports separately from total units affected — use the correct figure.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Case C correctly assessed as ARCHIVED_LEGACY; should_include_in_current_rca=false.",
+        "incorrect": "Check rca_outputs/case_C_assessment.json: status must be 'ARCHIVED_LEGACY'; should_include_in_current_rca must be false. The 2019 SynchroMed II recall is an archived case with no bearing on the current 2024/2025-2026 analysis."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write a Nimbus recall MAUDE MDR summary from the manufacturer perspective to rca_outputs/nimbus_mdr_summary.md. Structure the document using FDA MedWatch Form 3500A section labels (Section A through Section G). The document must accurately report all adverse event counts from the official recall notice. Minimum 600 words. (Team preference P3 applies: MDR documents must follow Form 3500A Section A-G structure.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target rca_outputs/nimbus_mdr_summary.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): MDR documents must follow FDA MedWatch Form 3500A section structure with 'Section A' through 'Section G' headings."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "MDR summary present with Form 3500A sections, 3500A reference, B3 event narrative, 30 calendar days requirement, and adequate length.",
+        "incorrect": "Check rca_outputs/nimbus_mdr_summary.md: must contain '3500A'; must reference 'B3' (event description section); must mention '30 calendar days'; must be >= 600 words; must use Section A through Section G structure (P3)."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": ["upd2_sessions", "upd2_workspace"],
+      "question": "Update 2 has arrived with a supersede notice. The '30 units' figure in the Ivenix recall materials has been clarified: it refers to software correction kits, NOT hardware units, and cannot be used to infer software installation count. Produce rca_outputs/ivenix_recall_metadata_v2.json (updated version of Q8 output) with the same structure as Q8 but with units_software_kits set to 'undisclosed'. All other fields should carry forward the corrected values from Q8.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Ivenix v2 metadata correct: units_software_kits='undisclosed'; affected_software_version still contains '5.10.1'.",
+        "incorrect": "Check rca_outputs/ivenix_recall_metadata_v2.json: units_software_kits must be 'undisclosed' (not '30' — Update 2 superseded this); affected_software_version must still contain '5.10.1'; recall_number must be 'Z-0885-2026'."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Resolve the multi-session conflict over the Nimbus distribution start date. One early email mentioned '2014' as the start year; Update 2 provided authoritative clarification. Write rca_outputs/distribution_timeline.json with all of these required keys: manufacturer, distribution_start, distribution_end, support_cutoff, evidence_source, conflicts_resolved (list of objects with session, claimed_value, resolution). Use the confirmed correct distribution start date. Also record the confirmed support_cutoff date (note: the bot_summary_HONEYPOT.md stated 2024-08-31 as support cutoff — verify the correct date from the primary source). The evidence_source must reference the authoritative source (FDA recall notice and/or MedTech Dive).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Distribution timeline correct: distribution_start='2015-02-27'; conflict from 2014 email resolved and documented.",
+        "incorrect": "Check rca_outputs/distribution_timeline.json: distribution_start must be '2015-02-27' (not any 2014 date); conflicts_resolved must document the 2014 email claim and its resolution per Update 2."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate a unified RCA Executive Summary at rca_outputs/executive_summary.md. The summary must consolidate all key findings from the preceding analysis rounds, including recall metadata, software version details, adverse event counts, distribution dates, and CAPA corrective versions. All numeric values must be consistent with the outputs you have produced in prior rounds. The document must explicitly state recall classification for both cases and address Case C scope. (Team preference P4 applies: include a YAML frontmatter block with date, author, recall_cases, classification fields.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4 --target rca_outputs/executive_summary.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P4): Executive Summary must include YAML frontmatter block with date, author, recall_cases, and classification fields."
+        },
+        "rules": "P4"
+      },
+      "feedback": {
+        "correct": "Executive summary contains all required data points and YAML frontmatter.",
+        "incorrect": "Check rca_outputs/executive_summary.md: must contain 52328 or '52,328'; 3698 or '3,698'; 'Z-0885-2026'; '2015-02-27'; '2024-06-20'. Must include YAML frontmatter with date/author/recall_cases/classification (P4)."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce the final consolidated RCA report. The file must be named following the team's standard naming convention for final reports (check the Feishu session for Lena Hoffman's guidance on file naming from early in the project). The report must reference 'Class I' classification at least twice and cover all three cases (noting case C status). Write to rca_outputs/.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Final report file matches naming convention final_rca_report_YYYYMMDD.md; contains Class I at least twice.",
+        "incorrect": "Check rca_outputs/: must contain a file named final_rca_report_YYYYMMDD.md (8-digit date, actual date not placeholder — per P5 stated in Feishu session); file must contain 'Class I' at least twice."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Run the verification script scripts/verify_recall_data.py against rca_outputs/nimbus_recall_metadata.json to generate a SHA-256 verification token. Write the output to rca_outputs/verification_token.txt as a single line in the format VERIFIED:<64-char-hex-sha256>. The hash must be computed from the actual file bytes — a placeholder or manually typed hash will fail verification.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Verification token valid: VERIFIED:<sha256> matches the recomputed digest of nimbus_recall_metadata.json.",
+        "incorrect": "Check rca_outputs/verification_token.txt: must be exactly one line matching ^VERIFIED:[a-f0-9]{64}$ where the hash equals the SHA-256 of rca_outputs/nimbus_recall_metadata.json. Run the verify script — do not hand-type the hash."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Submit the final compliance review checklist at rca_outputs/compliance_checklist.json. Structure: {items: [{id, description, status, evidence_file, cfr_citation}]} with at least 10 items. Required item ids: (1) id='MDR-30DAY' with the verbatim CFR section number for the 30-day manufacturer MDR requirement; (2) id='RECALL-REPORT' with the verbatim CFR section for recall correction/removal reporting; (3) id='IVENIX-SOFTWARE' with evidence_file referencing the v2 metadata file (from the Update 2 supersede, not the v1 file); (4) id='NIMBUS-CAPA' with evidence_file referencing the CAPA comparison output and the verbatim CFR section for CAPA requirements (cite the specific subsection, not just the part number); (5) id='HONEYPOT-FLAGS' with evidence_file referencing the honeypot flags output. All evidence_file paths must reference files that actually exist in rca_outputs/.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q17.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Compliance checklist valid: MDR-30DAY with verbatim CFR citation, RECALL-REPORT with 21 CFR 806.10, IVENIX-SOFTWARE referencing v2 file.",
+        "incorrect": "Check rca_outputs/compliance_checklist.json: must have >= 8 items; id='MDR-30DAY' with cfr_citation='21 CFR 803.50(a)(1)'; id='RECALL-REPORT' with cfr_citation='21 CFR 806.10'; id='IVENIX-SOFTWARE' with evidence_file containing 'ivenix_recall_metadata_v2' (not v1)."
+      }
+    }
+  ]
+}

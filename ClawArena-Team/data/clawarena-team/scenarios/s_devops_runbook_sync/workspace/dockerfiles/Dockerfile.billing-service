@@ -1,0 +1,18 @@
+# Dockerfile — billing-service
+FROM eclipse-temurin:17-jre-alpine
+
+LABEL maintainer="platform@mercatorrobotics.com"
+LABEL service="billing-service"
+
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+WORKDIR /app
+COPY target/billing-service.jar /app/app.jar
+
+USER appuser
+EXPOSE 8080
+
+ENV LOCK_TIMEOUT_MS=30000
+ENV LOG_LEVEL=INFO
+
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]

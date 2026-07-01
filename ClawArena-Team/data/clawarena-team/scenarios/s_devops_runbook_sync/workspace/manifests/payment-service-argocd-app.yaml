@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: payment-service
+  namespace: argocd
+spec:
+  project: platform
+  source:
+    repoURL: https://gitops.mercatorrobotics.com/helm-charts
+    targetRevision: v3.3.11
+    chart: payment-service
+    helm:
+      releaseName: payment-service
+      valueFiles:
+      - values-prod.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

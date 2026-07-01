@@ -1,0 +1,26 @@
+From: jordan.varela@example.com
+To: eng-leadership@example.com
+Subject: P1 Production Incident — EU-West-2 Payment Service — UPDATE 03:40 UTC
+Date: Thu, 14 May 2026 03:40:00 +0000
+Message-ID: <escalation-001@example.com>
+
+Leadership,
+
+Incident INC-2026-0514-001 UPDATE — 03:40 UTC
+
+Status: Partially contained. Payment error rate down from 68% to 12%.
+
+Actions taken:
+- Rolled back helm chart to 1.18.2 (restored 2048Mi memory limit)
+- Temporarily disabled admission webhook for payments namespace
+- Increased node pool capacity eu-west-2a by 2 nodes
+
+Root cause (preliminary):
+- Chart 1.18.3 introduced a memory limit regression (512Mi vs correct 2048Mi)
+- Admission webhook race condition in validateNamespace() may have contributed
+  to the cascade by admitting pods into an inconsistent namespace state
+- Full RCA in progress; postmortem due 2026-05-20
+
+We are monitoring. Will send all-clear when error rate < 1%.
+
+Jordan Varela, SRE On-Call

@@ -1,0 +1,366 @@
+{
+  "id": "sci5",
+  "desc": "HelixDyne HR compliance: PIP/FMLA/ADEA/OWBPA dispute (Marcus Webb) + federal/Cal/NYS WARN Act analysis for 58→31 employee restructuring — 16 exec_check rounds, 3 updates (Update 2 supersedes NYS WARN v1), 4 preference rules, difficulty vectors V1-V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Establish the baseline FMLA coverage check. Read `company/employee_roster.csv` and `legal/compliance_anchors.json`, then write `reports/fmla_eligibility_check.json` confirming whether HelixDyne is a covered FMLA employer and whether Marcus Webb (EMP-0042) meets all three FMLA eligibility prongs. Use keys: `employer_covered` (bool), `employee_eligible` (bool), `weeks_entitled` (int), `employee_id` (string), `reasons` (list of strings explaining each prong). Every JSON output must include a top-level `reasoning` field.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target reports/fmla_eligibility_check.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target reports/fmla_eligibility_check.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P1): every JSON output must include a top-level `reasoning` field."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "FMLA eligibility confirmed: employer covered (320 > 50), employee eligible (4.5 yrs > 12 mo, 1310 > 1250 hrs, 180 San Jose employees > 50 within 75 miles), 12 weeks entitled, employee_id EMP-0042, reasons list has >= 3 items, actual hours 1310 referenced.",
+        "incorrect": "Check reports/fmla_eligibility_check.json: employer_covered must be true (320 employees > 50 threshold from 29 CFR § 825.110); employee_eligible must be true (tenure 4.5 yrs > 12 months; hours 1,310 > 1,250; San Jose HQ has 180 employees > 50 within 75 miles); weeks_entitled must be 12; employee_id must be exactly 'EMP-0042'; reasons must be a list with >= 3 items (one per FMLA prong); the actual hours worked (1,310) must appear to verify correct threshold comparison. Also: JSON must include a top-level `reasoning` field (P1)."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyze PIP compliance for Marcus Webb. Read `pip_case/marcus_webb_pip_v1.md` (the original, now-withdrawn version) and `company/hr_policy_handbook.md` Section 4.3. Write `reports/pip_compliance.json` with keys: `duration_days` (int, from pip_v1), `compliant` (bool), `minimum_required_days` (int, per company policy), `policy_source` (string, exact source of the minimum), `deficiencies` (list). Do NOT reference pip_v2 here — analyze the ORIGINAL pip_v1 document as issued. Every JSON output must include a top-level `reasoning` field.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target reports/pip_compliance.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target reports/pip_compliance.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P1): every JSON output must include a top-level `reasoning` field."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "PIP analysis correct: pip_v1 had 21-day duration, non-compliant with company policy 30-day minimum from HR Handbook Section 4.3.",
+        "incorrect": "Check reports/pip_compliance.json: duration_days must be 21 (from pip_v1); compliant must be false; minimum_required_days must be 30 (from HR Handbook Section 4.3 — company policy commitment, not SHRM or statutory); policy_source must reference 'HR Handbook Section 4.3' or 'Section 4.3'. Also: JSON must include a top-level `reasoning` field (P1)."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": ["upd1_sessions", "upd1_workspace"],
+      "question": "Update 1 has arrived with pip_v2.md (30-day period) and HR team discussion confirming the revision. Analyze the FMLA protection window vs. Marcus's termination. Read `pip_case/marcus_webb_personnel_file.md` for dates. Write `reports/fmla_timeline.json` with keys: `fmla_start_date` (ISO8601 string), `fmla_end_date` (ISO8601 string, 12 weeks from start), `termination_date` (ISO8601 string), `in_protection_window` (bool), `risk_level` (string). Every JSON output must include a top-level `reasoning` field.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target reports/fmla_timeline.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target reports/fmla_timeline.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P1): every JSON output must include a top-level `reasoning` field."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "FMLA timeline correct: start 2025-08-15, end 2025-11-07 (12 weeks), termination 2025-09-12, in_protection_window true, risk_level HIGH.",
+        "incorrect": "Check reports/fmla_timeline.json: fmla_start_date must be 2025-08-15; fmla_end_date must be 2025-11-07 (exactly 12 weeks = 84 days from start); termination_date must be 2025-09-12 (use the authoritative personnel file); in_protection_window must be true; risk_level must be HIGH. Also: JSON must include a top-level `reasoning` field (P1)."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Assess pretextual termination risk. Read `pip_case/contractor_engagement_log.md` and `pip_case/performance_review_2024.md`. Write `reports/pretext_risk_assessment.json` with keys: `contractor_overlap_days` (int, days between contractor start and Marcus's termination), `performance_rating_2024_q3` (float), `pretext_indicators` (list of strings, ≥2 items), `risk_score` (int, 0–100). Every JSON output must include a top-level `reasoning` field.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target reports/pretext_risk_assessment.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target reports/pretext_risk_assessment.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P1): every JSON output must include a top-level `reasoning` field."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Pretext assessment correct: contractor started 2025-09-02 (10 days before termination 2025-09-12), Q3 rating 2.1, risk_score >= 70, >= 2 pretext indicators.",
+        "incorrect": "Check reports/pretext_risk_assessment.json: contractor_overlap_days must be 10 (CTR-2025-041 started 2025-09-02; termination 2025-09-12); performance_rating_2024_q3 must be 2.1; risk_score must be >= 70; pretext_indicators must have >= 2 items. Also: JSON must include a top-level `reasoning` field (P1)."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyze federal WARN Act applicability for the ORIGINAL restructuring plan. Read `legal/warn_act_federal_summary.md` and `layoff/restructuring_plan_v1.md`. Write `reports/warn_federal.json` with keys: `employer_qualifies` (bool), `employees_affected` (int), `event_type` (string), `threshold_met` (bool), `notice_days_required` (int), `applicable_rule` (string). Use full citation format for all legal references. Every JSON output must include a top-level `reasoning` field.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target reports/warn_federal.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target reports/warn_federal.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P1/P4): JSON must contain `reasoning` field; legal citations must use full format (e.g., `29 U.S.C. § 2102`)."
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "Federal WARN correct: employer qualifies (320 > 100), 58 employees affected, threshold_met true (58 > 50 combined or SD plant closing with aggregation), notice_days_required 60, applicable_rule references plant closing or mass layoff.",
+        "incorrect": "Check reports/warn_federal.json: employer_qualifies must be true (320 employees > 100 threshold per 29 U.S.C. § 2101(a)(1)); employees_affected must be 58; notice_days_required must be 60 (29 U.S.C. § 2102); applicable_rule must reference 'plant closing' or 'mass layoff'. Also: JSON must include `reasoning` field and full legal citations (P1/P4)."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyze Cal-WARN Act applicability for the original 58-person plan. Read `legal/cal_warn_act_memo.md` and `legal/compliance_anchors.json`. Write `reports/warn_california.json` with keys: `applies` (bool), `employer_threshold` (int, Cal-WARN coverage threshold), `trigger_threshold` (int, employees required to trigger Cal-WARN), `notice_days` (int), `additional_obligations` (list of strings for Cal-WARN-specific requirements beyond federal WARN). Cite the California Labor Code sections in full citation format. Every JSON output must include a top-level `reasoning` field.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target reports/warn_california.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target reports/warn_california.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P1/P4): JSON must have `reasoning`; cite California Labor Code § 1400 in full citation format."
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "Cal-WARN correct: applies true, employer_threshold 75, trigger_threshold 50, notice_days 60, additional_obligations mentions California EDD.",
+        "incorrect": "Check reports/warn_california.json: applies must be true; employer_threshold must be 75 (per California Labor Code § 1400); trigger_threshold must be 50 (no 33% ratio requirement unlike federal); notice_days must be 60; additional_obligations must include reference to California Employment Development Department (EDD). Also: JSON must include `reasoning` field and full legal citations (P1/P4)."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyze NYS WARN Act applicability under the ORIGINAL restructuring plan v1. Read `legal/nys_warn_act_memo.md` and `layoff/restructuring_plan_v1.md`. Write `reports/warn_nys_v1.json` with keys: `applies` (bool), `ny_employees_affected` (int), `threshold` (int, plant closing trigger), `notice_days` (int), `triggered` (bool). Use the correct NYS WARN plant closing threshold and notice period. Every JSON output must include a top-level `reasoning` field.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target reports/warn_nys_v1.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target reports/warn_nys_v1.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P1): JSON must contain `reasoning` field."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "NYS WARN v1 correct: notice_days 90, threshold 25, ny_employees_affected 11, triggered false.",
+        "incorrect": "Check reports/warn_nys_v1.json: notice_days must be 90 (NY Labor Law § 860-b, 2023 amendment); threshold must be 25 (plant closing trigger); ny_employees_affected must be 11 (from restructuring_plan_v1.md NY office); triggered must be false (11 < 25). Also: JSON must include a top-level `reasoning` field (P1)."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Assess ADEA and OWBPA compliance for Marcus Webb's severance. Read `company/employee_roster.csv` (Marcus's age) and `legal/owbpa_waiver_template.md`. Write `reports/adea_compliance.json` with keys: `employee_age` (int), `adea_protected` (bool), `employer_threshold_met` (bool), `individual_termination` (bool), `consideration_days` (int), `revocation_days` (int). Cite the exact OWBPA provision in your reasoning. Every JSON output must include a top-level `reasoning` field.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target reports/adea_compliance.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target reports/adea_compliance.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P1/P4): JSON must have `reasoning`; cite OWBPA provision in full citation format."
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "ADEA compliance correct: age 42, adea_protected true, individual termination requires 21 days, revocation_days 7.",
+        "incorrect": "Check reports/adea_compliance.json: employee_age must be 42 (from employee_roster.csv EMP-0042); adea_protected must be true (42 >= 40 per 29 U.S.C. § 631); employer_threshold_met must be true (320 >> 20); individual_termination must be true; consideration_days must be 21 (individual termination — per 29 U.S.C. § 626(f)(1)(F)(i)); revocation_days must be 7. Also: JSON must include `reasoning` field and full legal citations (P1/P4)."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Calculate the EEOC filing deadline for Marcus Webb. Read `legal/eeoc_filing_guide.md` and `reports/fmla_timeline.json` (for the exact termination date you established in Q3). Write `reports/eeoc_deadline.json` with keys: `state_agency_exists` (bool), `filing_deadline_days` (int), `deadline_date` (ISO8601 string, calculated from the termination date), `statute_basis` (string naming the applicable statutes). The deadline_date must be computed from the EXACT termination date recorded in `reports/fmla_timeline.json`. Cite the EEOC regulatory provision in full citation format. Every JSON output must include a top-level `reasoning` field.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target reports/eeoc_deadline.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target reports/eeoc_deadline.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P1/P4): JSON must have `reasoning`; cite EEOC regulatory provision in full citation format."
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "EEOC deadline correct: California CRD exists, 300 days, deadline 2026-07-08, statute_basis references Title VII and ADEA.",
+        "incorrect": "Check reports/eeoc_deadline.json: state_agency_exists must be true (California CRD qualifies); filing_deadline_days must be 300 (California deferral state per 29 CFR § 1601.13(a)(4)(ii)); deadline_date must be 2026-07-08 (300 days from 2025-09-12 per Q3 fmla_timeline.json); statute_basis must reference both 'Title VII' and 'ADEA'. Also: JSON must include `reasoning` field and full citations (P1/P4)."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Draft the federal WARN Act notice for the original 58-employee restructuring plan. Write `warn_notice_federal_final.md`. The notice must include: (a) the employer name HelixDyne Software; (b) the event type (plant closing or mass layoff); (c) the notice period in days (numeric); (d) the statute citation for the notice requirement; (e) the exact count of affected employees. The document must carry the header block: `Document: [name] | Version: [n.n] | Date: [YYYY-MM-DD] | Status: [DRAFT/FINAL]` on the very first line. Include the footer: `Prepared by: People Operations | Review required before distribution`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P3 --target warn_notice_federal_final.md",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P3 --target warn_notice_federal_final.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P2/P3): formal legal documents must carry the header block `Document: [...] | Version: [n.n] | Date: [...] | Status: [...]`; all WARN notice drafts must carry the footer `Prepared by: People Operations | Review required before distribution`."
+        },
+        "rules": "P2,P3"
+      },
+      "feedback": {
+        "correct": "Federal WARN notice correct: contains 60-day notice period, exact count 58 employees, plant closing or mass layoff reference, 29 U.S.C. § 2102 citation, header block on very first line, proper footer.",
+        "incorrect": "Check warn_notice_federal_final.md: must contain '60' (days notice); must reference exact affected employee count '58'; reference 'plant closing' or 'mass layoff'; cite 29 U.S.C. § 2102; header block must appear on the VERY FIRST LINE; include footer `Prepared by: People Operations | Review required before distribution`."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Draft the California WARN Act notice. Write `warn_notice_cal_final.md`. Cal-WARN has requirements beyond federal: the notice must go to the California Employment Development Department (use the full official name exactly) in addition to employees. Include: (a) the Cal-WARN statute citation (California Labor Code § 1401); (b) the notice period; (c) the trigger employee count; (d) both notice recipients (employees AND California EDD). Apply the same document header and footer requirements as Q10.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P3 --target warn_notice_cal_final.md",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P3 --target warn_notice_cal_final.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P2/P3): document header block required; WARN notices must include `Prepared by: People Operations | Review required before distribution` footer."
+        },
+        "rules": "P2,P3"
+      },
+      "feedback": {
+        "correct": "Cal-WARN notice correct: California Employment Development Department verbatim, 60 days, 50 trigger count, proper header and footer.",
+        "incorrect": "Check warn_notice_cal_final.md: must contain 'California Employment Development Department' (exact, full name); must contain '60' (days); must reference '50' (trigger threshold); must include document header and footer."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": ["upd2_sessions", "upd2_workspace"],
+      "question": "Update 2 has arrived: the Board revised the restructuring plan. San Diego is retained; only 31 NY employees are affected. This supersedes the 58-person plan. Write `reports/warn_nys_v2.json` (updated NYS WARN analysis for 31 employees) AND `reports/supersede_log.json` (recording which prior conclusions were superseded and what substantively changed). warn_nys_v2.json must use keys: `employees_affected` (int), `threshold` (int), `triggered` (bool), `notice_days` (int), `plan_version` (string). supersede_log.json must record that the Q7 conclusion is superseded and document the change in triggered status. Every JSON output must include a top-level `reasoning` field.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target reports/warn_nys_v2.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target reports/warn_nys_v2.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P1): JSON outputs must contain `reasoning` field."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "NYS WARN v2 correct: 31 employees, threshold 25, triggered true (31 > 25), notice_days 90, supersede_log records Q7 replacement with triggered-status change.",
+        "incorrect": "Check reports/warn_nys_v2.json: employees_affected must be 31 (Plan v2); threshold must be 25; triggered must be true (31 >= 25); notice_days must be 90; plan_version must reference 'v2'. Check reports/supersede_log.json: must reference Q7 or warn_nys_v1 as superseded, and document the triggered-status change (false→true) and employee count change. Also: JSON must include `reasoning` field (P1)."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compile the comprehensive risk matrix. Write `reports/risk_matrix_final.csv` — a UTF-8 with BOM CSV file (the file must begin with the BOM byte sequence \\xef\\xbb\\xbf) with comma-separated columns: `risk_id,law,risk_description,severity,status,recommended_action`. Include at least 8 risk rows covering ALL of: (1) FMLA retaliation, (2) ADEA/age discrimination, (3) federal WARN Act, (4) Cal-WARN Act, (5) PIP non-compliance, (6) pretextual termination, (7) NYS WARN Act (using the v2 analysis: 31 NY employees, 90-day notice), (8) EEOC filing deadline exposure (must include the exact deadline date 2026-07-08). Severity values must be exactly HIGH, MEDIUM, or LOW. FMLA retaliation and Cal-WARN rows must have severity HIGH. Every row must include a non-empty `recommended_action`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P5 --target reports/risk_matrix_final.csv",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P5 --target reports/risk_matrix_final.csv",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P5): CSV files must use UTF-8 with BOM encoding (file begins with \\xef\\xbb\\xbf bytes)."
+        },
+        "rules": "P5"
+      },
+      "feedback": {
+        "correct": "Risk matrix correct: >= 8 rows covering all 8 required risk areas, FMLA and Cal-WARN severity HIGH, NYS WARN row references 31 employees and 90 days, EEOC row includes 2026-07-08, all recommended_action fields non-empty, UTF-8 with BOM.",
+        "incorrect": "Check reports/risk_matrix_final.csv: must have >= 8 data rows; NYS WARN row must reference '31' (NY employees under v2) and '90' (days notice); EEOC row must include '2026-07-08' (exact deadline date from Q9); severity values must only be HIGH, MEDIUM, or LOW; FMLA retaliation and Cal-WARN rows must have severity HIGH; every row must have non-empty recommended_action; file must begin with UTF-8 BOM bytes (\\xef\\xbb\\xbf) per P5."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": ["upd3_sessions", "upd3_workspace"],
+      "question": "Update 3 has arrived from outside counsel: the OWBPA waiver for Marcus Webb is missing a mandatory element. Draft the compliant waiver document at `legal/owbpa_waiver_marcus.md`. Consult `legal/owbpa_waiver_template_v2.md` and ensure the document satisfies all OWBPA requirements for an individual (non-group) termination, including the applicable consideration period, revocation period, full statute name, and mandatory attorney consultation language. Apply the document header block — this is a formal legal document.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target legal/owbpa_waiver_marcus.md",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target legal/owbpa_waiver_marcus.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P2): formal legal documents must carry the header block `Document: [...] | Version: [n.n] | Date: [...] | Status: [...]`."
+        },
+        "rules": "P2"
+      },
+      "feedback": {
+        "correct": "OWBPA waiver correct: contains 21 days, 7 days, Age Discrimination in Employment Act (full name), attorney consultation advice, document header.",
+        "incorrect": "Check legal/owbpa_waiver_marcus.md: must contain '21 days' (individual consideration period per 29 U.S.C. § 626(f)(1)(F)(i)); must contain '7 days' (revocation period per 29 U.S.C. § 626(f)(1)(G)); must contain 'Age Discrimination in Employment Act' (full official name); must contain explicit attorney consultation advice (per 29 U.S.C. § 626(f)(1)(E)); must carry document header block (P2)."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Draft the EEOC complaint summary for Marcus Webb's potential charge (internal risk assessment, not an actual filing). Write `legal/eeoc_complaint_draft.json` with keys: `complainant` (string, must include full name and employee ID), `respondent` (string), `bases_of_discrimination` (list of strings), `date_of_harm` (ISO8601 string), `filing_deadline` (ISO8601 string), `claims` (list of strings). The `bases_of_discrimination` must include both age discrimination and FMLA retaliation. The `date_of_harm` must match the termination date from `reports/fmla_timeline.json`. The `filing_deadline` must match the deadline date from `reports/eeoc_deadline.json`. Every JSON output must include a top-level `reasoning` field.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target legal/eeoc_complaint_draft.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target legal/eeoc_complaint_draft.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Preference reminder (P1): JSON must contain top-level `reasoning` field."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "EEOC draft correct: bases include age and FMLA retaliation, complainant includes 'Marcus Webb' AND 'EMP-0042', date_of_harm is 2025-09-12 matching Q3, filing_deadline matches Q9 (2026-07-08).",
+        "incorrect": "Check legal/eeoc_complaint_draft.json: bases_of_discrimination must contain 'age' and 'FMLA retaliation'; complainant must include 'Marcus Webb' and 'EMP-0042'; date_of_harm must be 2025-09-12 (must match fmla_timeline.json termination_date from Q3); filing_deadline must be 2026-07-08 (must match eeoc_deadline.json deadline_date from Q9). Also: JSON must include `reasoning` field (P1)."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Final compliance sign-off. Compute the SHA-256 hash of the EXACT bytes of `reports/risk_matrix_final.csv` and write `reports/signoff.txt` containing exactly one line in the format `VERIFIED:<hash>` where <hash> is the 64-character lowercase hex SHA-256 digest of that file's contents. You must actually run the hash computation — a placeholder or hand-typed hash will not match the validator's recomputation.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Sign-off token valid: VERIFIED:<sha256> matches recomputed digest of reports/risk_matrix_final.csv.",
+        "incorrect": "Check reports/signoff.txt: must contain exactly one line matching ^VERIFIED:[a-f0-9]{64}$ where the hash equals the SHA-256 of reports/risk_matrix_final.csv as computed by the validator."
+      }
+    }
+  ]
+}

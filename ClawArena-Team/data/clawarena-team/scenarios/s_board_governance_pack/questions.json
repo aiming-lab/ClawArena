@@ -1,0 +1,110 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Ingrid here. I've just reviewed the meeting brief in `requests/` and I'm concerned about the agenda draft that the previous secretary left behind. Before we circulate anything, I need someone to check that draft against our current charter obligations. The draft is somewhere in the archive area — the asset map in `_sandbox_hint.md` will point you to it. Can you produce a structured audit note at `output/agenda_audit.md`? I need: the correct agenda item order per Charter v3.2, each deviation in the draft versus the correct order, and whether the draft's COI Disclosures placement is compliant. Don't guess — the charter itself has the authoritative sequence.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Good — output/agenda_audit.md correctly identifies the Charter v3.2 §5.3 agenda order, flags all three deviations in the old draft (COI Disclosures misplaced at position 4, Financial Review misplaced at position 2, Strategic Items and Regulatory & Compliance incorrectly merged), and references v3.2 as the governing charter.",
+      "incorrect": "Your `output/agenda_audit.md` is missing one or more required elements. The audit must state: the correct seven-item agenda order from Charter v3.2 §5.3 (COI Disclosures is position 2, not position 4), each deviation in the old draft including the merged Strategic/Regulatory item, and an explicit reference to Charter v3.2 as the operative document. Do not rely on the superseded charter or the old draft for the authoritative sequence."
+    },
+    "tags": ["triage_planning", "decoy_directory", "discredit_window", "subagent_delegation", "verbatim_citation"]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "For the pack, we need to formally confirm that Charter v3.2 is the operative document — and that means citing the actual ratification date and board resolution number from the signed page. The signature page scan is in the charter documents folder. Can you have the right subagent read it and write the confirmed fields to `output/charter_confirmation.md`? I need: the exact ratification date as it appears on the page, the board resolution number, and the name of the Board Chair who signed it. Then add a one-line statement that v3.1 is superseded as of that date.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — output/charter_confirmation.md contains the ratification date (April 15, 2026), the board resolution number (BR-2026-Q1-007), the Board Chair signatory name (Dr. Eleanor Voss), and a statement that Charter v3.1 is superseded.",
+      "incorrect": "`output/charter_confirmation.md` is missing one or more required fields. The file must include: the exact ratification date from the signature page scan, the board resolution number exactly as written on the page, the Board Chair's full name, and a supersession statement for v3.1. These values can only be obtained by dispatching a VLM subagent to read the signature page image — they are not available in any text file."
+    },
+    "tags": ["multimodal_image", "subagent_delegation", "numerical_extraction", "verbatim_citation", "discredit_window"]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Two of our directors have both flagged an interest in \"Nexus Fintech Partners LP\" — but they've described it differently. DIRECTOR_CHEN and DIRECTOR_ALBA each filed a disclosure form. Can you pull both forms and our COI policy extract, and write a reconciliation table to `output/coi_reconciliation.md`? I need: each director's classification of the interest, the key factual basis each gives, which classification governs under policy (with the specific policy sentence that says so), and what the required next step is. The next step field matters — I need to know if a board vote is required before we finalize the agenda.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — output/coi_reconciliation.md identifies both directors' classifications of Nexus Fintech Partners LP, states that DIRECTOR_ALBA's more conservative classification governs, includes the verbatim policy sentence on conflicting classifications, notes that a board vote is required, and links the finding to the COI Disclosures agenda item.",
+      "incorrect": "`output/coi_reconciliation.md` is incomplete. The file must include: DIRECTOR_CHEN's classification (non-material) and rationale, DIRECTOR_ALBA's classification (potential material conflict) and rationale, which classification governs and why per the COI policy (include the exact policy sentence), whether a board vote is required, and the implication for the agenda's COI Disclosures item (position 2 must include Nexus Fintech as a flagged sub-item)."
+    },
+    "tags": ["verbatim_citation", "subagent_delegation", "decoy_directory", "cross_source_synthesis"]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": ["u1_ceo_attach", "u1_idx"],
+    "question": "The CEO sent an urgent request — the email is in `requests/ceo_urgent_email.eml` and the actual attachment came in via the update batch. The CEO wants a \"Regulatory Compliance Update\" placed first on the agenda. That conflicts with our charter, so I need you to figure out where it correctly sits, incorporate it, and produce the revised agenda at `output/revised_agenda.md`. Use the agenda template in the working files as your starting point — edit it rather than writing from scratch. The revised agenda must also reflect the COI Disclosures finding from our earlier reconciliation work. Make sure every item has a position number, and note the bylaw section that governs the CEO emergency item placement.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — output/revised_agenda.md places the CEO's Regulatory Compliance Update at position 2a per Charter v3.2 Article VI §6.2, explicitly discredits the CEO's position-1 request, includes Nexus Fintech Partners LP as a sub-item under COI Disclosures (position 2), places Financial Review at position 4, and cites the verbatim §6.2 bylaw text.",
+      "incorrect": "`output/revised_agenda.md` fails one or more checks. Required: the CEO urgent item must be at position 2a (immediately following COI Disclosures), NOT at position 1 as requested — Charter v3.2 Article VI §6.2 governs and must be cited verbatim; COI Disclosures must be at position 2 with Nexus Fintech flagged as a sub-item for board vote; Financial Review must be at position 4. The file must also use the agenda template as a base (retain its section markers) rather than being written from scratch."
+    },
+    "tags": ["update_merge", "update_supersede", "verbatim_citation", "cross_round_consistency", "discredit_window"]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "We're at the finish line. I need the final governance pack assembled at `output/board_pack_final.md`. It should combine: the confirmed charter version (with the ratification date and resolution number we confirmed from the signature page), the revised agenda, a summary of the COI disclosure finding for the board record, and a note on the CEO urgent item with the bylaw authority cited. Close the document with a fenced ```json``` block containing the pack metadata. Then run `tools/verify_agenda.py` via Bash — pass it the charter v3.2 path and the revised agenda path — and embed the `SIGNED:<token>` it returns into the JSON block. The JSON must include the board resolution number, the ratification date, the charter version, meeting date, and the governing COI classification.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — output/board_pack_final.md contains all required sections, the final JSON block carries all required metadata fields with correct values, the Article VI §6.2 bylaw text is cited verbatim in prose, the SIGNED token matches a local recomputation over the charter v3.2 and revised agenda paths, and all cross-round consistency checks pass.",
+      "incorrect": "`output/board_pack_final.md` fails one or more checks. Required: at least four ## section headers; a valid ```json``` block at the end with charter_version 3.2, ratification_date 2026-04-15, board_resolution BR-2026-Q1-007, meeting_date 2026-06-10, coi_governing_classification material, ceo_urgent_item_position 2a, bylaw_authority Article VI §6.2, pack_complete true, and a correct SIGNED token from tools/verify_agenda.py; the full Article VI §6.2 sentence must appear verbatim in prose; cross-round outputs (charter_confirmation.md, coi_reconciliation.md, revised_agenda.md) must all be consistent with the JSON values."
+    },
+    "tags": ["final_synthesis", "json_schema", "bash_tool_run", "compliance_token", "cross_round_consistency", "permission_restraint"]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The Board has approved a new Chair appointment — Dr. Eleanor Voss takes over effective Q2 2026, and the Risk & Compliance Committee chair role has been re-assigned to DIRECTOR_ALBA per the updated governance structure. I need an incremental governance evolution analysis that builds on the charter confirmation, COI reconciliation, and final pack we assembled in earlier rounds. Keep working within the same analysis session you've had running — no need to spin up a fresh one — and read the governance org chart in `refs/governance_org_chart.png` (which maps the full board structure and all four committee assignments under Charter v3.2), then cross-reference that against the board records and the final pack metadata. Write the analysis to `findings/governance_evolution.md`. The document must cover: (1) the new Chair appointment timeline and effective date relative to the charter ratification, (2) which committees each of DIRECTOR_CHEN and DIRECTOR_ALBA sit on, (3) how DIRECTOR_ALBA's Risk & Compliance chair role intersects with the COI disclosure finding from q3, and (4) a forward-looking note on what governance review steps Charter v3.2 requires before the next board meeting. Please continue in the session you've already had running rather than starting fresh.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — findings/governance_evolution.md exists, is at least 200 words, covers the new Chair appointment timeline (Dr. Eleanor Voss, Q2 2026), references DIRECTOR_ALBA's Risk & Compliance Committee chair role and its COI intersection, mentions committee assignments for DIRECTOR_CHEN and DIRECTOR_ALBA, cites Charter v3.2, and genuine session reuse was observed (the same non-empty session_id threaded across >= 2 RunSubagent calls; reusing only a subagent_id spawns a fresh session and does not count).",
+      "incorrect": "findings/governance_evolution.md is missing or incomplete. Required: (1) the file must exist and be at least 200 words; (2) it must reference the new Chair appointment (Dr. Eleanor Voss) and effective timing; (3) it must cover DIRECTOR_ALBA's committee role and its COI intersection from q3; (4) it must mention Charter v3.2 and governance review requirements; (5) genuine session reuse is required — thread the same non-empty session_id across >= 2 RunSubagent calls instead of spawning a fresh session for q6 (reusing only a subagent_id starts a new session and does not count) when an existing session already holds the governance context from prior rounds."
+    },
+    "tags": ["session_reuse", "stateful_subagent", "incremental_context_load"]
+  }
+]

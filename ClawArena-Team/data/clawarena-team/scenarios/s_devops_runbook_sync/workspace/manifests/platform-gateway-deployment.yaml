@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: platform-gateway
+  namespace: prod
+  labels:
+    app: platform-gateway
+    team: platform
+    version: "1.3.22"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: platform-gateway
+  template:
+    metadata:
+      labels:
+        app: platform-gateway
+        version: "1.3.22"
+    spec:
+      serviceAccountName: platform-gateway-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      containers:
+      - name: platform-gateway
+        image: registry.mercatorrobotics.com/platform-gateway:1.3.22
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+        resources:
+          requests:
+            cpu: 186m
+            memory: 548Mi
+          limits:
+            cpu: 549m
+            memory: 1283Mi
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: platform-gateway-db-secret
+              key: host
+        - name: DB_PORT
+          value: "5432"
+        - name: LOCK_TIMEOUT
+          value: "30000"
+        - name: LOG_LEVEL
+          value: INFO

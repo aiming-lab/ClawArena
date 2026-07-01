@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: analytics-etl
+  namespace: argocd
+spec:
+  project: platform
+  source:
+    repoURL: https://gitops.mercatorrobotics.com/helm-charts
+    targetRevision: v4.2.4
+    chart: analytics-etl
+    helm:
+      releaseName: analytics-etl
+      valueFiles:
+      - values-prod.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

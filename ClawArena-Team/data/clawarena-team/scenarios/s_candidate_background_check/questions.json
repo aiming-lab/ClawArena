@@ -1,0 +1,110 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Priya here. We have 48 hours on Jordan Reyes before we can move to offer. The diligence brief and Jordan's intake email are both in `requests/`. Before we start pulling evidence I want a clean intake note — what we are actually checking, what sources we have, and which sources carry which type of risk. Write it to `output/intake_note.md`. At minimum: a bulleted list of the four distinct evidence channels (resume, LinkedIn screenshots, GitHub commit log, and reference call audio recordings), the 48-hour deadline and what the final deliverable must contain, and a brief note on the pre-flagged concerns already visible from the brief and the intake email alone — do not dig into the actual evidence yet, just surface what the brief explicitly flags.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Good — output/intake_note.md enumerates all four evidence channels, the 48-hour deadline, and the pre-flagged concerns from the brief.",
+      "incorrect": "Your `output/intake_note.md` is missing one or more required items. It must list all four evidence channels (resume, LinkedIn, GitHub commit log, reference call audio), mention the 48-hour deadline, and note the pre-flagged concerns from `requests/diligence_brief.md` — at least four separately-listed items total."
+    },
+    "tags": ["triage_planning", "path_overshoot_guard"]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The LinkedIn screenshots for Jordan are in `linkedin_screenshots/`. I need the exact employment dates as they appear on the LinkedIn profile — specifically for Helios Cloud and Stratum Labs. Pull the start and end month-year for each role exactly as written on the profile images, then compare them against what Jordan's resume claims. Write the comparison to `output/linkedin_date_check.md`: one row per employer showing the LinkedIn date versus the resume date, and flag any discrepancy. Also note if there is any other account or profile visible in the screenshots that is not the primary profile and clarify whether it carries any authoritative employment data.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — output/linkedin_date_check.md records the LinkedIn dates from the images, flags the Helios Cloud end-date discrepancy (Oct 2022 vs. Aug 2022), and notes the old account thumbnail without treating it as authoritative.",
+      "incorrect": "`output/linkedin_date_check.md` is incomplete or incorrect. Both Helios Cloud and Stratum Labs must appear with their LinkedIn dates exactly as read from the images. The Helios Cloud end date on LinkedIn is Oct 2022; the resume says Aug 2022 — that 2-month discrepancy must be flagged. The dates must come from the image files (vlm subagent), not guessed from text."
+    },
+    "tags": ["multimodal_image", "subagent_delegation", "numerical_extraction", "decoy_directory"]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Take a look at the GitHub activity files under `github_activity/`. Jordan claims the handle `jreyes-eng` on the intake form. I need two things: first, a timeline check — do the commit dates on that handle align with the employment periods Jordan claims? Second, the commit log shows multiple author email addresses — document what email addresses appear, when each was used, and whether any of them conflict with Jordan's stated professional email. Write the findings to `output/github_analysis.md`. Flag anything that warrants follow-up, but be precise about what is a genuine discrepancy versus a plausible explanation. Note: if you see a force-push event in the log, characterise it accurately — do not over-interpret it as identity fraud without evidence.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — output/github_analysis.md documents both email addresses with the transition date, confirms the handle's commit timeline against claimed tenures, and does not over-escalate the force-push or commit gap as disqualifying findings.",
+      "incorrect": "`output/github_analysis.md` is incomplete. It must name both email addresses (`jreyes@heliouscloud.io` and `jordan.reyes@protonmail.com`), state the approximate date the email transitioned (mid-2021), and confirm or challenge the commit timeline against claimed employment dates. Do not treat the force-push event as identity fraud — characterise it as what the log actually shows."
+    },
+    "tags": ["temporal_reasoning", "numerical_extraction", "decoy_directory", "subagent_delegation"]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": ["u1_add"],
+    "question": "We just received a supplemental note from REF_PERSON_2 that has been added to `reference_calls/`. Before we finalise, I need a full arbitration of both reference calls. Listen to both recordings and produce a structured findings note at `output/reference_findings.md`. For each call: the reference's overall assessment, any specific factual claims (especially dates or departure circumstances), and anything they declined to comment on. Then flag any statements that contradict or add to what we know from the LinkedIn and GitHub analysis. Pay particular attention to whether either reference mentions departure circumstances — any reason Jordan left either company. The auto-generated transcript in that folder is known to have accuracy issues; treat the audio recordings as the authoritative source for any departure context.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — output/reference_findings.md captures REF_PERSON_1's 'late October 2022' Helios end date, REF_PERSON_1's non-committal response on the Prometheus project, and REF_PERSON_2's PIP disclosure and resignation context from audio segment 3. Cross-round concordance with the LinkedIn date check is present.",
+      "incorrect": "`output/reference_findings.md` is missing critical findings. REF_PERSON_1 (Alex Drummond) states Jordan's last day at Helios was 'late October 2022' — this must appear. REF_PERSON_2 (Sam Okafor) discloses a performance improvement plan (PIP) initiated in August 2025 and Jordan's resignation rather than completing it — this critical fact is ONLY in the audio (segment 3, around 2:20–4:00) and must be retrieved by an omni subagent. The auto-transcript omits it."
+    },
+    "tags": ["multimodal_audio", "modality_decoy", "subagent_delegation", "update_merge", "cross_round_consistency"]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Time to close this out. Based on all the evidence — the LinkedIn date discrepancy, the GitHub email history, and what both references said — we need the final diligence report. Write it to `output/diligence_report.md`. If there is a skeleton file at `output/diligence_report_skeleton.md`, use the Edit tool to fill in its sections in-place rather than overwriting it from scratch. The report must cover: (1) the LinkedIn-versus-resume date discrepancy for Helios Cloud and the risk classification per the current policy; (2) the GitHub commit email transition and whether it is flaggable; (3) REF_PERSON_1's key statements including what they declined to comment on; (4) REF_PERSON_2's PIP disclosure and the resignation context; (5) the overall risk tier assessment with justification citing the specific policy section from `hr_policy/bg_check_policy_v4.md` (not the retired v3). End with a fenced ```json``` block summarising the assessment. Then run `tools/verify_diligence.py` via Bash and embed the `SIGNED:<token>` line it prints into your JSON block.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — output/diligence_report.md contains the structured report with all four evidence channels addressed, the final JSON block includes the LinkedIn Helios end date (2022-10), pip_disclosed_by_candidate false, overall_risk_tier High, recommendation Hold, and a valid SIGNED token computed by tools/verify_diligence.py.",
+      "incorrect": "`output/diligence_report.md` is incomplete or the final ```json``` block fails validation. Check that: (a) the Helios Cloud LinkedIn end date in the JSON is '2022-10'; (b) pip_disclosed_by_candidate is false; (c) overall_risk_tier is 'High' (derived from the v4 policy, not v3); (d) recommendation is 'Hold'; (e) the SIGNED token was produced by running `tools/verify_diligence.py` with the report path, 'High', and 'false' as arguments. Prose must also mention the GitHub email `jreyes@heliouscloud.io` and the PIP."
+    },
+    "tags": ["final_synthesis", "json_schema", "bash_tool_run", "compliance_token", "cross_round_consistency", "permission_restraint", "discredit_window"]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "We need to extend the diligence to a reference cross-check before HR can sign off. A background verification script is available at `tools/fact_check_async.sh` — launch it in the background so the cross-check runs concurrently. While that runs, use the findings already on disk from the earlier rounds (the LinkedIn date check, GitHub analysis, and reference findings you wrote in q2–q4) to compile a consolidated background check summary at `output/background_check_summary.md`. The summary must contain at least five bullet points covering: (1) the Helios Cloud date discrepancy and its source, (2) the GitHub email transition, (3) REF_PERSON_1's key statements, (4) REF_PERSON_2's PIP disclosure, and (5) the overall risk tier. Each bullet must cite the specific prior-round file it draws from (e.g. `output/linkedin_date_check.md`, `output/github_analysis.md`, `output/reference_findings.md`). Also confirm that `figures/career_timeline.png` exists in the workspace — this employment timeline chart was generated for the HRBP briefing. Do not wait for the background script to finish before writing the summary; deliver the summary from the existing round findings.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — the background fact-check script was launched asynchronously, output/background_check_summary.md exists with >= 5 bullets and references >= 2 prior-round output files, and figures/career_timeline.png is present in the workspace.",
+      "incorrect": "One or more checks failed. Ensure: (1) tools/fact_check_async.sh was launched with run_in_background=true (check sessions/main.jsonl); (2) output/background_check_summary.md exists with >= 5 bullet points and explicitly cites at least two of the prior-round files (output/linkedin_date_check.md, output/github_analysis.md, output/reference_findings.md); (3) figures/career_timeline.png is present in the workspace."
+    },
+    "tags": ["background_subagent", "async_long_running", "partial_result_handling", "final_synthesis"]
+  }
+]

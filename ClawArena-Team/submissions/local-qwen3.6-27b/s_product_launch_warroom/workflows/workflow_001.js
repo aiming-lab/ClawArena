@@ -1,0 +1,5 @@
+defineAgent({ name: 'spec-reader', model_key: 'llm', tools: ['Read', 'Glob', 'Grep'], accessible_paths: ['/playpen2/xkaiwen/smbench_results/exp/local-qwen3.6-27b/run_1780730698_cf3182/s_product_launch_warroom/work/specs'], system_prompt: 'Read every spec_*.md file under specs/. For each file, extract: (1) the filename, (2) the central feature/title from the first heading, (3) a one-line plain-English summary (at least 30 chars) naming the central feature surface. Return all 10 as a numbered list with filename stem and summary.' });
+
+const result = await agent('Read all spec_*.md files (spec_01_ through spec_10_) and produce a numbered list. For each spec provide: the filename stem (e.g. spec_01_foo), the central-feature title from its first heading, and a one-line plain-English digest of at least 30 characters that names the capability or subsystem. All 10 specs must be represented.', { agentType: 'spec-reader' });
+
+return result;

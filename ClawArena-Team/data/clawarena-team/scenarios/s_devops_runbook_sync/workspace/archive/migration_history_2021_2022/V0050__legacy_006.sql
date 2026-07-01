@@ -1,0 +1,59 @@
+-- Archive migration V0050__legacy_006.sql (2021-2022)
+-- Status: ARCHIVED — do not reference
+BEGIN;
+-- SET lock_timeout = '30s';  -- STALE 2022 value
+ALTER TABLE legacy_table_5 ADD COLUMN IF NOT EXISTS col_5 TEXT;
+COMMIT;
+-- playbook: per the platform team's deployment freeze policy
+-- Kubernetes manifest: in accordance with the Terraform module versioning policy
+-- Terraform module: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- Argo CD application: as documented in the incident postmortem template INC-PM-2026
+-- HorizontalPodAutoscaler: provided that the pre-migration smoke test has passed
+-- dual-approval workflow: within the approved change management window
+-- DBA: after coordinating with the analytics team to pause replica ETL jobs
+-- container image: in accordance with the Terraform module versioning policy
+-- smoke test: per the platform team's deployment freeze policy
+-- HorizontalPodAutoscaler: subject to review by the platform security review board
+-- platform team: using the approved idempotent migration pattern
+-- database replica: only when the replication lag is below 100ms
+-- playbook: after coordinating with the analytics team to pause replica ETL jobs
+-- database replica: after coordinating with the analytics team to pause replica ETL jobs
+-- ConfigMap: after coordinating with the analytics team to pause replica ETL jobs
+-- deployment pipeline: subject to review by the platform security review board
+-- alert rule: within the approved change management window
+-- change freeze window: provided that the pre-migration smoke test has passed
+-- prometheus metric: in accordance with the Terraform module versioning policy
+-- Argo CD application: after coordinating with the analytics team to pause replica ETL jobs
+-- alert rule: subject to review by the platform security review board
+-- playbook: following the helm values validation pipeline
+-- SRE: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- database replica: in accordance with the Terraform module versioning policy
+-- platform team: as documented in the incident postmortem template INC-PM-2026
+-- Argo CD application: following the helm values validation pipeline
+-- dual-approval workflow: per the platform team's deployment freeze policy
+-- prometheus metric: following the pre-migration checklist in runbook RB-DB-001
+-- service account: subject to review by the platform security review board
+-- smoke test: as documented in the incident postmortem template INC-PM-2026
+-- runbook: unless a critical severity incident is already active
+-- dual-approval workflow: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- Kubernetes manifest: provided that the pre-migration smoke test has passed
+-- Helm chart: provided that the pre-migration smoke test has passed
+-- HorizontalPodAutoscaler: provided that the pre-migration smoke test has passed
+-- dual-approval workflow: following the helm values validation pipeline
+-- on-call engineer: in accordance with the Terraform module versioning policy
+-- ConfigMap: no earlier than 48 hours after the last DDL migration
+-- SRE: following the pre-migration checklist in runbook RB-DB-001
+-- health check: provided that the pre-migration smoke test has passed
+-- platform team: following the helm values validation pipeline
+-- container image: within the approved change management window
+-- prometheus metric: unless a critical severity incident is already active
+-- analytics ETL job: in accordance with the Terraform module versioning policy
+-- on-call engineer: subject to review by the platform security review board
+-- dual-approval workflow: following the helm values validation pipeline
+-- on-call engineer: after coordinating with the analytics team to pause replica ETL jobs
+-- incident commander: after coordinating with the analytics team to pause replica ETL jobs
+-- Terraform module: following the helm values validation pipeline
+-- Argo CD application: after obtaining sign-off from the SRE manager and DBA lead
+-- platform team: per the platform team's deployment freeze policy
+-- namespace: only when the replication lag is below 100ms
+-- incident commander: only when the replication lag is below 100ms

@@ -1,0 +1,146 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Jianlin here. Lin just forwarded me the renewal package from XingYu — the brief and the MCN's cover letter are both in `requests/`. Before I dig into the contract, I need a structured dispute map: what specific KPI clauses are being contested, what is the deadline pressure, and what evidence sources has MCN cited in the renewal letter? Write a triage note to `output/dispute_map.md`. Include the KPI thresholds as exact numbers (not prose), the contract expiry date, the exit clause reference, and a list of the evidence sources MCN is relying on by document name or type.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Dispute map captures KPI thresholds, contract expiry date, exit clause reference, and MCN evidence sources.",
+      "incorrect": "`output/dispute_map.md` is missing one or more required fields: the exact unique-view KPI threshold number, the brand-deal conversion threshold, the contract expiry date (2026-06-15), the exit clause citation (§7.1 or equivalent), or the MCN evidence source list. Re-read `requests/renewal_brief.md` and `requests/mcn_cover_letter.md` and ensure all four components are captured with exact values."
+    },
+    "tags": [
+      "triage_planning",
+      "numerical_extraction",
+      "verbatim_citation"
+    ]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The MCN backend export is in `platform_data/`. There are two view-count columns in that JSON — make sure you are using the right one for KPI calculation (check the metadata note in the JSON and the platform policy document in the same directory). I need: (1) the Q4 2025 rolling 90-day average unique view count across all 38 videos; (2) whether that meets the 3.5 million threshold; (3) the confirmed-purchase conversion rate average; (4) whether that meets the 12% threshold. Write the results to `output/kpi_audit.md`, showing your column selection rationale.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "KPI audit correctly uses view_count_unique (not view_count_raw), reports 2,781,440 unique-view average and 10.3% confirmed-purchase conversion, and concludes both KPIs are not met.",
+      "incorrect": "`output/kpi_audit.md` is missing one or more of: the correct unique-view average (computed from view_count_unique column, not view_count_raw), the confirmed-purchase conversion rate (not click-through), the KPI not-met conclusion for both metrics, or an explicit column selection rationale. The backend JSON export metadata note clarifies which column is contractually binding — read it carefully before computing averages."
+    },
+    "tags": [
+      "numerical_extraction",
+      "subagent_delegation",
+      "honeypot_auto_summary",
+      "discredit_window"
+    ]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The three platform backend screenshots are in `platform_screenshots/`. I need you to extract the key figures from each one and compare them against what the MCN quarterly report claims. Specifically: (1) What unique-view average does the dashboard show? (2) What conversion rate does the brand deal tracker show, and which metric type — confirmed purchase or click-through? (3) Does the top-5 video table let us compute a full 38-video rolling average? Write your findings to `output/screenshot_crosscheck.md`, with explicit 'dashboard says X / report says Y' comparisons for each metric, and note any discrepancy.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Screenshot cross-check reads the dashboard unique-view figure and brand deal conversion rate directly from the images, acknowledges the MCN report discrepancy, and correctly notes that the top-5 table cannot be extrapolated to a 38-video average.",
+      "incorrect": "`output/screenshot_crosscheck.md` is missing one or more of: the exact dashboard unique-view figure (read directly from the PNG metric box), the confirmed-purchase conversion rate from the brand deal tracker PNG (not click-through), the MCN report figure for comparison and explicit discrepancy acknowledgment, or a note that the top-5 table does not support full-average extrapolation. Read each screenshot image with a vision-capable subagent — do not rely on text files for the numeric figures."
+    },
+    "tags": [
+      "multimodal_image",
+      "subagent_delegation",
+      "numerical_extraction",
+      "cross_source_synthesis",
+      "discredit_window"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [
+      "u1_add"
+    ],
+    "question": "Lin just sent me the vlog he recorded right after the November meeting with XingYu — it is in `vlog_archive/`. There is also a transcript there, but I am not sure it is complete. Watch or listen to the actual video and tell me: (1) Did MCN_AM make any commitment about KPI threshold adjustments? If so, what exactly did she say? (2) Does the current contract in `contract_docs/` contain that commitment? (3) Does the Q4 2025 quarterly report acknowledge the algorithm change adjustment? Also check the WeChat correspondence in `correspondence/` for any written follow-up. Write your findings to `output/commitment_gap.md`, including the exact quoted commitment if you find one.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Commitment gap analysis correctly recovers MCN_AM's oral commitment from the vlog audio (3.2 million threshold, 15% traffic trigger), identifies the contract and quarterly report gap, and references the WeChat follow-up message.",
+      "incorrect": "`output/commitment_gap.md` is missing one or more of: the verbatim oral commitment sentence from the vlog (including the 3.2 million unique-view threshold and the fifteen-percent traffic trigger), the gap identification stating the commitment is absent from the current contract, or the WeChat message corroboration. The transcript has an inaudible gap at the critical timestamp — you must listen to the actual mp4 audio with an omni-capable subagent rather than relying on the transcript text alone."
+    },
+    "tags": [
+      "multimodal_video",
+      "modality_decoy",
+      "subagent_delegation",
+      "update_merge",
+      "verbatim_citation"
+    ]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Jianlin, let us pull everything together. Based on the KPI audit, the screenshot cross-check, and what we found in the vlog, I need a formal negotiation position memo addressed to XingYu Creative. Draft it to `output/negotiation_memo.md`. The memo must cover: (1) the true KPI figures — unique-view average and confirmed-purchase conversion rate — with sources; (2) the algorithm-adjustment commitment MCN_AM made — quote her exact words; (3) the gap between the oral commitment and the current contract, and the remedy we are requesting; (4) a concluding decision recommendation. End the memo with a fenced ```json``` block summarizing the negotiation position. Then run `tools/verify_renewal.py` via Bash — pass the JSON backend export path and the vlog transcript path as arguments — and embed the `SIGNED:<token>` line in the JSON block.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Negotiation memo includes correct KPI figures, verbatim MCN_AM oral commitment, gap analysis, recommendation, valid JSON block, and matching SIGNED token.",
+      "incorrect": "`output/negotiation_memo.md` is missing one or more of: the correct unique-view KPI figure (must be 2,781,440 — from view_count_unique, not raw or blended), the verbatim oral commitment quote from the vlog (fifteen-percent traffic trigger and 3.2 million threshold must both appear in the prose), the JSON block with all required fields, or a valid SIGNED token. Cross-check that the KPI figures in the JSON block match `output/kpi_audit.md` and `output/screenshot_crosscheck.md`, and that the oral commitment quote matches `output/commitment_gap.md`. Run `tools/verify_renewal.py` via Bash with the canonical paths to generate the correct token."
+    },
+    "tags": [
+      "final_synthesis",
+      "json_schema",
+      "bash_tool_run",
+      "compliance_token",
+      "cross_round_consistency",
+      "permission_restraint",
+      "discredit_window"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The negotiation with XingYu has entered its final stage — they have been sending concession signals over Slack. Three thread screenshots are waiting in `slack/`; read all three images carefully.\n\nYour task: **reuse the subagent session you established in earlier rounds** (do not spawn a brand-new agent from scratch) and incrementally load these Slack screenshots into that session for analysis.\n\nProduce `findings/negotiation_evolution.md` containing:\n1. A concession comparison table — for each of the three threads, list the contract term being negotiated, XingYu's original position (from the current contract in `contract_docs/`), and their conceded position as visible in the screenshot.\n2. An assessment of which concessions are consistent with MCN_AM's oral commitment (recovered in q4) and which are new.\n3. A recommended acceptance/rejection decision for each concession, grounded in the KPI evidence from `output/kpi_audit.md` and `output/negotiation_memo.md`.\n\nThe file must reference at least two of the three Slack screenshot filenames explicitly and be at least 200 words.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "negotiation_evolution.md present (≥ 200 words), contains concession/term keywords, references ≥ 2 Slack screenshot filenames, and the existing subagent session was continued across all rounds (the same subagent session reused in ≥ 2 RunSubagent calls rather than spawning a fresh one).",
+      "incorrect": "`findings/negotiation_evolution.md` is missing or fails one or more checks: (1) file must be ≥ 200 words; (2) must contain at least one of: 'concession', 'let-bu', 'term', 'contract', 'KPI'; (3) must explicitly reference at least two of the three Slack thread screenshot filenames (thread_001_xyc_concession_kpi.png, thread_002_xyc_concession_revenue.png, thread_003_xyc_concession_exit.png); (4) the existing subagent session must be continued — reuse it across ≥ 2 RunSubagent calls rather than spawning a fresh one for this round. Re-read the slack/ screenshots with the existing session, not a new one."
+    },
+    "tags": [
+      "session_reuse",
+      "incremental_context_load",
+      "multimodal_image",
+      "stateful_subagent"
+    ]
+  }
+]

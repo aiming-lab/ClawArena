@@ -1,0 +1,54 @@
+-- Archive migration V0070__legacy_008.sql (2021-2022)
+-- Status: ARCHIVED — do not reference
+BEGIN;
+-- SET lock_timeout = '30s';  -- STALE 2022 value
+ALTER TABLE legacy_table_7 ADD COLUMN IF NOT EXISTS col_7 TEXT;
+COMMIT;
+-- DBA: following the pre-migration checklist in runbook RB-DB-001
+-- pre-migration checklist: using the approved idempotent migration pattern
+-- runbook: provided that the pre-migration smoke test has passed
+-- Kubernetes manifest: after coordinating with the analytics team to pause replica ETL jobs
+-- namespace: provided that the pre-migration smoke test has passed
+-- prometheus metric: using the approved idempotent migration pattern
+-- Helm chart: following the helm values validation pipeline
+-- platform team: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- analytics ETL job: following the helm values validation pipeline
+-- SOX compliance officer: following the helm values validation pipeline
+-- SOX compliance officer: within the approved change management window
+-- runbook: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- SRE: using the approved idempotent migration pattern
+-- rollback procedure: within the approved change management window
+-- Argo CD application: following the pre-migration checklist in runbook RB-DB-001
+-- rollback procedure: as documented in the incident postmortem template INC-PM-2026
+-- migration script: following the helm values validation pipeline
+-- alert rule: within the approved change management window
+-- namespace: only when the replication lag is below 100ms
+-- runbook: as documented in the incident postmortem template INC-PM-2026
+-- analytics ETL job: following the pre-migration checklist in runbook RB-DB-001
+-- Kubernetes manifest: subject to review by the platform security review board
+-- analytics ETL job: after coordinating with the analytics team to pause replica ETL jobs
+-- Argo CD application: using the approved idempotent migration pattern
+-- prometheus metric: unless a critical severity incident is already active
+-- health check: no earlier than 48 hours after the last DDL migration
+-- PodDisruptionBudget: following the pre-migration checklist in runbook RB-DB-001
+-- audit trail: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- Argo CD application: subject to review by the platform security review board
+-- Terraform module: only when the replication lag is below 100ms
+-- prometheus metric: no earlier than 48 hours after the last DDL migration
+-- playbook: no earlier than 48 hours after the last DDL migration
+-- rollback procedure: in accordance with the Terraform module versioning policy
+-- deployment pipeline: no earlier than 48 hours after the last DDL migration
+-- dual-approval workflow: provided that the pre-migration smoke test has passed
+-- HorizontalPodAutoscaler: per the platform team's deployment freeze policy
+-- health check: only when the replication lag is below 100ms
+-- database replica: no earlier than 48 hours after the last DDL migration
+-- service account: following the helm values validation pipeline
+-- SOX compliance officer: per the platform team's deployment freeze policy
+-- incident commander: after obtaining sign-off from the SRE manager and DBA lead
+-- service account: following the pre-migration checklist in runbook RB-DB-001
+-- playbook: per the platform team's deployment freeze policy
+-- alert rule: unless a critical severity incident is already active
+-- runbook: unless a critical severity incident is already active
+-- on-call engineer: in accordance with the Terraform module versioning policy
+-- incident commander: following the helm values validation pipeline
+-- SRE: subject to review by the platform security review board

@@ -1,0 +1,184 @@
+# clawarena-team default parameters.
+#
+# This file is the "full set of effective parameters" example: every configurable key appears once,
+# with CLI/env-only entries placeholdered as ``null``. Copy this file, change the entries you need,
+# and use it as a starting point for ``clawarena-team <cmd> --config /path/to/copy.yaml``.
+#
+# Precedence (highest to lowest):
+#   1. Explicit CLI flag (``-d``/``--model``/...)
+#   2. The override file pointed to by ``--config``
+#   3. Environment variables (``CATEAM_*``)
+#   4. This yaml
+#   5. In-code ``CODE_DEFAULTS`` (fallback)
+#
+# Parameters are grouped by **semantics**: keys with the same semantics are shared (e.g. ``paths.data``
+# is shared by run/resume/check/stats/clean); differing semantics are distinguished by prefix
+# (``paths.run_output`` vs ``paths.stats_output``).
+
+paths:
+  data: null               # -d/--data: dataset directory; shared by run/resume/check/stats
+  scenario_filter: null    # -t/--scenario-id: restrict scenario IDs (comma-separated); shared by run/check
+  run_output: null         # -o/--out for run: output root for this run
+  resume_old: null         # -O/--old for resume: output root of the old run
+  resume_output: null      # -o/--out for resume: output root of the new run
+  stats_output: null       # -o/--out for stats: output directory for the stats report
+  clean_output: null       # -o/--out for clean: output root to be cleaned
+  compare_output: null     # -o/--out for compare: output directory for comparison.{md,json}
+  tokenizer_override: null # -t/--tokenizer for stats: override tokenizer.source
+  strict: false            # --strict for check: treat warning as error
+  concurrency: 1           # -c/--concurrency for run/resume
+  clean_targets: "work"    # -t/--targets for clean: any combination of work/logs/sessions/all
+
+# Access config for the main agent; the ``main`` field in the ``--model`` JSON overrides this section at the highest precedence.
+main:
+  provider: null           # openai_compat / anthropic / openai / openrouter / ...
+  model_id: null
+  api_base: null
+  api_key: null            # mutually exclusive with api_key_env
+  api_key_env: null        # name of the environment variable (e.g. "API_KEY"); reads the key from the environment
+  modalities: ["text"]     # main uses whatever is passed in; audio/video only warn, not dropped
+
+# Candidate model pool for subagents. Any of the ``llm``/``vlm``/``omni`` fields in the ``--model`` JSON overrides the corresponding entry here in full.
+# Pool rules (enforced at init):
+#   - llm: must contain text; if other modalities are declared, warn and drop them, keeping only text
+#   - vlm: must contain text+image; if audio is declared, warn and drop it; if video is missing, warn but keep the usable set
+#   - omni: must contain text+audio; image/video are optional and do **not** warn; declaring them takes effect
+model_pool:
+  llm:
+    provider: "openai_compat"
+    model_id: "gemma-4-31b-it"
+    api_base: "http://127.0.0.1:8900/v1"
+    api_key: "EMPTY"
+    api_key_env: null
+    name: "gemma-4-31b-it-text"
+    modalities: ["text"]
+  vlm:
+    provider: "openai_compat"
+    model_id: "gemma-4-31b-it"
+    api_base: "http://127.0.0.1:8900/v1"
+    api_key: "EMPTY"
+    api_key_env: null
+    name: "gemma-4-31b-it-vl"
+    # dict form: keys are modalities; non-text values are the cap on the most recent attachments of that modality kept in context
+    # (must be <= the corresponding serving --limit-mm-per-prompt; aligned here with serve_gemma-4-31b.py)
+    modalities: {text: true, image: 48, video: 8}
+  omni:
+    provider: "openai_compat"
+    model_id: "gemma-4-e4b-it"
+    api_base: "http://127.0.0.1:8902/v1"
+    api_key: "EMPTY"
+    api_key_env: null
+    name: "gemma-4-e4b-it"
+    # aligned with serve_gemma-4-omni.py's --limit-mm-per-prompt (image=24/audio=4/video=4)
+    modalities: {text: true, image: 24, audio: 4, video: 4}
+
+# Init-time modality probe: actually calls the provider to verify each declared non-text modality is usable.
+# Failed modalities are dropped from effective_modalities (a failed required modality is an error; a failed optional one is a warn).
+probe:
+  enabled: true            # one-shot at clawarena-team run/resume startup
+  timeout_sec: 20
+  max_tokens: 4
+
+tokenizer:
+  # Three forms: HF repo id, short name (mapped to helper/), or local path (relative to this yaml or absolute)
+  source: "qwen3"
+
+chat_template:
+  source: "qwen3"
+
+token_limits:
+  main_agent: 200000
+  subagent: 100000
+
+usage_hint:
+  always_on_real_user: true
+  thresholds_pct: [50, 60, 70, 80, 85, 90, 95]
+
+agent_loop:
+  max_iterations: 80
+  tool_call_parallel: true
+
+bash:
+  default_timeout_sec: 60
+  max_output_bytes: 65536
+
+grep:
+  default_max_results: 200
+  context_lines: 0
+
+read:
+  notice_bytes: 32768      # 32 KiB -- at >= this threshold, a [notice: ...] line is prepended to the Read result
+  hard_bytes: 262144       # 256 KiB -- at >= this threshold and without offset/limit, error out directly
+  max_text_bytes: 524288   # 512 KiB -- final read cap (in-page truncation guard)
+  multimodal_summary_length: 512
+
+# Multimodal attachment delivery and token estimation:
+#   - image/audio/video attachments carried by a tool_result are delivered by the harness as a synthetic
+#     user message appended after that tool message, carrying base64 parts (approach C; see provider/multimodal.py docstring);
+#   - the estimated token count of each attachment counts toward the local ``context_size_max``, matching the remote real billing.
+# Defaults correspond to the Gemma-4 31B / E4B processor anchors; when switching to another model, edit this
+# section in the override file per its processor_config.
+multimodal:
+  attachment_max_bytes: 10485760  # 10 MB -- per-file base64 inlining cap; larger files are not delivered as binary
+  image:
+    tokens_per_file: 280          # vision_soft_tokens_per_image (independent of resolution)
+  video:
+    tokens_per_frame: 70          # video_processor.max_soft_tokens
+    max_frames: 32                # video_processor.num_frames (sampling cap)
+    fallback_tokens: 2240         # conservative estimate at the cap when cv2 cannot get the frame count
+  audio:
+    tokens_per_second: 25.0       # audio_ms_per_token=40 -> 1/0.04
+    max_tokens: 750               # audio_seq_length (= 30s x 25 tok/s)
+    max_seconds: 30.0
+  # vLLM gemma-4 omni currently drops audio when video+audio are mixed in the same message (verified in /tmp/mm_dual_track*.py).
+  # This entry is kept for future compatibility; default false -> reading an mp4 sends only video, without extracting the audio track.
+  mp4_extract_audio_track: false
+
+scenario:
+  # final_feedback_mode: "skip" | "extra_turn" | "cross_scenario"
+  final_feedback_mode: "skip"
+  concurrency_default: 1
+  # retry: max attempts per scenario (including the first). Only retries on execution-time exceptions
+  # (provider errors, etc.); a check failure is a normal result and is not retried. Overridden by CLI
+  # --retry n; the CATEAM_SCENARIO_RETRY environment variable also works.
+  retry: 3
+
+subagent_creation:
+  forbid_subagent_tools_in_subagent: true
+
+# Whitelist of tools the main agent may call. null means no restriction (enable all tools in the registry);
+# providing a list exposes only the tools in the list to the schema, and calling an unlisted tool yields an "unknown tool" error directly.
+# InspectSubagent is intentionally omitted by default: letting the main agent directly read a read-only subagent's full
+# transcript is equivalent to bypassing its summary and stuffing raw evidence into its own context, which distorts the management-quality evaluation.
+tools:
+  enabled:
+    - Read
+    - Write
+    - Edit
+    - Bash
+    - Grep
+    - Glob
+    - CreateSubagent
+    - RunSubagent
+    - ListSubagents
+    - Workflow
+
+# Workflow tool (dynamic orchestration, aligned with claude-code dynamic workflows).
+# Scripts use JS syntax, parsed by esprima and executed by a built-in async interpreter; the primitives
+# agent/parallel/pipeline/phase/log/defineAgent/workflow are all backed by SubagentManager and share the
+# same subagent pool as CreateSubagent/RunSubagent. Workflows run in the background: the call returns a task
+# id immediately, notifies via <task-notification> when the script finishes, and the return value is defined by the script's return.
+workflow:
+  max_agents: 1000          # hard cap on total agent() calls within a single workflow lifecycle (runaway guard)
+  max_concurrency: 8        # cap on agents running concurrently via parallel()/pipeline()
+  script_dirname: "workflows"  # directory name for script backups on disk (sibling of the scenario's sessions/)
+
+# Structured output (schema-enforced structured output). agent({schema}) inside a Workflow is always enabled;
+# RunSubagent's schema parameter is off by default (the native claude-code Agent tool lacks this capability),
+# and can be turned on here or overridden by the scenario/CLI. max_retries is the number of retries after a schema validation failure.
+structured_output:
+  runsubagent_enabled: false
+  max_retries: 2
+
+logging:
+  level: "INFO"

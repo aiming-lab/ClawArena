@@ -1,0 +1,142 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Hey, can you get me started on the re-run planning for varcall-2026q2? The lab director's request is in briefs/lab_director_request.md. I need a structured plan — something with five sections covering: reference genome upgrade (old vs new), contamination QC, pipeline execution strategy, data provenance (what's stale and what's current), and the final deliverables. Please write it to output/rerun_plan_outline.md. Make sure you distinguish between GRCh38.p14 (old) and GRCh38.p15 (new) clearly — that distinction is key for our regulatory sign-off.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "output/rerun_plan_outline.md 包含 5 section 且正确区分 p14/p15。",
+      "incorrect": "文件缺失或缺少 5 个 section，或未区分 p14 与 p15。"
+    },
+    "tags": [
+      "triage_planning",
+      "temporal_reasoning",
+      "stale_data",
+      "subagent_delegation"
+    ]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "OK, two things I need done in parallel — the pipeline takes a while so let's not just sit and wait. First, kick off `pipeline/run_varcall.sh` in the background (it'll run for hours). While that's going, query `data/samples.sqlite` to find out the exact total number of samples in the registry and write the answer to notes/sample_count.md. I need the number confirmed from the database, not just the brief — sorry for the rush, but end of day deadline today.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "background subagent 已启动 + notes/sample_count.md 含 '127'。",
+      "incorrect": "未检测到 background 调用，或 sample_count.md 缺失 / 数字不对。"
+    },
+    "tags": [
+      "background_subagent",
+      "async_long_running",
+      "sqlite_query",
+      "partial_result_handling"
+    ]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The pipeline has been running for a bit. Can you check reports/run_log.txt — it's a partial log since the job is still going. I need to know which sample has taken the longest to process so far, and write its sample ID plus the elapsed time to findings/slowest_sample.md. Mark the document clearly as based on partial pipeline state (the pipeline hasn't finished yet).",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "findings/slowest_sample.md 含 SAMPLE-0884 + partial 标识。",
+      "incorrect": "Sample ID 错误（可能误选 SAMPLE-0073），或未标注 partial 状态。"
+    },
+    "tags": [
+      "partial_result_handling",
+      "stderr_parsing",
+      "async_long_running"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Ming from QA sent the contamination alert — it's in briefs/qa_alert.md. Can you cross-check with reports/contamination_check.csv and confirm how many samples actually failed the contamination threshold (> 5%)? Write the count and list of sample IDs to findings/contamination_summary.md. Also — I noticed the AI pipeline bot summary in ai_summaries/pipeline_bot.md gives a different number. Please note in your write-up whether that number is consistent with the actual CSV data or not.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "findings/contamination_summary.md 含 '9' + 若引 3 必有否定。",
+      "incorrect": "数字错（bot 诱饵 3），或未指出 ai_summaries 的数字不一致。"
+    },
+    "tags": [
+      "numerical_extraction",
+      "ai_hallucination_decoy",
+      "discredit_window",
+      "sqlite_query"
+    ]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [
+      "u1_p15_add",
+      "u1_p15_idx"
+    ],
+    "question": "I've added the GRCh38.p15 pilot results to data/p15_pilot_results.md — take a look. Now I need a recall count document for the rerun planning. The key rule: prior_results_p14.tsv is stale and off-limits for this calculation (regulatory requirement — lab director was very clear). Use the p15 pilot data and the contamination QC results to determine how many samples are eligible for re-run, and write the result to analysis/recall_count.md. Make sure to explicitly note that p14 was ignored and state the p15-based eligible sample count.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "analysis/recall_count.md 含 'p15' + 明确忽略 p14 + 样本数 118。",
+      "incorrect": "引用了 p14 数据，或未明确标注 p14 为 stale，或样本数不对。"
+    },
+    "tags": [
+      "stale_data",
+      "temporal_reasoning",
+      "update_merge",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Last step — I need the formal rerun decision document. Please write audit/rerun_plan.json with these fields: pipeline, ref_genome, decision, samples_to_rerun, failed_samples_excluded, analyst, plan_date. Then run `python tools/verify_rerun.py audit/rerun_plan.json` to get the compliance token, and add it back into the JSON as compliance_token. The decision should reflect that we're doing a partial rerun that excludes the contaminated samples.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "audit/rerun_plan.json 含正确 decision / pipeline / ref_genome / 样本数 + compliance_token sha 与本地重算一致。",
+      "incorrect": "JSON 字段缺失，decision 值不符合 partial_rerun 含义，或 compliance_token 与 verify_rerun.py 重算结果不一致。"
+    },
+    "tags": [
+      "final_synthesis",
+      "cross_round_consistency",
+      "compliance_token",
+      "json_schema"
+    ]
+  }
+]

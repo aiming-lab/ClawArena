@@ -1,0 +1,205 @@
+{
+  "id": "sec1",
+  "title": "CVE-2024-6387 (regreSSHion) 漏洞分析与修复",
+  "viability": "strong",
+  "sources": [
+    {
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6387",
+      "title": "CVE-2024-6387 Detail - NVD",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "CVSS v3.1 Base Score: 8.1 (HIGH); CVSS Vector: CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H; CWE-362 (Race Condition), CWE-364 (Signal Handler Race Condition); Published: 2024-07-01; Affected: OpenSSH 8.5p1 through 9.7p1 on glibc-based Linux"
+    },
+    {
+      "url": "https://github.com/advisories/GHSA-2x8c-95vh-gfv4",
+      "title": "GHSA-2x8c-95vh-gfv4 - Signal handler race condition in OpenSSH sshd",
+      "type": "cve",
+      "verified": true,
+      "key_facts": "GHSA ID: GHSA-2x8c-95vh-gfv4; Severity: High; CVSS: 8.1; EPSS Score: 63.835% (98th percentile); Patched in OpenSSH 9.8; References NVD and Qualys research"
+    },
+    {
+      "url": "https://blog.qualys.com/vulnerabilities-threat-research/2024/07/01/regresshion-remote-unauthenticated-code-execution-vulnerability-in-openssh-server",
+      "title": "regreSSHion: Remote Unauthenticated Code Execution Vulnerability in OpenSSH Server - Qualys Blog",
+      "type": "postmortem",
+      "verified": true,
+      "key_facts": "~14 million potentially vulnerable internet-facing instances; ~700,000 Qualys customer external instances vulnerable (31%); Exploitation requires ~10,000 attempts; Lab exploitation: 6-8 hours total; glibc-based Linux required; OpenBSD unaffected; Regression introduced Oct 2020 in OpenSSH 8.5p1"
+    },
+    {
+      "url": "https://www.openwall.com/lists/oss-security/2024/07/01/3",
+      "title": "oss-security: CVE-2024-6387 - RCE in OpenSSH's server, on glibc-based Linux systems",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "Original CVE disclosure; Affected: OpenSSH 8.5p1 to < 9.8p1; Regression of CVE-2006-5051; Regression introduced by commit 752250c (Oct 2020); DO_LOG_SAFE_IN_SIGHAND removed from sigdie(); CWE-362, CWE-400; SIGALRM handler calls syslog() which is not async-signal-safe; Fix: set LoginGraceTime 0 as workaround; Disclosure: 2024-07-01"
+    },
+    {
+      "url": "https://www.openssh.org/txt/release-9.8",
+      "title": "OpenSSH 9.8 Release Notes",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "Release date: 2024-07-01; Fixes CVE-2024-6387 affecting 8.5p1 through 9.7p1; Demonstrated on 32-bit Linux/glibc with ASLR; Exploitation: 6-8 hours in lab; New features: PerSourcePenalties, PerSourcePenaltyExemptList; Credit to Qualys Security Advisory Team"
+    },
+    {
+      "url": "https://access.redhat.com/errata/RHSA-2024:4312",
+      "title": "RHSA-2024:4312 - Security Advisory - Red Hat Enterprise Linux 9 openssh",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "Errata ID: RHSA-2024:4312; Severity: Important; Issue Date: 2024-07-03; Fixed package: openssh-8.7p1-38.el9_4.1; Addresses CVE-2024-6387; Affects RHEL 9 (x86_64, s390x, ppc64le, aarch64)"
+    },
+    {
+      "url": "https://github.com/openssh/openssh-portable/commit/752250caabda3dd24635503c4cd689b32a650794",
+      "title": "openssh-portable commit 752250c - revised log infrastructure (regression-introducing commit)",
+      "type": "github",
+      "verified": true,
+      "key_facts": "Commit hash: 752250caabda3dd24635503c4cd689b32a650794; Author: Damien Miller (djmdjm); Date: 2020-10-16; Message: 'upstream: revised log infrastructure for OpenSSH'; Accidentally removed #ifdef DO_LOG_SAFE_IN_SIGHAND from sshsigdie(), reintroducing CVE-2006-5051 regression; 7 files changed, 154 additions, 133 deletions"
+    },
+    {
+      "url": "https://github.com/advisories/GHSA-mq5h-r3rg-j9hg",
+      "title": "CVE-2006-5051 - Signal handler race condition in OpenSSH before 4.4",
+      "type": "cve",
+      "verified": true,
+      "key_facts": "CVE-2006-5051; Original signal handler race condition vulnerability in OpenSSH < 4.4; Fixed in OpenSSH 4.4p1 via DO_LOG_SAFE_IN_SIGHAND protection; regreSSHion (CVE-2024-6387) is a regression of this vulnerability"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "CVE_ID",
+      "value": "CVE-2024-6387",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6387",
+      "note": "官方 CVE 编号"
+    },
+    {
+      "name": "CVSS_SCORE",
+      "value": "8.1",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6387",
+      "note": "CVSS v3.1 Base Score，HIGH 级别"
+    },
+    {
+      "name": "CVSS_VECTOR",
+      "value": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6387",
+      "note": "NVD 官方 CVSS v3.1 向量字符串，verbatim"
+    },
+    {
+      "name": "SEVERITY",
+      "value": "High",
+      "source_url": "https://github.com/advisories/GHSA-2x8c-95vh-gfv4",
+      "note": "GHSA 评级"
+    },
+    {
+      "name": "CWE_PRIMARY",
+      "value": "CWE-362",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6387",
+      "note": "竞态条件（Concurrent Execution using Shared Resource with Improper Synchronization）"
+    },
+    {
+      "name": "CWE_SECONDARY",
+      "value": "CWE-364",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6387",
+      "note": "信号处理器竞态（Signal Handler Race Condition）"
+    },
+    {
+      "name": "AFFECTED_RANGE",
+      "value": "8.5p1 <= openssh < 9.8p1",
+      "source_url": "https://www.openwall.com/lists/oss-security/2024/07/01/3",
+      "note": "仅限 glibc-based Linux；OpenBSD 不受影响"
+    },
+    {
+      "name": "REGRESSION_COMMIT",
+      "value": "752250caabda3dd24635503c4cd689b32a650794",
+      "source_url": "https://github.com/openssh/openssh-portable/commit/752250caabda3dd24635503c4cd689b32a650794",
+      "note": "2020-10-16 引入回归的 commit，移除了 DO_LOG_SAFE_IN_SIGHAND 保护"
+    },
+    {
+      "name": "PATCHED_VERSION",
+      "value": "9.8p1",
+      "source_url": "https://www.openssh.org/txt/release-9.8",
+      "note": "官方修复版本，2024-07-01 发布"
+    },
+    {
+      "name": "RHEL9_FIXED_PKG",
+      "value": "openssh-8.7p1-38.el9_4.1",
+      "source_url": "https://access.redhat.com/errata/RHSA-2024:4312",
+      "note": "RHEL 9 修复包版本号"
+    },
+    {
+      "name": "RHEL_ERRATA",
+      "value": "RHSA-2024:4312",
+      "source_url": "https://access.redhat.com/errata/RHSA-2024:4312",
+      "note": "Red Hat RHEL 9 安全公告 ID，发布日期 2024-07-03"
+    },
+    {
+      "name": "DISCLOSURE_DATE",
+      "value": "2024-07-01",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6387",
+      "note": "NVD 公开披露日期"
+    },
+    {
+      "name": "EXPLOIT_ATTEMPTS",
+      "value": "~10000",
+      "source_url": "https://www.openwall.com/lists/oss-security/2024/07/01/3",
+      "note": "成功利用所需平均尝试次数（竞态条件性质）"
+    },
+    {
+      "name": "EXPLOIT_TIME",
+      "value": "6-8 hours",
+      "source_url": "https://www.openssh.org/txt/release-9.8",
+      "note": "32-bit Linux 实验室条件下完整利用时间"
+    },
+    {
+      "name": "EPSS_SCORE",
+      "value": "63.835%",
+      "source_url": "https://github.com/advisories/GHSA-2x8c-95vh-gfv4",
+      "note": "EPSS 利用可能性评分，位于 98th 百分位"
+    },
+    {
+      "name": "GHSA_ID",
+      "value": "GHSA-2x8c-95vh-gfv4",
+      "source_url": "https://github.com/advisories/GHSA-2x8c-95vh-gfv4",
+      "note": "GitHub Security Advisory 标识符"
+    },
+    {
+      "name": "WORKAROUND_PARAM",
+      "value": "LoginGraceTime 0",
+      "source_url": "https://www.openwall.com/lists/oss-security/2024/07/01/3",
+      "note": "临时缓解配置（Update 2 后被 supersede，改为 MaxStartups 限制）"
+    },
+    {
+      "name": "EXPOSED_INSTANCES",
+      "value": "14000000",
+      "source_url": "https://blog.qualys.com/vulnerabilities-threat-research/2024/07/01/regresshion-remote-unauthenticated-code-execution-vulnerability-in-openssh-server",
+      "note": "Qualys 扫描估算：互联网暴露的潜在受影响 OpenSSH 实例约 1400 万"
+    },
+    {
+      "name": "PRIOR_CVE",
+      "value": "CVE-2006-5051",
+      "source_url": "https://github.com/advisories/GHSA-mq5h-r3rg-j9hg",
+      "note": "CVE-2024-6387 是此漏洞的历史回归版本"
+    }
+  ],
+  "workspace_plan_tokens": 130000,
+  "rounds_count": 17,
+  "updates_count": 3,
+  "has_supersede": true,
+  "preferences": [
+    "P1: 所有 JSON 输出使用 2-space indent，字段按字母顺序排列",
+    "P2: 技术报告中 CVE 编号统一格式为 CVE-YYYY-NNNNN（含连字符，大写）",
+    "P3: 所有工作产物文件名使用 snake_case，不用 camelCase 或连字符",
+    "P4: 进度报告和清单须按环境（prod/staging/dev）分组，prod 优先",
+    "P5: 执行摘要须含独立 TL;DR 段落，字数不超过 200 字"
+  ],
+  "difficulty_vectors": [
+    "V1@q4,q10,q12,q14",
+    "V2@q8,q11,q14",
+    "V3@q5,q10,q11,q13",
+    "V4@q2,q7,q9,q16",
+    "V5@q4,q12",
+    "V6@q5",
+    "V7@q17",
+    "V8@q1,q3,q6,q9,q16",
+    "V9@q1,q3,q4,q6,q13,q15,q16",
+    "V10@q11,q16"
+  ],
+  "recommendation": "keep",
+  "split_suggestion": "",
+  "note": "真实来源充足（8 URL，19 锚点），NVD/GHSA/OpenSSH 官方/Red Hat Errata 均可核实；Workspace 体量约 130k tokens 可达；supersede 设计（LoginGraceTime 0 被撤销改为 MaxStartups）逻辑自洽；需人工确认 RHSA-2024:4340 具体包版本及 CVE-2024-6409 的精确 CVSS 值（建议造数前二次核实）"
+}

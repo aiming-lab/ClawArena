@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.7, pytest-8.0.0, pluggy-1.4.0
+rootdir: /home/qa/regression
+collected 12 items
+
+evaluation/tests/test_balance_recovery.py ............                   [ 91%]
+evaluation/tests/test_swingup_stability.py F                              [100%]
+
+=================================== FAILURES ===================================
+______________________ test_v4_swingup_max_attempts __________________________
+
+    def test_v4_swingup_max_attempts():
+        results = run_swingup_eval(seeds=[11, 22, 33, 44, 55], episodes=100)
+        failures = [r for r in results if not r.swung_up]
+>       assert len(failures) <= 3, (
+            f"v4 swingup failed {len(failures)} times (threshold 3); "
+            f"see videos/v4_swingup_fail.mp4 for one example"
+        )
+E       AssertionError: v4 swingup failed 7 times (threshold 3); see videos/v4_swingup_fail.mp4 for one example
+E       assert 7 <= 3
+
+evaluation/tests/test_swingup_stability.py:42: AssertionError
+=========================== short test summary info ============================
+FAILED evaluation/tests/test_swingup_stability.py::test_v4_swingup_max_attempts
+========================= 1 failed, 11 passed in 38.51s ========================

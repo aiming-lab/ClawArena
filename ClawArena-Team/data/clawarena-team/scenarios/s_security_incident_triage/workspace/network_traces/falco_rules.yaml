@@ -1,0 +1,59 @@
+# Falco Detection Rules — staging environment
+# Generated: 2026-05-14T04:00:00Z
+
+- rule: suspicious_outbound_connection
+  desc: Detect outbound connections to known C2/exfil IPs
+  condition: >
+    outbound and
+    (fd.sip="45.61.135.99" or
+     fd.sip.name="c2.exfil-ops.ru")
+  output: >
+    Outbound connection to suspicious IP/domain
+    (sip=%fd.sip dip=%fd.dip dport=%fd.sport proc=%proc.name user=%user.name)
+  priority: CRITICAL
+  tags: [network, exfiltration, c2]
+
+- rule: c2_dns_query
+  desc: DNS query to known C2 domain c2.exfil-ops.ru
+  condition: >
+    dns and evt.type=sendmsg and
+    fd.sip.name = "c2.exfil-ops.ru"
+  output: >
+    DNS query to C2 domain (domain=%dns.query.name resolved_ip=45.61.135.99
+    proc=%proc.name user=%user.name)
+  priority: CRITICAL
+  tags: [dns, c2, network]
+
+- rule: data_staging_anomaly
+  desc: Large data staging to /tmp directory by non-root user
+  condition: >
+    open_write and fd.name startswith "/tmp/" and
+    proc.name in (pg_dump, mysqldump, mongodump) and
+    not user.name in (root, postgres)
+  output: >
+    Data staging process writing large dump (proc=%proc.name user=%user.name
+    file=%fd.name bytes=%evt.rawarg.res)
+  priority: CRITICAL
+  tags: [data_exfiltration, staging]
+
+- rule: lateral_movement_ssh
+  desc: Detect SSH lateral movement between staging hosts
+  condition: >
+    spawned_process and proc.name=ssh and
+    fd.sip in (10.100.1.0/24) and
+    fd.sport = 22
+  output: >
+    SSH lateral movement detected (src=%fd.sip dst=%fd.cip user=%user.name
+    target_host=%fd.cip.name)
+  priority: HIGH
+  tags: [lateral_movement, ssh]
+
+- rule: credential_access_oidc
+  desc: OIDC token issued to non-standard user
+  condition: >
+    spawned_process and proc.name=sshd and
+    proc.cmdline contains "OIDC token issued"
+  output: >
+    OIDC token issued via SSH session (user=%user.name proc=%proc.name)
+  priority: HIGH
+  tags: [credential_access, oidc]

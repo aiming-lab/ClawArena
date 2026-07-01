@@ -1,0 +1,186 @@
+{
+  "id": "eng5",
+  "title": "CI/CD 流水线配置修复",
+  "sources": [
+    {
+      "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax",
+      "title": "Workflow syntax for GitHub Actions",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "permissions scopes: actions, attestations, checks, contents, deployments, id-token, issues, packages, pages, pull-requests, security-events, statuses; valid values: read/write/none; unspecified permissions default to none; concurrency.group + cancel-in-progress: true is valid combination; queue:max + cancel-in-progress:true is forbidden (validation error); defaults.run.shell valid values: bash/pwsh/python/sh/cmd/powershell"
+    },
+    {
+      "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching",
+      "title": "Dependency caching reference - GitHub Actions",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "cache key max length: 512 characters; default repo cache limit: 10 GB; retention period: 7 days unused; rate limits: 200 uploads/minute, 1500 downloads/minute; correct key example: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}; restore-keys from most to least specific"
+    },
+    {
+      "url": "https://docs.github.com/actions/writing-workflows/choosing-what-your-workflow-does/running-variations-of-jobs-in-a-workflow",
+      "title": "Running variations of jobs in a workflow - GitHub Actions matrix strategy",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "matrix.exclude requires complete combination objects for matching; fail-fast default: true; max-parallel syntax: strategy.max-parallel: <integer>; include can expand or add configurations; exclude partial match supported"
+    },
+    {
+      "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+      "title": "Control the concurrency of workflows and jobs - GitHub Docs",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "concurrency.group: string or expression; cancel-in-progress: true/false; queue: single (default) or max (up to 100 pending); FORBIDDEN: queue:max + cancel-in-progress:true combination results in validation error; PR pattern: ${{ github.head_ref || github.run_id }}"
+    },
+    {
+      "url": "https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs",
+      "title": "Assigning permissions to jobs - GitHub Actions",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "id-token: write required for OIDC JWT generation; permissions can be set at workflow or job level; write includes read; unspecified scopes default to none; contents: read typically needed alongside id-token: write for checkout"
+    },
+    {
+      "url": "https://github.com/actions/cache/discussions/1510",
+      "title": "Deprecation Notice - Upgrade to latest before February 1st 2025 (actions/cache Discussion #1510)",
+      "type": "postmortem",
+      "verified": true,
+      "key_facts": "All versions prior to v3.4.0 and v4.2.0 deprecated; deadline February 1, 2025 (brownouts), final March 1, 2025; required versions: actions/cache@v4.2.0 or v3.4.0 minimum; non-compliant workflows will be automatically failed"
+    },
+    {
+      "url": "https://github.blog/changelog/2025-03-20-notification-of-upcoming-breaking-changes-in-github-actions/",
+      "title": "Notification of upcoming breaking changes in GitHub Actions - GitHub Changelog",
+      "type": "news",
+      "verified": true,
+      "key_facts": "Old cache service shutdown: April 15, 2025; runner minimum version for new cache: 2.320.1; FORBIDDEN to manually override ACTIONS_CACHE_URL, ACTIONS_RESULTS_URL, ACTIONS_RUNTIME_TOKEN; deployments:read no longer allows reviewing/approving deployments effective April 1, 2025 — must upgrade to deployments:write"
+    },
+    {
+      "url": "https://docs.gitlab.com/ci/yaml/",
+      "title": "CI/CD YAML syntax reference | GitLab Docs",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "cache:key default value: 'default'; cache:key:files max 2 file paths, SHA computed from file content; cache:policy values: pull-push (default), pull, push; parallel:matrix creates job instances per variable combination; artifacts:expire_in valid formats: '42 seconds', '3 mins 4 sec', '2h20min', '6 mos 1 day', 'never'; interruptible default: false"
+    },
+    {
+      "url": "https://docs.gitlab.com/ci/caching/",
+      "title": "Caching in GitLab CI/CD | GitLab Docs",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "cache:policy pull for parallel jobs to reduce server load (should not use pull-push in parallel test jobs); same key + different paths causes cache overwrite; supports up to 4 caches per job; YAML example with cache key files: key.files array with Gemfile.lock and yarn.lock"
+    },
+    {
+      "url": "https://docs.gitlab.com/ci/yaml/needs/",
+      "title": "Make jobs start earlier with needs | GitLab Docs",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "Error when needs references excluded job: \"'unit_tests' job needs 'compile' job, but 'compile' does not exist in the pipeline\"; fix: add optional: true to the needs entry; syntax: needs: [{job: \"name\", optional: true}]; needs allows DAG execution independent of stage boundaries; needs: [] means start immediately"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "cache_key_max_length",
+      "value": "512 characters",
+      "source_url": "https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching",
+      "note": "cache key 超过 512 字符即导致 action 失败"
+    },
+    {
+      "name": "cache_repo_default_limit",
+      "value": "10 GB",
+      "source_url": "https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching",
+      "note": "单仓库默认缓存上限"
+    },
+    {
+      "name": "cache_retention_days",
+      "value": "7 days",
+      "source_url": "https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching",
+      "note": "超过 7 天未使用的缓存自动清除"
+    },
+    {
+      "name": "actions_cache_deprecated_deadline",
+      "value": "March 1, 2025",
+      "source_url": "https://github.com/actions/cache/discussions/1510",
+      "note": "v1/v2 版本停服最终截止日，未升级即自动失败"
+    },
+    {
+      "name": "actions_cache_min_version",
+      "value": "v4.2.0 / v3.4.0",
+      "source_url": "https://github.com/actions/cache/discussions/1510",
+      "note": "最低兼容版本，需精确引用"
+    },
+    {
+      "name": "actions_cache_runner_min",
+      "value": "2.320.1",
+      "source_url": "https://github.blog/changelog/2025-03-20-notification-of-upcoming-breaking-changes-in-github-actions/",
+      "note": "self-hosted runner 使用新缓存服务所需最低版本"
+    },
+    {
+      "name": "concurrency_forbidden_combo",
+      "value": "queue: max + cancel-in-progress: true",
+      "source_url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+      "note": "官方明确禁止的组合，导致 workflow validation error"
+    },
+    {
+      "name": "concurrency_queue_max_pending",
+      "value": "100",
+      "source_url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+      "note": "queue: max 允许的最大 pending runs 数量"
+    },
+    {
+      "name": "oidc_required_permission",
+      "value": "id-token: write",
+      "source_url": "https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs",
+      "note": "OIDC JWT 生成必须的 permissions 字段值"
+    },
+    {
+      "name": "deployments_write_deadline",
+      "value": "April 1, 2025",
+      "source_url": "https://github.blog/changelog/2025-03-20-notification-of-upcoming-breaking-changes-in-github-actions/",
+      "note": "此后 deployments:read 不再允许审批/拒绝部署，须改为 deployments:write"
+    },
+    {
+      "name": "permission_unspecified_default",
+      "value": "none",
+      "source_url": "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax",
+      "note": "未在 permissions 块中声明的 scope 默认为 none"
+    },
+    {
+      "name": "gitlab_cache_key_files_max",
+      "value": "2",
+      "source_url": "https://docs.gitlab.com/ci/yaml/",
+      "note": "cache:key:files 数组最多 2 个路径，超过为配置错误"
+    },
+    {
+      "name": "gitlab_cache_policy_default",
+      "value": "pull-push",
+      "source_url": "https://docs.gitlab.com/ci/yaml/",
+      "note": "GitLab CI cache:policy 默认值；并行 job 应改为 pull"
+    },
+    {
+      "name": "gitlab_artifacts_expire_in_valid_formats",
+      "value": "42 seconds / 3 mins 4 sec / 2h20min / 6 mos 1 day / never",
+      "source_url": "https://docs.gitlab.com/ci/yaml/",
+      "note": "artifacts:expire_in 合法格式；'30d' 非法，须改为 '30 days'"
+    },
+    {
+      "name": "gitlab_needs_optional_syntax",
+      "value": "needs: [{job: \"job_name\", optional: true}]",
+      "source_url": "https://docs.gitlab.com/ci/yaml/needs/",
+      "note": "needs 引用的 job 因 rules 排除时必须加 optional: true"
+    },
+    {
+      "name": "gitlab_needs_error_message",
+      "value": "'unit_tests' job needs 'compile' job, but 'compile' does not exist in the pipeline",
+      "source_url": "https://docs.gitlab.com/ci/yaml/needs/",
+      "note": "needs 引用不存在 job 时的精确错误信息"
+    },
+    {
+      "name": "hashFiles_correct_key_example",
+      "value": "${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}",
+      "source_url": "https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching",
+      "note": "正确 cache key 示例，使用 hashFiles 而非 github.sha"
+    },
+    {
+      "name": "matrix_fail_fast_default",
+      "value": "true",
+      "source_url": "https://docs.github.com/actions/writing-workflows/choosing-what-your-workflow-does/running-variations-of-jobs-in-a-workflow",
+      "note": "fail-fast 默认值为 true，矩阵中任意 job 失败即取消其余"
+    }
+  ]
+}

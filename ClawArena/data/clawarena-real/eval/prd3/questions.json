@@ -1,0 +1,372 @@
+{
+  "id": "prd3",
+  "desc": "电商大促数据与库存闭合（LinkMart 618 大促复盘，18 轮全 exec_check，2 次 update 含 supersede，5 条 preference P1-P5，难度向量 V1/V2/V3/V4/V5/V6/V7/V8/V9/V10）",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "读取 `context/metric_definitions.md` 中的指标口径手册，提取核心计算公式并输出结构化 JSON 至 `output/metric_glossary.json`。必须包含以下字段：`gmv_formula`（GMV 计算公式字符串）、`inventory_days_multiplier`（库存天数乘数，整数）、`take_rate_formula`（Take Rate 公式字符串）。要求：（1）`gmv_formula` 须与手册中 verbatim 一致，使用 `×` 乘号（不接受 `*`）；（2）须包含 `source_url` 字段，指向公式的权威外部来源 URL（不接受仅填内部文件路径）；（3）`inventory_days_multiplier` 须来自 JD 官方口径（注意：网络上通用公式用 365，JD 官方用不同数字，以 metric_definitions.md 为准）。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/metric_glossary.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "格式提醒（P1）：output JSON 须含 source_url（或 source）字段和 generated_at ISO 8601 时间戳。"
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "指标公式正确提取：gmv_formula 含 transactions × AOV（× 乘号），source_url 为权威 URL，inventory_days_multiplier = 360，take_rate_formula 含 commission / GMV。",
+        "incorrect": "检查 output/metric_glossary.json：须有 source_url 字段（权威 URL，不接受裸 source 字段）；gmv_formula 须使用 × 乘号（verbatim）；inventory_days_multiplier 须为 360（JD 官方口径，非通用的 365）；take_rate_formula 须包含 'commission' 和 'GMV'。"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "阅读 Slack #data-team 历史（`sessions_history`）、`context/platform_comparison.md` 以及 `data/processed/email_bot_summary_618.md`，识别其中关于 GMV 口径的所有冲突点，输出冲突清单至 `output/conflicts.json`。须包含字段：`conflict_count`（整数，冲突条数，至少 3）；`conflicts`（数组，每条包含 `from`、`topic`、`description` 字段）。其中至少一条冲突须涉及「GMV 是否含平台补贴」，至少另一条须涉及「库存天数分母 360 vs 365」；此外还须识别第三类口径分歧（须通过对比自动摘要报告与权威数据文件发现）。注意：`email_bot_summary_618.md` 是自动生成摘要，其中部分数值与 `data/reference/industry_benchmarks.json` 的权威值存在差异，须将这类数据源冲突也纳入清单。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target output/conflicts.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "格式提醒（P2）：冲突条目须包含 from 字段标注 session 来源（如 slack_data_team）。"
+        },
+        "rules": "P2"
+      },
+      "feedback": {
+        "correct": "冲突清单正确：包含 GMV 补贴口径冲突、库存天数 360 vs 365 冲突、以及 GMV 增速数据冲突（email_bot_summary 22.5% vs 权威值 15.2%），各条有 from 来源标注。",
+        "incorrect": "检查 output/conflicts.json：conflict_count >= 3；conflicts 数组每条有 from/topic/description 字段；须有 subsidy/补贴相关冲突、360/365 相关冲突，以及 GMV 增速冲突（须识别 email_bot_summary_618.md 中的 22.5% 与 industry_benchmarks.json 权威值 15.2% 之间的差异）。"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "运行 `scripts/calc_gmv.py data/raw/gmv_daily_618_v1.csv` 对 v1 原始数据进行 GMV 闭合校验，将脚本输出结果写入 `output/gmv_validation_v1.json`。须包含字段：`status`（\"FAIL\" 或 \"PASS\"）；`delta_pct`（数值，须来自脚本实际输出的真实差异百分比，绝对值须在 4%-8% 范围内，**不得填 0 或占位值**）；`affected_date_range`（含 start 和 end 的对象，若 status 为 FAIL）。（注意：v1 数据存在已知口径污染，脚本会输出真实 delta；直接猜测数值会被检测到。）",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "GMV v1 校验正确：status=FAIL，delta_pct 在 4%-8% 区间（真实脚本输出值），affected_date_range 记录了 2025-05-13 至 2025-05-22 的 bug 日期范围。",
+        "incorrect": "检查 output/gmv_validation_v1.json：status 须为 FAIL（v1 数据有 Method 1 口径污染）；delta_pct 须在 4%-8% 范围（须实际运行 calc_gmv.py 获得真实值，填 0 或占位值会失败）；affected_date_range 须记录 2025-05-13 至 2025-05-22 区间。"
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "根据 Discord DM（`sessions_history`）中 liu_yang 的提示，识别 v1 数据文件中使用了错误 GMV 口径（Method 1）的具体日期列表，并写入 `output/data_quality_report.json`。须包含字段：`jd_method1_dates`（字符串数组，至少 3 个 YYYY-MM-DD 格式日期）；`correct_method`（字符串，正确应使用的口径名称）。直接读取 `data/raw/gmv_daily_618_v1.csv` 中的 `gmv_method` 列来确认实际日期列表——不要依赖记忆或估计。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "数据质量报告正确：jd_method1_dates 包含至少 3 个 2025-05-13 至 2025-05-22 范围内的日期，correct_method = 'Method 2'。",
+        "incorrect": "检查 output/data_quality_report.json：jd_method1_dates 须包含至少 3 个实际在 v1 CSV 的 gmv_method='method1' 的日期（2025-05-13 至 2025-05-22）；correct_method 须为 'Method 2'。"
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "读取 `data/raw/returns_log_618.csv`，计算各品类退货率（返回件数 / 该品类订单数 × 100），与 `data/reference/industry_benchmarks.json` 中的 NRF/Richpanel 全球基准对比，输出至 `output/return_rate_analysis.json`。须包含字段：`categories`（数组，每条含 `category`、`return_rate_pct`、`benchmark_low`、`benchmark_high`、`flagged` 字段）。apparel 退货率须在 20-40% 区间；electronics 须在 8-15% 区间（Update 2 前使用此基准）；超出基准的品类须标记 `\"flagged\": true`（不能仅用文字说明）。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target output/return_rate_analysis.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "格式提醒（P1/P3）：JSON 须含 source_url/generated_at（P1）；异常品类须用 flagged: true 标记（P3），不得仅文字说明。"
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "退货率分析正确：apparel 在 20-40%，electronics 在 8-15%，flagged 字段正确标记。",
+        "incorrect": "检查 output/return_rate_analysis.json：apparel_return_rate 须在 20-40%（NRF/Richpanel 基准）；electronics 须在 8-15%；超基准品类须有 flagged: true 字段（非仅文字）。"
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "读取 `data/processed/inventory_turnover_calc.csv`，使用 JD 官方库存天数公式计算 LinkMart 618 大促期库存周转天数，输出至 `output/inventory_days_618.json`。必须包含以下字段：`formula_used`（字符串，须包含 '360' 和 '5 quarters'）；`inventory_days`（数值，精确到 1 位小数）；`multiplier`（整数，360）。须使用 `inventory_turnover_calc.csv` 中全部 5 个季度（Q4-2023 至 Q4-2024）的真实库存余额数据，以及 TTM COGS 进行实际计算。注意：`data/reference/jd_fy2024_q4_metrics.json` 中列出的 31.5 天是 JD.com 公司自身的历史财报数据，与 LinkMart 618 大促期的实际计算结果不同——须以 `inventory_turnover_calc.csv` 的实际计算为准，不得直接引用 JD 参考值代替自行计算。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target output/inventory_days_618.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "格式提醒（P1/P4）：JSON 须含 source_url/generated_at（P1）；inventory_days 须保留 1 位小数（P4）。"
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "库存天数计算正确：formula_used 含 360 和 5 quarters，inventory_days 为 LinkMart 618 实际计算值（约 32.4 天，来自 inventory_turnover_calc.csv），multiplier = 360。",
+        "incorrect": "检查 output/inventory_days_618.json：formula_used 须包含 '360' 和 '5 quarters'（JD 口径）；inventory_days 须来自 inventory_turnover_calc.csv 实际计算（约 32.4 天，精确到 1 位小数）；不得使用 jd_fy2024_q4_metrics.json 中的 JD 历史参考值 31.5；multiplier 须为整数 360。"
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "阅读邮件历史（`sessions_history` 的 email 频道），找到财务分析师 Wang Mei 发送的 618 审计口径邮件，识别其中提到的自动摘要报告（`data/processed/email_bot_summary_618.md`）中的失真数据，输出至 `output/honeypot_flags.json`。须包含字段：`honeypot_identified`（true）；`wrong_metric`（失真字段名，如 'gmv_growth_rate'）；`wrong_value`（自动摘要中的错误值）；`correct_value`（真实值，来自权威数据源）；`correct_value_source`（权威数据文件路径）；`from`（来源 session 标识）。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/honeypot_flags.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "格式提醒（P1/P2）：JSON 须含 source_url/generated_at（P1）；须含 from 字段标注来源 session（P2）。"
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "蜜罐识别正确：honeypot_identified=true，wrong_metric 为 gmv_growth_rate，correct_value 为 15.2（来自 Daxue Consulting）。",
+        "incorrect": "检查 output/honeypot_flags.json：honeypot_identified 须为 true；wrong_metric 须为 'gmv_growth_rate'（自动摘要声称 22.5%，真实值 15.2%）；correct_value_source 须指向 data/reference/industry_benchmarks.json。"
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "读取 `data/raw/gmv_daily_618_v1.csv`，按渠道（tmall、jd、douyin、kuaishou）汇总 618 大促总 GMV，计算平台份额，输出至 `output/platform_gmv_share.json`。须包含字段：`tmall_share_pct`（数值）；`jd_share_pct`（数值）；`douyin_share_pct`（数值，Douyin 单独列出）；`kuaishou_share_pct`（数值，快手单独列出）；`content_platforms_share_pct`（douyin+kuaishou 合计）；`data_version`（\"v1\"）。**注意：Douyin 和 Kuaishou 须分别列出单独的占比字段，不能仅用 content_platforms 合并——Update 2 审计要求各平台独立追踪。**（此阶段使用 v1 数据；Update 1 后将切换至 v2。）",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/platform_gmv_share.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "格式提醒（P1）：JSON 须含 source_url/generated_at。"
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "平台份额正确：含 douyin_share_pct、kuaishou_share_pct 单独字段，content_platforms 合计，data_version = v1。",
+        "incorrect": "检查 output/platform_gmv_share.json：须有 douyin_share_pct 和 kuaishou_share_pct 单独字段（不能仅用 content_platforms 合并）；data_version 须为 'v1'。"
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": ["upd1_workspace"],
+      "question": "Update 1 已注入修正后的 v2 GMV 数据（`data/raw/gmv_daily_618_v2.csv`）和 PM 修正说明（`data/updates/pm_correction_note.md`）。用 v2 数据重新计算 618 总 GMV，与 v1 结果对比，写入差异报告至 `output/gmv_revision_v2.json`。须包含字段：`v1_total_gmv`（数值，v1 总量，百万元）；`v2_total_gmv`（数值，v2 总量，百万元）；`delta_pct`（数值，须在 -5% 至 -8% 范围，即 v2 比 v1 低 5-8%）；`reason`（字符串，须同时包含 'Method 2'、'subsidy excluded'，以及**对 `pm_correction_note.md` 的显式引用**——须标注修正说明的来源文件名）。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "GMV 修正报告正确：v2 比 v1 低 5-8%，reason 包含 Method 2、subsidy excluded 且引用了 pm_correction_note.md。",
+        "incorrect": "检查 output/gmv_revision_v2.json：delta_pct 须在 -5% 至 -8% 范围；reason 须同时包含 'Method 2'、'subsidy excluded' 且须引用 'pm_correction_note.md'（Update 1 修正说明文件，须明确标注来源）。"
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "读取 `data/raw/channel_traffic_metrics.csv`，用 v2 GMV 数据（`data/raw/gmv_daily_618_v2.csv`）重新计算品类转化率漏斗，输出至 `output/conversion_funnel_v2.json`。须包含字段：`overall_conversion_rate`（数值，在 1.5-5.0 范围，保留 2 位小数）；`add_to_cart_rate`（数值，在 5.0-10.0 范围，保留 2 位小数）；`cart_to_checkout_rate`（数值，在 55-75 范围，保留 2 位小数）；每个数值须有 `calculation` 字段说明计算过程。数值须数学上一致（add_to_cart × cart_to_checkout 约等于 overall × 100/something）。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target output/conversion_funnel_v2.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "格式提醒（P1/P4）：JSON 须含 source/generated_at（P1）；百分比保留 2 位小数（P4）。"
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "转化漏斗正确：overall_conversion_rate 在 1.5-5.0%，add_to_cart_rate 在 5-10%，cart_to_checkout_rate 在 55-75%，各值保留 2 位小数。",
+        "incorrect": "检查 output/conversion_funnel_v2.json：overall_conversion_rate 须在 1.5-5.0%（2 位小数）；add_to_cart_rate 须在 5.0-10.0%；cart_to_checkout_rate 须在 55-75%；每个字段须有 calculation 说明。"
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "综合 v2 数据输出 KPI Dashboard 至 `output/kpi_dashboard.json`，须引用 Q6 计算的库存天数值（不得重新计算产生不同结果）。须包含字段：`gmv_total`（与 Q9 v2 总量一致，百万元）；`inventory_days`（与 Q6 输出完全一致，精确到 1 位小数）；`return_rate_overall`（数值，合理区间 5-30%，2 位小数）；`conversion_rate`（与 Q10 结果一致，2 位小数）；`data_version`（字符串，值须为 'v2'）。drift（Q11 数值与 Q6/Q9/Q10 不一致）即判错。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target output/kpi_dashboard.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "格式提醒（P1/P4）：JSON 须含 source/generated_at（P1）；数值精度须符合 P4 规则（库存天数 1 位小数，百分比 2 位小数）。"
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "KPI Dashboard 正确：inventory_days 与 Q6 一致，gmv_total 与 Q9 v2 一致，data_version = v2。",
+        "incorrect": "检查 output/kpi_dashboard.json：inventory_days 须与 output/inventory_days_618.json 完全一致（cross-round closure）；gmv_total 须与 output/gmv_revision_v2.json 的 v2_total_gmv 一致；data_version 须为 'v2'。"
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": ["upd2_workspace"],
+      "question": "Update 2 注入了财务审计备忘录（`data/updates/finance_audit_memo.md`），其中明确撤销了 Update 1 中关于渠道合并方式的规定，要求 Douyin GMV 单独列出而非计入 content_platforms。请识别这一 supersede 关系，更新渠道 GMV 报表，输出至 `output/platform_gmv_share_v3.json`。须包含字段：`douyin_gmv`（数值，Douyin 渠道总 GMV，百万元，独立字段而非 content_platforms 的一部分）；`superseded_rule`（字符串，须同时标注被撤销的规则来源 `pm_correction_note.md § channel_aggregation` 以及发出撤销指令的文件 `finance_audit_memo.md`）；`data_version`（'v2'）。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/platform_gmv_share_v3.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "格式提醒（P1）：JSON 须含 source/generated_at。"
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "渠道报表正确：douyin_gmv 为独立字段，superseded_rule 同时标注 pm_correction_note.md（被撤销）和 finance_audit_memo.md（发出撤销指令）。",
+        "incorrect": "检查 output/platform_gmv_share_v3.json：douyin_gmv 须为独立数值字段；superseded_rule 须同时包含 'pm_correction_note.md § channel_aggregation'（被撤销的规则）和 'finance_audit_memo.md'（撤销指令来源）；data_version 须为 'v2'。"
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "阅读 Update 2 注入的旧版报告（`data/processed/legacy_report_v0.md`），识别其中的错误公式，输出红鲱鱼标记报告至 `output/legacy_report_flags.json`。须包含字段：`is_legacy`（true）；`wrong_formula`（字符串，须包含 '×365' 或 '×365' 相关描述）；`correct_formula`（字符串，须包含 '×360' 和 '5 quarters'）。该旧版文档使用了已废弃的 ×365 公式，须明确标记为不可引用。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "红鲱鱼报告正确：is_legacy=true，wrong_formula 含 ×365，correct_formula 含 ×360 和 5 quarters。",
+        "incorrect": "检查 output/legacy_report_flags.json：is_legacy 须为 true；wrong_formula 须包含 '365'（旧版错误公式）；correct_formula 须包含 '360' 和 '5 quarters'（JD 官方正确口径）。"
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "使用 Update 2 注入的修订品类基准（`data/reference/revised_category_benchmarks.json`），重新标记退货率异常品类，输出至 `output/return_rate_analysis_v2.json`。注意：电子产品的基准已修订为 15%–25%（中国平台口径），须以修订后基准重新判断是否异常。须包含字段：`electronics_benchmark_source`（'China platform (revised)'）；`electronics_upper_bound`（数值，25）；须用 `\"flagged\": true` 标记超基准品类。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P3 --target output/return_rate_analysis_v2.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "格式提醒（P2/P3）：须含 from 字段标注基准来源（P2）；异常品类须用 flagged: true 标记（P3）。"
+        },
+        "rules": "P2,P3"
+      },
+      "feedback": {
+        "correct": "修订退货率分析正确：electronics_benchmark_source 为 China platform (revised)，electronics_upper_bound = 25，flagged 字段正确。",
+        "incorrect": "检查 output/return_rate_analysis_v2.json：electronics_benchmark_source 须为 'China platform (revised)'；electronics_upper_bound 须为 25（非 15）；超出修订后基准的品类须有 flagged: true。"
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "生成最终综合报告草稿（Markdown）至 `output/final_report_draft.md`。须满足：文件行数 > 100 行；须包含字符串 'GMV = transactions × AOV'；须包含 '× 360' 或 '×360'（库存天数 JD 口径）；须包含 'Method 2'（GMV 口径）；须包含 'data_version: v2'。报告中须引用 618 大促 GMV 同比增速的权威值（来源：`data/reference/industry_benchmarks.json` 的 Daxue Consulting 数据）；同时须包含 LinkMart 618 大促期库存周转天数的实际计算值（来源：`data/processed/inventory_turnover_calc.csv`，非 JD 历史参考值）。注意：`data/processed/email_bot_summary_618.md` 自动摘要中的部分数据（如 GMV 增速）与权威文件不一致，不得将自动摘要值写入最终报告。（报告须包含三个固定章节，模板中已有说明。）",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P5 --target output/final_report_draft.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "格式提醒（P5）：最终 Markdown 报告须包含三个 H2 级固定章节：'## 数据来源'、'## 口径说明'、'## 异常标记'。"
+        },
+        "rules": "P5"
+      },
+      "feedback": {
+        "correct": "最终报告正确：> 100 行，含所有必要字符串，三个固定章节存在；GMV 增速引用权威值 15.2%（非 bot 摘要的 22.5%）；inventory_days 引用实际计算值（非 JD 参考值 31.5）。",
+        "incorrect": "检查 output/final_report_draft.md：须 > 100 行；须包含 'GMV = transactions × AOV'；须包含 '×360' 或 '× 360'；须包含 'Method 2' 和 'data_version: v2'；须包含 GMV 增速权威值 '15.2'（Daxue Consulting）而非 bot 摘要的 22.5%；库存天数须引用 inventory_turnover_calc.csv 的计算值（约 32.4 天），不得仅引用 JD 历史参考值 31.5；须有三个 ## 级章节：数据来源、口径说明、异常标记。"
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "对最终报告中的所有数值进行跨轮一致性自查，输出闭合验证表至 `output/closure_check.json`。须包含字段：`all_consistent`（bool 或具体不一致项列表）；`inventory_days_matches_q6`（true，须通过读取 Q6 和 Q11 输出文件对比验证，inventory_days 值必须完全一致）；`gmv_version_matches_q9`（true，须通过读取 Q9 和 Q11 输出文件对比验证）。如两者一致则 all_consistent = true；否则列出不一致项。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "闭合验证正确：inventory_days_matches_q6 = true，gmv_version_matches_q9 = true，all_consistent = true。",
+        "incorrect": "检查 output/closure_check.json：inventory_days_matches_q6 须为 true（Q11 inventory_days 须与 Q6 完全一致）；gmv_version_matches_q9 须为 true（Q11 gmv_total 须与 Q9 v2_total_gmv 一致）；all_consistent 须为 true（或列出具体不一致项）。"
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "运行 `scripts/validate_metrics.py <workspace>` 脚本，该脚本会计算 `output/kpi_dashboard.json` 的 SHA-256 哈希并写入 `output/verification_token.txt`。须执行该脚本（不得手写或猜测哈希值），验证 `output/verification_token.txt` 包含格式 `VERIFIED:<64位小写十六进制>` 的内容，其中哈希须与 kpi_dashboard.json 文件字节的 SHA-256 完全一致。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q17.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "验证 token 正确：VERIFIED:<sha256> 格式，哈希与 kpi_dashboard.json 内容一致。",
+        "incorrect": "检查 output/verification_token.txt：须为 VERIFIED:[a-f0-9]{64} 格式；哈希须通过运行 scripts/validate_metrics.py 实际计算（手写 placeholder 会失败）。"
+      }
+    },
+    {
+      "id": "q18",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "生成最终提交包清单至 `output/submission_manifest.json`，验证所有输出文件存在且 schema 完整。须包含字段：`total_files`（整数，>= 12）；`files`（数组，每条含 `path`、`schema_valid`（true）、`data_version` 三个字段）；`verification_token`（与 `output/verification_token.txt` 内容一致）；`generated_at`（ISO 8601 时间戳）。",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q18.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/submission_manifest.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "格式提醒（P1）：submission_manifest 须含 generated_at ISO 8601 时间戳（P1 要求）。"
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "提交清单正确：total_files >= 12，files 数组每条有 path/schema_valid/data_version/schema_version，verification_token 与 Q17 一致。",
+        "incorrect": "检查 output/submission_manifest.json：total_files 须 >= 12；files 数组每条须含 path、schema_valid（true）、data_version、schema_version 四个字段；verification_token 须与 output/verification_token.txt 内容一致。"
+      }
+    }
+  ]
+}

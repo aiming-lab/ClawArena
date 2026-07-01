@@ -1,0 +1,118 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Release ships Friday. The three issues in tickets/pending_issues.md need impact assessment — for each issue, which code modules will be touched by the fix? Save a markdown note per issue under output/notes/q1_modules.md, listing the module names clearly.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "All three issues correctly mapped to their affected modules.",
+      "incorrect": "Check that output/notes/q1_modules.md exists and lists core.pipeline, core.scheduler, api.gateway, api.auth, tasks.worker, and tasks.retry."
+    }
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "For the riskiest of those modules, walk me through the security exposure — I want to understand the blast radius if it were compromised. The architecture diagram in design/ should help you reason about data-flow. Save your analysis to output/notes/q2_security.md.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Security exposure correctly identified for api.gateway with blast-radius analysis.",
+      "incorrect": "Check that output/notes/q2_security.md exists, mentions api.gateway, and includes blast-radius / vulnerability / pentest language."
+    }
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [
+      "u1"
+    ],
+    "question": "Before I sign off, grep the whole repo for @deprecated usages — I need a total count and a top-5 list of the worst offenders. While you're at it, the design meeting recording in design/ explains why we made certain trade-offs around deprecations; cross-check the recording against docs/deprecations.md and flag anything that looks inconsistent. Save everything to output/notes/q3_deprecated.md.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct deprecated count (≥40), legacy_session_store conflict identified, recording cross-check confirmed.",
+      "incorrect": "Check q3_deprecated.md: needs deprecated count ≥40, must mention legacy_session_store, conflict/discrepancy keyword, and video/recording keyword."
+    }
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Pull it all together. Fill the four empty sections (Affected Modules, Security Concerns, Deprecated APIs, Recording vs. Documentation Conflict) in release_notes_draft.md — use Edit, not a full rewrite. Also emit output/release_summary.json with exactly these keys: {\"affected_modules\": [...], \"deprecation_count\": <int>, \"security_concern_module\": \"...\", \"recording_vs_docs_conflict\": \"...\"}.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Release notes fully populated and release_summary.json passes all field checks.",
+      "incorrect": "Check release_notes_draft.md (must mention api.gateway, legacy_session_store, count ≥40) and output/release_summary.json (all four required keys with correct values)."
+    }
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "We need to de-risk the deployment before we merge to main. Kick off a background subagent to run `tools/lint_release.sh` against the repo (this will take a while — let it run in the background). While it is running, use the q1–q4 findings already in `output/notes/` and `output/release_summary.json` to draft a consolidated risk summary at `analysis/risk_summary.md`. The summary must cite at least one finding from a previous round note (e.g. reference `output/notes/q2_security.md` or `output/notes/q3_deprecated.md` by path). Do not wait for the lint job to finish before writing the risk summary — produce both deliverables concurrently. Set this up as a single workflow script that orchestrates the background lint job and the parallel risk synthesis together.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Background lint subagent launched and analysis/risk_summary.md written with a cross-round anchor reference.",
+      "incorrect": "Check that: (1) a RunSubagent call with run_in_background=true appears in sessions/main.jsonl; (2) analysis/risk_summary.md exists; (3) the file contains a reference to a prior-round note path such as output/notes/q2_security.md or output/notes/q3_deprecated.md."
+    },
+    "tags": [
+      "background_subagent",
+      "async_long_running",
+      "partial_result_handling",
+      "workflow"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The deploy timeline animation `figures/deploy_timeline.mp4` shows the lead-time trend across the last 12 sprints — keep working within the same analysis session you've had running, no need to spin up a fresh one, and analyse the frame-by-frame progression and identify: which sprint showed the largest lead-time spike, and whether the trend is improving or worsening. Write the findings to `findings/deploy_evolution.md`. The file must include the video file path `figures/deploy_timeline.mp4` somewhere in the text (so the reader knows which asset was analysed).",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "findings/deploy_evolution.md written with video path reference, and genuine session reuse was observed (the same non-empty session_id threaded across ≥ 2 RunSubagent calls; reusing only a subagent_id spawns a fresh session and does not count).",
+      "incorrect": "Check that: (1) findings/deploy_evolution.md exists and contains the string 'figures/deploy_timeline.mp4'; (2) sessions/main.jsonl shows genuine session reuse — the same non-empty session_id threaded across ≥ 2 RunSubagent calls (reusing only a subagent_id starts a new session and does not count)."
+    },
+    "tags": [
+      "session_reuse",
+      "stateful_subagent",
+      "incremental_context_load",
+      "video_frame_reading"
+    ]
+  }
+]

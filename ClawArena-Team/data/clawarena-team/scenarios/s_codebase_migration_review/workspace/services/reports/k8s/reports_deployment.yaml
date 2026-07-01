@@ -1,0 +1,163 @@
+# Auto-generated Kubernetes / deployment config for payments-split migration review.
+# Service: reports
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-service
+  namespace: payments-split
+  labels:
+    app: reports
+    version: "v2"
+    team: platform-migration
+
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: reports
+  template:
+    metadata:
+      labels:
+        app: reports
+        version: "v2"
+    spec:
+      serviceAccountName: reports-sa
+      containers:
+      - name: reports
+        image: gcr.io/payments-split/reports:v2.2.10
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8400
+        env:
+        - name: SERVICE_NAME
+          value: "reports"
+        - name: ENV
+          valueFrom:
+            secretKeyRef:
+              name: reports-secrets
+              key: environment
+        - name: DB_DSN
+          valueFrom:
+            secretKeyRef:
+              name: reports-db-creds
+              key: dsn
+        resources:
+          requests:
+            cpu: "301m"
+            memory: "256Mi"
+          limits:
+            cpu: "1459m"
+            memory: "1024Mi"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8400
+          initialDelaySeconds: 9
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8400
+          initialDelaySeconds: 4
+          periodSeconds: 5
+      - name: reports-sidecar-1
+        image: gcr.io/payments-split/reports-sidecar-1:v2.14.10
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8401
+        env:
+        - name: SERVICE_NAME
+          value: "reports"
+        - name: ENV
+          valueFrom:
+            secretKeyRef:
+              name: reports-secrets
+              key: environment
+        - name: DB_DSN
+          valueFrom:
+            secretKeyRef:
+              name: reports-db-creds
+              key: dsn
+        resources:
+          requests:
+            cpu: "160m"
+            memory: "512Mi"
+          limits:
+            cpu: "1184m"
+            memory: "1024Mi"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8401
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8401
+          initialDelaySeconds: 13
+          periodSeconds: 5
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reports-svc
+  namespace: payments-split
+spec:
+  selector:
+    app: reports
+  ports:
+  - protocol: TCP
+    port: 8400
+    targetPort: 8400
+  type: ClusterIP
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: reports-hpa
+  namespace: payments-split
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: reports-service
+  minReplicas: 4
+  maxReplicas: 16
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: reports-config
+  namespace: payments-split
+data:
+  app.yaml: |
+    service: reports
+    version: v2
+    port: 8400
+    log_level: info
+    timeouts:
+      read: 30s
+      write: 30s
+      idle: 90s
+    retry:
+      max_attempts: 3
+      backoff_ms: 100
+    db:
+      pool_size: 8
+      max_idle: 10
+      conn_timeout: 5s
+    metrics:
+      enabled: true
+      path: /metrics
+      port: 8401

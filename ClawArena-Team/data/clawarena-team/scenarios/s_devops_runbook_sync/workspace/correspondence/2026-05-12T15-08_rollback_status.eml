@@ -1,0 +1,22 @@
+From: Jordan Choi <jordan.choi@mercatorrobotics.com>
+To: Marcus Osei <marcus.osei@mercatorrobotics.com>
+Date: 2026-05-12 15:08 UTC
+Subject: Re: [P1] Production incident — rollback status
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Marcus,
+
+Rollback is underway but slow. The backfill on billing_transactions
+has 12M rows to reverse. Current estimate: ~7 hours
+from when we started at 14:30 UTC.
+
+Priya has confirmed the root cause involves a missing lock timeout
+guard. The analytics ETL job from the replica was holding a share lock
+on billing_transactions that blocked our DDL entirely.
+
+Platform gateway is degraded but operational. payment-service and
+billing-service are in read-only mode.
+
+— Jordan
+

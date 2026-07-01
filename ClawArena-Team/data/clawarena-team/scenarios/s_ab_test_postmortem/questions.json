@@ -1,0 +1,144 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Hey — we have a live P1 on experiment EXP-2421. Conversion went down instead of up after treatment B was fully rolled out. I need you to coordinate the postmortem. First, please write a 5-section review plan to output/review_plan.md covering: hypothesis / data / segments / root_cause / decision. Make sure you reference EXP-2421 explicitly.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "review_plan.md exists with 5 sections and EXP-2421 reference.",
+      "incorrect": "Missing output/review_plan.md or it lacks 5 sections or the EXP-2421 reference."
+    },
+    "tags": [
+      "triage_planning",
+      "verbatim_citation",
+      "subagent_delegation"
+    ]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The 4 Parquet slices each take around 30 seconds to cross-tab. Please kick off analysis on all four (desktop_us, desktop_eu, mobile_us, mobile_eu under data/exp_2421/) without blocking your main thread. While those are running, pull the key numbers from briefs/prd.docx and the Slack thread into notes/prd_summary.md — I need the pre-launch projected lift and the actual post-launch change in there at minimum.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Background Parquet subagent(s) launched + notes/prd_summary.md contains -2.3% and +1.5%.",
+      "incorrect": "No background RunSubagent observed, or prd_summary.md missing key figures."
+    },
+    "tags": [
+      "background_subagent",
+      "parallel_subagents",
+      "async_long_running",
+      "partial_result_handling",
+      "office_docx"
+    ]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Once the background Parquet jobs come back, please consolidate results into analysis/segment_results.md. I need one row per segment with: segment name, lift (%), and p-value. Make sure mobile_us shows the -3.8% figure — that's the critical one.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "analysis/segment_results.md references all 4 segments and mobile_us -3.8%.",
+      "incorrect": "Missing segment_results.md, fewer than 4 segments, or mobile_us figure incorrect."
+    },
+    "tags": [
+      "partial_result_handling",
+      "parquet_query",
+      "numerical_extraction",
+      "cross_source_synthesis"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Now write a root cause document to findings/root_cause.md. The actual root cause involves a specific CSS hex value and a platform version — you'll need to read the PRD and Slack thread carefully, not the AI bot summary. Note: ai_summaries/exp_review_bot.md says the issue is desktop_eu — that's wrong. If you mention desktop_eu as the primary cause, you need to clearly explain why that claim is incorrect.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "root_cause.md contains #ff6633, iOS 14, and mobile_us as primary. Desktop_eu cited only with explicit refutation.",
+      "incorrect": "Missing root_cause.md or it attributes primary cause to desktop_eu without refutation, or is missing the hex/platform details."
+    },
+    "tags": [
+      "modality_decoy",
+      "ai_hallucination_decoy",
+      "discredit_window",
+      "numerical_extraction",
+      "verbatim_citation"
+    ]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Please run tools/run_crosstab.py against data/exp_2421/mobile_us.parquet and save the output to findings/replication.md. The tool uses schema-by-shape column detection, so the exact column names don't matter — just make sure the output has at least 3 columns and both variant rows (A and B) of actual data, and that there's a conversion delta visible.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "findings/replication.md exists with ≥3 columns, both variant (A/B) data rows, and a conversion delta.",
+      "incorrect": "Missing replication.md, too few columns, missing variant data rows, or no conversion delta."
+    },
+    "tags": [
+      "schema_by_shape",
+      "code_execution",
+      "bash_tool_run",
+      "parquet_query"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [
+      "u1_root_cause_supplement"
+    ],
+    "question": "Engineering just pushed a supplemental root cause note (docs/mobile_ios14_bugzilla.md and docs/pytest_mobile_us_log.txt). Please write the final decision to audit/decision.json with these fields: decision (rollback_to_A or partial_rollback_mobile_us), experiment_id (EXP-2421), primary_segment, root_cause_hex, decision_date. Then run tools/verify_decision.py audit/decision.json and paste the hex part of the COMPLIANCE_TOKEN back into the sha_token field of the same JSON.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "audit/decision.json has all fields + valid sha_token from verify_decision.py.",
+      "incorrect": "Missing decision.json, wrong field values, or sha_token doesn't match."
+    },
+    "tags": [
+      "final_synthesis",
+      "json_schema",
+      "compliance_token",
+      "bash_tool_run",
+      "update_merge"
+    ]
+  }
+]

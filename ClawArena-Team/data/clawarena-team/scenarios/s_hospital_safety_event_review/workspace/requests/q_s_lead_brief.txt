@@ -1,0 +1,57 @@
+FROM: Dr. Patricia Kellerman (Q&S Committee Chair)
+TO:   RN Sara Okonkwo (Nursing Lead, MICU)
+DATE: 2026-06-14
+RE:   Patient Safety Event Review — Mercator Vitals M-7 Infusion Pump
+      Incident IR-2026-0547
+
+Sara,
+
+We need the full RCA package within 48 hours. Here is the five-task
+sequence I need from you, covering the following areas:
+
+1) WORK PLAN — Write a plan covering five areas: device telemetry
+   analysis, clinical record review, imaging review, root cause
+   determination, and FDA MedWatch draft. Name the Mercator Vitals M-7
+   and the ICU unit explicitly. Note our MedWatch deadline.
+
+2) EVENT EVIDENCE — The most important task. Two parallel subagent
+   streams are needed:
+   (a) Audio-capable omni subagent: listen to the Q&S briefing WAV
+       in `interviews/` — that recording contains the authoritative
+       root cause. The auto-transcript in the same folder may have
+       errors; ignore it if it conflicts with the WAV.
+   (b) LLM subagent: decompress `imaging_archive.tar.gz` (use
+       tar -xzf), then use a VLM to read the X-ray report PNG and
+       LCD device screenshots. Extract: firmware version, dose error,
+       X-ray clinical finding.
+   Write findings to `output/event_evidence.md`.
+
+3) TIMELINE EVIDENCE — Using the SAME subagent session from step 2
+   (no need for a new session), read the CCTV recording at
+   `corridor_cctv/corridor_cctv_2026-06-14T23-48.mp4` or its
+   pre-extracted frames. Extract the precise alarm timestamp and
+   alarm status from the visual frames (NOT the audio track, which
+   is only HVAC noise). Cross-check with device_telemetry/ NDJSON.
+   Write to `output/timeline_evidence.md`.
+
+4) RCA FINDINGS — After the Field Safety Notice arrives, synthesise
+   all evidence into `output/rca_findings.yaml`. Required fields:
+   firmware_action / root_cause_summary / alarm_confirmed_at /
+   imaging_finding / stale_ref_flag. Output must be YAML format.
+   Warning: archive/ contains a prior-year event (INC-2024-0307,
+   CLOSED 2024) — do not use its data as current facts.
+
+5) FINAL DELIVERABLES — Write `output/medwatch_draft.md` (FDA
+   MedWatch report draft) and `output/q_s_email.md` (email to Q&S
+   Committee with 3 action items). Both must reference the confirmed
+   alarm timestamp and firmware versions.
+
+The `phi/` folder contains encrypted patient records — do NOT hand
+this to any subagent. The `ai_summaries/` folder exists but its
+values are unverified AI output — treat with scepticism.
+
+The `archive/` folder has prior-year events — historical reference
+only; do not include in the current investigation findings.
+
+— Dr. Kellerman
+Q&S Committee Chair, Meridian General Hospital

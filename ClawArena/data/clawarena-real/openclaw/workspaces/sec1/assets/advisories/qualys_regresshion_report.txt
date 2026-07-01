@@ -1,0 +1,353 @@
+# regreSSHion: Remote Unauthenticated Code Execution Vulnerability in OpenSSH Server
+## Qualys Threat Research Unit — Technical Report
+### Published: 2024-07-01
+### Source: https://blog.qualys.com/vulnerabilities-threat-research/2024/07/01/regresshion-remote-unauthenticated-code-execution-vulnerability-in-openssh-server
+
+---
+
+## Executive Summary
+
+The Qualys Threat Research Unit (TRU) has discovered a critical security regression
+(CVE-2024-6387) in OpenSSH's server (sshd). The vulnerability, dubbed "regreSSHion,"
+is a signal handler race condition that allows unauthenticated remote code execution
+(RCE) as root on glibc-based Linux systems.
+
+**Key Statistics:**
+- Approximately 14 million potentially vulnerable internet-facing OpenSSH instances identified
+- Approximately 700,000 Qualys customer external-facing instances vulnerable (~31%)
+- CVSS v3.1 Base Score: 8.1 (High)
+- EPSS Score: 63.835% (98th percentile)
+- Exploitation requires approximately 10,000 attempts due to race condition nature
+- Laboratory exploitation time: 6-8 hours total on 32-bit Linux with glibc and ASLR
+
+---
+
+## Background and History
+
+### CVE-2006-5051: The Original Vulnerability
+
+In 2006, a signal handler race condition was discovered in OpenSSH versions prior to 4.4.
+The vulnerability (CVE-2006-5051) allowed attackers to potentially execute arbitrary code
+by exploiting the unsafe use of functions in signal handlers. The OpenSSH team fixed this
+in version 4.4p1 by adding a compile-time guard macro `DO_LOG_SAFE_IN_SIGHAND` that wrapped
+calls to non-async-signal-safe functions within signal handlers.
+
+### The Regression (2020-10-16)
+
+On October 16, 2020, a commit to the openssh-portable repository inadvertently removed
+the `DO_LOG_SAFE_IN_SIGHAND` protection:
+
+  Commit: 752250caabda3dd24635503c4cd689b32a650794
+  Author: Damien Miller <djm@mindrot.org>
+  Date: 2020-10-16
+  Message: "upstream: revised log infrastructure for OpenSSH"
+  Files changed: 7 files, 154 additions, 133 deletions
+
+This commit refactored the logging infrastructure and accidentally dropped the
+`#ifdef DO_LOG_SAFE_IN_SIGHAND` guard in `sshsigdie()`, reintroducing the signal handler
+race condition from CVE-2006-5051. This regression was introduced in OpenSSH 8.5p1
+(released February 2021) and affected all versions through 9.7p1.
+
+---
+
+## Technical Analysis
+
+### Vulnerability Mechanism
+
+The vulnerability exists in sshd's handling of the `LoginGraceTime` timeout. When a client
+connection does not authenticate within the grace period (default: 120 seconds), sshd sends
+a `SIGALRM` signal to itself. The signal handler `sigdie()` (and its internal function
+`sshsigdie()`) then calls `syslog()` to log the timeout event.
+
+**The problem:** `syslog()` is NOT async-signal-safe. Calling a non-async-signal-safe function
+from within a signal handler creates a race condition — if the main thread is executing within
+glibc's heap allocator (e.g., during `malloc()`/`free()`) when the signal is delivered, the
+signal handler's call to `syslog()` may corrupt the heap state.
+
+### Exploit Methodology
+
+The exploit targets the glibc heap allocator's internal state. The attack exploits the FILE
+structure manipulation technique to gain code execution:
+
+1. **Setup Phase**: Attacker sends partial authentication requests to trigger SIGALRM at
+   precise moments during heap operations.
+2. **Heap Spraying**: Multiple connection attempts are used to position heap chunks in
+   predictable locations, working around ASLR.
+3. **FILE Structure Manipulation**: The attacker manipulates glibc's internal `_IO_FILE`
+   structures to redirect execution flow to attacker-controlled code.
+4. **ASLR Bypass**: On 32-bit Linux systems, the ASLR entropy is limited (~16 bits for
+   heap addresses), making brute-force feasible. The exploit requires approximately 10,000
+   attempts on average.
+5. **Privilege Escalation**: Since sshd runs as root, successful exploitation yields a
+   root shell.
+
+**Important 32-bit Constraint**: The described exploit is demonstrated on 32-bit Linux
+with glibc. On 64-bit Linux systems with full ASLR (56-bit entropy), the attack is
+significantly harder and not yet demonstrated in a reliable automated fashion.
+
+### Timing Requirements
+
+The race condition window is narrow. Qualys researchers demonstrated exploitation in a
+laboratory environment in approximately 6-8 hours total, including:
+- ~1-2 hours for heap profiling and alignment
+- ~4-6 hours of actual brute-force connection attempts (~10,000 tries)
+- The entire exploitation chain requires precise timing control
+
+**Note on bot-summarized timing claims**: Some automated summaries have incorrectly
+stated exploitation times of "30 minutes" or "less than 1 hour." These are inaccurate.
+The authoritative exploitation time from Qualys research is 6-8 hours in a controlled
+laboratory environment. See section "References and Authoritative Sources" below.
+
+---
+
+## Affected Versions
+
+### OpenSSH Version Matrix
+
+| Version Range | Status | Notes |
+|---|---|---|
+| < 4.4p1 | Vulnerable (original CVE-2006-5051) | Historical only |
+| 4.4p1 – 8.4p1 | Not vulnerable | Protected by DO_LOG_SAFE_IN_SIGHAND |
+| 8.5p1 – 9.7p1 | VULNERABLE (CVE-2024-6387) | Regression introduced Oct 2020 |
+| 9.8p1 | FIXED | Official patch, released 2024-07-01 |
+
+**OpenBSD**: OpenBSD systems are NOT affected because OpenBSD sshd uses a different
+signal handling mechanism that does not exhibit this race condition.
+
+**glibc dependency**: The vulnerability is exploitable only on systems using glibc.
+musl libc systems may not be exploitable via the documented technique.
+
+---
+
+## Internet Exposure Analysis
+
+Qualys' global scanning infrastructure identified approximately **14,000,000** (14 million)
+internet-facing SSH servers potentially running vulnerable OpenSSH versions. Among Qualys
+customer environments, approximately 700,000 external instances were found vulnerable,
+representing roughly 31% of monitored external SSH endpoints.
+
+### Version Distribution (representative sample from Qualys scan)
+
+| OpenSSH Version | Approximate Share |
+|---|---|
+| 8.7p1 (RHEL 8) | 18% |
+| 8.9p1 (Ubuntu 22.04) | 15% |
+| 9.3p2 | 12% |
+| 9.6p1 | 11% |
+| 8.8p1 | 9% |
+| Other 8.5p1–9.7p1 | 35% |
+
+---
+
+## Remediation Guidance
+
+### Primary Remediation: Upgrade to OpenSSH 9.8p1
+
+The definitive fix is to upgrade to OpenSSH 9.8p1, released 2024-07-01, which properly
+re-introduces the async-signal-safe guard in the signal handler code.
+
+### Workaround (Temporary Mitigation)
+
+If immediate patching is not possible:
+
+```
+# In /etc/ssh/sshd_config
+LoginGraceTime 0
+```
+
+Setting `LoginGraceTime 0` disables the authentication grace period timeout, eliminating
+the SIGALRM signal delivery that triggers the race condition. The signal handler code path
+is never reached.
+
+**IMPORTANT DoS Risk**: Setting `LoginGraceTime 0` means that unauthenticated connections
+are never timed out. This creates a Denial-of-Service risk: an attacker can exhaust sshd's
+connection slots by holding connections open indefinitely. Organizations with strict
+availability requirements should weigh this risk carefully.
+
+After editing sshd_config, restart the service:
+```
+systemctl restart sshd
+```
+
+### New Features in OpenSSH 9.8p1
+
+The fix release introduces:
+- `PerSourcePenalties`: Rate-limits connections from individual source IPs
+- `PerSourcePenaltyExemptList`: Whitelist for trusted networks
+
+These features provide defense-in-depth against brute-force attacks even if the race
+condition were to re-emerge.
+
+---
+
+## Vendor Patches
+
+| Vendor | Patch ID | Fixed Package | Release Date |
+|---|---|---|---|
+| Red Hat Enterprise Linux 9 | RHSA-2024:4312 | openssh-8.7p1-38.el9_4.1 | 2024-07-03 |
+| Red Hat Enterprise Linux 8 | RHSA-2024:4340 | openssh-8.0p1-19.el8_10.1 | 2024-07-05 |
+| Ubuntu | USN-6859-1 | openssh-server 9.6p1-3ubuntu13.3 | 2024-07-01 |
+| Debian | DSA-5724-1 | openssh 1:9.7p1-7 | 2024-07-09 |
+| SUSE | SUSE-SU-2024:2308-1 | openssh 9.6p1-150600.3.3.1 | 2024-07-04 |
+
+---
+
+## References and Authoritative Sources
+
+1. NVD: https://nvd.nist.gov/vuln/detail/CVE-2024-6387
+2. GHSA: https://github.com/advisories/GHSA-2x8c-95vh-gfv4
+3. Qualys Blog: https://blog.qualys.com/vulnerabilities-threat-research/2024/07/01/regresshion-remote-unauthenticated-code-execution-vulnerability-in-openssh-server
+4. oss-security: https://www.openwall.com/lists/oss-security/2024/07/01/3
+5. OpenSSH 9.8 Release: https://www.openssh.org/txt/release-9.8
+6. Regression commit: https://github.com/openssh/openssh-portable/commit/752250caabda3dd24635503c4cd689b32a650794
+7. CVE-2006-5051 (original): https://github.com/advisories/GHSA-mq5h-r3rg-j9hg
+8. RHSA-2024:4312: https://access.redhat.com/errata/RHSA-2024:4312
+
+---
+
+## Disclosure Timeline
+
+| Date | Event |
+|---|---|
+| 2020-10-16 | Regression introduced in commit 752250c (OpenSSH log infrastructure refactor) |
+| 2021-02 | OpenSSH 8.5p1 released (regression included, vulnerability present) |
+| 2024-05 | Qualys TRU internally discovers and reproduces the vulnerability |
+| 2024-06 | Coordinated disclosure with OpenSSH and major Linux distributions |
+| 2024-07-01 | Public disclosure (NVD, GHSA, Qualys blog, oss-security) |
+| 2024-07-01 | OpenSSH 9.8p1 released (fix) |
+| 2024-07-03 | Red Hat RHSA-2024:4312 (RHEL 9) |
+| 2024-07-05 | Red Hat RHSA-2024:4340 (RHEL 8) |
+
+---
+
+*This report was prepared by the Qualys Threat Research Unit. All exploitation metrics
+(10,000 attempts, 6-8 hours) are based on controlled laboratory conditions on 32-bit
+glibc-based Linux. Results on production systems may vary.*
+
+---
+
+## Extended Technical Analysis: Signal Handler Safety
+
+### async-signal-safe Functions
+
+POSIX.1-2008 defines a set of functions that are safe to call from within signal handlers.
+These functions are guaranteed to be re-entrant and will not cause undefined behavior even
+if the interrupted thread was executing in a non-re-entrant context (such as malloc()).
+
+The complete list includes: `_exit`, `access`, `alarm`, `close`, `dup`, `dup2`, `execle`,
+`execve`, `fork`, `fstat`, `getegid`, `geteuid`, `getgid`, `getgroups`, `getpgrp`,
+`getpid`, `getppid`, `getuid`, `kill`, `link`, `lseek`, `mkdir`, `mkfifo`, `open`,
+`pathconf`, `pause`, `pipe`, `raise`, `read`, `rename`, `rmdir`, `setgid`, `setpgid`,
+`setsid`, `setuid`, `sigaction`, `sigaddset`, `sigdelset`, `sigemptyset`, `sigfillset`,
+`sigismember`, `signal`, `sigpending`, `sigprocmask`, `sigsuspend`, `sleep`, `stat`,
+`symlink`, `sysconf`, `tcdrain`, `tcflow`, `tcflush`, `tcgetattr`, `tcgetpgrp`,
+`tcsendbreak`, `tcsetattr`, `tcsetpgrp`, `time`, `times`, `umask`, `uname`, `unlink`,
+`utime`, `wait`, `waitpid`, `write`.
+
+Notably ABSENT from this list: `malloc`, `free`, `syslog`, `printf`, `fprintf`.
+
+### The `sshsigdie()` Function
+
+In vulnerable versions of OpenSSH (8.5p1–9.7p1), the `sshsigdie()` function appeared as:
+
+```c
+/* REMOVED: the original protection guard
+#ifdef DO_LOG_SAFE_IN_SIGHAND
+*/
+void
+sshsigdie(const char *file, const char *func, int line, ...) {
+    va_list args;
+    char fmtbuf[256];
+    const char *fmt = NULL;
+
+    va_start(args, line);
+    /* ... format string setup ... */
+    va_end(args);
+
+    syslog(LOG_CRIT, "%s", fmtbuf);  /* NOT async-signal-safe! */
+    _exit(1);
+}
+/* REMOVED: closing #endif */
+```
+
+The `DO_LOG_SAFE_IN_SIGHAND` macro guard was meant to compile out the syslog() call in
+signal handler context, leaving only `_exit(1)` (which IS async-signal-safe). Without
+the guard, `syslog()` is called directly from the signal handler.
+
+### Heap State Corruption Mechanism
+
+When sshd is handling an authentication timeout (SIGALRM → sigdie() → sshsigdie()):
+
+1. The main execution thread may be inside `malloc()` or `free()` at the moment of signal delivery
+2. These functions hold internal locks (specifically `__malloc_lock` or its equivalent)
+3. `syslog()` internally calls `malloc()` (for formatting, buffer allocation)
+4. When `malloc()` is called re-entrantly (from within the signal handler while the main
+   thread is already in malloc), the internal lock is already held by the current thread
+5. On Linux with POSIX threads, `__malloc_lock` is a recursive mutex — re-entrancy does
+   NOT deadlock, but it can corrupt the free list or bin pointers in the heap metadata
+
+### Glibc FILE Structure Exploitation
+
+The specific exploitation technique leverages the `_IO_FILE` structure in glibc's stdio:
+
+```c
+struct _IO_FILE {
+    int _flags;                     /* High-order word is _IO_MAGIC; rest is flags. */
+    char *_IO_read_ptr;             /* Current read pointer */
+    char *_IO_read_end;             /* End of get area. */
+    char *_IO_read_base;            /* Start of putback+get area. */
+    char *_IO_write_base;           /* Start of put area. */
+    char *_IO_write_ptr;            /* Current put pointer. */
+    char *_IO_write_end;            /* End of put area. */
+    /* ... more fields ... */
+    const struct _IO_jump_t *_vtable;  /* Virtual function table */
+};
+```
+
+By corrupting the `_vtable` pointer to point to attacker-controlled data, the exploit
+can redirect execution when glibc calls any virtual function on the FILE structure
+(e.g., during `fclose()` or during output flushing).
+
+---
+
+## Mitigation Assessment: MaxStartups Alternative
+
+OpenSSH provides another defense-in-depth mechanism: `MaxStartups`. This setting controls
+the maximum number of concurrent unauthenticated connections:
+
+```
+# /etc/ssh/sshd_config
+MaxStartups 10:30:100
+```
+
+Format: `start:rate:full`
+- `10`: Allow up to 10 unauthenticated connections without throttling
+- `30`: Drop new connections with 30% probability when above 10 connections
+- `100`: Hard maximum of 100 concurrent unauthenticated connections
+
+**Effectiveness**: While `MaxStartups` does not eliminate the race condition, it limits
+the rate of attack attempts, increasing the time required for exploitation from hours
+to potentially weeks or months.
+
+**Advantage over LoginGraceTime 0**: Unlike `LoginGraceTime 0`, `MaxStartups` does not
+create an explicit DoS vector. Legitimate users with slow connections are not permanently
+blocked; they are rate-limited during periods of high connection volume.
+
+---
+
+## Comparison: CVE-2024-6387 vs CVE-2024-6409
+
+While analyzing regreSSHion, researchers also identified a related but distinct vulnerability:
+
+**CVE-2024-6409**: Signal handler race condition in OpenSSH privilege separation child process.
+- Affects: OpenSSH 8.7 and 8.8 specifically (RHEL 8 backport versions)
+- Scope: Affects the privilege-separated child process (not the main sshd)
+- Impact: Lower severity than CVE-2024-6387 due to reduced privileges of the child process
+- CVSS Score: 7.0 (High) — lower than CVE-2024-6387's 8.1
+- Note: The affected version range is narrower and the exploitability is reduced
+
+This is distinct from CVE-2024-6387 which affects the main sshd process directly.
+Do NOT conflate these two CVEs — they have different affected version ranges and different
+CVSS scores.
+
+---

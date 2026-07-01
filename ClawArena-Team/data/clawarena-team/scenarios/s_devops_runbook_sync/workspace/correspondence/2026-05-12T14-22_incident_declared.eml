@@ -1,0 +1,20 @@
+From: Marcus Osei <marcus.osei@mercatorrobotics.com>
+To: platform-oncall@mercatorrobotics.com
+Date: 2026-05-12 14:22 UTC
+Subject: [P1] Production incident — migration failure payment/billing
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+All,
+
+We have a P1 incident. Migration V0234__add_idempotency_keys.sql
+started at 13:47 UTC and has hung in phase 3 — backfill idempotency_keys on billing_transactions (12M rows).
+Database locks are cascading. Services affected:
+  - payment-service: 503s on /v1/process
+  - billing-service: queue backlog growing (>50k events)
+
+Priya (DBA lead) is investigating. Jordan is on call.
+Rolling back now. ETA unknown.
+
+— Marcus
+

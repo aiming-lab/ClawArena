@@ -1,0 +1,167 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Priya here. We're kicking off the FY2025 grant compliance audit for all three grantors. The brief and the query log are in `requests/`. Before we touch any numbers, I need a structured intake note: map out which grantors we're auditing, what the key deliverables are, and flag any preliminary concerns or open questions that the grantor officers have raised in the query log. Write it to `output/audit_intake.md`. Keep the three grantors listed separately — do not merge their concerns into a single paragraph.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "All three grantors correctly identified with separate sections, deliverables noted, and open questions per grantor captured without archive contamination.",
+      "incorrect": "`output/audit_intake.md` is either missing, too short, merges the three grantors into one block, omits deliverable types, or references FY2024 archive material. Re-read `requests/audit_brief.md` and `requests/grantor_query_log.md` and ensure each grantor gets its own section."
+    },
+    "tags": [
+      "triage_planning",
+      "decoy_directory"
+    ]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Now I need a comparative terms table. The three grant agreements are in `grant_agreements/`. For each grantor, pull out: (1) eligible expenditure categories with any per-item or percentage caps, (2) documentation requirements for travel, (3) whether indirect or overhead costs are eligible, and (4) any equipment purchase thresholds. Write the table to `output/terms_crosstab.md`. Important: for the Nordic agreement, please note which clauses are in the binding sections versus which content is explicitly labeled non-binding — and treat the non-binding content accordingly in your table.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Cross-tabulation covers travel, indirect costs, and equipment for all three grantors; Nordic §9 non-binding status correctly noted; Grantor C USD 500 equipment cap and Nordic binding NOK 15,000 cap both present.",
+      "incorrect": "`output/terms_crosstab.md` is missing one or more required fields, incorrectly treats the Nordic §9 non-binding clarification as a binding constraint, or references FY2024 archive agreements. Read the three binding agreements carefully and explicitly discredit the §9 label."
+    },
+    "tags": [
+      "cross_source_synthesis",
+      "discredit_window",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The scanned receipts are in `receipts/`. I need amounts and categories confirmed for all eight receipts. For each one, pull the vendor name, date, stated amount (in original currency), and expense category. There's a note in the receipts index that RCP-007 has a legibility issue — for that one, you'll need to cross-check against the ledger in `ledger/` and any other receipts from the same vendor to confirm the amount. Write your findings to `output/receipt_verification.md` — one entry per receipt.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "All eight receipts verified with correct amounts; RCP-007 amount confirmed as NOK 6,200 / USD 572 via cross-validation against the ledger, with cross-validation explicitly documented.",
+      "incorrect": "`output/receipt_verification.md` is missing entries, reports an incorrect amount for RCP-007, or lacks explicit cross-validation acknowledgment for the low-contrast image. Dispatch a VLM subagent for the image and an LLM subagent for the ledger, then reconcile."
+    },
+    "tags": [
+      "multimodal_image",
+      "subagent_delegation",
+      "cross_reference_anchor",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [
+      "u1"
+    ],
+    "question": "Now we do the core of the audit. Using the three agreements (as updated — the Grantor A agreement now has an amended Appendix III from Felix's recent email), the ledger, and the receipt verification you just completed, go through every transaction and flag any that are non-compliant with the relevant grantor's terms. Write the findings to `output/noncompliance_list.md`. Use the NC item numbering system from our SOP in `internal_reports/` — NC-A- prefix for Grantor A, NC-B- for Grantor B, NC-C- for Grantor C — and include the txn_id, the violated clause, and the required remediation action for each item. Be careful about the Nordic equipment items — check whether the relevant binding clause is actually violated before flagging.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "All eight NC items listed with correct codes and txn IDs; GRB-0187 (RCP-007) correctly found compliant under the binding NOK 15,000 cap; post-u1 ceiling of 18% applied to GRA-0041.",
+      "incorrect": "`output/noncompliance_list.md` is missing NC items, incorrectly flags GRB-0187 as non-compliant by citing the non-binding §9 clarification, or applies the pre-u1 15% ceiling to GRA-0041. Read the amended Halcyon agreement from `correspondence/thread_grantor_a_amendment.md` and the Nordic binding clauses carefully."
+    },
+    "tags": [
+      "update_supersede",
+      "discredit_window",
+      "cross_round_consistency"
+    ]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "We're ready to compile the official compliance report. Based on the non-compliance list you produced, draft the formal compliance report to `output/compliance_report.md`. Structure it with: (1) an executive summary, (2) the full non-compliance item table (all 8 items with NC codes, txn IDs, violated clauses, and remediation actions), (3) a section on the Grantor B equipment item RCP-007 confirming it was reviewed and found compliant under the binding terms, (4) a verbatim quotation of Halcyon Appendix III §3.4 as amended by the u1 update. Close the report with a fenced ```json``` block: include fields for each grantor's non-compliance count, the total NC item count, an array of all NC item codes, and the COMPLIANCE_CHECK token (obtained by running `tools/verify_compliance.py`).",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Compliance report contains all required sections, verbatim §3.4 citation, correct JSON counts, all 8 NC codes, RCP-007 compliance confirmation, and a valid COMPLIANCE_CHECK token matching the canonical sha256.",
+      "incorrect": "`output/compliance_report.md` is missing a required section, the §3.4 verbatim citation is absent or paraphrased, the JSON block has incorrect counts, or the COMPLIANCE_CHECK token does not match a fresh run of `tools/verify_compliance.py` over the canonical inputs."
+    },
+    "tags": [
+      "final_synthesis",
+      "verbatim_citation",
+      "compliance_token",
+      "bash_tool_run",
+      "json_schema",
+      "cross_round_consistency"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [
+      "u2"
+    ],
+    "question": "We've just received a formal communication from Felix Hartmann at the Halcyon Foundation — it's now in `correspondence/`. He's issued a formal waiver for the NC-A-001 indirect cost item for FY2025, so that finding is now resolved. However, at the same time, he's introduced a new documentation requirement we need to assess: all indirect cost claims above 12% must now have a completed 'Indirect Cost Justification Form' (ICJF) on file, and he's asking us to confirm whether MAN has this form for GRA-0041. We don't — so this becomes a new non-compliance item. Update `output/compliance_report.md` using the Edit tool (do not rewrite it wholesale) to reflect: (1) NC-A-001 is now marked as resolved / waived; (2) a new item NC-A-004 is added for the missing ICJF; (3) the overall counts are updated; (4) the nc_item_codes array is updated. Re-run `tools/verify_compliance.py` with the updated active NC item set and embed the new COMPLIANCE_CHECK token. The numbering system from your prior non-compliance list must be preserved — do not renumber existing items.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Compliance report correctly updated: NC-A-001 marked waived, NC-A-004 introduced for missing ICJF, all other NC codes preserved without renumbering, counts updated, and new COMPLIANCE_CHECK token matches the post-u2 canonical sha256.",
+      "incorrect": "`output/compliance_report.md` either drops NC-A-001 without marking it waived, omits NC-A-004 or the ICJF reference, renumbers existing items, or the COMPLIANCE_CHECK token does not match the updated active NC set. Preserve existing structure via Edit and recompute the token with the post-u2 active item list."
+    },
+    "tags": [
+      "update_merge",
+      "compliance_token",
+      "bash_tool_run",
+      "cross_round_consistency",
+      "json_schema"
+    ]
+  },
+  {
+    "id": "q7",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "We're entering the final stage of the FY2025 grant compliance audit. I need two things done in parallel — do not skip either. First, kick off a background run of `tools/grant_audit.sh` (it performs a long-running multi-year data aggregation — the script will take about 60 seconds and will write a timestamped log to `output/grant_audit_log.txt` when it finishes). Second, while that script is running in the background, reuse the subagent session you've already established in this audit to compile our final compliance audit report at `output/final_compliance_audit.md`. The report must: (1) include at least 5 bullet points summarising the key audit findings; (2) explicitly reference at least two of the deliverables you produced in earlier rounds (`audit_intake.md`, `terms_crosstab.md`, `receipt_verification.md`, `noncompliance_list.md`, `compliance_report.md`); (3) incorporate the grant flow diagram at `figures/grant_flow_diagram.png` as context for the fund routing analysis. Both the background audit script and the final report are mandatory deliverables — confirm when both are complete.",
+    "eval": {
+      "command": "python ${scripts}/check_q7.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Background grant audit script launched (run_in_background=true); output/final_compliance_audit.md contains >= 5 bullets and references >= 2 prior-round deliverables; figures/grant_flow_diagram.png present. (Continuing the existing subagent session is expected, but session reuse is advisory and does not gate scoring for this question.)",
+      "incorrect": "One or more gated conditions failed: (a) grant_audit.sh was not run in the background (use RunSubagent with run_in_background=true); (b) output/final_compliance_audit.md is missing, too short (< 5 bullets), or does not cite at least 2 prior deliverables; (c) figures/grant_flow_diagram.png is missing from the workspace. (Session reuse is advisory only for this question and does not gate scoring.)"
+    },
+    "tags": [
+      "session_reuse",
+      "background_subagent",
+      "async_long_running",
+      "stateful_subagent",
+      "final_synthesis"
+    ]
+  }
+]

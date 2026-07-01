@@ -1,0 +1,16 @@
+# Dockerfile — flyway-runner
+FROM flyway/flyway:9.21
+
+LABEL maintainer="platform@mercatorrobotics.com"
+LABEL service="flyway-runner"
+
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+COPY migrations/ /flyway/sql/
+COPY flyway.conf /flyway/conf/
+
+# Ensure LOCK_TIMEOUT is set in all migration sessions
+ENV FLYWAY_INIT_SQL="SET lock_timeout = '30s';"
+
+ENTRYPOINT ["flyway"]
+CMD ["migrate"]

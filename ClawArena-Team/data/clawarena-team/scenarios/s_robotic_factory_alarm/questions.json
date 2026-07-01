@@ -1,0 +1,161 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "You're the senior ops engineer for Assembly Line 3. robot-arm-04 just triggered an E-0211 alarm at 02:14:37 UTC on 2026-05-23. The ops brief is in briefs/ops_alert.md and briefs/technician_handoff.md.\n\nWrite a triage plan to output/triage_plan.md with at least 5 sections: immediate_action / root_cause_investigation / video_analysis / runbook_check / escalation. Make sure to call out robot-arm-04, alarm code E-0211, and the alarm date 2026-05-23.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "output/triage_plan.md has 5+ sections and mentions robot-arm-04, E-0211, 2026-05-23.",
+      "incorrect": "Plan is missing required sections or key identifiers (robot-arm-04 / E-0211 / 2026-05-23)."
+    },
+    "tags": [
+      "triage_planning",
+      "verbatim_citation",
+      "subagent_delegation"
+    ]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The diagnostic script at tools/diagnose.sh takes about 30 seconds to complete. Go ahead and kick it off in the background so it doesn't block your work. While it's running, grep through plc_logs/robot_arm_04_2026-05-23.log to pull out the exact alarm timestamp and a summary of what the PLC recorded around the E-0211 event. Write your findings to notes/plc_alarm_summary.md — include the timestamp 02:14:37 explicitly.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Background task launched + notes/plc_alarm_summary.md contains 02:14:37.",
+      "incorrect": "Either no background RunSubagent observed, or PLC timestamp 02:14:37 missing from summary."
+    },
+    "tags": [
+      "background_subagent",
+      "async_long_running",
+      "bash_tool_run"
+    ]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The diagnostic script should have some partial output by now — it writes intermediate results every 10 seconds to the workspace. Check whatever partial output is available (don't wait for the full run) and write a preliminary root-cause hypothesis to notes/initial_hypothesis.md. Be clear it's a partial / preliminary assessment pending the full diagnostic result. Focus on what the partial data suggests as a likely candidate root cause.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "notes/initial_hypothesis.md exists, mentions gripper/joint as candidate, flags as preliminary.",
+      "incorrect": "File missing, or does not mention gripper/joint, or does not indicate partial/preliminary status."
+    },
+    "tags": [
+      "partial_result_handling",
+      "async_long_running"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "There's a handheld video of the panel display at videos/handheld_panel_2026-05-23.mp4 — someone recorded it on their phone right after the alarm. To save context, reuse the same subagent session you've been using, don't spawn a new one. Sample the video at roughly 1-second intervals. The video is recorded at 12 fps — the key frame where the torque reading peaks is around 3 seconds in (frame ~36). Write your analysis to findings/panel_reading.md: report the frame number and whether torque exceeded the threshold.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "findings/panel_reading.md exists, mentions frame ~36, torque exceeds threshold, and session was reused.",
+      "incorrect": "Frame number missing or far off, no threshold-exceeded statement, or new subagent spawned unnecessarily."
+    },
+    "tags": [
+      "multimodal_video",
+      "video_frame_reading",
+      "session_reuse",
+      "modality_decoy"
+    ]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Check the runbooks directory. There are two versions of the E-0211 runbook. One of them is the current, authoritative version and the other is deprecated. Write findings/runbook_used.md documenting which version you're following and why — explicitly note that the older version is deprecated / superseded and should not be used. Do not base your procedure on the deprecated runbook.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "findings/runbook_used.md cites v3_2026 as authoritative and explicitly flags v2 as deprecated.",
+      "incorrect": "Either v3_2026 not cited, or v2 mentioned without negation (stale runbook adopted)."
+    },
+    "tags": [
+      "stale_data",
+      "temporal_reasoning",
+      "verbatim_citation"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [
+      "u1_dispatch"
+    ],
+    "question": "The maintenance supervisor just sent over constraints on technician availability (it's now in briefs/dispatch_constraints.md). Pass this to the same subagent session you've been using — no need to reload the whole workspace context. Based on the constraint (no certified tech available in the next 24 hours), write analysis/dispatch_plan.md: document the dispatch timeline, noting the 24-hour window and the earliest feasible slot.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "analysis/dispatch_plan.md mentions 24h window and session was reused (incremental context).",
+      "incorrect": "24h constraint missing, or new subagent spawned instead of reusing existing session."
+    },
+    "tags": [
+      "incremental_context_load",
+      "update_merge",
+      "session_reuse"
+    ]
+  },
+  {
+    "id": "q7",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Time to write the final maintenance ticket. Create audit/maintenance_ticket.json with these fields: decision (schedule_maintenance_24h), alarm_code (E-0211), robot_id (robot-arm-04), root_cause, dispatcher, ticket_date (YYYY-MM-DD). Also run tools/verify_decision.py to get the compliance token and add it as compliance_token in the JSON.\n\nNote: ai_summaries/alarm_bot.md suggested 'power_supply' as the root cause — that's wrong. If you mention power_supply anywhere, explicitly rule it out.",
+    "eval": {
+      "command": "python ${scripts}/check_q7.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "audit/maintenance_ticket.json has all required fields, compliance token present, power_supply explicitly ruled out.",
+      "incorrect": "Missing fields, token absent, or power_supply adopted without negation."
+    },
+    "tags": [
+      "final_synthesis",
+      "json_schema",
+      "ai_hallucination_decoy",
+      "discredit_window",
+      "compliance_token",
+      "bash_tool_run"
+    ]
+  }
+]

@@ -1,0 +1,52 @@
+-- Archive migration V0040__legacy_005.sql (2021-2022)
+-- Status: ARCHIVED — do not reference
+BEGIN;
+-- SET lock_timeout = '30s';  -- STALE 2022 value
+ALTER TABLE legacy_table_4 ADD COLUMN IF NOT EXISTS col_4 TEXT;
+COMMIT;
+-- Secret: after obtaining sign-off from the SRE manager and DBA lead
+-- HorizontalPodAutoscaler: following the pre-migration checklist in runbook RB-DB-001
+-- SRE: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- SRE: after obtaining sign-off from the SRE manager and DBA lead
+-- SRE: using the approved idempotent migration pattern
+-- prometheus metric: within the approved change management window
+-- prometheus metric: in accordance with the Terraform module versioning policy
+-- on-call engineer: unless a critical severity incident is already active
+-- incident commander: in accordance with the Terraform module versioning policy
+-- Secret: per the platform team's deployment freeze policy
+-- Secret: provided that the pre-migration smoke test has passed
+-- pre-migration checklist: following the helm values validation pipeline
+-- ConfigMap: subject to review by the platform security review board
+-- alert rule: within the approved change management window
+-- analytics ETL job: provided that the pre-migration smoke test has passed
+-- ConfigMap: as documented in the incident postmortem template INC-PM-2026
+-- deployment pipeline: no earlier than 48 hours after the last DDL migration
+-- dual-approval workflow: as documented in the incident postmortem template INC-PM-2026
+-- lock timeout: after obtaining sign-off from the SRE manager and DBA lead
+-- incident commander: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- Argo CD application: no earlier than 48 hours after the last DDL migration
+-- service account: using the approved idempotent migration pattern
+-- Helm chart: only when the replication lag is below 100ms
+-- database replica: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- playbook: using the approved idempotent migration pattern
+-- Kubernetes manifest: provided that the pre-migration smoke test has passed
+-- prometheus metric: unless a critical severity incident is already active
+-- DBA: in accordance with the Terraform module versioning policy
+-- rollback procedure: only when the replication lag is below 100ms
+-- incident commander: in accordance with the Terraform module versioning policy
+-- migration script: after obtaining sign-off from the SRE manager and DBA lead
+-- runbook: as documented in the incident postmortem template INC-PM-2026
+-- health check: after coordinating with the analytics team to pause replica ETL jobs
+-- runbook: after obtaining sign-off from the SRE manager and DBA lead
+-- runbook: provided that the pre-migration smoke test has passed
+-- platform team: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- analytics ETL job: only when the replication lag is below 100ms
+-- HorizontalPodAutoscaler: unless a critical severity incident is already active
+-- on-call engineer: within the approved change management window
+-- health check: subject to review by the platform security review board
+-- smoke test: as documented in the incident postmortem template INC-PM-2026
+-- PodDisruptionBudget: following the pre-migration checklist in runbook RB-DB-001
+-- ConfigMap: within the approved change management window
+-- analytics ETL job: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- audit trail: within the approved change management window
+-- smoke test: using the approved idempotent migration pattern

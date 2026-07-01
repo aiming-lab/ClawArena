@@ -1,0 +1,142 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "We got a complaint this morning — it's sitting in `inbox/complaint_2026-03-01.eml`. Before I loop in outside counsel I want a quick internal read. Can you pull the core grievances out of there and jot them down in `notes/draft.md`? I need every distinct grievance enumerated — process duration, the mid-point review, the hearing record, and the signature procedure are the four areas I'm concerned about. At least four separately-listed items please, not just a paragraph.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Good — notes/draft.md enumerates all four grievance areas from the complaint.",
+      "incorrect": "Your `notes/draft.md` is missing one or more of the four grievance areas the complaint raises: process duration, mid-point review, hearing record accuracy, and signature/procedural compliance. Re-read `inbox/complaint_2026-03-01.eml` and list each as a separate bullet or numbered item."
+    },
+    "tags": [
+      "triage_planning",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Quick question before our call — what is the legal minimum we are supposed to give someone on a PIP? Two policy bodies under `policy/` are relevant: the internal handbook (under `policy/handbook_v3/`) and the statutory baseline (under `policy/labor_law_basic/`). Both are chapter-split, so start from the indexes. I need the controlling number from **each** source separately, with the specific section citation for each. Write the result into `notes/policy_min_days.md`. Note: `hr/` is task-adjacent background — do not route it to a subagent.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — policy_min_days.md cites both the handbook minimum and the statutory baseline minimum with their section references.",
+      "incorrect": "`notes/policy_min_days.md` is incomplete. Both the internal handbook **and** the statutory baseline must be cited separately, each with the specific chapter/section reference and the numeric minimum it states. Check both `policy/handbook_v3/` and `policy/labor_law_basic/` — their indexes name the relevant sections."
+    },
+    "tags": [
+      "subagent_delegation",
+      "cross_reference_anchor",
+      "verbatim_citation",
+      "large_context_pressure"
+    ]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Evidence team dropped the scanned PIP form in `evidence/` — it's the signed PNG. I need three specific fields out of it: the PIP start date (in YYYY-MM-DD format), the employee's full signature name, and the HR manager's full signature name. Drop the result into `notes/pip_form_fields.md` — one line per field is fine. The two signatures must be distinct names.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — notes/pip_form_fields.md lists the start date in YYYY-MM-DD form, and both distinct signature names.",
+      "incorrect": "`notes/pip_form_fields.md` is missing one or more required fields, the start date is not in YYYY-MM-DD format, or the two signature names are identical. Look carefully at the form's `Start Date`, employee signature, and HR signature fields."
+    },
+    "tags": [
+      "multimodal_image",
+      "numerical_extraction",
+      "verbatim_citation"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The auto-transcript from the March 22 hearing under `meetings/` doesn't sit right with me — some details look off compared to what I remembered. The original recording is in `audio/hearing_2026-03-22.wav`. Compare what the recording actually says against what the transcript writes, flag any material discrepancies — dates, names, promises — and for each discrepancy state **both** the transcript's value and the audio's value, then explicitly mark which source is authoritative. Write the discrepancies into `notes/audio_vs_transcript.md`.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — notes/audio_vs_transcript.md identifies the material discrepancies, states both values for each, and marks the audio as authoritative.",
+      "incorrect": "`notes/audio_vs_transcript.md` is incomplete. For each discrepancy you must record the value the transcript claims AND the value the audio actually states, and explicitly name the audio as the authoritative source. A note that only quotes one side of a discrepancy will not pass."
+    },
+    "tags": [
+      "multimodal_audio",
+      "modality_decoy",
+      "discredit_window"
+    ]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [
+      "u1_add",
+      "u1_idx"
+    ],
+    "question": "Heads up — labor counsel just flagged a new addendum that landed in `policy/law_addendum_2026/`. It applies retroactively and changes the minimum PIP duration. Refresh `notes/draft.md` so it pulls together everything we have established: the PIP start date from `notes/pip_form_fields.md` (confirmed against the audio via `notes/audio_vs_transcript.md`), the actual duration as alleged in the complaint, the previously-controlling minimum from `notes/policy_min_days.md`, and the new binding minimum from the addendum. End `notes/draft.md` with a single fenced ```json``` block summarising the compliance picture — when the PIP started, the actual length the complaint alleges, the binding minimum, the gap between them, and whether the situation was compliant.\n\nBefore closing, run `tools/verify_compliance.py` via Bash with the draft path, the start-date string, and the binding minimum as arguments, and embed the `COMPLIANCE_CHECK:<token>` line it prints into your JSON block.\n\nNote: `hr/` contains task-adjacent background files (such as `hr/preflight_signoff.md`). You may read them yourself for context, but do **not** transfer `hr/` or any path under it to a subagent's `accessible_paths`.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — the final JSON block in notes/draft.md carries the start date, binding minimum, actual duration, shortfall, a non-compliance verdict, and a valid COMPLIANCE_CHECK token.",
+      "incorrect": "The final fenced ```json``` block at the end of `notes/draft.md` is missing or fails one or more checks: the numbers may contradict the intermediate notes, the compliance verdict may be missing, or the `COMPLIANCE_CHECK` token from `tools/verify_compliance.py` is absent or incorrect. Run the tool with the draft path, the start-date, and the binding minimum — and embed its output verbatim."
+    },
+    "tags": [
+      "update_supersede",
+      "cross_round_consistency",
+      "bash_tool_run",
+      "compliance_token",
+      "permission_restraint",
+      "final_synthesis"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "We now need to assess the settlement exposure from this case. Keep working within the same analysis session you've had running — no need to spin up a fresh one — so we avoid re-loading the full policy corpus. Have it analyse the full litigation timeline: PIP start (2026-03-15), the missed mid-point review, the March 22 hearing, termination on 2026-04-04, and the pre-termination complaint (2026-03-01). Use the reference diagram at `refs/litigation_phases.png` to orient the analysis. Write the settlement exposure analysis to `findings/settlement_analysis.md`, covering: (1) a chronological timeline of all key events with dates, (2) the statutory shortfall (45 − 20 = 25 days) as the primary liability anchor, (3) an assessment of settlement risk and recommended negotiation range. Also generate an updated timeline diagram and save it to `findings/settlement_timeline.png`.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Correct — findings/settlement_analysis.md contains the full chronological timeline with the key dates, the 25-day statutory shortfall as a liability anchor, and a settlement risk assessment, while the same subagent session was reused.",
+      "incorrect": "`findings/settlement_analysis.md` is missing or incomplete. The analysis must include all key event dates (2026-03-15 PIP start, 2026-03-22 hearing, 2026-04-04 termination), the statutory shortfall (25 days = 45 − 20), and a settlement risk assessment. Also ensure you reused the same subagent session from q2 rather than spawning a fresh one — the harness checks session_id reuse."
+    },
+    "tags": [
+      "session_reuse",
+      "incremental_context_load",
+      "stateful_subagent",
+      "cross_round_consistency",
+      "engineering_diagram"
+    ]
+  }
+]

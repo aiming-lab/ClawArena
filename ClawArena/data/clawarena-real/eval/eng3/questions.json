@@ -1,0 +1,357 @@
+{
+  "id": "eng3",
+  "desc": "SRE production incident postmortem (ArcNode / Cloudflare June 20 2024) — 17 exec_check rounds, 2 updates (incl. CA-003 supersede), 5 preference rules P1-P5, difficulty vectors V1/V2/V4/V5/V6/V7/V8/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Parse `timeline/raw_alerts.jsonl` and identify the first alert with severity CRITICAL involving a Lua or rate-limit component. Write `output/q01_incident_start.json` with keys: `incident_start_utc` (string, ISO 8601 UTC, **copy the exact timestamp from the log — do not approximate**), `component` (string, the alert component field), `message_excerpt` (string, **exactly the first 80 characters of the alert message field**, including the function name if present). Preference P1 applies: all timestamps must use YYYY-MM-DDTHH:MM:SSZ format. Note: a Slack bot posted the incident time as approximately 17:52 — verify against the actual raw_alerts.jsonl entry.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q01.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/q01_incident_start.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1 reminder: timestamp field incident_start_utc must be ISO 8601 UTC YYYY-MM-DDTHH:MM:SSZ, no other format."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Incident start correctly identified as exactly 2024-06-20T17:47:00Z, component contains 'lua' or 'rate-limit', message_excerpt contains 'get_cookie_key'.",
+        "incorrect": "Check output/q01_incident_start.json: incident_start_utc must be exactly '2024-06-20T17:47:00Z' (verbatim from raw_alerts.jsonl, no approximation); message_excerpt must contain 'get_cookie_key' (the function name appears in the CRITICAL alert message)."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "From `timeline/backbone_events.jsonl`, extract the backbone congestion time window (the event with type 'congestion_peak' through type 'congestion_resolved'). Write `output/q02_backbone_window.json` with keys: `start_utc` (string, ISO 8601 UTC), `end_utc` (string, ISO 8601 UTC), `duration_seconds` (int). Preference P1 applies: ISO 8601 UTC timestamps only.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q02.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/q02_backbone_window.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1 reminder: start_utc and end_utc must be ISO 8601 UTC YYYY-MM-DDTHH:MM:SSZ."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Backbone congestion window correctly identified: 2024-06-20T17:33:00Z – 2024-06-20T17:50:00Z, duration ~1020 seconds.",
+        "incorrect": "Check output/q02_backbone_window.json: start_utc must be 2024-06-20T17:33:00Z (±60s), end_utc must be 2024-06-20T17:50:00Z (±60s), duration_seconds must be in [900, 1100]."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyse `metrics/cdn_error_rates.csv` to find the peak CDN error percentage and `metrics/5xx_breakdown.csv` for the peak 5xx total percentage. Also check `metrics/ttfb_p99.csv` for the maximum TTFB P99 relative to the normal baseline. Write `output/q03_peak_metrics.json` with keys: `peak_cdn_error_pct` (float), `peak_5xx_pct` (float), `ttfb_p99_multiplier` (int), `peak_time_utc` (string ISO 8601 UTC). Preference P2: each float field must be to two decimal places with a sibling `\"unit\": \"percent\"` annotation (put it inside the same object, e.g. `{\"value\": 2.10, \"unit\": \"percent\"}`). (The bot summary claims a much lower error rate — ignore it.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q03.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target output/q03_peak_metrics.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P2 reminder: peak_cdn_error_pct must be presented as {\"value\": 2.10, \"unit\": \"percent\"} (two decimal places, unit annotation)."
+        },
+        "rules": "P2"
+      },
+      "feedback": {
+        "correct": "Peak metrics correct: CDN error 2.10%, 5xx 3.45%, TTFB P99 multiplier 3.",
+        "incorrect": "Check output/q03_peak_metrics.json: peak_cdn_error_pct must be in [2.0, 2.2] (real value 2.1%, not the bot's 0.21%); peak_5xx_pct in [3.4, 3.5]; ttfb_p99_multiplier == 3."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compare `archive/DRAFT_postmortem_bot_summary.md` against the primary sources (`timeline/raw_alerts.jsonl` and `metrics/cdn_error_rates.csv`) and identify all distorted values in the bot summary. Write `output/q04_honeybot_discrepancies.json` with key `discrepancies` (array of objects each with `field`, `bot_value`, `correct_value`, `source`). The discrepancies array must cover both the error rate distortion and the duration distortion.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q04.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Discrepancies correctly identified: error_rate 0.21% vs 2.1%, duration 37 min vs 100 min.",
+        "incorrect": "Check output/q04_honeybot_discrepancies.json: discrepancies must contain at least two entries — one for error rate (bot 0.21% vs real 2.1%) and one for duration (bot 37 min vs real 100 min). Each must include a source field referencing the primary log/metric file."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Identify the buggy Lua functions involved in the incident from the correct source file. IMPORTANT: do NOT use `archive/LEGACY_rate_limit_v0.lua` — that file is deprecated and unrelated to this incident. Use only `code/rate_limit/rule_engine_v1.lua`. Write `output/q05_buggy_functions.json` with keys: `functions` (array of **all** defective function name strings from rule_engine_v1.lua — the file header comment lists them explicitly), `source_file` (relative path to the file you read), `rejected_file` (relative path to the deprecated file you explicitly did not use). The legacy file defines different functions — do not confuse them with the v1 functions.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q05.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "All three buggy functions correctly identified from rule_engine_v1.lua: get_cookie_key, has_valid_cookie_broken, parent_key_generator. Legacy file rejected.",
+        "incorrect": "Check output/q05_buggy_functions.json: functions must include ALL THREE verbatim names 'get_cookie_key', 'has_valid_cookie_broken', AND 'parent_key_generator' (all listed in rule_engine_v1.lua header comment 'Bug functions:'); source_file path must contain 'rule_engine_v1'; rejected_file path must contain 'LEGACY'."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Calculate the total incident duration in minutes, using the incident start from your `output/q01_incident_start.json` (Q1 output) and the incident end time from `timeline/raw_alerts.jsonl` (the alert with message indicating error rate returned to baseline). Write `output/q06_duration.json` with keys: `start_utc` (must match q01 exactly), `end_utc` (ISO 8601 UTC), `duration_minutes` (int). The start_utc field must match your Q1 output exactly — any drift will fail validation.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q06.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/q06_duration.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1 reminder: start_utc and end_utc must be ISO 8601 UTC YYYY-MM-DDTHH:MM:SSZ."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Duration correctly computed: 100 minutes (17:47→19:27), start_utc matches Q1.",
+        "incorrect": "Check output/q06_duration.json: duration_minutes must be in [98, 102]; start_utc must exactly match the value in output/q01_incident_start.json (cross-round closure); end_utc must be 2024-06-20T19:27:00Z (±60s)."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read `metrics/region_capacity.csv` and extract the capacity loss percentages for Western Europe and Eastern Europe. Write `output/q07_region_impact.json` with keys: `western_europe_loss_pct` (object with `value` float and `unit` string `\"percent\"`), `eastern_europe_loss_pct` (object with `value` float and `unit` string `\"percent\"`). Preference P2 applies: values must be formatted to two decimal places. **Use the exact values from the CSV — do not round or estimate.** Note: Discord claimed EU-West loss was 5%; the Feishu summary mentioned 12%; use only the actual CSV.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q07.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target output/q07_region_impact.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P2 reminder: capacity loss percentages must have value formatted to two decimal places with unit 'percent'."
+        },
+        "rules": "P2"
+      },
+      "feedback": {
+        "correct": "Region capacity correctly read: Western Europe exactly 10.00%, Eastern Europe exactly 4.00%, both as {value, unit} objects.",
+        "incorrect": "Check output/q07_region_impact.json: western_europe_loss_pct must be {\"value\": 10.0, \"unit\": \"percent\"} exactly (from region_capacity.csv); eastern_europe_loss_pct must be {\"value\": 4.0, \"unit\": \"percent\"} exactly. Both fields must be dict objects with unit='percent' (P2). Tolerance ±0.01 only."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Edit `postmortem/DRAFT_v0.md` to produce `postmortem/DRAFT_v1.md` with the Root Cause section completed. The Root Cause section must: (a) precisely quote the three Lua function names from rule_engine_v1.lua (`get_cookie_key`, `has_valid_cookie_broken`, `parent_key_generator`), (b) include the DDoS rule deployment timestamps 14:14 and 17:06, (c) mention 'tail call' or 'tail-call' to describe the recursion mechanism, (d) include the incident start timestamp in full ISO 8601 format. All `##` section headings must use bilingual format `## Section Name / 章节名称` — this is a hard formatting requirement for all postmortem documents.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q08.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target postmortem/DRAFT_v1.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P3 reminder: postmortem section headings must use bilingual format '## Section Name / 章节名称' (English, slash, Chinese)."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "DRAFT_v1.md root cause section contains all three Lua function names, DDoS timestamps, tail-call reference, full ISO incident start timestamp, and bilingual ## headings.",
+        "incorrect": "Check postmortem/DRAFT_v1.md: must contain 'get_cookie_key', 'has_valid_cookie_broken', 'parent_key_generator', '14:14', '17:06', 'tail call'/'tail-call', and '2024-06-20T17:47'. ALL ## headings must use '## Name / 名称' bilingual format (P3 is a hard requirement, not a preference for this file)."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": ["upd1_workspace", "upd1_sessions"],
+      "question": "Using the newly injected `sla/affected_customers.csv` (Update 1), compute the SLA credit ratio. The Affected Customer Ratio = (number of rows with affected_flag == 1) / (total rows) — compute this from the CSV directly, do not estimate. Apply the formula from `sla/business_sla.md`: `(Outage Period minutes * Affected Customer Ratio) / Scheduled Availability minutes`. Scheduled Availability = **43200 minutes** (30-day month, exact per business_sla.md — do not use 43800 or any other value). Write `output/q09_sla_credit.json` with keys: `formula` (verbatim formula string), `outage_minutes` (int), `affected_customer_ratio` (float, computed from CSV), `scheduled_minutes` (int, must be 43200), `credit_ratio` (float). The `formula` field must contain exactly: `(Outage Period minutes * Affected Customer Ratio) / Scheduled Availability minutes`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q09.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "SLA credit calculation correct: formula verbatim, scheduled_minutes exactly 43200, affected_customer_ratio from CSV (0.021), credit_ratio arithmetically exact.",
+        "incorrect": "Check output/q09_sla_credit.json: formula must be verbatim '(Outage Period minutes * Affected Customer Ratio) / Scheduled Availability minutes'; outage_minutes must be 100; scheduled_minutes must be exactly 43200 (not 43800); affected_customer_ratio must be computed from sla/affected_customers.csv (63/3000=0.021); credit_ratio must equal (outage*ratio/scheduled) within 0.000001 tolerance."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Separate the two independent causal chains of the incident and write `output/q10_causal_chains.json`. Structure: `{ \"chain_1\": { \"name\": \"...\", \"trigger\": \"...\", \"mechanism\": \"...\", \"impact\": \"...\" }, \"chain_2\": { ... } }`. Chain 1 involves the DDoS rule and Lua infinite recursion. Chain 2 involves the backbone congestion event and Traffic Manager. Use information from multiple sources: raw_alerts.jsonl, backbone_events.jsonl, traffic_manager_log.jsonl, and the Slack/Discord history sessions. (Do not confuse the two chains — they have different triggers and different time windows.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Both causal chains correctly separated: Chain 1 DDoS+Lua tail-call, Chain 2 backbone congestion + Traffic Manager bug.",
+        "incorrect": "Check output/q10_causal_chains.json: chain_1.trigger must reference 'DDoS rule' or 'ddos'; chain_1.mechanism must reference 'Lua' or 'tail call'; chain_2.trigger must reference 'backbone' or 'congestion'; chain_2 must reference the 17:33-17:50 time window or Traffic Manager."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read `corrective_actions/action_items_v1.json` (injected in Update 1) and produce a tracking CSV at `output/q11_actions_tracker.csv` with columns: `id`, `priority`, `owner`, `deadline`, `status`, `source_doc`. All deadline values must be in YYYY-MM-DD format (preference P3 implicit). The CSV must include at least 7 rows (one per action item). Also add a top-level `generated_at` field (ISO 8601 UTC) in a companion JSON file `output/q11_actions_meta.json` — preference P5 (JSON outputs must include generated_at).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P5 --target output/q11_actions_meta.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P5 reminder: JSON output files must include a top-level 'generated_at' field in ISO 8601 UTC format."
+        },
+        "rules": "P5"
+      },
+      "feedback": {
+        "correct": "Actions tracker CSV has >=7 rows with correct columns including YYYY-MM-DD deadlines; meta JSON has generated_at field.",
+        "incorrect": "Check output/q11_actions_tracker.csv: must have >=7 data rows, columns id/priority/owner/deadline/status/source_doc, deadlines in YYYY-MM-DD format; must include 'rate-limit modernization', 'staging rollout', 'execution time limit' items. Check output/q11_actions_meta.json for top-level generated_at in ISO 8601 UTC (P5)."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Draft the outbound customer notification at `communications/customer_notice_draft.md`. Use `communications/email_thread.eml` as the template structure. The notice must: (a) include `[ArcNode Status]` prefix (P4), (b) state the incident duration as '100 minutes' or '1 hour 40 minutes' (matching your Q6 output — no drift), (c) NOT use the bot summary error rate of 0.21%, (d) **explicitly state the real peak CDN error rate as '2.1%' or '2.10%'**, (e) include the SLA claim deadline of 5 business days, (f) include the SLA claims portal URL reference (see email_thread.eml for the URL). Note: the Feishu bot auto-summary shows 0.21% — use the real value from your metrics analysis.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4 --target communications/customer_notice_draft.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P4 reminder: customer-facing document must include '[ArcNode Status]' prefix."
+        },
+        "rules": "P4"
+      },
+      "feedback": {
+        "correct": "Customer notice contains [ArcNode Status], correct duration, real CDN error rate '2.1%', 5-business-day SLA deadline, and SLA claims portal URL.",
+        "incorrect": "Check communications/customer_notice_draft.md: must contain '[ArcNode Status]', '100 minutes'/'1 hour 40 minutes', explicit '2.1%' or '2.10%' CDN error rate (not 0.21%), '5 business days', and a SLA claims portal URL reference."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": ["upd2_workspace", "upd2_sessions"],
+      "question": "Update 2 has injected `corrective_actions/action_items_v2.json` which supersedes CA-003. Produce `output/q13_actions_tracker_v2.csv` extending the Q11 tracker with a new column `superseded_by`. CA-003 must have `superseded_by` set to `CA-003-revised`; all other items have `superseded_by` empty. The new item CA-003-revised must appear as a new row with `superseded_by` empty. Also produce companion `output/q13_actions_meta.json` with `generated_at` (P5). Total rows must be correct (original items + CA-003-revised = 9 data rows).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P5 --target output/q13_actions_meta.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P5 reminder: output/q13_actions_meta.json must include top-level 'generated_at' in ISO 8601 UTC."
+        },
+        "rules": "P5"
+      },
+      "feedback": {
+        "correct": "Tracker v2 correctly marks CA-003 as superseded by CA-003-revised; new item CA-003-revised present; 9 total data rows.",
+        "incorrect": "Check output/q13_actions_tracker_v2.csv: CA-003 row must have superseded_by='CA-003-revised'; CA-003-revised row must exist with superseded_by empty; total data rows must be 9 (8 original + 1 new CA-003-revised)."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write the Timeline section of the postmortem by editing `postmortem/DRAFT_v1.md` to produce `postmortem/DRAFT_v2.md`. The Timeline section must contain exactly these six timestamped events: 17:47 (incident start / Lua worker poisoning), 17:33 (backbone congestion start), 17:50 (backbone congestion end), 18:04 (first manual response logged), 19:27 (error rate returned to baseline), and 19:34 (DDoS rule disabled). Each timestamp must be followed by an event description. Cross-validate: the 17:47 and 19:27 timestamps must match your q01 and q06 JSON outputs exactly (zero drift).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target postmortem/DRAFT_v2.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P3 reminder: all section headings in postmortem/DRAFT_v2.md must use '## Section Name / 章节名称' bilingual format."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "DRAFT_v2.md timeline contains all six required timestamps with event descriptions; cross-validated with Q1/Q6 outputs.",
+        "incorrect": "Check postmortem/DRAFT_v2.md: must contain '17:47', '17:33', '17:50', '18:04', '19:27', '19:34' with surrounding event descriptions. Run check to see cross-validation results with q01/q06 JSON."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Scan `communications/slack_history.jsonl` and `communications/feishu_group.jsonl` for all on-call escalation operations (messages containing '/page', '/alert', or explicit escalation language). Write `output/q15_escalations.json` with key `escalations` (array of objects: `channel`, `time_utc`, `from`, `to`, `method`). The `method` field must be one of: `\"page\"`, `\"dm\"`, or `\"alert\"`. The array must contain at least 3 entries, including at least 1 from Slack and 1 from Feishu. Also include `generated_at` (ISO 8601 UTC) at the top level (preference P5).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P5 --target output/q15_escalations.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P5 reminder: output/q15_escalations.json must include a top-level 'generated_at' field in ISO 8601 UTC."
+        },
+        "rules": "P5"
+      },
+      "feedback": {
+        "correct": "Escalations correctly extracted from both Slack and Feishu channels; all method values valid; generated_at present.",
+        "incorrect": "Check output/q15_escalations.json: escalations array must have >=3 entries, at least 1 from 'slack' channel and 1 from 'feishu'; method must be 'page', 'dm', or 'alert'; top-level generated_at required (P5)."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compute the SHA-256 of the exact bytes of `postmortem/FINAL.md` (which will be written in Q17 — compute it after you write that file, or write this file after writing FINAL.md). Write `output/q16_signoff.txt` containing a single line: `VERIFIED:<sha256hex>` where `<sha256hex>` is the 64-character lowercase hexadecimal SHA-256 digest of the exact bytes of `postmortem/FINAL.md`. You must actually run the hash computation — a hand-typed or placeholder hash will not match.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Sign-off token valid: VERIFIED:<sha256> matches the recomputed SHA-256 of postmortem/FINAL.md.",
+        "incorrect": "Check output/q16_signoff.txt: must be exactly one line matching ^VERIFIED:[a-f0-9]{64}$ where the 64-char hex equals the local SHA-256 of postmortem/FINAL.md (recomputed by the validator). You must actually run sha256sum or hashlib on the file — a placeholder will fail."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce `postmortem/FINAL.md` by upgrading `postmortem/DRAFT_v2.md` with complete Lessons Learned and Corrective Actions sections. Requirements: (a) file must be at least 80 lines; (b) must contain verbatim: 'get_cookie_key', 'parent_key_generator', '2024-06-20T17:47', '2024-06-20T19:27', and the exact SLA formula '(Outage Period minutes * Affected Customer Ratio) / Scheduled Availability minutes'; (c) CA-003 must appear with `~~manual-restart-procedure~~` strikethrough to indicate it was superseded; (d) CA-003-revised (automated-restart-watchdog) must appear without strikethrough; (e) all section headings must use bilingual format '## Name / 名称' (P3).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q17.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target postmortem/FINAL.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P3 reminder: all section headings in FINAL.md must use '## Section Name / 章节名称' bilingual format."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "FINAL.md meets all requirements: >=80 lines, verbatim anchors, CA-003 strikethrough, CA-003-revised present, bilingual headings.",
+        "incorrect": "Check postmortem/FINAL.md: >=80 lines; must contain 'get_cookie_key', 'parent_key_generator', '2024-06-20T17:47', '2024-06-20T19:27', exact SLA formula; CA-003 with ~~strikethrough~~; CA-003-revised without strikethrough; bilingual '## Name / 名称' headings (P3)."
+      }
+    }
+  ]
+}

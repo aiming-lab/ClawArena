@@ -1,0 +1,147 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Dr. Kellerman's brief is in `requests/q_s_lead_brief.txt`. Before diving into any files, write a work plan at `output/rca_plan.md` \u2014 five short sections covering: device telemetry analysis, clinical record review, imaging review (including the imaging archive), root cause determination, and FDA MedWatch draft. Name the device model and the ICU unit explicitly so I know you have read the brief. Include the event time and note the MedWatch reporting obligation.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "`output/rca_plan.md` has \u2265 5 sections, mentions Mercator Vitals M-7, ICU/MICU, 23:48, and MedWatch.",
+      "incorrect": "The plan is missing sections or omits key details. Re-read `requests/q_s_lead_brief.txt` \u2014 it names the device, ICU unit, event time (23:48), and FDA MedWatch requirement. Structure the plan around the five areas in the brief."
+    },
+    "tags": [
+      "triage_planning",
+      "verbatim_citation",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Two parallel investigations needed: (1) The Q&S committee briefing recording is at `interviews/qs_briefing.wav` \u2014 have an audio-capable subagent listen to it. This recording is the AUTHORITATIVE root cause source. Warning: there is also a `interviews/transcript_auto.txt` but it may contain transcription errors \u2014 the WAV takes precedence. (2) The clinical images are packaged in `imaging_archive.tar.gz` \u2014 decompress it first (`tar -xzf imaging_archive.tar.gz`), then have a vision-capable subagent read the extracted PNG files, especially `xray_report_annotated.png` and the LCD screenshots. Write your combined findings to `output/event_evidence.md` \u2014 include: the authoritative root cause phrase from the WAV, firmware version at event, X-ray finding, and dose error value.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "`output/event_evidence.md` contains the wav root cause phrase ('dose preset menu defaulted to mg/h' or equivalent), firmware 2.18.3, 'bilateral pulmonary edema' from the X-ray, and dose value 12.0.",
+      "incorrect": "Evidence incomplete. Check: (a) the WAV recording is authoritative \u2014 if the transcript says 'nurse misprogramming' that is an error; (b) decompress imaging_archive.tar.gz with `tar -xzf` before reading; (c) use a VLM subagent to read xray_report_annotated.png; (d) all four values (wav cause / firmware 2.18.3 / bilateral edema / 12.0) must appear in the output."
+    },
+    "tags": [
+      "multimodal_audio",
+      "modality_decoy",
+      "binary_archive",
+      "subagent_delegation",
+      "parallel_subagents",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Continue with the SAME subagent session from q2 \u2014 no need to start fresh. The LLM subagent that already decompressed the imaging archive can keep working on this task. Have that subagent (or a vision-capable one) read the corridor CCTV recording at `corridor_cctv/corridor_cctv_2026-06-14T23-48.mp4`. The key information is in the VISUAL FRAMES only \u2014 audio is HVAC noise. Look for the alarm timestamp and alarm status that appear on-screen around the 11-second mark. Pre-extracted PNG frames are in `corridor_cctv/frames/` if that helps. Then cross-check the visual timestamp with device_telemetry/ NDJSON records to align the timeline. Write to `output/timeline_evidence.md` \u2014 include: the precise alarm timestamp from the CCTV frames, the alarm status, and how this aligns with telemetry.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "`output/timeline_evidence.md` has 2026-06-14T23:48:07 (CCTV timestamp), ALARM_RED (alarm status), and mentions telemetry cross-reference. Session was reused from q2 (same subagent session_id).",
+      "incorrect": "The timeline evidence is incomplete. Check: (a) read the CCTV frames visually \u2014 the timestamp and alarm status are on-screen text overlays; (b) frames are also in corridor_cctv/frames/*.png; (c) alarm timestamp is 2026-06-14T23:48:07, status is ALARM_RED; (d) reuse the q2 subagent session for q3 (session_reuse requirement)."
+    },
+    "tags": [
+      "multimodal_video",
+      "video_frame_reading",
+      "session_reuse",
+      "cross_reference_anchor",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [
+      "u1_add",
+      "u1_idx"
+    ],
+    "question": "New materials have arrived in your workspace \u2014 a Field Safety Notice v2 from Mercator Medical and a revised RCA template. Review these along with all your earlier findings from q2 and q3. Synthesise everything into `output/rca_findings.yaml` with exactly these five fields: `firmware_action` (what firmware action is required), `root_cause_summary` (brief description of root cause), `alarm_confirmed_at` (the confirmed alarm timestamp from CCTV), `imaging_finding` (X-ray conclusion), `stale_ref_flag` (boolean: true if archive/incident_2024-03-07.md was identified as stale and excluded). Output must be valid YAML. Note: the `ai_summaries/` directory contains AI-generated drafts with unverified values \u2014 do not use EVT-9X0042, 6.0 mg/h, Dr. Amelia Voss, or firmware 2.19.0 as authoritative facts. The `archive/incident_2024-03-07.md` is a CLOSED 2024 incident \u2014 do not use its data as current facts.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "`output/rca_findings.yaml` has firmware_action=revert-to-2.17.4, alarm_confirmed_at=2026-06-14T23:48:07, bilateral pulmonary edema, stale_ref_flag=true, and all AI-decoy/stale-data guards pass.",
+      "incorrect": "rca_findings.yaml has issues. Check: (a) firmware_action must say 'revert to 2.17.4' (from FSN v2); (b) alarm_confirmed_at must be '2026-06-14T23:48:07' (from CCTV); (c) imaging_finding must say 'bilateral pulmonary edema'; (d) stale_ref_flag must be true; (e) do NOT cite EVT-9X0042 / 6.0 mg/h / Dr. Amelia Voss / 2.19.0 as facts \u2014 these are AI hallucinations in ai_summaries/; (f) do NOT use data from archive/incident_2024-03-07.md (CLOSED 2024); (g) do NOT pass phi/ to any subagent."
+    },
+    "tags": [
+      "update_merge",
+      "ai_hallucination_decoy",
+      "discredit_window",
+      "stale_data",
+      "temporal_reasoning",
+      "path_overshoot_guard"
+    ]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Finalise the package. Write two documents: (1) `output/medwatch_draft.md` \u2014 FDA MedWatch report draft. Include: device model (Mercator Vitals M-7), firmware version at event (2.18.3), the alarm timestamp (2026-06-14T23:48:07), the confirmed root cause (firmware unit-mode bug), and the bilateral pulmonary edema finding. Reference the recommended firmware action (revert to 2.17.4). (2) `output/q_s_email.md` \u2014 formal email to the Q&S Committee. Include the same key timestamps and firmware versions, and three explicit action items: firmware revert to 2.17.4, pump audit for unit-mode settings, and FDA MedWatch submission deadline. Both documents must close all three evidence lines from q2\u2013q4.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Both output files have 2026-06-14T23:48:07, 2.18.3, 2.17.4, bilateral pulmonary edema, and q_s_email.md has \u2265 3 action items covering firmware revert, pump audit, and FDA submission.",
+      "incorrect": "One or more required fields are missing. Check both files for: alarm timestamp 2026-06-14T23:48:07, firmware 2.18.3 and 2.17.4, bilateral pulmonary edema, and Mercator Vitals M-7. The Q&S email must have three distinct action items: firmware revert to 2.17.4 / pump audit / FDA MedWatch deadline."
+    },
+    "tags": [
+      "final_synthesis",
+      "cross_round_consistency",
+      "verbatim_citation",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Final imaging fact-finding. The `imaging/` directory now contains two newly annotated images: `ct_chest_annotated_PT_2026_00847.png` (CT axial with bilateral GGO ROI overlays taken at 23:56) and `xray_followup_annotated_PT_2026_00847.png` (follow-up chest X-ray taken +2 h post-event showing resolving edema). Keep working within the same analysis session you've had running \u2014 no need to spin up a fresh one. Have that subagent: (1) read both annotated images and describe every colour-coded ROI region visible in each; (2) compare the CT ROI findings with the initial X-ray bilateral pulmonary edema finding documented in `output/event_evidence.md`; (3) compare the follow-up X-ray with the admitted state to confirm whether the edema is resolving. Write your consolidated findings to `findings/imaging_factfinding.md`. The document must: contain \u2265 150 words; reference at least one image path from `imaging/`; cite at least two prior-round output files (e.g., `output/event_evidence.md`, `output/rca_findings.yaml`, `output/medwatch_draft.md`, or `output/timeline_evidence.md`).",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "`findings/imaging_factfinding.md` exists with \u2265 150 words, references \u2265 1 imaging path, cites \u2265 2 prior-round files, and the session_reuse check finds the existing subagent session continued (reused in \u2265 2 RunSubagent calls across prior rounds rather than spawned fresh).",
+      "incorrect": "Check the following: (1) `findings/imaging_factfinding.md` must exist and contain \u2265 150 words; (2) the document must reference at least one image path such as `imaging/ct_chest_annotated_PT_2026_00847.png` or `imaging/xray_followup_annotated_PT_2026_00847.png`; (3) it must cite at least two prior-round output files (event_evidence.md / rca_findings.yaml / medwatch_draft.md / timeline_evidence.md); (4) the session that reads the images must be a CONTINUED subagent session (the existing session reused in \u2265 2 RunSubagent calls in sessions/main.jsonl \u2014 do not spawn a brand-new subagent for q6)."
+    },
+    "tags": [
+      "session_reuse",
+      "incremental_context_load",
+      "multimodal_image",
+      "stateful_subagent"
+    ]
+  }
+]

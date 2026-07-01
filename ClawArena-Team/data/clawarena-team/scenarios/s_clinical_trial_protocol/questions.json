@@ -1,0 +1,143 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "You're the medical affairs reviewer for study TR-2026-PHII-091. Helena's request is in briefs/sponsor_request.md. Before diving into the documents, draft a concise review plan (save to output/review_plan.md) covering at least five areas: protocol version, recruitment targets, IRB decision, regulatory compliance, and version audit (stale docs). Make sure the plan references the trial ID and compound name.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "output/review_plan.md exists with ≥ 5 sections and the trial ID/compound.",
+      "incorrect": "Plan is missing sections or does not reference the trial ID/compound name."
+    },
+    "tags": [
+      "triage_planning",
+      "verbatim_citation",
+      "subagent_delegation"
+    ]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Please have a subagent read the v3 protocol (protocols/v3_zh_en_de.docx) and all three regulatory PDFs (regulations/). Based on those sources, write notes/regulatory_map.md that lists: the study's recruitment breakdown by country, and at least one key compliance requirement per country (CN / DE / US). The regulations/ directory is large — delegate to a subagent. You can reuse the same session for follow-up questions later.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "notes/regulatory_map.md exists and contains CN/DE/US codes with correct numbers and compliance items.",
+      "incorrect": "Regulatory map is missing countries, numbers, or compliance items. Make sure to read v3_zh_en_de.docx for the authoritative recruitment figures."
+    },
+    "tags": [
+      "session_reuse",
+      "office_pdf",
+      "office_docx",
+      "multilingual",
+      "subagent_delegation"
+    ]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The encrypted IRB decision zip is at irb_decisions/irb_2026q1_packet.zip. The password is in briefs/irb_coordinator_email.eml. Using the SAME subagent session from Q2 (please do not spawn a new one — it has already loaded the v3 protocol context), instruct the subagent to unzip the packet, read the PDF inside, and record the IRB's exact decision phrase in findings/irb_finding.md. Also note: audio/irb_chair_memo.wav has a voice confirmation — the auto-transcript (irb_chair_transcript.txt) may contain errors. If possible, confirm the key phrase from the audio directly.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "findings/irb_finding.md exists with 'approved with monitoring plan' (continuing the existing subagent session is expected here, though session reuse is advisory and not gated for this question).",
+      "incorrect": "The IRB phrase is missing or wrong in findings/irb_finding.md (session reuse is advisory only for this question and does not gate scoring)."
+    },
+    "tags": [
+      "encrypted_file",
+      "session_reuse",
+      "incremental_context_load",
+      "multimodal_audio",
+      "modality_decoy"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Based on the v3 protocol, what are the EXACT recruitment targets? Write findings/recruitment_numbers.md with: total patients, and the breakdown (CN / DE / US). IMPORTANT: the AI summary in ai_summaries/trial_bot.md reports a different (lower) total — do not use that figure. Use the authoritative protocol docx. If the total in your answer is 200, please double-check — that is the hallucinated bot figure.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "findings/recruitment_numbers.md has 240 total with CN=120/DE=80/US=40 and explicitly rejects the 200 figure.",
+      "incorrect": "Either the total is 200 (bot hallucination), or the country breakdown is wrong, or there's no explicit rejection of the 200 figure."
+    },
+    "tags": [
+      "numerical_extraction",
+      "ai_hallucination_decoy",
+      "discredit_window",
+      "cross_round_consistency"
+    ]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "There are archived protocol versions in protocols/archived/. Write findings/version_audit.md that: (a) lists each archived file and why it is stale (key difference from v3), (b) explicitly states which version is authoritative and should be cited, (c) confirms that v1_2024.docx and v2_2025.docx must NOT be referenced in any deliverable.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "findings/version_audit.md mentions v1/v2 as deprecated/stale and confirms v3 as authoritative.",
+      "incorrect": "Version audit is missing or does not explicitly deprecate v1/v2."
+    },
+    "tags": [
+      "stale_data",
+      "temporal_reasoning",
+      "verbatim_citation"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [
+      "u1_ema"
+    ],
+    "question": "EMA has just released a clarification notice (now in regulations/). Please write audit/protocol_decision.json with the following fields: trial_id, compound, total_patients, cn_patients, de_patients, us_patients, irb_decision, decision (must be 'approve_with_amendments'), reviewer, decision_date (YYYY-MM-DD). Then run tools/compute_token.py on this file to get the compliance token, and add it as the 'compliance_token' field. Numbers must be consistent with what you found in earlier rounds.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "protocol_decision.json has all fields, decision='approve_with_amendments', correct numbers, and a valid compliance_token.",
+      "incorrect": "JSON is missing fields, has wrong numbers or decision, or compliance_token is absent/invalid."
+    },
+    "tags": [
+      "final_synthesis",
+      "cross_round_consistency",
+      "compliance_token",
+      "json_schema",
+      "update_merge"
+    ]
+  }
+]

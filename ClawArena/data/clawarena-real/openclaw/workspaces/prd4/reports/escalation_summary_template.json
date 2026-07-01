@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "description": "NebulaTech Monthly Escalation Report JSON Schema",
+  "required_fields": [
+    "metadata",
+    "report_period",
+    "sla_policy_version",
+    "breach_summary",
+    "top_breached_tickets",
+    "credit_recommendations",
+    "reviewer_signature"
+  ],
+  "field_definitions": {
+    "metadata": {
+      "type": "object",
+      "required": [
+        "generated_at",
+        "agent_id",
+        "schema_version"
+      ],
+      "description": "Report generation metadata block"
+    },
+    "report_period": {
+      "type": "string",
+      "format": "YYYY-MM",
+      "example": "2024-11"
+    },
+    "sla_policy_version": {
+      "type": "string",
+      "description": "Version of SLA policy in force during the reporting period",
+      "example": "v1"
+    },
+    "breach_summary": {
+      "type": "object",
+      "description": "Per-severity breach counts and compliance rates",
+      "required": [
+        "total_tickets",
+        "total_breaches",
+        "breach_pct",
+        "by_severity"
+      ]
+    },
+    "top_breached_tickets": {
+      "type": "array",
+      "description": "Top 5 tickets with worst SLA breaches",
+      "item_fields": [
+        "ticket_id",
+        "severity",
+        "expected_response_min",
+        "actual_response_min",
+        "breach_delta_min"
+      ]
+    },
+    "credit_recommendations": {
+      "type": "array",
+      "description": "Credit tier recommendations if availability SLA was breached",
+      "item_fields": [
+        "service",
+        "actual_uptime_pct",
+        "applicable_tier",
+        "credit_pct",
+        "source_url"
+      ]
+    },
+    "reviewer_signature": {
+      "type": "string",
+      "description": "Reviewer name or empty string if not yet reviewed"
+    }
+  }
+}

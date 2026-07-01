@@ -1,0 +1,70 @@
+From: Saeed Abbasi <saeed.abbasi@qualys.com>
+To: oss-security@openwall.com
+Date: Mon, 01 Jul 2024 00:00:00 +0000
+Subject: CVE-2024-6387 - RCE in OpenSSH's server, on glibc-based Linux systems
+
+==========================================================================
+CVE-2024-6387 — Remote Unauthenticated Code Execution in OpenSSH Server
+==========================================================================
+
+VULNERABILITY OVERVIEW
+-----------------------
+
+A security regression was discovered in OpenSSH's server (sshd). The vulnerability
+is a signal handler race condition (CWE-362, CWE-364) that can lead to remote code
+execution with root privileges on glibc-based Linux systems.
+
+AFFECTED VERSIONS
+-----------------
+
+Vulnerable: OpenSSH 8.5p1 <= version < 9.8p1
+  (all releases from 8.5p1 through 9.7p1, on glibc-based Linux only)
+
+Fixed: OpenSSH >= 9.8p1
+
+OpenBSD systems are NOT affected.
+
+TECHNICAL DETAILS
+-----------------
+
+The vulnerability is a regression of CVE-2006-5051. The regression was introduced in
+OpenSSH 8.5p1 by commit 752250caabda3dd24635503c4cd689b32a650794 (2020-10-16),
+which modified the log infrastructure and accidentally removed the
+DO_LOG_SAFE_IN_SIGHAND protection from sshsigdie().
+
+The SIGALRM signal handler (triggered by LoginGraceTime expiration) calls syslog(),
+which is not async-signal-safe. This creates a race condition exploitable when the
+signal is delivered while the main thread is executing within glibc's allocator.
+
+Exploitation requires approximately 10,000 connection attempts due to the probabilistic
+nature of the race condition. Laboratory exploitation time was approximately 6-8 hours
+on 32-bit glibc-based Linux with ASLR enabled.
+
+WORKAROUND
+----------
+
+Set LoginGraceTime 0 in /etc/ssh/sshd_config and restart sshd.
+Note: This disables authentication timeout and may create DoS risk.
+
+TIMELINE
+--------
+
+2020-10-16: Regression introduced (commit 752250c)
+2021-02: OpenSSH 8.5p1 released (vulnerability present)
+2024-07-01: Public disclosure
+2024-07-01: OpenSSH 9.8p1 released (fix)
+
+CREDITS
+-------
+
+Discovered by Qualys Threat Research Unit (TRU).
+CVE assigned by Red Hat.
+
+REFERENCES
+----------
+
+1. https://nvd.nist.gov/vuln/detail/CVE-2024-6387
+2. https://www.openssh.org/txt/release-9.8
+3. https://blog.qualys.com/vulnerabilities-threat-research/2024/07/01/regresshion-remote-unauthenticated-code-execution-vulnerability-in-openssh-server
+4. https://github.com/openssh/openssh-portable/commit/752250caabda3dd24635503c4cd689b32a650794
+5. CVE-2006-5051 (original vulnerability): https://github.com/advisories/GHSA-mq5h-r3rg-j9hg

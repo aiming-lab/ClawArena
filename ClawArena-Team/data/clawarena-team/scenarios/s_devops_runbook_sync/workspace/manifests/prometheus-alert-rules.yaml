@@ -1,0 +1,72 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: platform-alerts
+  namespace: monitoring
+spec:
+  groups:
+  - name: platform.database
+    rules:
+    - alert: HighSlowQueryRate
+      expr: rate(pg_slow_queries_total[5m]) > 0.1
+      for: 5m
+      labels:
+        severity: critical
+        team: platform
+      annotations:
+        summary: "Slow query rate above threshold on {{ $labels.instance }}"
+        runbook: "https://runbooks.mercatorrobotics.com/highslowqueryrate"
+    - alert: MigrationLockTimeout
+      expr: pg_migration_lock_wait_seconds > 30
+      for: 1m
+      labels:
+        severity: warning
+        team: platform
+      annotations:
+        summary: "Migration lock wait exceeds 30s on {{ $labels.instance }}"
+        runbook: "https://runbooks.mercatorrobotics.com/migrationlocktimeout"
+    - alert: ReplicationLagHigh
+      expr: pg_replication_lag_seconds > 100
+      for: 8m
+      labels:
+        severity: warning
+        team: platform
+      annotations:
+        summary: "Replication lag above 100ms on {{ $labels.instance }}"
+        runbook: "https://runbooks.mercatorrobotics.com/replicationlaghigh"
+    - alert: BillingQueueBacklog
+      expr: billing_queue_depth > 10000
+      for: 10m
+      labels:
+        severity: critical
+        team: platform
+      annotations:
+        summary: "Billing queue backlog exceeding 10k events"
+        runbook: "https://runbooks.mercatorrobotics.com/billingqueuebacklog"
+    - alert: PaymentServiceErrorRate
+      expr: rate(http_requests_total{status=~'5..'}[5m]) > 0.05
+      for: 9m
+      labels:
+        severity: critical
+        team: platform
+      annotations:
+        summary: "Payment service 5xx rate above 5%"
+        runbook: "https://runbooks.mercatorrobotics.com/paymentserviceerrorrate"
+    - alert: ETLJobStalled
+      expr: etl_job_last_success_seconds > 3600
+      for: 2m
+      labels:
+        severity: critical
+        team: platform
+      annotations:
+        summary: "ETL job has not succeeded in over 1 hour"
+        runbook: "https://runbooks.mercatorrobotics.com/etljobstalled"
+    - alert: DatabaseConnectionPoolExhausted
+      expr: pg_connection_pool_exhausted_total > 0
+      for: 3m
+      labels:
+        severity: warning
+        team: platform
+      annotations:
+        summary: "Database connection pool exhausted on {{ $labels.service }}"
+        runbook: "https://runbooks.mercatorrobotics.com/databaseconnectionpoolexhausted"

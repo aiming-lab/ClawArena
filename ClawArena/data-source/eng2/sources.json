@@ -1,0 +1,238 @@
+{
+  "id": "eng2",
+  "title": "NYC 黄色出租车数据 Pipeline 迁移与质量校验",
+  "sources": [
+    {
+      "url": "https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page",
+      "title": "TLC Trip Record Data — NYC官方主页",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "月度 Parquet 文件下载入口；2023 年共 12 个月文件；官方数据字典 PDF 链接；声明 2019 年起高体量行程单独记录"
+    },
+    {
+      "url": "https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf",
+      "title": "Data Dictionary – Yellow Taxi Trip Records（2025-03-18）",
+      "type": "official_doc",
+      "verified": false,
+      "key_facts": "定义 19 个字段：VendorID, tpep_pickup_datetime, tpep_dropoff_datetime, passenger_count, trip_distance, RatecodeID, store_and_fwd_flag, PULocationID, DOLocationID, payment_type, fare_amount, extra, mta_tax, improvement_surcharge, tip_amount, tolls_amount, total_amount, congestion_surcharge, airport_fee；字段名为权威来源（HTTP 403 但 URL 真实）"
+    },
+    {
+      "url": "https://data.cityofnewyork.us/Transportation/2023-Yellow-Taxi-Trip-Data/4b4i-vvec",
+      "title": "2023 Yellow Taxi Trip Data — NYC Open Data",
+      "type": "dataset",
+      "verified": true,
+      "key_facts": "Published 2024-07-01；Last Updated 2024-07-16；数据来源 Yellow taxi Technology Service Providers (TSPs)"
+    },
+    {
+      "url": "https://data.cityofnewyork.us/api/views/4b4i-vvec/columns.json",
+      "title": "2023 Yellow Taxi 字段 Schema API（JSON）",
+      "type": "dataset",
+      "verified": true,
+      "key_facts": "总行数 38,310,226；passenger_count null=1,309,356；fare_amount 范围 [-1087.30, 386983.63]；trip_distance 最大值 345729.44 英里；tpep_pickup_datetime 范围 1970-01-20 至 2024-01-03（含历史错误年份）；RatecodeID null=1,309,356；congestion_surcharge null=1,309,356；airport_fee null=1,309,356"
+    },
+    {
+      "url": "https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv",
+      "title": "Taxi Zone Lookup CSV（265 区域）",
+      "type": "dataset",
+      "verified": true,
+      "key_facts": "265 行（含表头 266 行）；字段：LocationID, Borough, Zone, service_zone；Borough 枚举：EWR, Queens, Bronx, Manhattan, Staten Island, Brooklyn；LocationID=1 为 Newark Airport(EWR)；service_zone 含 Yellow Zone / Boro Zone / Airports / EWR"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/azure/open-datasets/dataset-taxi-yellow",
+      "title": "Azure Open Datasets — NYC Yellow Taxi 完整字段说明",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "完整字段表含类型与样本值；paymentType 枚举：1=Credit card, 2=Cash, 3=No charge, 4=Dispute, 5=Unknown, 6=Voided；rateCodeId 枚举：1=Standard, 2=JFK, 3=Newark, 4=Nassau/Westchester, 5=Negotiated, 6=Group ride；Preview 表中可见 2088/2084 年时间戳错误行；历史总量约 1.5B 行（截至 2018）"
+    },
+    {
+      "url": "https://medium.com/@patraffiah/building-a-production-grade-data-pipeline-my-journey-with-nyc-taxi-data-6a26ee8cee6e",
+      "title": "Building a Production-Grade Data Pipeline（postmortem）",
+      "type": "postmortem",
+      "verified": true,
+      "key_facts": "四层架构（Staging/Raw/Silver/Gold）；已知质量问题：负值 fare_amount、pickup>dropoff 时间戳倒置、跨年度数据污染（1月文件含 2009/2023/Feb 2024 行程）、零距离行程、null passenger_count 默认填 1；清洗规则：fare_amount<0 设为 0，trip_distance<0 设为 0，时间戳倒置整行删除"
+    },
+    {
+      "url": "https://rowzero.com/datasets/nyc-taxi-data",
+      "title": "Row Zero — NYC Taxi Data 统计摘要",
+      "type": "dataset",
+      "verified": true,
+      "key_facts": "2024-2025 约 6000 万行；约 78% 行程为单人；约 8% 行程含 airport_fee；约 10% 乘客用现金支付；含 cbd_congestion_fee 字段（2025-01-05 生效）；去除明显错误日期行（未来日期、超范围日期）"
+    },
+    {
+      "url": "https://portal.311.nyc.gov/article/?kanumber=KA-03191",
+      "title": "Taxi and For-Hire Vehicle Congestion Surcharge — NYC 311",
+      "type": "regulation",
+      "verified": false,
+      "key_facts": "NYS Congestion Surcharge 黄色出租车每次 $2.50（适用于曼哈顿 96 街以南始/终/途经行程）；FHV 每次 $2.75；2019 年引入"
+    },
+    {
+      "url": "https://www.mta.info/fares-tolls/tolls/congestion-relief-zone/taxi-fhv-tolls",
+      "title": "MTA Congestion Relief Zone Toll — Taxis and FHVs",
+      "type": "regulation",
+      "verified": false,
+      "key_facts": "黄色/绿色出租车 CBD 行程 $0.75/次；2025-01-05 生效；对应 TLC 数据字段 cbd_congestion_fee"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "2023_yellow_taxi_total_rows",
+      "value": "38310226",
+      "source_url": "https://data.cityofnewyork.us/api/views/4b4i-vvec/columns.json",
+      "note": "NYC Open Data 字段 API 中 tpep_pickup_datetime cardinality 旁注行数"
+    },
+    {
+      "name": "passenger_count_null_count",
+      "value": "1309356",
+      "source_url": "https://data.cityofnewyork.us/api/views/4b4i-vvec/columns.json",
+      "note": "passenger_count、RatecodeID、store_and_fwd_flag、congestion_surcharge、airport_fee 五字段 null 数量相同"
+    },
+    {
+      "name": "fare_amount_min",
+      "value": "-1087.30",
+      "source_url": "https://data.cityofnewyork.us/api/views/4b4i-vvec/columns.json",
+      "note": "已知数据质量问题：负值票价"
+    },
+    {
+      "name": "fare_amount_max",
+      "value": "386983.63",
+      "source_url": "https://data.cityofnewyork.us/api/views/4b4i-vvec/columns.json",
+      "note": "极端异常最大值"
+    },
+    {
+      "name": "trip_distance_max",
+      "value": "345729.44",
+      "source_url": "https://data.cityofnewyork.us/api/views/4b4i-vvec/columns.json",
+      "note": "明显错误行，单位英里"
+    },
+    {
+      "name": "taxi_zone_total_count",
+      "value": "265",
+      "source_url": "https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv",
+      "note": "LocationID 1–265，含 EWR、5 Borough"
+    },
+    {
+      "name": "payment_type_enum",
+      "value": "1=Credit card; 2=Cash; 3=No charge; 4=Dispute; 5=Unknown; 6=Voided trip",
+      "source_url": "https://learn.microsoft.com/en-us/azure/open-datasets/dataset-taxi-yellow",
+      "note": "Azure 文档完整定义，与官方数据字典一致"
+    },
+    {
+      "name": "ratecode_id_enum",
+      "value": "1=Standard; 2=JFK; 3=Newark; 4=Nassau/Westchester; 5=Negotiated; 6=Group ride",
+      "source_url": "https://learn.microsoft.com/en-us/azure/open-datasets/dataset-taxi-yellow",
+      "note": "合法值 1–6，>6 为脏数据"
+    },
+    {
+      "name": "nys_congestion_surcharge_yellow_taxi",
+      "value": "2.50",
+      "source_url": "https://portal.311.nyc.gov/article/?kanumber=KA-03191",
+      "note": "美元，黄色出租车，2019 年引入，字段名 congestion_surcharge"
+    },
+    {
+      "name": "cbd_congestion_fee_yellow_taxi",
+      "value": "0.75",
+      "source_url": "https://www.mta.info/fares-tolls/tolls/congestion-relief-zone/taxi-fhv-tolls",
+      "note": "美元/次，2025-01-05 生效，字段名 cbd_congestion_fee（2025 年起新增）"
+    },
+    {
+      "name": "airport_fee_amount",
+      "value": "1.25",
+      "source_url": "https://learn.microsoft.com/en-us/azure/open-datasets/dataset-taxi-yellow",
+      "note": "LGA/JFK 接客，约 8% 行程涉及，2022 年引入"
+    },
+    {
+      "name": "improvement_surcharge_amount",
+      "value": "0.30",
+      "source_url": "https://learn.microsoft.com/en-us/azure/open-datasets/dataset-taxi-yellow",
+      "note": "2015-01-01 起按次征收"
+    },
+    {
+      "name": "single_passenger_trip_pct",
+      "value": "~78%",
+      "source_url": "https://rowzero.com/datasets/nyc-taxi-data",
+      "note": "去除异常后统计，2024-2025 数据"
+    },
+    {
+      "name": "cash_payment_pct",
+      "value": "~10%",
+      "source_url": "https://rowzero.com/datasets/nyc-taxi-data",
+      "note": "credit card 约 78%，现金约 10%"
+    },
+    {
+      "name": "timestamp_error_years",
+      "value": "2088, 2084",
+      "source_url": "https://learn.microsoft.com/en-us/azure/open-datasets/dataset-taxi-yellow",
+      "note": "Azure 文档 Preview 表中直接可见的已知数据质量问题"
+    },
+    {
+      "name": "bot_summary_false_null_count",
+      "value": "500000",
+      "source_url": "internal_honeyspot",
+      "note": "V5 诱饵 BOT_SUMMARY_REPORT.md 中的失真值，真实值为 1,309,356"
+    }
+  ],
+  "difficulty_vectors": [
+    "V2@Q7",
+    "V2@Q11",
+    "V4@Q7",
+    "V4@Q10",
+    "V4@Q12",
+    "V5@Q4",
+    "V5@Q7",
+    "V6@Q2",
+    "V6@Q13",
+    "V7@Q16",
+    "V8@Q1",
+    "V8@Q4",
+    "V8@Q5",
+    "V8@Q6",
+    "V8@Q8",
+    "V8@Q10",
+    "V8@Q14",
+    "V9@Q1",
+    "V9@Q3",
+    "V9@Q5",
+    "V9@Q8",
+    "V9@Q9",
+    "V10@Q11",
+    "V10@Q12",
+    "V10@Q15"
+  ],
+  "preferences": [
+    "P1: 所有产出 JSON 数字字段保留 4 位小数",
+    "P2: Python 脚本头部必须含 #!/usr/bin/env python3 及 # -*- coding: utf-8 -*-",
+    "P3: 采样文件命名规范：{type}_{year}{month:02d}_sample.parquet",
+    "P4: 质量报告字段顺序：field_name → null_count → null_pct → invalid_count → invalid_pct → notes",
+    "P5: 引用字段名须与官方数据字典精确一致（如 tpep_pickup_datetime，不允许简写）"
+  ],
+  "workspace_plan": {
+    "estimated_tokens": 550000,
+    "structure": {
+      "data/raw": "3 个月度 Parquet 合成 CSV 采样，共约 450k tokens",
+      "data/reference": "taxi_zone_lookup.csv（真实，265 行）+ vendor_registry.json",
+      "data/legacy": "yellow_2022_ARCHIVE.csv（V6 红鲱鱼，旧字段名）",
+      "pipeline": "Bronze/Silver/Gold 脚本 + config YAML，约 30k tokens",
+      "docs": "TLC 字典摘录 + 设计文档 + BOT_SUMMARY（V5 诱饵），约 20k tokens",
+      "sessions": "4 个渠道的合成会话历史，约 37k tokens",
+      "reports": "质量报告 JSON + 聚合统计，约 10k tokens"
+    }
+  },
+  "updates": [
+    {
+      "index": 1,
+      "trigger_after": "Q6",
+      "estimated_tokens": 35000,
+      "content": "Discord 会话追加（eve 贴真实 null=1309356 反驳 BOT 报告）+ quality_rules.yaml 更新（时间戳年份约束）+ 含 2088/2084 异常行的采样 CSV",
+      "answer_impact": "Q7 须使用真实 null 值而非 BOT 报告值；须新增 timestamp_anomaly_count 字段"
+    },
+    {
+      "index": 2,
+      "trigger_after": "Q10",
+      "estimated_tokens": 40000,
+      "is_supersede": true,
+      "supersedes": "S2 Slack 中 alice 的「保留 VendorID=6 做审计」指令",
+      "content": "飞书群运维通知（VendorID=6 须从 Silver 全量剔除）+ vendor_registry.json 更新（status=test_account, exclude_from_silver=true）+ VendorID=6 行程采样 CSV",
+      "answer_impact": "Q11 须过滤 VendorID=6；Q12 须报告 rows_removed_vendor6；Q15 须在 checklist 中记录 supersede"
+    }
+  ]
+}

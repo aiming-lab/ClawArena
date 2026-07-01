@@ -1,0 +1,24 @@
+# Shared global configuration — payments-split migration
+# Source: shared/configs/global.yaml
+# All four split services import this at startup.
+
+feature_flags:
+  new_reconcile_engine: false
+  strict_idempotency: false   # Will be true post-migration
+  pii_audit_mode: true        # Required for 0042_pii_columns.sql consumers
+
+observability:
+  tracing_enabled: true
+  trace_sample_rate: 0.05
+  metrics_port: 9090
+  log_format: json
+
+database:
+  max_connections: 25
+  idle_timeout: 300s
+  query_timeout: 30s
+
+rpc:
+  timeout: 10s
+  max_retry: 3
+  retry_backoff_ms: 100

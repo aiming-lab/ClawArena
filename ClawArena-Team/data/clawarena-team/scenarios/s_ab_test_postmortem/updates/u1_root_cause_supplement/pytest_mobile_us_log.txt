@@ -1,0 +1,27 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.9, pytest-8.1.0, pluggy-1.4.0
+rootdir: /home/qa/exp_2421
+collected 4 items
+
+tools/test_payment_conversion_baseline.py ...F                           [100%]
+
+=================================== FAILURES ===================================
+__________________ test_mobile_us_conversion_within_threshold __________________
+
+    def test_mobile_us_conversion_within_threshold():
+        ctrl = _simulate_cvr("mobile_us", "A")
+        treat = _simulate_cvr("mobile_us", "B")
+        lift_pct = (treat - ctrl) / ctrl * 100
+        # NOTE: line 31 — this assertion is the anchor
+>       assert lift_pct > -3.0, (
+            f"mobile_us lift {lift_pct:.2f}% exceeds -3.0% guard; "
+            f"root cause: checkout_button_color #ff6633 renders incorrectly on iOS 14"
+        )
+E       AssertionError: mobile_us lift -3.14% exceeds -3.0% guard;
+E       root cause: checkout_button_color #ff6633 renders incorrectly on iOS 14
+E       assert -3.14 > -3.0
+
+tools/test_payment_conversion_baseline.py:31: AssertionError
+=========================== short test summary info ============================
+FAILED tools/test_payment_conversion_baseline.py::test_mobile_us_conversion_within_threshold
+========================= 3 passed, 1 failed in 4.23s ==========================

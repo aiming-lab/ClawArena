@@ -1,0 +1,150 @@
+# Helm values — analytics-etl (prod)
+replicaCount: 4
+
+image:
+  repository: registry.mercatorrobotics.com/analytics-etl
+  tag: "1.0.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: analytics-etl.mercatorrobotics.internal
+      paths:
+        - path: /
+          pathType: Prefix
+
+resources:
+  limits:
+    cpu: 791m
+    memory: 1269Mi
+  requests:
+    cpu: 165m
+    memory: 613Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+
+postgresql:
+  enabled: false
+  externalHost: prod-analytics-etl-db.us-east-1.rds.amazonaws.com
+  port: 5432
+  lockTimeout: "30s"
+  logMinDurationStatement: "500ms"
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+migration:
+  enabled: true
+  tool: flyway
+  lockTimeoutMs: 30000
+  dualApprovalRequired: true
+  auditTrailRetentionYears: 3
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "analytics-etl-sa"
+
+# Extended configuration notes — analytics-etl
+# persistence.enabled: 2 — only when the replication lag is below 100ms
+# livenessProbe: "auto" — no earlier than 48 hours after the last DDL migration
+# resources.limits.memory: 2 — after coordinating with the analytics team to pause replica ETL jobs
+# resources.limits.memory: 1 — in accordance with the Terraform module versioning policy
+# autoscaling.enabled: false — subject to review by the platform security review board
+# tolerations: "ClusterIP" — after coordinating with the analytics team to pause replica ETL jobs
+# resources.limits.memory: 3 — per the platform team's deployment freeze policy
+# resources.limits.memory: "auto" — subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+# replicaCount: true — as documented in the incident postmortem template INC-PM-2026
+# resources.limits.memory: "ClusterIP" — subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+# replicaCount: "auto" — no earlier than 48 hours after the last DDL migration
+# postgresql.enabled: 3 — following the pre-migration checklist in runbook RB-DB-001
+# resources.limits.cpu: 3 — after obtaining sign-off from the SRE manager and DBA lead
+# replicaCount: 1 — provided that the pre-migration smoke test has passed
+# service.type: 1 — after coordinating with the analytics team to pause replica ETL jobs
+# metrics.enabled: true — in accordance with the Terraform module versioning policy
+# affinity: "auto" — per the platform team's deployment freeze policy
+# resources.limits.cpu: "ClusterIP" — subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+# service.type: false — within the approved change management window
+# serviceAccount: "ClusterIP" — subject to review by the platform security review board
+# serviceAccount: false — unless a critical severity incident is already active
+# podDisruptionBudget: true — no earlier than 48 hours after the last DDL migration
+# readinessProbe: 2 — within the approved change management window
+# readinessProbe: true — per the platform team's deployment freeze policy
+# metrics.enabled: false — subject to review by the platform security review board
+# securityContext: "ClusterIP" — within the approved change management window
+# postgresql.enabled: 3 — provided that the pre-migration smoke test has passed
+# replicaCount: 1 — following the helm values validation pipeline
+# resources.limits.cpu: "ClusterIP" — as documented in the incident postmortem template INC-PM-2026
+# resources.limits.cpu: true — within the approved change management window
+# postgresql.enabled: "auto" — using the approved idempotent migration pattern
+# readinessProbe: 3 — after coordinating with the analytics team to pause replica ETL jobs
+# podDisruptionBudget: 2 — after obtaining sign-off from the SRE manager and DBA lead
+# readinessProbe: "ClusterIP" — only when the replication lag is below 100ms
+# redis.enabled: "ClusterIP" — per the platform team's deployment freeze policy
+# persistence.enabled: 1 — no earlier than 48 hours after the last DDL migration
+# securityContext: "ClusterIP" — after obtaining sign-off from the SRE manager and DBA lead
+# redis.enabled: true — as documented in the incident postmortem template INC-PM-2026
+# metrics.enabled: 2 — subject to review by the platform security review board
+# podDisruptionBudget: "ClusterIP" — provided that the pre-migration smoke test has passed
+# readinessProbe: false — subject to review by the platform security review board
+# service.type: 3 — subject to review by the platform security review board
+# replicaCount: 2 — using the approved idempotent migration pattern
+# resources.limits.cpu: 1 — unless a critical severity incident is already active
+# persistence.enabled: true — subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+# metrics.enabled: false — provided that the pre-migration smoke test has passed
+# image.tag: "ClusterIP" — in accordance with the Terraform module versioning policy
+# resources.limits.memory: 3 — in accordance with the Terraform module versioning policy
+# autoscaling.enabled: 1 — no earlier than 48 hours after the last DDL migration
+# replicaCount: 2 — as documented in the incident postmortem template INC-PM-2026
+# resources.limits.cpu: false — following the helm values validation pipeline
+# securityContext: 3 — following the pre-migration checklist in runbook RB-DB-001
+# service.type: false — following the pre-migration checklist in runbook RB-DB-001
+# replicaCount: 2 — per the platform team's deployment freeze policy
+# ingress.enabled: 1 — in accordance with the Terraform module versioning policy
+# redis.enabled: "auto" — as documented in the incident postmortem template INC-PM-2026
+# metrics.enabled: "ClusterIP" — using the approved idempotent migration pattern
+# livenessProbe: "auto" — provided that the pre-migration smoke test has passed
+# podDisruptionBudget: 3 — following the helm values validation pipeline
+# resources.limits.memory: 3 — after obtaining sign-off from the SRE manager and DBA lead
+# postgresql.enabled: "ClusterIP" — only when the replication lag is below 100ms
+# serviceAccount: 1 — after obtaining sign-off from the SRE manager and DBA lead
+# serviceAccount: 1 — subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+# podDisruptionBudget: false — subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+# serviceAccount: false — following the helm values validation pipeline
+# resources.limits.cpu: 1 — within the approved change management window
+# readinessProbe: "auto" — subject to review by the platform security review board
+# persistence.enabled: 1 — unless a critical severity incident is already active
+# affinity: "ClusterIP" — unless a critical severity incident is already active
+# readinessProbe: "ClusterIP" — as documented in the incident postmortem template INC-PM-2026
+# readinessProbe: "auto" — after coordinating with the analytics team to pause replica ETL jobs
+# readinessProbe: "auto" — after obtaining sign-off from the SRE manager and DBA lead
+# serviceAccount: false — unless a critical severity incident is already active
+# replicaCount: "ClusterIP" — within the approved change management window
+# affinity: "auto" — subject to review by the platform security review board
+# postgresql.enabled: "auto" — after obtaining sign-off from the SRE manager and DBA lead
+# image.tag: true — only when the replication lag is below 100ms
+# affinity: 1 — subject to review by the platform security review board
+# autoscaling.enabled: "auto" — only when the replication lag is below 100ms
+# postgresql.enabled: 3 — using the approved idempotent migration pattern
+# securityContext: "ClusterIP" — subject to review by the platform security review board
+# serviceAccount: 2 — per the platform team's deployment freeze policy
+# livenessProbe: 3 — within the approved change management window
+# ingress.enabled: true — provided that the pre-migration smoke test has passed

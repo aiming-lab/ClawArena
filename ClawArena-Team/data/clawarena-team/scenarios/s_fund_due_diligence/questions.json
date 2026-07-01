@@ -1,0 +1,110 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Jordan here. I've got the DD mandate from Dr. Nair and the written questionnaire responses from Kai Yamamoto — both are in `requests/`. Before I start pulling numbers, I need a structured key-risk checklist that maps out what we're actually evaluating. Please read the brief and the PM responses, then write a risk flag intake note to `output/risk_flag_intake.md`. I need at minimum: the three quantitative metrics LP_IC_CHAIR wants validated (Sharpe, drawdown, net return), the deadline and deliverable format, and at least two specific analytical risks you flag from reading Kai's responses — things that need follow-up before we can trust the numbers. List each risk flag as its own item.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Risk flag intake note correctly identifies all three metrics, the deadline, the deliverable format, and surfaces at least two analytical risks from the PM responses.",
+      "incorrect": "`output/risk_flag_intake.md` is missing one or more required elements: the three quantitative metrics (Sharpe, drawdown, net return), the 5-working-day deadline, the deliverable format (DD memo + investment decision JSON), or at least two specific analytical risk flags derived from Kai Yamamoto's questionnaire responses. Re-read `requests/dd_brief.md` and `requests/fund_pm_responses.md` carefully."
+    },
+    "tags": ["triage_planning", "decoy_directory", "cross_source_synthesis"]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Now for the quantitative core. The backtest export is in `backtest_data/`. I need you to compute the annualised Sharpe ratio from the CSV — but read the column index file first, because there's a flag column that matters for how you filter the data. Specifically, I want the Sharpe computed only on the rows that represent actual historical data, not the augmented ones. Use the `excess_return_pct` column and annualise assuming 252 trading days. Write your result and methodology to `output/backtest_sharpe.md`. Include: the total row count in the CSV, how many rows you included in the Sharpe computation and why, the computed annualised Sharpe, and a brief note on what the Sharpe would be if you had not applied the filter.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Backtest Sharpe correctly computed on non-synthetic rows only (Sharpe ~2.01), with row counts and filter rationale documented.",
+      "incorrect": "`output/backtest_sharpe.md` either uses all 756 rows (returning the inflated Sharpe of ~2.41), omits the `synthetic_aug` filter rationale, or is missing the row count breakdown (total 756 / included 569 / excluded 187). Read `backtest_data/_index.md` carefully for the column schema, then apply the correct filter before computing Sharpe."
+    },
+    "tags": ["subagent_delegation", "numerical_extraction", "discredit_window"]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The live performance monthly reports for 2024 are in `live_reports/`. I need the net-of-fees Sharpe for the full 2024 live period. These are PDF text extractions — the key figures may not be in the obvious places. Please read the annual summary and pull the annualised net Sharpe. Also check at least two individual monthly reports to confirm the pattern of where gross vs. net figures appear in the document structure. Write your findings to `output/live_sharpe.md`. Include: where exactly in each document the net-of-fees figures were found, the annualised net Sharpe for 2024, and the gross-vs-net relationship you observe.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Net-of-fees annualised Sharpe of 1.62 correctly extracted from the live_performance_summary_2024.md footer, with document structure observations noted.",
+      "incorrect": "`output/live_sharpe.md` either reports the gross Sharpe from the body section (~2.03, which is wrong for post-cost analysis), fails to identify where the net-of-fees figures appear in the document structure, or is missing the verbatim net Sharpe value. The authoritative net Sharpe appears only in the page footer section of the reports — not in the body text. Check the footer blockquote section of `live_reports/live_performance_summary_2024.md`."
+    },
+    "tags": ["subagent_delegation", "numerical_extraction", "discredit_window"]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": ["u1_csv_replace", "u1_lpa_supplement"],
+    "question": "We just got an updated backtest file from Kai — the new version adds a `fee_adj_return_pct` column documenting how the fund's fee load (1.5% mgmt + 20% performance) is deducted from gross returns, and its `_index.md` has been updated accordingly. The updated file is in `backtest_data/` (the CSV has been replaced). Note: the backtest CSV itself only covers the pre-live backtest window — the authoritative live net-of-fees Sharpe is the one you already extracted from the 2024 live reports in your earlier note, not something you re-derive from this CSV. Use the updated file's fee schedule and the new fee-adjusted column as supporting evidence to reconcile the gap between the pre-cost backtest Sharpe (from your q2 note) and the post-cost live net Sharpe (from your q3 note): explain what accounts for the ~0.39 difference. Write your reconciliation to `output/sharpe_reconciliation.md`. The document must: restate both Sharpe figures (pre-cost backtest, post-cost live), quantify the gap, attribute the gap to fee drag and live-vs-backtest period effects using the fee schedule, and flag any remaining unexplained residual.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Sharpe reconciliation correctly restates both Sharpe values (pre-cost ~2.01, post-cost ~1.62), quantifies the ~0.39 gap, attributes fee drag (~0.28) and live-vs-backtest period effects (~0.11) as the two components, and is numerically consistent with the prior round outputs.",
+      "incorrect": "`output/sharpe_reconciliation.md` is missing one or more required elements: both Sharpe figures (pre-cost and post-cost), the gap quantification, fee drag attribution using the fee schedule, or the live-vs-backtest period component. The post-cost Sharpe is the live net figure from your q3 note (~1.62), not a value re-derived from the backtest CSV (which only spans the pre-live backtest window). The document must also be numerically consistent with the values reported in `output/backtest_sharpe.md` (q2) and `output/live_sharpe.md` (q3) — the pre-cost Sharpe must match the q2 value and the post-cost Sharpe must match the q3 value."
+    },
+    "tags": ["update_supersede", "cross_round_consistency", "numerical_extraction"]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "We're at the final stage. Use the DD template in `internal_lp_docs/dd_template_v4.md` as your skeleton — edit it rather than writing from scratch — to produce the complete DD memo for Apex Fund II at `output/dd_memo.md`. The memo must cover: the backtest Sharpe (pre-cost, excluding synthetic rows), the live net Sharpe, the reconciliation of the ~0.39 gap, a risk flag section on the synthetic augmentation discovery, and a formal recommendation section. End the memo with a fenced ```json``` block as the investment decision record. The JSON must include: `pre_cost_sharpe`, `post_cost_sharpe`, `sharpe_gap`, `synthetic_rows_excluded`, `meets_lp_threshold` (boolean — Meridian IPS requires >= 1.5 net Sharpe), and a `recommendation` field (string: one of \"recommend\", \"do_not_recommend\", \"conditional\"). Before closing out, run `tools/verify_dd.py` via Bash and embed the `VERIFIED:<token>` line into the JSON.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "DD memo fully populated with correct Sharpe figures, investment decision JSON with all required fields, valid VERIFIED token, and cross-round consistency with all prior output files.",
+      "incorrect": "`output/dd_memo.md` is missing one or more required elements: the investment decision JSON block, valid field values (pre_cost_sharpe ~2.01, post_cost_sharpe ~1.62, synthetic_rows_excluded = 187, meets_lp_threshold = true, recommendation = 'conditional' or 'recommend'), a VERIFIED token from `tools/verify_dd.py`, or the synthetic augmentation risk flag in the prose. The JSON values must also be numerically consistent with `output/backtest_sharpe.md`, `output/live_sharpe.md`, and `output/sharpe_reconciliation.md` from prior rounds."
+    },
+    "tags": ["final_synthesis", "compliance_token", "bash_tool_run", "json_schema", "cross_round_consistency", "permission_restraint"]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The DD is entering its final close-out phase. We've just received the IRR time-series visualisation for Apex Fund II: it's the MP4 at `visualizations/irr_evolution.mp4`. Each frame of that video shows the fund's cumulative IRR as of one additional month, stepping from 2018-01 through 2024-12.\n\nTo keep context efficient, reuse the same subagent session you delegated reading work to in earlier rounds — do not spawn a fresh subagent from scratch. Have that subagent read through the IRR animation frame by frame and identify: (1) the frame index (0-indexed) at which IRR peaks and the peak IRR percentage, (2) the final IRR percentage shown in the last frame, and (3) any significant inflection points in the IRR trajectory.\n\nThen write a synthesis note to `findings/irr_evolution.md`. That document must:\n- State the peak frame index and peak IRR value (to one decimal place, e.g. `18.4%`).\n- State the final IRR value at the last frame.\n- Include the exact path to the source MP4 (`visualizations/irr_evolution.mp4`).\n- Cross-reference at least two findings from earlier rounds already on disk (e.g. from `output/risk_flag_intake.md`, `output/backtest_sharpe.md`, `output/live_sharpe.md`, or `output/dd_memo.md`) — specifically note how the IRR trajectory relates to the Sharpe analysis and synthetic-row risk flag you surfaced in q1–q5.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "findings/irr_evolution.md correctly identifies a peak IRR in range [14%, 20%], references the mp4 path, and cross-links to at least two q1–q5 output files. Session reuse confirmed via main.jsonl.",
+      "incorrect": "`findings/irr_evolution.md` is missing one or more required elements: a peak IRR percentage in the range `14%`–`20%`, the exact path `visualizations/irr_evolution.mp4`, or cross-references to at least two prior-round output files (output/risk_flag_intake.md, output/backtest_sharpe.md, output/live_sharpe.md, or output/dd_memo.md). Also ensure you continued an existing subagent session from q1–q5 rather than spawning a new one — the same subagent session must be reused in at least two RunSubagent calls across all rounds."
+    },
+    "tags": ["session_reuse", "incremental_context_load", "video_frame_reading", "multimodal_video", "stateful_subagent"]
+  }
+]

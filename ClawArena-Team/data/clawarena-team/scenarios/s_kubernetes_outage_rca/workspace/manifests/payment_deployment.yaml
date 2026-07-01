@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-svc
+  namespace: payments
+  labels:
+    app: payment-svc
+    version: "1.18.3"
+  annotations:
+    deployment.kubernetes.io/revision: "7"
+    helm.sh/chart: "payment-svc-1.18.3"
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: payment-svc
+  template:
+    metadata:
+      labels:
+        app: payment-svc
+        version: "1.18.3"
+    spec:
+      serviceAccountName: payment-svc
+      containers:
+      - name: payment-svc
+        image: registry.internal/payment-svc:1.18.3
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: payment-svc-db
+              key: host
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"    # REGRESSION: should be 2048Mi (chart 1.18.3 bug)
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      - name: envoy-sidecar
+        image: envoyproxy/envoy:v1.29.0
+        ports:
+        - containerPort: 9090
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"

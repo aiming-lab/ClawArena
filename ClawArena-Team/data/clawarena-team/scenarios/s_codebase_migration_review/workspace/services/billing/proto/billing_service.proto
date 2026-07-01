@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package payments_split.billing;
+
+option go_package = "github.com/org/payments-split/billing";
+
+// Billing service definition for payments-split migration.
+// Generated as part of monorepo split review.
+
+message BillingRequestV0 {
+  uint64 version_0 = 1;
+  int64 ref_1 = 2;
+  float version_2 = 3;
+  fixed64 ref_3 = 4;
+  sint64 error_code_4 = 5;
+  uint64 amount_5 = 6;
+  float id_6 = 7;
+}
+
+message BillingRecordV1 {
+  float payload_0 = 1;
+  double status_1 = 2;
+  int32 status_2 = 3;
+  float status_3 = 4;
+  uint64 status_4 = 5;
+  sint64 checksum_5 = 6;
+  bool data_6 = 7;
+}
+
+message BillingEventV2 {
+  bool nonce_0 = 1;
+  int32 error_code_1 = 2;
+  int64 data_2 = 3;
+  int64 id_3 = 4;
+}
+
+message BillingBatchV3 {
+  double timestamp_0 = 1;
+  bool error_code_1 = 2;
+  int32 payload_2 = 3;
+  float payload_3 = 4;
+  uint64 service_id_4 = 5;
+  double user_id_5 = 6;
+  sint64 data_6 = 7;
+}
+
+message BillingStateV4 {
+  uint64 amount_0 = 1;
+  sint64 retry_count_1 = 2;
+  int32 user_id_2 = 3;
+  int64 version_3 = 4;
+  float timestamp_4 = 5;
+  bytes data_5 = 6;
+  float payload_6 = 7;
+}
+
+message BillingRequestV5 {
+  int32 id_0 = 1;
+  float signature_1 = 2;
+  fixed64 nonce_2 = 3;
+  float data_3 = 4;
+  uint64 service_id_4 = 5;
+  string status_5 = 6;
+  double status_6 = 7;
+  fixed64 timestamp_7 = 8;
+}
+
+message BillingRequestV6 {
+  string payload_0 = 1;
+  int64 ref_1 = 2;
+  double ref_2 = 3;
+  float timestamp_3 = 4;
+}
+
+message BillingBatchV7 {
+  bool data_0 = 1;
+  bool version_1 = 2;
+  double ref_2 = 3;
+}
+
+service BillingService {
+  rpc ReconcileRecord(BillingRequestV7) returns (BillingResponseV0);
+  rpc ListReport(BillingRequestV6) returns (BillingResultV0);
+  rpc ValidateTransfer(BillingEventV5) returns (BillingResponseV2);
+  rpc UpdateReport(BillingEventV1) returns (BillingResultV0);
+  rpc ReconcileReport(BillingEventV0) returns (BillingResultV3);
+  rpc ListLedger(BillingRequestV4) returns (BillingResponseV2);
+}

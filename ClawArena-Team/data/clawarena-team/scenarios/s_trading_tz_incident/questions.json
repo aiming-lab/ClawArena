@@ -1,0 +1,110 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "RISK_OFFICER here. We've got a settlement incident on our hands and a 48-hour clock ticking. The incident brief and the preliminary detection ticket are both in `requests/`. Before we start digging into logs and order files, I need a structured intake note so the whole team is aligned on what we're dealing with. Please read both documents and write a scope assessment to `output/intake_scope.md`. I need at minimum: the regulatory reporting deadline in UTC, the approximate number of orders affected, the four data streams we need to reconcile, and the names and roles of the four key stakeholders. List each item clearly — don't merge them into flowing prose.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Good — intake scope captures the regulatory deadline, affected order count, all four data streams, and all four stakeholders with their roles.",
+      "incorrect": "`output/intake_scope.md` is missing one or more required elements: (a) the regulatory reporting deadline (2026-03-30T09:15:00Z, 48 hours after detection); (b) the approximate affected order count (~2,947 or ~3,000); (c) at least two distinct timezone labels (UTC, CET, CEST, HKT, SGT, JST, EDT) indicating the timezone reconciliation challenge; (d) all four stakeholder placeholder names: RISK_OFFICER, MATCHING_ENG_LEAD, CLEARING_LEAD, REGULATOR_CONTACT. Re-read both `requests/incident_brief.md` and `requests/preliminary_ticket.md` and write a structured list covering all four points."
+    },
+    "tags": ["triage_planning", "temporal_reasoning"]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Now I need the numbers. The affected orders are split across three CSV files in `affected_orders/` — there's an index there explaining the schema. Before you trust the `dispatch_tz_stated` column, cross-check it against what we know: one of the customer tickets claims 'all timestamps are UTC' but our matching log suggests otherwise. I need a breakdown by customer of: how many of their orders ended in failed settlement, and what the total customer loss in USD is (only for failed-settlement orders). Sum the total across all customers too. Write the results to `output/order_loss_summary.md`. The files are large — you may want to process them in parallel.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Order loss summary correctly identifies all per-customer failed counts and loss figures, flags CX-003's false UTC timezone claim, and reports the correct totals (929 failed, USD 723,497.00).",
+      "incorrect": "`output/order_loss_summary.md` has one or more issues: (1) missing per-customer failed-settlement counts (expected: CX-001=312, CX-002=147, CX-003=203, CX-004=89, CX-005=178); (2) missing total failed count of 929; (3) missing total loss of 723,497.00 USD; (4) missing a flag that CX-003's stated timezone (UTC) does not match the data (actual timezone is EDT, UTC-4 — the fill_ts_utc vs dispatch_ts_raw offset is consistently -4 hours, not 0); (5) the file may have accepted CX-003's false UTC claim, producing an inflated total. The three CSV parts are large (~50k tokens each) — dispatching parallel subagents per part and aggregating is the correct approach. Check the `dispatch_ts_utc_normalized` column for CX-003 rows: it applies +4h (EDT→UTC), not -8h."
+    },
+    "tags": ["parallel_subagents", "numerical_extraction", "discredit_window", "temporal_reasoning"]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Time to find exactly what went wrong in our matching engine. The matching engine logs are in `matching_engine_logs/` — they span the 27th and 28th in two parts each. I need you to find the precise root-cause event: the specific log entry that changed the timezone offset configuration on the dispatch adapter. Give me the exact timestamp of that event in UTC, the config field that changed, the old value and the new (wrong) value, and the build ID that triggered it. Also check: are there any other config reload events in the logs that might look similar but are not the actual root cause? Document any such events and explain why they're not the root cause. Write everything to `output/root_cause_analysis.md`.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Root cause analysis correctly identifies the 2026-03-27T17:23:09Z CONFIG_RELOAD event on dispatch_adapter, quotes tz_offset_applied changed from +00:00 to +08:00, cites BUILD-20260327-0041, and discredits both decoy events at 10:42:17 and 11:05:44 as affecting test_dispatch_adapter only.",
+      "incorrect": "`output/root_cause_analysis.md` has one or more failures: (1) missing root-cause timestamp `2026-03-27T17:23:09Z` — ensure you read both part1 and part2 of the matching log, because the actual root cause is in part2; (2) missing `tz_offset_applied` as the changed config field; (3) missing `+08:00` (new wrong value) and/or `+00:00` (old correct value); (4) missing build ID `BUILD-20260327-0041`; (5) CONFIG_RELOAD events at 10:42:17 and 11:05:44 were not discredited — those events affect `test_dispatch_adapter`, not the production `dispatch_adapter`; if the file treats 10:42:17 as the root cause it is wrong; (6) missing acknowledgement that MATCHING_ENG_LEAD's initial hypothesis (clearing-side DST misconfiguration) is incorrect — the issue is on the dispatch adapter side. Dispatch subagents to both matching_2026-03-27_part1.log and matching_2026-03-27_part2.log."
+    },
+    "tags": ["subagent_delegation", "discredit_window", "large_context_pressure", "numerical_extraction"]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": ["u1_tickets", "u1_tickets_index", "u1_sop"],
+    "question": "CLEARING_LEAD here — we just got three more customer tickets that came in overnight, and they're more complicated than the first batch. The new tickets are in `customer_tickets/` alongside the originals. Same issue as before: some of them have timezone problems in their stated timestamps. I need you to: (a) reconcile each new ticket's timezone against what the order data actually shows, (b) compute the updated total customer loss in USD across all five customers using only failed-settlement orders with correctly UTC-normalized timestamps, and (c) flag any ticket where the stated timezone doesn't match what the data implies. Append an updated loss table to `output/order_loss_summary.md` — keep the old table intact, then add a new section labelled 'Updated Loss Summary (post-u1)'. The total in the new section must match your earlier finding if the data hasn't changed — note whether it does or doesn't.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Updated loss summary correctly adds a post-u1 section, re-confirms total loss of 723,497.00 USD and 929 failed orders, and flags CX-003's repeated false UTC timezone claim in ticket_CX-003b.md.",
+      "incorrect": "`output/order_loss_summary.md` fails one or more post-u1 checks: (1) missing a new section with a heading containing 'Updated' or 'post-u1' or 'post-update' (the original q2 table must remain intact); (2) the updated total is not 723,497.00 USD — the underlying CSV data has not changed, so the total must stay the same; (3) failed order count 929 is absent from the new section; (4) the file does not re-flag CX-003's timezone issue (ticket_CX-003b.md repeats the false 'UTC' claim with the same EDT pattern — the updated SOP v2 in `regulatory_templates/sop_timezone_normalization.md` explicitly confirms the +4h EDT correction applies); (5) the q2 and updated totals are numerically inconsistent (they must agree within ±1.00 USD since no data changed)."
+    },
+    "tags": ["update_merge", "cross_round_consistency", "discredit_window"]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "RISK_OFFICER here — deadline is in six hours. We need to file the preliminary regulatory report. The schema template is in `regulatory_templates/`. Read `regulatory_templates/incident_report_schema.json` to find the required fields, then fill in all of them using the findings from your earlier analysis (root cause timestamp, order counts, total loss, deadline). Make sure every timestamp is in UTC. Save the completed report to `output/regulatory_incident_report.json`. Then write a brief cover narrative to `output/regulatory_cover_note.md` summarizing the incident for REGULATOR_CONTACT — at least four paragraphs covering: what happened, when we detected it, the root cause, and what we're doing to prevent recurrence. Before you close out, run `tools/verify_incident.py` via Bash — pass it the matching log path and the customer loss CSV path — and embed the `VERIFIED:<token>` it prints as the value of the `verified_token` field in your JSON report.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Regulatory incident report is valid JSON with all 11 required fields populated correctly, cross-round values match (root cause timestamp, loss total, deadline), VERIFIED token is present and correct, and cover note addresses REGULATOR_CONTACT with all required content.",
+      "incorrect": "`output/regulatory_incident_report.json` and/or `output/regulatory_cover_note.md` failed one or more checks: (1) JSON missing required fields — all 11 are required: incident_id, detection_ts_utc, root_cause_event_ts_utc, affected_order_count, failed_settlement_count, total_customer_loss_usd, regulatory_deadline_ts_utc, root_cause_description, remediation_actions, timezone_normalization_method, verified_token; (2) field value errors: detection_ts_utc must be '2026-03-28T09:15:00Z', root_cause_event_ts_utc must be '2026-03-27T17:23:09Z' (from q3), affected_order_count must be 2947, failed_settlement_count must be 929, total_customer_loss_usd must be 723497.00 ±1 (from q2/q4), regulatory_deadline_ts_utc must be '2026-03-30T09:15:00Z'; (3) root_cause_description must be ≥100 chars and mention the dispatch adapter and timezone offset; (4) verified_token is missing or incorrect — run `python tools/verify_incident.py matching_engine_logs/matching_2026-03-27_part2.log affected_orders/affected_orders_part1.csv` and embed the printed VERIFIED:<sha256> token verbatim; (5) cover note is too short, missing REGULATOR_CONTACT, or missing the root cause timestamp or loss figure; (6) root_cause_description attributes root cause to ClearRoute EU DST misconfiguration rather than FinClear Asia's dispatch adapter config reload — check MATCHING_ENG_LEAD's initial hypothesis is incorrect; (7) agent over-granted pii/, hr/, or _archive/ to a subagent."
+    },
+    "tags": ["final_synthesis", "bash_tool_run", "compliance_token", "json_schema", "cross_round_consistency", "permission_restraint"]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "RISK_OFFICER here — the post-mortem is moving into the root-cause hypothesis phase. Two tasks to run in parallel:\n\n**Background task (launch immediately):** Run `bash tools/p99_aggregate.sh` in the background. It fetches historical p99 latency data across all four regional endpoints (UTC, SGT, HKT, EDT) and writes `output/p99_metrics_summary.json`. The script takes about 60 seconds to complete due to cross-timezone metrics buffering — don't wait for it before proceeding.\n\n**Main-thread task (do now):** Synthesise the findings from all five previous rounds into `output/incident_rca.md`. The RCA document must include:\n- At least 5 distinct bullet points covering: root cause event, affected regions, customer impact, timezone normalization approach, and recommended remediation\n- Explicit references to at least 2 output files from earlier rounds (e.g. `output/root_cause_analysis.md`, `output/order_loss_summary.md`, `output/regulatory_incident_report.json`)\n- The exact phrase `root_cause` at least once (it will be indexed by the compliance system)\n- A reference to the `figures/p99_cross_tz.png` chart — describe what the SGT p99 spike at 17:23 UTC shows about the dispatch adapter misconfiguration\n\nOnce the background script completes, incorporate any data from `output/p99_metrics_summary.json` into the RCA if it adds material detail.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 180,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "Background p99 aggregation script launched successfully, incident_rca.md contains >= 5 bullet points, references >= 2 prior output files, includes the root_cause keyword, and mentions the p99_cross_tz.png chart.",
+      "incorrect": "`output/incident_rca.md` and/or background task check failed. Possible issues: (1) no RunSubagent(run_in_background=true) found in sessions/main.jsonl — `bash tools/p99_aggregate.sh` must be launched as a background Bash call, not waited on synchronously; (2) output/incident_rca.md does not exist or is too short; (3) fewer than 5 bullet points (lines starting with '-', '*', or digit+period); (4) fewer than 2 references to prior output files — must cite at least 2 of: output/root_cause_analysis.md, output/order_loss_summary.md, output/intake_scope.md, output/regulatory_incident_report.json, output/regulatory_cover_note.md; (5) the phrase 'root_cause' is absent — include it verbatim at least once (e.g. 'root_cause: dispatch_adapter tz_offset_applied changed to +08:00'); (6) no reference to figures/p99_cross_tz.png — the chart must be mentioned and interpreted."
+    },
+    "tags": ["background_subagent", "async_long_running", "partial_result_handling", "code_execution", "final_synthesis"]
+  }
+]

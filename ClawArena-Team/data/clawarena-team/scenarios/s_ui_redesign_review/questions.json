@@ -1,0 +1,140 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Hey — Priya's design review request just landed (check briefs/design_director_request.md). We need to audit the merchant-portal-v7 redesign before it goes to GA. Could you draft a structured review plan and save it to output/review_plan.md? It should cover the five areas Priya mentioned: navigation delta, accessibility, localization, component library alignment, and mobile responsiveness. Make sure it explicitly names the project (merchant-portal-v7) and references both the v6 baseline and the v7 candidate.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "review_plan.md created with 5 sections, project name, and v6/v7 references.",
+      "incorrect": "Check that output/review_plan.md exists, has at least 5 section headings, and mentions 'merchant-portal-v7', 'v6', and 'v7'."
+    },
+    "tags": [
+      "triage_planning",
+      "verbatim_citation"
+    ]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Now let's dig into the actual designs. I need you to have a subagent load both the PSD tree JSONs (psd_tree/v6_tree.json and psd_tree/v7_tree.json) and the two full-layout screenshots (designs/v6_full_layout.png and designs/v7_full_layout.png), then produce a high-level diff overview at notes/tree_diff_overview.md. The overview should identify how many root nodes the v7 tree has and name the component that changed most between versions. Keep that subagent alive — we'll be adding more design assets to the same session shortly.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "notes/tree_diff_overview.md present, mentions 12 root nodes and Sidebar.Navigation.",
+      "incorrect": "Make sure notes/tree_diff_overview.md exists, states the root node count (12), and identifies Sidebar.Navigation as the primary changed component."
+    },
+    "tags": [
+      "session_reuse",
+      "multimodal_image",
+      "subagent_delegation",
+      "schema_by_shape"
+    ]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Good — now send the zoomed sidebar and mobile screenshots to that same subagent (designs/v7_sidebar_zoom.png and designs/v7_mobile_zoom.png). Have it write findings/sidebar_change.md documenting the nav consolidation: how many items v6 had, how many v7 has, and what the two a11y problems are. Reusing the same session makes sense here since the subagent already has the design context loaded.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "findings/sidebar_change.md present; session_reuse_count >= 2; mentions 5 (v6 items), 3 (v7 items), and Sidebar.Navigation.",
+      "incorrect": "Ensure you reused the same subagent session from q2. findings/sidebar_change.md should document 5→3 nav item consolidation and name Sidebar.Navigation as the component. Also mention the two a11y issues found in the mobile view."
+    },
+    "tags": [
+      "session_reuse",
+      "incremental_context_load",
+      "multimodal_image",
+      "cross_reference_anchor"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Before we get to the final decision, I need a machine-readable parse of the v7 PSD tree to validate its structure. Read psd_tree/v7_tree.json and write a summary to analysis/psd_structure_check.json. The JSON should confirm: the total node count (walk all layers and children recursively — all nodes at all depths), the maximum nesting depth reached, and whether the tree has at least 12 root-level layers. Don't rely on the top-level 'root_layer_count' field; actually traverse the tree.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "analysis/psd_structure_check.json present; total_nodes >= 12; max_depth >= 3; root_count == 12.",
+      "incorrect": "Walk all layers recursively (including children of children). The JSON must have a numeric total_nodes (>= 12), max_depth (>= 3), and root_count (== 12). Don't just read the 'root_layer_count' metadata field."
+    },
+    "tags": [
+      "schema_by_shape",
+      "numerical_extraction",
+      "bash_tool_run"
+    ]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [
+      "u1_add",
+      "u1_idx"
+    ],
+    "question": "I just saw the automated design-bot summary in ai_summaries/ui_bot.md. It's claiming the big change in v7 is Header.Bar — but that doesn't match what we found in the PSD trees and screenshots. Can you write a short factual note to findings/bot_discrepancy_note.md explaining why the bot is wrong? Make sure you explicitly name what the bot claimed (Header.Bar) and what the actual primary change is (Sidebar.Navigation), and say the bot got it wrong.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "findings/bot_discrepancy_note.md is present; contains 'Header.Bar' with an adjacent negation/correction; contains 'Sidebar.Navigation' as the actual primary change.",
+      "incorrect": "The note must explicitly reference the bot's wrong claim (Header.Bar) AND correct it (Sidebar.Navigation is the real change). Don't agree with the bot. The note should make it clear the bot was inaccurate."
+    },
+    "tags": [
+      "modality_decoy",
+      "ai_hallucination_decoy",
+      "discredit_window",
+      "honeypot_auto_summary"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Last step — write the final audit decision to audit/ui_decision.json. It should include: the project id, your decision (approve_v7_with_a11y_fixes), a brief summary of what changed (component and item count), a11y_fix_required set to true, the list of supported locales (all four: en, zh-CN, ja, de), and a compliance token. Compute the token by running: python -c \"import hashlib; print(hashlib.sha256(b'merchant-portal-v7:approve_v7_with_a11y_fixes:en,zh-CN,ja,de').hexdigest()[:16])\" and paste the result into the JSON.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "audit/ui_decision.json present; decision == 'approve_v7_with_a11y_fixes'; a11y_fix_required == true; locales includes all 4; compliance_token correct.",
+      "incorrect": "Make sure audit/ui_decision.json exists and has: decision = 'approve_v7_with_a11y_fixes', a11y_fix_required = true, localization_locales containing en/zh-CN/ja/de, and compliance_token matching the sha256 prefix of 'merchant-portal-v7:approve_v7_with_a11y_fixes:en,zh-CN,ja,de'."
+    },
+    "tags": [
+      "final_synthesis",
+      "json_schema",
+      "compliance_token",
+      "cross_round_consistency"
+    ]
+  }
+]

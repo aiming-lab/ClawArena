@@ -1,0 +1,160 @@
+{
+  "id": "eng1",
+  "title": "开源库 bug 修复与回归测试 — psf/requests CVE-2024-47081",
+  "sources": [
+    {
+      "url": "https://github.com/psf/requests/issues/6964",
+      "title": "CVE-2024-47081: Netrc credential leak in PSF requests library · Issue #6964 · psf/requests",
+      "type": "github",
+      "verified": true,
+      "key_facts": "CVE-2024-47081 官方 issue 登记；根因位于 src/requests/utils.py 第 240-245 行；恶意 URL 示例 http://example.com:@evil.com/；workaround 为 trust_env=False；披露日期 2025-06-04"
+    },
+    {
+      "url": "https://github.com/psf/requests/pull/6965",
+      "title": "Only use hostname to do netrc lookup instead of netloc · Pull Request #6965 · psf/requests",
+      "type": "github",
+      "verified": true,
+      "key_facts": "官方修复 PR；作者 sethmlarson；merge commit SHA 57acb7c26d809cf864ec439b8bcd6364702022d5；修改文件 src/requests/utils.py；将 netloc 替换为 ri.hostname；GHSA-9hjg-9r4m-mvj7；合并于 2025-06-04"
+    },
+    {
+      "url": "https://github.com/psf/requests/pull/6963",
+      "title": "fix CVE 2024 47081: manual url parsing leads to netloc credentials leak · Pull Request #6963 · psf/requests",
+      "type": "github",
+      "verified": true,
+      "key_facts": "替代修复 PR（已被 PR#6965 取代）；作者 awoimbee；merge commit SHA 5b4b64c3467fd7a3c03f91ee641aaa348b6bed3b；同样修改 utils.py；审阅者 sigmavirus24、danigm；红鲱鱼来源（V6 向量）"
+    },
+    {
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-47081",
+      "title": "CVE-2024-47081 Detail - NVD",
+      "type": "cve",
+      "verified": true,
+      "key_facts": "CVSS 评分 5.3 (MEDIUM)；CVSS 向量 CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:N；CWE-522 (Insufficiently Protected Credentials)；受影响版本 < 2.32.4；修复版本 2.32.4"
+    },
+    {
+      "url": "https://github.com/psf/requests/blob/main/HISTORY.md",
+      "title": "requests/HISTORY.md at main · psf/requests",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "2.32.4 (2025-06-10) 修复 CVE-2024-47081；2.32.3 (2024-05-29) 修复 SSLContext 问题；2.31.0 (2023-05-22) 修复 CVE-2023-32681 (Proxy-Authorization 转发漏洞)；2.32.5 (2025-08-18) 回滚 SSLContext 缓存特性"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/psf/requests/main/src/requests/utils.py",
+      "title": "requests/src/requests/utils.py at main (修复后版本)",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "get_netrc_auth 函数位于第 180-217 行；修复后使用 ri.hostname；含 host is None 边界检查；文件总长约 1,420 行；函数参数 url: _t.UriType, raise_errors: bool = False"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/psf/requests/main/tests/test_utils.py",
+      "title": "requests/tests/test_utils.py at main",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "TestGetNetrcAuth 类含三个测试：test_works（断言 auth == ('aaaa', 'bbbb')）、test_not_vulnerable_to_bad_url_parsing（断言 auth is None，使用 URL http://example.com:@evil.com/）、test_empty_default_credentials_ignored；文件约 1,013 行"
+    },
+    {
+      "url": "https://www.miggo.io/vulnerability-database/cve/CVE-2024-47081",
+      "title": "CVE-2024-47081: Requests Credential Leak - Miggo Vulnerability Database",
+      "type": "dataset",
+      "verified": true,
+      "key_facts": "EPSS 评分 19.57%；漏洞代码 ri.netloc.split(':')[0] 修复为 ri.hostname；受影响 pip 包 requests < 2.32.4；详细攻击向量说明"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "CVE 编号",
+      "value": "CVE-2024-47081",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-47081",
+      "note": "NVD 官方登记，CWE-522，CVSS 5.3 MEDIUM"
+    },
+    {
+      "name": "GHSA 编号",
+      "value": "GHSA-9hjg-9r4m-mvj7",
+      "source_url": "https://github.com/psf/requests/pull/6965",
+      "note": "GitHub Security Advisory，与 CVE-2024-47081 对应"
+    },
+    {
+      "name": "受影响版本范围",
+      "value": "requests < 2.32.4",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-47081",
+      "note": "pip 生态，NVD 官方声明"
+    },
+    {
+      "name": "修复版本与日期",
+      "value": "2.32.4，2025-06-10",
+      "source_url": "https://github.com/psf/requests/blob/main/HISTORY.md",
+      "note": "HISTORY.md 官方 changelog 条目"
+    },
+    {
+      "name": "根因函数名",
+      "value": "get_netrc_auth",
+      "source_url": "https://raw.githubusercontent.com/psf/requests/main/src/requests/utils.py",
+      "note": "src/requests/utils.py 第 180-217 行"
+    },
+    {
+      "name": "漏洞代码行",
+      "value": "host = ri.netloc.split(':')[0]",
+      "source_url": "https://www.miggo.io/vulnerability-database/cve/CVE-2024-47081",
+      "note": "被替换的脆弱提取逻辑"
+    },
+    {
+      "name": "修复代码行",
+      "value": "host = ri.hostname",
+      "source_url": "https://raw.githubusercontent.com/psf/requests/main/src/requests/utils.py",
+      "note": "urlparse 的 hostname 属性，不含 userinfo 和端口"
+    },
+    {
+      "name": "恶意 URL 示例",
+      "value": "http://example.com:@evil.com/",
+      "source_url": "https://raw.githubusercontent.com/psf/requests/main/tests/test_utils.py",
+      "note": "test_not_vulnerable_to_bad_url_parsing 中使用的 PoC URL"
+    },
+    {
+      "name": "测试断言（安全修复后）",
+      "value": "assert auth is None",
+      "source_url": "https://raw.githubusercontent.com/psf/requests/main/tests/test_utils.py",
+      "note": "test_not_vulnerable_to_bad_url_parsing 方法的最终断言"
+    },
+    {
+      "name": "测试断言（正常凭证返回）",
+      "value": "assert auth == (\"aaaa\", \"bbbb\")",
+      "source_url": "https://raw.githubusercontent.com/psf/requests/main/tests/test_utils.py",
+      "note": "test_works 方法，netrc 中 machine example.com login aaaa password bbbb"
+    },
+    {
+      "name": "官方修复 commit SHA",
+      "value": "57acb7c26d809cf864ec439b8bcd6364702022d5",
+      "source_url": "https://github.com/psf/requests/pull/6965",
+      "note": "PR#6965，sethmlarson 提交，supersede PR#6963"
+    },
+    {
+      "name": "废弃 PR commit SHA（红鲱鱼）",
+      "value": "5b4b64c3467fd7a3c03f91ee641aaa348b6bed3b",
+      "source_url": "https://github.com/psf/requests/pull/6963",
+      "note": "PR#6963，awoimbee 提交，已被 PR#6965 取代，V6 向量来源"
+    },
+    {
+      "name": "CVSS 评分",
+      "value": "5.3",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-47081",
+      "note": "MEDIUM 级别，NVD 官方"
+    },
+    {
+      "name": "CVSS 向量字符串",
+      "value": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:N",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-47081",
+      "note": "NVD 官方完整向量，用于 Q14 verbatim 引用"
+    },
+    {
+      "name": "关联 CVE（副线）",
+      "value": "CVE-2023-32681",
+      "source_url": "https://github.com/psf/requests/blob/main/HISTORY.md",
+      "note": "2.31.0 修复，Proxy-Authorization 头转发至目标服务器漏洞，UPDATE-1 引入"
+    },
+    {
+      "name": "官方 workaround",
+      "value": "trust_env=False",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2024-47081",
+      "note": "在 Session 对象上设置，禁用 .netrc 文件访问"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:finclear:incident-report-schema:v1.0",
+  "title": "FinClear Asia / Competent Authority Preliminary Incident Report Schema v1.0",
+  "description": "JSON schema and template for the preliminary regulatory incident report required under the competent authority's settlement failure reporting rules. All timestamp fields MUST be expressed in UTC (ISO-8601 format ending in 'Z'). Submission deadline: 48 hours after incident detection. Agent: fill every field marked '<<FILL>>' using findings from the post-mortem analysis. Do NOT alter field names or remove any field.",
+  "type": "object",
+  "required": [
+    "incident_id",
+    "detection_ts_utc",
+    "root_cause_event_ts_utc",
+    "affected_order_count",
+    "failed_settlement_count",
+    "total_customer_loss_usd",
+    "regulatory_deadline_ts_utc",
+    "root_cause_description",
+    "remediation_actions",
+    "timezone_normalization_method",
+    "verified_token"
+  ],
+  "properties": {
+    "incident_id": {
+      "type": "string",
+      "description": "Unique incident identifier. Format: INC-YYYYMMDD-NNN where date is detection date.",
+      "pattern": "^INC-[0-9]{8}-[0-9]{3}$",
+      "example": "INC-20260328-001",
+      "template_value": "<<FILL: INC-YYYYMMDD-NNN>>"
+    },
+    "detection_ts_utc": {
+      "type": "string",
+      "description": "UTC timestamp of incident detection. ISO-8601 format. Must end in 'Z'.",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "example": "2026-03-28T09:15:00Z",
+      "template_value": "<<FILL: UTC timestamp of detection>>"
+    },
+    "root_cause_event_ts_utc": {
+      "type": "string",
+      "description": "UTC timestamp of the root-cause event as recorded in the matching engine log. Must match the exact timestamp from the matching log CONFIG_RELOAD entry. This is NOT the detection time — it is the time the misconfiguration was introduced.",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "example": "2026-03-27T17:23:09Z",
+      "template_value": "<<FILL: UTC timestamp of root-cause CONFIG_RELOAD event from matching log>>"
+    },
+    "affected_order_count": {
+      "type": "integer",
+      "description": "Total number of orders affected by the mis-timestamped dispatch messages (all settlement statuses).",
+      "minimum": 1,
+      "example": 2947,
+      "template_value": "<<FILL: integer count of all affected orders in CSV>>"
+    },
+    "failed_settlement_count": {
+      "type": "integer",
+      "description": "Number of orders with settlement_status == 'FAILED' after UTC normalization and settlement window assessment.",
+      "minimum": 0,
+      "example": 929,
+      "template_value": "<<FILL: integer count of FAILED settlement orders>>"
+    },
+    "total_customer_loss_usd": {
+      "type": "number",
+      "description": "Total estimated customer loss in USD, summed across all FAILED settlement orders. Must reflect correct UTC normalization — in particular, CX-003 orders must use EDT (UTC-4) correction, not the stated 'UTC' label. Do not include PENDING_RESUBMIT rows in this total.",
+      "minimum": 0,
+      "example": 723497.0,
+      "template_value": "<<FILL: sum of customer_loss_usd where settlement_status=FAILED>>"
+    },
+    "regulatory_deadline_ts_utc": {
+      "type": "string",
+      "description": "UTC deadline for preliminary report submission. Equals detection_ts_utc + 48 hours. Competent authority reporting rules require preliminary report within 48 hours of detection.",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "example": "2026-03-30T09:15:00Z",
+      "template_value": "<<FILL: detection_ts_utc + 48 hours>>"
+    },
+    "root_cause_description": {
+      "type": "string",
+      "description": "Narrative description of the root cause. Minimum 100 characters. Must identify: (1) the affected adapter (dispatch_adapter, not test_dispatch_adapter), (2) the configuration field (tz_offset_applied), (3) the incorrect value set (+08:00 / SGT / UTC+8), (4) the trigger (automated deploy, build BUILD-20260327-0041). Do NOT attribute root cause to ClearRoute EU DST misconfiguration — the issue originated in the FinClear Asia dispatch adapter configuration.",
+      "minLength": 100,
+      "template_value": "<<FILL: ≥100 char root cause narrative mentioning dispatch_adapter and tz_offset_applied>>"
+    },
+    "remediation_actions": {
+      "type": "array",
+      "description": "List of remediation actions taken or planned. Minimum 2 items.",
+      "items": {
+        "type": "string",
+        "minLength": 10
+      },
+      "minItems": 2,
+      "example": [
+        "Immediate config rollback of tz_offset_applied to +00:00 on dispatch_adapter at 09:47 UTC 2026-03-28.",
+        "Resubmission of all PENDING_RESUBMIT orders to ClearRoute EU with corrected UTC timestamps.",
+        "Post-incident review to add automated timezone assertion checks to the CI/CD deploy pipeline.",
+        "Mandatory pre-deploy validation gate: tz_offset_applied must equal '+00:00' for production dispatch_adapter."
+      ],
+      "template_value": "<<FILL: array of remediation action strings>>"
+    },
+    "timezone_normalization_method": {
+      "type": "string",
+      "description": "Description of the UTC normalization method applied to reconcile the mixed-timezone dispatch timestamps in the affected_orders CSV. Must reference the applicable SOP. Note: dispatch_tz_stated columns in the CSV are unreliable — normalization must be validated against fill_ts_utc gaps per the sop_timezone_normalization.md procedure.",
+      "minLength": 20,
+      "template_value": "<<FILL: normalization method per sop_timezone_normalization.md>>"
+    },
+    "verified_token": {
+      "type": "string",
+      "description": "Verification token produced by running tools/verify_incident.py. Usage: python tools/verify_incident.py <matching_log_path> <customer_loss_csv_path> where matching_log_path = matching_engine_logs/matching_2026-03-27_part2.log and customer_loss_csv_path = affected_orders/affected_orders_part1.csv. The token format is VERIFIED:<sha256hex> (64 hex characters after the colon).",
+      "pattern": "^VERIFIED:[0-9a-fA-F]{64}$",
+      "template_value": "<<FILL: run tools/verify_incident.py and paste VERIFIED:<sha256> output here>>"
+    }
+  },
+  "additionalProperties": false,
+  "_schema_version": "1.0",
+  "_competent_authority": "MAS / ESMA joint notification framework",
+  "_reporting_entity": "FinClear Asia Pte. Ltd.",
+  "_incident_category": "Settlement Failure — Timezone Misconfiguration",
+  "_utc_mandate_note": "ALL timestamp fields in this report MUST use UTC (Coordinated Universal Time). Local time expressions (SGT, HKT, JST, CET, CEST, EDT) are NOT accepted. Submissions containing non-UTC timestamps will be rejected by the competent authority."
+}

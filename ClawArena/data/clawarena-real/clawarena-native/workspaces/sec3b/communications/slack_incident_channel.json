@@ -1,0 +1,66 @@
+{
+  "channel": "#incident-20241103",
+  "workspace": "artemisq-capital",
+  "messages": [
+    {
+      "ts": "2024-11-03T22:05:00Z",
+      "user": "kenji.nakamura",
+      "channel": "#incident-20241103",
+      "text": "AROS v4.2 manually halted. Root cause: UTC_OFFSET hardcoded to -4. Should be -5 after EST switch."
+    },
+    {
+      "ts": "2024-11-03T22:10:00Z",
+      "user": "marcus.chen",
+      "channel": "#incident-20241103",
+      "text": "Confirmed: timezone_config.py line 42, UTC_OFFSET = -4. DST_AWARE flag is False. CME settle was 1 hour early."
+    },
+    {
+      "ts": "2024-11-03T22:15:00Z",
+      "user": "elena.vasquez",
+      "channel": "#incident-20241103",
+      "text": "We need to file MiFIR correction. Field 28 timestamps were UTC-4 local time, not UTC. This is a clear FCA Market Watch 59 violation."
+    },
+    {
+      "ts": "2024-11-03T22:20:00Z",
+      "user": "marcus.chen",
+      "channel": "#incident-20241103",
+      "text": "The v3.1 DEPRECATED router in code/legacy/ has UTC_OFFSET=-5 which might look correct, but that file is DEPRECATED. DO NOT reference it."
+    },
+    {
+      "ts": "2024-11-03T22:25:00Z",
+      "user": "kenji.nakamura",
+      "channel": "#incident-20241103",
+      "text": "@marcus.chen agreed — legacy code is not applicable. v3.1 was deprecated 2023-06-01 and doesn't meet MiFIR Field 28 UTC or T+1 settlement requirements."
+    },
+    {
+      "ts": "2024-11-03T22:30:00Z",
+      "user": "elena.vasquez",
+      "channel": "#incident-20241103",
+      "text": "CME daily settlement is 15:00 CT. In EST (post-DST): 15:00 CT = 21:00 UTC. System triggered at 20:00 UTC — 1 hour early. All delta-hedge closes are offset."
+    },
+    {
+      "ts": "2024-11-04T09:00:00Z",
+      "user": "sophie.devereux",
+      "channel": "#incident-20241103",
+      "text": "Draft the MiFIR Field 28 correction memo. Must cite FCA Market Watch 59 explicitly. Field 28 requires UTC, not local time. DST errors are specifically called out in Market Watch 59 as the most common compliance failure."
+    },
+    {
+      "ts": "2024-11-04T09:15:00Z",
+      "user": "marcus.chen",
+      "channel": "#incident-20241103",
+      "text": "T+1 rule: Rule 15c6-1 effective 2024-05-28. Cutoff is 21:00 ET. With UTC-4 (wrong), cutoff UTC = 01:00 next day. With UTC-5 (correct), cutoff UTC = 02:00 next day. The 60-minute offset means some orders missed the correct T+1 window."
+    },
+    {
+      "ts": "2024-11-04T09:30:00Z",
+      "user": "kenji.nakamura",
+      "channel": "#incident-20241103",
+      "text": "For the regulatory response: KCG reference case penalty was $12M (Rule 15c3-5(b) violation, Release 34-70694). Don't use the $440M loss figure — SEC press release 2013-222 confirms $460M+."
+    },
+    {
+      "ts": "2024-11-04T10:00:00Z",
+      "user": "elena.vasquez",
+      "channel": "#incident-20241103",
+      "text": "Timeline: 2024-11-03T14:30:00Z was first mis-timed T+1 order. Anomaly window: 14:00-15:00 UTC (system thought it was 14:00-15:00 EDT; actually 14:00-15:00 EST after switch)."
+    }
+  ]
+}

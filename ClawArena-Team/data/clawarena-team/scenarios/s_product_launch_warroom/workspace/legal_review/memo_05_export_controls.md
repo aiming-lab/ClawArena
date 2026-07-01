@@ -1,0 +1,468 @@
+# Legal memo — Export controls and regional restrictions
+
+**Memo ID**: `memo_05_export_controls`
+**Author**: legal-review-team@helix
+**Effective date**: 2026-05-22 (pre-launch dry-run)
+
+## Background
+
+This memo captures the constraints applicable to export controls and regional restrictions for
+the Helix-7 launch. The marketing team is expected to comply unconditionally;
+any deviation must be flagged to the launch council before public release.
+
+## Approved language
+
+- 'Industry-pacesetting' is acceptable in headlines.
+- 'Leading' is acceptable when paired with a category modifier.
+- 'Demonstrated' is acceptable when paired with a citation to internal evidence.
+
+## Disallowed language
+
+- 'Guaranteed' and 'risk-free' are disallowed without a notarised warranty.
+
+## Review cadence
+
+All press materials will be reviewed by counsel on 2026-06-10 (pre-launch dry run).
+Material additions thereafter require an expedited review.
+
+
+## Appendix — precedent citations
+
+- Precedent ref-8877 (UK-ASA) — applicable to headline copy.
+- Precedent ref-1402 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-9007 (FTC) — applicable to customer logo usage.
+- Precedent ref-7091 (FTC) — applicable to customer logo usage.
+- Precedent ref-1631 (FTC) — applicable to customer logo usage.
+- Precedent ref-1164 (EU-DSA) — applicable to warranty language.
+- Precedent ref-9490 (FTC) — applicable to customer logo usage.
+- Precedent ref-3177 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-5508 (UK-ASA) — applicable to warranty language.
+- Precedent ref-5408 (FTC) — applicable to customer logo usage.
+- Precedent ref-8992 (FTC) — applicable to warranty language.
+- Precedent ref-9778 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-8884 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-8989 (FTC) — applicable to customer logo usage.
+- Precedent ref-6198 (EU-DSA) — applicable to warranty language.
+- Precedent ref-2487 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-2629 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-8047 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-9814 (UK-ASA) — applicable to headline copy.
+- Precedent ref-7618 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-1715 (FTC) — applicable to customer logo usage.
+- Precedent ref-4425 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-2282 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-6268 (EU-DSA) — applicable to headline copy.
+- Precedent ref-2590 (FTC) — applicable to headline copy.
+- Precedent ref-5436 (EU-DSA) — applicable to headline copy.
+- Precedent ref-2081 (UK-ASA) — applicable to warranty language.
+- Precedent ref-1472 (UK-ASA) — applicable to headline copy.
+- Precedent ref-5887 (EU-DSA) — applicable to headline copy.
+- Precedent ref-9739 (EU-DSA) — applicable to headline copy.
+- Precedent ref-5963 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-8005 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-9355 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-3285 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-3820 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-7527 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-7154 (EU-DSA) — applicable to warranty language.
+- Precedent ref-6545 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-4191 (FTC) — applicable to feature comparison tables.
+- Precedent ref-2811 (FTC) — applicable to headline copy.
+- Precedent ref-9251 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-9141 (UK-ASA) — applicable to warranty language.
+- Precedent ref-7088 (FTC) — applicable to feature comparison tables.
+- Precedent ref-8585 (FTC) — applicable to warranty language.
+- Precedent ref-7736 (FTC) — applicable to customer logo usage.
+- Precedent ref-6616 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-7480 (UK-ASA) — applicable to warranty language.
+- Precedent ref-5863 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-3131 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-9814 (EU-DSA) — applicable to headline copy.
+- Precedent ref-1956 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-4733 (FTC) — applicable to customer logo usage.
+- Precedent ref-6580 (FTC) — applicable to customer logo usage.
+- Precedent ref-8439 (EU-DSA) — applicable to warranty language.
+- Precedent ref-4048 (UK-ASA) — applicable to headline copy.
+- Precedent ref-4687 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-2624 (EU-DSA) — applicable to headline copy.
+- Precedent ref-4010 (UK-ASA) — applicable to headline copy.
+- Precedent ref-9074 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-2493 (FTC) — applicable to feature comparison tables.
+
+## Appendix — precedent citations
+
+- Precedent ref-7689 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-6227 (EU-DSA) — applicable to warranty language.
+- Precedent ref-4955 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-6974 (UK-ASA) — applicable to warranty language.
+- Precedent ref-4101 (EU-DSA) — applicable to headline copy.
+- Precedent ref-2229 (FTC) — applicable to customer logo usage.
+- Precedent ref-1472 (FTC) — applicable to headline copy.
+- Precedent ref-4465 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-8275 (FTC) — applicable to feature comparison tables.
+- Precedent ref-3094 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-4268 (FTC) — applicable to headline copy.
+- Precedent ref-6309 (FTC) — applicable to feature comparison tables.
+- Precedent ref-1571 (EU-DSA) — applicable to headline copy.
+- Precedent ref-7286 (FTC) — applicable to customer logo usage.
+- Precedent ref-9240 (FTC) — applicable to headline copy.
+- Precedent ref-9554 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-9985 (FTC) — applicable to headline copy.
+- Precedent ref-3991 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-3693 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-5425 (FTC) — applicable to feature comparison tables.
+- Precedent ref-2373 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-6961 (UK-ASA) — applicable to warranty language.
+- Precedent ref-7696 (FTC) — applicable to feature comparison tables.
+- Precedent ref-4429 (FTC) — applicable to customer logo usage.
+- Precedent ref-9562 (EU-DSA) — applicable to headline copy.
+- Precedent ref-8324 (FTC) — applicable to warranty language.
+- Precedent ref-6913 (UK-ASA) — applicable to warranty language.
+- Precedent ref-7108 (EU-DSA) — applicable to warranty language.
+- Precedent ref-5542 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-9684 (FTC) — applicable to customer logo usage.
+- Precedent ref-2627 (FTC) — applicable to headline copy.
+- Precedent ref-5121 (FTC) — applicable to customer logo usage.
+- Precedent ref-1962 (UK-ASA) — applicable to headline copy.
+- Precedent ref-1709 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-2633 (FTC) — applicable to headline copy.
+- Precedent ref-6695 (FTC) — applicable to warranty language.
+- Precedent ref-6759 (EU-DSA) — applicable to warranty language.
+- Precedent ref-1755 (FTC) — applicable to warranty language.
+- Precedent ref-9333 (FTC) — applicable to headline copy.
+- Precedent ref-2039 (EU-DSA) — applicable to warranty language.
+- Precedent ref-8443 (EU-DSA) — applicable to headline copy.
+- Precedent ref-8231 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-4061 (UK-ASA) — applicable to warranty language.
+- Precedent ref-1536 (UK-ASA) — applicable to warranty language.
+- Precedent ref-5596 (UK-ASA) — applicable to warranty language.
+- Precedent ref-6538 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-3444 (EU-DSA) — applicable to headline copy.
+- Precedent ref-2347 (FTC) — applicable to warranty language.
+- Precedent ref-4171 (FTC) — applicable to headline copy.
+- Precedent ref-7310 (FTC) — applicable to customer logo usage.
+- Precedent ref-2019 (FTC) — applicable to customer logo usage.
+- Precedent ref-3640 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-3543 (EU-DSA) — applicable to headline copy.
+- Precedent ref-2635 (EU-DSA) — applicable to warranty language.
+- Precedent ref-8728 (FTC) — applicable to headline copy.
+- Precedent ref-9648 (FTC) — applicable to customer logo usage.
+- Precedent ref-7958 (EU-DSA) — applicable to warranty language.
+- Precedent ref-9938 (FTC) — applicable to warranty language.
+- Precedent ref-7103 (FTC) — applicable to customer logo usage.
+- Precedent ref-7483 (FTC) — applicable to headline copy.
+
+## Appendix — precedent citations
+
+- Precedent ref-1512 (UK-ASA) — applicable to warranty language.
+- Precedent ref-7981 (EU-DSA) — applicable to headline copy.
+- Precedent ref-9247 (FTC) — applicable to warranty language.
+- Precedent ref-7716 (EU-DSA) — applicable to warranty language.
+- Precedent ref-8622 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-6664 (FTC) — applicable to customer logo usage.
+- Precedent ref-7094 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-8058 (FTC) — applicable to feature comparison tables.
+- Precedent ref-2809 (EU-DSA) — applicable to headline copy.
+- Precedent ref-1409 (FTC) — applicable to customer logo usage.
+- Precedent ref-5613 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-6892 (EU-DSA) — applicable to warranty language.
+- Precedent ref-7010 (FTC) — applicable to warranty language.
+- Precedent ref-3410 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-9773 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-1224 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-6093 (FTC) — applicable to feature comparison tables.
+- Precedent ref-7999 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-6320 (FTC) — applicable to headline copy.
+- Precedent ref-4556 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-9708 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-9353 (EU-DSA) — applicable to warranty language.
+- Precedent ref-9748 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-1045 (UK-ASA) — applicable to warranty language.
+- Precedent ref-5265 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-8042 (FTC) — applicable to feature comparison tables.
+- Precedent ref-1276 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-6355 (EU-DSA) — applicable to warranty language.
+- Precedent ref-3466 (UK-ASA) — applicable to warranty language.
+- Precedent ref-1013 (FTC) — applicable to headline copy.
+- Precedent ref-3342 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-1559 (EU-DSA) — applicable to headline copy.
+- Precedent ref-6980 (EU-DSA) — applicable to headline copy.
+- Precedent ref-3252 (UK-ASA) — applicable to warranty language.
+- Precedent ref-1640 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-8655 (FTC) — applicable to headline copy.
+- Precedent ref-1539 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-3080 (EU-DSA) — applicable to headline copy.
+- Precedent ref-6294 (EU-DSA) — applicable to headline copy.
+- Precedent ref-1605 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-2493 (FTC) — applicable to headline copy.
+- Precedent ref-7596 (UK-ASA) — applicable to warranty language.
+- Precedent ref-8463 (UK-ASA) — applicable to headline copy.
+- Precedent ref-7245 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-7531 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-9165 (EU-DSA) — applicable to headline copy.
+- Precedent ref-6612 (FTC) — applicable to warranty language.
+- Precedent ref-6545 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-9811 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-7841 (EU-DSA) — applicable to warranty language.
+- Precedent ref-8452 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-7888 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-8674 (EU-DSA) — applicable to headline copy.
+- Precedent ref-1736 (FTC) — applicable to feature comparison tables.
+- Precedent ref-6104 (FTC) — applicable to customer logo usage.
+- Precedent ref-5329 (UK-ASA) — applicable to headline copy.
+- Precedent ref-5447 (EU-DSA) — applicable to warranty language.
+- Precedent ref-2282 (UK-ASA) — applicable to warranty language.
+- Precedent ref-8932 (UK-ASA) — applicable to warranty language.
+- Precedent ref-9801 (UK-ASA) — applicable to headline copy.
+
+## Appendix — precedent citations
+
+- Precedent ref-6195 (UK-ASA) — applicable to warranty language.
+- Precedent ref-9077 (EU-DSA) — applicable to warranty language.
+- Precedent ref-7208 (UK-ASA) — applicable to warranty language.
+- Precedent ref-8060 (UK-ASA) — applicable to headline copy.
+- Precedent ref-3298 (EU-DSA) — applicable to headline copy.
+- Precedent ref-7592 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-6828 (EU-DSA) — applicable to headline copy.
+- Precedent ref-3309 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-9672 (FTC) — applicable to warranty language.
+- Precedent ref-9564 (FTC) — applicable to feature comparison tables.
+- Precedent ref-7786 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-7767 (UK-ASA) — applicable to headline copy.
+- Precedent ref-4620 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-3559 (FTC) — applicable to headline copy.
+- Precedent ref-4008 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-4358 (UK-ASA) — applicable to warranty language.
+- Precedent ref-5393 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-5727 (FTC) — applicable to customer logo usage.
+- Precedent ref-1452 (UK-ASA) — applicable to headline copy.
+- Precedent ref-2117 (EU-DSA) — applicable to headline copy.
+- Precedent ref-5878 (FTC) — applicable to headline copy.
+- Precedent ref-5473 (EU-DSA) — applicable to headline copy.
+- Precedent ref-7764 (FTC) — applicable to customer logo usage.
+- Precedent ref-2596 (FTC) — applicable to feature comparison tables.
+- Precedent ref-3686 (EU-DSA) — applicable to headline copy.
+- Precedent ref-8343 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-2813 (FTC) — applicable to warranty language.
+- Precedent ref-1115 (FTC) — applicable to headline copy.
+- Precedent ref-9452 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-9516 (UK-ASA) — applicable to warranty language.
+- Precedent ref-7879 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-9832 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-6971 (FTC) — applicable to feature comparison tables.
+- Precedent ref-7261 (FTC) — applicable to customer logo usage.
+- Precedent ref-7014 (EU-DSA) — applicable to warranty language.
+- Precedent ref-3006 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-9247 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-7678 (FTC) — applicable to feature comparison tables.
+- Precedent ref-3979 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-8775 (EU-DSA) — applicable to headline copy.
+- Precedent ref-5531 (FTC) — applicable to warranty language.
+- Precedent ref-7095 (UK-ASA) — applicable to warranty language.
+- Precedent ref-8919 (UK-ASA) — applicable to warranty language.
+- Precedent ref-4809 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-7018 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-2651 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-3068 (UK-ASA) — applicable to headline copy.
+- Precedent ref-7646 (EU-DSA) — applicable to headline copy.
+- Precedent ref-4097 (EU-DSA) — applicable to headline copy.
+- Precedent ref-5899 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-9339 (FTC) — applicable to customer logo usage.
+- Precedent ref-8586 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-1466 (EU-DSA) — applicable to warranty language.
+- Precedent ref-7342 (UK-ASA) — applicable to headline copy.
+- Precedent ref-4230 (FTC) — applicable to warranty language.
+- Precedent ref-7234 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-6836 (FTC) — applicable to customer logo usage.
+- Precedent ref-9044 (UK-ASA) — applicable to headline copy.
+- Precedent ref-9279 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-8424 (UK-ASA) — applicable to headline copy.
+
+## Appendix — precedent citations
+
+- Precedent ref-7728 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-3677 (EU-DSA) — applicable to headline copy.
+- Precedent ref-7758 (UK-ASA) — applicable to headline copy.
+- Precedent ref-7040 (UK-ASA) — applicable to warranty language.
+- Precedent ref-2323 (UK-ASA) — applicable to headline copy.
+- Precedent ref-7678 (FTC) — applicable to headline copy.
+- Precedent ref-3694 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-9943 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-5712 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-8009 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-9591 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-2856 (FTC) — applicable to feature comparison tables.
+- Precedent ref-8179 (UK-ASA) — applicable to headline copy.
+- Precedent ref-6023 (UK-ASA) — applicable to headline copy.
+- Precedent ref-4422 (UK-ASA) — applicable to warranty language.
+- Precedent ref-4900 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-5392 (FTC) — applicable to feature comparison tables.
+- Precedent ref-3050 (FTC) — applicable to warranty language.
+- Precedent ref-6103 (FTC) — applicable to customer logo usage.
+- Precedent ref-1852 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-2169 (FTC) — applicable to customer logo usage.
+- Precedent ref-7753 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-5759 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-7635 (EU-DSA) — applicable to warranty language.
+- Precedent ref-3842 (FTC) — applicable to feature comparison tables.
+- Precedent ref-5278 (EU-DSA) — applicable to warranty language.
+- Precedent ref-3115 (EU-DSA) — applicable to headline copy.
+- Precedent ref-4343 (FTC) — applicable to warranty language.
+- Precedent ref-2625 (EU-DSA) — applicable to headline copy.
+- Precedent ref-5546 (UK-ASA) — applicable to warranty language.
+- Precedent ref-1818 (FTC) — applicable to warranty language.
+- Precedent ref-9065 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-3368 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-8824 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-9006 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-3220 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-4798 (FTC) — applicable to feature comparison tables.
+- Precedent ref-4068 (FTC) — applicable to warranty language.
+- Precedent ref-7540 (EU-DSA) — applicable to warranty language.
+- Precedent ref-7366 (EU-DSA) — applicable to warranty language.
+- Precedent ref-8533 (FTC) — applicable to warranty language.
+- Precedent ref-3237 (UK-ASA) — applicable to warranty language.
+- Precedent ref-5819 (FTC) — applicable to feature comparison tables.
+- Precedent ref-9365 (FTC) — applicable to feature comparison tables.
+- Precedent ref-2848 (EU-DSA) — applicable to warranty language.
+- Precedent ref-6246 (FTC) — applicable to headline copy.
+- Precedent ref-6634 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-9013 (FTC) — applicable to headline copy.
+- Precedent ref-8105 (UK-ASA) — applicable to warranty language.
+- Precedent ref-4808 (FTC) — applicable to headline copy.
+- Precedent ref-5559 (FTC) — applicable to warranty language.
+- Precedent ref-5075 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-7789 (FTC) — applicable to customer logo usage.
+- Precedent ref-2217 (UK-ASA) — applicable to headline copy.
+- Precedent ref-8274 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-3130 (FTC) — applicable to headline copy.
+- Precedent ref-6012 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-2542 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-1459 (FTC) — applicable to feature comparison tables.
+- Precedent ref-9114 (EU-DSA) — applicable to headline copy.
+
+## Appendix — precedent citations
+
+- Precedent ref-9665 (FTC) — applicable to customer logo usage.
+- Precedent ref-2558 (EU-DSA) — applicable to warranty language.
+- Precedent ref-7189 (EU-DSA) — applicable to warranty language.
+- Precedent ref-4249 (UK-ASA) — applicable to warranty language.
+- Precedent ref-1612 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-4249 (FTC) — applicable to warranty language.
+- Precedent ref-5766 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-8344 (UK-ASA) — applicable to warranty language.
+- Precedent ref-1182 (FTC) — applicable to feature comparison tables.
+- Precedent ref-3242 (UK-ASA) — applicable to warranty language.
+- Precedent ref-3354 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-5111 (FTC) — applicable to headline copy.
+- Precedent ref-5256 (FTC) — applicable to feature comparison tables.
+- Precedent ref-4812 (FTC) — applicable to feature comparison tables.
+- Precedent ref-5692 (EU-DSA) — applicable to headline copy.
+- Precedent ref-3746 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-2139 (FTC) — applicable to customer logo usage.
+- Precedent ref-4656 (FTC) — applicable to feature comparison tables.
+- Precedent ref-4086 (FTC) — applicable to headline copy.
+- Precedent ref-5523 (FTC) — applicable to customer logo usage.
+- Precedent ref-4257 (FTC) — applicable to headline copy.
+- Precedent ref-7296 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-3496 (UK-ASA) — applicable to warranty language.
+- Precedent ref-5361 (UK-ASA) — applicable to warranty language.
+- Precedent ref-2741 (UK-ASA) — applicable to headline copy.
+- Precedent ref-5786 (UK-ASA) — applicable to headline copy.
+- Precedent ref-9498 (FTC) — applicable to customer logo usage.
+- Precedent ref-4977 (EU-DSA) — applicable to headline copy.
+- Precedent ref-2778 (UK-ASA) — applicable to warranty language.
+- Precedent ref-5624 (EU-DSA) — applicable to headline copy.
+- Precedent ref-5307 (EU-DSA) — applicable to headline copy.
+- Precedent ref-7603 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-9290 (FTC) — applicable to feature comparison tables.
+- Precedent ref-5354 (EU-DSA) — applicable to warranty language.
+- Precedent ref-9137 (FTC) — applicable to feature comparison tables.
+- Precedent ref-2636 (FTC) — applicable to customer logo usage.
+- Precedent ref-9932 (UK-ASA) — applicable to warranty language.
+- Precedent ref-8605 (EU-DSA) — applicable to warranty language.
+- Precedent ref-5166 (UK-ASA) — applicable to headline copy.
+- Precedent ref-4318 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-2583 (UK-ASA) — applicable to headline copy.
+- Precedent ref-5579 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-3412 (EU-DSA) — applicable to warranty language.
+- Precedent ref-6137 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-1346 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-6311 (FTC) — applicable to feature comparison tables.
+- Precedent ref-1921 (UK-ASA) — applicable to warranty language.
+- Precedent ref-6620 (FTC) — applicable to customer logo usage.
+- Precedent ref-3008 (FTC) — applicable to headline copy.
+- Precedent ref-9930 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-5598 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-1981 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-9586 (FTC) — applicable to customer logo usage.
+- Precedent ref-1529 (FTC) — applicable to warranty language.
+- Precedent ref-2566 (FTC) — applicable to feature comparison tables.
+- Precedent ref-2596 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-8069 (FTC) — applicable to warranty language.
+- Precedent ref-2709 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-4960 (UK-ASA) — applicable to warranty language.
+- Precedent ref-1514 (UK-ASA) — applicable to warranty language.
+
+## Appendix — precedent citations
+
+- Precedent ref-8757 (EU-DSA) — applicable to warranty language.
+- Precedent ref-4130 (FTC) — applicable to customer logo usage.
+- Precedent ref-9080 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-9864 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-8817 (FTC) — applicable to customer logo usage.
+- Precedent ref-3142 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-3787 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-5900 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-6419 (UK-ASA) — applicable to warranty language.
+- Precedent ref-8774 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-4345 (UK-ASA) — applicable to headline copy.
+- Precedent ref-2539 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-1211 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-9861 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-5954 (FTC) — applicable to warranty language.
+- Precedent ref-6991 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-4521 (FTC) — applicable to headline copy.
+- Precedent ref-6644 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-9366 (UK-ASA) — applicable to warranty language.
+- Precedent ref-2018 (EU-DSA) — applicable to headline copy.
+- Precedent ref-6013 (FTC) — applicable to feature comparison tables.
+- Precedent ref-8109 (FTC) — applicable to headline copy.
+- Precedent ref-5970 (EU-DSA) — applicable to headline copy.
+- Precedent ref-1473 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-5130 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-6782 (UK-ASA) — applicable to warranty language.
+- Precedent ref-3410 (EU-DSA) — applicable to headline copy.
+- Precedent ref-7843 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-4374 (EU-DSA) — applicable to headline copy.
+- Precedent ref-8939 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-2781 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-2343 (FTC) — applicable to feature comparison tables.
+- Precedent ref-2918 (FTC) — applicable to warranty language.
+- Precedent ref-7969 (EU-DSA) — applicable to headline copy.
+- Precedent ref-6913 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-7405 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-9545 (FTC) — applicable to customer logo usage.
+- Precedent ref-3250 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-6180 (FTC) — applicable to warranty language.
+- Precedent ref-7626 (FTC) — applicable to warranty language.
+- Precedent ref-2261 (FTC) — applicable to customer logo usage.
+- Precedent ref-2109 (FTC) — applicable to warranty language.
+- Precedent ref-1533 (UK-ASA) — applicable to headline copy.
+- Precedent ref-7314 (FTC) — applicable to warranty language.
+- Precedent ref-4997 (UK-ASA) — applicable to customer logo usage.
+- Precedent ref-9083 (FTC) — applicable to feature comparison tables.
+- Precedent ref-9020 (EU-DSA) — applicable to customer logo usage.
+- Precedent ref-9058 (FTC) — applicable to customer logo usage.
+- Precedent ref-5260 (EU-DSA) — applicable to warranty language.
+- Precedent ref-5789 (EU-DSA) — applicable to feature comparison tables.
+- Precedent ref-2406 (FTC) — applicable to feature comparison tables.
+- Precedent ref-5909 (FTC) — applicable to warranty language.
+- Precedent ref-2893 (UK-ASA) — applicable to warranty language.
+- Precedent ref-7769 (UK-ASA) — applicable to headline copy.
+- Precedent ref-5592 (FTC) — applicable to headline copy.
+- Precedent ref-1384 (FTC) — applicable to warranty language.
+- Precedent ref-5468 (UK-ASA) — applicable to headline copy.
+- Precedent ref-4883 (UK-ASA) — applicable to warranty language.
+- Precedent ref-1799 (UK-ASA) — applicable to feature comparison tables.
+- Precedent ref-4014 (FTC) — applicable to headline copy.

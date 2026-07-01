@@ -1,0 +1,94 @@
+# GitHub Actions CI Pipeline — MASE
+# WARNING: lib-tinypath 1.4.2 in rust_pkg/Cargo.toml carries CVE-2026-21847.
+# This pipeline is currently BLOCKED from release until CVE is resolved.
+
+name: MASE CI
+
+on:
+  push:
+    branches: [main, dev, 'release/**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  sbom-check:
+    name: SBOM + CVE Scan
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate CycloneDX SBOM
+        run: |
+          cargo cyclonedx --format json --output sbom/mase_cyclonedx_sbom.json
+      - name: Trivy CVE scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          format: 'json'
+          output: 'trivy-results.json'
+          severity: 'HIGH,CRITICAL'
+          exit-code: '1'
+      - name: License check
+        run: |
+          pip install pip-licenses
+          pip-licenses --format json > license_matrix.json
+
+  build-rust:
+    name: Rust build + test
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        working-directory: source_code/rust_pkg
+        run: cargo build --release
+      - name: Test
+        working-directory: source_code/rust_pkg
+        run: cargo test
+
+  build-go:
+    name: Go build + test
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        working-directory: source_code/go_pkg
+        run: go build ./...
+      - name: Test
+        working-directory: source_code/go_pkg
+        run: go test ./...
+
+  build-python:
+    name: Python build + test
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install deps
+        working-directory: source_code/py_pkg
+        run: poetry install
+      - name: Test
+        working-directory: source_code/py_pkg
+        run: poetry run pytest
+
+  build-js:
+    name: JS build + test
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install deps
+        working-directory: source_code/js_pkg
+        run: npm ci
+      - name: Test
+        working-directory: source_code/js_pkg
+        run: npm test
+
+  oss-release-gate:
+    name: OSS Release Gate
+    runs-on: ubuntu-22.04
+    needs: [sbom-check, build-rust, build-go, build-python, build-js]
+    steps:
+      - name: Check CVE gate
+        run: |
+          # BLOCKED: CVE-2026-21847 in lib-tinypath@1.4.2
+          # Remove this block once pinned to 1.4.1 or patched 1.4.3
+          echo "ERROR: lib-tinypath 1.4.2 carries HIGH CVE-2026-21847"
+          echo "ACTION REQUIRED: pin to 1.4.1 in Cargo.toml"
+          exit 1

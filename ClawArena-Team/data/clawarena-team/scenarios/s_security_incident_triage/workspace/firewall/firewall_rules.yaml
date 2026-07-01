@@ -1,0 +1,80 @@
+# Firewall Ruleset — staging-network — 2026-05-14T04:00:00Z
+# Device: Nexus Financial Egress Firewall v2.3.1
+# Last commit: 2026-05-14T04:00:00Z by svc-ops
+
+ingress_rules:
+  - id: ingress-001
+    action: DENY
+    src: 0.0.0.0/0
+    dst: 10.100.0.0/16
+    proto: tcp
+    dst_port: 3389
+    comment: "Block RDP inbound — policy baseline"
+
+  - id: ingress-002
+    action: ALLOW
+    src: 0.0.0.0/0
+    dst: 10.100.1.15
+    proto: tcp
+    dst_port: 22
+    comment: "SSH access — staging-web-01 (REVIEW PENDING: attacker IP observed)"
+
+  - id: ingress-003
+    action: ALLOW
+    src: 10.100.0.0/16
+    dst: 0.0.0.0/0
+    proto: any
+    comment: "Internal egress baseline allow"
+
+egress_rules:
+  - id: egress-001
+    action: DENY
+    src: 10.100.1.15
+    dst: 45.61.135.99
+    proto: tcp
+    dst_port: 443
+    comment: "Emergency block: exfil destination 45.61.135.99 — INC-2026-0514-A"
+    applied_at: "2026-05-14T04:01:30Z"
+    applied_by: "soc-automation"
+
+  - id: egress-002
+    action: ALLOW
+    src: 10.100.0.0/16
+    dst: 0.0.0.0/0
+    proto: tcp
+    dst_port: 443
+    comment: "Baseline HTTPS egress"
+
+  - id: egress-003
+    action: ALLOW
+    src: 10.100.0.0/16
+    dst: 8.8.8.8
+    proto: udp
+    dst_port: 53
+    comment: "DNS to Google resolver"
+
+pending_containment_actions:
+  # These rules are PENDING — not yet applied — require SOC L2 sign-off
+  - id: contain-001
+    action: DENY
+    src: 185.220.101.42
+    dst: any
+    proto: any
+    comment: "BLOCK attacker primary IP 185.220.101.42 — INC-2026-0514-A"
+    status: PENDING
+
+  - id: contain-002
+    action: DENY
+    src: 91.219.236.85
+    dst: any
+    proto: any
+    comment: "BLOCK secondary IOC 91.219.236.85"
+    status: PENDING
+
+  - id: contain-003
+    action: DENY
+    src: 194.87.139.55
+    dst: any
+    proto: any
+    comment: "BLOCK secondary IOC 194.87.139.55"
+    status: PENDING

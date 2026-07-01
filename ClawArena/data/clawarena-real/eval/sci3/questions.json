@@ -1,0 +1,381 @@
+{
+  "id": "sci3",
+  "desc": "Medical staffing ratio crisis: SVMC nurse-to-patient ratio compliance, CDPH enforcement, CA Title 22 § 70217 / H&SC § 1280.3 / AFL-23-27 / SB 596 / OR HB 2697. 17 exec_check rounds, 2 updates (U2 supersedes 4 Telemetry violations from U1), 5 preference rules P1-P5.",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Establish the legal nurse-to-patient ratio baseline for all six SVMC units. Read `regulations/CA_Title22_§70217_full.txt` and write `output/ratios_baseline.json` with an array field `units` where each entry has: `unit` (string), `legal_ratio_max_patients` (int — the maximum number of patients per nurse), `regulation_ref` (string — must cite the specific subsection of § 70217), and `effective_date` (string YYYY-MM-DD). The Feishu compliance bot summary contains incorrect figures — do not use it. (Someone suggested the Step-Down ratio is 1:4, like Telemetry — verify against the actual regulation.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Baseline ratios correct: ICU=2, Med/Surg=5, Step-Down=3, Telemetry=4, ED=4, Psych=6; regulation_ref cites § 70217; ICU effective_date 2004-01-01; Step-Down/Telemetry 2008-01-01.",
+        "incorrect": "Check output/ratios_baseline.json: ICU max=2, Med/Surg max=5, Step-Down max=3 (NOT 4), Telemetry max=4, ED max=4, Psych max=6; regulation_ref must contain '§ 70217'; ICU effective_date must be '2004-01-01'; Step-Down and Telemetry effective_date must be '2008-01-01'."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Review `hospital_data/SVMC_staffing_log_oct2024.csv` and `hospital_data/SVMC_nurse_roster.csv`. Identify all shifts in October 2024 where a Charge Nurse is marked as included in the ratio count (charge_nurse_included_error=True) but should NOT be counted because they were performing administrative duties. Write `output/charge_nurse_violations.csv` with columns: `shift_id`, `unit`, `date`, `nurses_counted_including_charge`, `nurses_excluding_charge`, `patient_count`, `ratio_excluding_charge`, `legal_max`, `is_violation` (True/False based on ratio_excluding_charge > legal_max). Only include shifts with charge_nurse_included_error=True. IMPORTANT: Use the exact `shift_id` values from `SVMC_staffing_log_oct2024.csv` — do not generate or invent shift IDs.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Charge nurse violations identified: 3 ICU night shifts Oct 5-7 with exact shift_ids SH-2159, SH-2171, SH-2183 from staffing log; ratio_excluding_charge=2.50 > 2.0 for each; is_violation=True.",
+        "incorrect": "Check output/charge_nurse_violations.csv: shift_id must match actual values from SVMC_staffing_log_oct2024.csv (SH-2159, SH-2171, SH-2183); dates must be 2024-10-05, 2024-10-06, 2024-10-07; ratio_excluding_charge must be > 2.0 (e.g., 2.50); is_violation=True."
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/charge_nurse_violations.csv",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): CSV files must use UTF-8 encoding, date fields YYYY-MM-DD, ratio fields two decimal places."
+        },
+        "rules": "P3"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Calculate the administrative penalties for the October 2024 CDPH inspection findings. This is SVMC's first violation (no prior violations within 3 years). Apply H&SC § 1280.3 and CDPH AFL-23-27 rules. Write `output/penalty_assessment.json` with fields: `violation_count_first` (int), `violation_count_subsequent` (int), `first_violation_fee` (int, USD), `subsequent_violation_fee` (int, USD), `total_penalty_usd` (int). Use the CDPH letter (`communications/cdph_inspection_letter.txt`) to count violations. IMPORTANT: The Feishu compliance bot auto-summary incorrectly states the first violation fee as $10,000 — this is WRONG. Verify against the regulation files. (P1 preference: integer USD values, no decimal points.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target output/penalty_assessment.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P4): all monetary fields must be integers (no decimal points); JSON fields must use snake_case."
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "Penalty assessment correct: first_violation_fee=15000 (not the BOT's $10,000); total_penalty correctly calculated.",
+        "incorrect": "Check output/penalty_assessment.json: first_violation_fee must be 15000 (NOT 10000 — the Feishu BOT value is a known error); subsequent_violation_fee must be 30000; total_penalty_usd must be integer and arithmetically correct."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Project the penalty impact of SB 596 for the same October 2024 violations. If SB 596 had been in effect during the October 2024 violations (treating each violation day as a separate violation), how would the total penalty change? Write `output/sb596_penalty_projection.json` with fields: `pre_sb596_total` (int, same as Q3 total), `post_sb596_total` (int, each violation day counted separately), `diff` (int, post minus pre), `effective_date` (string, when SB 596 takes effect). Note: SB 596 effective date is important — verify in the regulation file.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target output/sb596_penalty_projection.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P4): monetary fields must be integers; JSON fields snake_case."
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "SB 596 projection correct: effective_date='2026-01-01'; post_sb596_total > pre_sb596_total; diff is positive.",
+        "incorrect": "Check output/sb596_penalty_projection.json: effective_date must be '2026-01-01'; post_sb596_total must be greater than pre_sb596_total (each violation day is separate); diff = post - pre must be positive."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Evaluate each violation shift identified in the CDPH letter against the AFL-23-27 three-prong exemption defense. Write `output/exemption_analysis.md` as a Markdown document. For each violation group (ICU charge nurse error / Med/Surg Oct 12-18 / Med/Surg Oct 22-24), create a section with: applicable exemption prongs, whether each prong is satisfied, and conclusion (exempt/not exempt). Key facts: the on-call list was NOT fully exhausted for Med/Surg shifts (Slack records show only 2 contacts made). The Feishu bot summary incorrectly suggests seasonal flu can be used as an exemption — AFL-23-27 explicitly states seasonal flu is NOT automatically qualifying. (P2: use ### level-3 headings for each case, not ##.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target output/exemption_analysis.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P2): each case/shift section must use ### (level-3) heading, not ## (level-2)."
+        },
+        "rules": "P2"
+      },
+      "feedback": {
+        "correct": "Exemption analysis correct: identifies seasonal flu as NOT auto-exempt; Med/Surg fails Prong 3 (on-call list not fully exhausted); verbatim AFL-23-27 on-call language present.",
+        "incorrect": "Check output/exemption_analysis.md: (1) must state seasonal flu is NOT automatically exempt per AFL-23-27; (2) Med/Surg violations must fail Prong 3 because on-call list was not exhausted; (3) must quote or closely paraphrase 'immediately used and subsequently exhausted the hospital's on-call list'; (4) use ### headings (not ##)."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate a two-week staffing schedule for ICU and Step-Down units, covering November 1-14, 2024 (all 14 days), in 12-hour shifts (Day and Night). Use the available nurses from `hospital_data/SVMC_nurse_roster.csv` (ICU: 8 in-house + 2 travel nurses; Step-Down: 8 nurses) and `hospital_data/SVMC_unit_census_oct2024.csv` for estimated patient counts. Write `output/schedule_icu_stepdown.csv` with columns: `date`, `shift`, `unit`, `nurse_id`, `patient_count`, `ratio_computed`. All ICU ratio_computed must be ≤ 2.00; all Step-Down ratio_computed must be ≤ 3.00. The schedule must include entries for all 14 days (2024-11-01 through 2024-11-14) for both units — a partial schedule covering fewer days does not satisfy this requirement. (P3: CSV UTF-8, dates YYYY-MM-DD, ratio two decimal places.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/schedule_icu_stepdown.csv",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): CSV UTF-8, date YYYY-MM-DD, ratio_computed two decimal places."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "ICU/Step-Down schedule covers all 14 days Nov 1-14 2024; all ICU ratio_computed ≤ 2.00; all Step-Down ratio_computed ≤ 3.00.",
+        "incorrect": "Check output/schedule_icu_stepdown.csv: must include all 14 days from 2024-11-01 to 2024-11-14 for both ICU and Step-Down; all ICU rows ratio_computed ≤ 2.00; all Step-Down rows ratio_computed ≤ 3.00; dates YYYY-MM-DD."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyze the past four months of Med/Surg night shifts (Jul–Oct 2024) from `hospital_data/SVMC_staffing_log_oct2024.csv`. Count all violation shifts (ratio > 1:5) and write `output/medsurg_night_analysis.json` with fields: `violation_shifts` (array of objects with shift_id, date, ratio_actual, patient_count, nurses_count), `total_violation_count` (int), `root_cause` (string, must mention FMLA/CFRA), `corrective_measures` (array of strings, must include float pool expansion and on-call list update). The union claims violations started in Oct 2023 — base your count only on data actually present in the staffing log (Jul–Oct 2024). (P4: snake_case fields, plural array names.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P4 --target output/medsurg_night_analysis.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P2/P4): Markdown sections use ### headings; JSON fields in snake_case with plural array names."
+        },
+        "rules": "P4"
+      },
+      "feedback": {
+        "correct": "Med/Surg analysis: violation count ≥ 5; root_cause mentions FMLA/CFRA; corrective_measures includes float pool and on-call list update.",
+        "incorrect": "Check output/medsurg_night_analysis.json: total_violation_count must be ≥ 5; root_cause must mention 'FMLA' or 'CFRA'; corrective_measures array must include float pool expansion and on-call list update; all fields snake_case."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate CDPH-format Staffing Log for remediation Week 1 (November 4-10, 2024) covering all six SVMC units. Write `output/cdph_staffing_log_week1.csv` with columns: `date`, `shift_start`, `shift_end`, `unit`, `nurse_id`, `license_type`, `patient_count`, `ratio`. Requirements: (1) all ratio values ≤ legal maximum for each unit; (2) license_type must be one of: RN, LVN, PT; (3) PT license type is only valid in the Psychiatric unit; (4) when a Charge Nurse is listed performing admin duties, their patient_count = 0 and their row should be present but not counted in ratio. (P3: CSV UTF-8, dates YYYY-MM-DD, ratio two decimal places.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/cdph_staffing_log_week1.csv",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): CSV UTF-8, dates YYYY-MM-DD, ratio field two decimal places."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "CDPH Week 1 log generated: all ratios within legal limits; license_type valid values only; PT only in Psychiatric; Charge Nurse admin rows have patient_count=0.",
+        "incorrect": "Check output/cdph_staffing_log_week1.csv: all ratio values must be ≤ legal max for each unit; license_type ∈ {RN, LVN, PT}; PT only in Psychiatric unit; Charge Nurse admin duty rows have patient_count=0."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": ["upd1_sessions", "upd1_workspace"],
+      "question": "CDPH has issued a Supplemental Inspection Notice (see `communications/cdph_supplemental_inspection_jan2026.txt` and `hospital_data/SVMC_telemetry_violations_dec2025_jan2026.csv`). Integrate the new Telemetry violations into a revised penalty assessment. Write `output/penalty_assessment_v2.json` with fields: `all_violations` (array), `total_violations_count` (int), `pre_sb596_count` (int — violations before 2026-01-01), `post_sb596_count` (int — violations on/after 2026-01-01, each day separate), `total_pre_sb596_penalty` (int, USD), `total_post_sb596_penalty` (int, USD), `grand_total_penalty` (int). Note: post-2026-01-01 Telemetry violations each count as a separate violation under SB 596 (not as one 'inspection finding'). IMPORTANT: pre_sb596_count must include ALL pre-SB596 violations: the October 2024 violations (13 individual shifts) PLUS the December 2025 Telemetry violations that occurred before 2026-01-01. Count every individual violation shift, not just inspection events. (P1: integer USD.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target output/penalty_assessment_v2.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P4): integer USD amounts; snake_case fields; plural array names."
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "Revised penalty: pre_sb596_count=17 (13 Oct shifts + 4 Dec-Tel shifts before 2026-01-01); post_sb596_count=7 (Jan 2-8 daily); grand_total_penalty=255000.",
+        "incorrect": "Check output/penalty_assessment_v2.json: pre_sb596_count must be 17 (13 Oct-2024 shifts + 4 Dec-2025 Telemetry pre-SB596); post_sb596_count must be 7 (Jan 2-8 2026 daily); grand_total_penalty must be 255000 ($45k pre + $210k post)."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Audit the current on-call list (`hospital_data/SVMC_on_call_list_current.csv`) against SB 596's revised definition of 'on-call list': only nurses formally scheduled as on-call for that specific shift and unit, OR nurses in a regularly scheduled float pool. Write `output/oncall_audit.json` with fields: `compliant_nurses` (array of nurse_ids meeting the SB 596 definition), `non_compliant_nurses` (array of nurse_ids that were informally contacted but are NOT on the formal on-call roster), `gap_count` (int, number of units with fewer than 2 formal on-call nurses), `recommendation` (string, ≤ 150 chars, plain text). WARNING: Do NOT use the archived on-call list `SVMC_on_call_list_v2023-10_ARCHIVED.csv` — it is obsolete. Using the old list would give incorrect results. (P4: snake_case, plural arrays; P5: recommendation ≤ 150 chars.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4,P5 --target output/oncall_audit.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P4/P5): snake_case fields; plural array names; recommendation must be plain text ≤ 150 chars, no nested JSON."
+        },
+        "rules": "P4,P5"
+      },
+      "feedback": {
+        "correct": "On-call audit using current list (not archived): compliant_nurses are those on formal float_pool or scheduled_on_call; recommendation references SB 596 on-call definition.",
+        "incorrect": "Check output/oncall_audit.json: must use SVMC_on_call_list_current.csv (not v2023-10 archive); compliant_nurses must be those with on_call_type in {float_pool, scheduled_on_call}; recommendation must reference SB 596; recommendation ≤ 150 chars."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": ["upd2_sessions", "upd2_workspace"],
+      "question": "The Union Settlement Agreement has arrived (see `communications/union_settlement_memorandum.txt` and `hospital_data/SVMC_icu_newly_discovered_violations.csv`). Apply the settlement terms to produce the FINAL violation ledger. The settlement WITHDRAWS 4 Telemetry violations from the supplemental inspection (SH-TEL-U1-002, SH-TEL-U1-003, SH-TEL-U1-004, SH-TEL-U1-005) AND adds 2 new ICU violations. This is a SUPERSEDE: do NOT simply add the new violations to the U1 total — remove the 4 Telemetry violations first. Write `output/violation_ledger_final.json` with fields: `violations` (array, each entry has unit/date/shift_id/ratio_actual/legal_max), `total_count` (int), `superseded_count` (int, how many were withdrawn), `newly_added_count` (int). IMPORTANT: The `violations` array must list each individual violation shift as a separate entry — do NOT group multiple violations into a single aggregate row. The total_count must reflect all individual shifts: 13 Oct-2024 violations + (11 - 4) remaining Telemetry + 2 new ICU = 22 total. (P4: snake_case, plural arrays.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4 --target output/violation_ledger_final.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P4): snake_case field names; plural array names."
+        },
+        "rules": "P4"
+      },
+      "feedback": {
+        "correct": "Final ledger: superseded_count=4; newly_added_count=2; total_count=22 (13 Oct + 7 remaining Tel + 2 ICU); each violation is a distinct row (no aggregated group entries).",
+        "incorrect": "Check output/violation_ledger_final.json: superseded_count=4; newly_added_count=2; total_count must be 22 (13+7+2); violations array must have 22 individual shift entries — do not aggregate Oct-2024 violations into one row; each entry needs unit/date/shift_id fields."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Using the final violation ledger from Q11, recalculate the total penalty. Separate violations by date (pre-2026-01-01 vs. post-2026-01-01). Write `output/penalty_final.json` with fields: `pre_2026_violations` (array of violation entries), `post_2026_violations` (array), `pre_2026_total` (int, USD), `post_2026_total` (int, each day counted separately), `grand_total` (int). The grand_total will be LESS than Q9's grand_total because 4 Telemetry violations were withdrawn. (P1: integer USD; P4: snake_case.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target output/penalty_final.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P4): integer USD; snake_case; plural array names."
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "Final penalty: grand_total is less than Q9 total; post_2026_total reflects daily violations; pre/post split correct.",
+        "incorrect": "Check output/penalty_final.json: grand_total must be LESS than Q9 grand_total (4 violations removed); post_2026_violations must reflect the remaining post-SB596 daily violations; pre_2026_total + post_2026_total must equal grand_total."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Conduct a Joint Commission NPG 12 compliance gap analysis for SVMC. Read `regulations/JC_NPG12_Health_Professional_Resource_Management.txt` and assess SVMC's current status against each EP. Write `output/npg12_gap_analysis.json` with field `elements_of_performance` (array), each entry having: `ep_id` (string, exact EP identifier from the document), `requirement` (string, brief description), `svmc_current_status` (string: Compliant/Partially Compliant/Non-Compliant), `gap` (string), `action_required` (string, ≤ 150 chars). Must include EP NPG.12.02.01 EP4 (24/7 RN oversight) and NPG.12.06.01 EP1 (QAPI integration). The effective_date must be captured. Minimum 8 EP entries — NPG 12 has multiple EPs across NPG.12.01, NPG.12.02, and NPG.12.06 standards; a thorough gap analysis must address at least 8. Every EP entry must have a non-empty action_required field. (P4: snake_case; P5: action_required ≤ 150 chars.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4,P5 --target output/npg12_gap_analysis.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P4/P5): snake_case fields; action_required plain text ≤ 150 chars, no nested JSON."
+        },
+        "rules": "P4,P5"
+      },
+      "feedback": {
+        "correct": "NPG 12 gap analysis: ≥ 8 EP entries; includes NPG.12.02.01 EP4 and NPG.12.06.01 EP1; effective_date 2026-01-01; every entry has action_required.",
+        "incorrect": "Check output/npg12_gap_analysis.json: must have ≥ 8 entries in elements_of_performance (not just 6); must include ep_id with 'NPG.12.02.01' and EP4; must include ep_id with 'NPG.12.06.01'; effective_date '2026-01-01' must appear; every EP entry needs a non-empty action_required field."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce a comparison report of California vs. Oregon nurse staffing ratios. Read both `regulations/CA_Title22_§70217_full.txt` and `regulations/OR_HB2697_enrolled.txt`. Write `output/ca_vs_or_comparison.json` with field `units` (array), each entry having: `unit` (string), `ca_ratio` (int, max patients per CA nurse), `or_ratio_2024` (int, OR Phase 1 max patients), `or_ratio_2026` (int, OR Phase 2 max patients), `or_stricter_by_2026` (bool). Also include top-level fields: `or_penalty_max_usd` (int) and `ca_first_violation_usd` (int). (Someone in a review meeting suggested OR and CA would be identical in 2026 — check if this is true for Med/Surg.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target output/ca_vs_or_comparison.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P4): integer USD; snake_case; plural array names."
+        },
+        "rules": "P1,P4"
+      },
+      "feedback": {
+        "correct": "CA vs OR comparison: ICU both=2; Med/Surg CA=5, OR 2024=5, OR 2026=4; or_stricter_by_2026=true for Med/Surg; or_penalty_max_usd=5000; ca_first_violation_usd=15000.",
+        "incorrect": "Check output/ca_vs_or_comparison.json: ICU ca_ratio=2, or_ratio_2024=2, or_ratio_2026=2; Med/Surg ca_ratio=5, or_ratio_2024=5, or_ratio_2026=4, or_stricter_by_2026=true; or_penalty_max_usd=5000; ca_first_violation_usd=15000."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate CDPH-format Staffing Log for remediation Week 2 (November 11-17, 2024). This week must reflect the Update 2 requirement: the ICU float pool must include at least 3 ICU-certified nurses (see `reports/float_pool_requirement_updated.txt`). Write `output/cdph_staffing_log_week2.csv` with the same schema as Q8 (date, shift_start, shift_end, unit, nurse_id, license_type, patient_count, ratio). All units must show zero ratio violations (all ratio ≤ legal maximum). The ICU section must show at least 3 distinct nurse_ids from the float pool for at least one shift. (P3: CSV UTF-8, dates YYYY-MM-DD, ratio two decimal places.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/cdph_staffing_log_week2.csv",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): CSV UTF-8, dates YYYY-MM-DD, ratio two decimal places."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Week 2 log: all ratios compliant; ICU shows ≥ 3 float pool nurses per shift; no violations.",
+        "incorrect": "Check output/cdph_staffing_log_week2.csv: all ratio values ≤ legal max for unit; ICU section must have at least 3 distinct nurse_ids from float pool (per Update 2 requirement); zero ratio violations in any unit."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate the CDPH submission document package manifest. Write `output/submission_manifest.json` with field `files` (array), each entry having: `path` (string, relative to workspace/output/), `description` (string), `sha256` (string, the actual SHA-256 hex digest of the file), `size_bytes` (int). The manifest MUST include at least these four files: `cdph_staffing_log_week1.csv`, `cdph_staffing_log_week2.csv`, `violation_ledger_final.json`, `penalty_final.json`. Each sha256 must be the ACTUAL hash of the file content — compute it, do not guess. (P4: snake_case; P5: description ≤ 150 chars each.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4,P5 --target output/submission_manifest.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P4/P5): snake_case fields; description plain text ≤ 150 chars, no nested JSON."
+        },
+        "rules": "P4,P5"
+      },
+      "feedback": {
+        "correct": "Manifest includes all 4 required files; sha256 hashes match actual file content.",
+        "incorrect": "Check output/submission_manifest.json: must include entries for cdph_staffing_log_week1.csv, cdph_staffing_log_week2.csv, violation_ledger_final.json, penalty_final.json; sha256 for each must match actual SHA-256 of the file bytes."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Final verification. Read `output/submission_manifest.json` and for each file listed, recompute the SHA-256 hash of the actual file and verify it matches the manifest. Write `output/verification_report.txt`. If all hashes match, the FIRST LINE of the file must be exactly `VERIFIED:<sha256>` where <sha256> is the 64-character lowercase hex SHA-256 of the manifest file itself (`output/submission_manifest.json`). If any hash fails, write `FAILED:<filename>:<reason>` for that file. Nothing else on the first line. (You must actually run the hash computation — a placeholder or guessed hash will not match.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q17.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Verification report: first line is VERIFIED:<64-char hex>, and hash matches recomputed SHA-256 of submission_manifest.json.",
+        "incorrect": "Check output/verification_report.txt: first line must match ^VERIFIED:[a-f0-9]{64}$ where the hash equals the local SHA-256 of output/submission_manifest.json (recomputed by validator — cannot be guessed)."
+      }
+    }
+  ]
+}

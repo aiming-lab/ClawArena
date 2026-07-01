@@ -1,0 +1,391 @@
+{
+  "id": "eng4",
+  "title": "数据库慢查询与索引优化",
+  "sources": [
+    {
+      "url": "https://www.postgresql.org/docs/current/using-explain.html",
+      "title": "PostgreSQL 18 Docs: Using EXPLAIN",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "成本格式 cost=startup..total，单位为磁盘页读取（seq_page_cost=1.0）；ANALYZE 后输出 actual time=ms..ms rows=N loops=M；节点类型含 Seq Scan/Index Scan/Bitmap Index Scan/Hash Join/Nested Loop 等；Seq Scan 成本公式：pages×1.0 + rows×0.01；执行计划包含 Planning Time 和 Execution Time（单位 ms）"
+    },
+    {
+      "url": "https://www.postgresql.org/docs/current/sql-explain.html",
+      "title": "PostgreSQL 18 Docs: EXPLAIN Command Reference",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "EXPLAIN FORMAT JSON 顶层字段：Node Type、Startup Cost、Total Cost、Plan Rows、Plan Width；ANALYZE 后额外含 Actual Rows、Actual Total Time；OPTIONS 含 ANALYZE(default FALSE)、BUFFERS(default FALSE)、COSTS(default TRUE)、FORMAT {TEXT|XML|JSON|YAML}(default TEXT)、SETTINGS(default FALSE)、GENERIC_PLAN(default FALSE)"
+    },
+    {
+      "url": "https://www.postgresql.org/docs/current/indexes-types.html",
+      "title": "PostgreSQL 18 Docs: Index Types",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "PostgreSQL 提供 7 种索引类型：B-Tree(默认，支持 <<==>=>)，Hash(仅支持 = 等值)，GiST(空间查询/最近邻)，SP-GiST(非平衡结构)，GIN(反转索引，多值列/数组/全文搜索)，BRIN(块范围索引，适合大表物理有序列)，Bloom(扩展)；Hash 索引不支持范围查询"
+    },
+    {
+      "url": "https://www.postgresql.org/docs/current/indexes-partial.html",
+      "title": "PostgreSQL 18 Docs: Partial Indexes",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "Partial Index 通过 WHERE 子句限定索引范围；官方示例：CREATE INDEX orders_unbilled_index ON orders(order_nr) WHERE billed IS NOT TRUE；避免对频繁出现值（>5%行）建索引；谓词必须与查询 WHERE 条件精确匹配才会被使用"
+    },
+    {
+      "url": "https://www.postgresql.org/docs/current/indexes-index-only-scans.html",
+      "title": "PostgreSQL 18 Docs: Index-Only Scans and Covering Indexes",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "INCLUDE 子句语法：CREATE INDEX tab_x_y ON tab(x) INCLUDE (y)；仅 B-Tree、GiST、SP-GiST 支持 INCLUDE；GIN 不支持 Index-Only Scan；需要 visibility map 全可见才能避免 heap fetch；Expressions 不支持作为 INCLUDE 列"
+    },
+    {
+      "url": "https://www.postgresql.org/docs/current/pgstatstatements.html",
+      "title": "PostgreSQL 18 Docs: pg_stat_statements",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "pg_stat_statements 视图共 61 列；关键列：queryid(bigint)、query(text)、calls(bigint)、total_exec_time(double precision ms)、mean_exec_time(double precision ms)、rows(bigint)、shared_blks_hit(bigint)、shared_blks_read(bigint)；配置：pg_stat_statements.max 默认 5000，pg_stat_statements.track 默认 'top'，pg_stat_statements.save 默认 on"
+    },
+    {
+      "url": "https://www.postgresql.org/docs/current/auto-explain.html",
+      "title": "PostgreSQL 18 Docs: auto_explain",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "auto_explain.log_min_duration 默认 -1（禁用），单位 ms，0 表示记录所有；auto_explain.log_analyze 默认 off；auto_explain.log_buffers 默认 off；auto_explain.log_format 默认 text；auto_explain.sample_rate 默认 1（记录所有慢查询）"
+    },
+    {
+      "url": "https://www.postgresql.org/docs/current/planner-stats.html",
+      "title": "PostgreSQL 18 Docs: Statistics Used by the Planner",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "pg_stats 视图关键字段：n_distinct（正值为实际个数，负值为占行数比例）、correlation（物理与逻辑顺序相关度，影响 I/O 估算）、most_common_vals（高频值数组）、histogram_bounds（分位值边界）；default_statistics_target 默认 100；CREATE STATISTICS 支持 dependencies/ndistinct/mcv 三种多列统计类型"
+    },
+    {
+      "url": "https://www.postgresql.org/docs/current/runtime-config-query.html",
+      "title": "PostgreSQL 18 Docs: Query Planning Parameters",
+      "type": "official_doc",
+      "verified": true,
+      "key_facts": "seq_page_cost=1.0，random_page_cost=4.0，cpu_tuple_cost=0.01，cpu_index_tuple_cost=0.005，cpu_operator_cost=0.0025，effective_cache_size=4GB；enable_seqscan/enable_indexscan/enable_bitmapscan 均默认 on；default_statistics_target 默认 100"
+    },
+    {
+      "url": "https://render.com/blog/postgresql-slow-query-to-fast-via-stats",
+      "title": "Render Blog: PostgreSQL slow query to fast via stats",
+      "type": "postmortem",
+      "verified": true,
+      "key_facts": "真实案例：postgres_dbs(~10万行) JOIN events(~9000万行)；Merge Join 切换到 Hash Join 导致扫描 7900 万无关行；通过 CREATE STATISTICS ON (data->>'serviceId') 后从 2.5 分钟优化到 <1ms (LIMIT 1) / ~650ms (全量)；工具使用：PEV2 可视化、pg_stats 和 pg_stats_ext"
+    },
+    {
+      "url": "https://www.depesz.com/2024/10/28/case-study-optimization-of-weirdly-picked-bad-plan/",
+      "title": "depesz: Case study optimization of weirdly picked bad plan",
+      "type": "postmortem",
+      "verified": true,
+      "key_facts": "PostgreSQL 14 案例：SELECT max(cached_due_date) 在主库毫秒内完成但在副本 3 分钟后超时；问题原因：规划器选择了 Index Scan Backward using index_voluntaries_on_cached_due_date，成本估算 0.58..39905284.07；解决方案：CREATE INDEX depesz_bandaid ON voluntaries(mutilation_id, cached_due_date) WHERE workflow_state <> 'deleted'；优化后执行时间 0.028ms，成本 0.62，规划时间从 0.321ms 降至 0.193ms"
+    },
+    {
+      "url": "https://medium.com/cubbit/optimizing-postgresql-queries-12-indexing-pitfalls-and-how-we-fixed-them-81c25615a84e",
+      "title": "Cubbit: 12 PostgreSQL Indexing Pitfalls",
+      "type": "postmortem",
+      "verified": true,
+      "key_facts": "12 个真实坑点包括：Partial Index WHERE 不完整不被使用；复合索引列顺序错误（等值列先于范围列）；LIKE 查询因 en_US.UTF-8 collation 不走索引（需改为 'C' collation）；ORDER BY DESC 需建降序索引；INCLUDE 子句避免 heap fetch；外键缺索引导致 DELETE 慢（外键约束触发全表扫描耗时 10244ms）；VACUUM INDEX_CLEANUP 清理 index bloat"
+    },
+    {
+      "url": "https://stormatics.tech/blogs/fixing-orm-slowness-by-80-with-strategic-postgresql-indexing",
+      "title": "Stormatics: Fixing ORM slowness 80% with strategic PostgreSQL indexing",
+      "type": "postmortem",
+      "verified": true,
+      "key_facts": "ORM 场景：外键列缺失索引导致 sequential scans 超过 4100 万次；通过 pg_stat_user_tables/pg_stat_user_indexes/pg_constraint/pg_index 视图诊断；CREATE INDEX CONCURRENTLY idx_orders_customer_id ON orders_main(customer_id)；优化效果：Sequential Scans ↓87%，查询时间 ↓60-80%，Disk Read IOPS ↓70%"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "A1: seq_page_cost 默认值",
+      "value": "1.0",
+      "source_url": "https://www.postgresql.org/docs/current/runtime-config-query.html",
+      "note": "顺序页读取基准成本，所有其他成本参数相对于此值计算"
+    },
+    {
+      "name": "A2: random_page_cost 默认值",
+      "value": "4.0",
+      "source_url": "https://www.postgresql.org/docs/current/runtime-config-query.html",
+      "note": "随机页读取成本；SSD 环境建议调为 1.1"
+    },
+    {
+      "name": "A3: cpu_tuple_cost 默认值",
+      "value": "0.01",
+      "source_url": "https://www.postgresql.org/docs/current/runtime-config-query.html",
+      "note": "每行 CPU 处理成本"
+    },
+    {
+      "name": "A4: cpu_index_tuple_cost 默认值",
+      "value": "0.005",
+      "source_url": "https://www.postgresql.org/docs/current/runtime-config-query.html",
+      "note": "每条索引项 CPU 处理成本"
+    },
+    {
+      "name": "A5: default_statistics_target 默认值",
+      "value": "100",
+      "source_url": "https://www.postgresql.org/docs/current/runtime-config-query.html",
+      "note": "ANALYZE 统计采样桶数，影响规划器估算精度"
+    },
+    {
+      "name": "A6: pg_stat_statements.max 默认值",
+      "value": "5000",
+      "source_url": "https://www.postgresql.org/docs/current/pgstatstatements.html",
+      "note": "pg_stat_statements 最大追踪语句数，需 server 重启才能修改"
+    },
+    {
+      "name": "A7: pg_stat_statements.track 默认值",
+      "value": "top",
+      "source_url": "https://www.postgresql.org/docs/current/pgstatstatements.html",
+      "note": "仅追踪顶层语句；改为 all 可追踪函数内嵌套语句"
+    },
+    {
+      "name": "A8: auto_explain.log_min_duration 默认值",
+      "value": "-1",
+      "source_url": "https://www.postgresql.org/docs/current/auto-explain.html",
+      "note": "-1 表示禁用；单位毫秒；设为 0 记录所有语句执行计划"
+    },
+    {
+      "name": "A9: Seq Scan 成本计算公式示例",
+      "value": "345 pages × 1.0 + 10000 rows × 0.01 = 445.00",
+      "source_url": "https://www.postgresql.org/docs/current/using-explain.html",
+      "note": "官方文档 tenk1 表示例值，用于验证成本计算理解"
+    },
+    {
+      "name": "A10: EXPLAIN ANALYZE 时间单位",
+      "value": "毫秒（milliseconds）",
+      "source_url": "https://www.postgresql.org/docs/current/using-explain.html",
+      "note": "actual time=start_ms..end_ms，loops 字段为执行次数，总时间需乘以 loops"
+    },
+    {
+      "name": "A11: INCLUDE 子句支持的索引类型",
+      "value": "B-Tree、GiST、SP-GiST（GIN 不支持）",
+      "source_url": "https://www.postgresql.org/docs/current/indexes-index-only-scans.html",
+      "note": "GIN 索引无法进行 Index-Only Scan"
+    },
+    {
+      "name": "A12: depesz 案例优化后执行时间",
+      "value": "0.028ms",
+      "source_url": "https://www.depesz.com/2024/10/28/case-study-optimization-of-weirdly-picked-bad-plan/",
+      "note": "从 3+ 分钟优化到 0.028ms，通过复合部分索引实现"
+    },
+    {
+      "name": "A13: depesz 案例成本估算对比",
+      "value": "优化前 8473.04，优化后 0.62",
+      "source_url": "https://www.depesz.com/2024/10/28/case-study-optimization-of-weirdly-picked-bad-plan/",
+      "note": "Total Cost 从 8473.04 降至 0.62，降幅 99.99%"
+    },
+    {
+      "name": "A14: Hash 索引支持的操作符",
+      "value": "仅 = （等值比较）",
+      "source_url": "https://www.postgresql.org/docs/current/indexes-types.html",
+      "note": "Hash 索引不支持范围查询（<、>、BETWEEN）"
+    },
+    {
+      "name": "A15: Partial Index 官方示例（orders 表）",
+      "value": "CREATE INDEX orders_unbilled_index ON orders(order_nr) WHERE billed IS NOT TRUE",
+      "source_url": "https://www.postgresql.org/docs/current/indexes-partial.html",
+      "note": "官方文档标准示例，用于未结算订单查询优化"
+    },
+    {
+      "name": "A16: EXPLAIN FORMAT JSON 顶层字段集合",
+      "value": "Node Type, Startup Cost, Total Cost, Plan Rows, Plan Width",
+      "source_url": "https://www.postgresql.org/docs/current/sql-explain.html",
+      "note": "加 ANALYZE 后含 Actual Rows, Actual Total Time, Actual Startup Time, Loops"
+    },
+    {
+      "name": "A17: pg_stats n_distinct 语义",
+      "value": "正值=实际唯一值数量；负值=占表行数比例（如 -0.23 表示约 23% 行各不同）",
+      "source_url": "https://www.postgresql.org/docs/current/planner-stats.html",
+      "note": "V5 诱饵设计来源：bot 摘要声称 n_distinct=-1，实际为 -0.23"
+    },
+    {
+      "name": "A18: Stormatics ORM 优化效果数值",
+      "value": "Sequential Scans ↓87%，Query Time ↓60-80%，Disk Read IOPS ↓70%",
+      "source_url": "https://stormatics.tech/blogs/fixing-orm-slowness-by-80-with-strategic-postgresql-indexing",
+      "note": "通过 CREATE INDEX CONCURRENTLY 修复外键缺失索引问题"
+    },
+    {
+      "name": "A19: Cubbit 案例 collation 问题",
+      "value": "LIKE 查询在 en_US.UTF-8 collation 下不走 B-Tree 索引；改为 C collation 可修复",
+      "source_url": "https://medium.com/cubbit/optimizing-postgresql-queries-12-indexing-pitfalls-and-how-we-fixed-them-81c25615a84e",
+      "note": "复合索引 (user_id, created_at DESC) 对应 ORDER BY DESC 查询"
+    },
+    {
+      "name": "A20: Render 案例 CREATE STATISTICS 语法",
+      "value": "CREATE STATISTICS ON (data->>'serviceId') FROM events",
+      "source_url": "https://render.com/blog/postgresql-slow-query-to-fast-via-stats",
+      "note": "用于修复 JSON 列的多列依赖统计缺失问题"
+    }
+  ],
+  "difficulty_vectors": [
+    "V1@q3",
+    "V2@q8",
+    "V2@q10",
+    "V3@q4",
+    "V3@q9",
+    "V3@q11",
+    "V3@q13",
+    "V4@q2",
+    "V4@q7",
+    "V4@q12",
+    "V4@q14",
+    "V5@q6",
+    "V6@q5",
+    "V7@q14",
+    "V8@q1",
+    "V8@q2",
+    "V8@q7",
+    "V8@q12",
+    "V9@q3",
+    "V9@q5",
+    "V9@q11",
+    "V10@q10"
+  ],
+  "workspace_plan": {
+    "total_tokens_estimate": 115000,
+    "files": [
+      {
+        "path": "db/schema.sql",
+        "size_kb": 12,
+        "description": "8 张表完整 DDL（events/orders/notifications/users/products/categories/audit_log/service_config）"
+      },
+      {
+        "path": "db/seed_stats.sql",
+        "size_kb": 15,
+        "description": "pg_stat_statements 快照插入脚本，含 20 条慢查询记录（mean_exec_time > 500ms）"
+      },
+      {
+        "path": "db/current_indexes.sql",
+        "size_kb": 10,
+        "description": "当前已有索引定义，含部分缺失关键索引"
+      },
+      {
+        "path": "reports/slow_query_report_week1.md",
+        "size_kb": 25,
+        "description": "第 1 周慢查询分析报告，含伪 EXPLAIN 文本输出"
+      },
+      {
+        "path": "reports/explain_plans/query_00{1-9}_before.json",
+        "size_kb": 90,
+        "description": "9 条慢查询 EXPLAIN FORMAT JSON 输出（优化前），各约 10KB"
+      },
+      {
+        "path": "reports/pgstatstatements_snapshot.csv",
+        "size_kb": 30,
+        "description": "pg_stat_statements 视图全量快照，含 61 列 × 50 行"
+      },
+      {
+        "path": "configs/postgresql.conf",
+        "size_kb": 8,
+        "description": "当前 PostgreSQL 配置，含 work_mem/random_page_cost 等关键参数"
+      },
+      {
+        "path": "configs/auto_explain.conf",
+        "size_kb": 2,
+        "description": "auto_explain 扩展配置片段"
+      },
+      {
+        "path": "sessions/slack_dba_channel.md",
+        "size_kb": 20,
+        "description": "Slack #dba-alerts 群聊历史，含告警 + 讨论"
+      },
+      {
+        "path": "sessions/slack_dm_li_wei_sreedhar.md",
+        "size_kb": 15,
+        "description": "Li Wei 与 Sreedhar 的 DM，含 V1 错误建议（Hash Index）和 V5 诱饵"
+      },
+      {
+        "path": "sessions/email_thread_cto_request.md",
+        "size_kb": 8,
+        "description": "CTO 加急优化邮件线程"
+      },
+      {
+        "path": "sessions/feishu_oncall_log.md",
+        "size_kb": 12,
+        "description": "飞书值班记录，含 tool_call 行为痕迹"
+      },
+      {
+        "path": "scripts/find_slow_queries.sql",
+        "size_kb": 3,
+        "description": "从 pg_stat_statements 筛选慢查询脚本"
+      },
+      {
+        "path": "scripts/index_usage_check.sql",
+        "size_kb": 3,
+        "description": "检查索引使用率与冗余索引脚本"
+      },
+      {
+        "path": "scripts/vacuum_analyze_report.sh",
+        "size_kb": 2,
+        "description": "统计各表 last_autovacuum 与 n_dead_tup"
+      },
+      {
+        "path": "archive/old_optimization_plan_v0.md",
+        "size_kb": 10,
+        "description": "V6 红鲱鱼：旧版优化方案（已归档但未明确废弃，含错误的 Hash Index 建议）"
+      }
+    ]
+  },
+  "updates": [
+    {
+      "id": "update1",
+      "inject_after_round": "Q6",
+      "size_kb": 120,
+      "supersedes": null,
+      "description": "注入 9 份 after EXPLAIN JSON + week2 报告 + 新消息，引入 Query-010~012",
+      "files_added": [
+        "reports/explain_plans/query_00{1-9}_after.json",
+        "reports/slow_query_report_week2.md",
+        "sessions/slack_update1_messages.md",
+        "sessions/email_cto_followup.md"
+      ]
+    },
+    {
+      "id": "update2",
+      "inject_after_round": "Q9",
+      "size_kb": 130,
+      "supersedes": "update1 中 CTO 邮件的 work_mem=256MB 建议",
+      "description": "架构师邮件明确撤销 work_mem 修改方案，改为 CREATE STATISTICS 方案（supersede）",
+      "files_added": [
+        "reports/slow_query_report_week3.md",
+        "configs/recommended_settings_v2.conf",
+        "sessions/email_architect_supersede.md",
+        "sessions/feishu_update2_messages.md",
+        "reports/explain_plans/query_010_before.json",
+        "reports/explain_plans/query_011_before.json",
+        "reports/explain_plans/query_012_before.json"
+      ]
+    }
+  ],
+  "preferences": [
+    {
+      "id": "P1",
+      "rule": "所有工作产物文件写入 work/ 目录，不得写入其他目录",
+      "inject": "explicit_before_Q1",
+      "silent_check_rounds": ["Q13"]
+    },
+    {
+      "id": "P2",
+      "rule": "JSON 文件中所有字段名使用 snake_case（不使用 camelCase 或 PascalCase）",
+      "inject": "explicit_before_Q2",
+      "silent_check_rounds": ["Q7", "Q12"]
+    },
+    {
+      "id": "P3",
+      "rule": "推荐索引时 rationale 字段必须引用具体文档来源（URL 或章节号）",
+      "inject": "feedback_after_Q3",
+      "silent_check_rounds": ["Q9"]
+    },
+    {
+      "id": "P4",
+      "rule": "生产环境 CREATE INDEX 语句必须使用 CONCURRENTLY 关键词",
+      "inject": "explicit_before_Q4",
+      "silent_check_rounds": ["Q11"]
+    },
+    {
+      "id": "P5",
+      "rule": "SQL 文件以 q{N}_ 前缀命名（如 q011_partial_index.sql）",
+      "inject": "feedback_after_Q9",
+      "silent_check_rounds": ["Q13"]
+    }
+  ]
+}

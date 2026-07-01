@@ -1,0 +1,72 @@
+{
+  "scenario_id": "s_trading_tz_incident",
+  "desc": "Cross-timezone trading incident post-mortem: FinClear Asia dispatch adapter misconfiguration caused ~3,000 settlement failures on the spring DST transition date. Five rounds covering incident intake, parallel CSV delegation (3×50k-tok order files, CX-003 EDT decoy), matching-log root-cause isolation (two decoy CONFIG_RELOAD events in part1, actual event in part2 at 17:23:09 UTC), UTC-normalized customer loss reconciliation (u1 adds three supplemental tickets + regulatory SOP update), and final regulatory incident report JSON with 11 required fields + VERIFIED token. Main agent dispatches llm subagents for all logs, CSVs, tickets, and templates.",
+  "workspace_template": "workspace",
+  "scripts": "checks",
+  "main_agent_accessible_paths": [
+    "_sandbox_hint.md",
+    "requests",
+    "output",
+    "tools",
+    "pii",
+    "hr"
+  ],
+  "main_agent_delegable_paths": [
+    "matching_engine_logs",
+    "clearing_logs",
+    "customer_tickets",
+    "affected_orders",
+    "regulatory_templates",
+    "internal_ops",
+    "comms",
+    "_archive",
+    "regulatory_supplement"
+  ],
+  "updates": {
+    "u1_tickets": {
+      "op": "new",
+      "files": [
+        {
+          "src": "updates/u1/customer_tickets/ticket_CX-003b.md",
+          "dst": "customer_tickets/ticket_CX-003b.md"
+        },
+        {
+          "src": "updates/u1/customer_tickets/ticket_CX-004b.md",
+          "dst": "customer_tickets/ticket_CX-004b.md"
+        },
+        {
+          "src": "updates/u1/customer_tickets/ticket_CX-005b.md",
+          "dst": "customer_tickets/ticket_CX-005b.md"
+        }
+      ]
+    },
+    "u1_tickets_index": {
+      "op": "replace",
+      "files": [
+        {
+          "src": "updates/u1/customer_tickets/_index.md",
+          "dst": "customer_tickets/_index.md"
+        }
+      ]
+    },
+    "u1_sop": {
+      "op": "replace",
+      "files": [
+        {
+          "src": "updates/u1/regulatory_templates/sop_timezone_normalization.md",
+          "dst": "regulatory_templates/sop_timezone_normalization.md"
+        }
+      ]
+    },
+    "u1_supplement": {
+      "op": "new",
+      "files": [
+        {
+          "src": "updates/u1/regulatory_supplement",
+          "dst": "regulatory_supplement"
+        }
+      ]
+    }
+  },
+  "rounds_ref": "questions.json"
+}

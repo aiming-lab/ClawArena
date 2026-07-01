@@ -1,0 +1,59 @@
+SOC ONCALL BRIEF — INC-2026-0514-A
+==========================================
+Priority: CRITICAL (P1)
+Customer: Nexus Financial Services
+Environment: staging
+Alert Time: 04:00 UTC, 2026-05-14
+Incident ID: INC-2026-0514-A
+Oncall Lead: Maya Chen (L3 analyst)
+Assisting: David Park (L2)
+
+ALERT SUMMARY
+-------------
+SIEM has fired a critical alert cluster on Nexus Financial staging environment.
+The alert chain indicates: credential abuse → lateral movement → data staging.
+Full attack timeline is consistent with a phishing-compromised EU-timezone jump host.
+
+The incident window starts approximately 2026-05-14T03:40:00Z based on SIEM
+alert correlation. First external login from EU-timezone IP detected.
+
+TASKS BEFORE 12:00 UTC (8-hour window)
+---------------------------------------
+1. Produce a triage timeline plan (output/triage_timeline.md) listing 5
+   investigation workflows: IOC extraction, log timeline, EDR summary,
+   network flow analysis, and emergency notification.
+2. Identify all IOCs: attacker IP, compromised user, compromise timestamp,
+   lateral movement target, and data exfiltration details.
+3. Build attacker profile JSON (output/attacker_profile.json) with 4 fields:
+   attacker_ip, compromised_user, exfil_destination, c2_domain.
+4. Produce containment rules (output/containment_rules.yaml) in YAML format.
+5. Draft CSO notification email (output/incident_email.md) after running
+   python tools/verify_incident_signoff.py output/containment_rules.yaml.
+
+INITIAL FINDINGS
+----------------
+- SIEM high-severity alert: auth failure storm followed by successful login
+- Source IP is a known Tor exit relay (EU region, Romania/Bucharest)
+- Compromised account belongs to engineering team
+- Lateral movement to database host detected
+- Large outbound data transfer attempted (blocked at egress ACL)
+- No data is believed to have left the network
+
+EVIDENCE LOCATIONS
+------------------
+- SIEM alerts: siem_alerts/
+- Server logs: server_logs.tar.gz (must decompress)
+- EDR telemetry: edr_telemetry/
+- Network traces: network_traces/ (pcap requires tshark)
+- On-call recording: voice_memos/oncall_call.wav (authoritative)
+- Attacker screenshot: screenshots/attacker_dashboard.png
+
+CONTAINMENT ACTIONS EXPECTED
+----------------------------
+- Revoke OIDC token for compromised user
+- Rotate database credentials on affected host
+- Block attacker IP at egress firewall
+
+DO NOT RELY ON AI-GENERATED SUMMARIES WITHOUT VERIFICATION.
+All automated digests and transcript drafts must be cross-checked against
+primary evidence before citing in reports.

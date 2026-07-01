@@ -1,0 +1,98 @@
+From: sophie.devereux@artemisq.com
+To: transaction.reporting@fca.org.uk; sec-compliance@sec.gov
+Subject: MiFIR Transaction Reporting Error — ArtemisQ Capital — Field 28 DST Misconfiguration
+Date: Mon, 04 Nov 2024 09:45:00 +0000
+
+Dear FCA Transaction Reporting Team,
+
+ArtemisQ Capital is writing to notify you of a data quality issue
+identified in our MiFIR transaction reports for 2024-11-03.
+
+**Issue**: Field 28 (trading date and time) timestamps for transactions
+executed between 09:30 UTC and 22:00 UTC on 2024-11-03 were submitted
+using local Eastern time (UTC-4) instead of the required UTC format.
+This is a violation of the UTC reporting requirement described in
+FCA Market Watch 59 and RTS 22.
+
+**Root Cause**: Our AROS v4.2 routing system hardcoded a UTC offset of -4
+(EDT) which was not updated following the US Eastern DST transition on
+2024-11-03 at 02:00 local time (07:00 UTC). After the switch, the correct
+offset is -5 (EST).
+
+**Impact**: All Field 28 timestamps for the affected period are offset by
++1 hour from the correct UTC values (e.g., a transaction at 14:30:00 UTC
+was reported as 2024-11-03T14:30:00-04:00 instead of 2024-11-03T14:30:00Z).
+
+**Remediation**: We will submit corrected transaction reports within 5
+business days. We are implementing an automatic DST detection mechanism
+to prevent recurrence.
+
+We will provide a full correction report and compliance action plan to
+both regulators within 48 hours.
+
+Sincerely,
+Sophie Devereux
+Regulatory Affairs Manager, ArtemisQ Capital
+
+---
+
+From: fca-market-transaction-reporting@fca.org.uk
+To: sophie.devereux@artemisq.com
+Subject: RE: MiFIR Transaction Reporting Error — ArtemisQ Capital — Field 28 DST Misconfiguration
+Date: Tue, 05 Nov 2024 10:30:00 +0000
+
+Dear Ms. Devereux,
+
+Thank you for the prompt notification regarding ArtemisQ Capital's Field 28
+reporting error for 2024-11-03.
+
+The FCA acknowledges receipt of your notification. Please note:
+
+1. FCA Market Watch 59 clearly states that Field 28 must be reported in UTC.
+   DST transition errors are among the most common compliance failures
+   identified in our transaction reporting supervision.
+
+2. You are required to submit corrected transaction reports with the correct
+   UTC timestamps by 2024-11-12 (5 business days).
+
+3. Please provide a written remediation plan including:
+   - Root cause analysis
+   - Description of the UTC conversion fix implemented
+   - Testing procedures to prevent recurrence at future DST transitions
+
+We are treating this as a data quality issue at this stage. Failure to
+provide corrected reports by the deadline may result in formal supervisory action.
+
+Regards,
+FCA Transaction Reporting Supervision
+Financial Conduct Authority
+
+---
+
+From: sec-mkt-access@sec.gov
+To: sophie.devereux@artemisq.com; elena.vasquez@artemisq.com
+Subject: RE: MiFIR Transaction Reporting Error — Inquiry re T+1 Settlement
+Date: Tue, 05 Nov 2024 15:00:00 +0000
+
+Dear Ms. Vasquez and Ms. Devereux,
+
+The SEC Division of Trading and Markets has been made aware of ArtemisQ
+Capital's November 3, 2024 systems incident in which timezone configuration
+errors may have affected compliance with Rule 15c6-1 (T+1 settlement cycle,
+effective May 28, 2024).
+
+This communication is a PRELIMINARY INQUIRY NOTICE — not a formal
+investigation order. Please provide the following within 48 hours of receipt:
+
+1. A quantitative breakdown of affected T+1 orders, including for each:
+   - order_id
+   - expected_settlement_utc (correct, using UTC-5)
+   - actual_settlement_utc (as determined by system with UTC-4 error)
+   - price_diff_usd (price difference using end-of-day closing price basis)
+
+2. Total count of affected orders
+
+We are evaluating whether this constitutes a Rule 15c6-1 violation.
+This notice does not constitute a formal investigation.
+
+SEC Division of Trading and Markets

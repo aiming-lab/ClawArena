@@ -1,0 +1,354 @@
+{
+  "id": "sec5",
+  "desc": "MeridianPay 反欺诈交易调查 — 17 exec_check rounds, 2 updates (incl. VAMP threshold supersede), 5 preference rules P1-P5, difficulty vectors V1/V2/V5/V6/V7/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read `data/raw/README_datasets.md` and produce `output/q1_fields.json` describing the ULB Credit Card Fraud Detection dataset fields. The JSON must include: `total_transactions` (int), `fraud_count` (int), `fraud_rate` (float, exact decimal value from README), `features` (list of verbatim feature names — exactly V1 through V28 plus Time, Amount, Class; no extras), `class_values` (list of the valid integer values for the Class field), `doi` (the dataset DOI string, verbatim as it appears in the README), and `source_url` (the dataset source URL from the README).\n\n(Note: the Slack bot summary claimed fraud rate ~0.3% and suggested 'Class' has values 0-10; the internal data catalog also lists DOI as '10.1016/j.eswa.2014' (truncated).)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/q1_fields.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1 reminder: every output JSON must include top-level field schema_version set to \"1.0\"."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "ULB fields correct: 284807 total, 492 fraud, rate=0.00172, features include V1-V28/Time/Amount/Class, DOI matches.",
+        "incorrect": "Check output/q1_fields.json: total_transactions must be 284807, fraud_count=492, fraud_rate≈0.00172, features must include all V1-V28 plus Time, Amount, Class (verbatim), class_values=[0,1], doi must include the dataset DOI."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "From `data/raw/README_datasets.md`, compute and write `output/q2_stats.json` with these exact keys: `total_transactions` (int), `fraud_count` (int), `fraud_rate` (float: the exact decimal fraction from the README — use no rounding), `non_fraud_count` (int: must be the precise difference total_transactions minus fraud_count). Verify: fraud_count + non_fraud_count must equal total_transactions (arithmetic closure). The bot summary in the Slack channel mentioned ~0.5% fraud rate and total transactions of 285,000.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "ULB stats correct: 284807 total, 492 fraud, rate≈0.00172, non_fraud=284315, arithmetic closure verified.",
+        "incorrect": "Check output/q2_stats.json: total_transactions=284807, fraud_count=492, non_fraud_count=284315 (closure: 492+284315=284807), fraud_rate≈0.00172 (not 0.005 from bot)."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read `data/raw/README_datasets.md` and write `output/q3_paysim_meta.json` with PaySim dataset metadata. Required keys: `transaction_types` (list of exactly the 5 verbatim type strings from README — no more, no less), `isFlaggedFraud_threshold` (int: the system auto-flag amount threshold), `simulation_steps` (int: total simulation steps), `fraud_rate` (float: exact decimal fraction from README). Also include a `sample_case_id` field set to exactly `CASE-20260310-001` — Sam from your Feishu DM set this specific case ID as a strict requirement. Include schema_version.\n\n(Note: a colleague mentioned PaySim fraud rate is ~0.2% and has 6 transaction types including WITHDRAWAL — that is from an older dataset version; use only `README_datasets.md` for authoritative values.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target output/q3_paysim_meta.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1/P2 reminder: JSON must have schema_version=\"1.0\"; case IDs must follow CASE-YYYYMMDD-NNN format."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "PaySim metadata correct: 5 transaction types (CASH-IN/CASH-OUT/DEBIT/PAYMENT/TRANSFER verbatim), threshold=200000, 744 steps, case_id format valid.",
+        "incorrect": "Check output/q3_paysim_meta.json: transaction_types must contain all 5 verbatim strings (CASH-IN, CASH-OUT, DEBIT, PAYMENT, TRANSFER); isFlaggedFraud_threshold=200000; simulation_steps=744; sample_case_id must match CASE-YYYYMMDD-NNN pattern."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Load `data/alerts/alert_batch_001.json` and classify all high and critical priority alerts into case records. Write `output/q4_cases_created.json` with at least 3 case records. Each case must include: `case_id` (CASE-YYYYMMDD-NNN format using today's date 2026-03-10), `status` (\"open\"), `amount_usd` (formatted to exactly 2 decimal places — Sam's P4 requirement), `sla_deadline` (created_at + 3 business days), `escalation_required` (true if amount_usd ≥ 50000.00). Include schema_version.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P4 --target output/q4_cases_created.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1/P2/P4 reminder: schema_version required; case IDs must be CASE-YYYYMMDD-NNN; amount_usd must have exactly 2 decimal places."
+        },
+        "rules": "P1,P2,P4"
+      },
+      "feedback": {
+        "correct": "Cases created correctly: ≥3 records, CASE-YYYYMMDD-NNN format, amounts at 2dp, escalation_required set correctly for amounts ≥$50,000.",
+        "incorrect": "Check output/q4_cases_created.json: ≥3 case records; case_id must match CASE-20260310-NNN (or valid date + 3-digit seq); amount_usd must be exactly 2 decimal places; escalation_required=true for amount≥50000."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read `regulations/fincen_sar_requirements.md` and `data/reference/sar_form111_template.json`, then write `output/q5_sar_structure.json` documenting the SAR filing requirements. Required keys: `form_number` (exact verbatim form name — no paraphrasing), `filing_threshold_usd` (int), `standard_deadline_days` (int), `no_suspect_deadline_days` (int), `five_ws` (object with keys who/what/when/where/why, each a substantive non-empty description), `source_url` (the FinCEN FAQ URL from the regulation file). Include schema_version.\n\nMorgan from Legal Compliance confirmed in the email thread that SAR narratives must follow the five-W structure (who/what/when/where/why) — this is both FinCEN best practice and MeridianPay policy (P3). Make sure your five_ws object reflects this.\n\n(Note: the internal compliance wiki lists the SAR form as 'FinCEN SAR-111' and the standard deadline as 45 days — those are outdated. Use `fincen_sar_requirements.md` as the authoritative source.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target output/q5_sar_structure.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1/P3 reminder: schema_version required; SAR narratives must use five-W structure (who/what/when/where/why)."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "SAR structure correct: FinCEN Form 111 verbatim, threshold=$5000, 30-day standard deadline, 60-day no-suspect, five_ws all non-empty.",
+        "incorrect": "Check output/q5_sar_structure.json: form_number must be exactly 'FinCEN Form 111'; filing_threshold_usd=5000; standard_deadline_days=30; no_suspect_deadline_days=60; five_ws must have all five keys (who/what/when/where/why) non-empty."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Using the model v1 configuration in `models/fraud_model_v1_config.json` (threshold=0.5), evaluate these 3 specific alert scores and write `output/q6_risk_scores.json`: alert ALRT-20260301-0001 (score=0.72), alert ALRT-20260301-0005 (score=0.43), alert ALRT-20260301-0009 (score=0.88). For each alert, include: `alert_id`, `score`, `threshold_used` (must be 0.5 from the model config), `decision` (\"FRAUD\" if score≥threshold else \"LEGITIMATE\"). Include schema_version.\n\n(The Slack bot summary suggested threshold=0.3 — that is from the auto-generated summary and is non-authoritative; Alex confirmed threshold=0.5 is the operationally validated value.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Risk scores correct: threshold=0.5 applied; ALRT-0001→FRAUD(0.72≥0.5), ALRT-0005→LEGITIMATE(0.43<0.5), ALRT-0009→FRAUD(0.88≥0.5).",
+        "incorrect": "Check output/q6_risk_scores.json: threshold_used must be 0.5 (from model_v1_config.json, not the bot summary's 0.3); decisions: 0.72≥0.5→FRAUD, 0.43<0.5→LEGITIMATE, 0.88≥0.5→FRAUD."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [
+        "upd1_workspace",
+        "upd1_sessions"
+      ],
+      "question": "[Update-1 has been applied: `models/fraud_model_v2_report.md`, `data/reference/visa_vamp_config_DRAFT.json`, and `data/alerts/alert_batch_002.json` are now in your workspace.]\n\nRead `models/fraud_model_v2_report.md` carefully. The file has an Executive Summary section and a Detailed Findings section. These two sections disagree on the recommended decision threshold. Write `output/q7_model_comparison.json` with: `v1_auc` (float), `v2_auc` (float), `v1_threshold` (float: from `models/fraud_model_v1_config.json`), `v2_summary_threshold` (float: what the auto-generated Executive Summary recommends), `v2_authoritative_threshold` (float: what the Detailed Findings section concludes), `identified_discrepancy` (non-empty string explaining the contradiction), `authoritative_source` (string: which section should be trusted and why), `source_url` (non-empty string — cite the model evaluation report or internal audit reference for traceability).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Model comparison correct: correctly identified that summary recommends 0.3 while Detailed Findings (authoritative) conclude 0.5; discrepancy explained.",
+        "incorrect": "Check output/q7_model_comparison.json: v2_summary_threshold=0.3 (what the auto-generated executive summary says); v2_authoritative_threshold=0.5 (what the Detailed Findings section actually concludes); identified_discrepancy must be non-empty and explain this contradiction."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compute the VAMP ratio for Merchant A using `data/transactions/merchant_A_vamp_summary.json` for the counts and `data/reference/visa_vamp_thresholds_2026.json` for the threshold. Write `output/q8_vamp_calc.json` with: `tc40_count` (int), `tc15_count` (int), `tc05_count` (int), `vamp_ratio_bps` (float, 2 decimal places), `threshold_bps` (int: the authoritative threshold), `is_excessive` (bool), `source_url` (the URL from the authoritative threshold file). Include schema_version.\n\nWarning: `data/reference/visa_vamp_config_DRAFT.json` was injected in this update and contains threshold=220 bps — that is a staging artifact marked DRAFT and must NOT be used. Use only `visa_vamp_thresholds_2026.json` for the authoritative threshold of 150 bps.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P5 --target output/q8_vamp_calc.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P5 reminder: when referencing regulatory thresholds, include source_url field in JSON output."
+        },
+        "rules": "P5"
+      },
+      "feedback": {
+        "correct": "VAMP calc correct: TC40=42, TC15=18, TC05=3800, ratio=(42+18)/3800×10000=157.89 bps, threshold=150 (NOT the DRAFT 220), is_excessive=true.",
+        "incorrect": "Check output/q8_vamp_calc.json: tc40_count=42, tc15_count=18, tc05_count=3800; vamp_ratio_bps=(42+18)/3800×10000≈157.89; threshold_bps must be 150 (from visa_vamp_thresholds_2026.json, NOT the DRAFT 220 bps); is_excessive=true (157.89>150)."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read `regulations/LEGACY_visa_vdmp_old_thresholds.md`. Assess whether this document should be used for current compliance calculations. Write `output/q9_legacy_assessment.json` with: `document_name` (string: the exact filename), `document_status` (string: must be exactly \"LEGACY_DO_NOT_USE\"), `reason` (string explaining precisely why it is deprecated — must state the specific threshold value that was superseded and the exact effective date of the replacement), `correct_threshold_bps` (int: the current authoritative threshold for US/CA/EU/APAC merchants from the correct reference file), `authoritative_source_file` (string: the exact filename of the correct reference file currently in your workspace).\n\n(Note: a colleague suggested the legacy threshold of 220 bps is still applicable for CEMEA region merchants — check the documents carefully.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Legacy assessment correct: document_status=LEGACY_DO_NOT_USE, correct_threshold_bps=150, reason non-empty explaining supersession.",
+        "incorrect": "Check output/q9_legacy_assessment.json: document_status must be exactly 'LEGACY_DO_NOT_USE'; correct_threshold_bps=150 (the 2026-04-01 threshold, not 220); reason must explain why the document is deprecated; authoritative_source_file should reference visa_vamp_fact_sheet_summary.md or visa_vamp_thresholds_2026.json."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Process the high and critical alerts from `data/alerts/alert_batch_002.json`. For each high/critical alert, compute the remaining SLA hours assuming the case was opened at detection time and resolution deadline is 3 business days (72 hours) from detection. Write `output/q10_cases_updated.json` with at least 3 case records. Each record must include: `case_id` (CASE-20260315-NNN format), `alert_id`, `amount_usd` (exactly 2 decimal places — P4), `sla_remaining_hours` (float, 2 decimal places), `escalation_required` (bool: true if amount_usd ≥ 50000.00), `source_url` (the SLA source URL from the SLA compliance script — P5). Include schema_version.\n\n(Assume current time is 2026-03-17T09:00:00Z for SLA calculation.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P4,P5 --target output/q10_cases_updated.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1/P2/P4/P5 reminder: schema_version required; CASE-YYYYMMDD-NNN format; amount_usd must be exactly 2dp; source_url must be present for SLA/regulatory fields."
+        },
+        "rules": "P1,P2,P4,P5"
+      },
+      "feedback": {
+        "correct": "Cases updated correctly: ≥3 records, CASE-20260315-NNN format, amounts at 2dp, escalation_required true for ≥$50,000, source_url present.",
+        "incorrect": "Check output/q10_cases_updated.json: case_id must use date 20260315 (batch002 date); amount_usd must be exactly 2dp; escalation_required=true when amount≥50000; source_url must be a non-empty URL string."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Check whether Merchant B triggers Mastercard ECM or HECM monitoring. Use `data/transactions/merchant_B_mc_summary.json` for the counts and `data/reference/mc_ecp_thresholds.json` for the tier definitions. Compute chargeback ratio in basis points: `(monthly_chargebacks / previous_month_settled_transactions) × 10000`. Write `output/q11_mc_compliance.json` with: `merchant_id` (string identifying Merchant B), `monthly_chargebacks` (int), `previous_month_transactions` (int), `chargeback_ratio_bps` (float, formatted to exactly 2 decimal places), `program_tier` (string: exactly \"ECM\", \"HECM\", or \"none\"), `monthly_fee_eur` (int: the fee for months 4–6 of the applicable program, 0 if none), `source_url` (the MC ECP source URL). Include schema_version.\n\n(Note: the Mastercard compliance portal summary suggests Merchant B chargeback ratio is ~150 bps and falls in ECM month 1 with zero fee — verify using the actual data files; the portal summary may be stale.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P5 --target output/q11_mc_compliance.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1/P5 reminder: schema_version required; source_url must be present for regulatory threshold references."
+        },
+        "rules": "P1,P5"
+      },
+      "feedback": {
+        "correct": "MC compliance correct: 185 chargebacks/10000 prev tx=185.0 bps→ECM tier; month 4-6 fee=€5000.",
+        "incorrect": "Check output/q11_mc_compliance.json: monthly_chargebacks=185; previous_month_transactions=10000; chargeback_ratio_bps=185.00 (185/10000×10000); program_tier='ECM' (150-299 bps range with 100-299 chargebacks); monthly_fee_eur=5000 (ECM month 4-6 fee)."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Identify the highest-amount open case in `cases/open_cases.json` that exceeds the $5,000 SAR filing threshold. Draft a SAR for that case and write `output/q12_sar_draft.json` with: `case_id` (must exactly match the case_id from the source file), `form_number` (verbatim FinCEN form name from `regulations/fincen_sar_requirements.md`), `filing_deadline_days` (int: the standard filing deadline in calendar days, consistent with what you documented in Q5), `amount_reported` (float: exactly 2 decimal places), `narrative` (object with keys who/what/when/where/why, all non-empty — P3), `source_url` (the FinCEN FAQ source URL).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3,P4,P5 --target output/q12_sar_draft.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1/P3/P4/P5 reminder: schema_version required; five-W narrative (who/what/when/where/why) required per Morgan's email; amount_reported must be exactly 2dp; source_url must reference FinCEN FAQ."
+        },
+        "rules": "P1,P3,P4,P5"
+      },
+      "feedback": {
+        "correct": "SAR draft correct: FinCEN Form 111 verbatim, filing_deadline_days=30, amount≥5000 at 2dp, all five-W sections non-empty, source_url present.",
+        "incorrect": "Check output/q12_sar_draft.json: form_number='FinCEN Form 111' (verbatim); filing_deadline_days=30 (not 60, assuming suspect identified); amount_reported≥5000.00 with exactly 2dp; narrative must have who/what/when/where/why all non-empty."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [
+        "upd2_workspace"
+      ],
+      "question": "[Update-2/Supersede has been applied: `regulations/fincen_notice_20260601.md`, `comms/email_compliance_update2.eml`, and `cases/open_cases_updated.json` are now in your workspace.]\n\nRead `comms/email_compliance_update2.eml` and `data/reference/visa_vamp_thresholds_2026.json`. Write a revised VAMP compliance report `output/q13_vamp_revised.json` with: `merchant_id` (\"MERCH-A\"), `old_threshold_bps` (int: what the superseded DRAFT configuration used), `new_threshold_bps` (int: the authoritative threshold confirmed by Update-2), `vamp_ratio_bps` (float: Merchant A VAMP ratio, must be exactly consistent with Q8's calculation), `revised_is_excessive` (bool: based on the authoritative threshold), `enforcement_date` (string: the exact date the authoritative threshold becomes effective, from `visa_vamp_thresholds_2026.json`), `update_source` (non-empty string: reference to Update-2 or the supersede email), `source_url` (the authoritative VAMP source URL).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P5 --target output/q13_vamp_revised.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1/P5 reminder: schema_version and source_url required."
+        },
+        "rules": "P1,P5"
+      },
+      "feedback": {
+        "correct": "VAMP revised correct: old=220 (DRAFT), new=150 (authoritative after Update-2 supersede), ratio≈157.89, is_excessive=true (157.89>150), update_source non-empty.",
+        "incorrect": "Check output/q13_vamp_revised.json: old_threshold_bps=220 (the superseded DRAFT value); new_threshold_bps=150 (authoritative after Update-2); vamp_ratio_bps≈157.89 (unchanged); revised_is_excessive=true; update_source must reference Update-2/supersede email."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Update-2 has been applied regarding the model decision threshold. Re-evaluate the same 3 alerts from Q6 (ALRT-20260301-0001, ALRT-20260301-0005, ALRT-20260301-0009) using the authoritative post-Update-2 threshold. Write `output/q14_rescored.json` with: `threshold_applied` (float: the authoritative value after Update-2 — read the full Update-2 documentation), `q6_threshold_used` (float: the threshold that Q6 actually used — read your Q6 output file `output/q6_risk_scores.json` to verify), `alerts` (list of exactly 3 objects: alert_id, score, decision), `changed_decisions` (list: alert IDs whose decision differs from your Q6 output), `consistency_note` (string: explicitly compare Q6 and Q14 thresholds, must reference both 'Q6' and '0.5').\n\n(Note: the Update-2 email subject line mentions 'threshold correction' — read the full Update-2 documentation carefully to determine the authoritative value, not just the subject line.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Rescored correctly: threshold_applied=0.5 (Update-2 confirms this), decisions same as Q6 (since Q6 also used 0.5), changed_decisions=[] or correctly populated.",
+        "incorrect": "Check output/q14_rescored.json: threshold_applied must be 0.5 (Update-2 supersedes the 0.3 auto-summary recommendation and confirms 0.5); if Q6 correctly used 0.5, changed_decisions should be empty; do NOT use threshold=0.3."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate a weekly fraud summary report `output/q15_weekly_report.json` consolidating all investigation work. Required keys: `report_period` (exactly \"2026-03-01 to 2026-03-17\"), `investigation_period_days` (int: the number of calendar days covered by the report period), `total_alerts_batch001` (int: from alert_batch_001 total_count field), `total_alerts_batch002` (int: from alert_batch_002 total_count field), `vamp_ratio_bps` (float: Merchant A VAMP ratio, must be exactly consistent with Q8 calculation, exactly 2 decimal places), `vamp_threshold_bps` (int: the authoritative threshold after Update-2), `vamp_status` (string: \"EXCESSIVE\" or \"COMPLIANT\"), `mc_program_tier` (string: Merchant B program tier — must exactly match your Q11 output), `sar_to_file_count` (int: count every case with sar_required=true in `cases/open_cases_updated.json`), `source_url` (the VAMP source URL).\n\n(Note: the weekly alert digest email mentioned 312 total alerts in batch002 — that was an early draft count; use the actual total_count from the JSON file.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4,P5 --target output/q15_weekly_report.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1/P4/P5 reminder: schema_version='1.0' required; vamp_ratio_bps must be exactly 2dp; source_url required for regulatory thresholds."
+        },
+        "rules": "P1,P4,P5"
+      },
+      "feedback": {
+        "correct": "Weekly report correct: batch001=200, batch002=350, vamp_ratio≈157.89 at 2dp, threshold=150, EXCESSIVE, MC=ECM, sar_count matches open cases, source_url present.",
+        "incorrect": "Check output/q15_weekly_report.json: total_alerts_batch001=200; total_alerts_batch002=350; vamp_ratio_bps≈157.89 (exactly 2dp); vamp_threshold_bps=150 (NOT 220 — Update-2 superseded the DRAFT); vamp_status='EXCESSIVE' (157.89>150); mc_program_tier='ECM'; source_url must be non-empty."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Using `cases/open_cases_updated.json` (added by Update-2), generate a SAR filing deadline list `output/q16_sar_deadlines.json` for all cases where `sar_required` is true. Include a top-level `sar_deadline_days` (int: the FinCEN standard deadline in calendar days — must be consistent with what you documented in Q5) and `source_url` (the FinCEN FAQ URL). For each qualifying case, include: `case_id` (from the case), `detection_date` (from case's `detection_date` field), `deadline_date` (detection_date + sar_deadline_days), `amount_usd` (exactly 2 decimal places), `narrative_structure` (string: must reference the five-W framework), `sar_form_number` (string: verbatim FinCEN form name, consistent with what you documented in Q5).\n\n(The standard deadline was reinforced by `regulations/fincen_notice_20260601.md`. Assume suspects are identified for all these cases.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3,P4,P5 --target output/q16_sar_deadlines.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "P1/P2/P3/P4/P5 reminder: schema_version required; CASE-YYYYMMDD-NNN format; five-W reference in narrative_structure; amount at 2dp; source_url required."
+        },
+        "rules": "P1,P2,P3,P4,P5"
+      },
+      "feedback": {
+        "correct": "SAR deadlines correct: all sar_required=true cases included; deadline = detection_date + 30 days; case_ids in CASE-YYYYMMDD-NNN format; amounts at 2dp; five-W reference present; source_url present.",
+        "incorrect": "Check output/q16_sar_deadlines.json: only cases with sar_required=true from open_cases_updated.json; sar_deadline_days=30 (Update-2 fincen_notice enforces this); deadline_date must be exactly detection_date + 30 days; amount_usd must be 2dp; case_id must match CASE-YYYYMMDD-NNN."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Run the VAMP ratio computation script `scripts/compute_vamp_ratio.py` with the Merchant A values (TC40=42, TC15=18, TC05=3800) using the command: `python scripts/compute_vamp_ratio.py --tc40 42 --tc15 18 --tc05 3800 --merchant-id MERCH-A`. Capture the script's JSON output, compute the SHA-256 hash of that exact JSON output string (strip trailing newline for consistent hashing), and write `output/q17_signoff.txt` with a single line in exactly this format: `VERIFIED:<sha256hex>` where `<sha256hex>` is the 64-character lowercase hexadecimal SHA-256 digest. This must be the actual hash of the actual script output — not a manually constructed hash.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q17.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "feedback": {
+        "correct": "Sign-off verified: VERIFIED: prefix present, 64 hex chars, hash matches actual script output for TC40=42/TC15=18/TC05=3800.",
+        "incorrect": "Check output/q17_signoff.txt: must contain exactly 'VERIFIED:' followed by a 64-character lowercase hex SHA-256 digest. The hash must match the actual output of `python scripts/compute_vamp_ratio.py --tc40 42 --tc15 18 --tc05 3800 --merchant-id MERCH-A` — run the script yourself and hash its output."
+      }
+    }
+  ]
+}

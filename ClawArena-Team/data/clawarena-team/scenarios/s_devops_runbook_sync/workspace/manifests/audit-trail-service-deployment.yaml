@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: audit-trail-service
+  namespace: prod
+  labels:
+    app: audit-trail-service
+    team: platform
+    version: "1.1.14"
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: audit-trail-service
+  template:
+    metadata:
+      labels:
+        app: audit-trail-service
+        version: "1.1.14"
+    spec:
+      serviceAccountName: audit-trail-service-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      containers:
+      - name: audit-trail-service
+        image: registry.mercatorrobotics.com/audit-trail-service:1.1.14
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+        resources:
+          requests:
+            cpu: 352m
+            memory: 638Mi
+          limits:
+            cpu: 901m
+            memory: 744Mi
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: audit-trail-service-db-secret
+              key: host
+        - name: DB_PORT
+          value: "5432"
+        - name: LOCK_TIMEOUT
+          value: "30000"
+        - name: LOG_LEVEL
+          value: INFO

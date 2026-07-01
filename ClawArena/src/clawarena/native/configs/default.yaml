@@ -1,0 +1,285 @@
+# ArcBench 默认参数。
+#
+# 本文件即「有效参数全集」示例：所有可配置键均出现一次，CLI/env-only 项以 ``null`` 占位。
+# 复制本文件后改你需要的项，即可作为 ``arcbench <cmd> --config /path/to/copy.yaml`` 起点。
+#
+# 优先级（自高至低）：
+#   1. CLI 显式 flag（``-d``/``--model``/...）
+#   2. ``--config`` 指向的覆盖文件
+#   3. 环境变量（``ARCBENCH_*``）
+#   4. 本 yaml
+#   5. 代码内 ``CODE_DEFAULTS``（兜底）
+#
+# 参数按**语义**分组：相同语义共用一键（如 ``paths.data`` 被 run/resume/check/stats/clean
+# 共用）；异义则前缀区分（``paths.run_output`` 与 ``paths.stats_output``）。
+
+paths:
+  data: null               # -d/--data: 数据集目录；run/resume/check/stats 共用
+  arc_filter: null         # -t/--arc-id: 限制弧 ID（逗号分隔），用于 check / stats 切片
+  run_output: null         # -o/--out for run: 本次 run 的输出根目录
+  resume_old: null         # -O/--old for resume: 旧 run 的输出根目录
+  resume_output: null      # -o/--out for resume: 新 run 的输出根目录
+  stats_output: null       # -o/--out for stats: stats 报告输出目录
+  clean_output: null       # -o/--out for clean: 待清理的输出根目录
+  tokenizer_override: null # -t/--tokenizer for stats: 覆盖 tokenizer.source
+  strict: false            # --strict for check: warning 视作 error
+  concurrency: 1           # ArcBench v1 单 session 串行；保留位以备 v2 多 run 并发对比
+  clean_targets: "work"    # work/logs/sessions/all 任意组合
+
+# 校准用子集过滤（仅经 --config-overrides 临时设；整库正式跑时留空）。
+#   run_filter.test_samples：仅跑列出的 test_sample（如 ["ts_saas"]）
+#   run_filter.arcs：每个 test_sample 仅保留列出的 arc，按列出序链式跑；为隔离校准，
+#     保留弧的 unlock 谓词被清空、first_arc 重设为列表首项。
+# 例：--config-overrides '{"run_filter":{"test_samples":["ts_saas"],"arcs":["arc1"]}}'
+run_filter:
+  test_samples: null
+  arcs: null
+
+# 三 role 模型配置：main / subagent / compaction。
+#
+# 仅 ``main`` 必须最终能解析出 provider + model_id（由 CLI ``--model`` JSON、env
+# ``ARCBENCH_{MAIN,SUBAGENT,COMPACT}_<FIELD>``、本 yaml、code defaults 五层合并）。
+# ``subagent`` / ``compaction`` 任一字段为 null 时，整段从 ``main`` 已合并好的值里
+# field-by-field 继承——典型场景：换模型 id 但共用 api_base / api_key_env。
+#
+# ``compaction.modalities`` 由代码强制 ["text"]（claude-code 同款约束：summary 不
+# 携带 image token），yaml 不暴露该字段。
+#
+# CLI 优先级最高的 ``--model`` JSON 接受两种等价形式（任一字段可缺）：
+#   1. 扁平：{"provider": "...", "model_id": "..."}      （等价于只配 main）
+#   2. 三 role：{"main": {...}, "subagent": {...}, "compaction": {...}}
+models:
+  main:
+    provider: null         # openai_compat / anthropic / openai / openrouter / gemini ...
+    model_id: null
+    api_base: null
+    api_key: null          # 与 api_key_env 二选一
+    api_key_env: null      # 环境变量名（如 "API_KEY"）；从环境取 key
+    modalities: ["text"]   # 声明 main 可消费的模态；audio/video 由 probe 实测
+  subagent:
+    provider: null         # null → 整段从 main 继承
+    model_id: null
+    api_base: null
+    api_key: null
+    api_key_env: null
+    modalities: null       # null → 继承 main.modalities
+  compaction:
+    provider: null         # null → 整段从 main 继承
+    model_id: null
+    api_base: null
+    api_key: null
+    api_key_env: null
+
+# 初始化模态探测：实际调用 provider 验证每个声明的非文本模态确实可用。
+probe:
+  enabled: true            # arcbench run/resume 启动时一次性
+  timeout_sec: 20
+  max_tokens: 4
+
+tokenizer:
+  # 三种形式：HF repo id、短名（映射到 helper/）、本地路径（相对本 yaml 或绝对）
+  source: "qwen3"
+
+chat_template:
+  source: "qwen3"
+
+# 单 session 跨整个 test_sample，理论无限长；超阈触发 compaction 而非熔断。
+token_limits:
+  main_agent: 200000
+
+usage_hint:
+  always_on_real_user: true
+  thresholds_pct: [50, 60, 70, 80, 85, 90, 95]
+
+# 自管理 file-based memory（system prompt 软性提示 agent 在 workspace 内维护
+# MEMORY.md / memory/）。不引入独立目录或注入机制——MEMORY.md 就是普通 workspace
+# 文件，靠 agent 主动 Read/Write，天然跨 day/arc 与 compaction 存活。
+memory:
+  # 是否在高用量阈值处下发"记忆写入提醒"。关掉只停掉提醒，不影响 system prompt 中
+  # 的 memory 段（agent 仍可自管理 MEMORY.md）。
+  notification_enabled: true
+  # 在这些高用量阈值处，于 USAGE_THRESHOLD_REMINDER 之后追加一条"记忆写入提醒"。
+  # 取值必须是 usage_hint.thresholds_pct 的子集；越界项在启动时被剔除并 warn。
+  persist_reminder_thresholds_pct: [80, 90]
+
+# Compaction：替换 SMbench 的 token 熔断；对齐 claude-code services/compact 的实践。
+#
+# 触发阈值是**动态**计算的：
+#   effective_window  = token_limit - reserved_summary_output_tokens
+#   trigger_tokens    = effective_window - auto_compact_buffer_tokens   # 软触发
+#   force_tokens      = token_limit * force_pct / 100                   # 强制触发
+#
+# 软触发命中后 harness 走 B1 语义边界缓押：只在 final-answer 后或 real-user 输入
+# 前 emit compact；强制触发命中则无视位置直接压。
+# 连续 max_consecutive_failures 次失败后熔断（不再尝试），单次成功重置计数。
+compaction:
+  # claude-code: MAX_OUTPUT_TOKENS_FOR_SUMMARY=20000 + AUTOCOMPACT_BUFFER_TOKENS=13000
+  auto_compact_buffer_tokens: 13000
+  reserved_summary_output_tokens: 20000
+  force_pct: 92                       # ctx ≥ token_limit * 92% 强制压
+  max_consecutive_failures: 3         # 熔断阈
+  summarizer_max_output_tokens: 20000 # 对齐 claude-code COMPACT_MAX_OUTPUT_TOKENS
+
+# Microcompact：把过老的大 tool_result 替换为占位文本（保留消息结构与 tool_call_id 配对）。
+# 不切片，仅减字节；触发条件比 compaction 低门槛。对齐 claude-code microCompact.ts。
+microcompact:
+  enabled: true
+  stale_after_messages: 30            # 距离 tail 末尾 ≥ N 条的 tool_result 才算陈旧
+  size_threshold_tokens: 800          # 单条 < 此值不动
+  max_redactions_per_event: 8
+
+# Post-compact 最近文件重注入（C2）：压缩后追加若干 user 消息携带最近被 Read 过的
+# 文件最新快照，避免 agent 跨日回访同一文件却只能依赖 summary 文本。
+# 对齐 claude-code POST_COMPACT_* 系列常量。
+post_compact_reinjection:
+  enabled: true
+  token_budget: 50000                 # 全部 reinjection 总 token 上限
+  max_files: 5
+  max_tokens_per_file: 5000
+
+agent_loop:
+  max_iterations: 80          # 单 round 内 agent loop 上限
+  tool_call_parallel: true
+
+bash:
+  default_timeout_sec: 60
+  max_output_bytes: 65536
+  # 禁前缀过滤：以这些 token 起始的命令直接 forbidden（agent 看不到 git）。
+  forbidden_prefixes: ["git"]
+
+grep:
+  default_max_results: 200
+  context_lines: 0
+
+read:
+  notice_bytes: 32768      # 32 KiB —— >= 此阈值会在 Read 结果前置 [notice: ...] 一行
+  hard_bytes: 262144       # 256 KiB —— >= 此阈值且未传 offset/limit 时直接报错
+  max_text_bytes: 524288   # 512 KiB —— 最终读取上限
+  multimodal_summary_length: 512
+
+# 多模态附件投递与 token 估算：
+#   - tool_result 携带的 image/audio/video 附件，由 harness 在该 tool 消息后追加一条
+#     合成 user 消息携带 base64 部件下发（方案 C；见 provider/multimodal.py docstring）；
+#   - 每个附件估算的 token 数计入本地 ``context_size_max``，与远端真实计费同口径。
+# 数值默认对应 Gemma-4 31B / E4B processor 锚点；切换到其它模型时按其 processor_config
+# 在覆盖文件改本节即可。
+multimodal:
+  attachment_max_bytes: 10485760  # 10 MB —— 单文件 base64 内联上限；超过则不投递二进制
+  image:
+    tokens_per_file: 280          # vision_soft_tokens_per_image（与分辨率无关）
+  video:
+    tokens_per_frame: 70          # video_processor.max_soft_tokens
+    max_frames: 32                # video_processor.num_frames（采样上限）
+    fallback_tokens: 2240         # cv2 拿不到帧数时按上限保守计
+  audio:
+    tokens_per_second: 25.0       # audio_ms_per_token=40 → 1/0.04
+    max_tokens: 750               # audio_seq_length (= 30s × 25 tok/s)
+    max_seconds: 30.0
+  # vLLM gemma-4 omni 当前同消息混搭 video+audio 会丢 audio。此项保留作未来兼容；
+  # 默认 false → 读 mp4 仅发 video，不抽音轨。
+  mp4_extract_audio_track: false
+
+# 偏好类系统配置。
+# mode 决定显式/静默期切换的判定方式：
+#   - fixed：按 exposure 次数硬切（兼容旧行为）
+#     - exposure <= explicit_exposures → 显式期，违反只提醒不扣分
+#     - exposure >  explicit_exposures → 静默期，违反 × silent_penalty_factor
+#   - ema：按 agent 该 tag 的近期满足率 EMA 自适应（推荐用于研究 path-dependence）
+#     - ema <  ema_threshold_low  → 'low' band，违反不扣分 + 提醒（还没掌握）
+#     - ema <  ema_threshold_high → 'mid' band，违反 × silent_penalty_mid + 提醒（半掌握）
+#     - 否则                        → 'high' band，违反 × silent_penalty_factor 静默考察
+# 两种模式都维护 EMA（fixed 模式仅供诊断），切换不影响落盘格式。
+preferences:
+  mode: fixed                       # 通过 --config-overrides '{"preferences":{"mode":"ema"}}' 临时切换
+  explicit_exposures: 2
+  silent_penalty_factor: 0.7
+  ema_alpha: 0.3
+  ema_initial: 0.5
+  ema_threshold_low: 0.4
+  ema_threshold_high: 0.8
+  silent_penalty_mid: 0.85
+  # 关闭 user_override 检测（当题面明显冲突偏好时跳过检查）
+  user_override_enabled: true
+
+# Update 引擎配置。
+update_engine:
+  # 各 test_sample 的 agent workspace 父目录名（相对本次 run 的 run_output）：
+  # 实际 workspace 落在 <run>/<此值>/<ts_id>/。每个 test_sample 把其 workspace_template
+  # 复制到独立临时目录，agent 只读写这里，不污染原始数据。
+  # 隐藏 git 落在该目录下的 .git/ 子目录，由 sandbox 的 .git 黑名单 + Bash `git`
+  # 禁前缀双重隔离，对 agent 不可见。注意：不要把本目录嵌进 .arcbench/ 下——
+  # sandbox 黑名单会拒绝任何含 .git/.arcbench 分量的路径，会连带挡掉 agent 自己的 workspace。
+  hidden_workspace_subdir: "workspaces"
+  # ops 冲突策略：theirs（外部 update 强覆盖 agent 改动）/ ours / abort
+  conflict_strategy: "theirs"
+  # apply 完后追加 reminder 摘要的最大字符数
+  reminder_summary_max_chars: 2048
+
+# Arc 拼接配置（实验旋钮——同一份数据可跑不同模式做可比实验）。
+# selection_mode：怎么从候选集选下一弧
+#   - fixed（默认）：按 manifest 声明序取候选首个 —— 可比基线
+#   - rule：规则自动选，子策略 rule_strategy
+#   - agent_choice：被测 agent 主动选（弧结束时 harness 下发编号菜单 reminder，解析 CHOICE: <n>）
+# rule_strategy（仅 selection_mode=rule 生效）：
+#   - branching：if-else 启发式（上一弧 TCR<0.5 时同 version +1）
+#   - continuous：连续 state_score ∈ [0,1] 软调节"重学 vs 推进"
+# 候选集 / 解锁规则 / first_arc / completion_criterion 在数据侧（test_sample manifest + arc.json）声明。
+# 论文须同时报告至少 fixed 与 agent_choice 两种 mode。
+# 临时切换：--config-overrides '{"arc_scheduler":{"selection_mode":"agent_choice"}}'
+arc_scheduler:
+  selection_mode: "fixed"      # fixed | rule | agent_choice
+  rule_strategy: "branching"   # branching | continuous（selection_mode=rule）
+  agent_choice_max_retries: 1  # agent_choice 解析失败后重发 reminder 次数；仍失败回落候选首项
+  base_priority: {}
+  # continuous strategy 的 state_score 三路融合权重（之和需 > 0）
+  state_w_tcr: 0.5             # 最近弧通过率权重
+  state_w_adh: 0.3             # preference 满足率 EMA 权重
+  state_w_sil: 0.2             # 无 silent failure 权重
+  state_recent_window: 3       # 计算 recent_tcr 时回看几弧
+  state_initial: 0.5           # 没有 completed 时的中性初值
+
+# 评分子项开关与权重。
+scoring:
+  enabled:
+    streak: true
+    adherence: true
+    adaptation: true
+    callback: true
+    compaction_profile: true
+  weights:
+    tcr: 0.4              # task completion rate
+    streak_robustness: 0.2
+    adherence: 0.2
+    adaptation: 0.1
+    callback: 0.1
+
+# Oracle / cascade mode 默认值；tests.json 内字段覆盖此处。
+oracle:
+  mode: "cascade"         # "cascade" (无覆盖) | "oracle" (覆盖)
+
+# Subagent 配置。v1 main agent 可通过 Agent 工具 spawn Explore / general-purpose 子代理。
+# Subagent 不参与压缩（短命）；超 max_iterations 直接返回最后一段 assistant 文本。
+subagent:
+  explore_enabled: true
+  general_purpose_enabled: true
+  token_limit: 100000           # 子代理 context 上限；主要靠 max_iterations 约束
+  max_iterations: 30
+
+# LS 工具上限：单次列表条目数。
+ls:
+  max_entries: 1000
+
+# 主 agent 可调用工具白名单。v1 默认放出全套（含 LS + Agent）。
+tools:
+  enabled:
+    - Read
+    - Write
+    - Edit
+    - Bash
+    - Grep
+    - Glob
+    - LS
+    - Agent
+
+logging:
+  level: "INFO"

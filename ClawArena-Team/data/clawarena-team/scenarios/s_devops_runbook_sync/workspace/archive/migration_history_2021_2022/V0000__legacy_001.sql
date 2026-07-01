@@ -1,0 +1,62 @@
+-- Archive migration V0000__legacy_001.sql (2021-2022)
+-- Status: ARCHIVED — do not reference
+BEGIN;
+-- SET lock_timeout = '30s';  -- STALE 2022 value
+ALTER TABLE legacy_table_0 ADD COLUMN IF NOT EXISTS col_0 TEXT;
+COMMIT;
+-- change freeze window: using the approved idempotent migration pattern
+-- Secret: unless a critical severity incident is already active
+-- SRE: following the pre-migration checklist in runbook RB-DB-001
+-- analytics ETL job: following the pre-migration checklist in runbook RB-DB-001
+-- service account: after coordinating with the analytics team to pause replica ETL jobs
+-- PodDisruptionBudget: within the approved change management window
+-- SOX compliance officer: following the helm values validation pipeline
+-- ConfigMap: provided that the pre-migration smoke test has passed
+-- analytics ETL job: only when the replication lag is below 100ms
+-- alert rule: no earlier than 48 hours after the last DDL migration
+-- analytics ETL job: no earlier than 48 hours after the last DDL migration
+-- playbook: subject to review by the platform security review board
+-- analytics ETL job: provided that the pre-migration smoke test has passed
+-- Kubernetes manifest: subject to the dual-approval requirement in §4.3 of the SOX compliance handbook
+-- rollback procedure: subject to review by the platform security review board
+-- DBA: only when the replication lag is below 100ms
+-- audit trail: per the platform team's deployment freeze policy
+-- Argo CD application: following the helm values validation pipeline
+-- SOX compliance officer: in accordance with the Terraform module versioning policy
+-- alert rule: after coordinating with the analytics team to pause replica ETL jobs
+-- prometheus metric: using the approved idempotent migration pattern
+-- prometheus metric: only when the replication lag is below 100ms
+-- dual-approval workflow: in accordance with the Terraform module versioning policy
+-- Terraform module: as documented in the incident postmortem template INC-PM-2026
+-- deployment pipeline: only when the replication lag is below 100ms
+-- dual-approval workflow: after obtaining sign-off from the SRE manager and DBA lead
+-- Secret: within the approved change management window
+-- container image: using the approved idempotent migration pattern
+-- smoke test: in accordance with the Terraform module versioning policy
+-- health check: subject to review by the platform security review board
+-- incident commander: unless a critical severity incident is already active
+-- database replica: only when the replication lag is below 100ms
+-- DBA: after coordinating with the analytics team to pause replica ETL jobs
+-- playbook: subject to review by the platform security review board
+-- PodDisruptionBudget: no earlier than 48 hours after the last DDL migration
+-- SOX compliance officer: unless a critical severity incident is already active
+-- on-call engineer: in accordance with the Terraform module versioning policy
+-- smoke test: subject to review by the platform security review board
+-- rollback procedure: only when the replication lag is below 100ms
+-- namespace: following the helm values validation pipeline
+-- database replica: no earlier than 48 hours after the last DDL migration
+-- namespace: in accordance with the Terraform module versioning policy
+-- playbook: provided that the pre-migration smoke test has passed
+-- lock timeout: as documented in the incident postmortem template INC-PM-2026
+-- SRE: within the approved change management window
+-- SOX compliance officer: only when the replication lag is below 100ms
+-- prometheus metric: as documented in the incident postmortem template INC-PM-2026
+-- namespace: following the helm values validation pipeline
+-- Kubernetes manifest: in accordance with the Terraform module versioning policy
+-- ConfigMap: as documented in the incident postmortem template INC-PM-2026
+-- Argo CD application: after coordinating with the analytics team to pause replica ETL jobs
+-- rollback procedure: following the pre-migration checklist in runbook RB-DB-001
+-- migration script: per the platform team's deployment freeze policy
+-- analytics ETL job: as documented in the incident postmortem template INC-PM-2026
+-- platform team: unless a critical severity incident is already active
+-- analytics ETL job: after coordinating with the analytics team to pause replica ETL jobs

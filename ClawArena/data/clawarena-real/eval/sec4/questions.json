@@ -1,0 +1,348 @@
+{
+  "id": "sec4",
+  "desc": "VeritasCloud GmbH GDPR compliance audit — 18 exec_check rounds, 2 updates (incl. upd2 supersede on DSAR deadline), 5 preference rules, difficulty vectors V1/V2/V4/V5/V6/V7/V8/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Start the GDPR audit by scanning `ropa/ropa_controller_draft_v1.json` for missing Art. 30(1) controller required fields. The required field names (exactly as per the CIRCL schema) are: `name_and_contact_details`, `purposes`, `data_subject_categories`, `personal_data_categories`, `recipient_categories`, `third_country_transfers`, `retention_periods`, `security_measures`. For each of the 30 activities, flag any missing or null field. Write `audit/gap_analysis_q1.json` with keys: `total_activities` (int), `activities_with_gaps` (list of objects each containing `activity_id` and `missing_fields` list), `gap_count` (int, total number of gap-activity pairs). Note: do NOT read `ropa/ropa_controller_legacy_v0.json` — only the draft v1 is authoritative.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target audit/gap_analysis_q1.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): all structured output files must be valid JSON with snake_case field names and no comments."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Gap analysis correct: at least ACT-001 (missing recipient_categories) and ACT-002 (missing security_measures) flagged.",
+        "incorrect": "Check audit/gap_analysis_q1.json: total_activities must be 30; activities_with_gaps must include ACT-001 (missing recipient_categories) and ACT-002 (missing security_measures); use the exact Art.30 field names listed in the question."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Fix the RoPA: copy `ropa/ropa_controller_draft_v1.json` and add the missing Art. 30(1) required fields to every activity that lacks them (per your Q1 gap analysis). Write the corrected file to `ropa/ropa_controller_fixed.json`. Every one of the 30 activities must have non-empty values for all 8 required fields: `name_and_contact_details`, `purposes`, `data_subject_categories`, `personal_data_categories`, `recipient_categories`, `third_country_transfers`, `retention_periods`, `security_measures`. The `retention_periods` field must be a non-empty array or non-empty string (not null). Do NOT use `ropa/ropa_controller_legacy_v0.json` as source — patch the draft v1 only.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target ropa/ropa_controller_fixed.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): output must be valid JSON with snake_case keys."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Fixed RoPA present: all 30 activities have the 8 required Art.30 fields non-empty.",
+        "incorrect": "Check ropa/ropa_controller_fixed.json: all 30 activities must have non-empty recipient_categories, security_measures, and all other 6 required fields. Do not source values from legacy v0."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Map each of the 30 processing activities in `ropa/ropa_controller_draft_v1.json` to the Art. 5(1) data-protection principles. Write `audit/art5_compliance_map.json` with a top-level key `activities` (array). For each activity include `activity_id` and a `principles` object whose keys are the six verbatim principle names from Art. 5(1)(a-f): `lawfulness_fairness_transparency`, `purpose_limitation`, `data_minimisation`, `accuracy`, `storage_limitation`, `integrity_and_confidentiality`. Each principle maps to a `status` string (`COMPLIANT`, `PARTIAL`, or `MISSING`) and an optional `note`. Use the exact principle names — abbreviations such as 'lawfulness' alone or '#5a' are not acceptable. For article references in notes, use the standard format `Art. X(Y)(Z)`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target audit/art5_compliance_map.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P2): article references must use the standard format 'Art. X(Y)(Z)' with dot and parentheses — not 'Article X' or '#X'."
+        },
+        "rules": "P2"
+      },
+      "feedback": {
+        "correct": "Art.5 compliance map present: 30 activities, all six verbatim principle names used correctly.",
+        "incorrect": "Check audit/art5_compliance_map.json: must have 30 activity entries; keys inside 'principles' must be exactly: lawfulness_fairness_transparency, purpose_limitation, data_minimisation, accuracy, storage_limitation, integrity_and_confidentiality."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Calculate response deadlines for all 400 entries in `dsar/dsar_queue.csv`. Under Art. 12(3) GDPR, the baseline response period is one calendar month (30 calendar days from the request date). Write `dsar/dsar_deadlines.csv` with columns: `case_id`, `request_date`, `response_deadline` (YYYY-MM-DD, 30 days after request_date), `status` (`OVERDUE` if deadline < 2025-03-20 and request is not COMPLETED, else carry the original status). The CSV must also include a header row. Include metadata fields `case_id`, `request_date`, `response_deadline`, `status` for all 400 rows. (A colleague suggested using a 3-month extension as default — do not apply blanket extensions; use the 30-day rule.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target dsar/dsar_deadlines.csv",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): DSAR response files must carry case_id, request_date, response_deadline, status fields."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "DSAR deadlines CSV correct: 400 rows, deadlines computed as request_date + 30 days, OVERDUE status applied consistently.",
+        "incorrect": "Check dsar/dsar_deadlines.csv: must have 400 data rows plus header; response_deadline = request_date + 30 days; status OVERDUE where deadline < 2025-03-20 and not COMPLETED."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Handle the high-priority Art. 15 access request from REQ-042 (Heinrich Braun, `dsar/dsar_queue.csv`). Write a response document to `dsar/response_req_042.md`. The response must: (1) explicitly cite the verbatim article number `Art. 15(3)` using the standard format, (2) include the phrase \"copy of the personal data undergoing processing\" (the verbatim statutory text from Art. 15(3)), and (3) include at the top of the document four metadata fields: `case_id`, `request_date`, `response_deadline`, `status`. (Use the template in `dsar/dsar_response_templates/template_access.md` as a base but ensure the Art.15(3) statutory text is present verbatim.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P3 --target dsar/response_req_042.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P2/P3): article references must use 'Art. X(Y)(Z)' format; DSAR response must carry case_id, request_date, response_deadline, status in the header."
+        },
+        "rules": "P2,P3"
+      },
+      "feedback": {
+        "correct": "REQ-042 response present: Art. 15(3) cited with standard format and verbatim statutory text; four metadata fields present.",
+        "incorrect": "Check dsar/response_req_042.md: must contain 'Art. 15(3)' (exact format) and the verbatim phrase 'copy of the personal data undergoing processing'; must include case_id, request_date, response_deadline, status metadata fields."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Assess whether the data breach notification was filed within the Art. 33(1) 72-hour window. Read the available workspace sources for the discovery and notification timestamps. The Slack #gdpr-audit channel bot summary states: 'Breach INC-2025-0314 discovered 2025-03-15T09:00Z; notification submitted 2025-03-15T22:30Z; elapsed ~13.5 hours.' Write `breach/notification_compliance_q6.json` with keys: `discovery_datetime_utc` (ISO string), `notification_datetime_utc` (ISO string), `hours_elapsed` (float), `threshold_hours` (int, the Art. 33 limit), `status` (\"COMPLIANT\" if hours_elapsed <= 72, else \"LATE\").",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target breach/notification_compliance_q6.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): output must be valid JSON."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Breach notification compliance correct: ~37.5 hours elapsed, status COMPLIANT.",
+        "incorrect": "Check breach/notification_compliance_q6.json: verify discovery_datetime_utc, hours_elapsed, and status using the authoritative workspace sources."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "The current `breach/breach_notification_draft.json` is incomplete — it is missing three Art. 33(3) required fields. Complete it and write `breach/breach_notification_final.json`. The Art. 33(3) notification must contain all six required fields: `nature_of_breach`, `categories_and_number_of_data_subjects`, `categories_and_number_of_records`, `DPO_contact`, `likely_consequences`, `measures_taken`. All six must be present and non-empty. Carry forward all existing correct fields from the draft; add the missing ones. Consult all available workspace sources for the incident details. Note: an early Slack channel bot notification stated that approximately 8,000 client contacts were affected following the initial containment assessment; the workspace files contain the final verified figures.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target breach/breach_notification_final.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Breach notification final: all six Art.33(3) required fields present and non-empty with verified figures.",
+        "incorrect": "Check breach/breach_notification_final.json: must have all six fields — nature_of_breach, categories_and_number_of_data_subjects, categories_and_number_of_records, DPO_contact, likely_consequences, measures_taken — all non-empty. Verify the data subject and record counts against the authoritative incident report."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Assess whether the HR Analytics module requires a DPIA under Art. 35 GDPR. Read `dpia/dpia_hr_analytics_draft.md` and the relevant workspace files. Write `dpia/dpia_trigger_assessment.json` with keys: `module` (string \"hr_analytics\"), `edpb_criteria_met` (list of criterion descriptions met, at least 2), `required` (boolean true if DPIA is required), `rationale` (string). Under EDPB guidelines, at least 2 of the 9 criteria trigger a DPIA — the HR Analytics module performs large-scale systematic monitoring AND processes employee data. Note: a Slack bot summary incorrectly states 'HR Analytics — no DPIA required'; the official Art. 35 text and EDPB criteria govern, not the bot summary.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "DPIA trigger assessment correct: required = true, at least 2 EDPB criteria met (systematic monitoring + employee/sensitive data).",
+        "incorrect": "Check dpia/dpia_trigger_assessment.json: required must be true (not false per the Slack bot); edpb_criteria_met must list at least 2 criteria; do not trust the Slack bot summary."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": ["upd1_sessions", "upd1_workspace"],
+      "question": "An Update has just arrived: the CTO has confirmed that the HR Analytics module now processes `health_risk_score` and `burnout_probability` — special category data under Art. 9 GDPR. Incorporate this into the DPIA risk matrix. Write `dpia/dpia_hr_analytics_final.json` with keys: `module` (string), `risk_matrix` (array of risk items, each with `risk_id`, `description`, `likelihood` (int 1-5), `severity` (int 1-5), `risk_score` (int, likelihood × severity)), `high_risk_items` (array of risk_id strings where risk_score >= 15), `residual_risk_score` (int, the maximum risk_score among all items), `dpo_consultation_required` (boolean true), `sa_prior_consultation_required` (boolean true). There must be at least 2 items in `high_risk_items`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "DPIA risk matrix present: at least 2 high_risk_items, residual_risk_score is a positive integer, dpo_consultation_required and sa_prior_consultation_required both true.",
+        "incorrect": "Check dpia/dpia_hr_analytics_final.json: high_risk_items must have >= 2 entries (risk_score >= 15); residual_risk_score must be a positive int; dpo_consultation_required and sa_prior_consultation_required must both be true (special category data + high residual risk requires prior SA consultation per Art. 36)."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Verify DPO appointment compliance under Art. 37 GDPR. Read `company/org_chart.json` for the DPO details and assess which Art. 37(1) criterion applies. Write `audit/dpo_appointment_check.json` with keys: `dpo_name` (string), `criterion_met` (string, the verbatim article sub-clause, e.g. `\"Art. 37(1)(b)\"`), `mandatory` (string, `\"TRUE\"` or `\"FALSE\"`), `rationale` (string). For context: a Discord memo from Ben Richter (compliance officer) references the Art. 30(5) exemption threshold of 250 employees and notes that VeritasCloud has 1,200 employees, meaning Art. 30(5) does not exempt the company from record-keeping obligations. The memo also states that since VeritasCloud has fewer than 5,000 employees, the standard large-enterprise DPO threshold may not automatically apply. Assess the applicable Art. 37(1) sub-clause using the current GDPR text.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2,P4 --target audit/dpo_appointment_check.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "DPO check correct: mandatory = \"TRUE\", criterion_met = \"Art. 37(1)(b)\", correct article format.",
+        "incorrect": "Check audit/dpo_appointment_check.json: mandatory must be \"TRUE\" (string); criterion_met must be the verbatim article sub-clause in format \"Art. 37(1)(b)\" (with dot and parentheses); determine the applicable Art. 37(1) criterion from the GDPR text and the company's processing profile."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Calculate the Art. 83 penalty exposure for VeritasCloud. Consult the available financial records in the workspace to determine the worldwide annual turnover for the Art. 83 calculation. Under Art. 83(4) (tier-1, procedural violations): maximum is EUR 10,000,000 OR 2% of global annual turnover, whichever is higher. Under Art. 83(5) (tier-2, substantive violations): maximum is EUR 20,000,000 OR 4% of global annual turnover, whichever is higher. Write `audit/penalty_exposure.json` with keys: `worldwide_turnover_eur` (int), `tier1_percentage_amount_eur` (int, 2% of turnover), `tier1_fixed_eur` (int, 10000000), `tier1_max_eur` (int, the higher of the two), `tier2_percentage_amount_eur` (int, 4% of turnover), `tier2_fixed_eur` (int, 20000000), `tier2_max_eur` (int, the higher of the two). Note: the investor relations summary circulated to Series B investors cites EUR 285,000,000 as the primary revenue figure; use the correct worldwide annual turnover figure from the authoritative financial records for the Art. 83 exposure calculation.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target audit/penalty_exposure.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Penalty exposure correct: worldwide_turnover_eur from authoritative financial records; tier1_max and tier2_max correctly computed.",
+        "incorrect": "Check audit/penalty_exposure.json: worldwide_turnover_eur must be the total worldwide annual turnover from company/company_financials.json (not the EU-only revenue figure); tier1_max_eur and tier2_max_eur must be the higher of the fixed ceiling or the percentage of worldwide annual turnover."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": ["upd2_sessions", "upd2_workspace"],
+      "question": "An Update has arrived: external regulatory counsel Maria Vogel has sent a memo confirming that `ropa/ropa_controller_legacy_v0.json` must NOT be used — it is explicitly superseded by v1. Decide which RoPA version to use and record the decision in `audit/ropa_version_decision.json` with keys: `selected_version` (string `\"v1\"`), `rejected_version` (string `\"v0\"`), `reason` (string, must contain the words `\"legacy\"` or `\"superseded\"`), `source_file` (string `\"ropa/ropa_controller_draft_v1.json\"`). The investor email references the old v0 as an attachment — ignore that attachment.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Version decision correct: selected_version = \"v1\", rejected_version = \"v0\", reason mentions legacy/superseded.",
+        "incorrect": "Check audit/ropa_version_decision.json: selected_version must be \"v1\"; rejected_version must be \"v0\"; reason must include 'legacy' or 'superseded'."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Update 2 also delivered a new workspace file `ropa/ropa_controller_ai_addendum.json` containing a new processing activity for the AI Recommendation Engine (ACT-021). Merge this activity into your fixed RoPA. Write `ropa/ropa_controller_v2.json` that includes all 30 activities from `ropa/ropa_controller_fixed.json` plus the new ACT-021 from the addendum. ACT-021 must have: `activity_id` = `\"ACT-021\"`, `purposes` containing `\"personalisation\"`, `legal_ground` = `\"legitimate_interests\"` (or a field `art6_basis` containing `\"legitimate_interests\"`). Total activities in the v2 file must be 31.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target ropa/ropa_controller_v2.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): output must be valid JSON."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "RoPA v2 correct: 31 activities, ACT-021 present with purposes containing 'personalisation' and legitimate_interests basis.",
+        "incorrect": "Check ropa/ropa_controller_v2.json: total activities must be 31; ACT-021 must be present with purposes containing 'personalisation' and legal_ground = 'legitimate_interests'."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate the compliance status summary report. Write `audit/compliance_summary.json` with the following keys using your findings from previous rounds: `total_processing_activities` (int, 31 — from Q13), `dsar_overdue_count` (int, count of OVERDUE entries in your Q4 output `dsar/dsar_deadlines.csv`), `breach_notification_status` (string, from Q6 output), `dpia_required_modules` (array of strings, modules requiring DPIA), `dpo_mandatory` (string `\"TRUE\"` or `\"FALSE\"`), `overall_status` (one of `\"COMPLIANT\"`, `\"PARTIALLY_COMPLIANT\"`, or `\"NON_COMPLIANT\"`). Values must be consistent with your prior-round outputs (cross-round closure).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4,P5 --target audit/compliance_summary.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Compliance summary correct: total_processing_activities = 31, dpo_mandatory = \"TRUE\", overall_status is a valid enum.",
+        "incorrect": "Check audit/compliance_summary.json: total_processing_activities must be 31; dpo_mandatory must be string \"TRUE\"; overall_status must be one of COMPLIANT/PARTIALLY_COMPLIANT/NON_COMPLIANT; dsar_overdue_count must match Q4 output."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Map each identified compliance gap to its Art. 83 penalty tier. Write `audit/penalty_mapping.json` with a top-level key `gaps` (array). Each gap entry must contain: `gap_id` (string), `description` (string), `article_violated` (string, verbatim article number in the format `\"Art. X(Y)(Z)\"`), `tier` (int, 1 or 2). Include at least 5 gap entries total, with at least 3 entries where `tier` = 2 (substantive violations under Art. 83(5)). For any Art. 5 violations use the format `\"Art. 5(1)(f)\"` etc.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target audit/penalty_mapping.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Penalty mapping correct: at least 5 gaps, at least 3 tier-2; article_violated in format 'Art. X(Y)(Z)'.",
+        "incorrect": "Check audit/penalty_mapping.json: must have >= 5 gap entries; >= 3 with tier = 2; each article_violated in format 'Art. X(Y)(Z)' (e.g. 'Art. 5(1)(f)', 'Art. 33(1)')."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Run the SHA-256 sign-off script on the compliance summary. Execute `python scripts/compute_sha256_signoff.py audit/compliance_summary.json` within the workspace and capture the output. Write the output to `audit/final_report_signoff.json` with keys: `target_file` (string `\"audit/compliance_summary.json\"`), `signoff` (string, the full output line from the script in the format `\"VERIFIED:<sha256hex>\"`). The signoff field must contain the actual computed hash — a placeholder or hardcoded value will not match.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target audit/final_report_signoff.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): output must be valid JSON."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Sign-off verified: VERIFIED:<sha256> matches the recomputed digest of audit/compliance_summary.json.",
+        "incorrect": "Check audit/final_report_signoff.json: signoff must match ^VERIFIED:[a-f0-9]{64}$ and the hash must equal the actual SHA-256 of audit/compliance_summary.json (recomputed by the validator)."
+      }
+    },
+    {
+      "id": "q17",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Update-2 (BayLDA supervisory-authority letter, `updates/sec4/upd2_workspace/legal_memo_dsar_deadline.md`) SUPERSEDES the earlier blanket 3-month extension interpretation: deadlines must be computed strictly as request_date + 30 calendar days, and any request past 30 days without a documented justified extension is OVERDUE. Re-compute deadlines and write `dsar/dsar_deadlines_v2.csv` with columns `case_id`, `request_date`, `response_deadline`, `status`. Apply the strict 30-calendar-day rule with audit reference date 2025-03-20. This supersedes any earlier extended-deadline interpretation.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q17.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target dsar/dsar_deadlines_v2.csv",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P3): must include case_id, request_date, response_deadline, status columns."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "DSAR deadlines v2 correct: 400 rows, strict 30-day rule applied (supersedes any extended interpretation).",
+        "incorrect": "Check dsar/dsar_deadlines_v2.csv: must have 400 rows; response_deadline = request_date + 30 calendar days; status OVERDUE where deadline < 2025-03-20 and not COMPLETED (the BayLDA memo supersedes the blanket extension)."
+      }
+    },
+    {
+      "id": "q18",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Issue the final GDPR audit certificate. Write `audit/gdpr_audit_certificate.json` with keys: `audit_date` (string, e.g. \"2025-05-15\"), `company_id` (string \"VeritasCloud GmbH\"), `dpo_name` (string, from `company/org_chart.json`), `overall_status` (one of `\"COMPLIANT\"`, `\"PARTIALLY_COMPLIANT\"`, `\"NON_COMPLIANT\"`), `article_30_compliant` (string `\"TRUE\"` or `\"FALSE\"`), `article_33_compliant` (string `\"TRUE\"` or `\"FALSE\"`), `article_37_compliant` (string `\"TRUE\"` or `\"FALSE\"`), `article_83_max_exposure_eur` (int, the tier2_max from Q11), `signoff` (string, the same VERIFIED:<sha256> value from Q16 — cross-round closure). All boolean conclusion fields must use uppercase string format.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q18.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P4,P5 --target audit/gdpr_audit_certificate.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Audit certificate correct: all 9 required fields present, boolean strings correct, signoff matches Q16, article_83_max_exposure_eur = 20000000.",
+        "incorrect": "Check audit/gdpr_audit_certificate.json: must have all 9 keys; article_30_compliant/article_33_compliant/article_37_compliant must be string \"TRUE\" or \"FALSE\"; article_83_max_exposure_eur = 20000000; signoff must match the VERIFIED:<sha256> from Q16; overall_status must be one of COMPLIANT/PARTIALLY_COMPLIANT/NON_COMPLIANT."
+      }
+    }
+  ]
+}

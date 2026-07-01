@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analytics-etl
+  namespace: prod
+  labels:
+    app: analytics-etl
+    team: platform
+    version: "1.0.26"
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: analytics-etl
+  template:
+    metadata:
+      labels:
+        app: analytics-etl
+        version: "1.0.26"
+    spec:
+      serviceAccountName: analytics-etl-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      containers:
+      - name: analytics-etl
+        image: registry.mercatorrobotics.com/analytics-etl:1.0.26
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+        resources:
+          requests:
+            cpu: 370m
+            memory: 440Mi
+          limits:
+            cpu: 630m
+            memory: 1183Mi
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: analytics-etl-db-secret
+              key: host
+        - name: DB_PORT
+          value: "5432"
+        - name: LOCK_TIMEOUT
+          value: "30000"
+        - name: LOG_LEVEL
+          value: INFO

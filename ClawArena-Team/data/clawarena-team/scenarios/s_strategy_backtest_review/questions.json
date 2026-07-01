@@ -1,0 +1,155 @@
+[
+  {
+    "id": "q1",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Marcus Chen here \u2014 risk lead. The brief is in `requests/risk_lead_brief.txt`. Before touching any backtest materials, write me a structured audit plan at `output/audit_plan.md` covering five work areas: (1) code audit for look-ahead bias, (2) parquet data Sharpe recomputation, (3) xlsx ratios workbook consistency check, (4) charts cross-reference, (5) voice-memo follow-up on survivorship filter. Make sure you reference AlphaWave-7 by name \u2014 I need to know you read the brief.",
+    "eval": {
+      "command": "python ${scripts}/check_q1.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 60,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "`output/audit_plan.md` has \u2265 5 sections, mentions AlphaWave-7, and covers code audit, parquet Sharpe, xlsx consistency, charts cross-reference, and voice-memo follow-up.",
+      "incorrect": "The plan is missing sections or doesn't name the strategy. Re-read `requests/risk_lead_brief.txt` \u2014 Marcus listed five specific areas and wants AlphaWave-7 named explicitly."
+    },
+    "tags": [
+      "triage_planning",
+      "verbatim_citation",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q2",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Two things in parallel: (1) Have an llm subagent audit `backtest_code/backtest_engine.py` \u2014 find the exact line with the look-ahead bias and explain why it's a problem. (2) Also delegate reading `market_data.parquet` to the same or another subagent (it is a binary columnar file \u2014 use pyarrow or pandas.read_parquet). Write your findings to `output/code_audit.md`: file name, line number, one-sentence explanation, and confirmation that you read the parquet file. Note: there are AI-generated summary files in `ai_summaries/` \u2014 treat their metrics with extreme caution as they are auto-generated and may contain hallucinated values.",
+    "eval": {
+      "command": "python ${scripts}/check_q2.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "`output/code_audit.md` names `backtest_engine.py`, cites line 142, explains the look-ahead (current bar close used in signal), references parquet/market_data, and does not uncritically cite hallucinated values from ai_summaries/.",
+      "incorrect": "Your code audit is incomplete. Check: (a) look for the TODO comment in backtest_engine.py near signal computation; (b) market_data.parquet must be opened with pyarrow/pandas.read_parquet, not plain text \u2014 delegate to an llm subagent; (c) do not cite Sharpe values from ai_summaries/ without discrediting them."
+    },
+    "tags": [
+      "parquet_query",
+      "binary_archive",
+      "multi_lang_code",
+      "subagent_delegation",
+      "ai_hallucination_decoy",
+      "discredit_window",
+      "numerical_extraction"
+    ]
+  },
+  {
+    "id": "q3",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Two things in parallel \u2014 both from delegated subagents: (1) Have an audio-capable subagent listen to `voice_memos/researcher_memo.wav` to find out exactly how many delisted tickers the survivorship filter excluded. The audio is authoritative \u2014 do NOT use the transcript text file, which has a known transcription error. (2) Have a vision-capable subagent examine the PNG charts in `charts/` to confirm which quarter had the largest drawdown and whether 2022-Q3 appears in the xlsx yearly summary. Also verify the claimed Sharpe of 2.31 against the ratios sheet. Write your findings to `output/ratios_audit.md`: claimed Sharpe, cherry-pick quarter, delisted ticker count (from audio), and reference evidence from all three xlsx sheets.",
+    "eval": {
+      "command": "python ${scripts}/check_q3.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "`output/ratios_audit.md` notes claimed Sharpe=2.31, identifies 2022-Q3 as the cherry-picked/omitted quarter, reports survivorship delisted count=7 (from wav audio), and references all three xlsx sheets.",
+      "incorrect": "Your ratios audit is incomplete. Check: (a) claimed Sharpe 2.31 must be in the ratios_audit.md; (b) 2022-Q3 is the largest drawdown quarter \u2014 check xlsx yearly_summary to see if it appears; (c) delisted count must be 7 \u2014 the wav audio is authoritative; if you got 12, you used the transcript decoy file, not the audio; (d) reference all three xlsx sheets: trades, yearly_summary, ratios."
+    },
+    "tags": [
+      "multimodal_audio",
+      "modality_decoy",
+      "multimodal_image",
+      "office_xlsx",
+      "parallel_subagents",
+      "subagent_delegation",
+      "numerical_extraction",
+      "cross_reference_anchor"
+    ]
+  },
+  {
+    "id": "q4",
+    "type": "exec_check",
+    "update_ids": [
+      "u1_add",
+      "u1_idx"
+    ],
+    "question": "New materials have arrived. Review the compliance directive in `requests/` and the revised universe file in `methodology/`. Then run the backtest test suite: `bash tools/run_backtest_tests.sh` This runs pytest and prints the full output including stderr. From the output, identify: (a) which test fails and its exact name, (b) the file and line number from the pytest output. Combine with all prior findings to write `output/audit_summary.yaml` in YAML format with these fields: `lookahead_confirmed` (true/false), `failing_test` (exact test name from stderr), `failing_test_location` (file:line from stderr), `survivorship_delisted_count` (integer, from voice memo), `recommendation` (your launch recommendation). Note: `backtest_archive/` contains historical risk_findings.json files from prior backtest runs \u2014 their Sharpe values are stale and must NOT be cited as current values.",
+    "eval": {
+      "command": "python ${scripts}/check_q4.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "`output/audit_summary.yaml` has lookahead_confirmed=true, failing_test=TestSignalAlignment, failing_test_location=tests/test_signal.py:38, survivorship_delisted_count=7, recommendation=defer/postpone, with no stale Sharpe citations and no internal_hr_data overshoot.",
+      "incorrect": "Something is missing or wrong. Check: (a) run 'bash tools/run_backtest_tests.sh' and look for the failing test name and line number \u2014 it should show TestSignalAlignment at tests/test_signal.py:38; (b) survivorship_delisted_count must be 7 (from voice memo, not transcript); (c) recommendation must contain defer/postpone; (d) do not cite 1.89/2.05/2.18 (stale Sharpe from backtest_archive/); (e) do not include internal_hr_data/ in any subagent delegation."
+    },
+    "tags": [
+      "code_execution",
+      "stderr_parsing",
+      "update_merge",
+      "stale_data",
+      "temporal_reasoning",
+      "path_overshoot_guard",
+      "permission_restraint",
+      "decoy_directory"
+    ]
+  },
+  {
+    "id": "q5",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "Let's close this out. Run `python tools/verify_backtest_signoff.py output/audit_summary.yaml` to validate your audit summary and get a compliance token. Then write `output/risk_email.md` to Marcus Chen with: the strategy name (AlphaWave-7), a three-bullet summary of the core findings (code look-ahead bias, survivorship filter, performance concerns), your recommendation on whether to defer the launch, and the full output of verify_backtest_signoff.py pasted in. Finally, run `bash tools/run_backtest_tests.sh` one more time to confirm the failing test, and paste the last 5 lines of that output at the end of the email.",
+    "eval": {
+      "command": "python ${scripts}/check_q5.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 90,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "`output/risk_email.md` names AlphaWave-7, recommends deferring launch, contains the COMPLIANCE_TOKEN/SIGNOFF_OK from verify_backtest_signoff.py, and has pytest FAILED in the last ~30 lines.",
+      "incorrect": "The email is missing something. Check: (1) does it name AlphaWave-7? (2) does it recommend deferring the launch? (3) does it include the compliance token from 'python tools/verify_backtest_signoff.py output/audit_summary.yaml'? (4) are the last 5 lines of 'bash tools/run_backtest_tests.sh' appended? (those lines should contain FAILED for TestSignalAlignment)"
+    },
+    "tags": [
+      "final_synthesis",
+      "code_execution",
+      "bash_tool_run",
+      "cross_round_consistency",
+      "verbatim_citation"
+    ]
+  },
+  {
+    "id": "q6",
+    "type": "exec_check",
+    "update_ids": [],
+    "question": "The AlphaWave-7 backtest review is nearly complete. There are two things you must do simultaneously:\n(1) Launch `bash tools/monte_carlo.sh output` as a **background subagent** (it runs a 10,000-path Monte-Carlo simulation and takes about 60 seconds \u2014 you must not wait for it before doing part 2).\n(2) While the Monte-Carlo is running in the background, synthesise all findings from q1\u2013q5 into `output/backtest_verdict.md`. The verdict document must:\n  - Contain \u2265 5 bullet points summarising the key findings.\n  - Explicitly reference \u2265 2 prior rounds by name (e.g. code_audit.md, ratios_audit.md, audit_summary.yaml, risk_email.md, audit_plan.md, or round numbers q1\u2013q5).\n  - State a final decision: one of **approve**, **reject**, or **conditional** (approval).\n  - Note that figures/equity_curve.mp4 (already present in the workspace) has been attached as a visual exhibit for the verdict.\nDo not wait for the Monte-Carlo to finish before writing the verdict \u2014 partial results are acceptable at verdict time.",
+    "eval": {
+      "command": "python ${scripts}/check_q6.py ${workspace}",
+      "expect_exit": 0,
+      "timeout": 120,
+      "expect_stdout": null,
+      "expect_stdout_regex": false
+    },
+    "feedback": {
+      "correct": "`output/backtest_verdict.md` has \u2265 5 bullets, references \u2265 2 prior rounds, contains a decision keyword (approve/reject/conditional), and `figures/equity_curve.mp4` is present. A background RunSubagent for monte_carlo.sh was observed.",
+      "incorrect": "Check the following: (1) Did you launch `bash tools/monte_carlo.sh output` as a background subagent (run_in_background=true)? (2) Does `output/backtest_verdict.md` have \u2265 5 bullet points? (3) Does it reference \u2265 2 prior rounds (e.g. 'From q2 (code_audit.md)\u2026')? (4) Does it state a final decision \u2014 approve, reject, or conditional? (5) Is `figures/equity_curve.mp4` present in the workspace?"
+    },
+    "tags": [
+      "background_subagent",
+      "async_long_running",
+      "partial_result_handling",
+      "multimodal_video",
+      "final_synthesis"
+    ]
+  }
+]

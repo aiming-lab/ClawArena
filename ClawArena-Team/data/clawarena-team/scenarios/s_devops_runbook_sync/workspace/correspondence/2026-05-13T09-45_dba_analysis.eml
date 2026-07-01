@@ -1,0 +1,28 @@
+From: Priya Nair <priya.nair@mercatorrobotics.com>
+To: jordan.choi@mercatorrobotics.com
+Date: 2026-05-13 09:45 UTC
+Subject: Root cause analysis — migration failure
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Jordan,
+
+I left a voicemail with the full RCA — please listen to it for the
+authoritative root cause; the verbal walkthrough has the specifics
+that I'm intentionally not putting in writing here (you know why).
+
+Short version: V0234__add_idempotency_keys.sql attempted to backfill 12M rows
+in billing_transactions and was blocked indefinitely by a concurrent process
+on the analytics replica. Our migration eventually exhausted the connection
+pool.
+
+Recommended remediation areas (details on the voicemail):
+- Tighten the relevant session-level migration settings (see voicemail).
+- Add a pre-migration pause step for the upstream pipeline to all runbooks.
+- Update Terraform aws_db_parameter_group to enforce
+  log_min_duration_statement=500ms across all RDS instances.
+
+I'll send the full DB slow-query log separately.
+
+— Priya
+

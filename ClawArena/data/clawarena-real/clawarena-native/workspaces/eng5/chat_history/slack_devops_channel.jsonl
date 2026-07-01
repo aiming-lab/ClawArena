@@ -1,0 +1,62 @@
+{
+  "channel": "devops-cicd",
+  "export_date": "2025-03-15",
+  "messages": [
+    {
+      "ts": "1741600000.000100",
+      "user": "alice",
+      "text": "Team, I've been looking at our cache situation. The root issue is `github.sha` in the key. Once we switch to `hashFiles`, we should see cache hit rates go up significantly.",
+      "reactions": [
+        {
+          "name": "thumbsup",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "ts": "1741600060.000200",
+      "user": "bob",
+      "text": "Agreed. I'll also upgrade `actions/cache` from v2 to v4. The deprecation deadline was March 1st. We're already past it.",
+      "attachments": []
+    },
+    {
+      "ts": "1741600120.000300",
+      "user": "charlie",
+      "text": "Per the bot summary below, the cache issue was resolved in November. Are you sure we still need this fix?",
+      "attachments": [
+        {
+          "title": "[Bot Summary - NOT authoritative]",
+          "text": "SUMMARY (auto-generated, accuracy not guaranteed): Cache configuration reviewed Nov 2024. Bot detected cache@v3 in use. Key format appears correct. No action needed. — Note: This summary may be outdated or inaccurate."
+        }
+      ]
+    },
+    {
+      "ts": "1741600180.000400",
+      "user": "alice",
+      "text": "Charlie, the bot summary is wrong. I just checked the actual yml files - still on v2, still using github.sha. Don't trust the bot for config status.",
+      "reactions": [
+        {
+          "name": "white_check_mark",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "ts": "1741600240.000500",
+      "user": "bob",
+      "text": "Also, the nightly.yml has a concurrency config issue. `queue: max` with `cancel-in-progress: true` is a forbidden combo. It causes a validation error every run.",
+      "reactions": []
+    },
+    {
+      "ts": "1741600300.000600",
+      "user": "charlie",
+      "text": "For the concurrency fix on nightly: since it's a long-running scan job, we should keep `queue: max` and remove `cancel-in-progress`. That way runs queue up but don't get killed mid-scan.",
+      "reactions": [
+        {
+          "name": "thumbsup",
+          "count": 2
+        }
+      ]
+    }
+  ]
+}

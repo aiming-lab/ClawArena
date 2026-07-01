@@ -1,0 +1,350 @@
+{
+  "id": "prd2",
+  "desc": "Content moderation policy engine for YouTube/Meta/TikTok/Reddit — 16 exec_check rounds, 3 updates (incl. TikTok appeal supersede), 5 preference rules P1-P5, difficulty vectors V1/V2/V3/V4/V5/V6/V7/V8/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Establish the platform policy index. Read the platform directories under `policy_engine/platforms/` and create an `index.json` file in each platform subdirectory summarizing the policy categories and key fields. Specifically write:\n- `platforms/youtube/index.json`: include `platform='youtube'`, `policy_categories` (list with at least 5 categories from the actual documentation: Spam & Deceptive Practices, Sensitive Content, Violent or Dangerous Content, Regulated Goods, Misinformation), and `strike_window_days=90`.\n- `platforms/meta/index.json`: include `platform='meta'`, `policy_category_count=27` (the official count from Meta's US English Community Standards).\n- `platforms/tiktok/index.json`: include `platform='tiktok'`, `safety_civility` field as an **object** containing `q1_2025_removal_pct` (the exact percentage from the Q1 2025 transparency report — check `platforms/tiktok/q1_2025_report.json`).\n- `platforms/reddit/index.json`: include `platform='reddit'`, `rule1`, `rule2`, and `rule5` fields with the **verbatim text** from the official NY S895B/A6789B report (exact phrasing, not paraphrased).\n(Jordan mentioned in email that Meta has ~25 categories but read the authoritative platform file for the real count.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target platforms/youtube/index.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): JSON files must use 2-space indentation and snake_case keys."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Platform index files created with correct category counts and verbatim field names.",
+        "incorrect": "Check platforms/{platform}/index.json: youtube must have >=5 policy categories; meta must have policy_category_count=27; tiktok must have safety_civility field; reddit must include rule1/rule2/rule5 verbatim text fields."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Encode the YouTube violation ladder precisely into `platforms/youtube/strike_system.json`. The file must capture:\n- `warning.expiry_days = 90` (warnings expire after 90 days)\n- `strike1.freeze_days = 7` (one week freeze)\n- `strike2.freeze_days = 14` (two weeks freeze)\n- `strike3.consequence = 'channel_permanent_removal'`\n- `window_days = 90` (the rolling strike window)\nAlso add `_source_url` fields for each numeric value per house preference P2. Use 2-space indented JSON with snake_case keys (P1).\n(I think Strike 2 might be 10 days but double-check — read the official platform file to be sure.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target platforms/youtube/strike_system.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): JSON must use 2-space indent and snake_case (P1); numeric fields must have _source_url companions (P2)."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "YouTube strike system JSON correct: warning=90d, strike1=7d, strike2=14d, strike3=channel_permanent_removal, window=90d.",
+        "incorrect": "Check platforms/youtube/strike_system.json: warning.expiry_days must be 90; strike1.freeze_days must be 7 (not 10); strike2.freeze_days must be 14; strike3.consequence must be 'channel_permanent_removal'; window_days must be 90."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Encode Meta's violation ladder precisely into `platforms/meta/strike_system.json`. The file must capture the exact day counts for each strike:\n- `strike_7.content_ban_days = 1` (7th strike = 1-day ban)\n- `strike_8.content_ban_days = 3`\n- `strike_9.content_ban_days = 7`\n- `strike_10plus.content_ban_days = 30`\nNote: Jordan's email claims Strike 7 = 3 days, and the PolicyBot summary also claims 3 days. Identify the correct value from the authoritative platform documentation, NOT from the email or bot summary.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target platforms/meta/strike_system.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): JSON 2-space indent + snake_case (P1); numeric fields need _source_url (P2)."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Meta strike system JSON correct: strike_7=1 day (not 3), strike_8=3 days, strike_9=7 days, strike_10plus=30 days.",
+        "incorrect": "Check platforms/meta/strike_system.json: strike_7.content_ban_days must be 1 (the email and bot claiming 3 days are WRONG — use the official Meta Transparency page value); strike_8 must be 3; strike_9 must be 7; strike_10plus must be 30."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Build the Reddit enforcement tiers JSON at `platforms/reddit/enforcement_tiers.json`. The file must include:\n- `tiers[0].action = 'warning'` (first tier)\n- `tiers[1].suspend_days = 3` (second tier is a 3-day suspension)\n- `tiers[2].suspend_days = 7` (third tier is a 7-day suspension)\n- `h1_2025.harassment.removed` — the **exact** H1 2025 harassment content removal figure from the NY S895B/A6789B report (read `platforms/reddit/h1_2025_metrics.json` for the precise number)\n- `h1_2025.hateful.appeal_reversal_rate` — the **exact** reversal rate for hateful content appeals from the same NY report (read the source file, not an approximation)\nAlso include verbatim Reddit Rule 1 text in a `rule1_verbatim` field (exact phrasing from the NY S895B/A6789B report, including the 'promote hate based on identity or vulnerability' clause).\nNote: include `_source_url` fields for all numeric values (P2). The Feishu channel mentioned harassment removals were 'around 70,000' — use the exact figure from the source file.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target platforms/reddit/enforcement_tiers.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): JSON 2-space indent + snake_case (P1); numeric fields need _source_url (P2)."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "Reddit enforcement tiers correct: warning/3d/7d/permanent; H1 2025 harassment=68550; hateful reversal rate=30.0%; Rule 1 verbatim included.",
+        "incorrect": "Check platforms/reddit/enforcement_tiers.json: tiers[0].action='warning'; tiers[1].suspend_days=3; tiers[2].suspend_days=7; h1_2025.harassment.removed=68550 (±10%); h1_2025.hateful.appeal_reversal_rate≈0.300 (±10%); rule1_verbatim field present."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Build the TikTok Q1 2025 metrics JSON at `platforms/tiktok/q1_2025_report.json`. The file must include these precise statistics from the official Q1 2025 transparency report. Read `platforms/tiktok/q1_2025_report.json` in the source data for the exact figures — do not round or approximate:\n- `videos_removed` — total videos removed (the report says approximately 211 million)\n- `automated_removed` — the **exact** automated detection count (a 9-digit number; the PolicyBot summary rounded it to 184 million, but use the exact figure)\n- `reinstated` — reinstated after further review\n- `proactive_rate` — fraction removed proactively before user reports\n- `within_24h_rate` — fraction removed within 24 hours\nNote: Add `_source_url` fields for each metric (P2). Time limits in the file (if any) should follow P3 convention (months as primary unit). The internal draft memo estimated automated removal at 185 million — verify against the authoritative source file.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2 --target platforms/tiktok/q1_2025_report.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2): JSON 2-space indent + snake_case (P1); numeric fields need _source_url (P2)."
+        },
+        "rules": "P1,P2"
+      },
+      "feedback": {
+        "correct": "TikTok Q1 2025 metrics JSON correct: all statistics within 1% of official values.",
+        "incorrect": "Check platforms/tiktok/q1_2025_report.json: videos_removed must be ~211000000; automated_removed ~184378987; reinstated ~7525184; proactive_rate ~0.990; within_24h_rate ~0.943."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Create a cross-platform SLA comparison table at `internal/platform_sla.json`. Use months as the primary unit for all time limits (P3 preference: 1 decimal place). Include:\n- `youtube.appeal_window_strike_months = 6.0` (6 months for strike appeals)\n- `youtube.appeal_window_content_months = 12.0` (12 months for content removal appeals)\n- `reddit.appeal_window_months = 6.0`\n- `tiktok.strike_expiry_days = 90` (keep in days as this is the standard unit used by TikTok)\nThe Slack #compliance bot summary claims YouTube's appeal window for strikes is 3 months. Do NOT use this — verify against the official platform documentation. Add `_source_url` for numeric values (P2).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P2,P3 --target internal/platform_sla.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P2/P3): JSON snake_case + 2-space indent (P1); _source_url for numerics (P2); time limits in months with 1 decimal (P3)."
+        },
+        "rules": "P1,P2,P3"
+      },
+      "feedback": {
+        "correct": "Platform SLA JSON correct: YouTube strike appeal window = 6.0 months (not 3 months from bot); content appeal = 12.0 months; Reddit = 6.0 months; TikTok strike expiry = 90 days.",
+        "incorrect": "Check internal/platform_sla.json: youtube.appeal_window_strike_months must be 6.0 (the Slack bot claiming 3 months is a known error — use official documentation); youtube.appeal_window_content_months must be 12.0; reddit.appeal_window_months must be 6.0; tiktok.strike_expiry_days must be 90."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Examine `reports/archived/compliance_report_v0.md` (the archived old report from 2024) and identify data points that are now outdated. Write `reports/deprecation_log.json` documenting which values from the old report have been superseded. The log must include:\n- An entry for Meta Strike 7 duration (old value: 3 days → now deprecated=true with correct_value=1)\n- An entry for YouTube appeal window for strikes (old value: 3 months → deprecated=true with correct_value=6)\nDo NOT use any data from the archived report for your deliverables — it is a red herring. The archived file has `last_updated: 2024-03-01` and is clearly marked as archived.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P4 --target reports/deprecation_log.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P4): JSON 2-space indent + snake_case (P1); reports/ files should use {type}_{yyyy-mm}.json naming (P5 — but deprecation_log is not a stats file so standard naming applies)."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Deprecation log correct: Meta Strike7 (3d→deprecated), YouTube appeal window (3mo→deprecated); archived report correctly identified as red herring.",
+        "incorrect": "Check reports/deprecation_log.json: must contain an entry for meta_strike_7_duration with deprecated=true; must contain an entry for youtube_appeal_window_strike with deprecated=true."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write a cross-platform violation tier comparison document at `internal/policy_matrix_summary.md`. The document must:\n1. Have `## YouTube`, `## Meta`, `## TikTok`, and `## Reddit` as second-level headings.\n2. Include in the YouTube section: Strike 1 = 7 days freeze.\n3. Include in the Meta section: Strike 7 = 1-day ban (NOT 3 days — Feishu DM from Maya noted TikTok two-strikes-to-permanent as wrong, and similarly the email claiming Strike7=3 days is wrong).\n4. Include in the Reddit section: Tier 2 = 3-day suspension.\n5. Include TikTok three-strike permanent ban (note: it's THREE strikes, not two).\n6. Use footnote citation format `[^N]` for all data sources, and end with a `## 参考来源` or `## References` section listing the source URLs (P4 requirement).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4 --target internal/policy_matrix_summary.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Citation reminder (P4): Markdown documents must use [^N] footnote format and include a ## 参考来源 (References) section at the end."
+        },
+        "rules": "P4"
+      },
+      "feedback": {
+        "correct": "Policy matrix summary contains all 4 platform headings, correct strike values, and P4 footnote citations.",
+        "incorrect": "Check internal/policy_matrix_summary.md: must have ## YouTube/Meta/TikTok/Reddit headings; YouTube Strike1=7 days; Meta Strike7=1 day; Reddit Tier2=3 days; TikTok permanent ban after 3 strikes; [^N] citations present; ## 参考来源 section at end."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": ["upd1_workspace", "upd1_sessions"],
+      "question": "Update_1 has arrived with 20 new appeal cases (T-001 to T-007 TikTok, Y-001 to Y-006 YouTube, M-001 to M-005 Meta, R-001 to R-002 Reddit) and updated case statuses for legacy cases. Update `internal/appeal_tracker.json` to reflect:\n1. All 20 new cases added with all fields from the update_1 data: `status`, `platform`, `violation_type`, and `filed_date`.\n2. Legacy cases OLD-0050, OLD-0051, OLD-0052 status changed to `under_review` (they were previously approved).\n3. The `total_cases` field must be set to the **exact** count of all cases in the tracker (count every entry in the cases dictionary).\nThe platform distribution of new cases must be fully represented (youtube/meta/tiktok/reddit all present in new cases).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target internal/appeal_tracker.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): JSON 2-space indent + snake_case keys required."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Appeal tracker updated: 20 new cases added (all 4 platforms represented); legacy cases 050/051/052 → under_review; total_cases updated.",
+        "incorrect": "Check internal/appeal_tracker.json: must contain at least 20 new cases from update_1 (T-001 to T-007, Y-001 to Y-006, M-001 to M-005, R-001 to R-002); OLD-0050/0051/0052 must be under_review; all new cases must have platform/status/violation_type fields."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Scan all sessions (Slack, Feishu, Email, Discord) and workspace files for claims that conflict with the authoritative platform policy files. Write `internal/conflict_report.json` documenting detected conflicts. The report must contain:\n- At least 3 conflict records\n- Each record must have: `source_channel`, `claimed_value`, `official_value`, `official_url` fields\n- Must identify: (a) Meta Strike 7 conflict (email/bot claim 3 days vs official 1 day), (b) YouTube appeal window conflict (bot claims 3 months vs official 6 months), (c) TikTok permanent ban threshold conflict (Feishu references old SOP claiming 2 strikes vs official 3 strikes)\nNote: the PolicyBot bot summary file (`internal/BOT_SUMMARY_POLICY_UPDATES.md`) is explicitly labelled as potentially inaccurate and must be flagged.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P5 --target internal/conflict_report.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1/P5): JSON 2-space indent + snake_case (P1); reports/ files should be named {type}_{yyyy-mm}.json (P5) — conflict_report.json is under internal/ so standard naming applies."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Conflict report has >=3 records: Meta Strike7, YouTube appeal window, TikTok ban threshold all identified with source_channel/claimed_value/official_value/official_url.",
+        "incorrect": "Check internal/conflict_report.json: must have >=3 conflict records, each with source_channel/claimed_value/official_value/official_url; must identify: meta_strike7 conflict, youtube_appeal_window conflict, tiktok_permanent_ban_threshold conflict."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce a cross-validation report at `reports/cross_validation.json` confirming that the values you recorded in earlier rounds (Q2, Q3, Q5) are internally consistent across files. Specifically verify:\n- `youtube.strike1_freeze_days` matches the value in `platforms/youtube/strike_system.json` (expected: 7)\n- `meta.strike9_ban_days` matches the value in `platforms/meta/strike_system.json` (expected: 7)\n- `tiktok.videos_removed_q1_2025` matches the value in `platforms/tiktok/q1_2025_report.json` (expected: 211000000)\nReport any discrepancies (drift) found. The JSON must record both the expected_value and the actual_value_found for each field.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Cross-validation report confirms no drift: all values consistent across Q2/Q3/Q5 files.",
+        "incorrect": "Check reports/cross_validation.json: must have youtube.strike1_freeze_days (from platforms/youtube/strike_system.json, expected 7), meta.strike9_ban_days (expected 7), tiktok.videos_removed_q1_2025 (expected 211000000)."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": ["upd2_workspace", "upd2_sessions"],
+      "question": "Update_2 has arrived. The Discord #mod-ops notice from Sam Rivera SUPERSEDES part of update_1: TikTok appeal cases T-001 through T-007 must be reset to 'pending' status. This ONLY affects TikTok cases T-001 to T-007 — YouTube cases (Y-001 to Y-006), Meta cases (M-001 to M-005), and Reddit cases (R-001 to R-002) from update_1 are NOT affected and should retain their update_1 statuses.\n\nAlso, update_2 provides a TikTok Q3 2025 transparency report to replace Q1 2025 as the current reference. Write the Q3 data to `platforms/tiktok/q3_2025_report.json` with a `quarter='Q3_2025'` field.\n\nUpdate `internal/appeal_tracker.json` accordingly.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Supersede correctly applied: TikTok T-001 to T-007 reset to pending; YouTube/Meta/Reddit cases unchanged; Q3 2025 TikTok report created with quarter='Q3_2025'.",
+        "incorrect": "Check: internal/appeal_tracker.json T-001 to T-007 must have status='pending' (supersede by Discord notice); Y-001 to Y-006 must NOT be changed (still approved); platforms/tiktok/q3_2025_report.json must exist with quarter field containing 'Q3_2025'."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Using `internal/violation_log_2025.csv`, compute a summary of violation category distribution by platform and write the result to a file in the `reports/` directory. The file must contain:\n- Counts per violation_type grouped by platform for all 4 platforms\n- Total count per platform\nName the output file following the reports/ naming convention (P5 preference: `{type}_{yyyy-mm}.json` or `{type}_latest.json` when no specific month applies). Do NOT name it `violation_stats.json` without a date/latest suffix — that would violate the naming convention.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P5 --target reports/",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Naming reminder (P5): Files in reports/ must follow {type}_{yyyy-mm}.json or {type}_latest.json convention."
+        },
+        "rules": "P5"
+      },
+      "feedback": {
+        "correct": "Violation stats file created with correct naming convention (P5) and valid platform breakdown.",
+        "incorrect": "Check reports/ directory: violation stats file must be named violation_stats_latest.json or violation_stats_{yyyy-mm}.json (P5 convention); must contain violation data for all 4 platforms (youtube/meta/tiktok/reddit); must have total_count per platform."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write the internal enforcement SOP document at `internal/sop_enforcement.md`. The document must:\n1. Have `## YouTube`, `## Meta`, `## TikTok`, and `## Reddit` as second-level headings.\n2. Include accurate appeal time limits in the YouTube section: 6 months for strikes/warnings, 12 months for content removals.\n3. Include accurate appeal time limits in the Reddit section: 6 months.\n4. End with a `## 来源参考` section containing at least 4 source URLs from the actual platform documentation (not made-up URLs).\nNote: House preference P4 (footnote citations) applies; use `[^N]` format in the body and list sources at the end.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4 --target internal/sop_enforcement.md",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Citation reminder (P4): Markdown SOP must use [^N] footnote format and include ## 来源参考 section with source URLs."
+        },
+        "rules": "P4"
+      },
+      "feedback": {
+        "correct": "SOP document has all 4 platform headings; correct appeal windows (YT 6mo, Reddit 6mo); ## 来源参考 section with >=4 URLs.",
+        "incorrect": "Check internal/sop_enforcement.md: must have ## YouTube/Meta/TikTok/Reddit; YouTube appeal window must be '6' month value; Reddit appeal window must be '6' month value; ## 来源参考 section must exist with >=4 actual source URLs from the documentation."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": ["upd3_workspace", "upd3_sessions"],
+      "question": "Update_3 has arrived via email from the legal team: EU DSA (Digital Services Act) compliance requirements are now formalized. Create `internal/regulatory_addendum.json` recording these requirements:\n- `regulation = 'EU_DSA'`\n- `affected_platforms` = list containing 'youtube', 'meta', 'tiktok' (but NOT 'reddit' — the email confirms Reddit does not meet the 45M EU active user VLOP threshold)\n- `article_reference` = list containing at minimum 'Art. 34' and 'Art. 35' (the key VLOP obligations — exact strings, e.g. 'Art. 34' not 'Article 34')\n- `non_affected_platforms` = list containing 'reddit'\n- `vlop_threshold_eu_users` = the exact numerical threshold for VLOP designation (read `internal/dsa_articles_reference.json` for the precise value)\n\nNote: An early draft in the email thread suggested Reddit might qualify, but the final email from legal@creatorhub.com SUPERSEDES that: Reddit is NOT in affected_platforms.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target internal/regulatory_addendum.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Format reminder (P1): JSON 2-space indent + snake_case keys."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "regulatory_addendum.json correct: regulation='EU_DSA'; affected_platforms contains youtube/meta/tiktok but NOT reddit; article_reference includes Art. 34 and Art. 35.",
+        "incorrect": "Check internal/regulatory_addendum.json: regulation must be 'EU_DSA'; affected_platforms must include youtube, meta, tiktok but NOT reddit; article_reference must include 'Art. 34' and 'Art. 35'; non_affected_platforms must include 'reddit'."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Final sign-off. Write a final compliance report at `reports/compliance_report_final.md` summarizing the complete policy engine state. The report must contain:\n- Data summaries for all four platforms, **including the exact figures** used throughout the policy engine (e.g. TikTok automated removal count 184378987, Reddit H1 2025 harassment removal count 68550)\n- An appeal window comparison table\n- A conflicts analysis summary referencing the conflict_report\n\nThen compute the SHA-256 hash of the EXACT bytes of `reports/compliance_report_final.md` and write `reports/compliance_signoff.json` containing a `sha256` field with the 64-character lowercase hex digest. The JSON must also contain `signed_file = 'reports/compliance_report_final.md'`.\n\nYou must actually run the hash computation — do not guess or use a placeholder.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Sign-off valid: compliance_report_final.md exists with platform summaries; sha256 in compliance_signoff.json matches recomputed digest.",
+        "incorrect": "Check reports/compliance_report_final.md (must exist with platform data and appeal table) and reports/compliance_signoff.json (sha256 field must match the actual sha256sum of compliance_report_final.md; signed_file field must be present)."
+      }
+    }
+  ]
+}

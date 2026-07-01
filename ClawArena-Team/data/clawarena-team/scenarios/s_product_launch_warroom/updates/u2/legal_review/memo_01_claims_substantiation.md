@@ -1,0 +1,1322 @@
+# Legal memo — Substantiation for performance claims (v2, post-u2)
+
+**Memo ID**: `memo_01_claims_substantiation`
+**Effective**: 2026-05-30. Supersedes the v1 memo of 2026-05-22 in language.
+
+## Substantiation standard (unchanged)
+
+Performance claims must rest on a published peer-reviewed measurement OR an
+internal benchmark with the methodology recorded in the press kit. The
+BlueRidge Logistics Q1 2026 pilot continues to meet the internal-benchmark
+standard.
+
+## Updated language guidance (new)
+
+- 'First' / 'first-ever' is no longer approved language. Replace with
+  'industry-pacesetting' or 'leading'.
+- 'Guaranteed' is no longer approved in customer-evidence sections. Replace
+  with 'demonstrated'.
+- See `memo_06_final_redactions.md` for the full disallowed-phrase list.
+
+## Appendix — referenced precedents
+
+- [ref-91726] appended a draft partner webinar from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 190.
+- [ref-84164] linked a tentative analyst report from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6233.
+- [ref-51503] transcribed a final customer reference call from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8019.
+- [ref-24374] indexed a definitive buyer survey from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 988.
+- [ref-22000] annotated a revised blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5289.
+- [ref-47803] verified a draft analyst report from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1873.
+- [ref-94666] tabulated a tentative podcast transcript from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 948.
+- [ref-58457] archived a tentative analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2556.
+- [ref-11385] uploaded a draft customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1912.
+- [ref-10994] annotated a preliminary blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1866.
+- [ref-97343] uploaded a qualified regulatory filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4862.
+- [ref-59984] circulated a supplemental regulatory filing from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4799.
+- [ref-32245] marked a contested customer reference call from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8910.
+- [ref-93982] linked a tentative win/loss interview from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6130.
+- [ref-73412] reviewed a tentative press release from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7654.
+- [ref-93765] captured a draft press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1821.
+- [ref-18636] filed a definitive podcast transcript from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4117.
+- [ref-10601] tagged a contested win/loss interview from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9411.
+- [ref-90009] indexed a revised regulatory filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9529.
+- [ref-13544] tagged a preliminary field memo from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7144.
+- [ref-25240] summarised a final conference talk from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7971.
+- [ref-71653] linked a final blog post from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8091.
+- [ref-36373] captured a revised blog post from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1440.
+- [ref-49698] circulated a unqualified field memo from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9508.
+- [ref-27053] transcribed a draft field memo from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9630.
+- [ref-60772] linked a supplemental blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3125.
+- [ref-69085] noted a preliminary trade show keynote from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3998.
+- [ref-45225] tabulated a qualified analyst report from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3531.
+- [ref-74815] linked a draft patent disclosure from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9871.
+- [ref-85940] logged a preliminary buyer survey from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6733.
+- [ref-17514] pulled a supplemental podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4251.
+- [ref-33481] reviewed a contested field memo from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8556.
+- [ref-11470] appended a definitive customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2749.
+- [ref-93862] captured a definitive win/loss interview from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2623.
+- [ref-77368] logged a qualified SEC filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3038.
+- [ref-76643] indexed a supplemental patent disclosure from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7583.
+- [ref-49197] tagged a tentative partner webinar from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7876.
+- [ref-60521] uploaded a contested patent disclosure from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5460.
+- [ref-69390] verified a uncontested field memo from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3933.
+- [ref-39804] marked a tentative analyst report from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7508.
+- [ref-33040] tabulated a unqualified podcast transcript from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2544.
+- [ref-71778] logged a uncontested conference talk from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7294.
+- [ref-68160] appended a tentative patent disclosure from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7614.
+- [ref-85099] appended a uncontested analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2472.
+- [ref-29805] linked a qualified podcast transcript from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4044.
+- [ref-43132] referenced a final press release from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4981.
+- [ref-15355] tagged a final SEC filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1271.
+- [ref-58412] archived a final patent disclosure from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1759.
+- [ref-63258] annotated a revised buyer survey from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4220.
+- [ref-68360] annotated a draft blog post from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1330.
+- [ref-52791] tagged a unqualified field memo from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 992.
+- [ref-20356] transcribed a draft field memo from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1160.
+- [ref-47033] verified a definitive analyst report from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3456.
+- [ref-46856] tabulated a unqualified analyst report from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 500.
+- [ref-52025] filed a supplemental podcast transcript from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4733.
+- [ref-58232] marked a unqualified analyst report from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1709.
+- [ref-33175] verified a draft conference talk from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4537.
+- [ref-34413] archived a uncontested field memo from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8730.
+- [ref-88299] captured a supplemental partner webinar from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8146.
+- [ref-76229] tagged a tentative buyer survey from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4076.
+- [ref-40619] ratified a unqualified partner webinar from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8388.
+- [ref-90678] transcribed a definitive customer reference call from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9050.
+- [ref-40677] logged a tentative analyst report from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1544.
+- [ref-71793] cross-checked a final partner webinar from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 666.
+- [ref-82814] ratified a tentative SEC filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2089.
+- [ref-33211] uploaded a final investor day deck from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7979.
+- [ref-25622] indexed a draft regulatory filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5505.
+- [ref-70244] ratified a tentative SEC filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 834.
+- [ref-31994] marked a contested SEC filing from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4511.
+- [ref-71533] tabulated a definitive partner webinar from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8840.
+- [ref-85691] marked a unqualified field memo from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1283.
+- [ref-21460] tabulated a supplemental trade show keynote from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3564.
+- [ref-61867] referenced a uncontested win/loss interview from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3858.
+- [ref-69287] noted a preliminary field memo from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 455.
+- [ref-14870] reviewed a uncontested analyst report from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6107.
+- [ref-30450] annotated a tentative field memo from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9060.
+- [ref-56832] appended a qualified partner webinar from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7127.
+- [ref-38209] noted a preliminary investor day deck from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 394.
+- [ref-34663] noted a definitive field memo from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4457.
+- [ref-45402] filed a tentative buyer survey from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2781.
+- [ref-40387] indexed a tentative analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9579.
+- [ref-51786] marked a qualified press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8243.
+- [ref-67264] marked a revised analyst report from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9208.
+- [ref-20786] logged a unqualified win/loss interview from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3563.
+- [ref-16360] pulled a draft podcast transcript from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7256.
+- [ref-62582] flagged a contested trade show keynote from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4347.
+- [ref-54585] marked a draft patent disclosure from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 529.
+- [ref-82837] tabulated a preliminary press release from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9390.
+- [ref-20482] annotated a contested customer reference call from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 370.
+- [ref-91613] tagged a qualified trade show keynote from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6327.
+- [ref-21027] appended a revised regulatory filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1271.
+- [ref-73671] indexed a definitive blog post from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4626.
+- [ref-82284] tabulated a final SEC filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3236.
+- [ref-52093] summarised a draft SEC filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7631.
+- [ref-69701] captured a definitive regulatory filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1736.
+- [ref-84822] marked a final patent disclosure from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5288.
+- [ref-97899] noted a supplemental analyst report from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8500.
+- [ref-43255] reviewed a draft press release from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2310.
+- [ref-47351] filed a preliminary press release from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8196.
+- [ref-26525] noted a preliminary patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3358.
+- [ref-93755] reviewed a unqualified SEC filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1050.
+- [ref-24182] linked a revised analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5059.
+- [ref-17209] pulled a revised trade show keynote from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3730.
+- [ref-51991] ratified a contested field memo from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4429.
+- [ref-32255] reviewed a supplemental patent disclosure from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 633.
+- [ref-90480] summarised a contested patent disclosure from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6900.
+- [ref-92277] indexed a tentative customer reference call from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 426.
+- [ref-84760] tagged a supplemental regulatory filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7909.
+- [ref-53749] archived a revised blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3488.
+- [ref-96740] captured a preliminary buyer survey from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6671.
+- [ref-76773] summarised a preliminary win/loss interview from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 384.
+- [ref-45402] tabulated a definitive win/loss interview from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8026.
+- [ref-90804] verified a definitive partner webinar from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3079.
+- [ref-95423] ratified a preliminary press release from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2560.
+- [ref-27147] transcribed a final investor day deck from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2146.
+- [ref-83124] tagged a final patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1599.
+- [ref-44868] ratified a contested partner webinar from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3020.
+- [ref-64498] noted a unqualified press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6153.
+- [ref-78121] linked a preliminary podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2724.
+- [ref-28342] appended a preliminary analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1579.
+- [ref-48572] logged a unqualified press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 789.
+- [ref-47248] logged a definitive buyer survey from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2836.
+- [ref-15163] linked a tentative SEC filing from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8761.
+- [ref-41648] archived a supplemental win/loss interview from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6090.
+- [ref-17934] cross-checked a qualified customer reference call from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2826.
+- [ref-91447] cross-checked a contested customer reference call from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3628.
+- [ref-70389] uploaded a uncontested regulatory filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4762.
+- [ref-23168] transcribed a uncontested investor day deck from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1377.
+- [ref-50634] archived a unqualified investor day deck from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4354.
+- [ref-81539] cross-checked a supplemental trade show keynote from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6301.
+- [ref-28924] noted a tentative press release from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3421.
+- [ref-22730] logged a definitive field memo from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3487.
+- [ref-65358] summarised a definitive conference talk from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1444.
+- [ref-58675] flagged a definitive blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5458.
+- [ref-65781] captured a uncontested investor day deck from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 193.
+- [ref-31228] reviewed a definitive press release from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7740.
+- [ref-34085] reviewed a qualified patent disclosure from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7255.
+- [ref-17155] cross-checked a tentative partner webinar from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3860.
+- [ref-73947] annotated a contested conference talk from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8163.
+- [ref-10838] indexed a unqualified regulatory filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5799.
+- [ref-63446] reviewed a final win/loss interview from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2213.
+- [ref-16501] filed a unqualified patent disclosure from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6844.
+- [ref-15598] referenced a contested regulatory filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4050.
+- [ref-41722] flagged a unqualified partner webinar from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2283.
+- [ref-54847] indexed a tentative podcast transcript from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7997.
+- [ref-98976] noted a unqualified field memo from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1206.
+- [ref-88912] referenced a definitive SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6814.
+- [ref-17744] uploaded a revised conference talk from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9783.
+- [ref-15566] logged a preliminary buyer survey from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2459.
+- [ref-50868] verified a draft field memo from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1309.
+- [ref-31414] filed a draft analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2497.
+- [ref-91418] annotated a preliminary investor day deck from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8502.
+- [ref-53735] verified a revised press release from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7966.
+- [ref-36190] filed a draft buyer survey from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3834.
+- [ref-95648] archived a uncontested investor day deck from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1812.
+- [ref-20716] transcribed a qualified blog post from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4262.
+- [ref-60098] uploaded a preliminary SEC filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 138.
+- [ref-93208] summarised a contested investor day deck from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2904.
+- [ref-57128] indexed a uncontested investor day deck from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7018.
+- [ref-57526] tabulated a contested patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3076.
+- [ref-71421] annotated a qualified buyer survey from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4481.
+- [ref-25899] indexed a final trade show keynote from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3431.
+- [ref-73633] flagged a supplemental win/loss interview from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9476.
+- [ref-67835] referenced a revised investor day deck from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7681.
+- [ref-92637] linked a preliminary analyst report from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2737.
+- [ref-91538] linked a revised field memo from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9180.
+- [ref-14651] archived a final investor day deck from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5970.
+- [ref-21423] reviewed a qualified podcast transcript from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9354.
+- [ref-99588] tabulated a qualified podcast transcript from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3082.
+- [ref-80145] referenced a final SEC filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1223.
+- [ref-15530] filed a unqualified regulatory filing from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2446.
+- [ref-99939] indexed a qualified buyer survey from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5230.
+- [ref-85654] uploaded a definitive analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8501.
+- [ref-41630] cross-checked a uncontested podcast transcript from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9017.
+- [ref-84756] summarised a uncontested patent disclosure from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8885.
+- [ref-59429] logged a uncontested SEC filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1044.
+- [ref-38761] indexed a tentative partner webinar from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6412.
+- [ref-54850] captured a supplemental buyer survey from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8793.
+- [ref-97746] tabulated a tentative podcast transcript from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 302.
+- [ref-24830] verified a draft podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 568.
+- [ref-13353] reviewed a unqualified win/loss interview from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8156.
+- [ref-63039] logged a uncontested SEC filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8530.
+- [ref-69335] captured a preliminary trade show keynote from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4672.
+- [ref-62156] tabulated a supplemental SEC filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8713.
+- [ref-42373] logged a draft investor day deck from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4267.
+- [ref-15384] cross-checked a unqualified win/loss interview from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1560.
+- [ref-72356] tagged a tentative patent disclosure from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4345.
+- [ref-21785] indexed a qualified analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8402.
+- [ref-13885] annotated a unqualified patent disclosure from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8326.
+- [ref-43968] circulated a tentative win/loss interview from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7625.
+- [ref-20695] noted a tentative patent disclosure from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8979.
+- [ref-41399] logged a qualified buyer survey from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 9406.
+- [ref-63079] annotated a uncontested patent disclosure from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1966.
+- [ref-44417] archived a supplemental field memo from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3118.
+- [ref-66587] cross-checked a final podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3946.
+- [ref-87684] noted a draft trade show keynote from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6378.
+- [ref-60480] indexed a supplemental win/loss interview from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2828.
+- [ref-83323] transcribed a tentative patent disclosure from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4982.
+- [ref-12885] archived a contested win/loss interview from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4365.
+- [ref-64194] ratified a final field memo from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4950.
+- [ref-93868] annotated a definitive investor day deck from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2620.
+- [ref-69278] linked a definitive customer reference call from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8597.
+- [ref-67784] referenced a definitive buyer survey from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9940.
+- [ref-35770] captured a preliminary win/loss interview from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1190.
+- [ref-81606] tagged a preliminary partner webinar from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7055.
+- [ref-59714] verified a revised investor day deck from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 923.
+- [ref-85875] reviewed a unqualified analyst report from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3430.
+- [ref-19268] circulated a revised blog post from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4080.
+- [ref-16580] transcribed a final blog post from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8309.
+- [ref-48592] indexed a contested buyer survey from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1169.
+- [ref-63413] indexed a draft analyst report from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 945.
+- [ref-11971] logged a contested blog post from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9327.
+- [ref-75586] summarised a revised patent disclosure from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3348.
+- [ref-93307] flagged a contested conference talk from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2847.
+- [ref-74029] verified a draft customer reference call from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 165.
+- [ref-71157] verified a final podcast transcript from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9422.
+- [ref-76859] tagged a final regulatory filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4473.
+- [ref-49808] linked a uncontested blog post from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8497.
+- [ref-58236] referenced a revised win/loss interview from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7562.
+- [ref-77183] reviewed a uncontested SEC filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4349.
+- [ref-23951] appended a uncontested win/loss interview from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1298.
+- [ref-97167] verified a preliminary press release from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5622.
+- [ref-98343] verified a contested blog post from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 644.
+- [ref-84937] annotated a final trade show keynote from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9203.
+- [ref-41137] filed a contested analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6432.
+- [ref-56613] indexed a supplemental regulatory filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6927.
+- [ref-12624] transcribed a uncontested trade show keynote from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5742.
+- [ref-79053] pulled a draft buyer survey from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 992.
+- [ref-21119] annotated a contested SEC filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8523.
+- [ref-16255] filed a contested buyer survey from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 132.
+- [ref-43709] filed a unqualified customer reference call from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3729.
+- [ref-16441] referenced a tentative patent disclosure from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8945.
+- [ref-54142] circulated a definitive podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 834.
+- [ref-66267] linked a final trade show keynote from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1049.
+- [ref-41793] noted a final podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2168.
+- [ref-51779] filed a draft analyst report from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9406.
+- [ref-99014] reviewed a preliminary customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9959.
+- [ref-58585] filed a draft press release from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9655.
+- [ref-54077] tabulated a contested trade show keynote from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 813.
+- [ref-19151] logged a final trade show keynote from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6246.
+- [ref-72713] flagged a supplemental regulatory filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3769.
+- [ref-85255] transcribed a tentative investor day deck from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8054.
+- [ref-93996] uploaded a contested patent disclosure from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8491.
+- [ref-78332] indexed a qualified win/loss interview from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 516.
+- [ref-51299] circulated a definitive podcast transcript from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8035.
+- [ref-54985] ratified a revised blog post from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5984.
+- [ref-43107] summarised a revised press release from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9944.
+- [ref-14404] linked a qualified buyer survey from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9625.
+- [ref-57608] uploaded a supplemental investor day deck from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8036.
+- [ref-84900] referenced a definitive partner webinar from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5240.
+- [ref-56404] ratified a definitive field memo from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1599.
+- [ref-51575] verified a supplemental customer reference call from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 55.
+- [ref-65174] reviewed a final win/loss interview from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7759.
+- [ref-15728] filed a preliminary customer reference call from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9325.
+- [ref-70765] referenced a unqualified buyer survey from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 63.
+- [ref-11910] uploaded a tentative podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1292.
+- [ref-79398] circulated a uncontested SEC filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9851.
+- [ref-11023] tagged a qualified podcast transcript from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1844.
+- [ref-63097] marked a supplemental buyer survey from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5390.
+- [ref-17154] referenced a final investor day deck from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5901.
+- [ref-42423] ratified a unqualified field memo from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6040.
+- [ref-62585] captured a tentative SEC filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9436.
+- [ref-96648] annotated a revised partner webinar from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 346.
+- [ref-76958] verified a uncontested podcast transcript from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5045.
+- [ref-94519] annotated a contested field memo from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1800.
+- [ref-21816] circulated a supplemental field memo from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4035.
+- [ref-95431] circulated a preliminary blog post from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6610.
+- [ref-29056] pulled a unqualified podcast transcript from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6340.
+- [ref-26794] flagged a draft buyer survey from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6392.
+- [ref-20399] noted a contested investor day deck from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3362.
+- [ref-89021] noted a definitive regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5041.
+- [ref-75858] marked a tentative win/loss interview from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7225.
+- [ref-10254] tabulated a revised SEC filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1095.
+- [ref-39848] filed a draft analyst report from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5871.
+- [ref-31792] tagged a qualified win/loss interview from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4777.
+- [ref-30194] noted a supplemental win/loss interview from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 465.
+- [ref-71085] pulled a uncontested regulatory filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9572.
+- [ref-28513] verified a revised blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2017.
+- [ref-58704] verified a supplemental customer reference call from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 979.
+- [ref-31672] archived a final analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6262.
+- [ref-22983] flagged a revised buyer survey from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9686.
+- [ref-19089] verified a definitive field memo from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3386.
+- [ref-63684] verified a preliminary win/loss interview from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8254.
+- [ref-85689] indexed a supplemental regulatory filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6571.
+- [ref-52538] verified a uncontested analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8507.
+- [ref-56393] archived a uncontested conference talk from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 812.
+- [ref-37826] captured a revised SEC filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 589.
+- [ref-75669] linked a revised patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9641.
+- [ref-22028] captured a supplemental field memo from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3503.
+- [ref-29323] appended a supplemental analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1994.
+- [ref-30599] marked a preliminary patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8834.
+- [ref-18059] uploaded a unqualified trade show keynote from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2731.
+- [ref-13745] tabulated a definitive regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3553.
+- [ref-67624] filed a revised regulatory filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2503.
+- [ref-80536] appended a definitive investor day deck from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6287.
+- [ref-32481] summarised a unqualified field memo from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2178.
+- [ref-70610] appended a uncontested analyst report from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 674.
+- [ref-24653] appended a draft field memo from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5929.
+- [ref-41538] ratified a draft trade show keynote from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9485.
+- [ref-40329] annotated a qualified win/loss interview from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4428.
+- [ref-93112] reviewed a supplemental podcast transcript from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4558.
+- [ref-61762] verified a draft patent disclosure from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9566.
+- [ref-30214] archived a uncontested partner webinar from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7757.
+- [ref-10288] referenced a supplemental field memo from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 197.
+- [ref-80600] linked a definitive customer reference call from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7143.
+- [ref-45320] summarised a definitive trade show keynote from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4607.
+- [ref-78300] logged a tentative field memo from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 295.
+- [ref-91654] marked a supplemental SEC filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9777.
+- [ref-45296] tagged a preliminary field memo from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2639.
+- [ref-10419] captured a tentative blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1684.
+- [ref-77193] tabulated a draft field memo from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3046.
+- [ref-85370] ratified a draft SEC filing from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2563.
+- [ref-59319] linked a contested analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1818.
+- [ref-42485] marked a contested customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7867.
+- [ref-47701] filed a supplemental field memo from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1271.
+- [ref-46731] appended a qualified podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6367.
+- [ref-39243] ratified a qualified customer reference call from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3227.
+- [ref-88184] logged a draft patent disclosure from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1328.
+- [ref-78063] summarised a draft patent disclosure from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4910.
+- [ref-28677] pulled a final trade show keynote from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5758.
+- [ref-21548] cross-checked a qualified buyer survey from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8571.
+- [ref-92342] linked a contested SEC filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6764.
+- [ref-49897] reviewed a draft win/loss interview from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1468.
+- [ref-57982] reviewed a supplemental conference talk from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7476.
+- [ref-72347] circulated a final trade show keynote from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5794.
+- [ref-63954] noted a qualified press release from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6052.
+- [ref-89394] flagged a final press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4708.
+- [ref-54105] transcribed a unqualified podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8738.
+- [ref-73260] referenced a draft analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3623.
+- [ref-53023] indexed a revised field memo from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7174.
+- [ref-12085] linked a unqualified conference talk from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2742.
+- [ref-47218] captured a revised buyer survey from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2745.
+- [ref-74720] indexed a unqualified blog post from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 163.
+- [ref-43095] tagged a final customer reference call from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1024.
+- [ref-73437] circulated a definitive customer reference call from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2736.
+- [ref-12031] uploaded a contested regulatory filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4019.
+- [ref-37771] appended a revised blog post from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5758.
+- [ref-78710] cross-checked a preliminary win/loss interview from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5650.
+- [ref-98901] summarised a definitive investor day deck from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3124.
+- [ref-72331] reviewed a tentative partner webinar from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4412.
+- [ref-73244] cross-checked a draft conference talk from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4914.
+- [ref-39179] cross-checked a uncontested podcast transcript from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3046.
+- [ref-17560] summarised a preliminary patent disclosure from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8061.
+- [ref-61151] linked a supplemental press release from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8982.
+- [ref-36999] marked a supplemental investor day deck from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 850.
+- [ref-70133] archived a final investor day deck from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2525.
+- [ref-92737] marked a preliminary field memo from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5559.
+- [ref-44760] filed a final analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8632.
+- [ref-72607] tabulated a tentative trade show keynote from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8058.
+- [ref-67684] circulated a draft analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4815.
+- [ref-26086] indexed a unqualified partner webinar from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2952.
+- [ref-27652] tagged a unqualified press release from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2331.
+- [ref-91650] tagged a contested conference talk from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 9979.
+- [ref-16823] indexed a tentative blog post from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6723.
+- [ref-73779] flagged a revised field memo from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2192.
+- [ref-74965] linked a final partner webinar from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7951.
+- [ref-60201] referenced a supplemental partner webinar from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5290.
+- [ref-85641] appended a revised analyst report from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1608.
+- [ref-72246] logged a revised customer reference call from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 440.
+- [ref-32279] captured a revised partner webinar from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5133.
+- [ref-65534] captured a definitive customer reference call from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6319.
+- [ref-17549] linked a draft regulatory filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4101.
+- [ref-74835] verified a revised press release from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6430.
+- [ref-89512] ratified a qualified podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7035.
+- [ref-23500] reviewed a uncontested patent disclosure from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2794.
+- [ref-68614] linked a tentative regulatory filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5478.
+- [ref-99257] reviewed a preliminary regulatory filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3232.
+- [ref-13516] filed a revised analyst report from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4368.
+- [ref-21369] appended a preliminary patent disclosure from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 27.
+- [ref-33041] tabulated a preliminary customer reference call from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4849.
+- [ref-69005] captured a revised investor day deck from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9903.
+- [ref-50302] pulled a revised analyst report from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8589.
+- [ref-58816] reviewed a unqualified win/loss interview from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 120.
+- [ref-23008] indexed a qualified customer reference call from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7597.
+- [ref-56813] logged a final patent disclosure from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1718.
+- [ref-46532] appended a definitive customer reference call from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3427.
+- [ref-78546] cross-checked a contested SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 305.
+- [ref-54038] linked a preliminary press release from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4538.
+- [ref-80453] marked a draft SEC filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9541.
+- [ref-23745] uploaded a final field memo from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8670.
+- [ref-45414] pulled a qualified blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4753.
+- [ref-42698] referenced a draft customer reference call from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7383.
+- [ref-40712] tagged a contested buyer survey from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9756.
+- [ref-46552] tabulated a unqualified regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 412.
+- [ref-77619] logged a unqualified patent disclosure from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7728.
+- [ref-40740] linked a uncontested customer reference call from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3181.
+- [ref-81353] uploaded a qualified blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3260.
+- [ref-11743] reviewed a uncontested blog post from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 736.
+- [ref-20487] flagged a preliminary podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1602.
+- [ref-58593] circulated a preliminary trade show keynote from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4347.
+- [ref-18860] indexed a supplemental analyst report from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5026.
+- [ref-76819] linked a revised analyst report from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 353.
+- [ref-58114] cross-checked a qualified regulatory filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4778.
+- [ref-45960] tagged a unqualified press release from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3173.
+- [ref-98731] reviewed a definitive SEC filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3663.
+- [ref-60372] archived a supplemental analyst report from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3087.
+- [ref-60590] transcribed a revised analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2899.
+- [ref-31168] transcribed a preliminary regulatory filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7582.
+- [ref-92764] summarised a contested regulatory filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7707.
+- [ref-97654] referenced a tentative customer reference call from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8887.
+- [ref-57234] summarised a draft patent disclosure from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6984.
+- [ref-65688] circulated a draft podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4911.
+- [ref-98889] uploaded a contested buyer survey from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5428.
+- [ref-86458] captured a preliminary blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2999.
+- [ref-82162] verified a uncontested partner webinar from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7667.
+- [ref-34955] appended a definitive analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3921.
+- [ref-78558] captured a final regulatory filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8054.
+- [ref-74142] flagged a preliminary SEC filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7879.
+- [ref-57076] referenced a definitive patent disclosure from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1491.
+- [ref-24813] summarised a supplemental trade show keynote from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9303.
+- [ref-93723] linked a preliminary SEC filing from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4997.
+- [ref-74770] appended a unqualified investor day deck from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9075.
+- [ref-80900] transcribed a uncontested trade show keynote from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2804.
+- [ref-83998] cross-checked a qualified podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2611.
+- [ref-36594] tagged a contested blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2834.
+- [ref-92132] archived a supplemental blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5498.
+- [ref-23597] tagged a revised conference talk from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1128.
+- [ref-62071] cross-checked a uncontested win/loss interview from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6152.
+- [ref-80893] annotated a draft partner webinar from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4144.
+- [ref-75889] annotated a contested trade show keynote from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5635.
+- [ref-24361] uploaded a unqualified podcast transcript from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3696.
+- [ref-60698] linked a final regulatory filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5550.
+- [ref-98223] flagged a unqualified blog post from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 354.
+- [ref-50982] filed a contested buyer survey from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2669.
+- [ref-31407] linked a tentative regulatory filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4853.
+- [ref-82677] linked a uncontested analyst report from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1578.
+- [ref-34898] referenced a preliminary patent disclosure from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3861.
+- [ref-25446] circulated a tentative blog post from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2743.
+- [ref-63606] tabulated a tentative field memo from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1382.
+- [ref-92691] transcribed a draft win/loss interview from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8125.
+- [ref-29669] tabulated a revised blog post from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4362.
+- [ref-70228] referenced a unqualified SEC filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 553.
+- [ref-67643] annotated a preliminary conference talk from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6406.
+- [ref-19314] tagged a revised podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6915.
+- [ref-80396] appended a supplemental blog post from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9215.
+- [ref-12268] ratified a definitive analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6131.
+- [ref-83560] annotated a definitive regulatory filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9002.
+- [ref-57682] circulated a final customer reference call from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2772.
+- [ref-52007] marked a draft patent disclosure from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8480.
+- [ref-75066] pulled a supplemental blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2838.
+- [ref-27882] referenced a uncontested partner webinar from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3994.
+- [ref-50704] summarised a unqualified buyer survey from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1022.
+- [ref-69571] marked a preliminary partner webinar from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2442.
+- [ref-83305] flagged a supplemental investor day deck from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3503.
+- [ref-96969] marked a draft SEC filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5730.
+- [ref-48921] linked a draft investor day deck from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3374.
+- [ref-38697] referenced a final conference talk from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1072.
+- [ref-36603] reviewed a tentative trade show keynote from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1121.
+- [ref-17592] transcribed a uncontested podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5601.
+- [ref-64884] cross-checked a contested trade show keynote from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2004.
+- [ref-79417] pulled a final buyer survey from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2382.
+- [ref-81323] circulated a preliminary win/loss interview from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3945.
+- [ref-42289] tabulated a qualified partner webinar from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4585.
+- [ref-24173] referenced a qualified press release from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1636.
+- [ref-84638] tagged a final investor day deck from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3177.
+- [ref-85288] tagged a tentative analyst report from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2847.
+- [ref-67550] filed a tentative partner webinar from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3002.
+- [ref-91962] archived a revised analyst report from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2709.
+- [ref-77413] tabulated a draft press release from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 501.
+- [ref-31151] verified a definitive SEC filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1017.
+- [ref-64379] pulled a revised podcast transcript from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5417.
+- [ref-35703] summarised a final SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9442.
+- [ref-25137] captured a preliminary patent disclosure from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 941.
+- [ref-40264] filed a final blog post from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9832.
+- [ref-44869] annotated a uncontested blog post from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4825.
+- [ref-99684] referenced a contested analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5903.
+- [ref-44541] transcribed a unqualified buyer survey from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6824.
+- [ref-37687] verified a revised investor day deck from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5497.
+- [ref-62314] referenced a revised patent disclosure from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9775.
+- [ref-67581] filed a qualified analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4276.
+- [ref-84612] linked a preliminary SEC filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7166.
+- [ref-48046] captured a unqualified press release from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1907.
+- [ref-33850] cross-checked a revised regulatory filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3717.
+- [ref-97415] marked a definitive conference talk from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 380.
+- [ref-69401] tabulated a qualified field memo from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6139.
+- [ref-10598] transcribed a contested regulatory filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4698.
+- [ref-14849] archived a revised regulatory filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 69.
+- [ref-81863] noted a unqualified conference talk from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6815.
+- [ref-42100] marked a supplemental SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1472.
+- [ref-37924] summarised a final partner webinar from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2501.
+- [ref-19372] flagged a draft trade show keynote from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1748.
+- [ref-94351] ratified a revised conference talk from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6610.
+- [ref-98205] indexed a contested field memo from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6636.
+- [ref-28000] uploaded a qualified press release from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4622.
+- [ref-96351] tagged a revised win/loss interview from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7440.
+- [ref-54032] verified a preliminary customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1914.
+- [ref-40396] annotated a qualified conference talk from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7330.
+- [ref-76805] linked a supplemental trade show keynote from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5140.
+- [ref-10574] flagged a contested investor day deck from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8382.
+- [ref-86431] tagged a qualified blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3421.
+- [ref-34505] verified a definitive SEC filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1907.
+- [ref-37051] reviewed a revised patent disclosure from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6970.
+- [ref-89373] filed a preliminary field memo from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6529.
+- [ref-98132] tabulated a unqualified conference talk from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8877.
+- [ref-81643] cross-checked a draft conference talk from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6435.
+- [ref-57776] indexed a uncontested investor day deck from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3568.
+- [ref-98904] verified a qualified patent disclosure from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 225.
+- [ref-85112] marked a revised buyer survey from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9955.
+- [ref-40027] filed a unqualified blog post from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5612.
+- [ref-33552] annotated a unqualified patent disclosure from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9615.
+- [ref-86696] circulated a supplemental customer reference call from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1716.
+- [ref-69433] appended a draft conference talk from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6690.
+- [ref-77283] logged a definitive podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2611.
+- [ref-63199] cross-checked a unqualified conference talk from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6359.
+- [ref-94227] transcribed a supplemental patent disclosure from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1032.
+- [ref-41540] flagged a tentative analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9490.
+- [ref-36301] transcribed a unqualified buyer survey from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6692.
+- [ref-74595] linked a final analyst report from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1796.
+- [ref-85702] transcribed a revised trade show keynote from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4198.
+- [ref-88486] pulled a final SEC filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 738.
+- [ref-31577] summarised a qualified blog post from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1695.
+- [ref-48390] summarised a draft field memo from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7483.
+- [ref-12691] appended a uncontested buyer survey from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6897.
+- [ref-20352] noted a supplemental patent disclosure from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9892.
+- [ref-13677] verified a unqualified investor day deck from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 484.
+- [ref-20830] circulated a contested field memo from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8097.
+- [ref-22807] circulated a supplemental field memo from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 9082.
+- [ref-93555] pulled a uncontested customer reference call from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4305.
+- [ref-96396] referenced a uncontested partner webinar from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1417.
+- [ref-62346] cross-checked a preliminary SEC filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3642.
+- [ref-39486] reviewed a contested buyer survey from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6994.
+- [ref-75020] flagged a qualified partner webinar from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7612.
+- [ref-49786] circulated a qualified conference talk from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 880.
+- [ref-53325] referenced a qualified investor day deck from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2187.
+- [ref-60731] transcribed a preliminary partner webinar from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4850.
+- [ref-24908] ratified a draft partner webinar from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 795.
+- [ref-30495] ratified a definitive customer reference call from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 995.
+- [ref-71918] tabulated a contested conference talk from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6804.
+- [ref-17028] indexed a definitive podcast transcript from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6415.
+- [ref-80729] marked a definitive press release from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7481.
+- [ref-49423] uploaded a definitive analyst report from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8511.
+- [ref-86164] filed a tentative patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1189.
+- [ref-10643] appended a draft win/loss interview from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 499.
+- [ref-86546] flagged a preliminary podcast transcript from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2068.
+- [ref-22608] uploaded a unqualified trade show keynote from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3080.
+- [ref-75898] ratified a preliminary analyst report from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3826.
+- [ref-38763] filed a draft partner webinar from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2823.
+- [ref-45518] summarised a supplemental podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 779.
+- [ref-62879] verified a qualified trade show keynote from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4742.
+- [ref-78482] pulled a tentative regulatory filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1650.
+- [ref-97046] tabulated a definitive trade show keynote from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1900.
+- [ref-30978] summarised a draft investor day deck from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5837.
+- [ref-75889] reviewed a supplemental blog post from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3677.
+- [ref-42553] tabulated a final patent disclosure from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7735.
+- [ref-42334] verified a contested blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1836.
+- [ref-45982] appended a preliminary field memo from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5087.
+- [ref-36778] transcribed a supplemental partner webinar from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 984.
+- [ref-16210] filed a contested buyer survey from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3422.
+- [ref-42693] ratified a supplemental partner webinar from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5660.
+- [ref-52501] marked a unqualified trade show keynote from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 939.
+- [ref-88110] archived a contested trade show keynote from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3942.
+- [ref-99067] marked a unqualified SEC filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 154.
+- [ref-53709] summarised a final analyst report from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5793.
+- [ref-10175] flagged a unqualified patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7573.
+- [ref-57160] noted a tentative trade show keynote from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1081.
+- [ref-95259] referenced a final SEC filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 9535.
+- [ref-58545] appended a preliminary buyer survey from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6052.
+- [ref-29252] tagged a final field memo from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4241.
+- [ref-36829] flagged a unqualified podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9803.
+- [ref-54122] ratified a draft conference talk from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6563.
+- [ref-51201] flagged a supplemental blog post from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2359.
+- [ref-10463] referenced a unqualified patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7358.
+- [ref-49544] flagged a tentative customer reference call from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4587.
+- [ref-50717] uploaded a revised SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6400.
+- [ref-64513] linked a definitive blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7804.
+- [ref-76818] verified a tentative press release from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6635.
+- [ref-50531] marked a revised SEC filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5849.
+- [ref-22829] appended a supplemental blog post from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3192.
+- [ref-26926] linked a contested analyst report from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1981.
+- [ref-58411] marked a revised trade show keynote from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4633.
+- [ref-77654] appended a final buyer survey from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4565.
+- [ref-74469] verified a uncontested trade show keynote from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3089.
+- [ref-38464] summarised a revised buyer survey from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3544.
+- [ref-22493] cross-checked a preliminary win/loss interview from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3943.
+- [ref-83074] noted a preliminary conference talk from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 519.
+- [ref-24850] referenced a preliminary press release from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4489.
+- [ref-34657] indexed a unqualified trade show keynote from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8795.
+- [ref-84461] summarised a supplemental trade show keynote from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2895.
+- [ref-74275] marked a preliminary field memo from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3854.
+- [ref-19239] indexed a tentative win/loss interview from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6268.
+- [ref-81208] marked a definitive partner webinar from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5320.
+- [ref-46300] referenced a definitive conference talk from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5538.
+- [ref-49405] filed a tentative patent disclosure from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4533.
+- [ref-65729] linked a preliminary podcast transcript from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4566.
+- [ref-86566] logged a revised SEC filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4733.
+- [ref-32666] reviewed a final podcast transcript from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8963.
+- [ref-70052] reviewed a revised investor day deck from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4806.
+- [ref-19962] circulated a definitive podcast transcript from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5496.
+- [ref-90988] annotated a contested patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7584.
+- [ref-95463] linked a qualified buyer survey from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7260.
+- [ref-33421] tagged a final customer reference call from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 136.
+- [ref-84750] flagged a supplemental buyer survey from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3917.
+- [ref-67297] pulled a preliminary buyer survey from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5591.
+- [ref-28940] verified a draft conference talk from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3451.
+- [ref-83824] appended a contested customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3724.
+- [ref-76198] marked a revised win/loss interview from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3481.
+- [ref-96261] marked a preliminary customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 782.
+- [ref-80944] flagged a definitive trade show keynote from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3769.
+- [ref-70705] filed a contested trade show keynote from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 84.
+- [ref-91945] tabulated a uncontested press release from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7032.
+- [ref-61213] archived a supplemental regulatory filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2213.
+- [ref-86351] ratified a supplemental investor day deck from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4146.
+- [ref-94359] annotated a uncontested podcast transcript from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5426.
+- [ref-64960] transcribed a supplemental conference talk from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4511.
+- [ref-96833] logged a tentative trade show keynote from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4508.
+- [ref-79036] tagged a supplemental patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9163.
+- [ref-66944] archived a final investor day deck from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7831.
+- [ref-65110] transcribed a final conference talk from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4217.
+- [ref-22305] tabulated a definitive conference talk from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2658.
+- [ref-51340] uploaded a uncontested patent disclosure from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9382.
+- [ref-71931] reviewed a uncontested press release from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 255.
+- [ref-20014] tagged a definitive press release from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8004.
+- [ref-36840] indexed a uncontested analyst report from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8016.
+- [ref-85694] archived a supplemental regulatory filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6340.
+- [ref-59760] cross-checked a contested podcast transcript from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8339.
+- [ref-29979] logged a contested investor day deck from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4583.
+- [ref-30110] ratified a contested partner webinar from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9002.
+- [ref-39856] captured a definitive conference talk from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6412.
+- [ref-25063] captured a qualified patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8836.
+- [ref-92511] flagged a contested partner webinar from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4695.
+- [ref-80325] logged a definitive SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9157.
+- [ref-66501] reviewed a qualified investor day deck from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8252.
+- [ref-87790] circulated a qualified podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5147.
+- [ref-34511] captured a contested conference talk from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7195.
+- [ref-68078] marked a revised regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9413.
+- [ref-20648] noted a revised trade show keynote from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7977.
+- [ref-91651] indexed a definitive press release from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8015.
+- [ref-14379] tabulated a unqualified conference talk from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4674.
+- [ref-10753] transcribed a uncontested customer reference call from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5327.
+- [ref-69652] pulled a tentative trade show keynote from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1643.
+- [ref-62918] logged a draft podcast transcript from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7135.
+- [ref-51497] flagged a revised customer reference call from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7112.
+- [ref-63769] referenced a preliminary investor day deck from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4779.
+- [ref-84152] tabulated a final trade show keynote from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9337.
+- [ref-92173] summarised a draft SEC filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1547.
+- [ref-55674] filed a final conference talk from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4872.
+- [ref-43832] reviewed a definitive blog post from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4272.
+- [ref-54575] filed a contested SEC filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8563.
+- [ref-60883] flagged a final press release from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3112.
+- [ref-53084] noted a uncontested partner webinar from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 933.
+- [ref-54299] tabulated a revised podcast transcript from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7373.
+- [ref-81992] flagged a preliminary field memo from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1246.
+- [ref-77885] uploaded a unqualified podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4959.
+- [ref-17988] tabulated a contested partner webinar from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2170.
+- [ref-97598] filed a supplemental partner webinar from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6588.
+- [ref-18113] tabulated a uncontested SEC filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7786.
+- [ref-10765] uploaded a definitive conference talk from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3766.
+- [ref-38416] summarised a contested customer reference call from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1601.
+- [ref-92964] logged a preliminary customer reference call from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6014.
+- [ref-25471] ratified a unqualified podcast transcript from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7381.
+- [ref-14476] transcribed a draft trade show keynote from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2243.
+- [ref-83125] captured a draft partner webinar from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5154.
+- [ref-91810] cross-checked a contested investor day deck from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8605.
+- [ref-41047] transcribed a final press release from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9061.
+- [ref-37586] cross-checked a uncontested conference talk from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8937.
+- [ref-77878] noted a tentative press release from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 520.
+- [ref-14283] circulated a qualified analyst report from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 818.
+- [ref-24020] marked a draft SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9357.
+- [ref-61990] pulled a definitive press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4827.
+- [ref-45378] indexed a unqualified buyer survey from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6512.
+- [ref-16046] logged a supplemental press release from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3353.
+- [ref-51900] annotated a contested partner webinar from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3817.
+- [ref-93145] flagged a supplemental regulatory filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8761.
+- [ref-62805] appended a revised press release from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7997.
+- [ref-76368] linked a unqualified regulatory filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4640.
+- [ref-68061] uploaded a contested patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3221.
+- [ref-64532] pulled a definitive win/loss interview from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8089.
+- [ref-10879] ratified a uncontested conference talk from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9030.
+- [ref-38443] archived a supplemental regulatory filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8863.
+- [ref-19754] circulated a tentative investor day deck from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4043.
+- [ref-28495] uploaded a unqualified customer reference call from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2408.
+- [ref-44781] uploaded a qualified trade show keynote from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8486.
+- [ref-23500] logged a draft field memo from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8811.
+- [ref-13075] verified a uncontested conference talk from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5159.
+- [ref-63265] indexed a final win/loss interview from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7934.
+- [ref-12323] captured a qualified buyer survey from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7445.
+- [ref-82999] linked a draft analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2731.
+- [ref-71780] cross-checked a supplemental field memo from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6502.
+- [ref-50222] transcribed a unqualified investor day deck from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6557.
+- [ref-67068] cross-checked a revised podcast transcript from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2833.
+- [ref-82716] marked a draft blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1659.
+- [ref-63200] uploaded a final partner webinar from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 340.
+- [ref-60037] linked a tentative podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3957.
+- [ref-78250] marked a qualified trade show keynote from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9021.
+- [ref-16921] referenced a supplemental patent disclosure from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1657.
+- [ref-38991] cross-checked a tentative field memo from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5930.
+- [ref-52206] marked a preliminary trade show keynote from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8647.
+- [ref-88170] noted a final regulatory filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1551.
+- [ref-27480] linked a supplemental win/loss interview from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4018.
+- [ref-86527] annotated a qualified podcast transcript from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6772.
+- [ref-34633] noted a final press release from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3850.
+- [ref-12676] verified a unqualified conference talk from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1422.
+- [ref-74765] marked a uncontested blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7090.
+- [ref-29851] uploaded a unqualified press release from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9657.
+- [ref-99975] cross-checked a unqualified buyer survey from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8265.
+- [ref-45015] indexed a qualified trade show keynote from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9939.
+- [ref-20947] referenced a unqualified conference talk from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8478.
+- [ref-64354] tagged a contested conference talk from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8660.
+- [ref-34949] archived a contested investor day deck from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6272.
+- [ref-74158] linked a revised win/loss interview from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6398.
+- [ref-75849] annotated a contested podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6773.
+- [ref-19966] logged a final SEC filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7487.
+- [ref-19535] verified a draft regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4161.
+- [ref-37310] marked a final regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2126.
+- [ref-40239] referenced a unqualified win/loss interview from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 911.
+- [ref-65251] verified a preliminary customer reference call from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5714.
+- [ref-15174] archived a revised regulatory filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4067.
+- [ref-77128] cross-checked a qualified conference talk from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7376.
+- [ref-60832] cross-checked a uncontested regulatory filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9320.
+- [ref-39672] marked a tentative customer reference call from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4848.
+- [ref-52236] uploaded a definitive win/loss interview from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4446.
+- [ref-44035] uploaded a qualified investor day deck from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8096.
+- [ref-79716] captured a uncontested conference talk from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7452.
+- [ref-11131] referenced a revised buyer survey from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 469.
+- [ref-39345] verified a qualified trade show keynote from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8095.
+- [ref-46594] cross-checked a contested buyer survey from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3811.
+- [ref-56577] flagged a preliminary investor day deck from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5733.
+- [ref-82377] transcribed a unqualified SEC filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4600.
+- [ref-30219] tabulated a draft partner webinar from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5354.
+- [ref-48918] annotated a qualified conference talk from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8664.
+- [ref-67659] archived a supplemental analyst report from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8432.
+- [ref-61077] uploaded a uncontested customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1440.
+- [ref-24963] circulated a preliminary blog post from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2197.
+- [ref-61642] annotated a uncontested blog post from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1966.
+- [ref-32212] verified a unqualified buyer survey from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7780.
+- [ref-32175] tabulated a tentative regulatory filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7864.
+- [ref-64729] reviewed a draft blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 765.
+- [ref-26259] tagged a definitive press release from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9550.
+- [ref-16218] summarised a definitive trade show keynote from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7881.
+- [ref-38300] summarised a final analyst report from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1917.
+- [ref-16250] cross-checked a uncontested regulatory filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9449.
+- [ref-98986] tabulated a preliminary customer reference call from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3320.
+- [ref-27402] pulled a contested field memo from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2691.
+- [ref-73730] captured a contested investor day deck from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5031.
+- [ref-76906] reviewed a supplemental SEC filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1818.
+- [ref-69739] indexed a contested blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9720.
+- [ref-96306] indexed a final blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8672.
+- [ref-75705] captured a uncontested partner webinar from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2663.
+- [ref-66776] logged a tentative partner webinar from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7383.
+- [ref-52468] transcribed a definitive conference talk from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6757.
+- [ref-33925] annotated a revised investor day deck from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3445.
+- [ref-87854] circulated a unqualified patent disclosure from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5542.
+- [ref-47027] indexed a unqualified field memo from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6233.
+- [ref-24185] filed a supplemental field memo from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4966.
+- [ref-73885] referenced a uncontested SEC filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3550.
+- [ref-53789] noted a contested podcast transcript from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6869.
+- [ref-99289] transcribed a final trade show keynote from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6699.
+- [ref-72555] archived a preliminary podcast transcript from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 523.
+- [ref-63014] filed a definitive press release from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8649.
+- [ref-91269] referenced a supplemental investor day deck from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6048.
+- [ref-15161] circulated a final podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2875.
+- [ref-80346] referenced a draft press release from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4207.
+- [ref-16518] captured a final win/loss interview from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5780.
+- [ref-81993] annotated a draft blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6481.
+- [ref-77664] uploaded a supplemental buyer survey from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4560.
+- [ref-12002] verified a revised patent disclosure from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9711.
+- [ref-13458] referenced a supplemental investor day deck from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3243.
+- [ref-87656] uploaded a preliminary press release from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6153.
+- [ref-26535] pulled a final field memo from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8451.
+- [ref-36944] pulled a revised blog post from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3035.
+- [ref-31245] filed a supplemental investor day deck from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4546.
+- [ref-38928] ratified a revised patent disclosure from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8664.
+- [ref-32619] transcribed a tentative press release from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6579.
+- [ref-44518] filed a final conference talk from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2208.
+- [ref-68527] summarised a tentative field memo from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1989.
+- [ref-50424] cross-checked a draft win/loss interview from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5066.
+- [ref-75235] cross-checked a contested SEC filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5234.
+- [ref-16144] appended a draft regulatory filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 265.
+- [ref-83488] linked a qualified conference talk from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4382.
+- [ref-47934] marked a supplemental trade show keynote from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7654.
+- [ref-71246] referenced a uncontested buyer survey from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3963.
+- [ref-66072] verified a contested SEC filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9620.
+- [ref-71041] appended a final customer reference call from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3644.
+- [ref-12676] tabulated a final blog post from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2680.
+- [ref-98794] logged a qualified buyer survey from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 531.
+- [ref-30637] transcribed a revised analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1533.
+- [ref-41236] appended a contested customer reference call from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2480.
+- [ref-91519] verified a draft investor day deck from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3016.
+- [ref-97222] noted a draft analyst report from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3613.
+- [ref-76400] referenced a tentative regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8125.
+- [ref-89576] filed a preliminary analyst report from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9099.
+- [ref-83383] transcribed a preliminary SEC filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4629.
+- [ref-84608] summarised a tentative press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7251.
+- [ref-30810] reviewed a unqualified win/loss interview from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6507.
+- [ref-69148] transcribed a supplemental field memo from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6210.
+- [ref-34239] noted a unqualified podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6147.
+- [ref-71577] annotated a draft analyst report from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1629.
+- [ref-96823] marked a definitive conference talk from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9260.
+- [ref-10905] logged a contested SEC filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1769.
+- [ref-67241] flagged a tentative analyst report from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 789.
+- [ref-21506] cross-checked a uncontested regulatory filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6869.
+- [ref-35363] ratified a qualified regulatory filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5333.
+- [ref-47218] linked a final trade show keynote from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6049.
+- [ref-88645] circulated a final SEC filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5012.
+- [ref-58461] referenced a draft regulatory filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 337.
+- [ref-46323] circulated a unqualified win/loss interview from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2165.
+- [ref-56299] noted a tentative regulatory filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6702.
+- [ref-47385] captured a revised press release from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8817.
+- [ref-18139] linked a revised blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1138.
+- [ref-21960] referenced a definitive buyer survey from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1283.
+- [ref-29602] ratified a tentative conference talk from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8369.
+- [ref-25393] annotated a definitive partner webinar from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5033.
+- [ref-81445] flagged a supplemental patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2208.
+- [ref-71884] referenced a definitive podcast transcript from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6260.
+- [ref-11146] tagged a qualified conference talk from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7574.
+- [ref-44932] ratified a definitive patent disclosure from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3030.
+- [ref-24529] noted a unqualified buyer survey from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1046.
+- [ref-55485] appended a contested conference talk from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 393.
+- [ref-94265] verified a revised regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2097.
+- [ref-32573] tabulated a final trade show keynote from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2824.
+- [ref-72350] logged a draft field memo from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5342.
+- [ref-68033] annotated a uncontested customer reference call from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1882.
+- [ref-70577] noted a final patent disclosure from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2395.
+- [ref-81278] captured a supplemental field memo from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2297.
+- [ref-53958] noted a definitive win/loss interview from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3138.
+- [ref-87023] uploaded a uncontested conference talk from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3250.
+- [ref-49439] summarised a unqualified investor day deck from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8624.
+- [ref-99766] transcribed a qualified field memo from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 907.
+- [ref-65057] appended a unqualified buyer survey from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2360.
+- [ref-31400] indexed a uncontested patent disclosure from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1089.
+- [ref-38965] reviewed a qualified investor day deck from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2390.
+- [ref-50214] captured a tentative customer reference call from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5711.
+- [ref-79881] tagged a revised analyst report from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9055.
+- [ref-26686] noted a definitive buyer survey from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9302.
+- [ref-82605] noted a qualified win/loss interview from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7252.
+- [ref-81263] uploaded a qualified analyst report from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7535.
+- [ref-87890] ratified a contested blog post from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5288.
+- [ref-46186] marked a revised trade show keynote from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2925.
+- [ref-28557] flagged a final patent disclosure from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2836.
+- [ref-18878] summarised a uncontested press release from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9513.
+- [ref-61408] archived a unqualified press release from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8172.
+- [ref-36535] ratified a final conference talk from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5313.
+- [ref-50586] pulled a contested press release from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5366.
+- [ref-49701] filed a preliminary podcast transcript from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8870.
+- [ref-41000] noted a uncontested investor day deck from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8532.
+- [ref-81384] archived a revised investor day deck from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5078.
+- [ref-72760] appended a supplemental investor day deck from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4780.
+- [ref-13207] appended a contested field memo from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6809.
+- [ref-49498] referenced a qualified field memo from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4682.
+- [ref-38720] captured a unqualified customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8461.
+- [ref-13287] archived a definitive regulatory filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7483.
+- [ref-61617] verified a uncontested partner webinar from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8819.
+- [ref-67827] reviewed a revised press release from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4349.
+- [ref-84839] transcribed a qualified partner webinar from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3645.
+- [ref-17628] summarised a final customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 446.
+- [ref-25537] verified a qualified partner webinar from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8182.
+- [ref-22436] verified a uncontested conference talk from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 135.
+- [ref-44486] uploaded a unqualified regulatory filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3960.
+- [ref-57322] linked a preliminary customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8376.
+- [ref-33395] verified a revised blog post from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4889.
+- [ref-35168] flagged a supplemental blog post from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1003.
+- [ref-55269] uploaded a tentative analyst report from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3701.
+- [ref-26894] uploaded a revised customer reference call from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2835.
+- [ref-86011] circulated a revised customer reference call from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2750.
+- [ref-10708] pulled a uncontested investor day deck from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2425.
+- [ref-57671] appended a contested investor day deck from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5171.
+- [ref-80952] uploaded a draft blog post from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7966.
+- [ref-75699] tabulated a tentative win/loss interview from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2778.
+- [ref-92596] appended a draft regulatory filing from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3280.
+- [ref-60312] indexed a final win/loss interview from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3391.
+- [ref-56418] tabulated a supplemental field memo from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1745.
+- [ref-58657] ratified a uncontested partner webinar from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9494.
+- [ref-81735] reviewed a supplemental trade show keynote from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9463.
+- [ref-78717] logged a revised trade show keynote from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6011.
+- [ref-20731] flagged a definitive customer reference call from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7726.
+- [ref-39648] captured a definitive investor day deck from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7380.
+- [ref-69778] flagged a unqualified podcast transcript from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1392.
+- [ref-51600] linked a contested analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1309.
+- [ref-53079] summarised a revised field memo from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 487.
+- [ref-18413] logged a revised conference talk from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2779.
+- [ref-95395] summarised a qualified field memo from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3592.
+- [ref-61831] marked a final field memo from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2685.
+- [ref-88291] indexed a preliminary field memo from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7787.
+- [ref-21712] filed a revised SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2491.
+- [ref-67688] transcribed a tentative blog post from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4728.
+- [ref-17751] pulled a definitive buyer survey from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3179.
+- [ref-76405] circulated a final customer reference call from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7958.
+- [ref-59152] indexed a unqualified analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8553.
+- [ref-43016] verified a uncontested field memo from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6522.
+- [ref-75981] linked a qualified conference talk from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9802.
+- [ref-99233] tabulated a uncontested field memo from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 9008.
+- [ref-95538] logged a definitive patent disclosure from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3595.
+- [ref-17601] tabulated a revised regulatory filing from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4031.
+- [ref-21779] tabulated a final field memo from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9044.
+- [ref-90775] linked a preliminary customer reference call from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1619.
+- [ref-22992] circulated a final patent disclosure from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3562.
+- [ref-80441] verified a final partner webinar from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1482.
+- [ref-12896] appended a tentative customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3919.
+- [ref-19544] indexed a unqualified partner webinar from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2608.
+- [ref-67803] linked a uncontested press release from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8421.
+- [ref-74456] archived a preliminary analyst report from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4614.
+- [ref-73815] pulled a uncontested SEC filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1383.
+- [ref-13376] circulated a tentative patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5480.
+- [ref-89360] archived a unqualified regulatory filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7586.
+- [ref-98879] verified a qualified win/loss interview from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8216.
+- [ref-68385] linked a uncontested analyst report from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 172.
+- [ref-65082] cross-checked a unqualified podcast transcript from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7445.
+- [ref-85870] referenced a draft podcast transcript from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4750.
+- [ref-36712] filed a draft trade show keynote from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9251.
+- [ref-32259] verified a revised investor day deck from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8413.
+- [ref-78826] transcribed a qualified conference talk from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3878.
+- [ref-71157] referenced a revised field memo from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 515.
+- [ref-32582] flagged a qualified partner webinar from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5510.
+- [ref-97562] appended a final patent disclosure from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9265.
+- [ref-49251] filed a tentative SEC filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3871.
+- [ref-81382] pulled a definitive patent disclosure from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3644.
+- [ref-49020] archived a tentative conference talk from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3225.
+- [ref-40509] transcribed a draft podcast transcript from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7634.
+- [ref-57581] filed a draft press release from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 9924.
+- [ref-43295] captured a supplemental trade show keynote from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7890.
+- [ref-36183] tagged a unqualified field memo from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8387.
+- [ref-58450] uploaded a draft regulatory filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9096.
+- [ref-13919] marked a preliminary field memo from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1096.
+- [ref-68382] circulated a draft partner webinar from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8445.
+- [ref-94858] ratified a unqualified podcast transcript from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3902.
+- [ref-40023] tabulated a draft buyer survey from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5260.
+- [ref-38751] logged a preliminary trade show keynote from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1257.
+- [ref-65589] captured a contested analyst report from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3301.
+- [ref-25198] indexed a draft analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 235.
+- [ref-39046] circulated a uncontested customer reference call from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1703.
+- [ref-96466] filed a draft regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6410.
+- [ref-71556] indexed a preliminary customer reference call from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3038.
+- [ref-21573] noted a qualified investor day deck from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2984.
+- [ref-41032] noted a revised patent disclosure from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4398.
+- [ref-65963] verified a definitive conference talk from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2179.
+- [ref-26453] uploaded a supplemental conference talk from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1476.
+- [ref-33475] verified a tentative podcast transcript from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1652.
+- [ref-68456] transcribed a unqualified conference talk from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2392.
+- [ref-39095] verified a tentative conference talk from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1367.
+- [ref-48004] summarised a final customer reference call from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7426.
+- [ref-57337] referenced a supplemental press release from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8515.
+- [ref-71857] circulated a final regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 55.
+- [ref-88482] circulated a contested SEC filing from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8071.
+- [ref-58748] archived a definitive SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6598.
+- [ref-74327] summarised a uncontested partner webinar from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1877.
+- [ref-33728] filed a definitive trade show keynote from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8908.
+- [ref-96728] tabulated a revised patent disclosure from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7626.
+- [ref-13069] flagged a revised blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 9402.
+- [ref-20905] pulled a uncontested investor day deck from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5477.
+- [ref-69172] logged a supplemental podcast transcript from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1767.
+- [ref-93159] tabulated a unqualified win/loss interview from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8810.
+- [ref-32132] summarised a final regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6787.
+- [ref-83352] indexed a contested partner webinar from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 9319.
+- [ref-48410] uploaded a tentative podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7457.
+- [ref-45899] cross-checked a definitive customer reference call from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 756.
+- [ref-72839] pulled a final SEC filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1785.
+- [ref-52222] summarised a unqualified blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1982.
+- [ref-84287] verified a qualified regulatory filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5502.
+- [ref-92705] circulated a uncontested regulatory filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7147.
+- [ref-50147] annotated a tentative buyer survey from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7260.
+- [ref-24567] tagged a revised trade show keynote from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 904.
+- [ref-91888] flagged a contested podcast transcript from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1891.
+- [ref-82151] uploaded a contested win/loss interview from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8281.
+- [ref-54569] captured a supplemental press release from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 287.
+- [ref-34307] archived a preliminary patent disclosure from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4265.
+- [ref-91597] pulled a final trade show keynote from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4656.
+- [ref-65389] filed a final press release from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2209.
+- [ref-74541] marked a supplemental trade show keynote from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6080.
+- [ref-36781] ratified a final buyer survey from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3346.
+- [ref-23811] archived a uncontested conference talk from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 292.
+- [ref-52789] transcribed a tentative patent disclosure from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3157.
+- [ref-34783] circulated a preliminary podcast transcript from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9005.
+- [ref-98745] captured a preliminary blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5125.
+- [ref-74925] annotated a preliminary win/loss interview from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3331.
+- [ref-43186] linked a revised customer reference call from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3103.
+- [ref-38540] transcribed a supplemental podcast transcript from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3298.
+- [ref-16881] indexed a definitive partner webinar from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6271.
+- [ref-60054] transcribed a final customer reference call from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9505.
+- [ref-52340] appended a draft field memo from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2879.
+- [ref-33577] filed a contested blog post from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5236.
+- [ref-70621] marked a definitive trade show keynote from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1331.
+- [ref-86267] reviewed a preliminary investor day deck from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 146.
+- [ref-91054] captured a qualified analyst report from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3894.
+- [ref-40775] marked a unqualified podcast transcript from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4285.
+- [ref-23582] marked a qualified patent disclosure from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4521.
+- [ref-60408] cross-checked a draft trade show keynote from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1878.
+- [ref-28309] appended a revised partner webinar from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3534.
+- [ref-18191] linked a definitive trade show keynote from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 9550.
+- [ref-13364] summarised a uncontested analyst report from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5235.
+- [ref-11320] tagged a preliminary customer reference call from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2023.
+- [ref-69914] reviewed a preliminary blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7431.
+- [ref-79109] referenced a tentative podcast transcript from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9116.
+- [ref-12423] archived a contested conference talk from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 31.
+- [ref-32624] indexed a unqualified investor day deck from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8161.
+- [ref-68603] ratified a tentative buyer survey from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7693.
+- [ref-91677] verified a preliminary SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4083.
+- [ref-89858] summarised a revised patent disclosure from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5575.
+- [ref-98390] transcribed a uncontested regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6714.
+- [ref-56095] linked a final analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 157.
+- [ref-97643] archived a revised blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3508.
+- [ref-71540] cross-checked a unqualified regulatory filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3237.
+- [ref-59590] summarised a definitive win/loss interview from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7213.
+- [ref-31744] captured a final field memo from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4512.
+- [ref-80627] tabulated a qualified press release from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2629.
+- [ref-53173] captured a contested press release from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 553.
+- [ref-99506] noted a revised patent disclosure from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5330.
+- [ref-55025] linked a unqualified win/loss interview from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9872.
+- [ref-36146] indexed a unqualified SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6283.
+- [ref-46909] flagged a definitive blog post from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5401.
+- [ref-81367] indexed a qualified SEC filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1880.
+- [ref-82793] linked a revised blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8117.
+- [ref-93856] archived a unqualified partner webinar from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1525.
+- [ref-57643] marked a final patent disclosure from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5117.
+- [ref-48021] tagged a tentative win/loss interview from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8769.
+- [ref-34947] linked a contested customer reference call from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8891.
+- [ref-39119] referenced a unqualified podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2805.
+- [ref-28091] archived a supplemental analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2757.
+- [ref-55403] noted a revised patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6295.
+- [ref-44905] annotated a supplemental trade show keynote from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7345.
+- [ref-45195] verified a preliminary conference talk from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8177.
+- [ref-36755] appended a revised blog post from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8354.
+- [ref-24544] transcribed a draft investor day deck from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4056.
+- [ref-15241] marked a supplemental patent disclosure from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 128.
+- [ref-48747] summarised a qualified podcast transcript from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5984.
+- [ref-15081] verified a tentative buyer survey from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4672.
+- [ref-15195] circulated a qualified trade show keynote from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4990.
+- [ref-15950] ratified a draft SEC filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2670.
+- [ref-21562] filed a supplemental blog post from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7284.
+- [ref-52560] filed a contested podcast transcript from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9135.
+- [ref-73412] circulated a qualified customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8702.
+- [ref-93324] transcribed a uncontested win/loss interview from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9899.
+- [ref-71101] indexed a qualified field memo from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 9304.
+- [ref-92852] filed a uncontested regulatory filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5907.
+- [ref-51836] archived a unqualified trade show keynote from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 847.
+- [ref-41474] tagged a definitive customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3875.
+- [ref-47180] verified a draft SEC filing from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9314.
+- [ref-52498] referenced a qualified SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8247.
+- [ref-56100] summarised a definitive buyer survey from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9941.
+- [ref-50713] referenced a unqualified SEC filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5137.
+- [ref-81247] uploaded a draft patent disclosure from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2978.
+- [ref-67763] referenced a supplemental regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6992.
+- [ref-83878] ratified a supplemental patent disclosure from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6359.
+- [ref-63837] cross-checked a qualified investor day deck from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1173.
+- [ref-99522] circulated a preliminary win/loss interview from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7977.
+- [ref-68511] cross-checked a preliminary conference talk from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6716.
+- [ref-80171] filed a qualified press release from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1055.
+- [ref-81623] referenced a supplemental trade show keynote from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1368.
+- [ref-15675] captured a revised regulatory filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7086.
+- [ref-67678] archived a final field memo from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 872.
+- [ref-39942] linked a definitive field memo from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3698.
+- [ref-91454] filed a revised regulatory filing from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9589.
+- [ref-79622] annotated a qualified partner webinar from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5871.
+- [ref-50868] captured a tentative regulatory filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 992.
+- [ref-90762] pulled a draft press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 962.
+- [ref-15181] logged a tentative buyer survey from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 113.
+- [ref-39671] marked a uncontested analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7233.
+- [ref-23650] filed a uncontested buyer survey from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3709.
+- [ref-99330] filed a final investor day deck from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 638.
+- [ref-15717] archived a contested press release from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5869.
+- [ref-11563] logged a contested patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8698.
+- [ref-44585] logged a unqualified investor day deck from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4834.
+- [ref-17246] noted a draft partner webinar from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1176.
+- [ref-76052] summarised a preliminary field memo from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1824.
+- [ref-20532] pulled a qualified customer reference call from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1425.
+- [ref-11607] reviewed a draft press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5563.
+- [ref-90911] linked a unqualified customer reference call from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6323.
+- [ref-76079] logged a revised customer reference call from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6812.
+- [ref-72488] ratified a draft press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3962.
+- [ref-90438] archived a revised partner webinar from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 592.
+- [ref-92889] annotated a final customer reference call from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9137.
+- [ref-75002] linked a definitive partner webinar from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2544.
+- [ref-19564] indexed a draft blog post from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3869.
+- [ref-33491] ratified a qualified regulatory filing from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 911.
+- [ref-70595] appended a qualified investor day deck from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 126.
+- [ref-65748] cross-checked a preliminary analyst report from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 269.
+- [ref-93434] cross-checked a preliminary conference talk from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3160.
+- [ref-33429] flagged a final press release from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6785.
+- [ref-31576] flagged a unqualified patent disclosure from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 9873.
+- [ref-19309] tabulated a draft analyst report from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3222.
+- [ref-26152] indexed a qualified SEC filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 500.
+- [ref-20761] summarised a contested analyst report from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6169.
+- [ref-55691] reviewed a final patent disclosure from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6054.
+- [ref-55767] appended a revised press release from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3564.
+- [ref-13571] uploaded a draft regulatory filing from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5835.
+- [ref-63244] cross-checked a uncontested investor day deck from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5164.
+- [ref-80176] transcribed a uncontested win/loss interview from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8384.
+- [ref-91536] noted a tentative conference talk from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9489.
+- [ref-12254] tabulated a definitive customer reference call from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7160.
+- [ref-42992] summarised a qualified podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7141.
+- [ref-16387] summarised a definitive analyst report from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6333.
+- [ref-38645] ratified a tentative partner webinar from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3279.
+- [ref-94289] tagged a contested partner webinar from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1751.
+- [ref-15165] uploaded a contested win/loss interview from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6843.
+- [ref-12896] filed a qualified investor day deck from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4632.
+- [ref-88291] verified a revised regulatory filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9695.
+- [ref-14693] tabulated a unqualified customer reference call from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1360.
+- [ref-72888] noted a contested analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7716.
+- [ref-42366] cross-checked a revised regulatory filing from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 742.
+- [ref-69549] verified a contested customer reference call from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5380.
+- [ref-95961] archived a uncontested buyer survey from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8747.
+- [ref-97568] logged a preliminary investor day deck from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7311.
+- [ref-21652] circulated a unqualified SEC filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3514.
+- [ref-88356] verified a tentative conference talk from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8434.
+- [ref-52904] verified a qualified trade show keynote from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6432.
+- [ref-31563] marked a definitive patent disclosure from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8498.
+- [ref-67778] linked a uncontested field memo from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9220.
+- [ref-11666] captured a tentative analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6782.
+- [ref-92654] captured a definitive buyer survey from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2262.
+- [ref-20710] verified a preliminary buyer survey from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 135.
+- [ref-78947] summarised a contested customer reference call from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2454.
+- [ref-29793] captured a final customer reference call from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5943.
+- [ref-87446] filed a definitive SEC filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1980.
+- [ref-44481] captured a supplemental analyst report from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 449.
+- [ref-58335] archived a definitive conference talk from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9134.
+- [ref-75130] indexed a supplemental blog post from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7751.
+- [ref-65265] annotated a unqualified buyer survey from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4749.
+- [ref-94699] uploaded a draft patent disclosure from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3981.
+- [ref-32578] summarised a unqualified SEC filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4069.
+- [ref-86684] cross-checked a draft buyer survey from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9828.
+- [ref-22149] flagged a revised patent disclosure from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4756.
+- [ref-19968] summarised a revised field memo from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8815.
+- [ref-11228] archived a qualified SEC filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8011.
+- [ref-71141] appended a uncontested win/loss interview from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8248.
+- [ref-19350] verified a uncontested regulatory filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 522.
+- [ref-38921] marked a revised press release from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3513.
+- [ref-12384] tagged a tentative partner webinar from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7344.
+- [ref-84747] referenced a qualified customer reference call from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7468.
+- [ref-32681] marked a preliminary SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6299.
+- [ref-45015] captured a revised win/loss interview from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6711.
+- [ref-93932] uploaded a final win/loss interview from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1418.
+- [ref-12057] ratified a tentative trade show keynote from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2844.
+- [ref-56829] uploaded a tentative press release from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3907.
+- [ref-91431] marked a qualified analyst report from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4678.
+- [ref-64072] verified a preliminary SEC filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 574.
+- [ref-86990] flagged a revised regulatory filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2912.
+- [ref-88862] appended a unqualified press release from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3529.
+- [ref-34186] transcribed a unqualified customer reference call from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2613.
+- [ref-12396] logged a final patent disclosure from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 703.
+- [ref-67872] circulated a qualified win/loss interview from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3964.
+- [ref-41725] verified a tentative press release from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8795.
+- [ref-71839] archived a tentative podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5256.
+- [ref-54165] archived a draft investor day deck from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1915.
+- [ref-15003] filed a draft analyst report from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3789.
+- [ref-99637] indexed a final patent disclosure from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6415.
+- [ref-53459] pulled a uncontested trade show keynote from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2910.
+- [ref-43906] circulated a definitive podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 531.
+- [ref-85697] marked a definitive analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6022.
+- [ref-80688] indexed a definitive customer reference call from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7851.
+- [ref-75223] annotated a final partner webinar from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4669.
+- [ref-75658] transcribed a revised podcast transcript from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6309.
+- [ref-22258] linked a draft buyer survey from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2966.
+- [ref-62931] appended a revised trade show keynote from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 344.
+- [ref-25628] indexed a definitive trade show keynote from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2743.
+- [ref-31664] logged a qualified partner webinar from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7228.
+- [ref-37805] tagged a uncontested regulatory filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 870.
+- [ref-50105] annotated a preliminary buyer survey from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2545.
+- [ref-37802] referenced a supplemental conference talk from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7993.
+- [ref-28495] transcribed a unqualified press release from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2444.
+- [ref-96620] annotated a draft blog post from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 155.
+- [ref-33880] linked a draft trade show keynote from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6290.
+- [ref-74417] annotated a draft customer reference call from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5671.
+- [ref-42230] summarised a preliminary regulatory filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2230.
+- [ref-69272] pulled a qualified win/loss interview from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7113.
+- [ref-92600] cross-checked a final press release from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 92.
+- [ref-11609] verified a draft buyer survey from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 193.
+- [ref-22921] ratified a definitive analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 469.
+- [ref-45339] annotated a definitive conference talk from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3774.
+- [ref-62869] marked a supplemental investor day deck from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9371.
+- [ref-27169] circulated a revised win/loss interview from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7615.
+- [ref-30349] captured a tentative analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 232.
+- [ref-98359] pulled a contested win/loss interview from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5098.
+- [ref-40779] logged a qualified investor day deck from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4593.
+- [ref-43430] reviewed a uncontested SEC filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9110.
+- [ref-56945] logged a definitive podcast transcript from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 724.
+- [ref-45445] noted a draft blog post from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4518.
+- [ref-39518] annotated a final patent disclosure from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1421.
+- [ref-42572] reviewed a final regulatory filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 508.
+- [ref-50846] tagged a draft customer reference call from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8170.
+- [ref-93984] reviewed a uncontested investor day deck from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2557.
+- [ref-32190] uploaded a contested customer reference call from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 5958.
+- [ref-94601] logged a final regulatory filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 8612.
+- [ref-61636] logged a final investor day deck from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8251.
+- [ref-90692] appended a supplemental press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3821.
+- [ref-75485] verified a contested trade show keynote from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8018.
+- [ref-82019] marked a revised blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3744.
+- [ref-34269] tagged a final regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7364.
+- [ref-21329] captured a supplemental investor day deck from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4052.
+- [ref-86368] verified a final SEC filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2994.
+- [ref-54543] verified a tentative SEC filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7285.
+- [ref-88477] captured a unqualified press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5876.
+- [ref-26063] uploaded a revised conference talk from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2983.
+- [ref-40515] circulated a uncontested press release from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 8750.
+- [ref-55406] filed a definitive regulatory filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6343.
+- [ref-41129] cross-checked a qualified partner webinar from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7571.
+- [ref-14749] logged a uncontested win/loss interview from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 555.
+- [ref-35836] summarised a qualified podcast transcript from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 1920.
+- [ref-74268] linked a contested patent disclosure from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1685.
+- [ref-86350] verified a final customer reference call from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2774.
+- [ref-98785] noted a final win/loss interview from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 8410.
+- [ref-95422] marked a uncontested blog post from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3567.
+- [ref-96363] tagged a revised trade show keynote from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4856.
+- [ref-84894] linked a uncontested partner webinar from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 546.
+- [ref-35807] verified a supplemental regulatory filing from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4949.
+- [ref-83943] noted a supplemental regulatory filing from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5852.
+- [ref-82983] filed a draft conference talk from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3507.
+- [ref-73779] marked a uncontested field memo from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6395.
+- [ref-45961] tagged a revised press release from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4251.
+- [ref-41860] tabulated a uncontested trade show keynote from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4674.
+- [ref-47691] referenced a supplemental customer reference call from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3788.
+- [ref-34902] verified a contested regulatory filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8513.
+- [ref-96259] marked a qualified analyst report from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5565.
+- [ref-51888] captured a draft press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3521.
+- [ref-11313] reviewed a qualified patent disclosure from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2100.
+- [ref-55770] noted a supplemental regulatory filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9162.
+- [ref-15101] noted a uncontested blog post from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 818.
+- [ref-96509] verified a qualified press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4000.
+- [ref-24940] summarised a preliminary field memo from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1783.
+- [ref-74716] appended a definitive win/loss interview from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3330.
+- [ref-54191] linked a uncontested blog post from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7651.
+- [ref-84006] annotated a definitive conference talk from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5626.
+- [ref-37120] tabulated a qualified podcast transcript from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 9787.
+- [ref-64882] ratified a draft field memo from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 2188.
+- [ref-51288] circulated a unqualified blog post from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4666.
+- [ref-77226] filed a unqualified partner webinar from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5192.
+- [ref-91911] filed a contested field memo from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5190.
+- [ref-84763] referenced a draft win/loss interview from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2650.
+- [ref-59219] summarised a tentative field memo from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9251.
+- [ref-74886] logged a definitive customer reference call from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7526.
+- [ref-34031] ratified a contested SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7956.
+- [ref-75739] marked a unqualified conference talk from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 9311.
+- [ref-97219] annotated a qualified conference talk from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3554.
+- [ref-27027] captured a preliminary customer reference call from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5517.
+- [ref-75150] referenced a revised SEC filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 666.
+- [ref-48156] referenced a qualified regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9904.
+- [ref-42417] archived a tentative podcast transcript from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5737.
+- [ref-39165] reviewed a final field memo from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5233.
+- [ref-53268] noted a final analyst report from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 663.
+- [ref-11297] marked a supplemental field memo from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 2562.
+- [ref-81609] summarised a draft trade show keynote from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8924.
+- [ref-92488] cross-checked a final investor day deck from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4756.
+- [ref-48956] ratified a qualified investor day deck from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6948.
+- [ref-18433] reviewed a final conference talk from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 4458.
+- [ref-16815] pulled a contested conference talk from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 2289.
+- [ref-16402] cross-checked a contested SEC filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3532.
+- [ref-52168] verified a definitive podcast transcript from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3089.
+- [ref-30059] archived a definitive patent disclosure from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7339.
+- [ref-83075] transcribed a contested patent disclosure from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2008.
+- [ref-46310] verified a draft partner webinar from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5242.
+- [ref-64017] uploaded a qualified SEC filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3585.
+- [ref-26019] linked a preliminary blog post from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 9977.
+- [ref-92808] ratified a contested press release from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3356.
+- [ref-67012] summarised a tentative field memo from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5549.
+- [ref-36314] reviewed a qualified podcast transcript from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6965.
+- [ref-84420] linked a supplemental conference talk from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8479.
+- [ref-82284] ratified a tentative press release from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6288.
+- [ref-73552] flagged a supplemental blog post from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2756.
+- [ref-20292] transcribed a draft regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1900.
+- [ref-12374] circulated a draft investor day deck from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5145.
+- [ref-74212] archived a preliminary investor day deck from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 376.
+- [ref-56137] referenced a unqualified regulatory filing from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 1511.
+- [ref-75650] tabulated a final conference talk from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7677.
+- [ref-22755] referenced a contested blog post from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6770.
+- [ref-49934] filed a final conference talk from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 622.
+- [ref-27064] tabulated a revised partner webinar from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4653.
+- [ref-65690] indexed a qualified podcast transcript from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6190.
+- [ref-98139] logged a final podcast transcript from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 3064.
+- [ref-38118] uploaded a draft buyer survey from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4593.
+- [ref-85179] annotated a draft customer reference call from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1370.
+- [ref-58163] uploaded a unqualified investor day deck from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6499.
+- [ref-66583] cross-checked a final field memo from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 1364.
+- [ref-75967] ratified a contested press release from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6692.
+- [ref-20637] circulated a final SEC filing from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 6138.
+- [ref-47203] indexed a uncontested win/loss interview from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1734.
+- [ref-37497] flagged a draft regulatory filing from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7717.
+- [ref-88020] summarised a final analyst report from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 3360.
+- [ref-10706] archived a final conference talk from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 7955.
+- [ref-28208] reviewed a draft investor day deck from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6841.
+- [ref-50502] annotated a draft investor day deck from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 2845.
+- [ref-20076] reviewed a unqualified field memo from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 32.
+- [ref-50055] noted a draft investor day deck from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7292.
+- [ref-44457] tagged a tentative blog post from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 6469.
+- [ref-96153] circulated a uncontested SEC filing from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 5397.
+- [ref-97884] tagged a draft regulatory filing from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 4755.
+- [ref-53884] logged a uncontested field memo from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7660.
+- [ref-63145] marked a definitive customer reference call from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 3494.
+- [ref-87632] uploaded a draft buyer survey from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 4477.
+- [ref-16301] reviewed a definitive trade show keynote from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7501.
+- [ref-63418] transcribed a definitive buyer survey from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1312.
+- [ref-64301] annotated a uncontested buyer survey from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1601.
+- [ref-38941] cross-checked a final SEC filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9090.
+- [ref-93326] pulled a qualified regulatory filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4059.
+- [ref-34557] annotated a unqualified trade show keynote from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 3043.
+- [ref-39891] summarised a revised analyst report from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 6379.
+- [ref-10225] filed a definitive customer reference call from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9520.
+- [ref-82843] linked a unqualified patent disclosure from 2025-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5781.
+- [ref-63936] indexed a revised podcast transcript from 2024-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 839.
+- [ref-94250] ratified a unqualified partner webinar from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 7443.
+- [ref-13639] tagged a final press release from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5855.
+- [ref-28658] captured a supplemental customer reference call from 2024-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 5300.
+- [ref-70155] summarised a revised blog post from 2026-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 525.
+- [ref-99389] linked a supplemental analyst report from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4519.
+- [ref-83905] appended a supplemental customer reference call from 2025-Q4 on the memo_01 v2 precedents dimension; cross-reference index entry 6050.
+- [ref-74181] verified a unqualified SEC filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 5576.
+- [ref-34723] marked a tentative trade show keynote from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 8591.
+- [ref-47269] circulated a draft win/loss interview from 2026-Q2 on the memo_01 v2 precedents dimension; cross-reference index entry 204.
+- [ref-75212] circulated a final SEC filing from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 9560.
+- [ref-16440] referenced a supplemental field memo from 2024-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 1924.
+- [ref-14814] marked a contested trade show keynote from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 7535.
+- [ref-45467] uploaded a final trade show keynote from 2025-Q1 on the memo_01 v2 precedents dimension; cross-reference index entry 7831.
+- [ref-21220] pulled a supplemental win/loss interview from 2025-Q3 on the memo_01 v2 precedents dimension; cross-reference index entry 4158.

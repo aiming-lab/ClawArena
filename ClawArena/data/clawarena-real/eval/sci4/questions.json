@@ -1,0 +1,318 @@
+{
+  "id": "sci4",
+  "desc": "法律证据与合同条款审查 — TechCo MSA with VendorX SaaS provider — 16 exec_check rounds, 3 updates (incl. supersede), 5 preference rules P1-P5, difficulty vectors V1/V2/V4/V5/V6/V7/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Begin by identifying the active contract version in the workspace. Read the contract files in `contracts/` and write `output/contract_metadata.json` with exactly these keys: `version` (the version string of the ACTIVE MSA), `status` (\"ACTIVE\" or \"SUPERSEDED\"), `effective_date` (ISO 8601 date — use the exact date from the contract header), `parties` (list of party names — use the exact legal names as they appear in the contract header), and `superseded_version` (version string of the document that the active version supersedes). The workspace contains multiple contract versions; ensure you identify and use the correct active version. Use these exact key names.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Contract metadata correct: v2.3 is ACTIVE, effective_date is 2026-01-15, parties include TechCo, Inc. and VendorX Solutions Ltd., superseded_version is v2.1.",
+        "incorrect": "Check output/contract_metadata.json: version must be 'v2.3'; effective_date must be exactly '2026-01-15' (from the DRAFT header — not the superseded v2.1 date); parties must include 'TechCo, Inc.' and 'VendorX Solutions Ltd.' (exact legal names); superseded_version must reference 'v2.1'."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Extract the limitation of liability clause from the ACTIVE MSA v2.3 and write `output/liability_cap.json`. Use these exact keys: `cap_months` (int, the number of months used as the basis for the aggregate liability cap), `excluded_damages` (list of excluded damage category names as strings), `exceptions` (list of carve-outs from the cap). (Note: there is a superseded version with a DIFFERENT cap period — use only the active v2.3 text. Someone may mention a 6-month cap, but read the actual active contract.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Liability cap correct: cap_months=12 from active MSA v2.3 §10.1; excluded_damages includes consequential/indirect/lost profits.",
+        "incorrect": "Check output/liability_cap.json: cap_months must be 12 (from MSA v2.3 §10.1 — the superseded v2.1 has 6 months which must NOT be used); excluded_damages must include 'consequential' and 'indirect' damage types."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Review the AS IS warranty disclaimer in MSA v2.3 §8.2 for compliance with UCC § 2-316(2) conspicuousness requirements and write `output/warranty_review.json`. Required keys: `compliant` (bool), `ucc_section_cited` (string — the exact UCC section reference), `issues` (list of identified compliance gaps as strings), `conspicuous` (bool, whether the disclaimer meets the conspicuousness standard). The UCC § 2-316(2) standard requires explicit mention of 'merchantability' and conspicuous presentation.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/warranty_review.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/warranty_review.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Citation format (P1): ucc_section_cited must use the standard format 'UCC § 2-316' (with section symbol and spaces)."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Warranty review correct: UCC § 2-316 cited, issues identify merchantability mention concern.",
+        "incorrect": "Check output/warranty_review.json: ucc_section_cited must contain '2-316'; issues must address the merchantability explicit-mention requirement from UCC § 2-316(2); format per P1 citation standard."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyse the IP indemnification clause in MSA v2.3 §9.2 and write `output/ip_indemnification_analysis.json`. Required keys: `vendor_remedy_options` (list of the remedy options actually present in §9.2), `market_standard_options` (list of the standard market options per Everbridge MSA §9.1 benchmark), `missing_options` (list of options present in market standard but absent from the current draft), `gap_risk_level` (string: 'HIGH', 'MEDIUM', or 'LOW'). The Slack bot summary (BOT_AutoSummary) claims IP indemnification covers all scenarios — verify against the actual contract text and market benchmark before deciding.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "IP analysis correct: procure rights identified as missing from vendor_remedy_options; gap_risk_level HIGH.",
+        "incorrect": "Check output/ip_indemnification_analysis.json: missing_options must include 'procure rights' (absent from MSA v2.3 §9.2 but present in Everbridge MSA §9.1 and AWS §7.2); gap_risk_level should be HIGH. Do not rely on the BOT_AutoSummary — it incorrectly claims all options are covered."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Review the force majeure clause in MSA v2.3 §11 against the ICC 2020 Force Majeure Clause standard and write `output/force_majeure_review.json`. Required keys: `notice_days` (int, the number of days for notice obligation per current MSA), `termination_threshold_days` (int, the number of days after which either party may terminate), `compliant_with_icc_2020` (bool), `icc_source` (string, the source reference for the ICC 2020 threshold). (Someone guessed the termination threshold was 90 days — read the actual clause and the ICC standard research memo.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target output/force_majeure_review.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target output/force_majeure_review.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Numeric citation (P2): all numeric claims must include source references in parentheses, e.g., '120 days (ICC 2020 Force Majeure Clause)'."
+        },
+        "rules": "P2"
+      },
+      "feedback": {
+        "correct": "Force majeure review correct: termination_threshold_days=120 (ICC 2020 standard).",
+        "incorrect": "Check output/force_majeure_review.json: termination_threshold_days must be 120 (the ICC 2020 standard, NOT 90); notice_days must match the current MSA §11.2 provision."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Review the Data Processing Agreement (DPA_VendorX_v1.2.md) for compliance with GDPR Article 28(3) requirements and write `output/dpa_compliance.json`. Required keys: `compliant_items` (list of GDPR Art.28(3) elements that ARE present), `missing_items` (list of required elements that are MISSING or inadequate), `penalty_risk` (string describing the penalty exposure from the relevant GDPR article), `overall_compliant` (bool). The DPA must be analysed systematically against all Art.28(3) mandatory elements.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/dpa_compliance.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/dpa_compliance.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Regulatory tagging (P3): compliance issues must be tagged [Source: GDPR Art.28] and penalty_risk must reference the specific GDPR penalty article."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "DPA compliance correct: sub-processor written authorisation mechanism identified as missing; penalty_risk references €10,000,000 or 2% annual turnover.",
+        "incorrect": "Check output/dpa_compliance.json: missing_items must include the sub-processor written authorisation mechanism (GDPR Art.28(3)(d)); penalty_risk must reference '€10,000,000 or 2%' from GDPR Art.83(4); overall_compliant must be false."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": ["upd1_sessions", "upd1_workspace"],
+      "question": "VendorX has submitted a counter-proposal: MSA v2.4. Compare MSA v2.3 and the newly injected MSA v2.4 and write `output/redline_v23_v24.json`. Required keys: `changed_clauses` (list of objects, each with `clause_ref`, `v23_summary`, `v24_summary`), `key_regression` (string describing the most critical regression from TechCo's perspective), `cap_months_v24` (int, the liability cap in months per v2.4). Focus on material changes that affect TechCo's risk position.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Redline correct: cap_months_v24=6 (regression from v2.3's 12); changed_clauses captures the liability cap, IP scope, and FM notice changes.",
+        "incorrect": "Check output/redline_v23_v24.json: cap_months_v24 must be 6 (VendorX's counter-proposal regresses from 12 to 6 months); changed_clauses must include the liability cap section showing the 12→6 month change."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Based on the v2.4 counter-proposal (cap at 6 months), draft TechCo's negotiation position and write `output/negotiation_position.json`. Required keys: `our_position_months` (int, TechCo's position on the liability cap), `vendor_position_months` (int, VendorX's position per v2.4), `market_standard_months` (int, the market standard per available benchmarks), `supporting_sources` (list of source references supporting TechCo's position), `rationale` (string). TechCo's position should be consistent with the market standard documented in the legal research. (The Slack bot suggested accepting 6 months — do not follow that recommendation.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target output/negotiation_position.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target output/negotiation_position.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Numeric citation (P2): our_position_months and market_standard_months must be accompanied by source references in parentheses."
+        },
+        "rules": "P2"
+      },
+      "feedback": {
+        "correct": "Negotiation position correct: our_position_months=12; market_standard_months=12; supporting_sources includes Everbridge/AWS references.",
+        "incorrect": "Check output/negotiation_position.json: our_position_months must be 12 (consistent with Q2 cap_months and market standard); market_standard_months must be 12 per Everbridge MSA §10 and AWS §9.2; supporting_sources must cite these market benchmarks."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyse the applicability of Hadley v Baxendale to the exclusion of indirect/consequential damages in MSA §10.2 and write `output/consequential_damages_analysis.json`. Required keys: `case_citation` (string, the full formal citation of Hadley v Baxendale — use the citation format from the case brief in legal_research/), `hadley_rule_applied` (string, which Hadley rule — explicitly state 'Rule 1' or 'Rule 2' — applies to consequential damages exclusions in §10.2), `analysis_text` (string, substantive legal analysis of at least 60 words explaining how the identified Hadley rule applies to MSA §10.2's consequential damages exclusion), `bot_claim_status` (string — assess whether the Slack bot claim that Hadley has been 'superseded' is correct or incorrect). The Slack bot claims Hadley's rule 'has been largely superseded in modern US contract law' — verify this against the case brief. The Finance team's notes reference '(1854) 9 Ex 341' as the citation — use the citation in the legal_research/ brief instead.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/consequential_damages_analysis.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/consequential_damages_analysis.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Citation format (P1): case_citation must use exact format '[1854] EWHC J70' — no abbreviations."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "Hadley analysis correct: case_citation is '[1854] EWHC J70'; Rule 2 identified for consequential damages; bot claim correctly rejected as INCORRECT.",
+        "incorrect": "Check output/consequential_damages_analysis.json: case_citation must be exactly '[1854] EWHC J70' (verbatim); hadley_rule_applied must reference Rule 2 (special/consequential damages); bot_claim_status must indicate the claim that Hadley has been 'superseded' is INCORRECT."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Extract and verify all time-related provisions from MSA v2.3 and write `output/termination_timeline.json`. Required keys: `cure_period_days` (int), `notice_days` (int, for termination for convenience), `data_retrieval_days` (int, post-termination data recovery period), `source_version` (string, which MSA version these figures come from). There is a superseded version (v2.1) with DIFFERENT time periods — use only the active v2.3 provisions. Cross-check your figures against the active contract text.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4 --target output/termination_timeline.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P4 --target output/termination_timeline.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Date format (P4): all date-related fields must use ISO 8601 format; duration fields must be integers with clear unit context."
+        },
+        "rules": "P4"
+      },
+      "feedback": {
+        "correct": "Termination timeline correct: all three time periods are 30 days each from active v2.3; not the superseded v2.1 (which had 15 days).",
+        "incorrect": "Check output/termination_timeline.json: cure_period_days=30, notice_days=30, data_retrieval_days=30 (all from MSA v2.3 — the superseded v2.1 has 15-day periods which must NOT be used); source_version must be 'v2.3'."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": ["upd2_sessions", "upd2_workspace"],
+      "question": "Update 2 has injected an external counsel redline and a supersede notice email. The supersede notice explicitly identifies which part of Update 1 is superseded and which parts remain in effect. Analyse this supersede carefully and write `output/update2_supersede_log.json`. Required keys: `superseded_items` (list of strings: what specific provisions from Update 1 are superseded by the external counsel position), `not_superseded_items` (list of strings: what Update 1 provisions are NOT superseded and remain under negotiation — list ALL provisions that remain live, not just the most obvious one), `effective_position_source` (string: identify the specific document(s) — by exact filename or document reference — that establish the now-effective IP indemnification position, including the external counsel firm name), `supersede_date` (ISO 8601 date: the exact date the supersede notice was issued, as stated in the email header).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Supersede log correct: IP narrowing from v2.4 identified as superseded; liability cap (6 months) correctly identified as NOT superseded (still under negotiation).",
+        "incorrect": "Check output/update2_supersede_log.json: superseded_items must include the IP indemnification narrowing from v2.4; not_superseded_items must include the liability cap (6-month position from VendorX, still under negotiation); effective_position_source must reference the external counsel redline (v2.4-revised) and the supersede notice email."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate a comprehensive risk matrix based on all review work to date and write `output/risk_matrix.json`. Required structure: a JSON object with a `risks` array where each entry has EXACTLY these keys: `risk_id` (string), `risk_level` (must be exactly 'HIGH', 'MEDIUM', or 'LOW'), `clause_ref` (string), `description` (string), `recommendation` (string). Include at LEAST 5 risks. The HIGH-level risks must include: (1) the DPA sub-processor authorisation gap, and (2) the AS IS warranty disclaimer compliance concern. Sort risks from HIGH to LOW priority.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/risk_matrix.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P3 --target output/risk_matrix.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Regulatory tagging (P3): compliance-related risks must be tagged with their regulatory source, e.g., [Source: GDPR Art.28]."
+        },
+        "rules": "P3"
+      },
+      "feedback": {
+        "correct": "Risk matrix correct: >=5 risks; HIGH items include DPA sub-processor and warranty disclaimer; risks sorted HIGH→LOW.",
+        "incorrect": "Check output/risk_matrix.json: risks array must have >=5 entries; each risk_level must be exactly 'HIGH', 'MEDIUM', or 'LOW'; HIGH risks must include DPA sub-processor gap and AS IS disclaimer issue; first risk must be HIGH level."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Analyse the applicability of CISG to this agreement and write `output/cisg_applicability.json`. Required keys: `cisg_applies` (bool), `exclusion_clause_ref` (string, the MSA section that addresses CISG), `art74_foreseeability_cap` (string, a verbatim excerpt of the Art.74 foreseeability standard), `art79_elements` (list of strings: the required elements to establish a CISG Art.79 force majeure exemption). There are conflicting views in the communications — the IT team, Finance, and Legal have different positions. Apply the authoritative legal position.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/cisg_applicability.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1 --target output/cisg_applicability.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Citation format (P1): CISG articles must be cited as 'CISG Art.74' or 'CISG Art.79' — no abbreviations."
+        },
+        "rules": "P1"
+      },
+      "feedback": {
+        "correct": "CISG analysis correct: cisg_applies=false (per §12.3 exclusion, authoritative GC position); art79_elements includes both required elements.",
+        "incorrect": "Check output/cisg_applicability.json: cisg_applies must be false (per MSA §12.3 CISG exclusion — the GC's ruling overrides the IT team's concern); art79_elements must list BOTH required elements: impediment beyond control AND not reasonably expected to have taken into account at conclusion of contract."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": ["upd3_sessions", "upd3_workspace"],
+      "question": "Update 3 has injected the final agreed MSA v2.5. Confirm the final contract version and lock the key negotiated terms in `output/final_contract_summary.json`. Required keys: `final_version` (string), `final_cap_months` (int, the FINAL agreed liability cap months), `governing_law` (string), `termination_notice_days` (int), `ip_remedy_options_count` (int, number of remedy options in the final IP indemnification provision). The cap figure must be consistent with Q2 and Q8 — track the full negotiation arc from v2.3 (12 months) → v2.4 (6 months) → v2.5 (final agreed).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target output/final_contract_summary.json",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target output/final_contract_summary.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Numeric citation (P2): final_cap_months must be accompanied by source reference, e.g., '12 (MSA v2.5 §10.1)'."
+        },
+        "rules": "P2"
+      },
+      "feedback": {
+        "correct": "Final summary correct: final_version='v2.5'; final_cap_months=12 (restored from v2.4's 6-month regression, consistent with Q2 and Q8); ip_remedy_options_count=4.",
+        "incorrect": "Check output/final_contract_summary.json: final_version must be 'v2.5'; final_cap_months must be 12 (the final agreed position — v2.4's 6-month cap was a temporary regression that was rejected; the final v2.5 restores 12 months consistent with Q2 and Q8); ip_remedy_options_count must be 4 (procure rights reinstated)."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate the final comprehensive contract review report at `output/final_review_report.md`. The report MUST contain exactly three sections with these exact headings in this order: `## Executive Summary`, `## Risk Matrix`, `## Recommended Actions`. The report must include: (1) citation of UCC § 2-316 (with § symbol) regarding the warranty disclaimer analysis; (2) citation of Hadley v Baxendale using the exact format '[1854] EWHC J70' (with square brackets) regarding consequential damages; (3) the GDPR Art.28 penalty figure for DPA non-compliance (€10,000,000 or 2%); (4) the Everbridge MSA §10 reference (with specific section number) for the 12-month liability cap benchmark. The ## Recommended Actions section must contain at least 3 numbered action items. The report must be comprehensive — at least 400 words total. Apply all P1-P5 preferences throughout.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace} && python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3,P5 --target output/final_review_report.md",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Final report correct: three required sections present in order; UCC § 2-316, [1854] EWHC J70, GDPR penalty, and Everbridge benchmark all cited.",
+        "incorrect": "Check output/final_review_report.md: must have '## Executive Summary', '## Risk Matrix', '## Recommended Actions' in that order (P5); must cite 'UCC § 2-316' (warranty disclaimer), '[1854] EWHC J70' (Hadley), '€10,000,000' or '2%' (GDPR penalty), and 'Everbridge MSA §10' or 'twelve (12) month' (cap benchmark)."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Perform the final sign-off. Compute the SHA-256 hash of the EXACT bytes of `output/final_review_report.md` and write `output/signoff.txt` containing exactly one line in the format `VERIFIED:<hash>` where `<hash>` is the 64-character lowercase hexadecimal SHA-256 digest of that file's contents. Nothing else should appear in the file. (You must actually execute the hash computation — a placeholder or manually typed hash will not match the validator's recomputation.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Sign-off token valid: VERIFIED:<sha256> matches the recomputed digest of final_review_report.md.",
+        "incorrect": "Check output/signoff.txt: must be exactly one line matching ^VERIFIED:[a-f0-9]{64}$ where the hash equals the SHA-256 of output/final_review_report.md as recomputed by the validator."
+      }
+    }
+  ]
+}

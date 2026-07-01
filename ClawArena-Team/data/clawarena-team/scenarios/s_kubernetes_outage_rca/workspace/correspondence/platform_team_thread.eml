@@ -1,0 +1,26 @@
+From: sam.okafor@example.com
+To: sre-team@example.com
+Subject: Re: [INC-2026-0514-001] Suspecting webhook + helm interaction
+Date: Thu, 14 May 2026 03:35:00 +0000
+Message-ID: <platform-thread-001@example.com>
+
+Jordan,
+
+I've been looking at the admission webhook logs and there's something odd.
+The webhook was redeployed at 02:50 UTC with the new validateNamespace()
+handler, and there's a gap in the audit log between 03:08 and 03:14 where
+several requests appear to have been processed with stale cache entries.
+
+I'm not 100% sure yet but it looks like a race condition in the cache
+invalidation path. When multiple requests arrive simultaneously for pods
+in the payments namespace, the goroutines may be reading from a stale
+namespace object before the mutation is committed. This would explain the
+intermittent admission failures we're seeing.
+
+Combined with the helm chart memory regression, any pod that gets
+admitted incorrectly and then has only 512Mi available will OOM immediately
+under the payment-svc startup load.
+
+I've asked the vendor about the chart version. Will update when I hear back.
+
+Sam

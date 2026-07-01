@@ -1,0 +1,79 @@
+name: Release Build
+# Multi-platform release matrix
+# Last modified: 2025-01-20 by Charlie (added matrix strategy)
+
+on:
+  push:
+    tags: ['v*.*.*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version'
+        required: true
+
+jobs:
+  build-matrix:
+    name: Build (${{ matrix.os }} / Node ${{ matrix.version }})
+    runs-on: ${{ matrix.os }}
+    # Matrix: 3 OS * 3 versions = 9 combinations
+    # We want to exclude windows-latest + node12 and windows-latest + node14 combinations (2 exclusions)
+    # But current exclude only matches on os, which would exclude ALL windows-latest (3 jobs instead of 2)
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        version: [12, 16, 20]
+        # BUG: exclude block only specifies os, not the full combination.
+        # This will NOT correctly filter: {os: windows-latest, version: 12} and {os: windows-latest, version: 14}
+        # It will instead try to match {os: windows-latest} which GitHhub expands differently.
+        exclude:
+          - os: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build for ${{ matrix.os }}
+        run: npm run build
+
+      - name: Run platform tests
+        run: npm run test:platform
+
+      - name: Package artifact
+        run: |
+          npm pack
+          mv *.tgz myapp-${{ matrix.os }}-node${{ matrix.version }}.tgz
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ matrix.os }}-node${{ matrix.version }}
+          path: '*.tgz'
+
+  publish:
+    name: Publish Release
+    runs-on: ubuntu-latest
+    needs: build-matrix
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/**/*.tgz
+          generate_release_notes: true

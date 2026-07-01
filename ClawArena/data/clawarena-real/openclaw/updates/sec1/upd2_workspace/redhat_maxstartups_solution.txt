@@ -1,0 +1,45 @@
+Red Hat Solution: Mitigating CVE-2024-6387 with MaxStartups
+Source: Red Hat Customer Portal
+
+ENVIRONMENT
+- Red Hat Enterprise Linux 9
+- Red Hat Enterprise Linux 8
+- OpenSSH
+
+ISSUE
+- CVE-2024-6387 (regreSSHion) allows unauthenticated remote code execution
+- Primary mitigation LoginGraceTime 0 has been identified as creating DoS risk
+
+RESOLUTION
+
+The recommended mitigation strategy after security review is to use MaxStartups:
+
+1. Edit /etc/ssh/sshd_config:
+   Add or modify: MaxStartups 10:30:100
+
+2. Restart the SSH service:
+   systemctl restart sshd
+
+3. Verify the configuration:
+   sshd -T | grep maxstartups
+
+RATIONALE
+The MaxStartups directive limits concurrent unauthenticated connection attempts.
+CVE-2024-6387 exploitation requires approximately 10,000 attempts due to the
+probabilistic nature of the race condition. With MaxStartups 10:30:100, the
+effective rate an attacker can sustain is dramatically reduced, making exploitation
+impractical within a reasonable timeframe.
+
+Unlike LoginGraceTime 0, MaxStartups does not disable authentication timeouts,
+preserving defense against slow-connection DoS attacks while mitigating the
+regreSSHion exploitation vector.
+
+IMPORTANT: This is a temporary mitigation only. Apply the vendor patch as soon
+as possible:
+- RHEL 9: dnf update openssh (target: openssh-8.7p1-38.el9_4.1, RHSA-2024:4312)
+- RHEL 8: dnf update openssh (target: openssh-8.0p1-19.el8_10.1, RHSA-2024:4340)
+
+REFERENCES
+- CVE-2024-6387: https://nvd.nist.gov/vuln/detail/CVE-2024-6387
+- RHSA-2024:4312: https://access.redhat.com/errata/RHSA-2024:4312
+- RHSA-2024:4340: https://access.redhat.com/errata/RHSA-2024:4340

@@ -1,0 +1,358 @@
+{
+  "id": "prd5",
+  "desc": "GrowthCo A/B experiment quality review — 16 exec_check rounds, 2 updates (incl. VP BH→Bonferroni supersede), 5 preference rules P1-P5, difficulty vectors V1/V2/V3/V4/V5/V6/V7/V8/V9/V10",
+  "rounds": [
+    {
+      "id": "q1",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Read `experiments/exp_registry.json` and write `output/q1_running_experiments.json` containing a JSON array of experiment IDs (strings) that currently have status \"running\". (A team member guessed there are 4 running experiments — read the registry and use the actual count.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q1.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target output/q1_running_experiments.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P3): output must be in the output/ subdirectory (P1); JSON fields sorted alphabetically (P3)."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "Correct: output/q1_running_experiments.json is a JSON array of exactly 5 string IDs (exp006-exp010).",
+        "incorrect": "Check output/q1_running_experiments.json: must be a plain JSON array of strings, with exactly the 5 running experiment IDs (exp006, exp007, exp008, exp009, exp010) — no extra keys, no dict wrapper."
+      }
+    },
+    {
+      "id": "q2",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "For exp002 (Onboarding Flow Redesign), run a chi-squared SRM check on the final sample allocation: control=5234, treatment=4891, expected split=50/50. Write `output/q2_srm_exp002.json` with keys: `chi2_stat` (float), `p_value` (float), `srm_detected` (bool). Use Statsig's SRM threshold of p < 0.01. (Bob in Feishu claimed exp002 passed SRM — check the actual numbers.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q2.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target output/q2_srm_exp002.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P3): output in output/ directory; JSON fields alphabetically sorted."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "SRM check correct: chi2_stat ≈ 11.83, p_value ≈ 0.0006 < 0.01, srm_detected = true.",
+        "incorrect": "Check output/q2_srm_exp002.json: p_value must be < 0.01 and srm_detected must be true (5234 vs 4891 on a 50/50 split is a clear SRM — contrary to Bob's Feishu claim)."
+      }
+    },
+    {
+      "id": "q3",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Audit the CUPED theta value reported in `experiments/exp002_onboarding_flow/analysis_report_v2.md`. The report states theta=0.31 (manually set), but the correct formula per Statsig is θ = Cov(Y, X) / Var(X). Using the values in the report (Cov=0.0412, Var=0.1456), write `output/q3_cuped_audit.json` with keys: `reported_theta` (float), `correct_theta` (float), `error_pct` (float, absolute percentage error). Also include key `formula_source` (string) citing the Statsig documentation URL verbatim.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q3.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target output/q3_cuped_audit.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P3): output in output/ subdirectory; JSON fields alphabetically sorted."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "CUPED audit correct: reported_theta=0.31, correct_theta≈0.2829, error_pct≈9.6%, formula_source cites Statsig docs.",
+        "incorrect": "Check output/q3_cuped_audit.json: correct_theta = 0.0412/0.1456 ≈ 0.2829 (formula: θ = Cov(Y,X)/Var(X) from https://docs.statsig.com/stats-engine/methodologies/cuped); error_pct ≈ 9.6%."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Write a corrected sample size calculation script at `scripts/power_analysis_fixed.py`. The existing `experiments/exp004_email_subject/power_analysis.py` uses wrong z-values (z_alpha=2.576 and z_beta=1.28). Correct it to use z_alpha/2=1.96 (for alpha=0.05 two-sided) and z_beta=0.84 (for power=0.80), per `docs/stats_methodology.md`. The script must be functional (each function has a Google docstring) and when run with p1=0.10, p2=0.12, alpha=0.05, power=0.80, it must print a sample size n in the range [1759, 1769]. (The old runbook in DEPRECATED_old_runbook_v1.md uses z=2.33 — do not use that.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q4.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P2 --target scripts/power_analysis_fixed.py",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P2): Python script must use functional style with Google-style docstrings (Args/Returns sections in each function)."
+        },
+        "rules": "P2"
+      },
+      "feedback": {
+        "correct": "Fixed power analysis script uses correct z_alpha=1.96, z_beta=0.84, and outputs n≈1764 for the standard test case.",
+        "incorrect": "Check scripts/power_analysis_fixed.py: must use z_alpha/2=1.96 and z_beta=0.84; when run with p1=0.10, p2=0.12, must output n in [1759,1769]."
+      }
+    },
+    {
+      "id": "q5",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Compare `reports/q3_experiment_summary_BOT.md` with `reports/q3_experiment_summary_HUMAN.md` and identify all factual errors in the BOT version. Write `output/q5_bot_errors.json` as a JSON array, each element an object with keys: `field` (string, descriptive name of the error), `bot_value` (string, what the BOT said), `correct_value` (string, the correct value from HUMAN or primary sources). You must identify at least 3 errors. (The BOT report contains several wrong statistics that conflict with the authoritative documents.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q5.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target output/q5_bot_errors.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P3): output in output/ subdirectory; JSON array elements with fields in alphabetical order."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "BOT error identification correct: at least 4 errors identified including peeking FPR (5% vs 57%), CUPED window (14 vs 7 days), SRM frequency (3% vs ~6%), and exp003 conclusion invalidation.",
+        "incorrect": "Check output/q5_bot_errors.json: must be a JSON array with >=4 error objects, each having 'field', 'bot_value', AND 'correct_value' keys. Key errors: peeking FPR (BOT says 5%, correct is 57%); CUPED window (BOT says 14 days, correct is 7 days); SRM frequency (BOT says 3%, correct is ~6%); exp003 conclusion (BOT claimed significant, correct: invalidated by bot traffic)."
+      }
+    },
+    {
+      "id": "q6",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "According to the Optimizely Stats Engine blog (referenced in `docs/stats_methodology.md`), quantify the peeking problem. Write `output/q6_peeking_analysis.json` with keys: `actual_fpr` (float, the actual false positive rate when checking after every visitor), `nominal_fpr` (float, the nominal significance level), `ratio` (float, actual/nominal, representing how many times worse peeking makes things). Use the exact numbers from the Optimizely source.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q6.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target output/q6_peeking_analysis.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P3): output in output/ subdirectory; JSON fields sorted alphabetically."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "Peeking analysis correct: actual_fpr=0.57, nominal_fpr=0.05, ratio≈11.4.",
+        "incorrect": "Check output/q6_peeking_analysis.json: actual_fpr must be 0.57 (from Optimizely blog), nominal_fpr=0.05, ratio≈11.4 (±0.1). The BOT report incorrectly cited 5% as the actual FPR — do not use the BOT value."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Apply Benjamini-Hochberg (BH) multiple comparison correction to exp003's primary metric results across 3 variants. There are 3 pairwise comparisons (control vs v1, control vs v2, v1 vs v2). Use these raw p-values: p_ctrl_v1=0.31, p_ctrl_v2=0.43, p_v1_v2=0.67 (from the pre-cleanup data). Write `output/q7_multi_test_correction.json` with keys: `bh_significant` (int, count of comparisons significant after BH), `method` (string, must be \"benjamini_hochberg\"), `n_tests` (int), `raw_significant` (int, count significant before correction at alpha=0.05). Note: a VP email earlier requested BH correction — we are using BH for this historical analysis only.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q7.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target output/q7_multi_test_correction.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P3): output in output/ directory; JSON fields in alphabetical order."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "BH correction applied: with p-values 0.31/0.43/0.67, none pass BH (bh_significant=0), raw_significant=0 (none < 0.05).",
+        "incorrect": "Check output/q7_multi_test_correction.json: all 3 raw p-values (0.31, 0.43, 0.67) are above 0.05, so raw_significant=0 and bh_significant=0; method must be 'benjamini_hochberg'; n_tests=3."
+      }
+    },
+    {
+      "id": "q8",
+      "type": "exec_check",
+      "update_ids": ["upd1_sessions", "upd1_workspace"],
+      "question": "Cathy has sent an update via Slack: exp003 control group data had 12% bot traffic which has been removed. The cleaned data is now in `experiments/exp003_pricing_page/results_raw_v2.csv` and the new analysis document is `experiments/exp003_pricing_page/analysis_report_FINAL_v2.md`. Based on the cleaned data and the new analysis, write `output/q8_exp003_revised.json` with keys: `conclusion` (string, the updated conclusion about exp003 significance), `p_value` (float, the p-value from cleaned data analysis), `significant` (bool). The original FINAL report (v1) showed p=0.023 — does the cleaned analysis confirm this?",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q8.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target output/q8_exp003_revised.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P3): output in output/ directory; JSON fields in alphabetical order."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "exp003 revised result correct: significant=false, p_value≈0.31 (not 0.023), conclusion reflects no significant effect.",
+        "incorrect": "Check output/q8_exp003_revised.json: significant must be false; p_value must be close to 0.31 (±0.05); conclusion must express 'no significant effect' or equivalent. The original p=0.023 was a false positive caused by bot traffic contamination."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Produce a cross-experiment results summary at `output/q9_experiment_summary.json`. Include one entry per completed (ended) experiment with fields: `exp_id` (string), `conclusion` (string: \"significant_positive\", \"not_significant\", or \"invalid_srm\"), `primary_p_value` (float or null), `notes` (string). Ensure exp003's conclusion reflects the Q8 analysis (NOT the original FINAL report), and exp002's conclusion accounts for the SRM found in Q2. exp001's primary result had a suspicious +45% lift that was flagged per Twyman's Law but not yet resolved — mark it as requiring investigation.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q9.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target output/q9_experiment_summary.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P3): output in output/ directory; JSON fields in alphabetical order."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "Cross-experiment summary correct: exp002 marked invalid_srm; exp003 marked not_significant with primary_p_value in [0.15, 0.55] consistent with Q8; exp001 conclusion/notes flags investigation (Twyman's Law).",
+        "incorrect": "Check output/q9_experiment_summary.json: exp002 must be 'invalid_srm'; exp003 must be 'not_significant' with primary_p_value ≈0.31 (cleaned data); exp001 conclusion/notes must explicitly flag investigation (Twyman's Law applies — cannot mark as significant or not_significant without diagnostic)."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "In Discord, an external consultant recommended using `docs/DEPRECATED_old_runbook_v1.md` for sample size calculations, claiming its z=2.33 is correct. Assess whether the deprecated runbook's sample size formula parameters match the current authoritative runbook (`docs/ab_testing_runbook.md`) and write `output/q10_runbook_diff.json` with keys: `is_deprecated` (bool), `discrepancy_list` (list of strings, each describing a specific difference). Identify at least 2 discrepancies.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q10.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target output/q10_runbook_diff.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P3): output in output/ directory; JSON fields alphabetically sorted."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "Deprecated runbook correctly flagged: is_deprecated=true, at least 2 discrepancies identified (z_alpha/2 wrong: 2.33 vs 1.96; z_beta wrong: 1.04 vs 0.84; SRM threshold different; CUPED window different).",
+        "incorrect": "Check output/q10_runbook_diff.json: is_deprecated must be true; discrepancy_list must have >=2 entries. Key differences: old runbook uses z_alpha/2=2.33 (correct is 1.96 for alpha=0.05) and z_beta=1.04 (correct is 0.84 for 80% power)."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Calculate the required sample size for exp004 (Email Subject Line Optimization). Parameters: baseline open rate p1=0.22, expected lift of 3pp so p2=0.25, alpha=0.05, power=0.80. Use the correct formula with z_alpha/2=1.96 and z_beta=0.84. Write `output/q11_exp004_sample_size.json` with keys: `alpha` (float), `delta` (float, expected lift), `n_per_group` (int), `power` (float), `total_n` (int). The script in `experiments/exp004_email_subject/power_analysis.py` uses WRONG parameters — compute using the correct values from `docs/stats_methodology.md`.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q11.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3 --target output/q11_exp004_sample_size.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P3): output in output/ directory; JSON fields alphabetically sorted."
+        },
+        "rules": "P1,P3"
+      },
+      "feedback": {
+        "correct": "exp004 sample size correct: n_per_group ≈ 3129 (in [2900, 3400]), alpha=0.05, power=0.80.",
+        "incorrect": "Check output/q11_exp004_sample_size.json: n_per_group must be ≈3129 (using p1=0.22, p2=0.25, z_alpha/2=1.96, z_beta=0.84 per docs/stats_methodology.md); alpha=0.05; power=0.80; total_n = 2*n_per_group."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Check whether exp005 is eligible for CUPED based on Statsig's activation conditions. Read `data/pre_experiment_metrics.csv` to find units with pre-experiment data for exp005, and compute coverage percentage against the total users in `data/user_segments.csv`. Write `output/q12_cuped_eligibility.json` with keys: `eligible` (bool), `pct_coverage` (float, percentage with pre-data), `reason` (string, explaining why eligible or not, citing the 7-day pre-experiment window), `units_with_pre_data` (int). Statsig requires >100 units with pre-data AND coverage >5%.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q12.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 60
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3,P4 --target output/q12_cuped_eligibility.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P3/P4): output in output/ directory; JSON fields alphabetically sorted; must include reason field (P4)."
+        },
+        "rules": "P1,P3,P4"
+      },
+      "feedback": {
+        "correct": "CUPED eligibility correct: eligible=true (640 units > 100 threshold, coverage=8% > 5%), reason cites 7-day pre-experiment window.",
+        "incorrect": "Check output/q12_cuped_eligibility.json: units_with_pre_data for exp005 = 640 (>100 threshold); pct_coverage = 640/8000 = 8.0% (>5% threshold); eligible=true; reason must mention '7 days' pre-experiment window (Statsig Cloud default)."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "exec_check",
+      "update_ids": ["upd2_sessions", "upd2_workspace"],
+      "question": "A correction notice has arrived via email from the CFO office (see the email thread update): the VP's earlier directive to use Benjamini-Hochberg correction was misaddressed and is superseded. The GrowthCo project must use Bonferroni correction. Apply Bonferroni correction to exp004's secondary metrics analysis. exp004 has 8 secondary metrics with raw p-values (read from `data/q4_segment_analysis.csv` — use the 8 distinct metric_values for exp004 rows as proxies, or use these representative values: 0.031, 0.042, 0.078, 0.112, 0.198, 0.234, 0.301, 0.445). Write `output/q13_bonferroni_correction.json` with keys: `alpha_adjusted` (float), `method` (string, must be \"bonferroni\"), `n_tests` (int, 8), `significant_metrics` (int).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q13.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3,P4 --target output/q13_bonferroni_correction.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P3/P4): output in output/ directory; JSON fields alphabetically sorted; reason field required (P4)."
+        },
+        "rules": "P1,P3,P4"
+      },
+      "feedback": {
+        "correct": "Bonferroni correction applied: method='bonferroni', alpha_adjusted=0.05/8=0.00625, significant_metrics=0 (none of the 8 p-values < 0.00625).",
+        "incorrect": "Check output/q13_bonferroni_correction.json: method must be 'bonferroni' (NOT 'benjamini_hochberg' — the VP email was superseded); alpha_adjusted = 0.05/8 = 0.00625; n_tests=8. The CFO correction notice supersedes the VP's BH directive."
+      }
+    },
+    {
+      "id": "q14",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "exp001 (Checkout CTA) reported a +45% lift in checkout_conversion_rate (control: 8.2%, treatment: 11.9%). Apply Twyman's Law ('Any figure that looks interesting or different is usually wrong') and write `output/q14_twyman_check.json` documenting your diagnostic. Required keys: `confidence_level` (string: \"high\", \"medium\", or \"low\"), `diagnostic_steps` (list of strings, at least 3 steps), `flagged_metric` (string), `reported_lift` (string, e.g. \"+45%\" or similar), `suspicion_reason` (string, must reference Twyman's Law or the implausibility of the lift magnitude).",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q14.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "pref": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_preferences.py ${workspace} --rules P1,P3,P4,P5 --target output/q14_twyman_check.json",
+        "feedback": {
+          "correct": "",
+          "incorrect": "Style reminder (P1/P3/P4/P5): output in output/ directory; JSON fields alphabetically sorted; reason field required (P4); confidence_level field required (P5)."
+        },
+        "rules": "P1,P3,P4,P5"
+      },
+      "feedback": {
+        "correct": "Twyman diagnostic correct: flagged_metric='checkout_conversion_rate', suspicion_reason explicitly names 'Twyman's Law', >=5 diagnostic_steps each substantive, reported_lift includes '%' and reflects +45%, confidence_level set.",
+        "incorrect": "Check output/q14_twyman_check.json: flagged_metric must be 'checkout_conversion_rate'; suspicion_reason must explicitly name 'Twyman's Law' (not just 'suspicious'); diagnostic_steps must be a list of >= 5 substantive strings (each >=10 chars); reported_lift must include '%' and show 40-49 range; confidence_level must be 'high', 'medium', or 'low'."
+      }
+    },
+    {
+      "id": "q15",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Generate the comprehensive Q3 experiment quality review report at `output/q15_final_report.md`. The report must: (1) mention all 12 experiment IDs (exp001 through exp012); (2) state exp003 conclusion as 'no significant effect' (reflecting the bot traffic cleanup from Q8); (3) reference Bonferroni correction (NOT BH, per the supersede from update2); (4) include the peeking false positive rate of 57% (from Q6); (5) use markdown with `## ` section headers. This tests integration of all prior rounds.",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q15.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Final report correct: all 12 experiment IDs present, exp003 marked not significant, Bonferroni referenced, 57% peeking rate cited, section headers present.",
+        "incorrect": "Check output/q15_final_report.md: must contain all of exp001-exp012; exp003 conclusion must be 'no significant effect'; must reference 'Bonferroni' (not BH, per supersede); must cite '57%' peeking false positive rate; must have >=2 '## ' section headers."
+      }
+    },
+    {
+      "id": "q16",
+      "type": "exec_check",
+      "update_ids": [],
+      "question": "Final sign-off. Compute the SHA-256 hash of the exact bytes of your `output/q15_final_report.md` file and write `output/q16_signoff.txt` containing exactly one line in the format `VERIFIED:<sha256hex>` where <sha256hex> is the 64-character lowercase hexadecimal SHA-256 digest. Nothing else in the file. (You must actually run sha256sum or equivalent — a hand-typed or placeholder hash will not match.)",
+      "eval": {
+        "command": "python ${eval_dir}/${agent_id}/scripts/check_q16.py ${workspace}",
+        "expect_exit": 0,
+        "timeout": 30
+      },
+      "feedback": {
+        "correct": "Sign-off token valid: VERIFIED:<sha256> matches the recomputed digest of q15_final_report.md.",
+        "incorrect": "Check output/q16_signoff.txt: must be exactly one line matching ^VERIFIED:[a-f0-9]{64}$ where the hash is the SHA-256 of output/q15_final_report.md (recomputed by the validator — placeholder hashes will fail)."
+      }
+    }
+  ]
+}

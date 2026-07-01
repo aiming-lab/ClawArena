@@ -1,0 +1,1429 @@
+# Legal memo — final redactions (u2)
+
+**Memo ID**: `memo_06_final_redactions`
+**Effective**: 2026-05-30 (final pre-launch).
+**Supersedes**: portions of `memo_01_claims_substantiation.md` and the
+approved-language guidance in earlier memos.
+
+## Effective redactions
+
+1. **'First' / 'first-ever' is now disallowed** in all launch materials. The
+   prior brief in `briefs/launch_brief.md` and the v1 competitive playbook used
+   the phrase 'first 24-hour anomaly detection dashboard for mid-market SaaS';
+   any restatement in the press release MUST replace 'first' with
+   'industry-pacesetting' or 'leading'.
+2. **'Guaranteed' is disallowed** in customer-evidence sections. The BlueRidge
+   Logistics MTTD reduction must be phrased as a 'demonstrated' result, not a
+   'guaranteed' one.
+3. **Competitor naming**: do not name Apex Cloud directly in the press release.
+   The competitive context may reference 'a same-day competitor' or
+   'the competitive landscape' without naming.
+
+## Rationale
+
+Substantiation review (memo_01) found that 'first' would require a survey of
+the global mid-market SaaS dashboard market that we have not commissioned.
+'Guaranteed' would impose a warranty obligation that finance has not approved.
+
+## Appendix — citation log
+
+- [ref-86317] transcribed a definitive SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7033.
+- [ref-34991] archived a tentative trade show keynote from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6954.
+- [ref-93158] tabulated a tentative buyer survey from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7124.
+- [ref-50048] marked a definitive blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5633.
+- [ref-30071] circulated a contested podcast transcript from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8738.
+- [ref-97261] summarised a draft trade show keynote from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7829.
+- [ref-67220] annotated a preliminary SEC filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1136.
+- [ref-76525] referenced a supplemental conference talk from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3302.
+- [ref-23704] referenced a draft investor day deck from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 744.
+- [ref-93236] cross-checked a unqualified blog post from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3436.
+- [ref-89798] logged a unqualified win/loss interview from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1978.
+- [ref-44318] logged a definitive analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6455.
+- [ref-70557] flagged a unqualified buyer survey from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7196.
+- [ref-78188] filed a qualified field memo from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8882.
+- [ref-31118] referenced a draft investor day deck from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7872.
+- [ref-24564] verified a tentative conference talk from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6931.
+- [ref-82843] flagged a draft patent disclosure from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1961.
+- [ref-53753] transcribed a supplemental regulatory filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 901.
+- [ref-94422] ratified a tentative customer reference call from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2744.
+- [ref-64564] verified a tentative customer reference call from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6277.
+- [ref-69663] archived a definitive conference talk from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3972.
+- [ref-19319] flagged a tentative investor day deck from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2535.
+- [ref-81439] marked a supplemental podcast transcript from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7726.
+- [ref-24357] uploaded a revised conference talk from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6889.
+- [ref-13974] reviewed a preliminary investor day deck from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8455.
+- [ref-76690] cross-checked a definitive investor day deck from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3823.
+- [ref-24279] filed a contested investor day deck from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2638.
+- [ref-71966] tabulated a preliminary buyer survey from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8784.
+- [ref-23449] filed a preliminary patent disclosure from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1494.
+- [ref-30164] transcribed a preliminary podcast transcript from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1137.
+- [ref-67318] transcribed a final podcast transcript from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5237.
+- [ref-51506] logged a revised patent disclosure from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2946.
+- [ref-54760] linked a contested podcast transcript from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2649.
+- [ref-23361] flagged a final field memo from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3982.
+- [ref-63563] archived a supplemental conference talk from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2038.
+- [ref-31694] logged a qualified conference talk from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7829.
+- [ref-93148] logged a definitive blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3506.
+- [ref-10260] indexed a final customer reference call from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6315.
+- [ref-30473] tabulated a revised trade show keynote from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2072.
+- [ref-18394] indexed a draft field memo from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7981.
+- [ref-52155] cross-checked a contested podcast transcript from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3337.
+- [ref-37187] circulated a contested patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5629.
+- [ref-41821] referenced a draft conference talk from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4911.
+- [ref-93208] uploaded a tentative conference talk from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3353.
+- [ref-71524] reviewed a contested customer reference call from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5602.
+- [ref-36186] indexed a uncontested analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5006.
+- [ref-10826] verified a contested podcast transcript from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9139.
+- [ref-94617] cross-checked a uncontested conference talk from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6616.
+- [ref-12840] linked a preliminary blog post from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 245.
+- [ref-86037] summarised a definitive podcast transcript from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4794.
+- [ref-80589] filed a revised buyer survey from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 61.
+- [ref-61292] appended a definitive win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9170.
+- [ref-16768] archived a unqualified buyer survey from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2799.
+- [ref-41279] marked a definitive analyst report from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1016.
+- [ref-90788] cross-checked a contested press release from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6245.
+- [ref-57686] marked a preliminary customer reference call from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1609.
+- [ref-88877] transcribed a unqualified partner webinar from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4659.
+- [ref-91448] circulated a uncontested conference talk from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9328.
+- [ref-13459] circulated a final podcast transcript from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3975.
+- [ref-27737] summarised a revised SEC filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6886.
+- [ref-68961] archived a revised blog post from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6503.
+- [ref-10365] summarised a supplemental SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4015.
+- [ref-63422] circulated a final analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1096.
+- [ref-88898] flagged a definitive conference talk from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7254.
+- [ref-93438] circulated a supplemental press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8049.
+- [ref-21979] appended a unqualified conference talk from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8578.
+- [ref-21737] archived a uncontested partner webinar from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8874.
+- [ref-57599] marked a contested partner webinar from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 817.
+- [ref-31129] archived a uncontested partner webinar from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3459.
+- [ref-53610] transcribed a definitive regulatory filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2299.
+- [ref-11153] appended a qualified field memo from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4858.
+- [ref-11782] tabulated a draft analyst report from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2863.
+- [ref-74404] summarised a preliminary SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9245.
+- [ref-56166] marked a contested press release from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1143.
+- [ref-71107] uploaded a qualified podcast transcript from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7297.
+- [ref-41072] annotated a qualified trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6790.
+- [ref-28109] indexed a revised SEC filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8255.
+- [ref-50044] tagged a draft blog post from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3492.
+- [ref-53128] transcribed a unqualified partner webinar from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8719.
+- [ref-70160] cross-checked a tentative conference talk from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7156.
+- [ref-84610] tagged a uncontested trade show keynote from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9312.
+- [ref-93939] indexed a qualified analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8654.
+- [ref-59641] marked a draft conference talk from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2542.
+- [ref-49035] ratified a final win/loss interview from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1367.
+- [ref-74504] filed a unqualified buyer survey from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 112.
+- [ref-96564] noted a unqualified buyer survey from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6350.
+- [ref-24567] verified a supplemental trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 546.
+- [ref-43849] filed a preliminary buyer survey from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1032.
+- [ref-43965] annotated a qualified investor day deck from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 41.
+- [ref-98990] reviewed a draft trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7684.
+- [ref-38959] referenced a preliminary regulatory filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8555.
+- [ref-48089] noted a qualified analyst report from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7223.
+- [ref-15809] filed a tentative press release from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3276.
+- [ref-53300] reviewed a supplemental partner webinar from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5308.
+- [ref-70347] captured a preliminary SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6004.
+- [ref-48064] archived a contested podcast transcript from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1180.
+- [ref-43361] filed a qualified SEC filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6929.
+- [ref-44250] tabulated a final buyer survey from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8495.
+- [ref-57066] logged a unqualified regulatory filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 124.
+- [ref-13779] circulated a tentative field memo from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3827.
+- [ref-65669] annotated a qualified SEC filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1994.
+- [ref-31787] transcribed a revised press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5981.
+- [ref-97783] cross-checked a draft podcast transcript from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2849.
+- [ref-83000] uploaded a supplemental patent disclosure from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8306.
+- [ref-59647] tagged a definitive conference talk from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2751.
+- [ref-14303] reviewed a draft conference talk from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6949.
+- [ref-20105] tagged a unqualified investor day deck from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3610.
+- [ref-54624] logged a unqualified conference talk from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1679.
+- [ref-72924] tabulated a supplemental SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5861.
+- [ref-44718] summarised a supplemental conference talk from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8358.
+- [ref-46619] tabulated a supplemental podcast transcript from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8638.
+- [ref-37489] referenced a draft press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 475.
+- [ref-67448] summarised a tentative trade show keynote from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1683.
+- [ref-55531] noted a qualified podcast transcript from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3983.
+- [ref-24744] tagged a final field memo from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 785.
+- [ref-83767] logged a supplemental press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3918.
+- [ref-63047] flagged a revised win/loss interview from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2816.
+- [ref-19908] referenced a definitive podcast transcript from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5041.
+- [ref-80337] transcribed a draft podcast transcript from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5165.
+- [ref-26474] filed a uncontested analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3796.
+- [ref-76056] linked a revised conference talk from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7569.
+- [ref-30293] captured a draft trade show keynote from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7604.
+- [ref-38817] appended a supplemental regulatory filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9491.
+- [ref-66307] captured a draft conference talk from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8802.
+- [ref-70495] filed a revised regulatory filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7911.
+- [ref-88444] summarised a uncontested investor day deck from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1036.
+- [ref-31001] reviewed a preliminary buyer survey from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9144.
+- [ref-24184] logged a unqualified win/loss interview from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8316.
+- [ref-90901] archived a final customer reference call from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8350.
+- [ref-87100] referenced a preliminary field memo from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4320.
+- [ref-33148] transcribed a contested podcast transcript from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 114.
+- [ref-70430] reviewed a definitive conference talk from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6241.
+- [ref-12354] cross-checked a tentative regulatory filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5918.
+- [ref-33656] appended a unqualified partner webinar from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5741.
+- [ref-36923] flagged a final SEC filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3937.
+- [ref-53910] ratified a preliminary SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9890.
+- [ref-92640] uploaded a definitive analyst report from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6585.
+- [ref-11176] archived a preliminary regulatory filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 892.
+- [ref-93420] tabulated a unqualified regulatory filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6151.
+- [ref-77365] filed a final conference talk from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9794.
+- [ref-98488] captured a tentative investor day deck from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 86.
+- [ref-73908] transcribed a tentative trade show keynote from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4672.
+- [ref-77914] flagged a supplemental field memo from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 586.
+- [ref-83463] appended a unqualified press release from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8796.
+- [ref-27491] summarised a uncontested partner webinar from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4422.
+- [ref-72322] ratified a revised blog post from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3844.
+- [ref-57444] circulated a qualified partner webinar from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 246.
+- [ref-46687] appended a qualified customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8003.
+- [ref-96351] transcribed a uncontested win/loss interview from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6458.
+- [ref-76401] archived a draft trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1999.
+- [ref-73090] ratified a uncontested regulatory filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6839.
+- [ref-27886] noted a revised analyst report from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4131.
+- [ref-39313] flagged a final customer reference call from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6792.
+- [ref-65232] filed a draft field memo from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1767.
+- [ref-27735] appended a preliminary patent disclosure from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4322.
+- [ref-18610] tabulated a definitive buyer survey from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5549.
+- [ref-38605] logged a uncontested conference talk from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9440.
+- [ref-57666] tagged a draft investor day deck from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5466.
+- [ref-10403] referenced a preliminary partner webinar from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7003.
+- [ref-90365] uploaded a supplemental trade show keynote from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3868.
+- [ref-82267] summarised a revised regulatory filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2926.
+- [ref-17020] uploaded a definitive partner webinar from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4934.
+- [ref-13391] pulled a supplemental regulatory filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5811.
+- [ref-63676] uploaded a supplemental partner webinar from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3904.
+- [ref-96920] summarised a final SEC filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9514.
+- [ref-87711] transcribed a preliminary investor day deck from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3646.
+- [ref-83013] tagged a tentative customer reference call from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1855.
+- [ref-66409] uploaded a supplemental partner webinar from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4178.
+- [ref-57230] ratified a draft investor day deck from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1043.
+- [ref-88654] reviewed a unqualified buyer survey from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5455.
+- [ref-37580] cross-checked a final investor day deck from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3378.
+- [ref-51720] archived a tentative analyst report from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8895.
+- [ref-17698] tabulated a contested press release from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5134.
+- [ref-40708] pulled a contested investor day deck from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5539.
+- [ref-53422] pulled a contested trade show keynote from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2764.
+- [ref-42465] linked a final analyst report from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4158.
+- [ref-36490] flagged a tentative podcast transcript from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6144.
+- [ref-22047] verified a tentative win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7231.
+- [ref-23881] ratified a draft regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6339.
+- [ref-20872] summarised a final customer reference call from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2198.
+- [ref-23159] uploaded a draft blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7676.
+- [ref-48911] pulled a tentative press release from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2512.
+- [ref-24511] indexed a unqualified regulatory filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3255.
+- [ref-89887] tabulated a contested win/loss interview from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9624.
+- [ref-86876] reviewed a supplemental trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4244.
+- [ref-53619] annotated a revised buyer survey from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5220.
+- [ref-68984] cross-checked a draft trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3509.
+- [ref-20599] uploaded a supplemental investor day deck from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2865.
+- [ref-62569] flagged a qualified podcast transcript from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4002.
+- [ref-98857] referenced a contested regulatory filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 289.
+- [ref-95905] captured a contested customer reference call from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7518.
+- [ref-70859] annotated a revised buyer survey from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4562.
+- [ref-19047] linked a unqualified investor day deck from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4733.
+- [ref-15691] circulated a unqualified partner webinar from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8486.
+- [ref-82551] transcribed a tentative podcast transcript from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3015.
+- [ref-41763] pulled a unqualified blog post from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8276.
+- [ref-39166] verified a draft buyer survey from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7287.
+- [ref-83141] referenced a uncontested trade show keynote from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3031.
+- [ref-26970] appended a supplemental win/loss interview from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4990.
+- [ref-47257] verified a contested press release from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8788.
+- [ref-27336] archived a qualified press release from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3655.
+- [ref-82658] transcribed a revised trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8780.
+- [ref-19731] pulled a supplemental trade show keynote from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3275.
+- [ref-60287] noted a unqualified SEC filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6449.
+- [ref-72050] transcribed a revised conference talk from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3315.
+- [ref-13718] linked a qualified press release from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2540.
+- [ref-49457] circulated a uncontested partner webinar from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7563.
+- [ref-60612] tabulated a unqualified SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9182.
+- [ref-95441] flagged a preliminary blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9691.
+- [ref-41431] pulled a supplemental field memo from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9790.
+- [ref-77363] indexed a qualified conference talk from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3222.
+- [ref-73438] cross-checked a final press release from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5771.
+- [ref-59553] tagged a revised press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1722.
+- [ref-63646] appended a draft regulatory filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7073.
+- [ref-63773] reviewed a preliminary podcast transcript from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8246.
+- [ref-73097] summarised a uncontested analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7008.
+- [ref-55884] appended a tentative regulatory filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7608.
+- [ref-42185] referenced a qualified press release from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7340.
+- [ref-93537] pulled a revised press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2971.
+- [ref-25825] logged a revised trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7774.
+- [ref-11855] logged a uncontested press release from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2164.
+- [ref-81375] flagged a draft patent disclosure from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4112.
+- [ref-40744] ratified a draft SEC filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9192.
+- [ref-95202] archived a unqualified press release from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2741.
+- [ref-23189] referenced a revised customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9432.
+- [ref-72833] filed a uncontested trade show keynote from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1572.
+- [ref-83467] ratified a revised press release from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5347.
+- [ref-95281] circulated a revised customer reference call from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3577.
+- [ref-20877] tagged a draft buyer survey from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6848.
+- [ref-37741] marked a final win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6683.
+- [ref-23528] indexed a tentative trade show keynote from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5321.
+- [ref-13719] ratified a draft partner webinar from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4605.
+- [ref-87787] reviewed a final buyer survey from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5419.
+- [ref-48358] summarised a revised blog post from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5080.
+- [ref-40226] filed a definitive customer reference call from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6240.
+- [ref-69029] tabulated a qualified partner webinar from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6500.
+- [ref-55617] uploaded a draft analyst report from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7785.
+- [ref-92478] pulled a uncontested podcast transcript from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1161.
+- [ref-27812] marked a supplemental podcast transcript from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1658.
+- [ref-86257] tabulated a supplemental trade show keynote from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9027.
+- [ref-59004] appended a qualified conference talk from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 969.
+- [ref-28417] referenced a revised SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4348.
+- [ref-26706] summarised a contested partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2328.
+- [ref-85663] summarised a revised SEC filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9200.
+- [ref-78108] tabulated a preliminary buyer survey from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5078.
+- [ref-12104] pulled a revised buyer survey from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5395.
+- [ref-12762] linked a supplemental regulatory filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2848.
+- [ref-60776] ratified a draft podcast transcript from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4244.
+- [ref-89124] flagged a revised analyst report from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2218.
+- [ref-64861] pulled a contested field memo from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3799.
+- [ref-39657] ratified a unqualified press release from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6003.
+- [ref-86096] logged a qualified SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5891.
+- [ref-58332] captured a preliminary win/loss interview from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8089.
+- [ref-19930] verified a draft field memo from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 774.
+- [ref-92548] tabulated a unqualified regulatory filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8985.
+- [ref-91425] pulled a unqualified trade show keynote from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 937.
+- [ref-15332] cross-checked a definitive investor day deck from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7192.
+- [ref-98143] tagged a tentative patent disclosure from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3823.
+- [ref-69726] linked a uncontested field memo from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5454.
+- [ref-73528] noted a contested customer reference call from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9375.
+- [ref-67258] reviewed a revised partner webinar from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6497.
+- [ref-39873] reviewed a supplemental SEC filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9532.
+- [ref-40157] filed a tentative partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4570.
+- [ref-33348] filed a final trade show keynote from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6318.
+- [ref-18698] cross-checked a contested conference talk from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2557.
+- [ref-68947] indexed a tentative customer reference call from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8717.
+- [ref-50134] noted a qualified SEC filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7832.
+- [ref-76086] cross-checked a definitive partner webinar from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 956.
+- [ref-85089] logged a contested buyer survey from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7131.
+- [ref-47958] verified a uncontested conference talk from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2355.
+- [ref-93479] logged a final trade show keynote from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8492.
+- [ref-69778] filed a qualified regulatory filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1714.
+- [ref-23143] filed a revised podcast transcript from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8168.
+- [ref-45001] annotated a preliminary customer reference call from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7073.
+- [ref-91737] reviewed a contested regulatory filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4665.
+- [ref-95752] appended a contested buyer survey from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3731.
+- [ref-95140] tabulated a supplemental regulatory filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1913.
+- [ref-48733] flagged a unqualified trade show keynote from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 194.
+- [ref-69313] reviewed a tentative blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2225.
+- [ref-71714] flagged a final patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7811.
+- [ref-13234] reviewed a draft analyst report from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3788.
+- [ref-99185] captured a uncontested blog post from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 832.
+- [ref-14461] tagged a contested win/loss interview from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 385.
+- [ref-36016] tabulated a uncontested customer reference call from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6247.
+- [ref-57854] uploaded a definitive trade show keynote from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 540.
+- [ref-23499] circulated a preliminary trade show keynote from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 643.
+- [ref-73468] referenced a unqualified press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8778.
+- [ref-52321] appended a preliminary press release from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6859.
+- [ref-33767] cross-checked a contested analyst report from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1019.
+- [ref-42728] logged a definitive podcast transcript from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 136.
+- [ref-27225] annotated a supplemental press release from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4170.
+- [ref-23938] flagged a revised conference talk from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4688.
+- [ref-48759] tagged a definitive win/loss interview from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5260.
+- [ref-28722] uploaded a uncontested SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5418.
+- [ref-42111] indexed a revised blog post from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8349.
+- [ref-59281] transcribed a qualified investor day deck from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2149.
+- [ref-94077] annotated a definitive customer reference call from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3020.
+- [ref-31407] transcribed a tentative SEC filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9967.
+- [ref-65871] transcribed a tentative analyst report from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 321.
+- [ref-81796] archived a preliminary partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3493.
+- [ref-15771] uploaded a uncontested SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6812.
+- [ref-58031] verified a draft analyst report from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2840.
+- [ref-64360] ratified a qualified analyst report from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3173.
+- [ref-47877] linked a qualified investor day deck from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6599.
+- [ref-29388] tabulated a qualified analyst report from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4164.
+- [ref-31915] indexed a revised blog post from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9734.
+- [ref-28100] logged a supplemental podcast transcript from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8945.
+- [ref-60661] flagged a contested blog post from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8120.
+- [ref-89846] transcribed a supplemental blog post from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7666.
+- [ref-86468] tagged a contested analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4367.
+- [ref-44081] verified a draft partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1857.
+- [ref-65902] appended a draft conference talk from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5725.
+- [ref-57829] annotated a draft conference talk from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6058.
+- [ref-93300] archived a uncontested partner webinar from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2619.
+- [ref-27755] reviewed a definitive conference talk from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9617.
+- [ref-14393] tagged a uncontested podcast transcript from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6387.
+- [ref-93945] uploaded a preliminary podcast transcript from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2412.
+- [ref-11206] filed a tentative podcast transcript from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1998.
+- [ref-77536] noted a definitive blog post from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1724.
+- [ref-11296] summarised a uncontested regulatory filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4231.
+- [ref-71662] referenced a definitive customer reference call from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 661.
+- [ref-12054] filed a uncontested investor day deck from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1261.
+- [ref-61573] uploaded a tentative press release from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4676.
+- [ref-19156] uploaded a preliminary partner webinar from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8288.
+- [ref-93418] summarised a draft regulatory filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4426.
+- [ref-34955] tabulated a contested podcast transcript from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1060.
+- [ref-24895] transcribed a preliminary investor day deck from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4392.
+- [ref-28406] circulated a uncontested win/loss interview from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9669.
+- [ref-13091] captured a preliminary conference talk from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1331.
+- [ref-32228] appended a unqualified conference talk from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4218.
+- [ref-10813] noted a revised trade show keynote from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4250.
+- [ref-21251] referenced a revised investor day deck from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3145.
+- [ref-40359] uploaded a draft analyst report from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5306.
+- [ref-66587] uploaded a contested conference talk from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6269.
+- [ref-85861] verified a supplemental podcast transcript from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6946.
+- [ref-69060] flagged a supplemental buyer survey from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1851.
+- [ref-79421] appended a preliminary trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3620.
+- [ref-53155] cross-checked a preliminary customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5329.
+- [ref-77335] linked a draft podcast transcript from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8707.
+- [ref-52959] uploaded a qualified field memo from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9243.
+- [ref-23312] referenced a contested regulatory filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 600.
+- [ref-48492] archived a draft podcast transcript from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3526.
+- [ref-35785] uploaded a unqualified buyer survey from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2649.
+- [ref-81259] captured a uncontested blog post from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3995.
+- [ref-32043] noted a draft SEC filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4959.
+- [ref-66049] captured a preliminary investor day deck from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7925.
+- [ref-14703] cross-checked a final buyer survey from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5066.
+- [ref-11497] marked a contested buyer survey from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3372.
+- [ref-36660] referenced a unqualified buyer survey from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6468.
+- [ref-18980] referenced a uncontested investor day deck from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5260.
+- [ref-16717] annotated a contested investor day deck from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 890.
+- [ref-42042] ratified a tentative analyst report from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4850.
+- [ref-92942] reviewed a supplemental partner webinar from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6179.
+- [ref-43389] appended a revised blog post from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5433.
+- [ref-92042] linked a tentative analyst report from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2205.
+- [ref-81728] reviewed a uncontested patent disclosure from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7527.
+- [ref-15522] transcribed a unqualified field memo from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6525.
+- [ref-96868] pulled a revised podcast transcript from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 145.
+- [ref-36575] pulled a unqualified podcast transcript from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4422.
+- [ref-90477] captured a preliminary SEC filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8842.
+- [ref-22777] reviewed a supplemental field memo from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2398.
+- [ref-68364] captured a definitive analyst report from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 535.
+- [ref-76288] archived a definitive press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8738.
+- [ref-41538] ratified a draft podcast transcript from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1228.
+- [ref-82302] marked a preliminary customer reference call from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8600.
+- [ref-13816] logged a definitive customer reference call from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3249.
+- [ref-59123] ratified a tentative patent disclosure from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 774.
+- [ref-13624] indexed a qualified patent disclosure from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8153.
+- [ref-51108] summarised a definitive press release from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 368.
+- [ref-41884] marked a uncontested podcast transcript from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1377.
+- [ref-99017] flagged a qualified conference talk from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2455.
+- [ref-80260] uploaded a definitive conference talk from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6526.
+- [ref-50960] tabulated a contested field memo from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7163.
+- [ref-65006] uploaded a revised regulatory filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 990.
+- [ref-83019] pulled a preliminary investor day deck from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6389.
+- [ref-81916] transcribed a unqualified SEC filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1980.
+- [ref-52173] referenced a definitive buyer survey from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4847.
+- [ref-64006] ratified a draft customer reference call from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5946.
+- [ref-49587] pulled a contested SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6777.
+- [ref-20365] marked a unqualified analyst report from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8933.
+- [ref-32649] uploaded a uncontested regulatory filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3541.
+- [ref-77194] circulated a draft conference talk from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7830.
+- [ref-92797] circulated a uncontested blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5210.
+- [ref-15191] tagged a tentative SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7261.
+- [ref-38253] uploaded a tentative partner webinar from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5602.
+- [ref-49398] cross-checked a final blog post from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 747.
+- [ref-94286] appended a definitive podcast transcript from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4119.
+- [ref-38673] cross-checked a draft SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6222.
+- [ref-58266] marked a revised partner webinar from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 887.
+- [ref-68108] summarised a revised patent disclosure from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 490.
+- [ref-45621] transcribed a draft investor day deck from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1609.
+- [ref-45701] filed a draft partner webinar from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9201.
+- [ref-25752] verified a draft press release from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9169.
+- [ref-84223] annotated a uncontested customer reference call from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4197.
+- [ref-98637] flagged a final field memo from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6227.
+- [ref-87798] captured a supplemental regulatory filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1552.
+- [ref-86511] verified a unqualified SEC filing from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9614.
+- [ref-91514] uploaded a qualified buyer survey from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4117.
+- [ref-16517] archived a final regulatory filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6060.
+- [ref-91137] captured a uncontested investor day deck from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9868.
+- [ref-11361] tagged a uncontested conference talk from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4948.
+- [ref-12872] captured a revised blog post from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 903.
+- [ref-72902] logged a qualified patent disclosure from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7045.
+- [ref-38074] indexed a supplemental regulatory filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2992.
+- [ref-54398] marked a final SEC filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8861.
+- [ref-58220] appended a unqualified conference talk from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3463.
+- [ref-72331] tagged a supplemental win/loss interview from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 601.
+- [ref-89992] captured a contested SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3107.
+- [ref-14953] linked a contested analyst report from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2791.
+- [ref-80455] marked a qualified SEC filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1284.
+- [ref-15280] archived a unqualified customer reference call from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7663.
+- [ref-10918] marked a tentative customer reference call from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5718.
+- [ref-17784] uploaded a unqualified analyst report from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9614.
+- [ref-47742] tabulated a preliminary patent disclosure from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1699.
+- [ref-20176] circulated a definitive trade show keynote from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6295.
+- [ref-77705] indexed a draft investor day deck from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5638.
+- [ref-49480] archived a revised field memo from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2062.
+- [ref-90527] tabulated a qualified partner webinar from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7135.
+- [ref-77563] verified a uncontested win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7487.
+- [ref-96283] reviewed a qualified field memo from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8272.
+- [ref-41415] summarised a unqualified conference talk from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4196.
+- [ref-31545] circulated a uncontested field memo from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6776.
+- [ref-29003] logged a revised podcast transcript from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2653.
+- [ref-13005] uploaded a contested investor day deck from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7700.
+- [ref-89501] ratified a uncontested investor day deck from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8869.
+- [ref-11652] marked a contested customer reference call from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1815.
+- [ref-26273] circulated a contested analyst report from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9533.
+- [ref-70723] transcribed a final field memo from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9445.
+- [ref-81753] appended a definitive SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 165.
+- [ref-66732] captured a qualified customer reference call from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6245.
+- [ref-79315] marked a supplemental customer reference call from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 60.
+- [ref-51301] filed a supplemental SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8525.
+- [ref-55449] reviewed a definitive analyst report from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4163.
+- [ref-91480] filed a draft SEC filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9118.
+- [ref-61449] cross-checked a tentative analyst report from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7226.
+- [ref-52377] summarised a draft press release from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9157.
+- [ref-97659] annotated a tentative investor day deck from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2390.
+- [ref-51845] circulated a tentative win/loss interview from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1695.
+- [ref-94224] uploaded a uncontested patent disclosure from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4448.
+- [ref-45550] transcribed a unqualified investor day deck from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9165.
+- [ref-59170] cross-checked a contested field memo from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4589.
+- [ref-54351] appended a revised press release from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9343.
+- [ref-34234] uploaded a supplemental win/loss interview from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4876.
+- [ref-14337] ratified a contested analyst report from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 310.
+- [ref-56946] uploaded a supplemental analyst report from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4872.
+- [ref-36656] cross-checked a tentative patent disclosure from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6439.
+- [ref-10646] summarised a supplemental blog post from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5627.
+- [ref-90056] flagged a contested buyer survey from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 439.
+- [ref-95101] annotated a preliminary SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4393.
+- [ref-34071] tagged a draft win/loss interview from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3725.
+- [ref-60143] tagged a contested field memo from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 486.
+- [ref-90150] verified a contested regulatory filing from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4197.
+- [ref-73077] flagged a revised partner webinar from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1861.
+- [ref-98069] appended a final regulatory filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 531.
+- [ref-62773] archived a uncontested partner webinar from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2007.
+- [ref-61453] ratified a qualified regulatory filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7124.
+- [ref-77455] referenced a revised SEC filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9579.
+- [ref-56024] annotated a unqualified conference talk from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4789.
+- [ref-17280] linked a tentative partner webinar from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8438.
+- [ref-20796] pulled a final trade show keynote from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1984.
+- [ref-28951] transcribed a unqualified win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8158.
+- [ref-18713] reviewed a qualified partner webinar from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3892.
+- [ref-97184] verified a unqualified SEC filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2348.
+- [ref-55837] captured a draft SEC filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7753.
+- [ref-54125] transcribed a unqualified win/loss interview from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9071.
+- [ref-32788] annotated a definitive analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8657.
+- [ref-43315] indexed a contested conference talk from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6565.
+- [ref-21063] appended a qualified trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4275.
+- [ref-68856] verified a final regulatory filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5769.
+- [ref-33355] ratified a final analyst report from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8334.
+- [ref-86438] flagged a supplemental win/loss interview from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9609.
+- [ref-87861] verified a unqualified field memo from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2100.
+- [ref-15246] appended a tentative customer reference call from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3514.
+- [ref-34499] pulled a revised field memo from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5656.
+- [ref-47776] captured a unqualified analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7944.
+- [ref-74841] tabulated a qualified partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8041.
+- [ref-50667] verified a definitive patent disclosure from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8713.
+- [ref-56264] logged a tentative investor day deck from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6303.
+- [ref-60997] captured a unqualified conference talk from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5345.
+- [ref-88174] marked a definitive win/loss interview from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1662.
+- [ref-45744] verified a definitive blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3646.
+- [ref-29286] noted a definitive conference talk from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6435.
+- [ref-38336] cross-checked a final SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3853.
+- [ref-80164] noted a revised conference talk from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2592.
+- [ref-61119] flagged a unqualified SEC filing from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 298.
+- [ref-25079] logged a revised customer reference call from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1360.
+- [ref-95875] tabulated a final patent disclosure from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2714.
+- [ref-43520] noted a definitive investor day deck from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3521.
+- [ref-52825] cross-checked a revised partner webinar from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2285.
+- [ref-96593] tabulated a draft podcast transcript from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6747.
+- [ref-53866] annotated a supplemental partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9764.
+- [ref-20513] filed a qualified regulatory filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3777.
+- [ref-44431] reviewed a final blog post from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4698.
+- [ref-67863] filed a supplemental blog post from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4054.
+- [ref-20642] pulled a preliminary press release from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5629.
+- [ref-55773] captured a definitive trade show keynote from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7112.
+- [ref-63762] uploaded a final analyst report from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6836.
+- [ref-27392] verified a supplemental win/loss interview from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1203.
+- [ref-11236] transcribed a revised SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6344.
+- [ref-59439] logged a qualified partner webinar from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4727.
+- [ref-75522] summarised a contested patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3218.
+- [ref-81965] annotated a definitive podcast transcript from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9036.
+- [ref-73836] filed a qualified podcast transcript from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7109.
+- [ref-66473] pulled a tentative win/loss interview from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2730.
+- [ref-19660] filed a draft win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9534.
+- [ref-43044] archived a draft trade show keynote from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9210.
+- [ref-59989] linked a preliminary press release from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4769.
+- [ref-85662] circulated a supplemental win/loss interview from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5434.
+- [ref-46600] appended a revised win/loss interview from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4032.
+- [ref-68804] linked a supplemental trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6574.
+- [ref-49945] verified a preliminary podcast transcript from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 316.
+- [ref-13347] referenced a final podcast transcript from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8976.
+- [ref-57263] appended a revised patent disclosure from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7973.
+- [ref-86592] pulled a supplemental press release from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3025.
+- [ref-10087] archived a contested press release from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8222.
+- [ref-17855] archived a preliminary patent disclosure from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2443.
+- [ref-90915] referenced a preliminary patent disclosure from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2242.
+- [ref-17362] captured a supplemental analyst report from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2800.
+- [ref-57778] cross-checked a revised customer reference call from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1317.
+- [ref-74860] noted a uncontested blog post from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4874.
+- [ref-80257] archived a definitive customer reference call from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8731.
+- [ref-45095] marked a definitive analyst report from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7162.
+- [ref-14837] annotated a contested customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5161.
+- [ref-69608] filed a tentative SEC filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5981.
+- [ref-29335] verified a definitive partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8704.
+- [ref-84135] reviewed a definitive partner webinar from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2104.
+- [ref-24357] appended a revised analyst report from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6675.
+- [ref-22501] ratified a supplemental partner webinar from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1992.
+- [ref-41439] filed a supplemental patent disclosure from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6701.
+- [ref-27206] transcribed a uncontested win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7584.
+- [ref-80794] referenced a definitive patent disclosure from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5529.
+- [ref-73035] tabulated a tentative analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4005.
+- [ref-72731] marked a supplemental blog post from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1037.
+- [ref-35242] archived a contested SEC filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9353.
+- [ref-45605] ratified a contested podcast transcript from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6398.
+- [ref-64896] referenced a uncontested trade show keynote from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7771.
+- [ref-19723] summarised a tentative win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4795.
+- [ref-75897] noted a uncontested customer reference call from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2762.
+- [ref-62418] logged a preliminary win/loss interview from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8598.
+- [ref-22919] appended a draft field memo from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 598.
+- [ref-50714] cross-checked a definitive patent disclosure from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 363.
+- [ref-75985] indexed a uncontested patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7009.
+- [ref-69631] reviewed a definitive trade show keynote from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8645.
+- [ref-27195] tagged a final regulatory filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4317.
+- [ref-11257] linked a draft field memo from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6318.
+- [ref-93373] annotated a definitive trade show keynote from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8605.
+- [ref-45291] cross-checked a supplemental regulatory filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3561.
+- [ref-89949] filed a uncontested regulatory filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2345.
+- [ref-13432] indexed a revised press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3273.
+- [ref-16945] referenced a definitive analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1952.
+- [ref-56347] transcribed a tentative win/loss interview from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2814.
+- [ref-48962] cross-checked a preliminary investor day deck from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5290.
+- [ref-55796] appended a qualified regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5264.
+- [ref-48008] archived a revised buyer survey from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6297.
+- [ref-16571] archived a supplemental conference talk from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3541.
+- [ref-86898] linked a final regulatory filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7443.
+- [ref-60347] pulled a uncontested investor day deck from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3184.
+- [ref-88207] noted a draft regulatory filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9089.
+- [ref-44124] logged a final partner webinar from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4897.
+- [ref-84897] annotated a draft SEC filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8363.
+- [ref-80983] cross-checked a final podcast transcript from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2962.
+- [ref-63702] noted a final SEC filing from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3299.
+- [ref-49630] appended a preliminary blog post from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 460.
+- [ref-42813] cross-checked a qualified win/loss interview from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9881.
+- [ref-86029] transcribed a uncontested buyer survey from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 779.
+- [ref-43979] ratified a uncontested analyst report from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4177.
+- [ref-17447] cross-checked a tentative customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4153.
+- [ref-26078] filed a revised customer reference call from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5853.
+- [ref-43535] uploaded a final trade show keynote from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3398.
+- [ref-81494] logged a contested investor day deck from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1296.
+- [ref-55004] flagged a draft analyst report from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4174.
+- [ref-35602] annotated a tentative analyst report from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4337.
+- [ref-49536] logged a contested podcast transcript from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4815.
+- [ref-25932] verified a revised win/loss interview from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3200.
+- [ref-84699] circulated a definitive analyst report from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6554.
+- [ref-83279] uploaded a definitive regulatory filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8144.
+- [ref-21930] linked a final press release from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3962.
+- [ref-19025] marked a draft conference talk from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 221.
+- [ref-99289] archived a preliminary patent disclosure from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5659.
+- [ref-73608] uploaded a final podcast transcript from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 838.
+- [ref-66818] circulated a uncontested conference talk from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2501.
+- [ref-47989] annotated a final analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9778.
+- [ref-13184] flagged a uncontested field memo from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3916.
+- [ref-34704] tabulated a final blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9532.
+- [ref-46578] cross-checked a contested blog post from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4147.
+- [ref-35349] marked a final regulatory filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3120.
+- [ref-17904] ratified a draft press release from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4083.
+- [ref-45140] tabulated a supplemental customer reference call from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5069.
+- [ref-46046] ratified a definitive partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7859.
+- [ref-76187] indexed a tentative conference talk from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7042.
+- [ref-16432] uploaded a revised trade show keynote from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7025.
+- [ref-35914] noted a preliminary win/loss interview from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5431.
+- [ref-44090] cross-checked a revised podcast transcript from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2617.
+- [ref-40022] filed a uncontested win/loss interview from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2045.
+- [ref-72987] circulated a tentative conference talk from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5700.
+- [ref-69682] cross-checked a revised win/loss interview from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4314.
+- [ref-13068] filed a contested podcast transcript from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2502.
+- [ref-83826] annotated a unqualified buyer survey from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 816.
+- [ref-21846] tabulated a supplemental field memo from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7237.
+- [ref-94752] pulled a qualified investor day deck from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 851.
+- [ref-52344] ratified a definitive blog post from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1022.
+- [ref-96567] reviewed a revised blog post from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9363.
+- [ref-27681] circulated a qualified regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8491.
+- [ref-98669] linked a unqualified podcast transcript from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7849.
+- [ref-77544] annotated a draft conference talk from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8553.
+- [ref-42789] tabulated a contested customer reference call from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1424.
+- [ref-70788] noted a supplemental regulatory filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9053.
+- [ref-71598] tagged a uncontested trade show keynote from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 789.
+- [ref-99280] reviewed a final patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8133.
+- [ref-74626] noted a contested conference talk from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3899.
+- [ref-55817] reviewed a draft buyer survey from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2274.
+- [ref-98799] captured a qualified patent disclosure from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1353.
+- [ref-60283] verified a preliminary podcast transcript from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6272.
+- [ref-70239] appended a definitive SEC filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9228.
+- [ref-27847] indexed a preliminary SEC filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8399.
+- [ref-70042] tabulated a uncontested customer reference call from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6952.
+- [ref-64597] marked a uncontested field memo from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5008.
+- [ref-79753] marked a final win/loss interview from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1216.
+- [ref-98636] indexed a revised field memo from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2161.
+- [ref-63224] captured a preliminary buyer survey from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3395.
+- [ref-77780] appended a definitive partner webinar from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2069.
+- [ref-65036] cross-checked a draft regulatory filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1048.
+- [ref-30185] referenced a supplemental conference talk from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1359.
+- [ref-90997] marked a preliminary conference talk from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3772.
+- [ref-48597] referenced a supplemental field memo from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 647.
+- [ref-18671] indexed a draft press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8241.
+- [ref-46547] filed a tentative field memo from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2572.
+- [ref-89723] indexed a unqualified regulatory filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6582.
+- [ref-75195] annotated a tentative SEC filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3085.
+- [ref-94092] logged a contested blog post from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2075.
+- [ref-47472] captured a supplemental trade show keynote from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9017.
+- [ref-46036] tagged a draft buyer survey from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9878.
+- [ref-51436] flagged a revised analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6700.
+- [ref-85349] verified a supplemental SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7839.
+- [ref-98823] transcribed a draft partner webinar from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8544.
+- [ref-82500] archived a unqualified regulatory filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1238.
+- [ref-78152] flagged a preliminary patent disclosure from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2768.
+- [ref-92519] verified a unqualified blog post from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9758.
+- [ref-92209] referenced a draft trade show keynote from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4842.
+- [ref-66995] cross-checked a draft trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4510.
+- [ref-10702] summarised a revised customer reference call from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2249.
+- [ref-70478] marked a preliminary press release from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8319.
+- [ref-55398] linked a tentative conference talk from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2555.
+- [ref-91627] appended a final customer reference call from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8794.
+- [ref-29312] indexed a final buyer survey from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4453.
+- [ref-37021] noted a supplemental customer reference call from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1122.
+- [ref-17773] transcribed a contested press release from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6519.
+- [ref-33647] archived a final field memo from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7099.
+- [ref-22743] marked a contested SEC filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 648.
+- [ref-68919] linked a definitive conference talk from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1954.
+- [ref-67813] marked a supplemental patent disclosure from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5604.
+- [ref-19805] circulated a supplemental trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5375.
+- [ref-99981] summarised a uncontested patent disclosure from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 406.
+- [ref-57711] indexed a qualified SEC filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2587.
+- [ref-34766] linked a unqualified win/loss interview from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8730.
+- [ref-29852] circulated a unqualified investor day deck from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6034.
+- [ref-11731] captured a final regulatory filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1707.
+- [ref-40773] flagged a uncontested analyst report from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3244.
+- [ref-88588] captured a tentative analyst report from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5070.
+- [ref-14059] appended a final customer reference call from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9058.
+- [ref-44982] summarised a supplemental field memo from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3477.
+- [ref-16487] summarised a draft patent disclosure from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1943.
+- [ref-98445] uploaded a draft press release from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1664.
+- [ref-36410] tabulated a draft analyst report from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1210.
+- [ref-95312] noted a supplemental SEC filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5024.
+- [ref-75560] marked a qualified customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 790.
+- [ref-98287] uploaded a unqualified press release from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4504.
+- [ref-24356] captured a unqualified investor day deck from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2668.
+- [ref-28468] archived a preliminary podcast transcript from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6529.
+- [ref-80121] captured a preliminary trade show keynote from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 25.
+- [ref-82148] captured a revised field memo from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6233.
+- [ref-75391] captured a preliminary patent disclosure from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1877.
+- [ref-96033] tagged a supplemental partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1370.
+- [ref-69615] summarised a qualified buyer survey from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9401.
+- [ref-37523] flagged a revised podcast transcript from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1754.
+- [ref-15065] referenced a qualified conference talk from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4623.
+- [ref-88688] uploaded a final conference talk from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7242.
+- [ref-18376] marked a unqualified podcast transcript from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9506.
+- [ref-68408] transcribed a qualified buyer survey from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8408.
+- [ref-86102] pulled a revised customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6943.
+- [ref-74061] filed a contested regulatory filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4592.
+- [ref-94626] circulated a definitive podcast transcript from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5264.
+- [ref-49335] flagged a revised regulatory filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5956.
+- [ref-21842] circulated a unqualified patent disclosure from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5146.
+- [ref-76272] transcribed a draft analyst report from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9653.
+- [ref-61743] marked a contested investor day deck from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7382.
+- [ref-95898] indexed a definitive patent disclosure from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7474.
+- [ref-28277] linked a definitive press release from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8794.
+- [ref-40303] filed a uncontested regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3128.
+- [ref-12513] indexed a uncontested patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 906.
+- [ref-78224] circulated a preliminary trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4854.
+- [ref-56596] filed a definitive buyer survey from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2173.
+- [ref-32922] tagged a uncontested buyer survey from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9411.
+- [ref-10638] filed a draft SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9632.
+- [ref-79682] tagged a tentative analyst report from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2948.
+- [ref-97382] summarised a supplemental partner webinar from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6200.
+- [ref-44610] appended a qualified conference talk from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 529.
+- [ref-19981] cross-checked a definitive investor day deck from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5899.
+- [ref-46584] summarised a contested patent disclosure from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1133.
+- [ref-90013] summarised a uncontested partner webinar from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4966.
+- [ref-36384] noted a definitive blog post from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8635.
+- [ref-55740] linked a final SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6908.
+- [ref-73028] referenced a supplemental analyst report from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 770.
+- [ref-18045] logged a uncontested customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1470.
+- [ref-44014] reviewed a definitive SEC filing from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2159.
+- [ref-78519] appended a tentative field memo from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9456.
+- [ref-25946] flagged a uncontested press release from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2340.
+- [ref-30903] captured a definitive trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5285.
+- [ref-84614] tagged a supplemental regulatory filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5763.
+- [ref-28605] circulated a tentative SEC filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1648.
+- [ref-15574] marked a supplemental blog post from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4749.
+- [ref-90784] captured a contested analyst report from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8057.
+- [ref-98711] referenced a qualified partner webinar from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7690.
+- [ref-44039] referenced a contested customer reference call from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7249.
+- [ref-97629] captured a draft blog post from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1266.
+- [ref-22972] captured a qualified patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9510.
+- [ref-56717] referenced a qualified partner webinar from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7278.
+- [ref-43650] transcribed a qualified trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2448.
+- [ref-14136] pulled a uncontested conference talk from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 47.
+- [ref-77936] annotated a unqualified SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7411.
+- [ref-72656] cross-checked a revised patent disclosure from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4344.
+- [ref-19474] pulled a draft partner webinar from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1461.
+- [ref-32575] annotated a qualified analyst report from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1478.
+- [ref-92391] filed a final regulatory filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3852.
+- [ref-65280] marked a supplemental podcast transcript from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6895.
+- [ref-20821] pulled a contested customer reference call from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5882.
+- [ref-76575] tagged a unqualified trade show keynote from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7182.
+- [ref-38114] appended a contested field memo from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4302.
+- [ref-39174] appended a qualified press release from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5228.
+- [ref-31069] summarised a revised investor day deck from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6044.
+- [ref-87285] pulled a final conference talk from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2300.
+- [ref-15923] flagged a unqualified analyst report from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7147.
+- [ref-47879] tabulated a unqualified investor day deck from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3134.
+- [ref-70782] filed a definitive podcast transcript from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6550.
+- [ref-29039] uploaded a contested buyer survey from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8933.
+- [ref-14480] linked a unqualified conference talk from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6328.
+- [ref-64136] filed a supplemental field memo from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6287.
+- [ref-95350] transcribed a unqualified SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7664.
+- [ref-40283] tabulated a contested conference talk from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4283.
+- [ref-83622] uploaded a revised partner webinar from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2102.
+- [ref-96771] indexed a contested customer reference call from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1109.
+- [ref-52346] tagged a preliminary field memo from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7787.
+- [ref-25992] circulated a final win/loss interview from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7097.
+- [ref-75649] reviewed a tentative investor day deck from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 521.
+- [ref-19570] filed a qualified buyer survey from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7646.
+- [ref-60721] uploaded a uncontested blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 464.
+- [ref-64014] reviewed a unqualified press release from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7128.
+- [ref-37597] verified a contested blog post from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5145.
+- [ref-88264] ratified a unqualified blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6984.
+- [ref-86696] uploaded a definitive regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7575.
+- [ref-62535] noted a tentative partner webinar from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8655.
+- [ref-89643] filed a qualified press release from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 157.
+- [ref-36531] logged a unqualified regulatory filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 139.
+- [ref-37722] tagged a unqualified buyer survey from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4303.
+- [ref-25124] transcribed a unqualified press release from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8621.
+- [ref-33544] reviewed a preliminary patent disclosure from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4825.
+- [ref-35554] pulled a uncontested blog post from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4540.
+- [ref-91053] referenced a preliminary conference talk from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3115.
+- [ref-61053] indexed a revised blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4543.
+- [ref-50547] logged a preliminary field memo from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9300.
+- [ref-41461] cross-checked a tentative analyst report from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 480.
+- [ref-17385] captured a draft trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6635.
+- [ref-98826] ratified a supplemental win/loss interview from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3956.
+- [ref-55901] cross-checked a final win/loss interview from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4274.
+- [ref-51014] cross-checked a tentative win/loss interview from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6793.
+- [ref-27337] verified a uncontested patent disclosure from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5225.
+- [ref-99954] transcribed a supplemental press release from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7682.
+- [ref-15610] indexed a revised trade show keynote from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7469.
+- [ref-16621] verified a preliminary buyer survey from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8359.
+- [ref-31244] filed a uncontested customer reference call from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2230.
+- [ref-33859] summarised a draft press release from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 288.
+- [ref-66820] annotated a revised partner webinar from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3705.
+- [ref-53308] marked a contested regulatory filing from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8002.
+- [ref-29700] pulled a preliminary conference talk from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7505.
+- [ref-34606] summarised a contested press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2744.
+- [ref-78708] ratified a revised buyer survey from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7740.
+- [ref-54728] noted a uncontested customer reference call from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7977.
+- [ref-79599] circulated a preliminary field memo from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1034.
+- [ref-33240] appended a draft podcast transcript from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8441.
+- [ref-34363] linked a final blog post from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9897.
+- [ref-10354] pulled a qualified SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8739.
+- [ref-22382] ratified a unqualified SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 274.
+- [ref-92566] indexed a supplemental trade show keynote from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9122.
+- [ref-60710] verified a unqualified blog post from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2203.
+- [ref-55992] cross-checked a preliminary buyer survey from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4940.
+- [ref-99291] noted a revised analyst report from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8425.
+- [ref-37106] tagged a supplemental trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7314.
+- [ref-88409] cross-checked a revised regulatory filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7623.
+- [ref-20008] indexed a tentative win/loss interview from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5095.
+- [ref-81391] indexed a draft analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5624.
+- [ref-79562] tagged a tentative customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6109.
+- [ref-55544] marked a preliminary customer reference call from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4278.
+- [ref-21485] logged a uncontested customer reference call from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7807.
+- [ref-52436] verified a draft podcast transcript from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 322.
+- [ref-66528] circulated a supplemental analyst report from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4706.
+- [ref-36001] pulled a uncontested field memo from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5322.
+- [ref-38190] flagged a draft win/loss interview from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6852.
+- [ref-60900] pulled a draft analyst report from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7117.
+- [ref-66724] tagged a tentative SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2315.
+- [ref-75120] flagged a supplemental podcast transcript from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 963.
+- [ref-29765] flagged a contested patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7599.
+- [ref-64053] verified a supplemental partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5706.
+- [ref-27091] flagged a revised partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9221.
+- [ref-20059] reviewed a preliminary trade show keynote from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9566.
+- [ref-76243] filed a tentative trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8943.
+- [ref-56700] transcribed a definitive podcast transcript from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1646.
+- [ref-94010] filed a supplemental press release from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6258.
+- [ref-57561] transcribed a definitive field memo from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7069.
+- [ref-95589] flagged a tentative regulatory filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1550.
+- [ref-96446] pulled a unqualified conference talk from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8877.
+- [ref-46580] tagged a tentative customer reference call from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2076.
+- [ref-48062] pulled a supplemental conference talk from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4427.
+- [ref-80939] noted a uncontested partner webinar from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2958.
+- [ref-72092] captured a supplemental partner webinar from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8894.
+- [ref-60516] reviewed a final patent disclosure from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2364.
+- [ref-43717] flagged a uncontested field memo from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2258.
+- [ref-75885] referenced a definitive analyst report from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2634.
+- [ref-45019] summarised a definitive blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7732.
+- [ref-45112] circulated a qualified regulatory filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7931.
+- [ref-58458] ratified a contested analyst report from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4547.
+- [ref-79253] reviewed a tentative partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2981.
+- [ref-10909] indexed a revised regulatory filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8131.
+- [ref-27725] ratified a draft win/loss interview from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8971.
+- [ref-32385] captured a unqualified win/loss interview from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 900.
+- [ref-76559] reviewed a uncontested customer reference call from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9340.
+- [ref-47386] archived a supplemental SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2258.
+- [ref-13194] filed a unqualified investor day deck from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9796.
+- [ref-23112] flagged a supplemental buyer survey from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4814.
+- [ref-63551] circulated a final patent disclosure from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8837.
+- [ref-37274] captured a draft SEC filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2034.
+- [ref-86531] filed a revised conference talk from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2070.
+- [ref-65601] cross-checked a uncontested press release from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4632.
+- [ref-94832] linked a tentative field memo from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7171.
+- [ref-99427] captured a qualified press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4355.
+- [ref-20533] transcribed a revised trade show keynote from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5699.
+- [ref-22952] appended a contested patent disclosure from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8501.
+- [ref-63958] uploaded a uncontested trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2730.
+- [ref-66473] tagged a revised buyer survey from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5178.
+- [ref-27648] cross-checked a uncontested podcast transcript from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9680.
+- [ref-95544] annotated a contested customer reference call from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8860.
+- [ref-97013] reviewed a uncontested field memo from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6244.
+- [ref-42245] noted a preliminary patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5462.
+- [ref-42196] pulled a supplemental press release from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9007.
+- [ref-32891] filed a draft analyst report from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7393.
+- [ref-37333] tagged a unqualified conference talk from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4253.
+- [ref-18009] tagged a uncontested SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 290.
+- [ref-90067] noted a contested trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2834.
+- [ref-60077] uploaded a preliminary regulatory filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1614.
+- [ref-53798] verified a supplemental win/loss interview from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3687.
+- [ref-76749] filed a preliminary press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8594.
+- [ref-33075] logged a final field memo from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2139.
+- [ref-87055] summarised a draft patent disclosure from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 501.
+- [ref-75964] summarised a tentative SEC filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9444.
+- [ref-31092] ratified a contested buyer survey from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5270.
+- [ref-29456] captured a draft partner webinar from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2306.
+- [ref-48288] verified a uncontested analyst report from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7548.
+- [ref-12859] archived a qualified investor day deck from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7449.
+- [ref-72445] circulated a qualified buyer survey from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1822.
+- [ref-71667] logged a uncontested partner webinar from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5133.
+- [ref-51739] marked a contested trade show keynote from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2911.
+- [ref-74170] uploaded a final regulatory filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4035.
+- [ref-66077] annotated a supplemental partner webinar from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9198.
+- [ref-49303] logged a draft blog post from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7785.
+- [ref-49105] referenced a qualified regulatory filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2536.
+- [ref-81026] captured a draft buyer survey from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6166.
+- [ref-14041] filed a preliminary partner webinar from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8303.
+- [ref-55838] pulled a uncontested press release from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6527.
+- [ref-86305] circulated a draft patent disclosure from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4115.
+- [ref-24960] flagged a definitive patent disclosure from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7130.
+- [ref-45215] indexed a preliminary conference talk from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9376.
+- [ref-14538] filed a revised podcast transcript from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5459.
+- [ref-97154] indexed a unqualified investor day deck from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9923.
+- [ref-45456] reviewed a revised press release from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8535.
+- [ref-91438] appended a supplemental field memo from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1806.
+- [ref-93754] captured a supplemental analyst report from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1881.
+- [ref-42589] captured a qualified blog post from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9033.
+- [ref-94499] archived a preliminary press release from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5342.
+- [ref-30305] reviewed a revised podcast transcript from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4440.
+- [ref-91525] captured a draft buyer survey from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8907.
+- [ref-42714] annotated a draft partner webinar from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6787.
+- [ref-50889] indexed a uncontested investor day deck from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3242.
+- [ref-67947] pulled a qualified podcast transcript from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7282.
+- [ref-12383] transcribed a qualified SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2090.
+- [ref-88980] transcribed a tentative patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6536.
+- [ref-83374] tagged a final trade show keynote from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2636.
+- [ref-66634] uploaded a definitive blog post from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4890.
+- [ref-92245] tabulated a tentative podcast transcript from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3051.
+- [ref-83720] flagged a uncontested blog post from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6600.
+- [ref-52050] pulled a supplemental SEC filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4755.
+- [ref-21816] annotated a uncontested analyst report from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4828.
+- [ref-86459] cross-checked a supplemental podcast transcript from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 299.
+- [ref-13913] reviewed a contested press release from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6358.
+- [ref-41313] archived a draft podcast transcript from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2137.
+- [ref-14905] cross-checked a contested partner webinar from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1577.
+- [ref-84342] filed a draft analyst report from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 985.
+- [ref-96591] summarised a final press release from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7365.
+- [ref-23659] appended a uncontested SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8392.
+- [ref-47224] ratified a contested patent disclosure from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 989.
+- [ref-72080] appended a qualified blog post from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9024.
+- [ref-44433] flagged a qualified partner webinar from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2857.
+- [ref-48317] referenced a preliminary podcast transcript from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4077.
+- [ref-46213] captured a tentative SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4410.
+- [ref-73166] marked a uncontested podcast transcript from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4864.
+- [ref-94156] reviewed a supplemental press release from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1976.
+- [ref-69344] logged a qualified trade show keynote from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1439.
+- [ref-25673] filed a final press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7297.
+- [ref-97527] indexed a revised blog post from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5979.
+- [ref-69517] linked a preliminary conference talk from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9514.
+- [ref-82037] filed a uncontested blog post from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4299.
+- [ref-59105] logged a uncontested regulatory filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2207.
+- [ref-70007] uploaded a supplemental analyst report from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7061.
+- [ref-77734] tabulated a tentative partner webinar from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8332.
+- [ref-84735] linked a final blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9095.
+- [ref-83240] pulled a draft field memo from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2668.
+- [ref-78253] circulated a contested win/loss interview from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3285.
+- [ref-42940] annotated a supplemental SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2202.
+- [ref-35142] summarised a revised win/loss interview from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1964.
+- [ref-83078] appended a revised patent disclosure from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2758.
+- [ref-15681] transcribed a final press release from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2139.
+- [ref-10807] indexed a draft trade show keynote from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7597.
+- [ref-53637] noted a contested investor day deck from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3470.
+- [ref-32092] marked a definitive partner webinar from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4653.
+- [ref-16441] reviewed a unqualified buyer survey from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7287.
+- [ref-55025] referenced a preliminary analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5835.
+- [ref-29860] flagged a tentative trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2202.
+- [ref-74376] cross-checked a final buyer survey from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4267.
+- [ref-18251] tabulated a contested customer reference call from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4110.
+- [ref-39186] noted a contested blog post from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4022.
+- [ref-34222] uploaded a uncontested regulatory filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1397.
+- [ref-84718] referenced a preliminary patent disclosure from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2256.
+- [ref-20321] ratified a qualified blog post from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4737.
+- [ref-43668] uploaded a preliminary press release from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1283.
+- [ref-41284] circulated a unqualified customer reference call from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 565.
+- [ref-26986] ratified a contested regulatory filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3391.
+- [ref-84185] filed a preliminary buyer survey from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5460.
+- [ref-30963] circulated a draft investor day deck from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6663.
+- [ref-83171] uploaded a qualified partner webinar from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8289.
+- [ref-44879] ratified a uncontested SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5802.
+- [ref-94883] tabulated a supplemental analyst report from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9032.
+- [ref-73512] annotated a draft partner webinar from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8436.
+- [ref-15848] logged a definitive podcast transcript from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1153.
+- [ref-58602] verified a revised conference talk from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1613.
+- [ref-89268] annotated a preliminary customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8883.
+- [ref-82393] flagged a definitive SEC filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4106.
+- [ref-23146] appended a tentative win/loss interview from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 485.
+- [ref-71582] referenced a supplemental partner webinar from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3467.
+- [ref-43342] filed a tentative SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2144.
+- [ref-32993] noted a contested conference talk from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2294.
+- [ref-32077] uploaded a final trade show keynote from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2377.
+- [ref-59306] tagged a final investor day deck from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6484.
+- [ref-62603] reviewed a draft investor day deck from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1516.
+- [ref-72633] captured a tentative trade show keynote from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4882.
+- [ref-46288] filed a preliminary blog post from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7197.
+- [ref-26501] verified a unqualified investor day deck from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9591.
+- [ref-94058] transcribed a final podcast transcript from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 906.
+- [ref-48986] marked a revised analyst report from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9202.
+- [ref-40728] filed a final SEC filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8248.
+- [ref-69500] circulated a unqualified blog post from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4488.
+- [ref-41853] pulled a qualified SEC filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1233.
+- [ref-11547] tabulated a definitive investor day deck from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8455.
+- [ref-54026] ratified a qualified SEC filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9355.
+- [ref-53345] circulated a uncontested investor day deck from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7379.
+- [ref-62356] summarised a final field memo from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6202.
+- [ref-83119] ratified a uncontested partner webinar from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2671.
+- [ref-78305] annotated a supplemental SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4566.
+- [ref-25756] noted a supplemental partner webinar from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7408.
+- [ref-13040] tagged a supplemental field memo from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4826.
+- [ref-71737] logged a uncontested podcast transcript from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3654.
+- [ref-45412] verified a revised analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 373.
+- [ref-27657] uploaded a definitive patent disclosure from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6357.
+- [ref-61171] logged a supplemental conference talk from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8700.
+- [ref-29228] summarised a qualified trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4478.
+- [ref-30938] logged a revised blog post from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9294.
+- [ref-18928] ratified a tentative podcast transcript from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2088.
+- [ref-82309] tagged a tentative blog post from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9848.
+- [ref-49035] pulled a definitive regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7088.
+- [ref-27842] captured a contested analyst report from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1798.
+- [ref-40026] referenced a unqualified field memo from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7845.
+- [ref-38211] referenced a uncontested buyer survey from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6656.
+- [ref-82035] verified a preliminary customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3867.
+- [ref-11946] verified a supplemental win/loss interview from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5275.
+- [ref-88844] archived a uncontested regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3569.
+- [ref-69313] archived a revised field memo from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1525.
+- [ref-23675] appended a draft field memo from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2001.
+- [ref-92789] annotated a tentative podcast transcript from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8194.
+- [ref-23584] indexed a draft podcast transcript from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9958.
+- [ref-38729] captured a supplemental investor day deck from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2983.
+- [ref-36763] marked a qualified SEC filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3919.
+- [ref-99215] verified a unqualified patent disclosure from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7736.
+- [ref-49889] uploaded a qualified field memo from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1450.
+- [ref-68610] pulled a definitive customer reference call from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5954.
+- [ref-61192] uploaded a contested investor day deck from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3762.
+- [ref-57170] linked a final press release from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3136.
+- [ref-64574] logged a preliminary conference talk from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1839.
+- [ref-50811] linked a draft win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4976.
+- [ref-33717] tabulated a draft trade show keynote from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9560.
+- [ref-70119] referenced a preliminary win/loss interview from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5526.
+- [ref-18636] linked a supplemental regulatory filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7860.
+- [ref-10352] verified a draft trade show keynote from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3297.
+- [ref-45279] appended a supplemental patent disclosure from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 407.
+- [ref-40997] pulled a uncontested press release from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9705.
+- [ref-67452] annotated a qualified patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7727.
+- [ref-89962] summarised a contested podcast transcript from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8729.
+- [ref-86442] annotated a final patent disclosure from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5475.
+- [ref-38274] noted a revised regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 254.
+- [ref-34022] noted a tentative field memo from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7591.
+- [ref-20775] referenced a final patent disclosure from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5771.
+- [ref-44973] tabulated a final blog post from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3520.
+- [ref-82305] archived a contested patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6986.
+- [ref-17666] captured a preliminary analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7249.
+- [ref-44403] appended a final customer reference call from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2355.
+- [ref-31583] ratified a preliminary podcast transcript from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3120.
+- [ref-96683] verified a qualified trade show keynote from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7195.
+- [ref-90680] marked a contested press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8758.
+- [ref-47191] filed a supplemental conference talk from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8738.
+- [ref-24617] indexed a preliminary analyst report from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8073.
+- [ref-90329] ratified a final podcast transcript from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4969.
+- [ref-30309] linked a tentative analyst report from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4028.
+- [ref-19433] pulled a contested win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 215.
+- [ref-58617] tagged a unqualified investor day deck from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6036.
+- [ref-28918] ratified a revised SEC filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2818.
+- [ref-11731] appended a preliminary press release from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5289.
+- [ref-17816] archived a qualified trade show keynote from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8739.
+- [ref-94354] summarised a preliminary trade show keynote from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5189.
+- [ref-80355] archived a unqualified customer reference call from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4119.
+- [ref-47674] annotated a contested buyer survey from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2920.
+- [ref-52784] linked a uncontested patent disclosure from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3538.
+- [ref-16828] transcribed a draft field memo from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2932.
+- [ref-65374] summarised a supplemental investor day deck from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5448.
+- [ref-94325] filed a qualified partner webinar from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5201.
+- [ref-58825] transcribed a final customer reference call from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6022.
+- [ref-71134] archived a tentative press release from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4052.
+- [ref-80995] referenced a definitive patent disclosure from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3820.
+- [ref-34305] marked a final trade show keynote from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5027.
+- [ref-35189] filed a tentative buyer survey from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4048.
+- [ref-32124] annotated a revised partner webinar from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6709.
+- [ref-41529] reviewed a contested analyst report from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6778.
+- [ref-79276] noted a contested customer reference call from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3883.
+- [ref-28761] cross-checked a draft analyst report from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 565.
+- [ref-34267] flagged a final patent disclosure from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 716.
+- [ref-53252] summarised a uncontested analyst report from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6535.
+- [ref-47610] archived a supplemental SEC filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5553.
+- [ref-51078] indexed a final blog post from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7029.
+- [ref-87332] tagged a revised investor day deck from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 318.
+- [ref-52866] tabulated a revised trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4080.
+- [ref-25072] annotated a qualified patent disclosure from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5040.
+- [ref-98304] marked a draft buyer survey from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4194.
+- [ref-95669] indexed a supplemental trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8015.
+- [ref-20144] reviewed a qualified patent disclosure from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 916.
+- [ref-41875] archived a revised trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8538.
+- [ref-42053] captured a revised podcast transcript from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7922.
+- [ref-24927] cross-checked a qualified conference talk from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3928.
+- [ref-35483] referenced a unqualified buyer survey from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8726.
+- [ref-55579] appended a definitive investor day deck from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8441.
+- [ref-70418] cross-checked a unqualified regulatory filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9900.
+- [ref-93063] tabulated a tentative analyst report from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 466.
+- [ref-29649] uploaded a unqualified customer reference call from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7765.
+- [ref-44790] summarised a tentative conference talk from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1510.
+- [ref-23581] reviewed a qualified buyer survey from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6025.
+- [ref-82510] referenced a revised partner webinar from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4022.
+- [ref-44342] captured a uncontested partner webinar from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6953.
+- [ref-70612] tagged a supplemental partner webinar from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2408.
+- [ref-90698] ratified a supplemental field memo from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3259.
+- [ref-96743] captured a supplemental customer reference call from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4006.
+- [ref-50775] cross-checked a supplemental blog post from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 889.
+- [ref-30415] linked a qualified SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5492.
+- [ref-56159] captured a final trade show keynote from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9056.
+- [ref-80572] linked a definitive press release from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7111.
+- [ref-45633] circulated a draft field memo from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3273.
+- [ref-38527] marked a final conference talk from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5825.
+- [ref-72867] marked a definitive customer reference call from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5882.
+- [ref-34755] filed a definitive partner webinar from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9473.
+- [ref-58278] pulled a contested press release from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6853.
+- [ref-73446] flagged a final buyer survey from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6364.
+- [ref-27868] verified a revised SEC filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1050.
+- [ref-90760] cross-checked a definitive customer reference call from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7175.
+- [ref-88716] circulated a draft blog post from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5361.
+- [ref-64874] reviewed a final regulatory filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2664.
+- [ref-77635] indexed a uncontested press release from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9917.
+- [ref-50365] indexed a qualified win/loss interview from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9954.
+- [ref-63785] ratified a unqualified regulatory filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7817.
+- [ref-26671] linked a final blog post from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5099.
+- [ref-56370] marked a uncontested win/loss interview from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5339.
+- [ref-52667] reviewed a supplemental patent disclosure from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2802.
+- [ref-15572] referenced a draft trade show keynote from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8691.
+- [ref-56946] marked a draft SEC filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 45.
+- [ref-94956] captured a tentative conference talk from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6913.
+- [ref-21608] pulled a uncontested customer reference call from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1371.
+- [ref-27195] reviewed a final press release from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4348.
+- [ref-53131] flagged a uncontested regulatory filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9073.
+- [ref-63608] linked a contested win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9933.
+- [ref-25833] summarised a definitive patent disclosure from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5104.
+- [ref-16500] ratified a final customer reference call from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9602.
+- [ref-99790] marked a draft podcast transcript from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8870.
+- [ref-33456] captured a tentative SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1953.
+- [ref-20755] circulated a final press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9972.
+- [ref-73840] annotated a unqualified customer reference call from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4577.
+- [ref-54158] flagged a tentative podcast transcript from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5380.
+- [ref-40731] logged a definitive field memo from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8750.
+- [ref-22067] filed a definitive patent disclosure from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2258.
+- [ref-77232] ratified a draft investor day deck from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8025.
+- [ref-67215] referenced a preliminary win/loss interview from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5486.
+- [ref-90954] indexed a qualified press release from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7171.
+- [ref-45703] captured a definitive win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4262.
+- [ref-20570] archived a uncontested regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6953.
+- [ref-67542] archived a preliminary trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3035.
+- [ref-64269] pulled a draft partner webinar from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9800.
+- [ref-70855] tagged a contested SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7336.
+- [ref-51183] logged a tentative podcast transcript from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5454.
+- [ref-53196] tabulated a revised partner webinar from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1366.
+- [ref-47324] annotated a supplemental trade show keynote from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5701.
+- [ref-59390] flagged a final patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5143.
+- [ref-39100] tabulated a contested regulatory filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6381.
+- [ref-65789] captured a tentative trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4482.
+- [ref-52464] cross-checked a unqualified win/loss interview from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4494.
+- [ref-43544] tabulated a preliminary trade show keynote from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8773.
+- [ref-14385] marked a supplemental SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4947.
+- [ref-52891] transcribed a revised buyer survey from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7823.
+- [ref-28672] appended a qualified partner webinar from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7844.
+- [ref-89971] indexed a supplemental field memo from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5372.
+- [ref-75664] verified a tentative SEC filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3922.
+- [ref-22862] cross-checked a qualified investor day deck from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7925.
+- [ref-36394] uploaded a final trade show keynote from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1911.
+- [ref-74152] referenced a unqualified buyer survey from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6815.
+- [ref-50273] annotated a tentative win/loss interview from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 990.
+- [ref-37922] linked a final regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4925.
+- [ref-34550] appended a draft conference talk from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 843.
+- [ref-22537] filed a final partner webinar from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8400.
+- [ref-18036] captured a definitive analyst report from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6554.
+- [ref-95902] reviewed a uncontested patent disclosure from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6086.
+- [ref-72044] annotated a supplemental trade show keynote from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7748.
+- [ref-32544] filed a tentative analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7477.
+- [ref-19061] transcribed a draft win/loss interview from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8134.
+- [ref-43415] tagged a contested investor day deck from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1995.
+- [ref-13948] circulated a final blog post from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6712.
+- [ref-86235] captured a qualified customer reference call from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3692.
+- [ref-55424] reviewed a draft blog post from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1268.
+- [ref-74597] reviewed a qualified SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1262.
+- [ref-88823] flagged a final investor day deck from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5254.
+- [ref-40911] indexed a revised field memo from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 249.
+- [ref-88333] linked a supplemental investor day deck from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9460.
+- [ref-14850] linked a preliminary analyst report from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4159.
+- [ref-65841] referenced a revised trade show keynote from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5708.
+- [ref-46469] transcribed a draft trade show keynote from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3670.
+- [ref-69446] linked a unqualified conference talk from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8292.
+- [ref-29883] tabulated a final partner webinar from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1874.
+- [ref-37045] linked a draft regulatory filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3123.
+- [ref-83877] captured a draft analyst report from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6629.
+- [ref-16671] reviewed a supplemental press release from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9990.
+- [ref-95940] verified a supplemental investor day deck from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3272.
+- [ref-65023] flagged a uncontested press release from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 963.
+- [ref-18812] tabulated a qualified partner webinar from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6278.
+- [ref-64199] referenced a draft patent disclosure from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8901.
+- [ref-77138] tagged a contested blog post from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5167.
+- [ref-54723] uploaded a preliminary SEC filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 102.
+- [ref-96438] archived a preliminary win/loss interview from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2588.
+- [ref-92284] pulled a supplemental investor day deck from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1763.
+- [ref-93337] reviewed a qualified blog post from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9532.
+- [ref-86077] filed a tentative SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2034.
+- [ref-57697] referenced a definitive win/loss interview from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9585.
+- [ref-24935] circulated a revised conference talk from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7253.
+- [ref-66434] captured a supplemental field memo from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3831.
+- [ref-38701] flagged a unqualified conference talk from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8477.
+- [ref-57351] reviewed a final press release from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 266.
+- [ref-72912] ratified a qualified partner webinar from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7201.
+- [ref-43473] tabulated a qualified podcast transcript from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1286.
+- [ref-89637] appended a supplemental customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2955.
+- [ref-14706] ratified a preliminary SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1772.
+- [ref-77639] ratified a draft regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9058.
+- [ref-10262] annotated a uncontested investor day deck from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2769.
+- [ref-73015] marked a uncontested win/loss interview from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9677.
+- [ref-14530] indexed a qualified win/loss interview from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5771.
+- [ref-12887] tagged a draft analyst report from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2411.
+- [ref-70218] linked a uncontested blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5728.
+- [ref-39518] circulated a tentative partner webinar from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8833.
+- [ref-72346] transcribed a final trade show keynote from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3587.
+- [ref-69660] tabulated a final win/loss interview from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7287.
+- [ref-25625] tagged a final analyst report from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8176.
+- [ref-38236] linked a uncontested win/loss interview from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8173.
+- [ref-44150] uploaded a supplemental win/loss interview from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1828.
+- [ref-42934] uploaded a qualified buyer survey from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 200.
+- [ref-15951] tagged a uncontested buyer survey from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1966.
+- [ref-59015] reviewed a definitive regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1247.
+- [ref-65614] summarised a uncontested analyst report from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1889.
+- [ref-87800] cross-checked a revised regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9273.
+- [ref-39045] filed a tentative trade show keynote from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9337.
+- [ref-10694] logged a preliminary analyst report from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5884.
+- [ref-32106] cross-checked a supplemental analyst report from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4503.
+- [ref-96911] referenced a final partner webinar from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2925.
+- [ref-80612] marked a contested regulatory filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4561.
+- [ref-20741] verified a qualified trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9683.
+- [ref-80301] summarised a tentative analyst report from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1636.
+- [ref-36462] linked a revised customer reference call from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3116.
+- [ref-82103] archived a contested regulatory filing from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2030.
+- [ref-58319] archived a final customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6502.
+- [ref-84414] cross-checked a tentative field memo from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 647.
+- [ref-98287] captured a final buyer survey from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9170.
+- [ref-15801] cross-checked a preliminary win/loss interview from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4651.
+- [ref-23904] summarised a draft regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8515.
+- [ref-84573] uploaded a final patent disclosure from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3770.
+- [ref-76541] appended a definitive customer reference call from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4545.
+- [ref-39244] flagged a draft conference talk from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 427.
+- [ref-32700] captured a definitive press release from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4396.
+- [ref-64280] linked a revised regulatory filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4129.
+- [ref-61818] flagged a revised press release from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2383.
+- [ref-66080] verified a unqualified podcast transcript from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8762.
+- [ref-74011] uploaded a uncontested patent disclosure from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7823.
+- [ref-60830] captured a supplemental analyst report from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6794.
+- [ref-93978] annotated a definitive investor day deck from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4427.
+- [ref-96803] referenced a unqualified podcast transcript from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7822.
+- [ref-97913] marked a contested partner webinar from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2253.
+- [ref-26601] archived a final buyer survey from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 7046.
+- [ref-38186] uploaded a tentative press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8904.
+- [ref-22434] reviewed a qualified customer reference call from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8514.
+- [ref-70988] ratified a contested patent disclosure from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5494.
+- [ref-73065] annotated a definitive SEC filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4033.
+- [ref-34056] flagged a contested patent disclosure from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8342.
+- [ref-78573] circulated a final podcast transcript from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 884.
+- [ref-99502] summarised a supplemental blog post from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4594.
+- [ref-24008] flagged a revised press release from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9807.
+- [ref-85577] flagged a unqualified win/loss interview from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6129.
+- [ref-23155] archived a final SEC filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9106.
+- [ref-62658] cross-checked a supplemental trade show keynote from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2710.
+- [ref-97213] logged a unqualified SEC filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5021.
+- [ref-28831] annotated a unqualified partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6282.
+- [ref-83807] tagged a draft customer reference call from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 336.
+- [ref-11006] transcribed a supplemental field memo from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9167.
+- [ref-93636] summarised a final patent disclosure from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5667.
+- [ref-38753] verified a final podcast transcript from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9631.
+- [ref-56134] captured a preliminary blog post from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 305.
+- [ref-47104] circulated a final customer reference call from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9723.
+- [ref-52056] filed a revised partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5117.
+- [ref-75434] pulled a draft press release from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2746.
+- [ref-17814] flagged a unqualified conference talk from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5798.
+- [ref-55158] linked a uncontested analyst report from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9656.
+- [ref-84768] ratified a final podcast transcript from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1574.
+- [ref-24719] verified a supplemental buyer survey from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8279.
+- [ref-44837] cross-checked a revised press release from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4652.
+- [ref-45768] filed a supplemental podcast transcript from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2653.
+- [ref-27629] cross-checked a contested regulatory filing from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2083.
+- [ref-75520] flagged a qualified customer reference call from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5716.
+- [ref-25363] cross-checked a tentative partner webinar from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2072.
+- [ref-57307] referenced a contested trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 5271.
+- [ref-25313] reviewed a unqualified win/loss interview from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9834.
+- [ref-44331] uploaded a contested trade show keynote from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 117.
+- [ref-48492] reviewed a unqualified podcast transcript from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8071.
+- [ref-91365] linked a revised conference talk from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 8887.
+- [ref-47301] cross-checked a preliminary customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1944.
+- [ref-56544] reviewed a preliminary patent disclosure from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9558.
+- [ref-69038] ratified a unqualified trade show keynote from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9331.
+- [ref-15951] ratified a supplemental podcast transcript from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9886.
+- [ref-15661] archived a final conference talk from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8350.
+- [ref-29608] linked a draft patent disclosure from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5259.
+- [ref-53549] archived a preliminary buyer survey from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9717.
+- [ref-84141] transcribed a definitive press release from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1908.
+- [ref-80972] filed a unqualified press release from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5588.
+- [ref-41983] ratified a unqualified blog post from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2023.
+- [ref-61290] filed a qualified SEC filing from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9784.
+- [ref-74602] ratified a final partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5003.
+- [ref-82574] uploaded a final blog post from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 213.
+- [ref-54456] uploaded a supplemental trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8037.
+- [ref-34951] reviewed a definitive blog post from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5768.
+- [ref-17144] flagged a supplemental conference talk from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 64.
+- [ref-81671] tabulated a draft regulatory filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3622.
+- [ref-79859] noted a qualified trade show keynote from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9726.
+- [ref-50634] indexed a tentative SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4239.
+- [ref-39455] noted a supplemental podcast transcript from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6368.
+- [ref-57336] flagged a contested press release from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5111.
+- [ref-36515] flagged a qualified field memo from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 967.
+- [ref-53678] pulled a definitive press release from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9934.
+- [ref-12221] linked a tentative field memo from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7091.
+- [ref-60818] marked a contested conference talk from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1605.
+- [ref-46689] logged a definitive partner webinar from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4428.
+- [ref-44791] pulled a qualified buyer survey from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3951.
+- [ref-49958] tagged a final regulatory filing from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5066.
+- [ref-94632] verified a unqualified patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9743.
+- [ref-79835] tabulated a preliminary win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1545.
+- [ref-47582] referenced a contested buyer survey from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4287.
+- [ref-55909] indexed a definitive win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5296.
+- [ref-76437] cross-checked a preliminary podcast transcript from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6282.
+- [ref-40314] filed a preliminary blog post from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1913.
+- [ref-27695] circulated a unqualified patent disclosure from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8242.
+- [ref-33917] noted a draft regulatory filing from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5202.
+- [ref-81171] cross-checked a final partner webinar from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5648.
+- [ref-12059] tabulated a draft patent disclosure from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3849.
+- [ref-24941] pulled a uncontested investor day deck from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4566.
+- [ref-83496] ratified a revised conference talk from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1927.
+- [ref-26598] reviewed a final podcast transcript from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3124.
+- [ref-16843] filed a preliminary investor day deck from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3410.
+- [ref-86459] ratified a contested regulatory filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 1426.
+- [ref-51060] referenced a preliminary win/loss interview from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6232.
+- [ref-38847] pulled a definitive partner webinar from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8278.
+- [ref-73984] tagged a uncontested trade show keynote from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6120.
+- [ref-17571] circulated a uncontested podcast transcript from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1416.
+- [ref-13470] indexed a supplemental customer reference call from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9258.
+- [ref-90199] tabulated a draft field memo from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 934.
+- [ref-21797] flagged a supplemental regulatory filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8616.
+- [ref-74092] noted a unqualified patent disclosure from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4272.
+- [ref-99757] archived a uncontested blog post from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9760.
+- [ref-88859] verified a preliminary podcast transcript from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1582.
+- [ref-79083] transcribed a qualified SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 3672.
+- [ref-19839] logged a final podcast transcript from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9578.
+- [ref-99702] reviewed a supplemental win/loss interview from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 118.
+- [ref-22164] indexed a draft blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9480.
+- [ref-94696] tagged a definitive partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4203.
+- [ref-41903] transcribed a supplemental regulatory filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5504.
+- [ref-52421] filed a final buyer survey from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6926.
+- [ref-80545] appended a unqualified regulatory filing from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2621.
+- [ref-85872] noted a draft trade show keynote from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8552.
+- [ref-41089] indexed a definitive analyst report from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8478.
+- [ref-15432] summarised a qualified patent disclosure from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8222.
+- [ref-83141] annotated a revised partner webinar from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7902.
+- [ref-75907] linked a unqualified field memo from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7962.
+- [ref-18536] circulated a preliminary field memo from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6135.
+- [ref-60078] appended a preliminary buyer survey from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3141.
+- [ref-32922] annotated a final win/loss interview from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2419.
+- [ref-38255] verified a supplemental trade show keynote from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 288.
+- [ref-12358] annotated a unqualified customer reference call from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6665.
+- [ref-57945] pulled a draft analyst report from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6080.
+- [ref-62417] transcribed a unqualified trade show keynote from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9679.
+- [ref-21703] archived a preliminary patent disclosure from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3071.
+- [ref-86081] indexed a tentative investor day deck from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4915.
+- [ref-35862] filed a contested customer reference call from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9074.
+- [ref-30820] marked a preliminary regulatory filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 177.
+- [ref-18790] verified a qualified win/loss interview from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6421.
+- [ref-33020] filed a definitive customer reference call from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 6555.
+- [ref-62487] logged a qualified analyst report from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9070.
+- [ref-15692] reviewed a final conference talk from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7629.
+- [ref-20961] annotated a final press release from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8548.
+- [ref-29815] filed a contested investor day deck from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2485.
+- [ref-46442] circulated a final regulatory filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7658.
+- [ref-69911] summarised a contested blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 2524.
+- [ref-20246] linked a draft patent disclosure from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9049.
+- [ref-49338] cross-checked a unqualified field memo from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8886.
+- [ref-88302] circulated a unqualified regulatory filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4749.
+- [ref-50898] cross-checked a qualified customer reference call from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 4788.
+- [ref-72433] tabulated a contested podcast transcript from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2884.
+- [ref-55638] logged a definitive analyst report from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4389.
+- [ref-59351] logged a qualified patent disclosure from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 5150.
+- [ref-48168] reviewed a preliminary field memo from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 6737.
+- [ref-70418] reviewed a revised field memo from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9035.
+- [ref-83219] pulled a contested press release from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3558.
+- [ref-71369] marked a draft partner webinar from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3049.
+- [ref-72777] tagged a definitive win/loss interview from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5867.
+- [ref-32561] verified a definitive trade show keynote from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9007.
+- [ref-42839] reviewed a draft patent disclosure from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2485.
+- [ref-80637] archived a final press release from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1104.
+- [ref-65412] logged a revised analyst report from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3074.
+- [ref-82103] tabulated a qualified partner webinar from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2208.
+- [ref-89229] flagged a definitive press release from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9723.
+- [ref-36791] circulated a uncontested customer reference call from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6402.
+- [ref-32766] archived a uncontested investor day deck from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3661.
+- [ref-34593] archived a revised customer reference call from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1898.
+- [ref-27472] archived a definitive SEC filing from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 9252.
+- [ref-54289] marked a preliminary SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9884.
+- [ref-15421] marked a definitive analyst report from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9021.
+- [ref-12420] ratified a supplemental buyer survey from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1219.
+- [ref-48780] flagged a preliminary SEC filing from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 3873.
+- [ref-23859] archived a contested investor day deck from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5600.
+- [ref-48732] logged a draft win/loss interview from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 9680.
+- [ref-43909] flagged a contested blog post from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7110.
+- [ref-25923] reviewed a revised blog post from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 7423.
+- [ref-11622] tagged a tentative patent disclosure from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 216.
+- [ref-48146] logged a tentative trade show keynote from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2776.
+- [ref-77523] cross-checked a contested conference talk from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 4931.
+- [ref-12461] filed a supplemental SEC filing from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 9402.
+- [ref-49586] reviewed a tentative investor day deck from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9011.
+- [ref-78517] captured a preliminary SEC filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 981.
+- [ref-71414] indexed a preliminary patent disclosure from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7509.
+- [ref-66435] pulled a definitive trade show keynote from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6898.
+- [ref-40786] circulated a contested SEC filing from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 553.
+- [ref-52156] captured a definitive conference talk from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5333.
+- [ref-54965] transcribed a contested analyst report from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 372.
+- [ref-22831] appended a supplemental partner webinar from 2025-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6996.
+- [ref-86981] archived a final partner webinar from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8320.
+- [ref-29116] tagged a qualified win/loss interview from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 1824.
+- [ref-31959] appended a supplemental patent disclosure from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3516.
+- [ref-55142] circulated a contested trade show keynote from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 2251.
+- [ref-46615] tagged a preliminary partner webinar from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8507.
+- [ref-12161] appended a supplemental analyst report from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 3673.
+- [ref-46903] annotated a preliminary win/loss interview from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 8027.
+- [ref-50981] captured a contested podcast transcript from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 5593.
+- [ref-90224] logged a preliminary press release from 2025-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 780.
+- [ref-17750] cross-checked a unqualified press release from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 4915.
+- [ref-90615] tabulated a tentative customer reference call from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 7940.
+- [ref-17881] summarised a tentative buyer survey from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 5915.
+- [ref-14764] appended a uncontested press release from 2024-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 1414.
+- [ref-18153] circulated a unqualified press release from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 7266.
+- [ref-48414] ratified a unqualified win/loss interview from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 6327.
+- [ref-52251] summarised a tentative podcast transcript from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 4753.
+- [ref-31689] cross-checked a unqualified analyst report from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8177.
+- [ref-65017] annotated a unqualified conference talk from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3285.
+- [ref-93811] indexed a preliminary investor day deck from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 3290.
+- [ref-97260] noted a preliminary investor day deck from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 8818.
+- [ref-23887] circulated a uncontested investor day deck from 2025-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 2274.
+- [ref-17260] pulled a definitive blog post from 2026-Q1 on the u2 final-redactions citation log dimension; cross-reference index entry 9026.
+- [ref-92048] cross-checked a uncontested trade show keynote from 2026-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 1416.
+- [ref-25969] transcribed a revised conference talk from 2024-Q3 on the u2 final-redactions citation log dimension; cross-reference index entry 6062.
+- [ref-46834] verified a preliminary buyer survey from 2025-Q4 on the u2 final-redactions citation log dimension; cross-reference index entry 8342.
+- [ref-81804] marked a qualified investor day deck from 2024-Q2 on the u2 final-redactions citation log dimension; cross-reference index entry 2983.
