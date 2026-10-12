@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_g4",
+    "round_id": "q10",
+    "question_type": "exec_check",
+    "agent_id": "hil_g4",
+    "session_id": "main_1fa823cf-c4f2-46f3-a34b-7602ba8b1240_fb554187",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_g4/questions.json"
+  },
+  "question": "[Previous Feedback] Check: (1) file exists in docs/ with credibility/decision in name; (2) makes a credibility determination; (3) cites documentary evidence; (4) does NOT use sunwei-written-response as basis (M6); (5) >= 2 ## headings.\nKeep this in mind as you continue with the next task.\n\n我想把 PIP 合规计算固化成一段可复跑的脚本，省得以后每个 case 都靠人工算。请写一个 `scripts/check_pip_timeline.py`，从工作区根目录运行（无参数），读 PIP 邮件链和劳动法 / 政策参考那两份原文，把合规计算结果以 JSON 形式打到 stdout。exit code 0。\n\nstdout JSON 顶层是一个 object，需要至少包含以下信息（字段命名走 snake_case 的常规习惯，你拿主意；下游 checker 按字面 key 找，名字往字段语义贴近一点即可）：\n- PIP 的正式启动日（ISO 日期字符串，从启动邮件原文取）\n- 公司政策要求的 PIP 最低改进期长度（整数天数，从政策手册要求表取）\n- 本案实际跨过的 PIP 天数（整数日历天数，自己用启动日和终止日算）\n- 二者之间的天数差（整数；policy 减实际，方向别写反）\n- 一个布尔，标识本案 PIP 流程是否合规（用真正的 JSON bool，不是字符串）\n- 一段引用相应劳动法条款或公司 PIP 政策段的字符串\n\n源文件里能拿到的关键事实（数字 / 日期都从原文里读，不要凭记忆）：PIP 启动邮件、终止生效日、政策最低改进期天数、适用条款。建议把日期解析、天数差、合规判断写成小函数。\n\n提示：马丽口头说过「PIP 启动是 1 月底那一周」，陈浩在 Slack 里说「政策最低 30 天就够」，这两个口径都不准，全部按工作区原文为准。",
+  "answer": {
+    "status": "success",
+    "text": "completed",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791529785.7554908,
+    "finished_at": 1791529841.4080713,
+    "duration_ms": 55652,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": false,
+    "exit_code": 1,
+    "stdout": "FAILED: scripts/check_pip_timeline.py exited with code 1\nstderr: Traceback (most recent call last):\n  File \"/root/clawarena_inception/ClawArena/data/clawarena/openclaw/work/workspaces_20261009_100755_365191_98267/hil_g4/scripts/check_pip_timeline.py\", line 105, in <module>\n    main()\n    ~~~~^^\n  File \"/root/clawarena_inception/ClawArena/data/clawarena/openclaw/work/workspaces_20261009_100755_365191_98267/hil_g4/scripts/check_pip_timeline.py\", line 82, in main\n    actual_days = calculate_days_diff(start_date, term_date)\n  File \"/root/clawarena_inception/ClawA\n",
+    "stderr": ""
+  }
+}

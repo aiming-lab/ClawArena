@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_c7",
+    "round_id": "q26",
+    "question_type": "exec_check",
+    "agent_id": "hil_c7",
+    "session_id": "main_3a49c0ac-4d3a-484c-beb8-f22ef410513d_ed585801",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_c7/questions.json"
+  },
+  "question": "[Previous Feedback] A, B, C, F, G, H are supported by the complete evidence set.\n\nRemediation plan (semi-strict schema) at `docs/remediation_plan.json`. Sana and Leo will own most of these but ownership stays per-action.\n\nTop-level structure: a list of remediation actions plus a positive integer giving the estimated completion horizon for the whole plan in days. Pick conventional snake_case names a reviewer would expect for both the list wrapper and the days-estimate field.\n\nEach entry in the actions list is an object describing one action. The fields it needs (use predictable snake_case names — match the convention any reasonable reviewer would name these):\n- a stable per-action identifier\n- a human-readable description of what the action is\n- the owning person or team\n- a target completion date\n- the acceptance criteria that decide when it's done\n\nFive actions minimum, every field a non-empty string. Make sure the obvious must-haves are covered: a security-review gate for any PR touching customer-data API endpoints, automated CI verification that auth decorators are actually present, an audit sweep of every other endpoint for the same class of gap, tighter rate-limiting on enumeration-prone params, and an access-log preservation policy so we never have to scramble for raw evidence again. (Priya thinks three actions might be enough but the downstream tooling is hard-set on five minimum, so don't trim. Leo mentioned in passing the schema has historically been loose on key naming — values matter more than names — so just use whatever reads most naturally.)",
+  "answer": {
+    "status": "success",
+    "text": "Created `docs/remediation_plan.json` with five required actions:\n\n| ID | Description | Owner | Target Date |\n|----|-------------|-------|-------------|\n| security_review_gate_api | Mandatory security review for API endpoint PRs | Sana Mehta | Dec 21, 2024 |\n| ci_auth_decorator_check | Automated CI check for @require_auth on customer-data routes | Leo Chen | Dec 14, 2024 |\n| full_endpoint_auth_audit | Comprehensive audit of all v2 API routes | Diego Santos | Dec 14, 2024 |\n| rate_limit_enumeration_params | Rate limits on enumeration-prone parameters | Diego Santos | Dec 21, 2024 |\n| access_log_preservation_policy | Write-once log preservation for forensic analysis | Diego Santos | Dec 14, 2024 |\n\nThe schema uses predictable snake_case names (`actions`, `estimated_completion_days`), each action has five non-empty string fields, and all required remediation categories are covered. The completion horizon is 30 days.",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791530964.228159,
+    "finished_at": 1791530977.0250452,
+    "duration_ms": 12796,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": false,
+    "exit_code": 1,
+    "stdout": "FAILED: 'remediation_actions' must be a list\n",
+    "stderr": ""
+  }
+}

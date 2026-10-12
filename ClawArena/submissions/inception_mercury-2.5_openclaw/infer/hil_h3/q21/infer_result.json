@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_h3",
+    "round_id": "q21",
+    "question_type": "exec_check",
+    "agent_id": "hil_h3",
+    "session_id": "main_4639a02b-36b4-4a03-b094-2678bc65d72f_7a541345",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_h3/questions.json"
+  },
+  "question": "[Previous Feedback] resolution_analysis.md references ta-resolution-email.md, states formal warning outcome, cites Section 4.3 vs 4.2 distinction, notes Section 4.5 authority, and has >= 3 ## headings.\n\n把全案的来源认定固化成机器可读结构——落到 `analysis/case_provenance.json`，走严格 schema：下游脚本会按 key 取值，字段名一字不能改。\n\n顶层八个字段，下面提到的字段名都按这种 snake_case 形式照搬：`commit_owner_evidence` / `primary_evidence` / `source_confidence` / `supporting_factors` / `contradicting_factors` / `github_evidence_excluded` / `so_common_source_confirmed` / `resolution`。下面一条条讲取值口径：\n\n- `commit_owner_evidence`：哪位同学的 commit 在 git 那条线上更早——本案就是我；填字符串，值得跟其他 JSON 文档里指代我用的那种拼音惯例对齐（前面 q6 里 `<人>_<平台>` 嵌套键名我用的就是那种写法，照那个来）\n- `primary_evidence`：用一段非空字符串描述本案最核心的那条证据\n- `source_confidence`：来源认定的置信度，取一个枚举字符串。这套枚举下游脚本认死的就那么三档：明确确认那档、大概率那档、有争议那档（值都走全小写英文单词形式）；本案因为 git 能证 commit 时戳但不能直接证谁先写的代码，落在中间那档\n- `supporting_factors`：支持本案归属判定的证据条目，字符串数组，至少 1 条\n- `contradicting_factors`：与本案归属判定相左的因素，字符串数组（可以为空数组但字段必须存在）\n- `github_evidence_excluded`：布尔，按 M6 那条负面排除（陈伟 GitHub 那条时间线已被排除）该取的值填\n- `so_common_source_confirmed`：布尔，按本案 SO 共同来源那层认定该取的值填\n- `resolution`：本案最终定性的枚举字符串。**不是** plagiarism、不是 warning、不是 violation 这种泛词；按 TA 邮件里给本案定的那种\"用了公共来源但没标注引用\"的那种性质（学术英文里有专门词组对应这层意思——去翻 TA 那封处理邮件，找到那条专门讲本案性质的小节标题，把那个标题对应的英文学术术语转成 snake_case 两个词、用下划线连起来直接搬过来即可）；这层定性是整张 case 的支柱，写错了下游卡死",
+  "answer": {
+    "status": "success",
+    "text": "Done! Created `analysis/case_provenance.json` with all 8 required fields:\n\n- `commit_owner_evidence`: \"wangming\" (aligns with prior snake_case convention)\n- `primary_evidence`: Describes the 30-hour commit lead\n- `source_confidence`: \"likely\" (git proves submission order, not code authorship)\n- `supporting_factors`: 3 items (incremental commits, Chen Wei's single-commit implementation, SO coverage)\n- `contradicting_factors`: 2 items (95% similarity, identical naming)\n- `github_evidence_excluded`: true\n- `so_common_source_confirmed`: true\n- `resolution`: \"citation_violation\" (snake_case of \"citation violation\" from the TA's email)\n\nAll field names follow strict snake_case as required.",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791530444.582288,
+    "finished_at": 1791530460.9715333,
+    "duration_ms": 16389,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": false,
+    "exit_code": 1,
+    "stdout": "FAILED: source_confidence must be one of {'disputed', 'confirmed', 'probable'}, got 'likely'\n",
+    "stderr": ""
+  }
+}

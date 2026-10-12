@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_g3",
+    "round_id": "q16",
+    "question_type": "exec_check",
+    "agent_id": "hil_g3",
+    "session_id": "main_0fb68201-a7e9-4376-a0a4-9199a64717d7_668b6857",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_g3/questions.json"
+  },
+  "question": "IT 取证那份元数据档（`salary-spreadsheet-metadata.md`）一进来，哈希链就该自己跑出来。请写 `scripts/hash_chain_verifier.py`：\n1. 读元数据档，从那张表的 'SHA-256 哈希 (前16位)' 列里抽出 `2026-Q3-salary-full.xlsx` v1.1 那一行的哈希。\n2. 同样抽出 `salary-data-analysis.xlsx`（即邮件附件）那一行的哈希。\n3. 判定两哈希是否相等。\n4. stdout 输出：\n   ```\n   {\"full_v1_1_hash\": \"...\", \"email_attachment_hash\": \"...\", \"hash_match\": true, \"hypothesis_h3_status\": \"refuted\", \"conclusion\": \"...\"}\n   ```\n\n关键：`hash_match` 在两哈希等同时为 true，且 `hypothesis_h3_status` 设 `refuted`（H3 那条「附件是另一个 2.3 MB 不相干文件」的假设到此推翻）。运行：`cd ${workspace} && python scripts/hash_chain_verifier.py`。请实读元数据 Markdown 表，不要把哈希字面量硬编码到脚本里 —— 一旦 IT 重跑取证、哈希列变了就废。",
+  "answer": {
+    "status": "success",
+    "text": "completed",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791532790.615637,
+    "finished_at": 1791532825.0643737,
+    "duration_ms": 34448,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": false,
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "  File \"<string>\", line 4\n    assert d['full_v1_1_hash']=='a3f7b2c8e9d1', f'wrong hash: {d[chr(39)]full_v1_1_hash{chr(39)]}'\n                                                               ^^^^^^^^^^^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?\n"
+  }
+}

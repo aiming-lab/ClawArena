@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_g1",
+    "round_id": "q7",
+    "question_type": "exec_check",
+    "agent_id": "hil_g1",
+    "session_id": "main_b92f7d4f-e740-4e56-a410-6eac5b2cd3dd_4461f74f",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_g1/questions.json"
+  },
+  "question": "[Previous Feedback] Interview behavioral analysis and JSON scores file both validated. Hesitation signal, 4.3/2.8 scores, P6 recommendation, and JSON schema all correct.\n\nBuild a re-runnable computation helper at `scripts/compute_discrepancy_metrics.py` so the headline numbers have a single source of truth. Print valid JSON to stdout with these snake_case keys (the downstream validator reads them by name, do not rename): `resume_team_size`, `reference_team_size`, `ratio`, `gap_months`, `gap_start`, `gap_end`, `gap_disclosed`. The two team-size integers come from the resume and reference files; `ratio` is resume_team_size divided by reference_team_size. `gap_months` is the integer count of zero-activity calendar months between the gap_start and gap_end strings derivable from `github-contribution-export.md` (gap_start and gap_end as human month-year strings, e.g. 'Month YYYY'). `gap_disclosed` reflects whether the resume itself acknowledges the gap. Has to run cleanly from the workspace root.",
+  "answer": {
+    "status": "success",
+    "text": "Created `scripts/compute_discrepancy_metrics.py` that outputs valid JSON with all required fields:\n\n- **resume_team_size**: 12 (from resume claim)\n- **reference_team_size**: 4 (from Liu Wei's reference)\n- **ratio**: 3.0 (12 ÷ 4)\n- **gap_months**: 7 (June 2023 to December 2023 inclusive)\n- **gap_start**: \"June 2023\"\n- **gap_end**: \"December 2023\"\n- **gap_disclosed**: false (resume does not acknowledge the 2023 gap)\n\nThe script parses:\n1. Resume for the team-size claim\n2. Reference email for the corroborated (or contradicted) team size\n3. GitHub export for zero-activity gap detection (handles markdown bold formatting)\n4. Checks if the resume itself discloses any employment gap\n\nRun from workspace root with: `python3 scripts/compute_discrepancy_metrics.py`",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791532104.734528,
+    "finished_at": 1791532150.7528365,
+    "duration_ms": 46018,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": true,
+    "exit_code": 0,
+    "stdout": "PASSED\n",
+    "stderr": ""
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_j1",
+    "round_id": "q6",
+    "question_type": "exec_check",
+    "agent_id": "hil_j1",
+    "session_id": "main_79d840e0-8739-4396-b475-2ecf4ec55380_cfb28cb5",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_j1/questions.json"
+  },
+  "question": "赵敏把品牌方那边收到的全部 MCN 材料都转给我了——附件里既有图片又有表格；同时合约摘要也终于到手，我得把这两份对上看。\n\n**任务一：** 落一份 `analysis/品牌方材料分析.md`。\n- 把 MCN 实际提交的数据形态写清楚（具体格式以赵敏转来的 brand-received-data.md 为准——她说\"主要是 PDF\"，但我记得不是 PDF，自己核一下）。\n- 引用合同摘要里关于\"数据真实性核验来源\"和\"品牌方数据更正请求权\"两条相关条款；条款编号请从工作区合同摘要里抄出来原样写进文档（法务回头要按编号查）。\n- 至少 3 个 ## 级标题。\n\n**任务二：** 顺便把数据来源对照表落成 `analysis/数据来源对比.json`。schema 字段我固定一下，因为下游要硬调：\n```json\n{\n  \"mcn_submitted\": \"<MCN 实际提交的数据形态，单 token 字符串>\",\n  \"contract_required\": \"<合同要求的数据形态，单 token 字符串>\",\n  \"compliant\": <bool>,\n  \"xiaohongshu_official\": <int>,\n  \"xiaohongshu_mcn\": <int>,\n  \"bilibili_official\": <int>,\n  \"bilibili_mcn\": <int>\n}\n```\n`compliant` 的值你自己根据合同条款 vs 实际提交形态下判断，不用客气。",
+  "answer": {
+    "status": "success",
+    "text": "完成！已创建两份文件：\n\n**analysis/品牌方材料分析.md**\n- 核心结论先行：MCN 提交的是截图 (PNG) + PDF 报告，不是主要 PDF\n- 数据形态表：逐条列出赵敏转交的材料（PNG 截图、Excel 等）\n- 条款引用：7.3（截图不作为 verified data）、9.1（更正权）、4.2（verified data 定义）\n- 合规性判定表：MCN 实际 vs 合同要求，compliant=false\n\n**analysis/数据来源对比.json**\n```json\n{\n  \"mcn_submitted\": \"截图 (PNG)\",\n  \"contract_required\": \"平台 API 导出或第三方监测报告\",\n  \"compliant\": false,\n  \"xiaohongshu_official\": 50234,\n  \"xiaohongshu_mcn\": 120000,\n  \"bilibili_official\": 32178,\n  \"bilibili_mcn\": 65000\n}\n```\n\n根据合同条款 7.3 和 4.2，截图明确不被认定为 verified data，compliant=false。赵敏备注中说的\"依赖 MCN 的报告\"只是内部流程，不构成对数据真实性的书面确认。",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791533622.7508547,
+    "finished_at": 1791533635.074228,
+    "duration_ms": 12323,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": true,
+    "exit_code": 0,
+    "stdout": "PASSED\n",
+    "stderr": ""
+  }
+}

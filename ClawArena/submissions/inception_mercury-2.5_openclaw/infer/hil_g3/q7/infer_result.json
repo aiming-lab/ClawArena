@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_g3",
+    "round_id": "q7",
+    "question_type": "exec_check",
+    "agent_id": "hil_g3",
+    "session_id": "main_0fb68201-a7e9-4376-a0a4-9199a64717d7_668b6857",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_g3/questions.json"
+  },
+  "question": "[Previous Feedback] Check: (1) version_trace.md must contain '2.1' AND '2.3' AND language excluding v1.0 (e.g., '2.1 MB does not match', 'v1.0 ruled out') AND ≥ 2 ## headings; (2) claim_vs_evidence.json must be a JSON array of exactly 3 objects, each with 'evidence_against' (array of ≥ 2 strings) and 'verdict' == 'refuted'; (3) new_employee_exposure.md must name all three employees (李明, 赵伟, 孙丽) and reference 'v1.1'.\nKeep this in mind as you continue with the next task.\n\n把版本匹配也固化成脚本：`scripts/version_matcher.py`。读云盘日志和版本历史档，做下列事：\n1. 从云盘日志拉出林小雅那条 DOWNLOAD 的大小（用户字段含 `lxy`、操作为 DOWNLOAD）。\n2. 从版本历史里读出已知版本和大小（v1.0 = 2.1 MB、v1.1 = 2.3 MB）。\n3. 比对、定位匹配版本。\n4. 仅向 stdout 输出一个 JSON：\n   `{\"downloaded_version\": \"v1.1\", \"version_size_mb\": 2.3, \"v10_size_mb\": 2.1, \"size_delta_from_v10\": 0.2, \"new_employees\": [\"李明\", \"赵伟\", \"孙丽\"], \"conclusion\": \"林小雅 downloaded v1.1 which includes 3 employees not in v1.0\"}`\n\n运行：`cd ${workspace} && python scripts/version_matcher.py`。`new_employees` 取自版本历史档v1.1 那一行的备注 —— 写脚本时请实读、勿硬编码人名常量；`size_delta_from_v10` 用 v1.1 大小减去 v1.0 大小算出。",
+  "answer": {
+    "status": "success",
+    "text": "completed",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791532663.5991619,
+    "finished_at": 1791532683.078564,
+    "duration_ms": 19479,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": false,
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "  File \"<string>\", line 3\n    assert d['downloaded_version']=='v1.1', f'expected v1.1, got {d[chr(39)]downloaded_version{chr(39)]}'\n                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?\n"
+  }
+}

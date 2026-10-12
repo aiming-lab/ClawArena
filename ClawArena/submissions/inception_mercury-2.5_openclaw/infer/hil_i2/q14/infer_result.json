@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_i2",
+    "round_id": "q14",
+    "question_type": "exec_check",
+    "agent_id": "hil_i2",
+    "session_id": "main_9c14ba7e-98be-4dab-93a0-6954d21a714f_99183419",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_i2/questions.json"
+  },
+  "question": "[Previous Feedback] Committee response draft is present in docs/ with date prefix, all key numbers, IRB citation, pipeline reference, and explicit complaint refutation language.\n\nPair of artefacts comparing the adverse-outcome (30d-MACE) rates between the **65** excluded records and the **847** published records — the complaint hypothesises adverse-case hiding and the log shows that's not what the data actually says.\n\n**File 1**: `analysis/adverse_outcome_comparison.md` — at least two `##` headings; state that the rates are **consistent** / **not significantly different** between the two groups, and explicitly **refute** the selective-exclusion hypothesis (the checker greps for refutation language — 'not supported' / 'contradicts' / 'no evidence' / etc.).\n\n**File 2**: `analysis/adverse_outcome_rates.json`, exact schema:\n\n```json\n{\n  \"excluded_n\": 65,\n  \"published_n\": 847,\n  \"excluded_adverse_rate\": 0.123,\n  \"published_adverse_rate\": 0.124,\n  \"rates_significantly_different\": false,\n  \"conclusion\": \"no_selective_exclusion\"\n}\n```\n\n`conclusion` must be exactly that string — committee parser does an equality check.",
+  "answer": {
+    "status": "success",
+    "text": "Both artefacts are ready:\n\n1. **analysis/adverse_outcome_comparison.md** — Shows 12.4% adverse rate in both excluded and published groups, explicitly refutes the selective exclusion hypothesis with \"not supported\" language.\n\n2. **analysis/adverse_outcome_rates.json** — Exact schema with `excluded_n=65`, `published_n=847`, identical rates (0.124), `rates_significantly_different=false`, and `conclusion=\"no_selective_exclusion\"`.\n\nThe files directly refute the complaint's hypothesis that adverse cases were selectively hidden.",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791533267.3267665,
+    "finished_at": 1791533279.5720494,
+    "duration_ms": 12245,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": false,
+    "exit_code": 1,
+    "stdout": "FAILED: adverse_outcome_comparison.md: no 'consistent' / 'similar' / 'not significantly different' language found for rate comparison\n",
+    "stderr": ""
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_g4",
+    "round_id": "q23",
+    "question_type": "exec_check",
+    "agent_id": "hil_g4",
+    "session_id": "main_1fa823cf-c4f2-46f3-a34b-7602ba8b1240_fb554187",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_g4/questions.json"
+  },
+  "question": "[Previous Feedback] Systemic gaps report created: identifies >= 2 systemic (institutional) process failures with specific case evidence, includes improvement recommendations, references case-specific events (Sun Wei, Chen Hao, specific dates), has >= 3 ## headings.\n\n再固化一份仲裁风险评估到 `analysis/arbitration_risk.json`，M4 严格 schema。\n\n顶层 object，按你认为合理的 snake_case 字段名组织以下五段内容（命名贴近字段语义即可，下游 checker 按字面 key 找）：\n- 一个三档枚举，标识仲裁风险水平（high / medium / low 三选一）\n- 一段字符串，描述本 case 最主要的法律暴露点（单数概念，一段连贯描述）\n- 一个字符串 list（注意：是复数容器，不是单值字段），至少 1 条，每条援引相应的劳动法条款或公司政策（具体哪一条按 labor-law-reference.md 原文写）\n- 一个整数，政策最低天数减实际 PIP 天数（自己算，下游精确比对）\n- 一段字符串，描述若实际进入仲裁的预期结果\n\n几个容易踩坑：上面那个条款字段是 list 不是单字符串；天数差是 policy 减实际，方向别写反；陈浩判断这个 case 风险是 medium，他对法务流程不熟，你独立评估；孙伟在书面回复里说本案差了 5 天，他算法不对，按你自己重算的为准。",
+  "answer": {
+    "status": "success",
+    "text": "已创建 `analysis/arbitration_risk.json`：\n\n```json\n{\n  \"risk_level\": \"high\",\n  \"primary_exposure\": \"PIP 周期违规 (40 天 vs 60 天政策) 且关键节点文档缺失\",\n  \"legal_citations\": [\n    \"公司 PIP 政策：最低 60 天改进期限 (见 labor-law-reference.md)\",\n    \"《中华人民共和国劳动合同法》第四十条：经过培训或调整工作岗位仍不能胜任工作的解除程序\"\n  ],\n  \"days_shortfall\": 20,\n  \"expected_outcome\": \"仲裁委可能认定程序违法，判决公司支付 2N(双倍经济补偿金) 或恢复劳动关系。\"\n}\n```\n\n### 字段校验\n| 字段 | 值 | 说明 |\n|------|-----|------|\n| `risk_level` | `\"high\"` | 独立评估，不采用陈浩 \"medium\" 判断 |\n| `primary_exposure` | 单数暴露点描述 | PIP 周期违规 + 文档缺失 |\n| `legal_citations` | 字符串列表 (2 条) | 政策 + 劳动法第 40 条 |\n| `days_shortfall` | `20` | 60 - 40 = 20 (policy - actual) |\n| `expected_outcome` | 预期仲裁结果 | 2N 赔偿风险 |\n\n字段名采用 snake_case，差额方向正确，条款字段为 list 而非字符串，days_shortfall 精确为 20，符合 M4 checker schema 要求。",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791529998.669469,
+    "finished_at": 1791530009.0110507,
+    "duration_ms": 10341,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": false,
+    "exit_code": 1,
+    "stdout": "FAILED: missing or empty 'primary_vulnerability' field\nFAILED: applicable_clauses must have >= 1 item (expected reference to 第四十条 or Article 40)\nFAILED: missing or empty 'estimated_outcome' field\n",
+    "stderr": ""
+  }
+}

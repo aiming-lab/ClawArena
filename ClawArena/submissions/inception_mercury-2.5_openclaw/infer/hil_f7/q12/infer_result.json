@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_f7",
+    "round_id": "q12",
+    "question_type": "exec_check",
+    "agent_id": "hil_f7",
+    "session_id": "main_2b12644b-9c0e-4964-881c-b5e7e1813c95_88bc388a",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_f7/questions.json"
+  },
+  "question": "[Previous Feedback] docs/timeline_consistency_report.md created with all three timestamps (10:02:33, 10:02:45, 2026-06-19), 12-second gap mentioned, chronological consistency stated, >= 3 ## headings.\n\n把这单纠纷的核心事实压成一份严格的结构化 JSON，落到 `analysis/evidence_schema.json`。字段照下面（部分名字不太常规，下游 schema validator 是按 key 字面取值的，别擅自改）：\n\n顶层是一个 dict，含订单号、下单 SKU、实收 SKU、付款金额（**字段名定为 `payment_amount_fen`，整数，单位「分」**——即元数 × 100）、RMA 工单号、以及一个 `fraud_type` 枚举字段。前五个字段名走常规 snake_case，agent 自己从语义里推：订单号字段、下单 SKU 字段、实收 SKU 字段、RMA id 字段。\n\n`fraud_type` 三选一：`product_substitution`、`description_mismatch`、`both`（这三个枚举值字面）。各字段值从 workspace 文件里直接抄字面，不要近似。",
+  "answer": {
+    "status": "success",
+    "text": "已创建 `analysis/evidence_schema.json`：\n\n- `order_id`: JD-618-2026-7891234\n- `ordered_sku`: GPU-A100-80G\n- `received_sku`: GPU-A40-48G\n- `payment_amount_fen`: 7299900 (¥72,999.00)\n- `rma_ticket`: RMA-2026-0620-001\n- `fraud_type`: both",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791529321.0463428,
+    "finished_at": 1791529330.716325,
+    "duration_ms": 9669,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": false,
+    "exit_code": 1,
+    "stdout": "FAILED: missing required fields: ['product_sku_ordered', 'product_sku_received', 'rma_id']\n",
+    "stderr": ""
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_c7",
+    "round_id": "q23",
+    "question_type": "exec_check",
+    "agent_id": "hil_c7",
+    "session_id": "main_3a49c0ac-4d3a-484c-beb8-f22ef410513d_ed585801",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_c7/questions.json"
+  },
+  "question": "[Previous Feedback] root_cause_analysis.md contains: 7.5 CVSS score, pipeline-configs endpoint reference, PR #847 or Oct 14 deployment event, authentication failure as root cause, >= 3 ## headings.\n\nDefinitive impact-assessment JSON at `analysis/breach_impact_final.json` (strict-ish schema — types enforced, classifier values drawn from a small fixed vocabulary). The document needs to surface, in a flat object with conventional snake_case naming a reviewer would expect:\n\n- the CVSS number from the technical brief (float)\n- the impacted route(s) as a list of strings (must include the GET pipeline-configs `{uuid}` route)\n- a bool for whether the customer notification cleared the regulator's window (per outside counsel's sign-off in the final notification doc)\n- the exposure window as float hours (first-exploit → endpoint-disabled)\n- the confirmed total of impacted records as an int (pull from the forensic log writeup, NOT the early TBD-flavoured disclosure report; Maya remembered the figure as roughly 1,800 after dedup, but Leo thought it was closer to 3,200 from a different cut — both are off, ground it in the log doc itself)\n- a data-sensitivity classifier drawn from the standard four-tier severity vocabulary (critical / high / medium / low)\n- a regulatory-risk classifier drawn from the standard three-tier risk vocabulary (high / medium / low)\n\nAll numbers ground-truth, no rounding tricks. This file is the one outside counsel will reference, so accuracy beats elegance. Maya also thought exposure landed near 600 hours; that's a rough overshoot, compute it yourself off the actual timestamps.",
+  "answer": {
+    "status": "success",
+    "text": "Created `analysis/breach_impact_final.json` with ground-truth values from the source documents:\n\n| Field | Value | Source |\n|-------|-------|--------|\n| `cvss_score` | 7.5 | `vulnerability_technical_brief.md` |\n| `impacted_routes` | [\"GET /api/v2/pipeline-configs/{uuid}\"] | `api_endpoint_register.md` |\n| `customer_notification_within_regulator_window` | true | `notification_final.md` (legal counsel sign-off) |\n| `exposure_window_hours` | 518.625 | Nov 5 02:14:33 UTC → Nov 26 16:52:00 UTC (calculated from logs) |\n| `confirmed_impacted_records` | 2340 | `access_log_analysis.md` (forensic log writeup) |\n| `data_sensitivity` | \"high\" | API keys exposed (no payment/SSN) |\n| `regulatory_risk` | \"medium\" | API key exposure without additional PII |\n\nKey clarifications:\n- The **2,340** record count comes from `access_log_analysis.md` (Diego's forensic analysis), not Maya's ~1,800 recollection or Leo's ~3,200 estimate\n- The **518.625-hour** exposure window is calculated directly from timestamps (Nov 5 at 02:14:33 UTC to Nov 26 at 16:52:00 UTC)\n- The `customer_notification_within_regulator_window` is **true** based on Jordan's legal counsel confirmation that the overall approach satisfies GDPR and state requirements",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791530928.6780465,
+    "finished_at": 1791530943.0145018,
+    "duration_ms": 14336,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": false,
+    "exit_code": 1,
+    "stdout": "FAILED: affected_endpoints must be a non-empty list, got None\nFAILED: missing field 'notification_compliant'\nFAILED: missing field 'exposure_hours'\nFAILED: missing field 'total_affected_records'\n",
+    "stderr": ""
+  }
+}

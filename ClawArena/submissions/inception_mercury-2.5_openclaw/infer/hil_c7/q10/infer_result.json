@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_c7",
+    "round_id": "q10",
+    "question_type": "exec_check",
+    "agent_id": "hil_c7",
+    "session_id": "main_3a49c0ac-4d3a-484c-beb8-f22ef410513d_ed585801",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_c7/questions.json"
+  },
+  "question": "[Previous Feedback] scope_decision.md explicitly selects access_log_analysis.md (Diego) as most credible, cites 2340, explains why Jake's and Sana's estimates are superseded, does NOT defer to disclosure_report_initial.md as definitive (M6).\n\npls add a small analysis script at `scripts/analyze_scope.py` that we can re-run any time the inventory or endpoint register changes. It should read `api_endpoint_register.md` and `customer_data_inventory.md` from the workspace root (both are markdown with tables), and emit JSON to stdout.\n\nFields the validator expects, by semantic role:\n- a count of distinct endpoint routes registered\n- a list of routes that lack authentication\n- a list of customer-data field names the inventory marks as exposed in pipeline-config objects (at least four; read the inventory's exposure column)\n- the total active pipeline-config count from the inventory (an int)\n- a sensitivity classification\n\nUse conventional snake_case names for all keys — pick whatever a reasonable reviewer would name each field. The sensitivity value must come from the allowed set `critical | high | medium | low`; given API keys are in scope, `high` is the obvious pick.\n\nHas to run as `python scripts/analyze_scope.py` from the workspace root and exit 0. Priya's QA tooling will smoke-test it before we merge.",
+  "answer": {
+    "status": "success",
+    "text": "completed",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791530724.674522,
+    "finished_at": 1791530752.4118018,
+    "duration_ms": 27737,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": true,
+    "exit_code": 0,
+    "stdout": "{\n  \"endpoint_route_count\": 16,\n  \"auth_lacking_routes\": [\n    \"/api/v2/pipeline-configs/{uuid}\"\n  ],\n  \"exposed_fields\": [\n    \"pipeline_uuid\",\n    \"customer_name\",\n    \"company_name\",\n    \"pipeline_name\",\n    \"api_key\",\n    \"config_json\",\n    \"created_at\",\n    \"updated_at\"\n  ],\n  \"total_active_config_count\": 2340,\n  \"sensitivity\": \"high\"\n}\n",
+    "stderr": ""
+  }
+}

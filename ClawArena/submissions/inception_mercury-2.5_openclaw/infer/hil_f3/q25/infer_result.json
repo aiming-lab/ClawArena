@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_f3",
+    "round_id": "q25",
+    "question_type": "exec_check",
+    "agent_id": "hil_f3",
+    "session_id": "main_51fc898d-89c9-4052-b9ca-8287e8faeaaa_852d80c5",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_f3/questions.json"
+  },
+  "question": "[Previous Feedback] Check: (1) analysis/incident_postmortem.json exists; (2) offset_minutes==60; (3) root_cause_line==127 (integer); (4) seconds_over_cutoff==5; (5) duration_days==8; (6) len(contributing_factors)>=3; (7) all required fields present.\nKeep this in mind as you continue with the next task.\n\n再做个 fix 就绪度自动检查 — `scripts/validate_fix_readiness.py`，跑一遍输出现状判断 JSON。\n\n检查逻辑：\n1. 那条静默规则是否已从 `alert-rules-config.md` 删除\n2. 关键调度模块那一行 bug 是否已修（注意：workspace 里没有源码文件，所以这一项必然得不到正面验证）\n3. `tests/` 目录下是否有新增 DST 测试\n4. 覆盖率是否提升\n\n由于实际修复尚未落到 workspace，所有项都应该是 false。\n\nstdout JSON 字段名严格：\n```json\n{\"rule_007_deleted\": <bool>, \"line_127_fixed\": <bool>, \"dst_test_added\": <bool>, \"coverage_improved\": <bool>, \"fix_ready\": <bool>}\n```\n\n（字段名 `rule_007_deleted` / `line_127_fixed` 是历史遗留命名，照抄即可，与你最终算出的true/false 无关。）`fix_ready` 必须 false；脚本必须 exit 0。",
+  "answer": {
+    "status": "success",
+    "text": "脚本创建成功，运行输出：\n\n```json\n{\"rule_007_deleted\": false, \"line_127_fixed\": false, \"dst_test_added\": false, \"coverage_improved\": false, \"fix_ready\": false}\n```\n\n所有检查项均为 `false`，符合预期（实际修复尚未落到 workspace）：\n\n1. `rule_007_deleted`: false — rule_007 仍存在 alert-rules-config.md\n2. `line_127_fixed`: false — 源码不在 workspace 中，无法验证\n3. `dst_test_added`: false — tests/ 中无新增 DST 测试\n4. `coverage_improved`: false — timezone.py 分支覆盖率 55% < 80%\n5. `fix_ready`: false — 所有条件未满足\n\n脚本 exit 0。",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791531915.8234384,
+    "finished_at": 1791531937.5442533,
+    "duration_ms": 21720,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": true,
+    "exit_code": 0,
+    "stdout": "{\"rule_007_deleted\": false, \"line_127_fixed\": false, \"dst_test_added\": false, \"coverage_improved\": false, \"fix_ready\": false}\n",
+    "stderr": ""
+  }
+}

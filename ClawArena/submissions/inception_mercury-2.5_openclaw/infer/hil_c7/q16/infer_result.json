@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_c7",
+    "round_id": "q16",
+    "question_type": "exec_check",
+    "agent_id": "hil_c7",
+    "session_id": "main_3a49c0ac-4d3a-484c-beb8-f22ef410513d_ed585801",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_c7/questions.json"
+  },
+  "question": "[Previous Feedback] Check: (1) analysis/compliance_timing.json exists; (2) vulnerability_first_exploited_ts references 2024-11-05; (3) exposure_window_hours is a number 480-550; (4) regulatory_notification_deadline_ts references ~2024-11-08 (first_exploited + 72h).\nKeep this in mind as you continue with the next task.\n\nCompanion script for the JSON we just produced — pls add `scripts/analyze_timeline.py`. It should read the deduped log writeup and the deployment-history doc from the workspace root and dump a single flat JSON object to stdout.\n\nFields the downstream tooling expects, by semantic role (use conventional snake_case names a reviewer would predict):\n- the moment of the first external list-call (ISO 8601)\n- the moment the introducing PR went into production (ISO 8601, watch the EST→UTC conversion if the source uses local time)\n- the moment the vulnerable endpoint was disabled (ISO 8601)\n- the float-hours window between first exploit and fix-deploy\n- the regulator's notification window length expressed in hours (literally the integer the EU 72-hour rule names)\n- the regulator's deadline timestamp (first-exploit + that window)\n\nAll three datetime values come from the workspace source docs — don't hardcode strings, derive them. Must run as `python scripts/analyze_timeline.py` from workspace root and exit 0. Leo said the post-mortem CI doesn't pin specific key names — values and types are what matter — but Priya wasn't sure he was right about that, so just go with whatever naming the rest of the script files in `scripts/` already use as a stylistic baseline.",
+  "answer": {
+    "status": "success",
+    "text": "Created `scripts/analyze_timeline.py` which:\n\n- Parses the first external exploitation timestamp from `access_log_analysis.md`: **Nov 5, 2024 at 02:14:33 UTC**\n- Extracts the production deploy timestamp from `deployment_timeline.md`: **Oct 14, 2024 at 14:32:18 UTC**\n- Reads the endpoint disabled timestamp from `disclosure_report_initial.md` (converted from EST to UTC): **Nov 26, 2024 at 16:52:00 UTC**\n- Calculates the exposure window: **518.62 hours**\n- Sets the regulatory notification window to **72 hours** (EU GDPR rule)\n- Computes the deadline: **Nov 8, 2024 at 02:14:33 UTC** (first exploit + 72h)\n\nAll datetime values are derived from the source documents, and the script runs with exit code 0.",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791530822.7005334,
+    "finished_at": 1791530843.3284516,
+    "duration_ms": 20627,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": true,
+    "exit_code": 0,
+    "stdout": "{\n  \"first_exploitation_utc\": \"2024-11-05T02:14:33Z\",\n  \"production_deploy_utc\": \"2024-10-14T14:32:18Z\",\n  \"endpoint_disabled_utc\": \"2024-11-26T16:52:00Z\",\n  \"exposure_window_hours\": 518.6241666666666,\n  \"regulatory_notification_window_hours\": 72,\n  \"regulatory_notification_deadline_utc\": \"2024-11-08T02:14:33Z\"\n}\n",
+    "stderr": ""
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_g3",
+    "round_id": "q25",
+    "question_type": "exec_check",
+    "agent_id": "hil_g3",
+    "session_id": "main_0fb68201-a7e9-4376-a0a4-9199a64717d7_668b6857",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_g3/questions.json"
+  },
+  "question": "[Previous Feedback] denial_vs_evidence_timeline.md contains '2487' (or '41 min'), 'a3f7b2c8e9d1', the admission quote, ≥ 4 ## headings, and events in chronological order with 14:22 appearing before 15:03.\n\n再起 `scripts/case_strength_scorer.py` —— 一只综合打分脚本，读 workspace 已有的 analysis / scripts 文件，按下列权重算出一个 0.0–1.0 的强度分：\n\n- **hash_match_confirmed**（+0.35）：检查 `analysis/complete_evidence_chain.json` 是否存在且含 `a3f7b2c8e9d1`（或 `scripts/hash_chain_verifier.py` 的输出确认 hash 匹配）。\n- **download_confirmed**（+0.25）：检查 `analysis/access_timeline.json` 是否存在且有一条 action='DOWNLOAD' 且 user 含 `lxy`。\n- **external_email_confirmed**（+0.20）：检查 `analysis/suspect_profile.json` 是否存在且 `email_sent == true`。\n- **partial_admission**（+0.15）：检查 `analysis/lin_xiaoya_statement_log.json` 是否有任意条目 `status == 'partial_admission'`（注意它现在是对象，承认条目在 `statements` 数组中）。\n- **it_scope_gap_documented**（+0.05）：检查 `analysis/it_scope_analysis.json` 是否存在。\n\nstdout 输出：\n```json\n{\"total_score\": <float>, \"components\": {\"hash_match_confirmed\": <bool>, \"download_confirmed\": <bool>, \"external_email_confirmed\": <bool>, \"partial_admission\": <bool>, \"it_scope_gap_documented\": <bool>}, \"verdict\": \"strong\" | \"moderate\" | \"weak\"}\n```\n\n若 `total_score >= 0.95`，verdict 必为 `strong`。运行：`cd ${workspace} && python scripts/case_strength_scorer.py`。",
+  "answer": {
+    "status": "success",
+    "text": "completed",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791532942.8034854,
+    "finished_at": 1791532963.722568,
+    "duration_ms": 20919,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": false,
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "  File \"<string>\", line 3\n    assert d['total_score']>=0.95, f'score too low: {d[chr(39)]total_score{chr(39)]}'\n                                                     ^^^^^^^^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?\n"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "framework": "openclaw",
+    "test_id": "hil_h3",
+    "round_id": "q16",
+    "question_type": "exec_check",
+    "agent_id": "hil_h3",
+    "session_id": "main_4639a02b-36b4-4a03-b094-2678bc65d72f_7a541345",
+    "eval_question_path": "/root/clawarena_inception/ClawArena/data/clawarena/eval/hil_h3/questions.json"
+  },
+  "question": "[Previous Feedback] Check: (1) analysis/similarity_breakdown.json exists and is valid JSON; (2) moss_total_pct==95; (3) abs(so_explainable_pct - 85) <= 5; (4) abs((so_explainable_pct + unexplained_pct) - 95) <= 5; (5) so_explains_majority==true; (6) inter_student_copying_evidence==false.\nKeep this in mind as you continue with the next task.\n\n再写一个轻量脚本 `scripts/analyze_similarity.py`，从 workspace root 跑。它读两份资料：抄袭检测报告（一张 markdown 表，按函数列了相似度百分比）和那张 Stack Overflow 截图（里头有那一组三件套变量名）；文件名在 workspace root `ls` 一下就看见，自己挑出来。\n\nstdout 打 JSON——下游对字段名严格：四个顶层键 `moss_similarity_pct` / `matched_line_ranges` / `so_matching_patterns` / `so_coverage_estimate_pct`。\n- `moss_similarity_pct`：从抄袭检测报告里抠出那个总相似度数字（整数）；脚本下游用等值卡，写错就挂\n- `matched_line_ranges`：抄袭检测报告里命中的函数名列表，至少 1 项（直接照搬报告里的函数名字符串，别自己改写）\n- `so_matching_patterns`：从 SO 截图里抠出的特征变量名列表，至少 1 项（截图里那几个名字一字不动）\n- `so_coverage_estimate_pct`：那条 SO 答案能解释 MOSS 那笔相似度的百分比估算（数值，落在 70 到 95 之间——李浩问\"50 行不行\"，不行，看截图你会发现实际覆盖远不止 50）\n\n`python scripts/analyze_similarity.py` 必须 exit 0。",
+  "answer": {
+    "status": "success",
+    "text": "Done! Created `scripts/analyze_similarity.py` that reads from the workspace and outputs:\n\n- `moss_similarity_pct`: 95\n- `matched_line_ranges`: [\"reverse_linked_list()\", \"sort_linked_list()\", \"print_list()\", \"main()\"]\n- `so_matching_patterns`: [\"prev_node\", \"curr_node\", \"next_temp\"]\n- `so_coverage_estimate_pct`: 85.0\n\nThe script exits with code 0 and all field names match the downstream requirements.",
+    "error": null
+  },
+  "timing": {
+    "started_at": 1791530377.324685,
+    "finished_at": 1791530397.5934932,
+    "duration_ms": 20268,
+    "retry_count": 1
+  },
+  "llm_log": null,
+  "inline_score": {
+    "passed": true,
+    "exit_code": 0,
+    "stdout": "PASSED\n",
+    "stderr": ""
+  }
+}
